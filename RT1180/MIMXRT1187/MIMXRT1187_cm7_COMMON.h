@@ -11,7 +11,7 @@
 **
 **     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b240823
+**     Build:               b241025
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1187_cm7
@@ -874,9 +874,9 @@ typedef enum IRQn {
 /** FlexSPI AMBA memory base alias count */
 #define FLEXSPI_AMBA_BASE_ALIAS_COUNT     (2)
 /* FlexSPI AMBA base address array. */
-#define FlexSPI_AMBA_BASE_ARRAY                  { {0x28000000u, 0x2000000u}, {0x4000000u, 0x22000000u} }
+#define FlexSPI_AMBA_BASE_ARRAY                  { {0u, 0u}, {0x28000000u, 0x2000000u}, {0x4000000u, 0x22000000u} }
 /* FlexSPI AMBA end address array. */
-#define FlexSPI_AMBA_END_ARRAY                   { {0x2FFFFFFFu, 0x3FFFFFFu}, {0x7FFFFFFu, 0x23FFFFFFu} }
+#define FlexSPI_AMBA_END_ARRAY                   { {0u, 0u}, {0x2FFFFFFFu, 0x3FFFFFFu}, {0x7FFFFFFu, 0x23FFFFFFu} }
 /* FlexSPI1 AMBA address. */
 #define FlexSPI1_AMBA_BASE                       (0x28000000u)
 /* FlexSPI1 ASFM address. */

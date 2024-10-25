@@ -17,7 +17,7 @@
 **
 **     Reference manual:    IMXRT1064RM Rev.2, 7/2021 | IMXRT106XSRM Rev.0
 **     Version:             rev. 1.3, 2021-08-10
-**     Build:               b240823
+**     Build:               b241025
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1064
@@ -613,17 +613,17 @@ typedef enum IRQn {
 /** Peripheral FLEXSPI2 base pointer */
 #define FLEXSPI2                                 ((FLEXSPI_Type *)FLEXSPI2_BASE)
 /** Array initializer of FLEXSPI peripheral base addresses */
-#define FLEXSPI_BASE_ADDRS                       { FLEXSPI_BASE, FLEXSPI2_BASE }
+#define FLEXSPI_BASE_ADDRS                       { FLEXSPI_BASE, 0u, FLEXSPI2_BASE }
 /** Array initializer of FLEXSPI peripheral base pointers */
-#define FLEXSPI_BASE_PTRS                        { FLEXSPI, FLEXSPI2 }
+#define FLEXSPI_BASE_PTRS                        { FLEXSPI, (FLEXSPI_Type *)0u, FLEXSPI2 }
 /** Interrupt vectors for the FLEXSPI peripheral type */
-#define FLEXSPI_IRQS                             { FLEXSPI_IRQn, FLEXSPI2_IRQn }
+#define FLEXSPI_IRQS                             { FLEXSPI_IRQn, NotAvail_IRQn, FLEXSPI2_IRQn }
 /** FlexSPI AMBA memory base alias count */
 #define FLEXSPI_AMBA_BASE_ALIAS_COUNT     (1)
 /* FlexSPI AMBA base address array. */
-#define FlexSPI_AMBA_BASE_ARRAY                 { {0x60000000u}, {0x70000000u} }
+#define FlexSPI_AMBA_BASE_ARRAY                 { {0x60000000u}, {0u}, {0x70000000u} }
 /* FlexSPI AMBA end address array. */
-#define FlexSPI_AMBA_END_ARRAY                  { {0x6FFFFFFFu}, {0x7EFFFFFFu} }
+#define FlexSPI_AMBA_END_ARRAY                  { {0x6FFFFFFFu}, {0u}, {0x7EFFFFFFu} }
 /* FlexSPI AMBA address. */
 #define FlexSPI_AMBA_BASE                        (0x60000000u)
 /* FlexSPI ASFM address. */

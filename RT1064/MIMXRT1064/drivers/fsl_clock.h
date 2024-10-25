@@ -232,9 +232,9 @@ extern volatile uint32_t g_rtcXtalFreq;
     }
 
 /*! @brief Clock ip name array for FLEXSPI. */
-#define FLEXSPI_CLOCKS                  \
-    {                                   \
-        kCLOCK_FlexSpi, kCLOCK_FlexSpi2 \
+#define FLEXSPI_CLOCKS                                    \
+    {                                                     \
+        kCLOCK_FlexSpi, kCLOCK_IpInvalid, kCLOCK_FlexSpi2 \
     }
 
 /*! @brief Clock ip name array for FLEXSPI EXSC. */
