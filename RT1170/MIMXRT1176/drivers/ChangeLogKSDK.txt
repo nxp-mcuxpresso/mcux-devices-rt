@@ -1,0 +1,318 @@
+/*!
+@page driver_log Driver Change Log
+@section clock CLOCK
+  The current CLOCK driver version is 2.5.6.
+
+  - 2.5.6
+	- Bug Fixes
+	  - Fix an issue in CLOCK_InitArmPll() of wrong bitmask used
+
+  - 2.5.5
+    - Improvements
+      - Move s_clockSourceName array to c from header.
+
+  - 2.5.4
+    - Improvements
+      - Toggle hold_ring_off during arm pll initialization.
+
+    - Bug Fixes
+      - Fixed an issue that in CLOCK_InitSysPll3() some reserved bits may be cleared.
+
+  - 2.5.3
+    - Bug Fixes
+      - Fixed bug in CLOCK_GetPllFreq() the formula is not general.
+      - Fixed bug in CLOCK_InitSysPll1() function.
+
+  - 2.5.2
+    - Bug Fixes
+      - Fixed bug in XBARA_CLOCKS macro defie.
+
+  - 2.5.1
+    - Bug Fixes
+      - Fixed bug in CLOCK_InitArmPll() function.
+      - Fixed bug clock root divider set to cut off at 255.
+
+  - 2.5.0
+    - New Features
+      - Added CLOCK_DeinitPfd() function to clock gate selected PLL's pfd.
+
+    - Bug Fixes
+      - Fixed violations of MISRA C-2012 rule 5.6.
+      - Fixed bug in XBARA_CLOCKS macro define.
+
+  - 2.4.0
+    - New features
+      - Added CLOCK_IsUsb1PfdEnabled and CLOCK_IsSysPfdEnabled to get the clock source status.
+
+    - Improvements
+      - In CLOCK_InitPfd() function, check fractional divide value firstly,
+        if register's value is equal to value to set, return directly.
+
+    - Bug Fixes
+      - Fixed Doxygen warnings.
+      - Fixed violations of MISRA C-2012 rule 10.3, 10.1, 10.4, 14.4, 16.6, 16.1, 8.8.
+
+  - 2.3.0
+    - Improvements
+      - Added APIs for CCM functional blocks: OSCPLL, CLOCK_ROOT, LPCG.
+        - Added APIs for Unassigned Mode, Domain Mode, CPU Low Power Mode, SetPoint Mode.
+        - Added APIs for control mode access and white list access.
+        - Added APIs for OSCPLL, LPCG to set current accessing domain's clock depend level.
+      - Added APIS for Fractional PLLs during GPC mode.
+      - Added kCLOCK_SysPll3Div2 case in CLOCK_GetFreq() function.
+
+  - 2.2.0
+    - Improvements
+      - Updated PLL initialization API for those PLLs support spread spectrum
+      - Added APIs for PLL
+        - check/set PLL bypass
+        - check if PLL is enabled
+
+  - 2.1.10
+    - Improvements
+      - Defined SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY as 400000000UL for m4 core.
+
+    - Bug Fixes
+      - Fixed violations of MISRA C-2012 rules, including 10.3, 16.1, 16.4, 9.3,
+        10.4, 10.8, 5.6, 11.1, 14.3, 10.7, 14.4, 12.2, 8.4.
+
+  - 2.1.9
+    - Bug Fixes
+      - Aligned behavor of clock root divider setting and geting
+
+  - 2.1.8
+    - Bug Fixes
+      - Fixed CLOCK_SetRootClockMux changes not mux only
+
+  - 2.1.7
+    - New Features
+      - Supported ARM PLL initialization with frequency.
+
+  - 2.1.6
+    - Improvements
+      - Added puf related enum variable in clock driver.
+
+  - 2.1.5
+    - Bug Fixes
+      - Fixed CLOCK_GetRootClockFreq does not get correct OSC RC 16M frequency.
+
+  - 2.1.4
+    - Bug Fixes
+      - rt1170: fix set clock root divider issue
+      - rt1170: add __xSB() after changing clock related registers
+
+  - 2.1.3
+    - Improvements
+      - Aligned naming rule for enum variable _clock_pll with previous RT1xxx devices.
+
+  - 2.1.2
+    - Improvements
+      - Added a new enumerator to define the mux value of clock source in clock roots.
+
+  - 2.1.1
+    - Bug Fixes
+      - Fixed AV Pll frequency calculation
+
+  - 2.1.0
+    - New features
+      - Moved SDK_DelayAtLeastUs function from clock driver to common driver.
+
+  - 2.0.0
+    - initial version.
+
+@section iomuxc IOMUXC
+  The current IOMUXC driver version is 2.0.1.
+
+  - 2.0.1
+    - Doxygen improvement.
+
+  - 2.0.0
+    - initial version.
+
+@section anatop_ai ANATOP_AI
+  The current anatop_ai driver version is 2.0.0.
+
+  - 2.0.0
+    - initial version.
+
+@section soc_mipi_csir2x SOC_MIPI_CSI2RX
+  The current SOC_MIPI_CSI2RX driver version is 2.0.2.
+
+  - 2.0.2
+    - Updated for new header file.
+
+  - 2.0.1
+    - Bug Fixes
+      - Fixed MISRA-C 2012 10.8 issue.
+
+  - 2.0.0
+    - initial version.
+
+@section src SRC
+  The current SRC driver version is 2.1.1.
+
+  - 2.1.1
+    - Bug Fixes
+      - Fixed Doxygen warnings.
+
+  - 2.1.0
+    - Improvements
+      - Provided more flexible APIs to set slice authentication.
+
+  - 2.0.1
+    - Bug Fixes
+      - Fixed the violation of MISRA C-2012 rule 10.4.
+
+  - 2.0.0
+    - Initial version.
+
+@section gpc GPC
+  The current GPC driver version is 2.5.0.
+
+  - 2.5.0
+    - Improvements
+      - Set GPC_CM_ConfigCpuModeTransitionStep(), GPC_SP_ConfigSetPointTransitionStep(), 
+        GPC_STBY_ConfigStandbyTransitionStep() as deprecated.
+      - Added GPC_CM_EnableCpuModeTransitionStep(), GPC_CM_DisableCpuModeTransitionStep().
+      - Added GPC_SP_EnableSetPointTransitionStep(), GPC_SP_DisableSetPointTransitionStep().
+      - Added GPC_STBY_EnableStandbyTransitionStep(), GPC_STBY_DisableStandbyTransitionStep().
+      - Added GPC_STBY_SetPmicOutStepCountMode() to set count mode of PMIC_OUT step.
+
+  - 2.4.0
+    - Improvements
+      - Deleted cnt_mode and step count of gpc_tran_step_config_t structure to aligned with updates of header file.
+
+  - 2.3.1
+    - Bug Fixes
+      - Fixed the violation of MISRA C-2012 rule 5.8.
+
+  - 2.3.0
+    - Bug Fixes
+      - Fixed wrong offset value of DCDC_UP_CTRL register.
+    - New Features
+      - Added GPC_STBY_ForceCoreRequestStandbyMode() function ti force core to enter standby mode.
+
+  - 2.2.0
+    - Bug Fixes
+      - Fixed violations of MISRA C-2012 rule 10.8.
+      - Fixed violations of MISRA C-2012 rule 8.6 by removing the declaration of
+        GPC_SP_GetResponseCount() function.
+
+  - 2.1.1
+    - Bug Fixes
+      - Fixed Doxygen warnings.
+
+  - 2.1.0
+    - Improvements
+      - Removed status related APIs based on the updates of header file.
+
+  - 2.0.0
+    - Initial version.
+
+@section pgmc PGMC
+  The current PGMC driver version is 2.1.2.
+
+  - 2.1.2
+    - Bug Fixes
+      - Fixed bug in PGMC_PPC_TriggerPMICStandbySoftMode() function.
+
+  - 2.1.1
+    - Bug Fixes
+      - Fixed Doxygen warnings.
+
+  - 2.1.0
+    - Improvements
+      - Updated PGMC driver based on the updates of header file.
+
+  - 2.0.0
+    - Initial version.
+
+@section pmu PMU
+  The current PMU driver version is 2.1.2.
+
+  - 2.1.2
+    - Bug Fixes
+      - Updated PMU_StaticEnablePllLdo() with disabling LDO current limit after LDO is stable to
+        minimize ARM PLL jitter in cold temperature.
+
+  - 2.1.1
+    - Bug Fixes
+      - Fixed bugs in FBB configuration.
+      - Updated delay value from 1us to 100us in PMU_StaticEnablePllLdo() function.
+
+  - 2.1.0
+    - Improvements
+      - Updated the PMU driver based on the new header file.
+      - Defined the macro to separate different scenes that
+        some devices may do not support FBB.
+      - Fixed Doxygen warnings.
+      - Fixed violations of MISRA C-2012 rule 14.3.
+
+    - Bug Fixes
+      - Fixed violations of MISRA C-2012 rule 13.1, rule 10.1,
+        rule 10.4, and rule 14.3.
+
+  - 2.0.0
+    - Initial version.
+
+@section romapi ROMAPI
+  The current ROMAPI driver version is 1.1.1.
+
+  - 1.1.1
+    - Improvements
+      - Update the comments of "clear cache" function.
+
+  - 1.1.0
+    - New features
+      - Support B0 silicon
+
+  - 1.0.0
+    - initial version.
+
+@section soc_flexram_allocate SOC_FLEXRAM_ALLOCATE
+  The current SOC_FLEXRAM_ALLOCATE driver version is 2.0.2.
+
+  - 2.0.2
+    - Bug Fixes
+      - Fixed violations of the MISRA C-2012 Rule 10.4.
+
+  - 2.0.1
+    - Bug Fixes
+      - Fixed wrong GPR setting for re-allocate OCRAM/DTCM/ITCM.
+
+  - 2.0.0
+    - initial version.
+
+@section dcdc DCDC
+  The current DCDC driver version is 2.1.2.
+
+  - 2.1.2
+    - Improvements
+      - The DCDC_GetInstance() function is only available when FSL_SDK_DISABLE_DRIVER_CLOCK_CONTROL is set to 0.
+
+  - 2.1.1
+    - Bug Fixes
+      - Fixed Doxygen warnings.
+
+  - 2.1.0
+    - Improvements
+      - Updated DCDC_BootIntoDCM() function.
+      - Based on the updates of header file, updated dcdc driver.
+
+    - Bug Fixes
+      - Fixed violations of MISRA C-2012 rule 10.3, rule 10.7, and
+        rule 12.2.
+
+  - 2.0.0
+    - Initial version.
+
+@section nic NIC301
+  The current NIC301 driver version is 2.0.1.
+
+  - 2.0.1
+    - Bug Fixes.
+      - Fixed the repeat of offset addition in this file API.
+
+  - 2.0.0
+    - Initial version.
+*/

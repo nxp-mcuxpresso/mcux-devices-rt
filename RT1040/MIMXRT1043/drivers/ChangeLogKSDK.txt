@@ -1,0 +1,23 @@
+/*!
+@page driver_log Driver Change Log
+@section clock CLOCK
+  The current CLOCK driver version is 2.0.2.
+
+  - 2.0.2
+    - Bug Fixes
+      - Fixed the violations of MISRA C-2012 rule 10.7.
+
+  - 2.0.1
+    - Bug Fixes
+      - Fixed issues in CLOCK_GetSysPfdFreq() and CLOCK_GetUsb1PfdFreq() which produce incorrect result.
+
+  - 2.0.0
+    - initial version.
+
+@section iomuxc IOMUXC
+  The current IOMUXC driver version is 2.0.0.
+
+  - 2.0.0
+    - initial version.
+
+*/

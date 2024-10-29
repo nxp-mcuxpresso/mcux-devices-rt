@@ -1,0 +1,12 @@
+/*!
+@defgroup pmu PMU Driver
+@details The MCUXpresso SDK provides APIs for MCUXpresso SDK device's src operation.
+
+The Power Management Unit(PMU) is designed to simplify the external power interface. Based on the features of PMU,
+the PMU driver is divided into 3 groups. In the function group "LDOs Control APIs", those APIs can be used to control
+LDOs (including PLL LDO, LPSR_DIG LDO, LPSR_ANA LDO) in software mode or hardware mode; In the function
+group "Bandgap Control APIs", those APIs can be used to control bandgap in software mode or hardware mode; In the
+function group "Body Bias Control APIs", those APIs can be used to control well bias and body bias in software mode or
+hardware mode.
+
+ */

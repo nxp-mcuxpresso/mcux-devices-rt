@@ -1,0 +1,68 @@
+---
+
+device.hardware_data:
+  section-type: "manifest_content"
+  belong_to: set.device.MIMXRT1011
+  contents:
+    generated_from_chip_model: "yes"
+    devices:
+      - id: "MIMXRT1011xxxxx"
+        full_name: "MIMXRT1011xxxxx"
+        name: "MIMXRT1011"
+        platform: "i.MX"
+        series: "RT"
+        family: "MIMXRT1010"
+        subfamily: "iMXRT1011"
+        frequency_mhz: 500
+        core:
+          - name: "Cortex-M7F"
+            type: "cm7f"
+            id: "core0"
+            description: "M7 core"
+            fpu: "SP_FPU"
+            mpu: true
+        memory:
+          memoryBlock:
+            - id: "SRAM_DTC"
+              name: "SRAM_DTC"
+              addr: 0x20000000
+              size: 0x8000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_ITC"
+              name: "SRAM_ITC"
+              addr: 0x0
+              size: 0x8000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_OC"
+              name: "SRAM_OC"
+              addr: 0x20200000
+              size: 0x8000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "NCACHE_REGION"
+              name: "NCACHE_REGION"
+              addr: 0x20208000
+              size: 0x8000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "ROMCP"
+              name: "ROMCP"
+              addr: 0x200000
+              size: 0x10000
+              type: "ROM"
+              access: "RO"
+              default: true
+        total_memory:
+          ram_size_kb: 128
+          flash_size_kb: 0
+        part:
+          - name: "MIMXRT1011DAE5A"
+          - name: "MIMXRT1011CAE4A"
+        modules:
+...

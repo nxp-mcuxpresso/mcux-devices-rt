@@ -1,0 +1,4 @@
+menu "Device Boot Header"
+    config MCUX_COMPONENT_device.boot_header
+        bool "Use device boot header"
+endmenu

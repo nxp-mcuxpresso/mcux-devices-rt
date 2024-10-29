@@ -1,0 +1,163 @@
+if (CONFIG_MCUX_COMPONENT_driver.clock)
+
+    mcux_add_source(
+        SOURCES fsl_clock.h
+                fsl_clock.c
+    )
+
+    mcux_add_include(
+        INCLUDES .
+    )
+
+endif()
+
+if (CONFIG_MCUX_COMPONENT_driver.dcdc_3)
+
+    mcux_add_source(
+        SOURCES fsl_dcdc.c
+                fsl_dcdc.h
+    )
+
+    mcux_add_include(
+        INCLUDES .
+    )
+
+endif()
+
+if (CONFIG_MCUX_COMPONENT_driver.ecat)
+
+    mcux_add_source(
+        SOURCES fsl_ecat.c
+                fsl_ecat.h
+    )
+
+    mcux_add_include(
+        INCLUDES .
+    )
+
+endif()
+
+if (CONFIG_MCUX_COMPONENT_driver.edma_soc)
+
+    mcux_add_source(
+        SOURCES fsl_edma_soc.c
+                fsl_edma_soc.h
+    )
+
+    mcux_add_include(
+        INCLUDES .
+    )
+
+endif()
+
+if (CONFIG_MCUX_COMPONENT_driver.ele_base_api)
+
+    mcux_add_source(
+        SOURCES fsl_ele_base_api.c
+                fsl_ele_base_api.h
+    )
+
+    mcux_add_include(
+        INCLUDES .
+    )
+
+endif()
+
+if (CONFIG_MCUX_COMPONENT_driver.gpc_3)
+
+    mcux_add_source(
+        SOURCES fsl_gpc.c
+                fsl_gpc.h
+    )
+
+    mcux_add_include(
+        INCLUDES .
+    )
+
+endif()
+
+if (CONFIG_MCUX_COMPONENT_driver.iomuxc)
+
+    mcux_add_source(
+        SOURCES fsl_iomuxc.h
+    )
+
+    mcux_add_include(
+        INCLUDES .
+    )
+
+endif()
+
+if (CONFIG_MCUX_COMPONENT_driver.memory)
+
+    mcux_add_source(
+        SOURCES fsl_memory.h
+    )
+
+    mcux_add_include(
+        INCLUDES .
+    )
+
+endif()
+
+if (CONFIG_MCUX_COMPONENT_driver.misc)
+
+    mcux_add_source(
+        SOURCES fsl_misc.h
+    )
+
+    mcux_add_include(
+        INCLUDES .
+    )
+
+endif()
+
+if (CONFIG_MCUX_COMPONENT_driver.nic301)
+
+    mcux_add_source(
+        SOURCES fsl_nic301.h
+    )
+
+    mcux_add_include(
+        INCLUDES .
+    )
+
+endif()
+
+if (CONFIG_MCUX_COMPONENT_driver.anadig_pmu_1)
+
+    mcux_add_source(
+        SOURCES fsl_pmu.h
+                fsl_pmu.c
+    )
+
+    mcux_add_include(
+        INCLUDES .
+    )
+
+endif()
+
+if (CONFIG_MCUX_COMPONENT_driver.src_3)
+
+    mcux_add_source(
+        SOURCES fsl_soc_src.c
+                fsl_soc_src.h
+    )
+
+    mcux_add_include(
+        INCLUDES .
+    )
+endif()
+
+if (CONFIG_MCUX_COMPONENT_driver.romapi)
+
+    mcux_add_source(
+        SOURCES ./romapi/fsl_romapi.c
+                ./romapi/fsl_romapi.h
+    )
+
+    mcux_add_include(
+        INCLUDES ./romapi
+    )
+
+endif()

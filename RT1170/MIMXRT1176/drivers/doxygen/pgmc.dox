@@ -1,0 +1,17 @@
+/*!
+@defgroup pgmc PGMC Driver
+@details The MCUXpresso SDK provides APIs for MCUXpresso SDK devices' src operation.
+
+The Power Gating and Memory Controller(PGMC) block is a power management component that controls power gating of power
+domains and memory low power mode. There are four sub modules in the PGMC block, they are:
+    - Basic Power Controller(BPC): To control power domains with simple isolation and power switch;
+    - CPU Power Controller(CPC): To control CPU platform with complex power domain and sequence requirement;
+    - PMIC Power Controller(PPC): To control PMIC standby mode outside of the chip;
+    - Memory Interface(MIF): Designed for dedicated technology of memory;
+
+For the BPC sub module, the APIs in "Basic Power Controller Related Interfaces" function group are provided. For the CPC
+sub module, the APIs in "CPU Power Controller Related Interfaces" function group are provided. For the PPC sub module,
+the APIs in "PMIC Power Related Interfaces" function group are provided. For the MIF sub module, the APIs in "MIF Module
+Related APIs" are provided. 
+
+ */

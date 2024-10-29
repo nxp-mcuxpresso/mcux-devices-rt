@@ -1,0 +1,5 @@
+/*!
+@defgroup dsp DSP Driver
+@details This driver is used for cooperation with DSP.
+
+*/

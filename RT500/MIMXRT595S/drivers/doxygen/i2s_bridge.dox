@@ -1,0 +1,20 @@
+/*!
+@defgroup i2s_bridge I2S_BRIDGE: I2S bridging and signal sharing configuration
+@details The MCUXpresso SDK provides a peripheral driver for the I2S Bridging/Signal Sharing module of MCUXpresso SDK devices. For furter details, see the corresponding chapter.
+*/
+
+# Typical use case {#I2S_BRIDGEUC}
+##Signal sharing
+Below example shows FC6/FC7 share WS/SCK signal which comes from FC7.
+@code
+    /* select signal source for share set0 */
+    I2S_BRIDGE_SetShareSignalSrc(kI2S_BRIDGE_ShareSet0, kI2S_BRIDGE_SignalSCK, kI2S_BRIDGE_Flexcomm7);
+    I2S_BRIDGE_SetShareSignalSrc(kI2S_BRIDGE_ShareSet0, kI2S_BRIDGE_SignalWS, kI2S_BRIDGE_Flexcomm7);
+    /* select share set for special flexcomm signal */
+    I2S_BRIDGE_SetFlexcommSignalShareSet(kI2S_BRIDGE_Flexcomm7, kI2S_BRIDGE_SignalSCK, kI2S_BRIDGE_ShareSet0);
+    I2S_BRIDGE_SetFlexcommSignalShareSet(kI2S_BRIDGE_Flexcomm7, kI2S_BRIDGE_SignalWS, kI2S_BRIDGE_ShareSet0);
+    I2S_BRIDGE_SetFlexcommSignalShareSet(kI2S_BRIDGE_Flexcomm6, kI2S_BRIDGE_SignalSCK, kI2S_BRIDGE_ShareSet0);
+    I2S_BRIDGE_SetFlexcommSignalShareSet(kI2S_BRIDGE_Flexcomm6, kI2S_BRIDGE_SignalWS, kI2S_BRIDGE_ShareSet0);
+@endcode
+
+*/

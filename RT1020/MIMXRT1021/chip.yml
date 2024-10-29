@@ -1,0 +1,67 @@
+---
+
+device.hardware_data:
+  section-type: "manifest_content"
+  belong_to: set.device.MIMXRT1021
+  contents:
+    generated_from_chip_model: "yes"
+    devices:
+      - id: "MIMXRT1021xxxxx"
+        full_name: "MIMXRT1021xxxxx"
+        name: "MIMXRT1021"
+        platform: "i.MX"
+        series: "RT"
+        family: "MIMXRT1020"
+        subfamily: "iMXRT1021"
+        frequency_mhz: 500
+        core:
+          - name: "Cortex-M7F"
+            type: "cm7f"
+            id: "core0"
+            description: "M7 core"
+            fpu: "DP_FPU"
+            mpu: true
+        memory:
+          memoryBlock:
+            - id: "SRAM_DTC"
+              name: "SRAM_DTC"
+              addr: 0x20000000
+              size: 0x10000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_ITC"
+              name: "SRAM_ITC"
+              addr: 0x0
+              size: 0x10000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_OC"
+              name: "SRAM_OC"
+              addr: 0x20200000
+              size: 0x20000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "ROMCP"
+              name: "ROMCP"
+              addr: 0x200000
+              size: 0x18000
+              type: "ROM"
+              access: "RO"
+              default: true
+        total_memory:
+          ram_size_kb: 256
+          flash_size_kb: 0
+        part:
+          - name: "MIMXRT1021DAG5A"
+          - name: "MIMXRT1021CAF4A"
+          - name: "MIMXRT1021CAG4A"
+          - name: "MIMXRT1021DAF5A"
+          - name: "MIMXRT1021DAG5B"
+          - name: "MIMXRT1021CAF4B"
+          - name: "MIMXRT1021CAG4B"
+          - name: "MIMXRT1021DAF5B"
+        modules:
+...

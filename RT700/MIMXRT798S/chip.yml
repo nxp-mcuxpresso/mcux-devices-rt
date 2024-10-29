@@ -1,0 +1,185 @@
+---
+
+device.hardware_data:
+  section-type: "manifest_content"
+  belong_to: set.device.MIMXRT798S
+  contents:
+    generated_from_chip_model: "yes"
+    devices:
+      - id: "MIMXRT798S"
+        full_name: "MIMXRT798S"
+        name: "MIMXRT798S"
+        platform: "i.MX"
+        series: "RT"
+        family: "MIMXRT700"
+        subfamily: "iMXRT798S"
+        core:
+          - name: "EZHV"
+            type: "ezhv"
+            id: "ezhv"
+            description: "RISC-V EZHV core"
+            frequency_mhz: 300
+            boot_role: "secondary"
+            slave_role:
+              - id: "EZHVSLAVE"
+                name: "EZHV acts as slave"
+          - name: "Cadence-HiFi1"
+            type: "dsp"
+            id: "hifi1"
+            description: "Cadence HiFi1 DSP core"
+            frequency_mhz: 100
+            boot_role: "secondary"
+            slave_role:
+              - id: "HiFi1SLAVE"
+                name: "Cadence-HiFi1 acts as slave"
+          - name: "Cadence-HiFi4"
+            type: "dsp"
+            id: "hifi4"
+            description: "Cadence HiFi4 DSP core"
+            frequency_mhz: 300
+            boot_role: "secondary"
+            slave_role:
+              - id: "HiFi4SLAVE"
+                name: "Cadence-HiFi4 acts as slave"
+          - name: "Cortex-M33"
+            type: "cm33"
+            id: "cm33_core0"
+            description: ""
+            fpu: "SP_FPU"
+            dsp: true
+            mpu: true
+            sau: true
+            frequency_mhz: 300
+            boot_role: "primary"
+          - name: "Cortex-M33"
+            type: "cm33"
+            id: "cm33_core1"
+            description: ""
+            fpu: "SP_FPU"
+            dsp: true
+            mpu: true
+            sau: true
+            frequency_mhz: 100
+            boot_role: "secondary"
+            slave_role:
+              - id: "M33SLAVE"
+                name: "Cortex-M33 core1 acts as slave"
+        memory:
+          memoryBlock:
+            - id: "SRAM_CMPT"
+              name: "SRAM_CMPT"
+              addr: 0x80000
+              size: 0x280000
+              type: "RAM"
+              access: "RW"
+              default: true
+              aliases:
+                - name: "SRAM_CMPT_alias1"
+                  addr: 0x10080000
+                  size: 0x280000
+                  access: "RW"
+                - name: "SRAM_CMPT_alias2"
+                  addr: 0x20080000
+                  size: 0x280000
+                  access: "RW"
+                - name: "SRAM_CMPT_alias3"
+                  addr: 0x30080000
+                  size: 0x280000
+                  access: "RW"
+            - id: "SRAM_SHARED"
+              name: "SRAM_SHARED"
+              addr: 0x0
+              size: 0x80000
+              type: "RAM"
+              access: "RW"
+              default: true
+              aliases:
+                - name: "SRAM_SHARED_alias1"
+                  addr: 0x10000000
+                  size: 0x80000
+                  access: "RW"
+                - name: "SRAM_SHARED_alias2"
+                  addr: 0x20000000
+                  size: 0x80000
+                  access: "RW"
+                - name: "SRAM_SHARED_alias3"
+                  addr: 0x30000000
+                  size: 0x80000
+                  access: "RW"
+            - id: "SRAM_HIFI4"
+              name: "SRAM_HIFI4"
+              addr: 0x300000
+              size: 0x280000
+              type: "RAM"
+              access: "RW"
+              default: true
+              aliases:
+                - name: "SRAM_HIFI4_alias1"
+                  addr: 0x10300000
+                  size: 0x280000
+                  access: "RW"
+                - name: "SRAM_HIFI4_alias2"
+                  addr: 0x20300000
+                  size: 0x280000
+                  access: "RW"
+                - name: "SRAM_HIFI4_alias3"
+                  addr: 0x30300000
+                  size: 0x280000
+                  access: "RW"
+            - id: "SRAM_SENSE"
+              name: "SRAM_SENSE"
+              addr: 0x580000
+              size: 0x100000
+              type: "RAM"
+              access: "RW"
+              default: true
+              aliases:
+                - name: "SRAM_SENSE_alias1"
+                  addr: 0x10580000
+                  size: 0x100000
+                  access: "RW"
+                - name: "SRAM_SENSE_alias2"
+                  addr: 0x20580000
+                  size: 0x100000
+                  access: "RW"
+                - name: "SRAM_SENSE_alias3"
+                  addr: 0x30580000
+                  size: 0x100000
+                  access: "RW"
+            - id: "SRAM_HIFI1"
+              name: "SRAM_HIFI1"
+              addr: 0x680000
+              size: 0x100000
+              type: "RAM"
+              access: "RW"
+              default: true
+              aliases:
+                - name: "SRAM_HIFI1_alias1"
+                  addr: 0x10680000
+                  size: 0x100000
+                  access: "RW"
+                - name: "SRAM_HIFI1_alias2"
+                  addr: 0x20680000
+                  size: 0x100000
+                  access: "RW"
+                - name: "SRAM_HIFI1_alias3"
+                  addr: 0x30680000
+                  size: 0x100000
+                  access: "RW"
+            - id: "BootROM"
+              name: "BootROM"
+              addr: 0x3000000
+              size: 0x40000
+              type: "ROM"
+              access: "RO"
+              default: true
+              aliases:
+                - name: "BootROM_alias"
+                  addr: 0x13000000
+                  size: 0x40000
+                  access: "RO"
+        total_memory:
+          ram_size_kb: 7680
+          flash_size_kb: 0
+        modules:
+...

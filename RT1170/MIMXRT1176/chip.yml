@@ -1,0 +1,123 @@
+---
+
+device.hardware_data:
+  section-type: "manifest_content"
+  belong_to: set.device.MIMXRT1176
+  contents:
+    generated_from_chip_model: "yes"
+    devices:
+      - id: "MIMXRT1176xxxxx"
+        full_name: "MIMXRT1176xxxxx"
+        name: "MIMXRT1176"
+        platform: "i.MX"
+        series: "RT"
+        family: "MIMXRT1170"
+        subfamily: "iMXRT1176"
+        core:
+          - name: "Cortex-M4F"
+            type: "cm4f"
+            id: "cm4"
+            description: ""
+            fpu: "SP_FPU"
+            mpu: true
+            frequency_mhz: 400
+            memory:
+              memoryBlock:
+                - id: "SRAM_DTC_cm4"
+                  name: "SRAM_DTC_cm4"
+                  addr: 0x20000000
+                  size: 0x20000
+                  type: "RAM"
+                  access: "RW"
+                  default: true
+                - id: "SRAM_ITC_cm4"
+                  name: "SRAM_ITC_cm4"
+                  addr: 0x1ffe0000
+                  size: 0x20000
+                  type: "RAM"
+                  access: "RW"
+                  default: true
+            boot_role: "primary_secondary"
+            slave_role:
+              - id: "M4SLAVE"
+                name: "Cortex-M4 acts as slave by default"
+          - name: "Cortex-M7F"
+            type: "cm7f"
+            id: "cm7"
+            description: ""
+            fpu: "DP_FPU"
+            mpu: true
+            frequency_mhz: 1000
+            memory:
+              memoryBlock:
+                - id: "SRAM_DTC_cm7"
+                  name: "SRAM_DTC_cm7"
+                  addr: 0x20000000
+                  size: 0x40000
+                  type: "RAM"
+                  access: "RW"
+                  default: true
+                - id: "SRAM_ITC_cm7"
+                  name: "SRAM_ITC_cm7"
+                  addr: 0x0
+                  size: 0x40000
+                  type: "RAM"
+                  access: "RW"
+                  default: true
+            boot_role: "primary_secondary"
+            slave_role:
+              - id: "M7SLAVE"
+                name: "Cortex-M7 acts as slave by default"
+        memory:
+          memoryBlock:
+            - id: "SRAM_OC1"
+              name: "SRAM_OC1"
+              addr: 0x20240000
+              size: 0x80000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_OC2"
+              name: "SRAM_OC2"
+              addr: 0x202c0000
+              size: 0x80000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_OC_ECC1"
+              name: "SRAM_OC_ECC1"
+              addr: 0x20340000
+              size: 0x10000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_OC_ECC2"
+              name: "SRAM_OC_ECC2"
+              addr: 0x20350000
+              size: 0x10000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_OC_cm7"
+              name: "SRAM_OC_cm7"
+              addr: 0x20360000
+              size: 0x20000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "ROMCP"
+              name: "ROMCP"
+              addr: 0x200000
+              size: 0x40000
+              type: "ROM"
+              access: "RO"
+              default: true
+        total_memory:
+          ram_size_kb: 2048
+          flash_size_kb: 0
+        part:
+          - name: "MIMXRT1176DVMAA"
+          - name: "MIMXRT1176AVM8A"
+          - name: "MIMXRT1176CVM8A"
+        modules:
+...

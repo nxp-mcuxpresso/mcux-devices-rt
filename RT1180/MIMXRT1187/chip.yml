@@ -1,0 +1,110 @@
+---
+
+device.hardware_data:
+  section-type: "manifest_content"
+  belong_to: set.device.MIMXRT1187
+  contents:
+    generated_from_chip_model: "yes"
+    devices:
+      - id: "MIMXRT1187xxxxx"
+        full_name: "MIMXRT1187xxxxx"
+        name: "MIMXRT1187"
+        platform: "i.MX"
+        series: "RT"
+        family: "MIMXRT1180"
+        subfamily: "iMXRT1187"
+        core:
+          - name: "Cortex-M33"
+            type: "cm33"
+            id: "cm33"
+            description: ""
+            fpu: "SP_FPU"
+            dsp: true
+            mpu: true
+            sau: true
+            frequency_mhz: 240
+            memory:
+              memoryBlock:
+                - id: "SRAM_DTC_cm33"
+                  name: "SRAM_DTC_cm33"
+                  addr: 0x20000000
+                  size: 0x20000
+                  type: "RAM"
+                  access: "RW"
+                  default: true
+                - id: "M7_ITCM_ALIAS"
+                  name: "M7_ITCM_ALIAS"
+                  addr: 0x203C0000
+                  size: 0x40000
+                  type: "RAM"
+                  access: "RW"
+                  default: true
+                - id: "SRAM_ITC_cm33"
+                  name: "SRAM_ITC_cm33"
+                  addr: 0xffe0000
+                  size: 0x20000
+                  type: "RAM"
+                  access: "RW"
+                  default: true
+            boot_role: "primary"
+          - name: "Cortex-M7F"
+            type: "cm7f"
+            id: "cm7"
+            description: ""
+            fpu: "DP_FPU"
+            dsp: false
+            mpu: true
+            sau: false
+            frequency_mhz: 800
+            memory:
+              memoryBlock:
+                - id: "SRAM_ITC_cm7"
+                  name: "SRAM_ITC_cm7"
+                  addr: 0x0
+                  size: 0x40000
+                  type: "RAM"
+                  access: "RW"
+                  default: true
+                - id: "SRAM_DTC_cm7"
+                  name: "SRAM_DTC_cm7"
+                  addr: 0x20000000
+                  size: 0x40000
+                  type: "RAM"
+                  access: "RW"
+                  default: true
+            boot_role: "secondary"
+            slave_role:
+              - id: "M7SLAVE"
+                name: "Cortex-M7F acts as slave by default"
+        memory:
+          memoryBlock:
+            - id: "SRAM_OC1"
+              name: "SRAM_OC1"
+              addr: 0x20484000
+              size: 0x7C000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_OC2"
+              name: "SRAM_OC2"
+              addr: 0x20500000
+              size: 0x40000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "ROMCP"
+              name: "ROMCP"
+              addr: 0x0
+              size: 0x28000
+              type: "ROM"
+              access: "RO"
+              default: true
+        total_memory:
+          ram_size_kb: 1536
+          flash_size_kb: 0
+        part:
+          - name: "MIMXRT1187CVM8B"
+          - name: "MIMXRT1187AVM8B"
+          - name: "MIMXRT1187XVM8B"
+        modules:
+...

@@ -1,0 +1,106 @@
+menu "Device specific drivers"
+    config MCUX_COMPONENT_driver.clock
+        bool "Use driver clock"
+        # select MCUX_COMPONENT_driver.common
+
+        if MCUX_COMPONENT_driver.clock
+
+        endif
+
+    config MCUX_COMPONENT_driver.dcdc_3
+        bool "Use driver dcdc"
+        select MCUX_COMPONENT_driver.common
+
+        if MCUX_COMPONENT_driver.dcdc_3
+
+        endif
+
+    config MCUX_COMPONENT_driver.ecat
+        bool "Use driver ecat"
+        select MCUX_COMPONENT_driver.common
+
+        if MCUX_COMPONENT_driver.ecat
+
+        endif
+
+    config MCUX_COMPONENT_driver.edma_soc
+        bool "Use driver edma"
+        select MCUX_COMPONENT_driver.common
+
+        if MCUX_COMPONENT_driver.edma_soc
+
+        endif
+
+    config MCUX_COMPONENT_driver.ele_base_api
+        bool "Use driver ele_base_api"
+        select MCUX_COMPONENT_driver.common
+        select MCUX_COMPONENT_driver.s3mu
+
+        if MCUX_COMPONENT_driver.ele_base_api
+
+        endif
+
+    config MCUX_COMPONENT_driver.gpc_3
+        bool "Use driver gpc"
+        select MCUX_COMPONENT_driver.common
+
+        if MCUX_COMPONENT_driver.gpc_3
+
+        endif
+
+    config MCUX_COMPONENT_driver.iomuxc
+        bool "Use driver iomuxc"
+        select MCUX_COMPONENT_driver.common
+
+        if MCUX_COMPONENT_driver.iomuxc
+
+        endif
+
+    config MCUX_COMPONENT_driver.memory
+        bool "Use driver memory"
+        select MCUX_COMPONENT_driver.common
+
+        if MCUX_COMPONENT_driver.memory
+
+        endif
+
+    config MCUX_COMPONENT_driver.misc
+        bool "Use driver misc"
+        select MCUX_COMPONENT_driver.common
+
+        if MCUX_COMPONENT_driver.misc
+
+        endif
+
+    config MCUX_COMPONENT_driver.nic301
+        bool "Use driver nic301"
+        select MCUX_COMPONENT_driver.common
+
+        if MCUX_COMPONENT_driver.nic301
+
+        endif
+
+    config MCUX_COMPONENT_driver.anadig_pmu_1
+        bool "Use driver pmu"
+        # select MCUX_COMPONENT_driver.common
+
+        if MCUX_COMPONENT_driver.anadig_pmu_1
+
+        endif
+
+    config MCUX_COMPONENT_driver.src_3
+        bool "Use driver src"
+        select MCUX_COMPONENT_driver.common
+
+        if MCUX_COMPONENT_driver.src_3
+
+        endif
+
+    config MCUX_COMPONENT_driver.romapi
+        bool "Use driver rom api"
+        select MCUX_COMPONENT_driver.common
+
+        if MCUX_COMPONENT_driver.romapi
+
+        endif
+endmenu

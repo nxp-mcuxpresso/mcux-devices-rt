@@ -1,0 +1,19 @@
+/*!
+@page driver_log Driver Change Log
+
+@section xip_device XIP_DEVICE
+  Current XIP_DEVICE driver version is 2.0.3
+
+  - 2.0.3
+    - Add conditional compliation before including board.h.
+
+  - 2.0.2
+    - Included common driver.
+
+  - 2.0.1
+    - Add used attribute for sections of .boot_hdr.ivt and .boot_hrd.boot_data
+
+  - 2.0.0
+    - Initial version.
+
+*/

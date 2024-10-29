@@ -1,0 +1,144 @@
+---
+device.hardware_data:
+  section-type: manifest_content
+  belong_to: set.device.MIMXRT685S
+  contents:
+    generated_from_chip_model: 'yes'
+    devices:
+    - id: MIMXRT685S
+      full_name: MIMXRT685S
+      name: MIMXRT685S
+      platform: i.MX
+      series: RT
+      family: MIMXRT600
+      subfamily: iMXRT685S
+      core:
+      - name: Cadence-HiFi4
+        type: dsp
+        id: hifi4
+        description: Cadence HiFi4 DSP core
+        frequency_mhz: 600
+        boot_role: primary_secondary
+      - name: Cortex-M33
+        type: cm33
+        id: cm33
+        description: ''
+        fpu: SP_FPU
+        dsp: true
+        mpu: true
+        sau: true
+        frequency_mhz: 300
+        boot_role: primary
+      memory:
+        memoryBlock:
+        - id: SRAM
+          name: SRAM
+          addr: 524288
+          size: 1572864
+          type: RAM
+          access: RW
+          default: true
+          aliases:
+          - name: SRAM_alias1
+            addr: 268959744
+            size: 1572864
+            access: RW
+          - name: SRAM_alias2
+            addr: 537395200
+            size: 1572864
+            access: RW
+          - name: SRAM_alias3
+            addr: 805830656
+            size: 1572864
+            access: RW
+        - id: SRAM_ROM
+          name: SRAM_ROM
+          addr: 0
+          size: 131072
+          type: RAM
+          access: RW
+          default: true
+          aliases:
+          - name: SRAM_ROM_alias1
+            addr: 268435456
+            size: 131072
+            access: RO
+          - name: SRAM_ROM_alias2
+            addr: 536870912
+            size: 131072
+            access: RO
+          - name: SRAM_ROM_alias3
+            addr: 805306368
+            size: 131072
+            access: RO
+        - id: SRAM_SHARED
+          name: SRAM_SHARED
+          addr: 131072
+          size: 393216
+          type: RAM
+          access: RW
+          default: true
+          aliases:
+          - name: SRAM_SHARED_alias1
+            addr: 268566528
+            size: 393216
+            access: RW
+          - name: SRAM_SHARED_alias2
+            addr: 537001984
+            size: 393216
+            access: RW
+          - name: SRAM_SHARED_alias3
+            addr: 805437440
+            size: 393216
+            access: RW
+        - id: SRAM_DSP
+          name: SRAM_DSP
+          addr: 2097152
+          size: 2621440
+          type: RAM
+          access: RW
+          default: true
+          aliases:
+          - name: SRAM_DSP_alias1
+            addr: 270532608
+            size: 2621440
+            access: RW
+          - name: SRAM_DSP_alias2
+            addr: 538968064
+            size: 2621440
+            access: RW
+          - name: SRAM_DSP_alias3
+            addr: 807403520
+            size: 2621440
+            access: RW
+        - id: USB_RAM
+          name: USB_RAM
+          addr: 1075052544
+          size: 16384
+          type: RAM
+          access: RW
+          default: true
+          aliases:
+          - name: USB_RAM_alias
+            addr: 1343488000
+            size: 16384
+            access: RW
+        - id: BootROM
+          name: BootROM
+          addr: 50331648
+          size: 262144
+          type: ROM
+          access: RO
+          aliases:
+          - name: BootROM_alias
+            addr: 318767104
+            size: 262144
+            access: RO
+      total_memory:
+        ram_size_kb: 4608
+        flash_size_kb: 0
+      part:
+      - name: MIMXRT685SFVKB
+      - name: MIMXRT685SFFOB
+      - name: MIMXRT685SFAWBR
+      modules:

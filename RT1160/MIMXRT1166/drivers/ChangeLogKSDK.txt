@@ -1,0 +1,98 @@
+/*!
+@page driver_log Driver Change Log
+@section clock CLOCK
+  The current CLOCK driver version is 2.1.5.
+
+  - 2.1.6
+    - Bug Fixes
+	  - Fix an issue in CLOCK_InitArmPll() of wrong bitmask used
+
+  - 2.1.5
+    - Bug Fixes
+      - Fix clock_pll_post_div_t value.
+
+  - 2.1.4
+    - Improvements
+      - Move s_clockSourceName array to c from header.
+
+  - 2.1.3
+    - Improvements
+      - Toggle hold_ring_off during arm pll initialization.
+
+  - 2.1.2
+    - Bug Fixes
+      - Fixed bug in XBARA_CLOCKS macro define.
+      - Fixed bug in CLOCK_InitSysPll1() function.
+
+  - 2.1.1
+    - Bug Fixes
+      - Fixed bug in CLOCK_InitArmPll() function.
+      - Fixed bug clock root divider set to cut off at 255.
+
+  - 2.1.0
+    - New Features
+      - Added CLOCK_DeinitPfd() function.
+
+    - Bug Fixes
+      - Fixed violations of MISRA C-2012 rule 10.4.
+      - Fixed bug in XBARA_CLOCKS macro define.
+
+  - 2.0.0
+    - initial version.
+
+@section iomuxc IOMUXC
+  The current IOMUXC driver version is 2.0.1.
+
+  - 2.0.1
+    - Doxygen improvement.
+
+  - 2.0.0
+    - initial version.
+
+@section anatop_ai ANATOP_AI
+  The current anatop_ai driver version is 2.0.0.
+
+  - 2.0.0
+    - initial version.
+
+@section soc_mipi_csir2x SOC_MIPI_CSI2RX
+  The current SOC_MIPI_CSI2RX driver version is 2.0.2.
+
+  - 2.0.2
+    - Updated for new header file.
+
+  - 2.0.1
+    - Bug Fixes
+      - Fixed MISRA-C 2012 10.8 issue.
+
+  - 2.0.0
+    - initial version.
+
+@section romapi ROMAPI
+  The current ROMAPI driver version is 1.1.1.
+
+  - 1.1.1
+    - Improvements
+      - Update the comments of "clear cache" function.
+
+  - 1.1.0
+    - New features
+      - Support B0 silicon
+
+  - 1.0.0
+    - initial version.
+
+@section soc_flexram_allocate SOC_FLEXRAM_ALLOCATE
+  The current SOC_FLEXRAM_ALLOCATE driver version is 2.0.2.
+
+  - 2.0.2
+    - Bug Fixes
+      - Fixed violations of the MISRA C-2012 Rule 10.4.
+
+  - 2.0.1
+    - Bug Fixes
+      - Fixed wrong GPR setting for re-allocate OCRAM/DTCM/ITCM.
+
+  - 2.0.0
+    - initial version.
+*/

@@ -1,0 +1,132 @@
+---
+
+device.hardware_data:
+  section-type: "manifest_content"
+  belong_to: set.device.MIMXRT1061
+  contents:
+    generated_from_chip_model: "yes"
+    devices:
+      - id: "MIMXRT1061xxxxA"
+        full_name: "MIMXRT1061xxxxA"
+        name: "MIMXRT1061"
+        platform: "i.MX"
+        series: "RT"
+        family: "MIMXRT1060"
+        subfamily: "iMXRT1061"
+        frequency_mhz: 600
+        core:
+          - name: "Cortex-M7F"
+            type: "cm7f"
+            id: "core0"
+            description: "M7 core"
+            fpu: "DP_FPU"
+            mpu: true
+        memory:
+          memoryBlock:
+            - id: "SRAM_DTC"
+              name: "SRAM_DTC"
+              addr: 0x20000000
+              size: 0x20000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_ITC"
+              name: "SRAM_ITC"
+              addr: 0x0
+              size: 0x20000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_OC2"
+              name: "SRAM_OC2"
+              addr: 0x20200000
+              size: 0x80000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_OC"
+              name: "SRAM_OC"
+              addr: 0x20280000
+              size: 0x40000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "ROMCP"
+              name: "ROMCP"
+              addr: 0x200000
+              size: 0x20000
+              type: "ROM"
+              access: "RO"
+              default: true
+        total_memory:
+          ram_size_kb: 1024
+          flash_size_kb: 0
+        part:
+          - name: "MIMXRT1061CVL5A"
+          - name: "MIMXRT1061CVJ5A"
+          - name: "MIMXRT1061DVL6A"
+          - name: "MIMXRT1061DVJ6A"
+        modules:
+      - id: "MIMXRT1061xxxxB"
+        full_name: "MIMXRT1061xxxxB"
+        name: "MIMXRT1061"
+        platform: "i.MX"
+        series: "RT"
+        family: "MIMXRT1060"
+        subfamily: "iMXRT1061"
+        frequency_mhz: 600
+        core:
+          - name: "Cortex-M7F"
+            type: "cm7f"
+            id: "core0"
+            description: "M7 core"
+            fpu: "DP_FPU"
+            mpu: true
+        memory:
+          memoryBlock:
+            - id: "SRAM_DTC"
+              name: "SRAM_DTC"
+              addr: 0x20000000
+              size: 0x20000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_ITC"
+              name: "SRAM_ITC"
+              addr: 0x0
+              size: 0x20000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_OC2"
+              name: "SRAM_OC2"
+              addr: 0x20200000
+              size: 0x80000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_OC"
+              name: "SRAM_OC"
+              addr: 0x20280000
+              size: 0x40000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "ROMCP"
+              name: "ROMCP"
+              addr: 0x200000
+              size: 0x20000
+              type: "ROM"
+              access: "RO"
+              default: true
+        total_memory:
+          ram_size_kb: 1024
+          flash_size_kb: 0
+        part:
+          - name: "MIMXRT1061CVL5B"
+          - name: "MIMXRT1061CVJ5B"
+          - name: "MIMXRT1061DVL6B"
+          - name: "MIMXRT1061DVJ6B"
+          - name: "MIMXRT1061XVN5B"
+        modules:
+...

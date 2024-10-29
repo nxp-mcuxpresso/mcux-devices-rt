@@ -1,0 +1,61 @@
+---
+
+device.hardware_data:
+  section-type: "manifest_content"
+  belong_to: set.device.MIMXRT1043
+  contents:
+    generated_from_chip_model: "yes"
+    devices:
+      - id: "MIMXRT1043xxxxB"
+        full_name: "MIMXRT1043xxxxB"
+        name: "MIMXRT1043"
+        platform: "i.MX"
+        series: "RT"
+        family: "MIMXRT1040"
+        subfamily: "iMXRT1043"
+        frequency_mhz: 600
+        core:
+          - name: "Cortex-M7F"
+            type: "cm7f"
+            id: "core0"
+            description: "M7 core"
+            fpu: "DP_FPU"
+            mpu: true
+        memory:
+          memoryBlock:
+            - id: "SRAM_DTC"
+              name: "SRAM_DTC"
+              addr: 0x20000000
+              size: 0x20000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_ITC"
+              name: "SRAM_ITC"
+              addr: 0x0
+              size: 0x20000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "SRAM_OC"
+              name: "SRAM_OC"
+              addr: 0x20200000
+              size: 0x40000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "ROMCP"
+              name: "ROMCP"
+              addr: 0x200000
+              size: 0x20000
+              type: "ROM"
+              access: "RO"
+              default: true
+        total_memory:
+          ram_size_kb: 512
+          flash_size_kb: 0
+        part:
+          - name: "MIMXRT1043DFP6B"
+          - name: "MIMXRT1043XFP5B"
+        modules:
+...
