@@ -1,6 +1,5 @@
 /*
  * Copyright 2023-2024 NXP
- * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
@@ -17,15 +16,23 @@
 #define FSL_COMPONENT_ID "platform.drivers.ezhv"
 #endif
 
-#define EZHV_M_EXT_INT    (11UL)
-/* shared ram space between arm and ezhv, size=256Bytes */
-#define EZHV_ARM2EZHV_PARA_ADDR    (0x2410FF00U)
+/*! @brief EZHV inside machine-mode external isr offset */
+#define EZHV_M_EXT_INT           (11U)
+
+/*! @brief shared data space between ARM and EZHV, space size is 256 Bytes */
+#define EZHV_SHARED_DATA_ADDR    (0x2410FF00U)
+
+/*! @brief definition for active ezhv2arm int channel number
+ * 
+ * please redefine this macro's value if less channels are enabled
+*/
+#define EZHV_INT_CHAN_NUM       (16U)
 
 /*******************************************************************************
  * Variables
  ******************************************************************************/
-static ezhv_callback_t s_ezhvCallback;
-static void *s_ezhvCallbackParam;
+static ezhv_callback_t s_ezhvCallback[EZHV_INT_CHAN_NUM] = {NULL};
+static void *s_ezhvCallbackParam[EZHV_INT_CHAN_NUM]      = {NULL};
 
 /*******************************************************************************
  * Prototypes
@@ -80,22 +87,12 @@ void EZHV_Boot(uint32_t bootAddr)
 void EZHV_SetPara(ezhv_param_t *para)
 {
     assert(para != NULL);
-    memcpy((void*)EZHV_ARM2EZHV_PARA_ADDR, para, sizeof(ezhv_param_t));
+    memcpy((void*)EZHV_SHARED_DATA_ADDR, para, sizeof(ezhv_param_t));
 }
 
 uint32_t *EZHV_GetParaAddr(void)
 {
-    return (uint32_t *)EZHV_ARM2EZHV_PARA_ADDR;
-}
-
-void EZHV_EnableArm2EzhvInt(arm2ezhv_intctl_t arm2ezhvInt)
-{
-    SYSCON4->ARM2EZHV_INT_CTRL |= (uint32_t)arm2ezhvInt;
-}
-
-void EZHV_DisableArm2EzhvInt(arm2ezhv_intctl_t arm2ezhvInt)
-{
-    SYSCON4->ARM2EZHV_INT_CTRL &= ~(uint32_t)arm2ezhvInt;
+    return (uint32_t *)EZHV_SHARED_DATA_ADDR;
 }
 
 void EZHV_Deinit(void)
@@ -108,37 +105,43 @@ void EZHV_Deinit(void)
     POWER_ApplyPD();
 }
 
-void EZHV_InstallCallback(ezhv_callback_t callback, void *param)
+void EZHV_WakeUpEzhv(arm2ezhv_intctl_t arm2ezhvInt)
 {
-    s_ezhvCallback       = callback;
-    s_ezhvCallbackParam  = param;
+    volatile uint32_t tmp = 0;
+    while(0 == tmp)
+    {
+        tmp = EZHV_GetEzhvWaitStatusFlag();
+    }
+    EZHV_EnableArm2EzhvInt(arm2ezhvInt);
 }
 
-void EZHV_HandleIRQ(void)
+void EZHV_SetCallback(ezhv_callback_t callback,
+                    uint16_t channel,
+                    void *userData)
 {
-    if (NULL != s_ezhvCallback)
+	assert(channel < EZHV_INT_CHAN_NUM);
+    s_ezhvCallback[channel]       = callback;
+    s_ezhvCallbackParam[channel]  = userData;
+}
+
+static void EZHV_HandleIRQ(void)
+{
+    uint32_t intFlag = EZHV_GetEzhv2ArmIntChan();
+
+    if (0U != intFlag)
     {
-        s_ezhvCallback(s_ezhvCallbackParam);
+        for (uint32_t id = 0U; id < EZHV_INT_CHAN_NUM; id++)
+        {
+            if ((0U != (intFlag & (1U << id))) && (NULL != s_ezhvCallback[id]))
+            {
+                s_ezhvCallback[id](s_ezhvCallbackParam[id]);
+            }
+        }
+        EZHV_ClearEzhv2ArmIntChan((ezhv2arm_int_chan_t)intFlag);
     }
 }
 
 void EZHV_DriverIRQHandler(void)
 {
     EZHV_HandleIRQ();
-}
-
-/*! @brief Enable the EZHV interrupt channel to ARM core. */
-void EZHV_EnableEzhv2ArmIntChan(ezhv2arm_int_chan_t chan)
-{
-    SYSCON4->EZHV2ARM_INT_EN |= (uint32_t)chan;
-}
-
-uint32_t EZHV_GetIntChan(void)
-{
-    return (uint32_t)(SYSCON4->EZHV2ARM_INT_CHAN & SYSCON4_EZHV2ARM_INT_CHAN_INT_CHAN_MASK >> SYSCON4_EZHV2ARM_INT_CHAN_INT_CHAN_SHIFT);
-}
-
-void EZHV_ClearEzhv2ArmIntChan(ezhv2arm_int_chan_t chan)
-{
-    SYSCON4->EZHV2ARM_INT_CHAN = chan;
 }

@@ -22,14 +22,17 @@
 /*! @name Driver version */
 /*@{*/
 /*! @brief cache driver version. */
-#define FSL_EZHV_DRIVER_VERSION (MAKE_VERSION(2, 0, 0))
+#define FSL_EZHV_DRIVER_VERSION (MAKE_VERSION(2, 1, 0))
 /*@}*/
 
-/*! @brief Callback function prototype for the ezhv driver. */
-typedef void (*ezhv_callback_t)(void *param);
+/*! @brief define callback function for EZH-V 
+ *
+ * This callback function is called in EZH-V interrupt handle.
+*/
+typedef void (*ezhv_callback_t)(void *userData);
 
 /*!
- * @brief Structure for EZHV copy image to destination address
+ * @brief Structure for EZH-V copy image to destination address
  *
  * Defines source and destination address for copying image with given size.
  */
@@ -41,14 +44,14 @@ typedef struct _ezhv_copy_image
 } ezhv_copy_image_t;
 
 /*!
- * @Brief List of EZHV APIs
+ * @Brief List of EZH-V APIs
  */
 typedef uint32_t ezhv_api_t;
 
 #define EZHV_API_MAX_ARG 8U
 
 /*!
- * @brief parameters used by EZHV
+ * @brief parameters used by EZH-V
  */
 typedef struct _ezhv_param {
     ezhv_api_t ezhvApi;
@@ -56,15 +59,15 @@ typedef struct _ezhv_param {
     uint32_t *argv[EZHV_API_MAX_ARG];
 } ezhv_param_t;
 
-/*! @brief ARM to EZHV interrupt requests */
-typedef enum _amr2ezhv_intctl {
+/*! @brief Definition of 4 interrupt requests from ARM to EZH-V */
+typedef enum _arm2ezhv_intctl {
     kEZHV_ARM2EZHV_MEI = SYSCON4_ARM2EZHV_INT_CTRL_MEIP_MASK,
     kEZHV_ARM2EZHV_SEI = SYSCON4_ARM2EZHV_INT_CTRL_SEIP_MASK,
     kEZHV_ARM2EZHV_MSI = SYSCON4_ARM2EZHV_INT_CTRL_MSIP_MASK,
     kEZHV_ARM2EZHV_MTI = SYSCON4_ARM2EZHV_INT_CTRL_MTIP_MASK,
 } arm2ezhv_intctl_t;
 
-/*! @brief EZHV to ARM interrupt channel. */
+/*! @brief EZH-V to ARM interrupt channel. */
 typedef enum _ezhv2arm_int_chan {
     kEZHV_EzhvToArmIntChan0  = (0x1U << 0U),
     kEZHV_EzhvToArmIntChan1  = (0x1U << 1U),
@@ -97,14 +100,14 @@ extern "C" {
 #endif
 
 /*!
- * @brief Initialize the EZHV.
+ * @brief Initialize the EZH-V.
  *
- * @param ezhvCopyImage The information about the EZHV image to copy.
+ * @param ezhvCopyImage The information about the EZH-V image to copy.
  */
 void EZHV_Init(ezhv_copy_image_t *ezhvCopyImage);
 
  /*!
- * @brief Initialize the EZHV.
+ * @brief Initialize the EZH-V.
  *
  * This function is similar with EZHV_Init, the difference is this function
  * does not install the firmware, the firmware could be installed using
@@ -113,71 +116,113 @@ void EZHV_Init(ezhv_copy_image_t *ezhvCopyImage);
 void EZHV_InitWithoutFirmware(void);
 
 /*!
- * @brief install EZHV firmware by given image info
+ * @brief install EZH-V firmware by given image info
  *
- * @param ezhvCopyImage The information about the EZHV image to copy.
+ * @param ezhvCopyImage The information about the EZH-V image to copy.
  */
 void EZHV_InstallFirmware(ezhv_copy_image_t *ezhvCopyImage);
 
 /*!
- * @brief Boot EZHV from given address bootAddr
+ * @brief Boot EZH-V from given address bootAddr
  *
  * @param bootAddr The boot address.
  */
 void EZHV_Boot(uint32_t bootAddr);
 
 /*!
- * @brief Deinitialize the EZHV.
+ * @brief Deinitialize the EZH-V.
  */
 void EZHV_Deinit(void);
 
 /*!
- * @brief Install the complete callback function.
+ * @brief Install the EZH-V callback function.
  *
- * @param callback The callback called when EZHV program finished.
- * @param param parameter for callback function
+ * @param callback EZH-V callback function pointer.
+ * @param channel interrupt channel index.
+ * @param userData A parameter for the callback function.
  */
-void EZHV_InstallCallback(ezhv_callback_t callback, void *param);
+void EZHV_SetCallback(ezhv_callback_t callback,
+                    uint16_t channel,
+                    void *userData);
 
 /*!
- * @brief Install the complete callback function..
+ * @brief Set the parameter used by EZH-V.
  *
- * @return The base address of arm2ezhv paramter
+ * @param para Parameter written into shared mem between ARM and EZH-V.
+ */
+void EZHV_SetPara(ezhv_param_t *para);
+
+/*!
+ * @brief Get shared space address
+ *
+ * @return The start address of shared space
  */
 uint32_t *EZHV_GetParaAddr(void);
 
 /*!
- * @brief Enable interrupt request from ARM core to EZHV core.
- * 
- * @note This interrupt can be used to wake up EZHV core when the core in wait state.
+ * @brief Check the wait status and wake up EZH-V.
  *
- * @param arm2ezhvInt The interrupt request which will send to the EZHV.
+ * @param arm2ezhvInt The interrupt request which will send to the EZH-V.
  */
-void EZHV_EnableArm2EzhvInt(arm2ezhv_intctl_t arm2ezhvInt);
+void EZHV_WakeUpEzhv(arm2ezhv_intctl_t arm2ezhvInt);
 
 /*!
- * @brief Disable interrupt request from ARM core to EZHV core.
+ * @brief Enable interrupt request from ARM core to EZH-V core.
+ * 
+ * @note This interrupt can be used to send interrupt request to EZH-V
+ *
+ * @param arm2ezhvInt The interrupt request which will send to the EZH-V.
+ */
+static inline void EZHV_EnableArm2EzhvInt(arm2ezhv_intctl_t arm2ezhvInt)
+{
+    SYSCON4->ARM2EZHV_INT_CTRL |= (uint32_t)arm2ezhvInt;
+}
+
+/*!
+ * @brief Disable interrupt request from ARM core to EZH-V core.
  * 
  * @param arm2ezhvInt The interrupt request type.
  */
-void EZHV_DisableArm2EzhvInt(arm2ezhv_intctl_t arm2ezhvInt);
+static inline void EZHV_DisableArm2EzhvInt(arm2ezhv_intctl_t arm2ezhvInt)
+{
+    SYSCON4->ARM2EZHV_INT_CTRL &= ~(uint32_t)arm2ezhvInt;
+}
 
 /*!
- * @brief Set the parameter used by EZHV.
- *
- * @param para Parameter written into shared mem between ARM and EZHV.
+ * @brief EZH-V IRQ handler
  */
-void EZHV_SetPara(ezhv_param_t *para);
+void EZHV_DriverIRQHandler(void);
 
-void EZHV_EnableEzhv2ArmIntChan(ezhv2arm_int_chan_t chan);
+/*! 
+ * @brief Enable the EZH-V interrupt channel to ARM core.
+ *
+ * @param chan Ezhv to arm interrupt channel index.
+ */
+static inline void EZHV_EnableEzhv2ArmIntChan(ezhv2arm_int_chan_t chan)
+{
+    SYSCON4->EZHV2ARM_INT_EN |= (uint32_t)chan;
+}
 
-uint32_t EZHV_GetIntChan(void);
+/*! 
+ * @brief Get EZH-V interrupt outputs. 
+ */
+static inline uint32_t EZHV_GetEzhv2ArmIntChan(void)
+{
+    return (uint32_t)(SYSCON4->EZHV2ARM_INT_CHAN & SYSCON4_EZHV2ARM_INT_CHAN_INT_CHAN_MASK >> SYSCON4_EZHV2ARM_INT_CHAN_INT_CHAN_SHIFT);
+}
 
-void EZHV_ClearEzhv2ArmIntChan(ezhv2arm_int_chan_t chan);
-
+/*! 
+ * @brief Clear EZH-V interrupt outputs.
+ *
+ * @param chan EZH-V to ARM interrupt channel index.
+ */
+static inline void EZHV_ClearEzhv2ArmIntChan(ezhv2arm_int_chan_t chan)
+{
+    SYSCON4->EZHV2ARM_INT_CHAN = (uint32_t)chan;
+}
 
 /*!
- * @brief Get EZHV stop status flag
+ * @brief Get EZH-V stop status flag
  */
 static inline bool EZHV_GetEzhvStopStatusFlag()
 {
@@ -185,7 +230,7 @@ static inline bool EZHV_GetEzhvStopStatusFlag()
 }
 
 /*!
- * @brief Get EZHV halt status flag
+ * @brief Get EZH-V halt status flag
  */
 static inline bool EZHV_GetEzhvHaltStatusFlag()
 {
@@ -193,7 +238,7 @@ static inline bool EZHV_GetEzhvHaltStatusFlag()
 }
 
 /*!
- * @brief Get EZHV wait status flag
+ * @brief Get EZH-V wait status flag
  */
 static inline bool EZHV_GetEzhvWaitStatusFlag()
 {
@@ -201,7 +246,7 @@ static inline bool EZHV_GetEzhvWaitStatusFlag()
 }
 
 /*!
- * @brief Get EZHV wakeup status flag
+ * @brief Get EZH-V wakeup status flag
  */
 static inline bool EZHV_GetEzhvWakeupStatusFlag()
 {
