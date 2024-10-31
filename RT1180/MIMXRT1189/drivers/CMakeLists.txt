@@ -1,4 +1,5 @@
 if (CONFIG_MCUX_COMPONENT_driver.clock)
+    mcux_component_version(2.1.4)
 
     mcux_add_source(
         SOURCES fsl_clock.h
@@ -12,6 +13,7 @@ if (CONFIG_MCUX_COMPONENT_driver.clock)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.dcdc_3)
+    mcux_component_version(2.0.1)
 
     mcux_add_source(
         SOURCES fsl_dcdc.c
@@ -25,6 +27,7 @@ if (CONFIG_MCUX_COMPONENT_driver.dcdc_3)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.ecat)
+    mcux_component_version(1.0.0)
 
     mcux_add_source(
         SOURCES fsl_ecat.c
@@ -38,6 +41,7 @@ if (CONFIG_MCUX_COMPONENT_driver.ecat)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.edma_soc)
+    mcux_component_version(2.1.0)
 
     mcux_add_source(
         SOURCES fsl_edma_soc.c
@@ -51,6 +55,7 @@ if (CONFIG_MCUX_COMPONENT_driver.edma_soc)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.ele_base_api)
+    mcux_component_version(1.0.0)
 
     mcux_add_source(
         SOURCES fsl_ele_base_api.c
@@ -64,6 +69,7 @@ if (CONFIG_MCUX_COMPONENT_driver.ele_base_api)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.gpc_3)
+    mcux_component_version(2.1.0)
 
     mcux_add_source(
         SOURCES fsl_gpc.c
@@ -77,6 +83,7 @@ if (CONFIG_MCUX_COMPONENT_driver.gpc_3)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.iomuxc)
+    mcux_component_version(2.0.0)
 
     mcux_add_source(
         SOURCES fsl_iomuxc.h
@@ -89,6 +96,7 @@ if (CONFIG_MCUX_COMPONENT_driver.iomuxc)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.memory)
+    mcux_component_version(2.0.0)
 
     mcux_add_source(
         SOURCES fsl_memory.h
@@ -101,6 +109,7 @@ if (CONFIG_MCUX_COMPONENT_driver.memory)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.misc)
+    mcux_component_version(2.0.0)
 
     mcux_add_source(
         SOURCES fsl_misc.h
@@ -113,6 +122,7 @@ if (CONFIG_MCUX_COMPONENT_driver.misc)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.nic301)
+    mcux_component_version(2.0.1)
 
     mcux_add_source(
         SOURCES fsl_nic301.h
@@ -125,6 +135,7 @@ if (CONFIG_MCUX_COMPONENT_driver.nic301)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.anadig_pmu_1)
+    mcux_component_version(2.1.2)
 
     mcux_add_source(
         SOURCES fsl_pmu.h
@@ -138,6 +149,7 @@ if (CONFIG_MCUX_COMPONENT_driver.anadig_pmu_1)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.src_3)
+    mcux_component_version(2.0.1)
 
     mcux_add_source(
         SOURCES fsl_soc_src.c
@@ -150,6 +162,7 @@ if (CONFIG_MCUX_COMPONENT_driver.src_3)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.romapi)
+    mcux_component_version(1.1.2)
 
     mcux_add_source(
         SOURCES ./romapi/fsl_romapi.c

@@ -1,4 +1,5 @@
 if (CONFIG_MCUX_COMPONENT_driver.clock)
+    mcux_component_version(2.5.3)
 
     mcux_add_source(
         SOURCES fsl_clock.h
@@ -12,6 +13,7 @@ if (CONFIG_MCUX_COMPONENT_driver.clock)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.iomuxc)
+    mcux_component_version(2.0.3)
 
     mcux_add_source(
         SOURCES fsl_iomuxc.h

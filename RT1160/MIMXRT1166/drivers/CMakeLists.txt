@@ -1,4 +1,5 @@
 if (CONFIG_MCUX_COMPONENT_driver.clock)
+    mcux_component_version(2.1.6)
 
     mcux_add_source(
         SOURCES fsl_clock.h
@@ -12,6 +13,7 @@ if (CONFIG_MCUX_COMPONENT_driver.clock)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.iomuxc)
+    mcux_component_version(2.0.0)
 
     mcux_add_source(
         SOURCES fsl_iomuxc.h
@@ -24,6 +26,7 @@ if (CONFIG_MCUX_COMPONENT_driver.iomuxc)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.mipi_csi2rx_soc)
+    mcux_component_version(2.0.2)
 
     mcux_add_source(
         SOURCES fsl_soc_mipi_csi2rx.c
@@ -37,6 +40,7 @@ if (CONFIG_MCUX_COMPONENT_driver.mipi_csi2rx_soc)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.mipi_dsi_soc)
+    mcux_component_version(2.0.0)
 
     mcux_add_source(
         SOURCES fsl_soc_mipi_dsi.h
