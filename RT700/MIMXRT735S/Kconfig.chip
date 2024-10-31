@@ -143,7 +143,7 @@ config MCUX_HW_IP_DriverType_LPFLEXCOMM
 
 config MCUX_HW_IP_DriverType_FREQME
     bool
-    default y
+    default y if MCUX_HW_DEVICE_MIMXRT735S_CORE_ID_cm33_core0
     depends on MCUX_HW_DEVICE_ID_MIMXRT735S
 
 config MCUX_HW_IP_DriverType_I3C
@@ -198,7 +198,7 @@ config MCUX_HW_IP_DriverType_LPC_RSTCTL
 
 config MCUX_HW_IP_DriverType_SCTIMER
     bool
-    default y
+    default y if MCUX_HW_DEVICE_MIMXRT735S_CORE_ID_cm33_core0
     depends on MCUX_HW_DEVICE_ID_MIMXRT735S
 
 config MCUX_HW_IP_DriverType_UTICK
