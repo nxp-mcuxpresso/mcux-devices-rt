@@ -51,7 +51,6 @@ HEAP_START   = DEFINED(__heap_noncacheable__) ? NCACHE_END + 1 : DATA_END + 1;
 /* The SRAM region [0x000000-0x013FFF] is reserved for ROM bootloader execution. Can be reused after boot. */
 /* The SRAM region [0x014000-0x07FFFF] is reserved for Non-cached shared memory or application data. */
 /* The SRAM region [0x080000-0x3FFFFF] is reserved for CPU0 application, last 2MB non-cacheable data for NPU/GPU/Display etc. */
-/* The SRAM region [0x400000-0x57FFFF] is reserved for HiFi4 application. */
 MEMORY
 {
   m_flash_config        (RX)  : ORIGIN = 0x28000000, LENGTH = 0x00004000

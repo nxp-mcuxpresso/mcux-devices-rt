@@ -36,7 +36,6 @@ if (isdefinedsymbol(__heap_size__)) {
 
 /* The SRAM region [0x580000-0x5BFFFF] is reserved for shared memory or application data. */
 /* The SRAM region [0x5C0000-0x67FFFF] is reserved for CPU1 application. */
-/* The SRAM region [0x680000-0x77FFFF] is reserved for HiFi1 application. */
 
 define symbol m_interrupts_start               = 0x00600000;
 define symbol m_interrupts_end                 = 0x006001FF;

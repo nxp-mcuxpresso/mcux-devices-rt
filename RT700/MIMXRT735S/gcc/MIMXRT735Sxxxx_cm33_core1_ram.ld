@@ -34,7 +34,6 @@ RPMSG_SHMEM_START = DEFINED(__use_shmem_hifi1__) ? 0x20588000 : 0x20200000;
 /* Specify the memory areas */
 /* The SRAM region [0x580000-0x5BFFFF] is reserved for shared memory or application data. */
 /* The SRAM region [0x5C0000-0x67FFFF] is reserved for CPU1 application. */
-/* The SRAM region [0x680000-0x77FFFF] is reserved for HiFi1 application. */
 MEMORY
 {
   m_interrupts          (RX)  : ORIGIN = 0x00600000, LENGTH = 0x00000200

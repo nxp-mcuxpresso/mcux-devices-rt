@@ -38,7 +38,6 @@
 
 /* The SRAM region [0x580000-0x5BFFFF] is reserved for shared memory or application data. */
 /* The SRAM region [0x5C0000-0x67FFFF] is reserved for CPU1 application. */
-/* The SRAM region [0x680000-0x77FFFF] is reserved for HiFi1 application. */
 
 #define m_interrupts_start             0x00600000
 #define m_interrupts_size              0x00000200
