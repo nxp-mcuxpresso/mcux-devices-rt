@@ -1,1 +1,2 @@
-periph:MIMXRT1064
+#### Peripheral folder for devices
+* periph:MIMXRT1064
