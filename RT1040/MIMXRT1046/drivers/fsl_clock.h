@@ -270,7 +270,7 @@ extern volatile uint32_t g_rtcXtalFreq;
 /*! @brief Clock ip name array for LPSPI. */
 #define LPSPI_CLOCKS                                                  \
     {                                                                 \
-        kCLOCK_IpInvalid, kCLOCK_Lpspi1, kCLOCK_Lpspi2, kCLOCK_Lpspi4, kCLOCK_Lpspi3 \
+        kCLOCK_IpInvalid, kCLOCK_Lpspi1, kCLOCK_Lpspi2, kCLOCK_Lpspi3, kCLOCK_Lpspi4 \
     }
 
 /*! @brief Clock ip name array for LPUART. */
