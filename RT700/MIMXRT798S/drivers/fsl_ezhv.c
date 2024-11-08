@@ -16,18 +16,6 @@
 #define FSL_COMPONENT_ID "platform.drivers.ezhv"
 #endif
 
-/*! @brief EZHV inside machine-mode external isr offset */
-#define EZHV_M_EXT_INT           (11U)
-
-/*! @brief shared data space between ARM and EZHV, space size is 256 Bytes */
-#define EZHV_SHARED_DATA_ADDR    (0x2410FF00U)
-
-/*! @brief definition for active ezhv2arm int channel number
- * 
- * please redefine this macro's value if less channels are enabled
-*/
-#define EZHV_INT_CHAN_NUM       (16U)
-
 /*******************************************************************************
  * Variables
  ******************************************************************************/

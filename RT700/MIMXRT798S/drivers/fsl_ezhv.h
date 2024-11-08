@@ -1,6 +1,5 @@
 /*
  * Copyright 2023-2024 NXP
- * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
@@ -18,11 +17,22 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+/*! @brief EZHV inside machine-mode external isr offset */
+#define EZHV_M_EXT_INT           (11U)
+
+/*! @brief shared data space between ARM and EZHV, space size is 256 Bytes */
+#define EZHV_SHARED_DATA_ADDR    (0x2410FF00U)
+
+/*! @brief definition for active ezhv2arm int channel number
+ * 
+ * please redefine this macro's value if less channels are enabled
+*/
+#define EZHV_INT_CHAN_NUM       (16U)
 
 /*! @name Driver version */
 /*@{*/
 /*! @brief cache driver version. */
-#define FSL_EZHV_DRIVER_VERSION (MAKE_VERSION(2, 1, 0))
+#define FSL_EZHV_DRIVER_VERSION (MAKE_VERSION(2, 1, 1))
 /*@}*/
 
 /*! @brief define callback function for EZH-V 
