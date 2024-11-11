@@ -1,6 +1,5 @@
 /*
  * Copyright 2023-2024 NXP
- * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
@@ -791,7 +790,7 @@ void CLOCK_EnableFroClkFreq(FRO_Type *base, uint32_t targetFreq, uint32_t divOut
 {
     const clock_fro_config_t froAutotrimCfg = {
         .targetFreq   = targetFreq,
-        .range        = 50U, /* For about 0.5% deviation. */
+        .range        = 100U, /* For about 1.0% deviation. */
         .trim1DelayUs = 15U,
         .trim2DelayUs = 150U,
         .refDiv       = 1U,
