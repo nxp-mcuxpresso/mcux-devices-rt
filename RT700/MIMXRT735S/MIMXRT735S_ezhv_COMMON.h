@@ -5,7 +5,7 @@
 **
 **     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241112
 **
 **     Abstract:
 **         Peripheral Access Layer for MIMXRT735S_ezhv
@@ -662,6 +662,9 @@ typedef enum IRQn {
 #define IOPCTL2_BASE_ADDRS                       { IOPCTL2_BASE }
 /** Array initializer of IOPCTL2 peripheral base pointers */
 #define IOPCTL2_BASE_PTRS                        { IOPCTL2 }
+/** Array initializer of IOPCTL peripheral base addresses */
+  #define IOPCTL_BASE_ADDRS                        {IOPCTL0_BASE, IOPCTL1_BASE, IOPCTLR2_BASE}
+
 
 /* JPGDECWRP - Peripheral instance base addresses */
 /** Peripheral JPGDECWRP base address */

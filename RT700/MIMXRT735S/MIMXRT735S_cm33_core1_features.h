@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241018
+**     Build:               b241111
 **
 **     Abstract:
 **         Chip specific module features.
@@ -459,7 +459,7 @@
 /* @brief Has LPUART_PINCFG. */
 #define FSL_FEATURE_LPUART_HAS_PINCFG (1)
 /* @brief Belong to LPFLEXCOMM */
-#define FSL_FEATURE_LPUART_IS_LPFLEXCOMM (0)
+#define FSL_FEATURE_LPUART_IS_LPFLEXCOMM (1)
 /* @brief Has register MODEM Control. */
 #define FSL_FEATURE_LPUART_HAS_MCR (0)
 /* @brief Has register Half Duplex Control. */
