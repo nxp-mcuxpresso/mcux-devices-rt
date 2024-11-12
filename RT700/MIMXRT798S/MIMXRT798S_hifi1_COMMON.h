@@ -6,7 +6,7 @@
 **     Compiler:            Xtensa Compiler
 **     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241112
 **
 **     Abstract:
 **         Peripheral Access Layer for MIMXRT798S_hifi1
@@ -1114,6 +1114,16 @@ typedef enum _dma_request_source
   /** Array initializer of IOPCTL2 peripheral base pointers */
   #define IOPCTL2_BASE_PTRS                        { IOPCTL2 }
 #endif
+#if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
+/** Array initializer of IOPCTL peripheral base addresses */
+  #define IOPCTL_BASE_ADDRS                        {0u, IOPCTL1_BASE, IOPCTLR2_BASE}
+/** Array initializer of IOPCTL NS peripheral base addresses */
+  #define IOPCTL_BASE_ADDRS_NS                     {0u, IOPCTL1_BASE_NS, IOPCTLR2_BASE_NS}
+#else
+/** Array initializer of IOPCTL peripheral base addresses */
+  #define IOPCTL_BASE_ADDRS                        {0u, IOPCTL1_BASE, IOPCTLR2_BASE}
+#endif
+
 
 /* JPEGDEC - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
