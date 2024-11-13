@@ -1,1 +1,1 @@
-include(../../../RT1180/MIMXRT1189/drivers/CMakeListss.txt)
+include(../../../RT1180/MIMXRT1189/drivers/CMakeLists.txt)
