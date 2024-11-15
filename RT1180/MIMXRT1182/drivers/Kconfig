@@ -1,3 +1,4 @@
-
-
-rsource "../../../RT1180/MIMXRT1189/drivers/Kconfig"
+menu "Device specific drivers"
+    rsource "../../../RT1180/MIMXRT1189/drivers/Kconfig_common"
+    rsource "../../../RT1180/MIMXRT1189/drivers/ecat/Kconfig"
+endmenu
