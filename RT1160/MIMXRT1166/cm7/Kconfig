@@ -1,3 +1,7 @@
+# Copyright 2024 NXP
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
 
 config MCUX_HW_DEVICE_MIMXRT1166_CORE_ID_CM7
     bool
