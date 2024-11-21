@@ -4,7 +4,7 @@
 ;            MIMXRT798S_cm33_core1
 ;  @version: 2.0
 ;  @date:    2024-5-28
-;  @build:   b240911
+;  @build:   b241121
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.
@@ -111,12 +111,12 @@ __vector_table_0x1c
         DCD     WDT2_IRQHandler                               ;WDT: Interrupt request
         DCD     WDT3_IRQHandler                               ;WDT: Interrupt request
         DCD     USBPHY0_IRQHandler                            ;HSUSBPHY: UTM interrupt request
-        DCD     PMIC_IRQN_IRQHandler                          ;PMIC: External PMIC interrupt
+        DCD     Reserved55_IRQHandler                         ;xxx Interrupt 55
         DCD     I3C3_IRQHandler                               ;I3C: Interrupt Request
         DCD     FLEXIO_IRQHandler                             ;flexio: Interrupt request
         DCD     LCDIF_IRQHandler                              ;dcn: Interrupt request
         DCD     VGPU_IRQHandler                               ;VGPU interrupt from graphics core
-        DCD     MIPI_IRQHandler                               ;dsi: Interrupt request
+        DCD     MIPI_IRQHandler                               ;DSI: Interrupt request
         DCD     EDMA2_CH0_IRQHandler                          ;edma2: Channel 0 interrupt
         DCD     EDMA2_CH1_IRQHandler                          ;edma2: Channel 1 interrupt
         DCD     EDMA2_CH2_IRQHandler                          ;edma2: Channel 2 interrupt
@@ -517,11 +517,11 @@ USBPHY0_IRQHandler
         LDR     R0, =USBPHY0_DriverIRQHandler
         BX      R0
 
-        PUBWEAK PMIC_IRQN_IRQHandler
-        PUBWEAK PMIC_IRQN_DriverIRQHandler
+        PUBWEAK Reserved55_IRQHandler
+        PUBWEAK Reserved55_DriverIRQHandler
         SECTION .text:CODE:REORDER:NOROOT(2)
-PMIC_IRQN_IRQHandler
-        LDR     R0, =PMIC_IRQN_DriverIRQHandler
+Reserved55_IRQHandler
+        LDR     R0, =Reserved55_DriverIRQHandler
         BX      R0
 
         PUBWEAK I3C3_IRQHandler
@@ -934,7 +934,7 @@ USB1_DriverIRQHandler
 WDT2_DriverIRQHandler
 WDT3_DriverIRQHandler
 USBPHY0_DriverIRQHandler
-PMIC_IRQN_DriverIRQHandler
+Reserved55_DriverIRQHandler
 I3C3_DriverIRQHandler
 FLEXIO_DriverIRQHandler
 LCDIF_DriverIRQHandler

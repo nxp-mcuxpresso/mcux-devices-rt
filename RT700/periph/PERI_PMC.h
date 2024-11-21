@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for PMC
@@ -1557,14 +1557,6 @@ typedef struct {
  *  0b1..Power down
  */
 #define PMC_PDRUNCFG0_RBBSR2_PD(x)               (((uint32_t)(((uint32_t)(x)) << PMC_PDRUNCFG0_RBBSR2_PD_SHIFT)) & PMC_PDRUNCFG0_RBBSR2_PD_MASK)
-
-#define PMC_PDRUNCFG0_AFBBSR2_PD_MASK            (0x80000000U)
-#define PMC_PDRUNCFG0_AFBBSR2_PD_SHIFT           (31U)
-/*! AFBBSR2_PD - Power Down SRAM AFBB in VDD2 Domain
- *  0b0..Power on
- *  0b1..Power down
- */
-#define PMC_PDRUNCFG0_AFBBSR2_PD(x)              (((uint32_t)(((uint32_t)(x)) << PMC_PDRUNCFG0_AFBBSR2_PD_SHIFT)) & PMC_PDRUNCFG0_AFBBSR2_PD_MASK)
 /*! @} */
 
 /*! @name PDRUNCFG1 - PD Run Configuration 1 in Compute Domain */
@@ -2765,14 +2757,6 @@ typedef struct {
  *  0b1..Power down
  */
 #define PMC_PDSLEEPCFG0_RBBSR2_PD(x)             (((uint32_t)(((uint32_t)(x)) << PMC_PDSLEEPCFG0_RBBSR2_PD_SHIFT)) & PMC_PDSLEEPCFG0_RBBSR2_PD_MASK)
-
-#define PMC_PDSLEEPCFG0_AFBBSR2_PD_MASK          (0x80000000U)
-#define PMC_PDSLEEPCFG0_AFBBSR2_PD_SHIFT         (31U)
-/*! AFBBSR2_PD - Power Down SRAM AFBB in VDD2 Domain
- *  0b0..Power on
- *  0b1..Power down
- */
-#define PMC_PDSLEEPCFG0_AFBBSR2_PD(x)            (((uint32_t)(((uint32_t)(x)) << PMC_PDSLEEPCFG0_AFBBSR2_PD_SHIFT)) & PMC_PDSLEEPCFG0_AFBBSR2_PD_MASK)
 /*! @} */
 
 /*! @name PDSLEEPCFG1 - PD Sleep Configuration 1 in Compute Domain */
@@ -3981,22 +3965,6 @@ typedef struct {
  *  0b1..Power down
  */
 #define PMC_PDCFGSTATUS0_RBBSR2_PD(x)            (((uint32_t)(((uint32_t)(x)) << PMC_PDCFGSTATUS0_RBBSR2_PD_SHIFT)) & PMC_PDCFGSTATUS0_RBBSR2_PD_MASK)
-
-#define PMC_PDCFGSTATUS0_AFBBSR1_PD_MASK         (0x40000000U)
-#define PMC_PDCFGSTATUS0_AFBBSR1_PD_SHIFT        (30U)
-/*! AFBBSR1_PD - SRAM AFBB Power Down in VDD1 Domain
- *  0b0..Power on
- *  0b1..Power down
- */
-#define PMC_PDCFGSTATUS0_AFBBSR1_PD(x)           (((uint32_t)(((uint32_t)(x)) << PMC_PDCFGSTATUS0_AFBBSR1_PD_SHIFT)) & PMC_PDCFGSTATUS0_AFBBSR1_PD_MASK)
-
-#define PMC_PDCFGSTATUS0_AFBBSR2_PD_MASK         (0x80000000U)
-#define PMC_PDCFGSTATUS0_AFBBSR2_PD_SHIFT        (31U)
-/*! AFBBSR2_PD - SRAM AFBB Power Down in VDD2 Domain
- *  0b0..Power on
- *  0b1..Power down
- */
-#define PMC_PDCFGSTATUS0_AFBBSR2_PD(x)           (((uint32_t)(((uint32_t)(x)) << PMC_PDCFGSTATUS0_AFBBSR2_PD_SHIFT)) & PMC_PDCFGSTATUS0_AFBBSR2_PD_MASK)
 /*! @} */
 
 /*! @name PDCFGSTATUS1 - PD Configuration Status 1 */

@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for PKC
@@ -455,9 +455,9 @@ typedef struct {
 #define PKC_PKC_VERSION_MULSIZE_MASK             (0x3U)
 #define PKC_PKC_VERSION_MULSIZE_SHIFT            (0U)
 /*! MULSIZE
- *  0b01..64-bit multiplier
- *  0b10..128-bit multiplier
- *  0b11..128-bit multiplier
+ *  0b01..Reserved
+ *  0b10..64-bit multiplier
+ *  0b11..Reserved
  */
 #define PKC_PKC_VERSION_MULSIZE(x)               (((uint32_t)(((uint32_t)(x)) << PKC_PKC_VERSION_MULSIZE_SHIFT)) & PKC_PKC_VERSION_MULSIZE_MASK)
 

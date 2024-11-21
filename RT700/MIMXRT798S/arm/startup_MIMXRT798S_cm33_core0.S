@@ -4,7 +4,7 @@
 /*            MIMXRT798S_cm33_core0                                          */
 /*  @version: 2.0                                                            */
 /*  @date:    2024-5-28                                                      */
-/*  @build:   b240911                                                        */
+/*  @build:   b241121                                                        */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Copyright 1997-2016 Freescale Semiconductor, Inc.                         */
@@ -89,7 +89,7 @@ __Vectors:
     .long   WDT1_IRQHandler                                 /* WDT: Interrupt request*/
     .long   USBPHY0_IRQHandler                              /* HSUSBPHY: UTM interrupt request*/
     .long   PUF_IRQHandler                                  /* PUF: Interrupt Request*/
-    .long   PMIC_IRQN_IRQHandler                            /* PMIC: External PMIC interrupt*/
+    .long   Reserved62_IRQHandler                           /* xxx Interrupt 62*/
     .long   LP_FLEXCOMM8_IRQHandler                         /* FLEXCOMM: Interrupt request*/
     .long   LP_FLEXCOMM9_IRQHandler                         /* FLEXCOMM: Interrupt request*/
     .long   LP_FLEXCOMM10_IRQHandler                        /* FLEXCOMM: Interrupt request*/
@@ -704,12 +704,12 @@ PUF_IRQHandler:
 
     .align 1
     .thumb_func
-    .weak PMIC_IRQN_IRQHandler
-    .type PMIC_IRQN_IRQHandler, %function
-PMIC_IRQN_IRQHandler:
-    ldr   r0,=PMIC_IRQN_DriverIRQHandler
+    .weak Reserved62_IRQHandler
+    .type Reserved62_IRQHandler, %function
+Reserved62_IRQHandler:
+    ldr   r0,=Reserved62_DriverIRQHandler
     bx    r0
-    .size PMIC_IRQN_IRQHandler, . - PMIC_IRQN_IRQHandler
+    .size Reserved62_IRQHandler, . - Reserved62_IRQHandler
 
     .align 1
     .thumb_func
@@ -1771,7 +1771,7 @@ OCOTP_IRQHandler:
     def_irq_handler    WDT1_DriverIRQHandler
     def_irq_handler    USBPHY0_DriverIRQHandler
     def_irq_handler    PUF_DriverIRQHandler
-    def_irq_handler    PMIC_IRQN_DriverIRQHandler
+    def_irq_handler    Reserved62_DriverIRQHandler
     def_irq_handler    LP_FLEXCOMM8_DriverIRQHandler
     def_irq_handler    LP_FLEXCOMM9_DriverIRQHandler
     def_irq_handler    LP_FLEXCOMM10_DriverIRQHandler

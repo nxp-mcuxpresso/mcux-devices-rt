@@ -10,7 +10,7 @@
 **
 **     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241112
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT735S_cm33_core1
@@ -118,12 +118,11 @@ typedef enum IRQn {
   WDT2_IRQn                    = 36,               /**< WDT: Interrupt request */
   WDT3_IRQn                    = 37,               /**< WDT: Interrupt request */
   USBPHY0_IRQn                 = 38,               /**< HSUSBPHY: UTM interrupt request */
-  PMIC_IRQN_IRQn               = 39,               /**< PMIC: External PMIC interrupt */
   I3C3_IRQn                    = 40,               /**< I3C: Interrupt Request */
   FLEXIO_IRQn                  = 41,               /**< flexio: Interrupt request */
   Reserved58_IRQn              = 42,               /**< Reserved interrupt */
   Reserved59_IRQn              = 43,               /**< Reserved interrupt */
-  MIPI_IRQn                    = 44,               /**< dsi: Interrupt request */
+  Reserved60_IRQn              = 44,               /**< Reserved interrupt */
   EDMA2_CH0_IRQn               = 45,               /**< edma2: Channel 0 interrupt */
   EDMA2_CH1_IRQn               = 46,               /**< edma2: Channel 1 interrupt */
   EDMA2_CH2_IRQn               = 47,               /**< edma2: Channel 2 interrupt */
@@ -728,6 +727,8 @@ typedef enum _dma_request_source
   /** Array initializer of DMA peripheral base pointers */
   #define DMA_BASE_PTRS                            { (DMA_Type *)0u, (DMA_Type *)0u, DMA2, DMA3 }
 #endif
+/** Interrupt vectors for the DMA peripheral type */
+#define DMA_IRQS                                 { { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { EDMA2_CH0_IRQn, EDMA2_CH1_IRQn, EDMA2_CH2_IRQn, EDMA2_CH3_IRQn, EDMA2_CH4_IRQn, EDMA2_CH5_IRQn, EDMA2_CH6_IRQn, EDMA2_CH7_IRQn }, { EDMA3_CH0_IRQn, EDMA3_CH1_IRQn, EDMA3_CH2_IRQn, EDMA3_CH3_IRQn, EDMA3_CH4_IRQn, EDMA3_CH5_IRQn, EDMA3_CH6_IRQn, EDMA3_CH7_IRQn } }
 
 /* FLEXIO - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -1610,6 +1611,8 @@ typedef enum _dma_request_source
   /** Array initializer of MU peripheral base pointers */
   #define MU_BASE_PTRS                             { MU1_MUB, MU2_MUB, MU3_MUA }
 #endif
+/** Interrupt vectors for the MU peripheral type */
+#define MU_IRQS                                  { MU1_B_IRQn, NotAvail_IRQn, MU3_A_IRQn }
 
 /* NIC - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -1728,6 +1731,11 @@ typedef enum _dma_request_source
   /** Array initializer of PDM peripheral base pointers */
   #define PDM_BASE_PTRS                            { PDM }
 #endif
+/** Interrupt vectors for the PDM peripheral type */
+#define PDM_HWVAD_Event_IRQS                     { PDM_HWVAD_EVENT_IRQn }
+#define PDM_HWVAD_Error_IRQS                     { PDM_HWVAD_EVENT_IRQn }
+#define PDM_Event_IRQS                           { PDM_EVENT_IRQn }
+#define PDM_Error_IRQS                           { PDM_EVENT_IRQn }
 
 /* PINT - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -2958,6 +2966,8 @@ typedef enum _dma_request_source
   /** Array initializer of USBPHY peripheral base pointers */
   #define USBPHY_BASE_PTRS                         { USBPHY }
 #endif
+/** Interrupt vectors for the USBPHY peripheral type */
+#define USBPHY_IRQS                              { USBPHY0_IRQn }
 /* Backward compatibility */
 #define USBPHY_CTRL_ENDEVPLUGINDET_MASK     USBPHY_CTRL_ENDEVPLUGINDETECT_MASK
 #define USBPHY_CTRL_ENDEVPLUGINDET_SHIFT    USBPHY_CTRL_ENDEVPLUGINDETECT_SHIFT

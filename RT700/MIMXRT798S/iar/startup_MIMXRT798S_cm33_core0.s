@@ -4,7 +4,7 @@
 ;            MIMXRT798S_cm33_core0
 ;  @version: 2.0
 ;  @date:    2024-5-28
-;  @build:   b240911
+;  @build:   b241121
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.
@@ -118,7 +118,7 @@ __vector_table_0x1c
         DCD     WDT1_IRQHandler                               ;WDT: Interrupt request
         DCD     USBPHY0_IRQHandler                            ;HSUSBPHY: UTM interrupt request
         DCD     PUF_IRQHandler                                ;PUF: Interrupt Request
-        DCD     PMIC_IRQN_IRQHandler                          ;PMIC: External PMIC interrupt
+        DCD     Reserved62_IRQHandler                         ;xxx Interrupt 62
         DCD     LP_FLEXCOMM8_IRQHandler                       ;FLEXCOMM: Interrupt request
         DCD     LP_FLEXCOMM9_IRQHandler                       ;FLEXCOMM: Interrupt request
         DCD     LP_FLEXCOMM10_IRQHandler                      ;FLEXCOMM: Interrupt request
@@ -631,11 +631,11 @@ PUF_IRQHandler
         LDR     R0, =PUF_DriverIRQHandler
         BX      R0
 
-        PUBWEAK PMIC_IRQN_IRQHandler
-        PUBWEAK PMIC_IRQN_DriverIRQHandler
+        PUBWEAK Reserved62_IRQHandler
+        PUBWEAK Reserved62_DriverIRQHandler
         SECTION .text:CODE:REORDER:NOROOT(2)
-PMIC_IRQN_IRQHandler
-        LDR     R0, =PMIC_IRQN_DriverIRQHandler
+Reserved62_IRQHandler
+        LDR     R0, =Reserved62_DriverIRQHandler
         BX      R0
 
         PUBWEAK LP_FLEXCOMM8_IRQHandler
@@ -1461,7 +1461,7 @@ WDT0_DriverIRQHandler
 WDT1_DriverIRQHandler
 USBPHY0_DriverIRQHandler
 PUF_DriverIRQHandler
-PMIC_IRQN_DriverIRQHandler
+Reserved62_DriverIRQHandler
 LP_FLEXCOMM8_DriverIRQHandler
 LP_FLEXCOMM9_DriverIRQHandler
 LP_FLEXCOMM10_DriverIRQHandler

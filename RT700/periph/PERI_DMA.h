@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for DMA
@@ -659,7 +659,6 @@ typedef struct {
 #define DMA_TCD_ATTR_SMOD_SHIFT                  (11U)
 /*! SMOD - Source Address Modulo
  *  0b00000..Source address modulo feature disabled
- *  0b00001..Source address modulo feature enabled for any non-zero value [1-31]
  */
 #define DMA_TCD_ATTR_SMOD(x)                     (((uint16_t)(((uint16_t)(x)) << DMA_TCD_ATTR_SMOD_SHIFT)) & DMA_TCD_ATTR_SMOD_MASK)
 /*! @} */

@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for GPIO
@@ -148,17 +148,17 @@ typedef struct {
   __IO uint32_t ICNP;                              /**< Interrupt Control Nonprivilege, offset: 0x1C */
        uint8_t RESERVED_1[32];
   __IO uint32_t PDOR;                              /**< Port Data Output, offset: 0x40 */
-  __O  uint32_t PSOR;                              /**< Port Set Output, offset: 0x44 */
-  __O  uint32_t PCOR;                              /**< Port Clear Output, offset: 0x48 */
-  __O  uint32_t PTOR;                              /**< Port Toggle Output, offset: 0x4C */
+  __IO uint32_t PSOR;                              /**< Port Set Output, offset: 0x44 */
+  __IO uint32_t PCOR;                              /**< Port Clear Output, offset: 0x48 */
+  __IO uint32_t PTOR;                              /**< Port Toggle Output, offset: 0x4C */
   __I  uint32_t PDIR;                              /**< Port Data Input, offset: 0x50 */
   __IO uint32_t PDDR;                              /**< Port Data Direction, offset: 0x54 */
   __IO uint32_t PIDR;                              /**< Port Input Disable, offset: 0x58 */
        uint8_t RESERVED_2[4];
   __IO uint8_t PDR[GPIO_PDR_COUNT];                /**< Pin Data, array offset: 0x60, array step: 0x1 */
   __IO uint32_t ICR[GPIO_ICR_COUNT];               /**< Interrupt Control 0..Interrupt Control 31, array offset: 0x80, array step: 0x4 */
-  __O  uint32_t GICLR;                             /**< Global Interrupt Control Low, offset: 0x100 */
-  __O  uint32_t GICHR;                             /**< Global Interrupt Control High, offset: 0x104 */
+  __IO uint32_t GICLR;                             /**< Global Interrupt Control Low, offset: 0x100 */
+  __IO uint32_t GICHR;                             /**< Global Interrupt Control High, offset: 0x104 */
        uint8_t RESERVED_3[24];
   __IO uint32_t ISFR[GPIO_ISFR_COUNT];             /**< Interrupt Status Flag, array offset: 0x120, array step: 0x4 */
 } GPIO_Type;

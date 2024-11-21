@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241111
+**     Build:               b241121
 **
 **     Abstract:
 **         Chip specific module features.
@@ -71,6 +71,8 @@
 #define FSL_FEATURE_SOC_LPUART_COUNT (14)
 /* @brief MIPI_DSI_HOST availability on the SoC. */
 #define FSL_FEATURE_SOC_MIPI_DSI_HOST_COUNT (1)
+/* @brief MPU availability on the SoC. */
+#define FSL_FEATURE_SOC_MPU_COUNT (1)
 /* @brief MRT availability on the SoC. */
 #define FSL_FEATURE_SOC_MRT_COUNT (1)
 /* @brief MU availability on the SoC. */

@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for USDHC
@@ -153,7 +153,7 @@ typedef struct {
   __IO uint32_t WTMK_LVL;                          /**< Watermark Level, offset: 0x44 */
   __IO uint32_t MIX_CTRL;                          /**< Mixer Control, offset: 0x48 */
        uint8_t RESERVED_0[4];
-  __O  uint32_t FORCE_EVENT;                       /**< Force Event, offset: 0x50 */
+  __IO uint32_t FORCE_EVENT;                       /**< Force Event, offset: 0x50 */
   __I  uint32_t ADMA_ERR_STATUS;                   /**< ADMA Error Status, offset: 0x54 */
   __IO uint32_t ADMA_SYS_ADDR;                     /**< ADMA System Address, offset: 0x58 */
        uint8_t RESERVED_1[4];

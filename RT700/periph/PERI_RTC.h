@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for RTC
@@ -156,6 +156,7 @@ typedef struct {
   __IO uint32_t WAKE_TIMER_CTRL;                   /**< Wake Timer Control (CPU0), offset: 0xC00 */
        uint8_t RESERVED_3[8];
   __IO uint32_t WAKE_TIMER_CNT;                    /**< Wake Timer 0 Counter (CPU0), offset: 0xC0C */
+  __IO uint32_t GPR;                               /**< General Purpose, offset: 0xC10, available only on: RTC0 (missing on RTC1) */
 } RTC_Type;
 
 /* ----------------------------------------------------------------------------
@@ -760,6 +761,15 @@ typedef struct {
 #define RTC_WAKE_TIMER_CNT_WAKE_CNT_SHIFT        (0U)
 /*! WAKE_CNT - Wake Counter 1 Value */
 #define RTC_WAKE_TIMER_CNT_WAKE_CNT(x)           (((uint32_t)(((uint32_t)(x)) << RTC_WAKE_TIMER_CNT_WAKE_CNT_SHIFT)) & RTC_WAKE_TIMER_CNT_WAKE_CNT_MASK)
+/*! @} */
+
+/*! @name GPR - General Purpose */
+/*! @{ */
+
+#define RTC_GPR_DATA_MASK                        (0xFFFFFFFFU)
+#define RTC_GPR_DATA_SHIFT                       (0U)
+/*! DATA - Data */
+#define RTC_GPR_DATA(x)                          (((uint32_t)(((uint32_t)(x)) << RTC_GPR_DATA_SHIFT)) & RTC_GPR_DATA_MASK)
 /*! @} */
 
 

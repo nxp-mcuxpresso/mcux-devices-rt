@@ -4,7 +4,7 @@
 /*            MIMXRT798S_cm33_core1                                          */
 /*  @version: 2.0                                                            */
 /*  @date:    2024-5-28                                                      */
-/*  @build:   b240911                                                        */
+/*  @build:   b241121                                                        */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Copyright 1997-2016 Freescale Semiconductor, Inc.                         */
@@ -81,12 +81,12 @@ __isr_vector:
     .long   WDT2_IRQHandler                                 /* WDT: Interrupt request*/
     .long   WDT3_IRQHandler                                 /* WDT: Interrupt request*/
     .long   USBPHY0_IRQHandler                              /* HSUSBPHY: UTM interrupt request*/
-    .long   PMIC_IRQN_IRQHandler                            /* PMIC: External PMIC interrupt*/
+    .long   Reserved55_IRQHandler                           /* xxx Interrupt 55*/
     .long   I3C3_IRQHandler                                 /* I3C: Interrupt Request*/
     .long   FLEXIO_IRQHandler                               /* flexio: Interrupt request*/
     .long   LCDIF_IRQHandler                                /* dcn: Interrupt request*/
     .long   VGPU_IRQHandler                                 /* VGPU interrupt from graphics core*/
-    .long   MIPI_IRQHandler                                 /* dsi: Interrupt request*/
+    .long   MIPI_IRQHandler                                 /* DSI: Interrupt request*/
     .long   EDMA2_CH0_IRQHandler                            /* edma2: Channel 0 interrupt*/
     .long   EDMA2_CH1_IRQHandler                            /* edma2: Channel 1 interrupt*/
     .long   EDMA2_CH2_IRQHandler                            /* edma2: Channel 2 interrupt*/
@@ -645,12 +645,12 @@ USBPHY0_IRQHandler:
 
     .align 1
     .thumb_func
-    .weak PMIC_IRQN_IRQHandler
-    .type PMIC_IRQN_IRQHandler, %function
-PMIC_IRQN_IRQHandler:
-    ldr   r0,=PMIC_IRQN_DriverIRQHandler
+    .weak Reserved55_IRQHandler
+    .type Reserved55_IRQHandler, %function
+Reserved55_IRQHandler:
+    ldr   r0,=Reserved55_DriverIRQHandler
     bx    r0
-    .size PMIC_IRQN_IRQHandler, . - PMIC_IRQN_IRQHandler
+    .size Reserved55_IRQHandler, . - Reserved55_IRQHandler
 
     .align 1
     .thumb_func
@@ -1182,7 +1182,7 @@ Reserved108_IRQHandler:
     def_irq_handler    WDT2_DriverIRQHandler
     def_irq_handler    WDT3_DriverIRQHandler
     def_irq_handler    USBPHY0_DriverIRQHandler
-    def_irq_handler    PMIC_IRQN_DriverIRQHandler
+    def_irq_handler    Reserved55_DriverIRQHandler
     def_irq_handler    I3C3_DriverIRQHandler
     def_irq_handler    FLEXIO_DriverIRQHandler
     def_irq_handler    LCDIF_DriverIRQHandler

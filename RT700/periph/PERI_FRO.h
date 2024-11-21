@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for FRO
@@ -292,6 +292,14 @@ typedef struct {
 #define FRO_CNFG1_REFDIV_SHIFT                   (0U)
 /*! REFDIV - OSC Reference Clock Divider */
 #define FRO_CNFG1_REFDIV(x)                      (((uint32_t)(((uint32_t)(x)) << FRO_CNFG1_REFDIV_SHIFT)) & FRO_CNFG1_REFDIV_MASK)
+
+#define FRO_CNFG1_FSTUPEN_MASK                   (0x800U)
+#define FRO_CNFG1_FSTUPEN_SHIFT                  (11U)
+/*! FSTUPEN - FRO Fast Startup Enable
+ *  0b0..Disable
+ *  0b1..Enable
+ */
+#define FRO_CNFG1_FSTUPEN(x)                     (((uint32_t)(((uint32_t)(x)) << FRO_CNFG1_FSTUPEN_SHIFT)) & FRO_CNFG1_FSTUPEN_MASK)
 
 #define FRO_CNFG1_LOL_ERR_IE_MASK                (0x1000U)
 #define FRO_CNFG1_LOL_ERR_IE_SHIFT               (12U)

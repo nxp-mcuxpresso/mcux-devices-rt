@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SLEEPCON1
@@ -2172,14 +2172,6 @@ typedef struct {
 /*! @name HW_WAKE - eDMA Wakeup Enable */
 /*! @{ */
 
-#define SLEEPCON1_HW_WAKE_HWWK_SRC0_MASK         (0x1U)
-#define SLEEPCON1_HW_WAKE_HWWK_SRC0_SHIFT        (0U)
-/*! HWWK_SRC0 - eDMA Wakeup Source 0
- *  0b0..Disables
- *  0b1..Enables
- */
-#define SLEEPCON1_HW_WAKE_HWWK_SRC0(x)           (((uint32_t)(((uint32_t)(x)) << SLEEPCON1_HW_WAKE_HWWK_SRC0_SHIFT)) & SLEEPCON1_HW_WAKE_HWWK_SRC0_MASK)
-
 #define SLEEPCON1_HW_WAKE_HWWK_SRC1_MASK         (0x2U)
 #define SLEEPCON1_HW_WAKE_HWWK_SRC1_SHIFT        (1U)
 /*! HWWK_SRC1 - eDMA Wakeup Source 1
@@ -2208,14 +2200,6 @@ typedef struct {
 /*! @name HW_WAKE_SET - eDMA Wakeup Set */
 /*! @{ */
 
-#define SLEEPCON1_HW_WAKE_SET_HWWK_SRC0_SET_MASK (0x1U)
-#define SLEEPCON1_HW_WAKE_SET_HWWK_SRC0_SET_SHIFT (0U)
-/*! HWWK_SRC0_SET - eDMA Wakeup Source 0 Enable
- *  0b0..No effect
- *  0b1..Sets the bit
- */
-#define SLEEPCON1_HW_WAKE_SET_HWWK_SRC0_SET(x)   (((uint32_t)(((uint32_t)(x)) << SLEEPCON1_HW_WAKE_SET_HWWK_SRC0_SET_SHIFT)) & SLEEPCON1_HW_WAKE_SET_HWWK_SRC0_SET_MASK)
-
 #define SLEEPCON1_HW_WAKE_SET_HWWK_SRC1_SET_MASK (0x2U)
 #define SLEEPCON1_HW_WAKE_SET_HWWK_SRC1_SET_SHIFT (1U)
 /*! HWWK_SRC1_SET - eDMA Wakeup Source 1 Enable
@@ -2243,14 +2227,6 @@ typedef struct {
 
 /*! @name HW_WAKE_CLR - eDMA Wakeup Clear */
 /*! @{ */
-
-#define SLEEPCON1_HW_WAKE_CLR_HWWK_SRC0_CLR_MASK (0x1U)
-#define SLEEPCON1_HW_WAKE_CLR_HWWK_SRC0_CLR_SHIFT (0U)
-/*! HWWK_SRC0_CLR - eDMA Wakeup Source 0 Clear
- *  0b0..No effect
- *  0b1..Clears the bit
- */
-#define SLEEPCON1_HW_WAKE_CLR_HWWK_SRC0_CLR(x)   (((uint32_t)(((uint32_t)(x)) << SLEEPCON1_HW_WAKE_CLR_HWWK_SRC0_CLR_SHIFT)) & SLEEPCON1_HW_WAKE_CLR_HWWK_SRC0_CLR_MASK)
 
 #define SLEEPCON1_HW_WAKE_CLR_HWWK_SRC1_CLR_MASK (0x2U)
 #define SLEEPCON1_HW_WAKE_CLR_HWWK_SRC1_CLR_SHIFT (1U)

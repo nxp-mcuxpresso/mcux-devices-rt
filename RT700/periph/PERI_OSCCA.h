@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for OSCCA
@@ -164,7 +164,7 @@ typedef struct {
   __IO uint32_t SAFO_SGI_CTRL2;                    /**< SGI Control Register 2, offset: 0xD04 */
        uint8_t RESERVED_5[12];
   __IO uint32_t SAFO_SGI_SM3_CTRL;                 /**< SM3 Control Register, offset: 0xD14 */
-  __O  uint32_t SAFO_SGI_SM3_FIFO;                 /**< SM3 FIFO Register, offset: 0xD18 */
+  __IO uint32_t SAFO_SGI_SM3_FIFO;                 /**< SM3 FIFO Register, offset: 0xD18 */
   __I  uint32_t SAFO_SGI_CONFIG;                   /**< SGI Configuration Register, offset: 0xD1C */
        uint8_t RESERVED_6[708];
   __IO uint32_t SAFO_SGI_INT_ENABLE;               /**< Interrupt Enable, offset: 0xFE4 */

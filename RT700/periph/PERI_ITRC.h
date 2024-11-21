@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for ITRC
@@ -165,7 +165,7 @@ typedef struct {
 
 #define ITRC_STATUS_IN0_STATUS_MASK              (0x1U)
 #define ITRC_STATUS_IN0_STATUS_SHIFT             (0U)
-/*! IN0_STATUS - Digital glitch detector 0 or 1 event occurred.
+/*! IN0_STATUS - Digital glitch detector 1 event occurred.
  *  0b0..Output not triggered.
  *  0b1..Output has been triggered.
  */
@@ -173,7 +173,7 @@ typedef struct {
 
 #define ITRC_STATUS_IN1_STATUS_MASK              (0x2U)
 #define ITRC_STATUS_IN1_STATUS_SHIFT             (1U)
-/*! IN1_STATUS - Digital glitch detector 2 or 3 event occurred.
+/*! IN1_STATUS - Digital glitch detector 3 event occurred.
  *  0b0..Output not triggered.
  *  0b1..Output has been triggered.
  */
@@ -345,7 +345,7 @@ typedef struct {
 
 #define ITRC_STATUS1_IN18_STATUS_MASK            (0x4U)
 #define ITRC_STATUS1_IN18_STATUS_SHIFT           (2U)
-/*! IN18_STATUS - Temperature tamper 0 or 1 event occurred.
+/*! IN18_STATUS - TEMPDETECT0 or TEMPDETECT1 event occurred.
  *  0b0..Output not triggered.
  *  0b1..Output has been triggered.
  */
@@ -353,7 +353,7 @@ typedef struct {
 
 #define ITRC_STATUS1_IN20_STATUS_MASK            (0x10U)
 #define ITRC_STATUS1_IN20_STATUS_SHIFT           (4U)
-/*! IN20_STATUS - Shared APB slave group 0 or Shared peripheral AIPS2 illegal access events occurred.
+/*! IN20_STATUS - Error response of Shared APB slave group 0 and Shared peripheral AIPS2 occurred.
  *  0b0..Output not triggered.
  *  0b1..Output has been triggered.
  */
@@ -361,7 +361,7 @@ typedef struct {
 
 #define ITRC_STATUS1_IN21_STATUS_MASK            (0x20U)
 #define ITRC_STATUS1_IN21_STATUS_SHIFT           (5U)
-/*! IN21_STATUS - COMPUTE_AHBSC bus checkers detected illegal access.
+/*! IN21_STATUS - AHBSC0 bus checkers detected illegal access.
  *  0b0..Output not triggered.
  *  0b1..Output has been triggered.
  */
@@ -369,7 +369,7 @@ typedef struct {
 
 #define ITRC_STATUS1_IN22_STATUS_MASK            (0x40U)
 #define ITRC_STATUS1_IN22_STATUS_SHIFT           (6U)
-/*! IN22_STATUS - SENSE_AHBSC bus checkers detected illegal access.
+/*! IN22_STATUS - AHBSC3 bus checkers detected illegal access.
  *  0b0..Output not triggered.
  *  0b1..Output has been triggered.
  */
@@ -377,7 +377,7 @@ typedef struct {
 
 #define ITRC_STATUS1_IN23_STATUS_MASK            (0x80U)
 #define ITRC_STATUS1_IN23_STATUS_SHIFT           (7U)
-/*! IN23_STATUS - MEDIA_AHBSC bus checkers detected illegal access.
+/*! IN23_STATUS - AHBSC4 bus checkers detected illegal access.
  *  0b0..Output not triggered.
  *  0b1..Output has been triggered.
  */
@@ -409,7 +409,7 @@ typedef struct {
 
 #define ITRC_STATUS1_IN28_STATUS_MASK            (0x1000U)
 #define ITRC_STATUS1_IN28_STATUS_SHIFT           (12U)
-/*! IN28_STATUS - SM3 or SM4 SGI error event occurred
+/*! IN28_STATUS - SAFO-SGI error event occurred
  *  0b0..Output not triggered.
  *  0b1..Output has been triggered.
  */
@@ -509,12 +509,12 @@ typedef struct {
 
 #define ITRC_OUT_SEL_IN0_SELn_MASK               (0x3U)
 #define ITRC_OUT_SEL_IN0_SELn_SHIFT              (0U)
-/*! IN0_SELn - Selects digital glitch detector 0 and 1 as a trigger source. */
+/*! IN0_SELn - Selects digital glitch detector 0 as a trigger source. */
 #define ITRC_OUT_SEL_IN0_SELn(x)                 (((uint32_t)(((uint32_t)(x)) << ITRC_OUT_SEL_IN0_SELn_SHIFT)) & ITRC_OUT_SEL_IN0_SELn_MASK)
 
 #define ITRC_OUT_SEL_IN1_SELn_MASK               (0xCU)
 #define ITRC_OUT_SEL_IN1_SELn_SHIFT              (2U)
-/*! IN1_SELn - Selects digital glitch detector 2 and 3 as a trigger source. */
+/*! IN1_SELn - Selects digital glitch detector 3 as a trigger source. */
 #define ITRC_OUT_SEL_IN1_SELn(x)                 (((uint32_t)(((uint32_t)(x)) << ITRC_OUT_SEL_IN1_SELn_SHIFT)) & ITRC_OUT_SEL_IN1_SELn_MASK)
 
 #define ITRC_OUT_SEL_IN4_SELn_MASK               (0x300U)
@@ -594,7 +594,7 @@ typedef struct {
 
 #define ITRC_OUT_SEL_1_IN18_SELn_MASK            (0x30U)
 #define ITRC_OUT_SEL_1_IN18_SELn_SHIFT           (4U)
-/*! IN18_SELn - Selects Temperature detector 0 and 1 tamper output event as a trigger source. */
+/*! IN18_SELn - Selects TEMPDETECT0 and TEMPDETECT1 tamper output event as a trigger source. */
 #define ITRC_OUT_SEL_1_IN18_SELn(x)              (((uint32_t)(((uint32_t)(x)) << ITRC_OUT_SEL_1_IN18_SELn_SHIFT)) & ITRC_OUT_SEL_1_IN18_SELn_MASK)
 
 #define ITRC_OUT_SEL_1_IN20_SELn_MASK            (0x300U)
@@ -604,17 +604,17 @@ typedef struct {
 
 #define ITRC_OUT_SEL_1_IN21_SELn_MASK            (0xC00U)
 #define ITRC_OUT_SEL_1_IN21_SELn_SHIFT           (10U)
-/*! IN21_SELn - Selects AHBSC_COMPUTE illegal access event as a trigger source. */
+/*! IN21_SELn - Selects AHBSC0 illegal access event as a trigger source. */
 #define ITRC_OUT_SEL_1_IN21_SELn(x)              (((uint32_t)(((uint32_t)(x)) << ITRC_OUT_SEL_1_IN21_SELn_SHIFT)) & ITRC_OUT_SEL_1_IN21_SELn_MASK)
 
 #define ITRC_OUT_SEL_1_IN22_SELn_MASK            (0x3000U)
 #define ITRC_OUT_SEL_1_IN22_SELn_SHIFT           (12U)
-/*! IN22_SELn - Selects AHBSC_SENSE illegal access event as a trigger source. */
+/*! IN22_SELn - Selects AHBSC3 illegal access event as a trigger source. */
 #define ITRC_OUT_SEL_1_IN22_SELn(x)              (((uint32_t)(((uint32_t)(x)) << ITRC_OUT_SEL_1_IN22_SELn_SHIFT)) & ITRC_OUT_SEL_1_IN22_SELn_MASK)
 
 #define ITRC_OUT_SEL_1_IN23_SELn_MASK            (0xC000U)
 #define ITRC_OUT_SEL_1_IN23_SELn_SHIFT           (14U)
-/*! IN23_SELn - Selects AHBSC_MEDIA illegal access event as a trigger source. */
+/*! IN23_SELn - Selects AHBSC4 illegal access event as a trigger source. */
 #define ITRC_OUT_SEL_1_IN23_SELn(x)              (((uint32_t)(((uint32_t)(x)) << ITRC_OUT_SEL_1_IN23_SELn_SHIFT)) & ITRC_OUT_SEL_1_IN23_SELn_MASK)
 
 #define ITRC_OUT_SEL_1_IN24_SELn_MASK            (0x30000U)
@@ -634,7 +634,7 @@ typedef struct {
 
 #define ITRC_OUT_SEL_1_IN28_SELn_MASK            (0x3000000U)
 #define ITRC_OUT_SEL_1_IN28_SELn_SHIFT           (24U)
-/*! IN28_SELn - Selects SM3 and SM4 SGI error event as a trigger source. */
+/*! IN28_SELn - Selects SAFO-SGI error event as a trigger source. */
 #define ITRC_OUT_SEL_1_IN28_SELn(x)              (((uint32_t)(((uint32_t)(x)) << ITRC_OUT_SEL_1_IN28_SELn_SHIFT)) & ITRC_OUT_SEL_1_IN28_SELn_MASK)
 
 #define ITRC_OUT_SEL_1_IN29_SELn_MASK            (0xC000000U)

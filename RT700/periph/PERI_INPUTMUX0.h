@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for INPUTMUX0
@@ -659,7 +659,6 @@ typedef struct {
  *  0b001011..Selects CTIMER4_MAT3
  *  0b001100..Selects PINT0 boolean pattern-match output
  *  0b001101..Selects ACMP0 CMPO
- *  0b001110..Selects EZH-V trigger out channel 0
  *  0b001111..Selects RTC_SS0 interrupt
  *  0b010000..Selects GPIO0 peripheral output channel 0 trigger
  *  0b010001..Selects GPIO0 peripheral output channel 1 trigger

@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for USBNC
@@ -141,7 +141,8 @@ typedef struct {
   __IO uint32_t LPM_CSR2;                          /**< USB LPM Control and Status 2, offset: 0xA8 */
        uint8_t RESERVED_1[84];
   __IO uint32_t EUSB_CTRL0;                        /**< eUSB Control 0, offset: 0x100, available only on: USBNC1 (missing on USBNC0) */
-       uint8_t RESERVED_2[68];
+  __IO uint32_t EUSB_CTRL1;                        /**< eUSB Control 1, offset: 0x104, available only on: USBNC1 (missing on USBNC0) */
+       uint8_t RESERVED_2[64];
   __IO uint32_t EUSB_RAP;                          /**< eUSB RAP Control and Status, offset: 0x148, available only on: USBNC1 (missing on USBNC0) */
 } USBNC_Type;
 
@@ -458,6 +459,34 @@ typedef struct {
  *  0b1..Trigger device issue port reset
  */
 #define USBNC_EUSB_CTRL0_EUSB_DEV_PORT_RST(x)    (((uint32_t)(((uint32_t)(x)) << USBNC_EUSB_CTRL0_EUSB_DEV_PORT_RST_SHIFT)) & USBNC_EUSB_CTRL0_EUSB_DEV_PORT_RST_MASK)
+/*! @} */
+
+/*! @name EUSB_CTRL1 - eUSB Control 1 */
+/*! @{ */
+
+#define USBNC_EUSB_CTRL1_EUSB_SQ_MASK            (0xE000U)
+#define USBNC_EUSB_CTRL1_EUSB_SQ_SHIFT           (13U)
+/*! EUSB_SQ - eUSB Squelch
+ *  0b000..66.6mV
+ *  0b001..63.2mV
+ *  0b010..59.7mV
+ *  0b011..56mV
+ *  0b100..80.6mV
+ *  0b101..76.9mV
+ *  0b110..73.5mV
+ *  0b111..70mV
+ */
+#define USBNC_EUSB_CTRL1_EUSB_SQ(x)              (((uint32_t)(((uint32_t)(x)) << USBNC_EUSB_CTRL1_EUSB_SQ_SHIFT)) & USBNC_EUSB_CTRL1_EUSB_SQ_MASK)
+
+#define USBNC_EUSB_CTRL1_EUSB_FSTX_OPT_MASK      (0x180000U)
+#define USBNC_EUSB_CTRL1_EUSB_FSTX_OPT_SHIFT     (19U)
+/*! EUSB_FSTX_OPT - eUSB Full-Speed TX Option
+ *  0b00..Default
+ *  0b01..Faster 10%
+ *  0b10..Slower 20%
+ *  0b11..Slower 10%
+ */
+#define USBNC_EUSB_CTRL1_EUSB_FSTX_OPT(x)        (((uint32_t)(((uint32_t)(x)) << USBNC_EUSB_CTRL1_EUSB_FSTX_OPT_SHIFT)) & USBNC_EUSB_CTRL1_EUSB_FSTX_OPT_MASK)
 /*! @} */
 
 /*! @name EUSB_RAP - eUSB RAP Control and Status */

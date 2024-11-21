@@ -1,23 +1,29 @@
 /*
 ** ###################################################################
-**     Processor:           MIMXRT798SGFOA_ezhv
-**     Compilers:           LLVM Compiler
+**     Processors:          MIMXRT798SGAWAR_ezhv
+**                          MIMXRT798SGFOA_ezhv
 **
-**     Reference manual:    iMXRT700RM Rev.1, 08/2022
-**     Version:             rev. 1.0, 2022-08-01
-**     Build:               b221115
+**     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
+**     Version:             rev. 2.0, 2024-05-28
+**     Build:               b241121
 **
-**     Copyright 2024 NXP
-**     All rights reserved.
+**     Abstract:
+**         Provides a system configuration function and a global variable that
+**         contains the system frequency. It configures the device and initializes
+**         the oscillator (PLL) that is part of the microcontroller device.
 **
+**     Copyright 2016 Freescale Semiconductor, Inc.
+**     Copyright 2016-2024 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
 **     mail:                 support@nxp.com
 **
 **     Revisions:
-**     - rev. 1.0 (2022-08-01)
+**     - rev. 1.0 (2022-09-15)
 **         Initial version.
+**     - rev. 2.0 (2024-05-28)
+**         Rev2 DraftA.
 **
 ** ###################################################################
 */
@@ -25,9 +31,12 @@
 /*!
  * @file MIMXRT798S_ezhv
  * @version 1.0
- * @date 2022-08-01
+ * @date 2024-11-21
  * @brief Device specific configuration file for MIMXRT798S_ezhv (header
- *        file)
+ *
+ * Provides a system configuration function and a global variable that contains
+ * the system frequency. It configures the device and initializes the oscillator
+ * (PLL) that is part of the microcontroller device.
  */
 
 #ifndef _SYSTEM_MIMXRT798S_ezhv_H_

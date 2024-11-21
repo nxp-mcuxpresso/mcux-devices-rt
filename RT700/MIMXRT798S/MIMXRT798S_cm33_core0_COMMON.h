@@ -10,7 +10,7 @@
 **
 **     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241112
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT798S_cm33_core0
@@ -125,7 +125,6 @@ typedef enum IRQn {
   WDT1_IRQn                    = 43,               /**< WDT: Interrupt request */
   USBPHY0_IRQn                 = 44,               /**< HSUSBPHY: UTM interrupt request */
   PUF_IRQn                     = 45,               /**< PUF: Interrupt Request */
-  PMIC_IRQN_IRQn               = 46,               /**< PMIC: External PMIC interrupt */
   LP_FLEXCOMM8_IRQn            = 47,               /**< FLEXCOMM: Interrupt request */
   LP_FLEXCOMM9_IRQn            = 48,               /**< FLEXCOMM: Interrupt request */
   LP_FLEXCOMM10_IRQn           = 49,               /**< FLEXCOMM: Interrupt request */
@@ -1101,6 +1100,9 @@ typedef enum _dma_request_source
   /** Array initializer of DMA peripheral base pointers */
   #define DMA_BASE_PTRS                            { DMA0, DMA1 }
 #endif
+/** Interrupt vectors for the DMA peripheral type */
+#define DMA_IRQS                                 { { EDMA0_CH0_IRQn, EDMA0_CH1_IRQn, EDMA0_CH2_IRQn, EDMA0_CH3_IRQn, EDMA0_CH4_IRQn, EDMA0_CH5_IRQn, EDMA0_CH6_IRQn, EDMA0_CH7_IRQn, EDMA0_CH8_IRQn, EDMA0_CH9_IRQn, EDMA0_CH10_IRQn, EDMA0_CH11_IRQn, EDMA0_CH12_IRQn, EDMA0_CH13_IRQn, EDMA0_CH14_IRQn, EDMA0_CH15_IRQn }, \
+                                                   { EDMA1_CH0_IRQn, EDMA1_CH1_IRQn, EDMA1_CH2_IRQn, EDMA1_CH3_IRQn, EDMA1_CH4_IRQn, EDMA1_CH5_IRQn, EDMA1_CH6_IRQn, EDMA1_CH7_IRQn, EDMA1_CH8_IRQn, EDMA1_CH9_IRQn, EDMA1_CH10_IRQn, EDMA1_CH11_IRQn, EDMA1_CH12_IRQn, EDMA1_CH13_IRQn, EDMA1_CH14_IRQn, EDMA1_CH15_IRQn } }
 
 /* ELS - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -1226,6 +1228,8 @@ typedef enum _dma_request_source
   /** Array initializer of FREQME peripheral base pointers */
   #define FREQME_BASE_PTRS                         { FREQME }
 #endif
+/** Interrupt vectors for the FREQME peripheral type */
+#define FREQME_IRQS                              { Freqme_IRQn }
 
 /* FRO - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -2934,6 +2938,8 @@ typedef enum _dma_request_source
   /** Array initializer of MU peripheral base pointers */
   #define MU_BASE_PTRS                             { MU0_MUA, MU1_MUA, MU4_MUA }
 #endif
+/** Interrupt vectors for the MU peripheral type */
+#define MU_IRQS                                  { MU0_A_IRQn, MU1_A_IRQn, MU4_A_IRQn }
 
 /* NIC - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -2992,6 +2998,8 @@ typedef enum _dma_request_source
   /** Array initializer of OCOTP peripheral base pointers */
   #define OCOTP_BASE_PTRS                          { OCOTP }
 #endif
+/** Interrupt vectors for the OCOTP peripheral type */
+#define OCOTP_IRQS                               { OCOTP_IRQn }
 
 /* OSC32KNP - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -3110,6 +3118,11 @@ typedef enum _dma_request_source
   /** Array initializer of PDM peripheral base pointers */
   #define PDM_BASE_PTRS                            { PDM }
 #endif
+/** Interrupt vectors for the PDM peripheral type */
+#define PDM_HWVAD_Event_IRQS                     { PDM_HWVAD_EVENT_IRQn }
+#define PDM_HWVAD_Error_IRQS                     { PDM_HWVAD_EVENT_IRQn }
+#define PDM_Event_IRQS                           { PDM_EVENT_IRQn }
+#define PDM_Error_IRQS                           { PDM_EVENT_IRQn }
 
 /* PINT - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -3836,6 +3849,8 @@ typedef enum _dma_request_source
   /** Array initializer of TRNG peripheral base pointers */
   #define TRNG_BASE_PTRS                           { TRNG }
 #endif
+/** Interrupt vectors for the TRNG peripheral type */
+#define TRNG_IRQS                                { TRNG_IRQn }
 /* Backward compatibility */
 #define TRNG0                                    TRNG
 
@@ -4591,6 +4606,8 @@ typedef enum _dma_request_source
   /** Array initializer of USBPHY peripheral base pointers */
   #define USBPHY_BASE_PTRS                         { USBPHY }
 #endif
+/** Interrupt vectors for the USBPHY peripheral type */
+#define USBPHY_IRQS                              { USBPHY0_IRQn }
 /* Backward compatibility */
 #define USBPHY_CTRL_ENDEVPLUGINDET_MASK     USBPHY_CTRL_ENDEVPLUGINDETECT_MASK
 #define USBPHY_CTRL_ENDEVPLUGINDET_SHIFT    USBPHY_CTRL_ENDEVPLUGINDETECT_SHIFT

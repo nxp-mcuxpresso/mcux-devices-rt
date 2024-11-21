@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MU
@@ -158,7 +158,7 @@ typedef struct {
   __IO uint32_t RCR;                               /**< Receive Control, offset: 0x128 */
   __I  uint32_t RSR;                               /**< Receive Status, offset: 0x12C */
        uint8_t RESERVED_3[208];
-  __O  uint32_t TR[MU_TR_COUNT];                   /**< Transmit, array offset: 0x200, array step: 0x4 */
+  __IO uint32_t TR[MU_TR_COUNT];                   /**< Transmit, array offset: 0x200, array step: 0x4 */
        uint8_t RESERVED_4[112];
   __I  uint32_t RR[MU_RR_COUNT];                   /**< Receive, array offset: 0x280, array step: 0x4 */
 } MU_Type;
@@ -265,8 +265,8 @@ typedef struct {
 #define MU_SR_TEP_MASK                           (0x20U)
 #define MU_SR_TEP_SHIFT                          (5U)
 /*! TEP - MUB Transmit Empty Pending
- *  0b0..Not pending; MUA is reading no Receive (RRn) register
- *  0b1..Pending; MUA is reading a Receive (RRn) register
+ *  0b0..No MUA transmit empty event pending
+ *  0b1..Pending; any TCR[TIEn] field is 1 and TSR[TEn] flag is set
  */
 #define MU_SR_TEP(x)                             (((uint32_t)(((uint32_t)(x)) << MU_SR_TEP_SHIFT)) & MU_SR_TEP_MASK)
 

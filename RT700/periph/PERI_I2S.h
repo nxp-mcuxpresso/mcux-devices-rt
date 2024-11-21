@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for I2S
@@ -147,7 +147,7 @@ typedef struct {
   __IO uint32_t TCR3;                              /**< Transmit Configuration 3, offset: 0x14 */
   __IO uint32_t TCR4;                              /**< Transmit Configuration 4, offset: 0x18 */
   __IO uint32_t TCR5;                              /**< Transmit Configuration 5, offset: 0x1C */
-  __O  uint32_t TDR[I2S_TDR_COUNT];                /**< Transmit Data, array offset: 0x20, array step: 0x4 */
+  __IO uint32_t TDR[I2S_TDR_COUNT];                /**< Transmit Data, array offset: 0x20, array step: 0x4 */
        uint8_t RESERVED_0[28];
   __I  uint32_t TFR[I2S_TFR_COUNT];                /**< Transmit FIFO, array offset: 0x40, array step: 0x4 */
        uint8_t RESERVED_1[28];

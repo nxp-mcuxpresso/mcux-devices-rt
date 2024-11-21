@@ -5,7 +5,7 @@
 **
 **     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241112
+**     Build:               b241121
 **
 **     Abstract:
 **         Peripheral Access Layer for MIMXRT798S_ezhv

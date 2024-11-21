@@ -1,11 +1,11 @@
 /*
 ** ###################################################################
-**     Processors:          MIMXRT735SGAWAR
-**                          MIMXRT735SGFOA
+**     Processors:          MIMXRT735SGAWAR_ezhv
+**                          MIMXRT735SGFOA_ezhv
 **
 **     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240614
+**     Build:               b241121
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -31,7 +31,7 @@
 /*!
  * @file MIMXRT735S_ezhv
  * @version 1.0
- * @date 2024-06-14
+ * @date 2024-11-21
  * @brief Device specific configuration file for MIMXRT735S_ezhv
  *  (implementation file)
  *

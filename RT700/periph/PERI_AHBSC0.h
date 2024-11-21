@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for AHBSC0
@@ -4278,16 +4278,6 @@ typedef struct {
  *  0b11..Secure and privilege user access allowed
  */
 #define AHBSC0_APB_SLAVE_GROUP0_RULE2_GDET0(x)   (((uint32_t)(((uint32_t)(x)) << AHBSC0_APB_SLAVE_GROUP0_RULE2_GDET0_SHIFT)) & AHBSC0_APB_SLAVE_GROUP0_RULE2_GDET0_MASK)
-
-#define AHBSC0_APB_SLAVE_GROUP0_RULE2_GDET1_MASK (0x30000U)
-#define AHBSC0_APB_SLAVE_GROUP0_RULE2_GDET1_SHIFT (16U)
-/*! GDET1 - GDET1
- *  0b00..Non-secure and non-privilege user access allowed
- *  0b01..Non-secure and privilege access allowed
- *  0b10..Secure and non-privilege user access allowed
- *  0b11..Secure and privilege user access allowed
- */
-#define AHBSC0_APB_SLAVE_GROUP0_RULE2_GDET1(x)   (((uint32_t)(((uint32_t)(x)) << AHBSC0_APB_SLAVE_GROUP0_RULE2_GDET1_SHIFT)) & AHBSC0_APB_SLAVE_GROUP0_RULE2_GDET1_MASK)
 /*! @} */
 
 /*! @name APB_SLAVE_GROUP0_RULE3 - APB Bridge Peripheral 0 Rule Register 3 */
@@ -4616,16 +4606,6 @@ typedef struct {
  *  0b11..Secure and privilege user access allowed
  */
 #define AHBSC0_SHARED_APB_SLAVE_GROUP0_RULE1_RTC1(x) (((uint32_t)(((uint32_t)(x)) << AHBSC0_SHARED_APB_SLAVE_GROUP0_RULE1_RTC1_SHIFT)) & AHBSC0_SHARED_APB_SLAVE_GROUP0_RULE1_RTC1_MASK)
-
-#define AHBSC0_SHARED_APB_SLAVE_GROUP0_RULE1_GDET2_MASK (0x300U)
-#define AHBSC0_SHARED_APB_SLAVE_GROUP0_RULE1_GDET2_SHIFT (8U)
-/*! GDET2 - GDET2
- *  0b00..Non-secure and non-privilege user access allowed
- *  0b01..Non-secure and privilege access allowed
- *  0b10..Secure and non-privilege user access allowed
- *  0b11..Secure and privilege user access allowed
- */
-#define AHBSC0_SHARED_APB_SLAVE_GROUP0_RULE1_GDET2(x) (((uint32_t)(((uint32_t)(x)) << AHBSC0_SHARED_APB_SLAVE_GROUP0_RULE1_GDET2_SHIFT)) & AHBSC0_SHARED_APB_SLAVE_GROUP0_RULE1_GDET2_MASK)
 
 #define AHBSC0_SHARED_APB_SLAVE_GROUP0_RULE1_GDET3_MASK (0x3000U)
 #define AHBSC0_SHARED_APB_SLAVE_GROUP0_RULE1_GDET3_SHIFT (12U)

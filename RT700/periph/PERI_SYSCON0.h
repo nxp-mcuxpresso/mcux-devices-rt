@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b240912
+**     Build:               b241121
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SYSCON0
@@ -226,20 +226,22 @@ typedef struct {
   __I  uint32_t ELS_OTP_LC_STATE_DP;               /**< Lifecycle State, offset: 0xB04 */
   __IO uint32_t ELS_TEMPORAL_STATE;                /**< ELS Temporal State, offset: 0xB08 */
   __IO uint32_t ELS_KDF_MASK;                      /**< Key Derivation Function Mask, offset: 0xB0C */
-       uint8_t RESERVED_26[88];
+       uint8_t RESERVED_26[44];
+  __I  uint32_t ELS_BOOT_STATE1;                   /**< ELS Boot State 1, offset: 0xB3C */
+       uint8_t RESERVED_27[40];
   __IO uint32_t ELS_ASSET_PROT;                    /**< ELS Asset Protection, offset: 0xB68 */
-       uint8_t RESERVED_27[84];
+       uint8_t RESERVED_28[84];
   __I  uint32_t ELS_AS_UUID[SYSCON0_ELS_AS_UUID_COUNT]; /**< ELS AS UUID, array offset: 0xBC0, array step: 0x4 */
   __I  uint32_t ELS_AS_CFG0;                       /**< ELS AS Configuration 0, offset: 0xBD0 */
   __I  uint32_t ELS_AS_CFG1;                       /**< ELS AS Configuration 1, offset: 0xBD4 */
-       uint8_t RESERVED_28[4];
+       uint8_t RESERVED_29[4];
   __I  uint32_t ELS_AS_CFG3;                       /**< ELS AS Configuration 3, offset: 0xBDC */
   __I  uint32_t ELS_AS_ST0;                        /**< ELS AS State 0, offset: 0xBE0 */
   __I  uint32_t ELS_AS_ST1;                        /**< ELS AS State 1, offset: 0xBE4 */
-       uint8_t RESERVED_29[16];
+       uint8_t RESERVED_30[16];
   __I  uint32_t ELS_AS_FLAG0;                      /**< ELS AS Flag 0, offset: 0xBF8 */
   __I  uint32_t ELS_AS_FLAG1;                      /**< ELS AS Flag 1, offset: 0xBFC */
-       uint8_t RESERVED_30[560];
+       uint8_t RESERVED_31[560];
   __IO uint32_t CLK_OVERRIDE_RAMPKC;               /**< PKC RAM Clock Override, offset: 0xE30 */
 } SYSCON0_Type;
 
@@ -3480,6 +3482,53 @@ typedef struct {
 #define SYSCON0_ELS_KDF_MASK_KDF_MASK_SHIFT      (0U)
 /*! KDF_MASK - Key Derivation Function Mask */
 #define SYSCON0_ELS_KDF_MASK_KDF_MASK(x)         (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_KDF_MASK_KDF_MASK_SHIFT)) & SYSCON0_ELS_KDF_MASK_KDF_MASK_MASK)
+/*! @} */
+
+/*! @name ELS_BOOT_STATE1 - ELS Boot State 1 */
+/*! @{ */
+
+#define SYSCON0_ELS_BOOT_STATE1_ROOT_KEY_INDEX_MASK (0x3U)
+#define SYSCON0_ELS_BOOT_STATE1_ROOT_KEY_INDEX_SHIFT (0U)
+/*! ROOT_KEY_INDEX - Root Key Index */
+#define SYSCON0_ELS_BOOT_STATE1_ROOT_KEY_INDEX(x) (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE1_ROOT_KEY_INDEX_SHIFT)) & SYSCON0_ELS_BOOT_STATE1_ROOT_KEY_INDEX_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE1_FIPS_SELF_TEST_MASK (0x3FCU)
+#define SYSCON0_ELS_BOOT_STATE1_FIPS_SELF_TEST_SHIFT (2U)
+/*! FIPS_SELF_TEST - FIPS Self-Test
+ *  0b00000010..FIPS_SHA_STEN
+ *  0b00000011..FIPS_AES_STEN
+ *  0b00000100..FIPS_ECDSA_STEN
+ *  0b00000101..FIPS_DRBG_STEN
+ *  0b00000110..FIPS_CMAC_STEN
+ *  0b00000111..FIPS_CKDF_STEN
+ *  0b00001000..FIPS_HKDF_STEN
+ *  0b00001001..
+ */
+#define SYSCON0_ELS_BOOT_STATE1_FIPS_SELF_TEST(x) (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE1_FIPS_SELF_TEST_SHIFT)) & SYSCON0_ELS_BOOT_STATE1_FIPS_SELF_TEST_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE1_SB3_TYP_MASK     (0xC00U)
+#define SYSCON0_ELS_BOOT_STATE1_SB3_TYP_SHIFT    (10U)
+/*! SB3_TYP - SB3 Type
+ *  0b00..Customer firmware load and update file
+ *  0b01..NXP provisioning firmware
+ *  0b10..Customer manufacturing firmware (device HSM)
+ */
+#define SYSCON0_ELS_BOOT_STATE1_SB3_TYP(x)       (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE1_SB3_TYP_SHIFT)) & SYSCON0_ELS_BOOT_STATE1_SB3_TYP_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_19_18_MASK (0x3000U)
+#define SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_19_18_SHIFT (12U)
+/*! PMC0_FLAGS_19_18 - PMC0.FLAGS[19:18] */
+#define SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_19_18(x) (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_19_18_SHIFT)) & SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_19_18_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_22_21_MASK (0x18000U)
+#define SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_22_21_SHIFT (15U)
+/*! PMC0_FLAGS_22_21 - PMC0.FLAGS[22:21] */
+#define SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_22_21(x) (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_22_21_SHIFT)) & SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_22_21_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_17_16_MASK (0xC0000U)
+#define SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_17_16_SHIFT (18U)
+/*! PMC0_FLAGS_17_16 - PMC0.FLAGS[17:16] */
+#define SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_17_16(x) (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_17_16_SHIFT)) & SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_17_16_MASK)
 /*! @} */
 
 /*! @name ELS_ASSET_PROT - ELS Asset Protection */
