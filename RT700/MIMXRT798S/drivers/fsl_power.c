@@ -35,8 +35,9 @@
 #define LP_STATE_REG(offset)       (*((volatile uint32_t *)((uint32_t)(&(SLEEPCON->SHA_MED_CSTAT0)) + ((offset) << 2U))))
 #define POWER_LP_REQ_TIMEOUT_COUNT (400U)
 
-/* Get AFBB bits mask from body bias domain _body_bias_domain */
-#define POWER_AFBB_BITS_MASK(x) (((x)&0x20000000u) << 2U | (((x)&0x05400000u) << 1U))
+/* Get AFBB bits mask from RBB bits mask for _body_bias_domain */
+/* #define POWER_AFBB_BITS_MASK(x) (((x)&0x20000000u) << 2U | (((x)&0x05400000u) << 1U)) */
+#define POWER_AFBB_BITS_MASK(x) (((x)&0x05400000u) << 1U)
 
 /* Each loop has 4 instructions.*/
 #define US2LOOP(clk, x) ((clk / MEGA * x) >> 2U)
@@ -414,7 +415,7 @@ void POWER_EnableAutoWake(uint16_t ticks)
 
 void POWER_EnableRunAFBB(uint32_t mask)
 {
-    /* clear AFBBxxx_PD, set RBBxxx_PD. No AFBBSRAM1 bit. */
+    /* clear AFBBxxx_PD, set RBBxxx_PD. No AFBBSRAM1, AFBBSRAM2 bit. */
     PMC->PDRUNCFG0 &= ~POWER_AFBB_BITS_MASK(mask);
     PMC->PDRUNCFG0 |= mask;
 }

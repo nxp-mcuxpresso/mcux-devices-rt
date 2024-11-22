@@ -452,7 +452,6 @@ typedef enum _power_mode_config
  */
 enum _power_hwwake_src
 {
-    kPower_HWWakeSrcMicfil     = 0x1U, /*!< Enables DMA to wakeup by MICFIL DMA request.*/
     kPower_HWWakeSrcFlexio     = 0x2U, /*!< Enables DMA to wakeup by FLEXIO DMA request.*/
     kPower_HWWakeSrcLpFlexcomm = 0x4U, /*!< Enables DMA to wakeup by LP_FLEXCOMM0-13(CPU0), LP_FLEXCOMM17-20(CPU1) DMA
                                    request.*/
@@ -849,7 +848,6 @@ void POWER_DisableLPRequestMask(uint32_t mask);
 
 /*!
  * @brief Enable AFBB mode for various domains in active mode.
- * AFBB mode should always be used for domains that are active/clocked.
  * Note, users should call POWER_ApplyPD() to make the change take effect.
  * @param mask : A bitmask of domains to enable AFBB mode, refer to @ref _body_bias_domain and PMC PDRUNCFG0 register
  * descritpion in RM.
