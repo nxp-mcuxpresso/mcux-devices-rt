@@ -1802,6 +1802,7 @@ typedef struct _clock_fro_config
                       TEXPCNT to be considerred locked. The value/100 is the % deviation. */
     uint32_t enableInt; /*!< Enable interrupts. Bit mask of #_clock_fro_interrupt. */
     bool coarseTrimEn;  /*!< Coarse Trim Enable. Set to true to allow autotrimming of the FRO high-byte trim bits. */
+    bool fastStartupEn; /*!< Fast startup Enable. Enables FRO fast startup. */
 } clock_fro_config_t;
 
 /*! @brief Clock Control for each power domain. */
@@ -2122,6 +2123,22 @@ uint32_t CLOCK_GetFroFlags(FRO_Type *base);
 inline static void CLOCK_ClearFroFlags(FRO_Type *base, uint32_t flags)
 {
     base->CSR.CLR = flags;
+}
+
+/*! @brief  Enable/Disable FRO fast startup.
+ *  @param  base : base address of FRO.
+ *  @param  enable, true to enable fast startup, false to disable fast startup.
+ */
+inline static void CLOCK_EnableFroFastStartup(FRO_Type *base, bool enable)
+{
+    if (enable)
+    {
+        base->CNFG1.SET = FRO_CNFG1_FSTUPEN_MASK;
+    }
+    else
+    {
+        base->CNFG1.CLR = FRO_CNFG1_FSTUPEN_MASK;
+    }
 }
 
 /*! @brief  Return Frequency of FRO clk

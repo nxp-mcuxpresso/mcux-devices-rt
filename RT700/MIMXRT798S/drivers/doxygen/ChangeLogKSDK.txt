@@ -7,6 +7,7 @@
     - New features
       - Added return value for CLOCK_InitMainPfd CLOCK_InitAudioPfd.
       - Updated FRO max supported frequency.
+      - Added fast startup configuration for FRO.
   - 2.3.1
     - Bug fixes
       - Fixed bugs in CLOCK_ClearFroFlags.

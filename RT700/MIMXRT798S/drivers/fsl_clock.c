@@ -747,8 +747,9 @@ status_t CLOCK_EnableFroAutoTuning(FRO_Type *base, const clock_fro_config_t *con
 
             tempCnt = (10U * refFreq + freqkHZ - 1U) /
                       freqkHZ; /* REFCLKCNT = 10000 * divided reference clock / FRO target frequency. */
-            base->CNFG1.RW =
-                config->enableInt | FRO_CNFG1_RFCLKCNT(tempCnt) | FRO_CNFG1_REFDIV((uint32_t)config->refDiv - 1UL);
+            base->CNFG1.RW = config->enableInt | FRO_CNFG1_RFCLKCNT(tempCnt) |
+                             FRO_CNFG1_REFDIV((uint32_t)config->refDiv - 1UL) |
+                             FRO_CNFG1_FSTUPEN((uint32_t)config->fastStartupEn);
 
             /* TEXPCNT */
             tempCnt          = (uint32_t)((uint64_t)config->targetFreq * tempCnt / refFreq);
