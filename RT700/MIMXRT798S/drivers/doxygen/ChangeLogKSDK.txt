@@ -71,7 +71,10 @@
     - Initial version.
 
 @section reset RESET
-  The current RESET driver version is 2.0.2.
+  The current RESET driver version is 2.1.0.
+  - 2.1.0
+    - New features
+      - Added RESET_SetFlashStateContext API.
   - 2.0.2
     - Bug fixes
       - Added FREQME_RSTS_N.
