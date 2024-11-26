@@ -11,7 +11,7 @@
 **
 **     Reference manual:    IMXRT1040RM Rev.1, 09/2022
 **     Version:             rev. 0.1, 2021-07-20
-**     Build:               b241021
+**     Build:               b241126
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1043
@@ -72,6 +72,7 @@
 #include "PERI_IOMUXC_GPR.h"
 #include "PERI_IOMUXC_SNVS.h"
 #include "PERI_IOMUXC_SNVS_GPR.h"
+#include "PERI_LCDIF.h"
 #include "PERI_LPI2C.h"
 #include "PERI_LPSPI.h"
 #include "PERI_LPUART.h"
@@ -80,6 +81,7 @@
 #include "PERI_PIT.h"
 #include "PERI_PMU.h"
 #include "PERI_PWM.h"
+#include "PERI_PXP.h"
 #include "PERI_RTWDOG.h"
 #include "PERI_SEMC.h"
 #include "PERI_SNVS.h"

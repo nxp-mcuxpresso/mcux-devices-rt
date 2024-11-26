@@ -4,7 +4,7 @@
 /*            MIMXRT1043                                                     */
 /*  @version: 0.1                                                            */
 /*  @date:    2021-7-20                                                      */
-/*  @build:   b241021                                                        */
+/*  @build:   b241126                                                        */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Copyright 1997-2016 Freescale Semiconductor, Inc.                         */
@@ -81,9 +81,9 @@ __Vectors:
     .long   Reserved55_IRQHandler                           /* Reserved interrupt*/
     .long   Reserved56_IRQHandler                           /* Reserved interrupt*/
     .long   GPR_IRQ_IRQHandler                              /* GPR interrupt*/
-    .long   Reserved58_IRQHandler                           /* Reserved interrupt*/
+    .long   LCDIF_IRQHandler                                /* LCDIF interrupt*/
     .long   Reserved59_IRQHandler                           /* Reserved interrupt*/
-    .long   Reserved60_IRQHandler                           /* Reserved interrupt*/
+    .long   PXP_IRQHandler                                  /* PXP interrupt*/
     .long   WDOG2_IRQHandler                                /* WDOG2 interrupt*/
     .long   SNVS_HP_WRAPPER_IRQHandler                      /* SNVS Functional Interrupt*/
     .long   SNVS_HP_WRAPPER_TZ_IRQHandler                   /* SNVS Security Interrupt*/
@@ -858,9 +858,9 @@ FLEXIO3_IRQHandler:
     def_irq_handler    Reserved55_IRQHandler
     def_irq_handler    Reserved56_IRQHandler
     def_irq_handler    GPR_IRQ_IRQHandler
-    def_irq_handler    Reserved58_IRQHandler
+    def_irq_handler    LCDIF_IRQHandler
     def_irq_handler    Reserved59_IRQHandler
-    def_irq_handler    Reserved60_IRQHandler
+    def_irq_handler    PXP_IRQHandler
     def_irq_handler    WDOG2_IRQHandler
     def_irq_handler    SNVS_HP_WRAPPER_IRQHandler
     def_irq_handler    SNVS_HP_WRAPPER_TZ_IRQHandler

@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 0.1, 2021-07-20
-**     Build:               b241030
+**     Build:               b241126
 **
 **     Abstract:
 **         Chip specific module features.
@@ -73,6 +73,8 @@
 #define FSL_FEATURE_SOC_IOMUXC_GPR_COUNT (1)
 /* @brief IOMUXC_SNVS availability on the SoC. */
 #define FSL_FEATURE_SOC_IOMUXC_SNVS_COUNT (1)
+/* @brief LCDIF availability on the SoC. */
+#define FSL_FEATURE_SOC_LCDIF_COUNT (1)
 /* @brief LPI2C availability on the SoC. */
 #define FSL_FEATURE_SOC_LPI2C_COUNT (4)
 /* @brief LPSPI availability on the SoC. */
@@ -89,6 +91,8 @@
 #define FSL_FEATURE_SOC_PMU_COUNT (1)
 /* @brief PWM availability on the SoC. */
 #define FSL_FEATURE_SOC_PWM_COUNT (4)
+/* @brief PXP availability on the SoC. */
+#define FSL_FEATURE_SOC_PXP_COUNT (1)
 /* @brief SEMC availability on the SoC. */
 #define FSL_FEATURE_SOC_SEMC_COUNT (1)
 /* @brief SNVS availability on the SoC. */
@@ -436,6 +440,15 @@
 /* @brief Is affected by errata with ID 3777. */
 #define FSL_FEATURE_GPT_HAS_ERRATA_3777 (0)
 
+/* LCDIF module features */
+
+/* @brief LCDIF does not support alpha support. */
+#define FSL_FEATURE_LCDIF_HAS_NO_AS (1)
+/* @brief LCDIF does not support output reset pin to LCD panel. */
+#define FSL_FEATURE_LCDIF_HAS_NO_RESET_PIN (1)
+/* @brief LCDIF supports LUT. */
+#define FSL_FEATURE_LCDIF_HAS_LUT (1)
+
 /* LPI2C module features */
 
 /* @brief Has separate DMA RX and TX requests. */
@@ -589,6 +602,23 @@
 #define FSL_FEATURE_PWM_HAS_CAPTURE_ON_CHANNELB (1)
 /* @brief If (e)FlexPWM has module capture functionality on X channels (inputs). */
 #define FSL_FEATURE_PWM_HAS_CAPTURE_ON_CHANNELX (1)
+
+/* PXP module features */
+
+/* @brief PXP module has dither engine. */
+#define FSL_FEATURE_PXP_HAS_DITHER (0)
+/* @brief PXP module supports repeat run */
+#define FSL_FEATURE_PXP_HAS_EN_REPEAT (1)
+/* @brief PXP doesn't have CSC */
+#define FSL_FEATURE_PXP_HAS_NO_CSC2 (1)
+/* @brief PXP doesn't have LUT */
+#define FSL_FEATURE_PXP_HAS_NO_LUT (1)
+/* @brief PXP doesn't have PORTER_DUFF_CTR */
+#define FSL_FEATURE_PXP_HAS_NO_PORTER_DUFF_CTRL (0)
+/* @brief PXP 3.0 version */
+#define FSL_FEATURE_PXP_V3 (0)
+/* @brief PXP doesn't have ROT_POS */
+#define FSL_FEATURE_PXP_HAS_NO_ROT_POS (1)
 
 /* RTWDOG module features */
 

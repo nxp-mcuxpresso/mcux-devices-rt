@@ -4,7 +4,7 @@
 ;            MIMXRT1043
 ;  @version: 0.1
 ;  @date:    2021-7-20
-;  @build:   b241021
+;  @build:   b241126
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.
@@ -109,9 +109,9 @@ __vector_table_0x1c
         DCD     Reserved55_IRQHandler                         ;Reserved interrupt
         DCD     Reserved56_IRQHandler                         ;Reserved interrupt
         DCD     GPR_IRQ_IRQHandler                            ;GPR interrupt
-        DCD     Reserved58_IRQHandler                         ;Reserved interrupt
+        DCD     LCDIF_IRQHandler                              ;LCDIF interrupt
         DCD     Reserved59_IRQHandler                         ;Reserved interrupt
-        DCD     Reserved60_IRQHandler                         ;Reserved interrupt
+        DCD     PXP_IRQHandler                                ;PXP interrupt
         DCD     WDOG2_IRQHandler                              ;WDOG2 interrupt
         DCD     SNVS_HP_WRAPPER_IRQHandler                    ;SNVS Functional Interrupt
         DCD     SNVS_HP_WRAPPER_TZ_IRQHandler                 ;SNVS Security Interrupt
@@ -625,9 +625,9 @@ CAN2_IRQHandler
         PUBWEAK Reserved55_IRQHandler
         PUBWEAK Reserved56_IRQHandler
         PUBWEAK GPR_IRQ_IRQHandler
-        PUBWEAK Reserved58_IRQHandler
+        PUBWEAK LCDIF_IRQHandler
         PUBWEAK Reserved59_IRQHandler
-        PUBWEAK Reserved60_IRQHandler
+        PUBWEAK PXP_IRQHandler
         PUBWEAK WDOG2_IRQHandler
         PUBWEAK SNVS_HP_WRAPPER_IRQHandler
         PUBWEAK SNVS_HP_WRAPPER_TZ_IRQHandler
@@ -875,9 +875,9 @@ FLEXRAM_IRQHandler
 Reserved55_IRQHandler
 Reserved56_IRQHandler
 GPR_IRQ_IRQHandler
-Reserved58_IRQHandler
+LCDIF_IRQHandler
 Reserved59_IRQHandler
-Reserved60_IRQHandler
+PXP_IRQHandler
 WDOG2_IRQHandler
 SNVS_HP_WRAPPER_IRQHandler
 SNVS_HP_WRAPPER_TZ_IRQHandler

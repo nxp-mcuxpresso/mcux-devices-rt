@@ -11,7 +11,7 @@
 **
 **     Reference manual:    IMXRT1040RM Rev.1, 09/2022
 **     Version:             rev. 0.1, 2021-07-20
-**     Build:               b241025
+**     Build:               b241126
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1043
@@ -119,9 +119,9 @@ typedef enum IRQn {
   Reserved55_IRQn              = 39,               /**< Reserved interrupt */
   Reserved56_IRQn              = 40,               /**< Reserved interrupt */
   GPR_IRQ_IRQn                 = 41,               /**< GPR interrupt */
-  Reserved58_IRQn              = 42,               /**< Reserved interrupt */
+  LCDIF_IRQn                   = 42,               /**< LCDIF interrupt */
   Reserved59_IRQn              = 43,               /**< Reserved interrupt */
-  Reserved60_IRQn              = 44,               /**< Reserved interrupt */
+  PXP_IRQn                     = 44,               /**< PXP interrupt */
   WDOG2_IRQn                   = 45,               /**< WDOG2 interrupt */
   SNVS_HP_WRAPPER_IRQn         = 46,               /**< SNVS Functional Interrupt */
   SNVS_HP_WRAPPER_TZ_IRQn      = 47,               /**< SNVS Security Interrupt */
@@ -748,6 +748,18 @@ typedef enum IRQn {
 /** Array initializer of IOMUXC_SNVS_GPR peripheral base pointers */
 #define IOMUXC_SNVS_GPR_BASE_PTRS                { IOMUXC_SNVS_GPR }
 
+/* LCDIF - Peripheral instance base addresses */
+/** Peripheral LCDIF base address */
+#define LCDIF_BASE                               (0x402B8000u)
+/** Peripheral LCDIF base pointer */
+#define LCDIF                                    ((LCDIF_Type *)LCDIF_BASE)
+/** Array initializer of LCDIF peripheral base addresses */
+#define LCDIF_BASE_ADDRS                         { LCDIF_BASE }
+/** Array initializer of LCDIF peripheral base pointers */
+#define LCDIF_BASE_PTRS                          { LCDIF }
+/** Interrupt vectors for the LCDIF peripheral type */
+#define LCDIF_IRQ0_IRQS                          { LCDIF_IRQn }
+
 /* LPI2C - Peripheral instance base addresses */
 /** Peripheral LPI2C1 base address */
 #define LPI2C1_BASE                              (0x403F0000u)
@@ -901,6 +913,18 @@ typedef enum IRQn {
 #define PWM_CAPTURE_IRQS                         { { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { PWM1_0_IRQn, PWM1_1_IRQn, PWM1_2_IRQn, PWM1_3_IRQn }, { PWM2_0_IRQn, PWM2_1_IRQn, PWM2_2_IRQn, PWM2_3_IRQn }, { PWM3_0_IRQn, PWM3_1_IRQn, PWM3_2_IRQn, PWM3_3_IRQn }, { PWM4_0_IRQn, PWM4_1_IRQn, PWM4_2_IRQn, PWM4_3_IRQn } }
 #define PWM_FAULT_IRQS                           { NotAvail_IRQn, PWM1_FAULT_IRQn, PWM2_FAULT_IRQn, PWM3_FAULT_IRQn, PWM4_FAULT_IRQn }
 #define PWM_RELOAD_ERROR_IRQS                    { NotAvail_IRQn, PWM1_FAULT_IRQn, PWM2_FAULT_IRQn, PWM3_FAULT_IRQn, PWM4_FAULT_IRQn }
+
+/* PXP - Peripheral instance base addresses */
+/** Peripheral PXP base address */
+#define PXP_BASE                                 (0x402B4000u)
+/** Peripheral PXP base pointer */
+#define PXP                                      ((PXP_Type *)PXP_BASE)
+/** Array initializer of PXP peripheral base addresses */
+#define PXP_BASE_ADDRS                           { PXP_BASE }
+/** Array initializer of PXP peripheral base pointers */
+#define PXP_BASE_PTRS                            { PXP }
+/** Interrupt vectors for the PXP peripheral type */
+#define PXP_IRQ0_IRQS                            { PXP_IRQn }
 
 /* RTWDOG - Peripheral instance base addresses */
 /** Peripheral RTWDOG base address */

@@ -159,6 +159,11 @@ config MCUX_HW_IP_DriverType_EDMA
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT1043xxxxB
 
+config MCUX_HW_IP_DriverType_ELCDIF
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT1043xxxxB
+
 config MCUX_HW_IP_DriverType_ENC
     bool
     default y
@@ -270,6 +275,11 @@ config MCUX_HW_IP_DriverType_PMU
     depends on MCUX_HW_DEVICE_ID_MIMXRT1043xxxxB
 
 config MCUX_HW_IP_DriverType_PWM
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT1043xxxxB
+
+config MCUX_HW_IP_DriverType_PXP
     bool
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT1043xxxxB
