@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 1.0, 2018-06-19
-**     Build:               b241030
+**     Build:               b241127
 **
 **     Abstract:
 **         Chip specific module features.
@@ -227,6 +227,10 @@
 #define FSL_FEATURE_ACMP_HAS_C1_DMODE_BIT (1)
 /* @brief Has C2 RRE Bit */
 #define FSL_FEATURE_ACMP_HAS_C2_RRE_BIT (0)
+/* @brief If support 3v domain */
+#define FSL_FEATURE_ACMP_HAS_NO_3V_DOMAIN (0)
+/* @brief If has acmp sample signal */
+#define FSL_FEATURE_ACMP_HAS_NO_SAMPLE_SIGNAL (1)
 
 /* CRC module features */
 

@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241121
+**     Build:               b241127
 **
 **     Abstract:
 **         Chip specific module features.
@@ -152,6 +152,8 @@
 #define FSL_FEATURE_ACMP_HAS_NO_FILTER_MODE (0)
 /* @brief Has No C0 SE Bit */
 #define FSL_FEATURE_ACMP_HAS_NO_C0_SE_BIT (1)
+/* @brief If has acmp sample signal */
+#define FSL_FEATURE_ACMP_HAS_NO_SAMPLE_SIGNAL (1)
 
 /* LPADC module features */
 
