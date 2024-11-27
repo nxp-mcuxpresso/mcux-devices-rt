@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 0.1, 2021-03-09
-**     Build:               b241030
+**     Build:               b241127
 **
 **     Abstract:
 **         Chip specific module features.
@@ -315,6 +315,8 @@
 #define FSL_FEATURE_ACMP_HAS_NO_WINDOW_MODE (0)
 /* @brief If support filter mode */
 #define FSL_FEATURE_ACMP_HAS_NO_FILTER_MODE (0)
+/* @brief Has No C0 SE Bit */
+#define FSL_FEATURE_ACMP_HAS_NO_C0_SE_BIT (0)
 
 /* DAC12 module features */
 
@@ -367,7 +369,7 @@
 /* @brief Has register access permission. */
 #define FSL_FEATURE_HAVE_DMA_CONTROL_REGISTER_ACCESS_PERMISSION (0)
 /* @brief NBYTES must be multiple of 8 when using scatter gather. */
-#define FSL_FEATURE_EDMA_HAS_ERRATA_51327 (1)
+#define FSL_FEATURE_EDMA_HAS_ERRATA_51327 (0)
 /* @brief If 128 bytes transfer supported. */
 #define FSL_FEATURE_EDMA_INSTANCE_SUPPORT_128_BYTES_TRANSFERn(x) \
     (((x) == DMA4) ? (1) : \
@@ -375,9 +377,7 @@
 /* @brief If channel clock controlled independently */
 #define FSL_FEATURE_EDMA_CHANNEL_HAS_OWN_CLOCK_GATE (1)
 /* @brief NBYTES must be multiple of 8 when using scatter gather. */
-#define FSL_FEATURE_EDMA_INSTANCE_HAS_ERRATA_51327n(x) \
-    (((x) == DMA4) ? (1) : \
-    (((x) == DMA3) ? (0) : (-1)))
+#define FSL_FEATURE_EDMA_INSTANCE_HAS_ERRATA_51327n(x) (0)
 /* @brief Has register CH_CSR. */
 #define FSL_FEATURE_EDMA_HAS_CHANNEL_CONFIG (1)
 /* @brief Has channel mux */
@@ -668,9 +668,9 @@
 
 /* SYSPM module features */
 
-/* @brief Temperature sensor parameter A (slope). */
+/* @brief SYSPM support disable counters if stopped or halted. */
 #define FSL_FEATURE_SYSPM_HAS_PMCR_DCIFSH (1)
-/* @brief Temperature sensor parameter B (offset). */
+/* @brief SYSPM has reset instruction counter. */
 #define FSL_FEATURE_SYSPM_HAS_PMCR_RICTR (1)
 /* @brief Number of PMCR registers signals number of performance monitors available in single SYSPM instance. */
 #define FSL_FEATURE_SYSPM_PMCR_COUNT (1)
@@ -730,21 +730,21 @@
 /* NETC module features */
 
 /* @brief Accesses to 64b stats registers must be performed atomically. */
-#define FSL_FEATURE_NETC_HAS_ERRATA_050679 (1)
+#define FSL_FEATURE_NETC_HAS_ERRATA_050679 (0)
 /* @brief Egress time gate scheduling can get corrupted when functional level reset is applied or when time gating is disabled. */
-#define FSL_FEATURE_NETC_HAS_ERRATA_051130 (1)
+#define FSL_FEATURE_NETC_HAS_ERRATA_051130 (0)
 /* @brief Possible transmit MAC underrun at low 10M/100M speeds when the NETC switch is operating in cut-through forwarding mode. */
-#define FSL_FEATURE_NETC_HAS_ERRATA_051202 (1)
+#define FSL_FEATURE_NETC_HAS_ERRATA_051202 (0)
 /* @brief Tx/Rx disable (POR[RXDIS] and POR[TXDIS]) are enabled out of reset. */
-#define FSL_FEATURE_NETC_HAS_ERRATA_051246 (1)
+#define FSL_FEATURE_NETC_HAS_ERRATA_051246 (0)
 /* @brief Administrative gate control list can get configured inadvertently when an exception is detected and notified. */
-#define FSL_FEATURE_NETC_HAS_ERRATA_051254 (1)
+#define FSL_FEATURE_NETC_HAS_ERRATA_051254 (0)
 /* @brief One-step timestamp support for PTP/IEEE1588 does not function properly. */
-#define FSL_FEATURE_NETC_HAS_ERRATA_051255 (1)
+#define FSL_FEATURE_NETC_HAS_ERRATA_051255 (0)
 /* @brief During initial Initialization of NETC, all ENETCs and Switch PCI functions must be enabled for NETC to accept table management commands for any function. */
-#define FSL_FEATURE_NETC_HAS_ERRATA_051260 (1)
+#define FSL_FEATURE_NETC_HAS_ERRATA_051260 (0)
 /* @brief FLR or transmit disable may cause frame transfers to underrun in MAC resulting in bad frame transmission. */
-#define FSL_FEATURE_NETC_HAS_ERRATA_051398 (1)
+#define FSL_FEATURE_NETC_HAS_ERRATA_051398 (0)
 /* @brief The Ingress Stream Identification key construction check of payload may evaluate incorrectly. */
 #define FSL_FEATURE_NETC_HAS_ERRATA_051524 (1)
 /* @brief Time gate scheduling update command can erroneously respond with an error when AdminBaseTime specified is near the current time. */
