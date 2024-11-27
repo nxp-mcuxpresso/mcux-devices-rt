@@ -7,4 +7,4 @@ config MCUX_HW_DEVICE_MIMXRT735S_CORE_ID_ezhv
     default y
 
 rsource "Kconfig.chip"
-rsource "../../../../ezhv/Kconfig.common"
+rsource "../../../../../devices/ezhv/Kconfig.common"

@@ -5,7 +5,7 @@
 
 #### device spepcific drivers
 include(${SdkRootDirPath}/devices/arm/device_header.cmake)
-mcux_add_cmakelists(${SdkRootDirPath}/devices/RT/RT500/MIMXRT533S/drivers)
+mcux_add_cmakelists(${SdkRootDirPath}/${device_root}/RT/RT500/MIMXRT533S/drivers)
 
 # common configuration
 include(${SdkRootDirPath}/arch/arm/configuration/RT.cmake)

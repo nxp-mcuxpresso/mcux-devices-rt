@@ -8,4 +8,4 @@ config MCUX_HW_DEVICE_MIMXRT798S_CORE_ID_cm33_core1
     default y
 
 rsource "Kconfig.chip"
-rsource "../../../../arm/Kconfig.common"
+rsource "../../../../../devices/arm/Kconfig.common"
