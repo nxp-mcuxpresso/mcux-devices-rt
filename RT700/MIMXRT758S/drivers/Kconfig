@@ -1,44 +1,17 @@
 # Copyright 2024 NXP
-# All rights reserved.
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
 menu "Device specific drivers configuration"
 
-    config MCUX_COMPONENT_driver.clock
-         bool "Use driver clock"
-         default y
-
-    config MCUX_COMPONENT_driver.dsp
-         bool "Use driver dsp"
-         depends on MCUX_HW_CORE_CM33
-
-    config MCUX_COMPONENT_driver.edma_soc
-         bool "Use driver edma_soc"
-
-    config MCUX_COMPONENT_driver.ezhv
-         bool "Use driver ezhv"
-	 depends on MCUX_HW_CORE_CM33
-
-    config MCUX_COMPONENT_driver.inputmux_connections
-         bool "Use driver inputmux_connections"
-
-    config MCUX_COMPONENT_driver.iopctl_soc
-         bool "Use driver iopctl"
-         default y
-
-    config MCUX_COMPONENT_driver.power
-         bool "Use driver power"
-         depends on MCUX_HW_CORE_CM33
-
-    config MCUX_COMPONENT_driver.reset
-         bool "Use driver reset"
-         default y
-
-    config MCUX_COMPONENT_driver.mipi_dsi_soc
-         bool "Use driver mipi_dsi_soc"
-
-    config MCUX_COMPONENT_driver.romapi
-         bool "Use driver romapi"
-         depends on MCUX_HW_CORE_ID_CM33_CORE0
+    rsource "../../MIMXRT798S/drivers/Kconfig_clock"
+    rsource "../../MIMXRT798S/drivers/Kconfig_dsp"
+    rsource "../../MIMXRT798S/drivers/Kconfig_edma_soc"
+    rsource "../../MIMXRT798S/drivers/Kconfig_ezhv"
+    rsource "../../MIMXRT798S/drivers/Kconfig_inputmux_connections"
+    rsource "../../MIMXRT798S/drivers/Kconfig_iopctl_soc"
+    rsource "../../MIMXRT798S/drivers/Kconfig_mipi_dsi_soc"
+    rsource "../../MIMXRT798S/drivers/Kconfig_power"
+    rsource "../../MIMXRT798S/drivers/Kconfig_reset"
+    rsource "../../MIMXRT798S/drivers/Kconfig_romapi"
 endmenu
