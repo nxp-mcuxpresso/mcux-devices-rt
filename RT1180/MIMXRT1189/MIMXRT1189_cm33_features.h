@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 0.1, 2021-03-09
-**     Build:               b241127
+**     Build:               b241211
 **
 **     Abstract:
 **         Chip specific module features.
@@ -412,6 +412,8 @@
 #define FSL_FEATURE_EDMA_INSTANCE_HAS_MP_CHANNEL_MUXn(x) (0)
 /* @brief Has register bit fields CH_MATTR[WCACHE], CH_MATTR[RCACHE]. */
 #define FSL_FEATURE_EDMA_HAS_CHANNEL_MEMORY_ATTRIBUTE (1)
+/* @brief Whether has SOC level request enable control. */
+#define FSL_FEATURE_EDMA_HAS_SOC_REQUEST_ENABLE (0)
 /* @brief Instance has register CH_MATTR. */
 #define FSL_FEATURE_EDMA_INSTANCE_HAS_CHANNEL_MEMORY_ATTRIBUTEn(x) \
     (((x) == DMA4) ? (1) : \
@@ -438,6 +440,8 @@
 #define FSL_FEATURE_EDMA_TCD_TYPEn(x) (0)
 /* @brief Has no register bit fields CH_SBR[SEC]. */
 #define FSL_FEATURE_EDMA_HAS_NO_CH_SBR_SEC (0)
+/* @brief Number of DMA channels with asynchronous request capability. */
+#define FSL_FEATURE_EDMA_ASYNCHRO_REQUEST_CHANNEL_COUNT (64)
 
 /* EQDC module features */
 
@@ -519,6 +523,11 @@
 /* @brief FlexSPI Array Length */
 #define FSL_FEATURE_FLEXSPI_ARRAY_LEN (3)
 
+/* GPT module features */
+
+/* @brief Is affected by errata with ID 3777. */
+#define FSL_FEATURE_GPT_HAS_ERRATA_3777 (1)
+
 /* I3C module features */
 
 /* @brief Has TERM bitfile in MERRWARN register. */
@@ -542,6 +551,8 @@
 
 /* @brief SOC support ele provisioned. */
 #define FSL_FEATURE_IEE_ELE_PROVISIONED_KEY (1)
+/* @brief SOC support ele S400. */
+#define FSL_FEATURE_IEE_ELE_S4XX (1)
 /* @brief iee apc use GPR. */
 #define FSL_FEATURE_IEE_APC_USE_GPR (0)
 
@@ -674,6 +685,8 @@
 #define FSL_FEATURE_SYSPM_HAS_PMCR_RICTR (1)
 /* @brief Number of PMCR registers signals number of performance monitors available in single SYSPM instance. */
 #define FSL_FEATURE_SYSPM_PMCR_COUNT (1)
+/* @brief SYSPM has instruction counter. */
+#define FSL_FEATURE_SYSPM_HAS_PMICTR (1)
 
 /* MEMORY module features */
 
@@ -769,6 +782,10 @@
 #define FSL_FEATURE_NETC_MSIX_TABLE_BASE (0x60BC0000)
 /* @brief No switch support. */
 #define FSL_FEATURE_NETC_HAS_NO_SWITCH (0)
+/* @brief No XGMII support. */
+#define FSL_FEATURE_NETC_HAS_NO_XGMII (0)
+/* @brief NXP Switch Tag support. */
+#define FSL_FEATURE_NETC_HAS_SWITCH_TAG (0)
 
 /* NVIC module features */
 
@@ -1088,6 +1105,22 @@
 #define FSL_FEATURE_USDHC_HAS_NO_VOLTAGE_SELECT (0)
 /* @brief Has no VS18 bit in HOST_CTRL_CAP register */
 #define FSL_FEATURE_USDHC_HAS_NO_VS18 (0)
+
+/* VREF module features */
+
+/* @brief whether has CSR[LPBG_BUF_EN] bitfield */
+#define FSL_FEATURE_VREF_HAS_LOWPOWER_BUFFER (0)
+/* @brief whether has UTRIM[TRIM2V1] bitfield */
+#define FSL_FEATURE_VREF_HAS_TRIM2V1 (0)
+/* @brief whether has TEST_UNLOCK register */
+#define FSL_FEATURE_VREF_HAS_TEST_UNLOCK_REG (1)
+/* @brief whether has TRIM0 register */
+#define FSL_FEATURE_VREF_HAS_TRIM0_REG (1)
+
+/* XBAR_DSC module features */
+
+/* @brief The width of registers of XBAR */
+#define FSL_FEATURE_XBAR_DSC_REG_WIDTH (16)
 
 /* XCACHE module features */
 

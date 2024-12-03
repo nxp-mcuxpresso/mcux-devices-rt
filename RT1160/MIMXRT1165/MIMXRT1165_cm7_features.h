@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 0.1, 2020-12-29
-**     Build:               b241030
+**     Build:               b241211
 **
 **     Abstract:
 **         Chip specific module features.
@@ -231,6 +231,20 @@
 /* @brief Has data register toggle DR_TOGGLE. */
 #define FSL_FEATURE_IGPIO_HAS_DR_TOGGLE (1)
 
+/* interrupt module features */
+
+/* @brief Lowest interrupt request number. */
+#define FSL_FEATURE_INTERRUPT_IRQ_MIN (-14)
+/* @brief Highest interrupt request number. */
+#define FSL_FEATURE_INTERRUPT_IRQ_MAX (215)
+
+/* SCB module features */
+
+/* @brief L1 ICACHE line size in byte. */
+#define FSL_FEATURE_L1ICACHE_LINESIZE_BYTE (32)
+/* @brief L1 DCACHE line size in byte. */
+#define FSL_FEATURE_L1DCACHE_LINESIZE_BYTE (32)
+
 /* ACMP module features */
 
 /* @brief Has CMP_C3. */
@@ -251,6 +265,8 @@
 #define FSL_FEATURE_ACMP_HAS_C1_DMODE_BIT (1)
 /* @brief Has C2 RRE Bit */
 #define FSL_FEATURE_ACMP_HAS_C2_RRE_BIT (0)
+/* @brief If support 3v domain */
+#define FSL_FEATURE_ACMP_HAS_NO_3V_DOMAIN (0)
 
 /* DAC12 module features */
 
@@ -579,6 +595,8 @@
 #define FSL_FEATURE_LPSPI_HAS_NO_PCSCFG (0)
 /* @brief Has no WIDTH bits in TCR register */
 #define FSL_FEATURE_LPSPI_HAS_NO_MULTI_WIDTH (0)
+/* @brief Has ERRATA051472. */
+#define FSL_FEATURE_LPSPI_HAS_ERRATA_051472 (1)
 
 /* LPUART module features */
 
@@ -690,13 +708,6 @@
 #define FSL_FEATURE_MU_HAS_RESET_ASSERT_INT (0)
 /* @brief MU supports reset de-assert interrupt. CR[RDIE] or BCR[RDIE]. */
 #define FSL_FEATURE_MU_HAS_RESET_DEASSERT_INT (0)
-
-/* interrupt module features */
-
-/* @brief Lowest interrupt request number. */
-#define FSL_FEATURE_INTERRUPT_IRQ_MIN (-14)
-/* @brief Highest interrupt request number. */
-#define FSL_FEATURE_INTERRUPT_IRQ_MAX (105)
 
 /* OCOTP module features */
 
@@ -885,13 +896,6 @@
 /* SSARC_LP module features */
 
 /* No feature definitions */
-
-/* SCB module features */
-
-/* @brief L1 ICACHE line size in byte. */
-#define FSL_FEATURE_L1ICACHE_LINESIZE_BYTE (32)
-/* @brief L1 DCACHE line size in byte. */
-#define FSL_FEATURE_L1DCACHE_LINESIZE_BYTE (32)
 
 /* TMPSNS module features */
 
