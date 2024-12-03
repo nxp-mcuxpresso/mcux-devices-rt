@@ -152,5 +152,8 @@ device.hardware_data:
         total_memory:
           ram_size_kb: 7680
           flash_size_kb: 0
+        part:
+          - name: "MIMXRT758SGFOA"
+          - name: "MIMXRT758SGAWAR"
         modules:
 ...

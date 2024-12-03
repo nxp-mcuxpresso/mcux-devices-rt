@@ -152,5 +152,8 @@ device.hardware_data:
         total_memory:
           ram_size_kb: 5120
           flash_size_kb: 0
+        part:
+          - name: "MIMXRT735SGFOA"
+          - name: "MIMXRT735SGAWAR"
         modules:
 ...
