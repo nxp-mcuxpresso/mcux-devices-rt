@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 0.1, 2021-03-09
-**     Build:               b241211
+**     Build:               b241212
 **
 **     Abstract:
 **         Chip specific module features.
@@ -443,6 +443,11 @@
 /* @brief Number of DMA channels with asynchronous request capability. */
 #define FSL_FEATURE_EDMA_ASYNCHRO_REQUEST_CHANNEL_COUNT (64)
 
+/* EDGELOCK module features */
+
+/* @brief SOC support ele S400. */
+#define FSL_FEATURE_ELE_S4XX (1)
+
 /* EQDC module features */
 
 /* @brief Is affected by errata with ID 051383 (Quadrature decoder CTRL[DMAEN] bit can not be cleared by SW). */
@@ -551,8 +556,6 @@
 
 /* @brief SOC support ele provisioned. */
 #define FSL_FEATURE_IEE_ELE_PROVISIONED_KEY (1)
-/* @brief SOC support ele S400. */
-#define FSL_FEATURE_IEE_ELE_S4XX (1)
 /* @brief iee apc use GPR. */
 #define FSL_FEATURE_IEE_APC_USE_GPR (0)
 
