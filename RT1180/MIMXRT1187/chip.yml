@@ -13,6 +13,7 @@ device.hardware_data:
         series: "RT"
         family: "MIMXRT1180"
         subfamily: "iMXRT1187"
+        compatible_device.pemicro: IMXRT1187
         core:
           - name: "Cortex-M33"
             type: "cm33"
