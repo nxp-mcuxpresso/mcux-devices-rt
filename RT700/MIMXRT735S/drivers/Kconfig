@@ -5,9 +5,9 @@
 menu "Device specific drivers configuration"
 
     rsource "../../MIMXRT798S/drivers/Kconfig_clock"
-    rsource "../../MIMXRT798S/drivers/Kconfig_dsp"
+    rsource "./Kconfig_dsp"
     rsource "../../MIMXRT798S/drivers/Kconfig_edma_soc"
-    rsource "../../MIMXRT798S/drivers/Kconfig_ezhv"
+    rsource "./Kconfig_ezhv"
     rsource "../../MIMXRT798S/drivers/Kconfig_inputmux_connections"
     rsource "../../MIMXRT798S/drivers/Kconfig_iopctl_soc"
     rsource "../../MIMXRT798S/drivers/Kconfig_power"

@@ -4,4 +4,4 @@
 
     config MCUX_COMPONENT_driver.ezhv
          bool "Use driver ezhv"
-         depends on MCUX_HW_DEVICE_MIMXRT798S && MCUX_HW_CORE_ID_CM33_CORE0
+         depends on MCUX_HW_DEVICE_MIMXRT758S && MCUX_HW_CORE_ID_CM33_CORE0
