@@ -27,6 +27,17 @@ config MCUX_HW_DEVICE_PART
     default "MIMXRT735SGFOA" if MCUX_HW_DEVICE_PART_MIMXRT735SGFOA
     default "MIMXRT735SGAWAR" if MCUX_HW_DEVICE_PART_MIMXRT735SGAWAR
 
+
+config MCUX_HW_IP_DriverType_FLEXIO_CAMERA
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT735S
+
+config MCUX_HW_IP_DriverType_FLEXIO_MCULCD
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT735S
+
 # ip information
 config MCUX_HW_IP_DriverType_ACMP
     bool

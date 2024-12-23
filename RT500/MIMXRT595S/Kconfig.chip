@@ -32,6 +32,16 @@ config MCUX_HW_IP_DriverType_IAP3
     default y if MCUX_HW_DEVICE_MIMXRT595S_CORE_ID_cm33
     depends on MCUX_HW_DEVICE_ID_MIMXRT595S
 
+config MCUX_HW_IP_DriverType_FLEXIO_QSPI
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT595S
+
+config MCUX_HW_IP_DriverType_FLEXIO_MCULCD
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT595S
+
 # ip information
 config MCUX_HW_IP_DriverType_ACMP
     bool

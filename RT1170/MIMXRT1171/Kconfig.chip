@@ -98,6 +98,11 @@ config MCUX_TOOLCHAIN_JLINK_CPU_IDENTIFIER
     string
     default "MIMXRT1171xxxA"
 
+config MCUX_HW_IP_DriverType_SMARTCARD_EMVSIM
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT1171xxxxx
+
 # ip information
 config MCUX_HW_IP_DriverType_ACMP
     bool

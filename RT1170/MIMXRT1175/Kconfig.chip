@@ -39,6 +39,10 @@ config MCUX_HW_DEVICE_PART
     default "MIMXRT1175AVM8A" if MCUX_HW_DEVICE_PART_MIMXRT1175AVM8A
     default "MIMXRT1175CVM8A" if MCUX_HW_DEVICE_PART_MIMXRT1175CVM8A
 
+config MCUX_HW_IP_DriverType_SMARTCARD_EMVSIM
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT1175xxxxx
 
 # ip information
 config MCUX_HW_IP_DriverType_ACMP

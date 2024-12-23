@@ -27,6 +27,16 @@ config MCUX_HW_DEVICE_PART
     default "MIMXRT798SGFOA" if MCUX_HW_DEVICE_PART_MIMXRT798SGFOA
     default "MIMXRT798SGAWAR" if MCUX_HW_DEVICE_PART_MIMXRT798SGAWAR
 
+config MCUX_HW_IP_DriverType_FLEXIO_CAMERA
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT798S
+
+config MCUX_HW_IP_DriverType_FLEXIO_MCULCD
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT798S
+
 # ip information
 config MCUX_HW_IP_DriverType_ACMP
     bool

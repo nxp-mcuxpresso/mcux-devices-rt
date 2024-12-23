@@ -108,6 +108,16 @@ config MCUX_HW_IP_DriverType_IAP3
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT555S
 
+config MCUX_HW_IP_DriverType_FLEXIO_QSPI
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT555S
+
+config MCUX_HW_IP_DriverType_FLEXIO_MCULCD
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT555S
+
 # ip information
 config MCUX_HW_IP_DriverType_ACMP
     bool
