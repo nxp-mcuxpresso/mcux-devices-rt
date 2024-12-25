@@ -35,7 +35,7 @@ MEMORY
   m_interrupts          (RX)  : ORIGIN = 0x80000000, LENGTH = 0x00000400
   m_text                (RX)  : ORIGIN = 0x80000400, LENGTH = 0x001FFC00
   m_qacode              (RX)  : ORIGIN = 0x00000000, LENGTH = 0x00020000
-  m_data                (RW)  : ORIGIN = 0x20200000, LENGTH = DEFINED(__heap_noncacheable__) ? 0x00040000 : 0x00040000 - HEAP_SIZE
+  m_data                (RW)  : ORIGIN = 0x20200000, LENGTH = DEFINED(__heap_noncacheable__) ? 0x000C0000 : 0x000C0000 - HEAP_SIZE
   m_data2               (RW)  : ORIGIN = 0x20000000, LENGTH = 0x00020000
   m_data3               (RW)  : ORIGIN = 0x80200000, LENGTH = 0x01C00000
   m_ncache              (RW)  : ORIGIN = 0x81E00000, LENGTH = DEFINED(__heap_noncacheable__) ? 0x00200000 - HEAP_SIZE : 0x00200000

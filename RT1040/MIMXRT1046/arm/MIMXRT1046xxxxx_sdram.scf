@@ -35,7 +35,7 @@
 #define m_data2_size                   0x00020000
 
 #define m_data3_start                  0x20200000
-#define m_data3_size                   0x00040000
+#define m_data3_size                   0x000C0000
 
 #define m_ncache_start                 0x81E00000
 #define m_ncache_size                  0x00200000

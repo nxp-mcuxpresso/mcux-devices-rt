@@ -32,7 +32,7 @@
 #define m_data_size                    0x00020000
 
 #define m_data2_start                  0x20200000
-#define m_data2_size                   0x00040000
+#define m_data2_size                   0x000C0000
 
 /* Sizes */
 #if (defined(__stack_size__))

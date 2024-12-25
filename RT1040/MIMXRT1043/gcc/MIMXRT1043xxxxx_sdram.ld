@@ -37,7 +37,7 @@ MEMORY
   m_data                (RW)  : ORIGIN = 0x80000000, LENGTH = DEFINED(__heap_noncacheable__) ? 0x01E00000 : 0x01E00000 - HEAP_SIZE
   m_ncache              (RW)  : ORIGIN = 0x81E00000, LENGTH = DEFINED(__heap_noncacheable__) ? 0x00200000 - HEAP_SIZE : 0x00200000
   m_data2               (RW)  : ORIGIN = 0x20000000, LENGTH = 0x00020000
-  m_data3               (RW)  : ORIGIN = 0x20200000, LENGTH = 0x00040000
+  m_data3               (RW)  : ORIGIN = 0x20200000, LENGTH = 0x000C0000
   m_heap                (RW)  : ORIGIN = NCACHE_HEAP_START, LENGTH = HEAP_SIZE
 }
 
