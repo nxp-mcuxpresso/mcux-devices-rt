@@ -38,7 +38,11 @@
 #define m_interrupts_size              0x00000400
 
 #define m_text_start                   0x60002400
+#if (defined(__use_flash16MB__))
+#define m_text_size                    0x00FFDC00
+#else
 #define m_text_size                    0x007FDC00
+#endif
 
 #define m_qacode_start                 0x00000000
 #define m_qacode_size                  0x00020000
@@ -50,7 +54,7 @@
 #define m_data_size                    (0x00020000 - m_interrupts_ram_size)
 
 #define m_data2_start                  0x20200000
-#define m_data2_size                   0x00040000
+#define m_data2_size                   0x000C0000
 
 /* Sizes */
 #if (defined(__stack_size__))
