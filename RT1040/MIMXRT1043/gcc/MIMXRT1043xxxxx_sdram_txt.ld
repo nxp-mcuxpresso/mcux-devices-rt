@@ -26,7 +26,7 @@ ENTRY(Reset_Handler)
 
 HEAP_SIZE  = DEFINED(__heap_size__)  ? __heap_size__  : 0x0400;
 STACK_SIZE = DEFINED(__stack_size__) ? __stack_size__ : 0x0400;
-NCACHE_HEAP_START = DEFINED(__heap_noncacheable__) ? 0x82000000 - HEAP_SIZE : 0x20240000 - HEAP_SIZE;
+NCACHE_HEAP_START = DEFINED(__heap_noncacheable__) ? 0x82000000 - HEAP_SIZE : 0x202C0000 - HEAP_SIZE;
 NCACHE_HEAP_SIZE  = DEFINED(__heap_noncacheable__) ? HEAP_SIZE : 0x0000;
 
 /* Specify the memory areas */
