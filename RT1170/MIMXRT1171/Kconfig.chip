@@ -299,11 +299,6 @@ config MCUX_HW_IP_DriverType_LCDIFV2
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT1171xxxxx
 
-config MCUX_HW_IP_DriverType_LMEM
-    bool
-    default y
-    depends on MCUX_HW_DEVICE_ID_MIMXRT1171xxxxx
-
 config MCUX_HW_IP_DriverType_LPADC
     bool
     default y
