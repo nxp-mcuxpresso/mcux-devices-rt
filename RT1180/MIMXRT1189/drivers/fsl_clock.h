@@ -108,6 +108,12 @@
 #define PLL_SYS3_480_FREQ (XTAL_FREQ * PLL_SYS3_480_MFI)
 #define XTAL_FREQ         (24000000UL)
 
+/*! @brief Clock gate name array for VREF. */
+#define VREF_CLOCKS \
+    {               \
+        kCLOCK_Vref \
+    }
+      
 /*! @brief Clock gate name array for LPADC. */
 #define LPADC_CLOCKS                               \
     {                                              \
