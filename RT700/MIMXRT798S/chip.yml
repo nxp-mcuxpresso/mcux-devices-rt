@@ -18,7 +18,7 @@ device.hardware_data:
             type: "ezhv"
             id: "ezhv"
             description: "RISC-V EZHV core"
-            frequency_mhz: 300
+            frequency_mhz: 325
             boot_role: "secondary"
             slave_role:
               - id: "EZHVSLAVE"
@@ -27,7 +27,7 @@ device.hardware_data:
             type: "dsp"
             id: "hifi1"
             description: "Cadence HiFi1 DSP core"
-            frequency_mhz: 100
+            frequency_mhz: 250
             boot_role: "secondary"
             slave_role:
               - id: "HiFi1SLAVE"
@@ -36,7 +36,7 @@ device.hardware_data:
             type: "dsp"
             id: "hifi4"
             description: "Cadence HiFi4 DSP core"
-            frequency_mhz: 300
+            frequency_mhz: 325
             boot_role: "secondary"
             slave_role:
               - id: "HiFi4SLAVE"
@@ -49,7 +49,7 @@ device.hardware_data:
             dsp: true
             mpu: true
             sau: true
-            frequency_mhz: 300
+            frequency_mhz: 325
             boot_role: "primary"
           - name: "Cortex-M33"
             type: "cm33"
@@ -59,7 +59,7 @@ device.hardware_data:
             dsp: true
             mpu: true
             sau: true
-            frequency_mhz: 100
+            frequency_mhz: 250
             boot_role: "secondary"
             slave_role:
               - id: "M33SLAVE"
