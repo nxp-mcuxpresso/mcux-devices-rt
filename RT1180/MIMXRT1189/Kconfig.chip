@@ -292,6 +292,11 @@ config MCUX_HW_IP_DriverType_NETC
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT1189xxxxx
 
+config MCUX_HW_IP_DriverType_ECAT
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT1189xxxxx
+
 config MCUX_HW_IP_DriverType_NETC_tmr
     bool
     default y
