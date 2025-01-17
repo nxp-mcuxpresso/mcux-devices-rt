@@ -520,4 +520,4 @@ config MCUX_HW_IP_DriverType_XCACHE
 config MCUX_HW_IP_DriverType_SYSCTR
     bool
     default y
-    depends on MCUX_HW_DEVICE_ID_MIMXRT1189xxxxx
+    depends on MCUX_HW_DEVICE_ID_MIMXRT1181xxxxx
