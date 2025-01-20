@@ -1,7 +1,6 @@
 include(../../../RT1180/MIMXRT1189/drivers/CMakeLists_anadig_pmu_1.txt)
 include(../../../RT1180/MIMXRT1189/drivers/CMakeLists_clock.txt)
 include(../../../RT1180/MIMXRT1189/drivers/CMakeLists_dcdc_3.txt)
-include(../../../RT1180/MIMXRT1189/drivers/CMakeLists_ecat.txt)
 include(../../../RT1180/MIMXRT1189/drivers/CMakeLists_edma_soc.txt)
 include(../../../RT1180/MIMXRT1189/drivers/CMakeLists_ele_base_api.txt)
 include(../../../RT1180/MIMXRT1189/drivers/CMakeLists_gpc_3.txt)
