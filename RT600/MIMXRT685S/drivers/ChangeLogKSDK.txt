@@ -1,8 +1,10 @@
 /*!
 @page driver_log Driver Change Log
 @section clock CLOCK
-  The current CLOCK driver version is 2.7.3.
-
+  The current CLOCK driver version is 2.7.4.
+  - 2.7.4
+    - New feature 
+      - Added ESPI clock selection.
   - 2.7.3
     - Improvements
       - Added return value for CLOCK_InitSysPfd CLOCK_InitAudioPfd.
