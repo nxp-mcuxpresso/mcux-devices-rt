@@ -4,11 +4,11 @@
 /*            MIMXRT758S_cm33_core1                                          */
 /*  @version: 2.0                                                            */
 /*  @date:    2024-5-28                                                      */
-/*  @build:   b241121                                                        */
+/*  @build:   b250123                                                        */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Copyright 1997-2016 Freescale Semiconductor, Inc.                         */
-/* Copyright 2016-2024 NXP                                                   */
+/* Copyright 2016-2025 NXP                                                   */
 /* SPDX-License-Identifier: BSD-3-Clause                                     */
 /*****************************************************************************/
 /* Version: GCC for ARM Embedded Processors                                  */
@@ -82,7 +82,7 @@ __Vectors:
     .long   WDT2_IRQHandler                                 /* WDT: Interrupt request*/
     .long   WDT3_IRQHandler                                 /* WDT: Interrupt request*/
     .long   USBPHY0_IRQHandler                              /* HSUSBPHY: UTM interrupt request*/
-    .long   Reserved55_IRQHandler                           /* xxx Interrupt 55*/
+    .long   Reserved55_IRQHandler                           /* Reserved interrupt 55*/
     .long   I3C3_IRQHandler                                 /* I3C: Interrupt Request*/
     .long   FLEXIO_IRQHandler                               /* flexio: Interrupt request*/
     .long   LCDIF_IRQHandler                                /* dcn: Interrupt request*/

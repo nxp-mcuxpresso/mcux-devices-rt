@@ -28,13 +28,13 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241121
+**     Build:               b250124
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for FRO
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -392,7 +392,7 @@ typedef struct {
 
 #define FRO_TRIMCNT_TRIMCNT_MASK                 (0xFFFFFFFFU)
 #define FRO_TRIMCNT_TRIMCNT_SHIFT                (0U)
-/*! TRIMCNT - Trim Expected Count */
+/*! TRIMCNT - Trim Count */
 #define FRO_TRIMCNT_TRIMCNT(x)                   (((uint32_t)(((uint32_t)(x)) << FRO_TRIMCNT_TRIMCNT_SHIFT)) & FRO_TRIMCNT_TRIMCNT_MASK)
 /*! @} */
 

@@ -28,13 +28,13 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241121
+**     Build:               b250124
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for USBPHY
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -1585,7 +1585,7 @@ typedef struct {
  *  0b100..Divide value is 4
  *  0b101..Divide value is 5
  *  0b110..Divide value is 6
- *  0b111..Reserved; do not use
+ *  0b111..Do not use
  */
 #define USBPHY_PLL_SIC_PLL_POSTDIV(x)            (((uint32_t)(((uint32_t)(x)) << USBPHY_PLL_SIC_PLL_POSTDIV_SHIFT)) & USBPHY_PLL_SIC_PLL_POSTDIV_MASK)
 

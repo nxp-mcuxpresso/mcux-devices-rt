@@ -28,13 +28,13 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241121
+**     Build:               b250124
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for I2S
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -431,9 +431,9 @@ typedef struct {
 #define I2S_TCR2_MSEL_SHIFT                      (26U)
 /*! MSEL - MCLK Select
  *  0b00..Bus clock
- *  0b01..Controller clock (MCLK) option 1
- *  0b10..Controller clock (MCLK) option 2
- *  0b11..Controller clock (MCLK) option 3
+ *  0b01..Audio clock (MCLK) option 1
+ *  0b10..Audio clock (MCLK) option 2
+ *  0b11..Audio clock (MCLK) option 3
  */
 #define I2S_TCR2_MSEL(x)                         (((uint32_t)(((uint32_t)(x)) << I2S_TCR2_MSEL_SHIFT)) & I2S_TCR2_MSEL_MASK)
 
@@ -903,9 +903,9 @@ typedef struct {
 #define I2S_RCR2_MSEL_SHIFT                      (26U)
 /*! MSEL - MCLK Select
  *  0b00..Bus clock
- *  0b01..Controller clock (MCLK) option 1
- *  0b10..Controller clock (MCLK) option 2
- *  0b11..Controller clock (MCLK) option 3
+ *  0b01..Audio clock (MCLK) option 1
+ *  0b10..Audio clock (MCLK) option 2
+ *  0b11..Audio clock (MCLK) option 3
  */
 #define I2S_RCR2_MSEL(x)                         (((uint32_t)(((uint32_t)(x)) << I2S_RCR2_MSEL_SHIFT)) & I2S_RCR2_MSEL_MASK)
 
@@ -1197,10 +1197,10 @@ typedef struct {
 #define I2S_MCR_MSEL_MASK                        (0x3000000U)
 #define I2S_MCR_MSEL_SHIFT                       (24U)
 /*! MSEL - MCLK Select
- *  0b00..Controller clock (MCLK) option 1
+ *  0b00..Audio clock (MCLK) option 1
  *  0b01..Reserved
- *  0b10..Controller clock (MCLK) option 2
- *  0b11..Controller clock (MCLK) option 3
+ *  0b10..Audio clock (MCLK) option 2
+ *  0b11..Audio clock (MCLK) option 3
  */
 #define I2S_MCR_MSEL(x)                          (((uint32_t)(((uint32_t)(x)) << I2S_MCR_MSEL_SHIFT)) & I2S_MCR_MSEL_MASK)
 

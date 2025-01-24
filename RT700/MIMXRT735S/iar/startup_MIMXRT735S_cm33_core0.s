@@ -4,11 +4,11 @@
 ;            MIMXRT735S_cm33_core0
 ;  @version: 2.0
 ;  @date:    2024-5-28
-;  @build:   b241121
+;  @build:   b250123
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.
-; Copyright 2016-2024 NXP
+; Copyright 2016-2025 NXP
 ; SPDX-License-Identifier: BSD-3-Clause
 ;
 ; The modules in this file are included in the libraries, and may be replaced
@@ -118,7 +118,7 @@ __vector_table_0x1c
         DCD     WDT1_IRQHandler                               ;WDT: Interrupt request
         DCD     USBPHY0_IRQHandler                            ;HSUSBPHY: UTM interrupt request
         DCD     PUF_IRQHandler                                ;PUF: Interrupt Request
-        DCD     Reserved62_IRQHandler                         ;xxx Interrupt 62
+        DCD     Reserved62_IRQHandler                         ;Reserved interrupt 62
         DCD     LP_FLEXCOMM8_IRQHandler                       ;FLEXCOMM: Interrupt request
         DCD     LP_FLEXCOMM9_IRQHandler                       ;FLEXCOMM: Interrupt request
         DCD     LP_FLEXCOMM10_IRQHandler                      ;FLEXCOMM: Interrupt request

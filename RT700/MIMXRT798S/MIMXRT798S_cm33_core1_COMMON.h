@@ -10,13 +10,13 @@
 **
 **     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241121
+**     Build:               b250123
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT798S_cm33_core1
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -118,6 +118,7 @@ typedef enum IRQn {
   WDT2_IRQn                    = 36,               /**< WDT: Interrupt request */
   WDT3_IRQn                    = 37,               /**< WDT: Interrupt request */
   USBPHY0_IRQn                 = 38,               /**< HSUSBPHY: UTM interrupt request */
+  Reserved55_IRQn              = 39,               /**< Reserved interrupt 55 */
   I3C3_IRQn                    = 40,               /**< I3C: Interrupt Request */
   FLEXIO_IRQn                  = 41,               /**< flexio: Interrupt request */
   LCDIF_IRQn                   = 42,               /**< dcn: Interrupt request */
