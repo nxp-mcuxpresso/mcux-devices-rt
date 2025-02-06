@@ -4,7 +4,7 @@
 
 
     config MCUX_COMPONENT_driver.anatop_ai
-        bool "Use driver anatop_ai"
+        bool "anatop_ai"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.anatop_ai

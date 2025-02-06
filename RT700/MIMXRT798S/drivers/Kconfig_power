@@ -4,5 +4,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
     config MCUX_COMPONENT_driver.power
-         bool "Use driver power"
+         bool "power"
          depends on MCUX_HW_CORE_CM33

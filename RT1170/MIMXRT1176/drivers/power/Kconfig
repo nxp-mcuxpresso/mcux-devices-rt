@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
     config MCUX_COMPONENT_driver.dcdc_2
-        bool "Use driver dcdc"
+        bool "dcdc"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.dcdc_2
@@ -11,7 +11,7 @@
         endif
 
     config MCUX_COMPONENT_driver.gpc_xxx_ctrl
-        bool "Use driver gpc"
+        bool "gpc"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.gpc_xxx_ctrl
@@ -19,7 +19,7 @@
         endif
 
     config MCUX_COMPONENT_driver.pgmc
-        bool "Use driver pgmc"
+        bool "pgmc"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.pgmc
@@ -27,7 +27,7 @@
         endif
 
     config MCUX_COMPONENT_driver.anadig_pmu
-        bool "Use driver pmu"
+        bool "pmu"
         # select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.anadig_pmu
@@ -35,7 +35,7 @@
         endif
 
     config MCUX_COMPONENT_driver.src_2
-        bool "Use driver src"
+        bool "src"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.src_2

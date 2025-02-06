@@ -4,5 +4,5 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
     config MCUX_COMPONENT_driver.iopctl_soc
-         bool "Use driver iopctl"
+         bool "iopctl"
          default y

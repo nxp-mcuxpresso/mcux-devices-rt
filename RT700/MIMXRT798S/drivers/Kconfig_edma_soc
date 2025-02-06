@@ -4,4 +4,4 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
     config MCUX_COMPONENT_driver.edma_soc
-         bool "Use driver edma_soc"
+         bool "edma_soc"

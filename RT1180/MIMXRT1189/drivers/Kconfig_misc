@@ -4,7 +4,7 @@
 
 
     config MCUX_COMPONENT_driver.misc
-        bool "Use driver misc"
+        bool "misc"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.misc

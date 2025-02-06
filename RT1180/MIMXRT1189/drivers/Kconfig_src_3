@@ -4,7 +4,7 @@
 
 
     config MCUX_COMPONENT_driver.src_3
-        bool "Use driver src"
+        bool "src"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.src_3

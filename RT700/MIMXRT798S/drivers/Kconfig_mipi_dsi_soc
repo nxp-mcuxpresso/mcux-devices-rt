@@ -4,4 +4,4 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
     config MCUX_COMPONENT_driver.mipi_dsi_soc
-         bool "Use driver mipi_dsi_soc"
+         bool "mipi_dsi_soc"

@@ -4,7 +4,7 @@
 
 
     config MCUX_COMPONENT_driver.flexram_allocate
-        bool "Use driver flexram_allocate"
+        bool "flexram_allocate"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.flexram_allocate

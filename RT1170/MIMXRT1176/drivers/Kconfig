@@ -4,7 +4,7 @@
 
 menu "Device specific drivers"
     config MCUX_COMPONENT_driver.clock
-        bool "Use driver clock"
+        bool "clock"
         # select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.clock
@@ -12,7 +12,7 @@ menu "Device specific drivers"
         endif
 
     config MCUX_COMPONENT_driver.iomuxc
-        bool "Use driver iomuxc"
+        bool "iomuxc"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.iomuxc
@@ -20,7 +20,7 @@ menu "Device specific drivers"
         endif
 
     config MCUX_COMPONENT_driver.mipi_csi2rx_soc
-        bool "Use driver mipi csi2rx"
+        bool "mipi csi2rx"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.mipi_csi2rx_soc
@@ -28,7 +28,7 @@ menu "Device specific drivers"
         endif
 
     config MCUX_COMPONENT_driver.mipi_dsi_soc
-        bool "Use driver mipi dsi"
+        bool "mipi dsi"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.mipi_dsi_soc

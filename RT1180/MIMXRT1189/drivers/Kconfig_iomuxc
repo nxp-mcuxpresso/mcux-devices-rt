@@ -4,7 +4,7 @@
 
 
     config MCUX_COMPONENT_driver.iomuxc
-        bool "Use driver iomuxc"
+        bool "iomuxc"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.iomuxc

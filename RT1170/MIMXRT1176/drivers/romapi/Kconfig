@@ -4,7 +4,7 @@
 
 
     config MCUX_COMPONENT_driver.romapi
-        bool "Use driver ROM API"
+        bool "ROM API"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.romapi

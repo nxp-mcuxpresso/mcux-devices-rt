@@ -4,7 +4,7 @@
 
 
     config MCUX_COMPONENT_driver.dcdc_3
-        bool "Use driver dcdc"
+        bool "dcdc"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.dcdc_3

@@ -4,7 +4,7 @@
 
 
     config MCUX_COMPONENT_driver.gpc_3
-        bool "Use driver gpc"
+        bool "gpc"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.gpc_3

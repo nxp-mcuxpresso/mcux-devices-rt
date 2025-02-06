@@ -4,4 +4,4 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
     config MCUX_COMPONENT_driver.inputmux_connections
-         bool "Use driver inputmux_connections"
+         bool "inputmux_connections"

@@ -4,7 +4,7 @@
 
 
     config MCUX_COMPONENT_driver.nic301
-        bool "Use driver nic301"
+        bool "nic301"
         select MCUX_COMPONENT_driver.common
 
         if MCUX_COMPONENT_driver.nic301
