@@ -19,28 +19,28 @@ config MCUX_HW_DEVICE_ID_MIMXRT1021xxxxx
 choice MCUX_HW_DEVICE_PART_MIMXRT1021
     prompt "Device MIMXRT1021 Part"
     config MCUX_HW_DEVICE_PART_MIMXRT1021DAG5A
-        bool "Device part MIMXRT1021DAG5A"
+        bool "MIMXRT1021DAG5A"
         select MCUX_HW_DEVICE_ID_MIMXRT1021xxxxx
     config MCUX_HW_DEVICE_PART_MIMXRT1021CAF4A
-        bool "Device part MIMXRT1021CAF4A"
+        bool "MIMXRT1021CAF4A"
         select MCUX_HW_DEVICE_ID_MIMXRT1021xxxxx
     config MCUX_HW_DEVICE_PART_MIMXRT1021CAG4A
-        bool "Device part MIMXRT1021CAG4A"
+        bool "MIMXRT1021CAG4A"
         select MCUX_HW_DEVICE_ID_MIMXRT1021xxxxx
     config MCUX_HW_DEVICE_PART_MIMXRT1021DAF5A
-        bool "Device part MIMXRT1021DAF5A"
+        bool "MIMXRT1021DAF5A"
         select MCUX_HW_DEVICE_ID_MIMXRT1021xxxxx
     config MCUX_HW_DEVICE_PART_MIMXRT1021DAG5B
-        bool "Device part MIMXRT1021DAG5B"
+        bool "MIMXRT1021DAG5B"
         select MCUX_HW_DEVICE_ID_MIMXRT1021xxxxx
     config MCUX_HW_DEVICE_PART_MIMXRT1021CAF4B
-        bool "Device part MIMXRT1021CAF4B"
+        bool "MIMXRT1021CAF4B"
         select MCUX_HW_DEVICE_ID_MIMXRT1021xxxxx
     config MCUX_HW_DEVICE_PART_MIMXRT1021CAG4B
-        bool "Device part MIMXRT1021CAG4B"
+        bool "MIMXRT1021CAG4B"
         select MCUX_HW_DEVICE_ID_MIMXRT1021xxxxx
     config MCUX_HW_DEVICE_PART_MIMXRT1021DAF5B
-        bool "Device part MIMXRT1021DAF5B"
+        bool "MIMXRT1021DAF5B"
         select MCUX_HW_DEVICE_ID_MIMXRT1021xxxxx
 endchoice
 

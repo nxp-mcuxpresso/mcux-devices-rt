@@ -19,16 +19,16 @@ config MCUX_HW_DEVICE_ID_MIMXRT1041xxxxB
 choice MCUX_HW_DEVICE_PART_MIMXRT1041
     prompt "Device MIMXRT1041 Part"
     config MCUX_HW_DEVICE_PART_MIMXRT1041XFP5B
-        bool "Device part MIMXRT1041XFP5B"
+        bool "MIMXRT1041XFP5B"
         select MCUX_HW_DEVICE_ID_MIMXRT1041xxxxB
     config MCUX_HW_DEVICE_PART_MIMXRT1041XJM5B
-        bool "Device part MIMXRT1041XJM5B"
+        bool "MIMXRT1041XJM5B"
         select MCUX_HW_DEVICE_ID_MIMXRT1041xxxxB
     config MCUX_HW_DEVICE_PART_MIMXRT1041DJM6B
-        bool "Device part MIMXRT1041DJM6B"
+        bool "MIMXRT1041DJM6B"
         select MCUX_HW_DEVICE_ID_MIMXRT1041xxxxB
     config MCUX_HW_DEVICE_PART_MIMXRT1041DFP6B
-        bool "Device part MIMXRT1041DFP6B"
+        bool "MIMXRT1041DFP6B"
         select MCUX_HW_DEVICE_ID_MIMXRT1041xxxxB
 endchoice
 

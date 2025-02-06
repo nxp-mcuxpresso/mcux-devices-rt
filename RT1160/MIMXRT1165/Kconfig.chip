@@ -19,13 +19,13 @@ config MCUX_HW_DEVICE_ID_MIMXRT1165xxxxx
 choice MCUX_HW_DEVICE_PART_MIMXRT1165
     prompt "Device MIMXRT1165 Part"
     config MCUX_HW_DEVICE_PART_MIMXRT1165DVM6A
-        bool "Device part MIMXRT1165DVM6A"
+        bool "MIMXRT1165DVM6A"
         select MCUX_HW_DEVICE_ID_MIMXRT1165xxxxx
     config MCUX_HW_DEVICE_PART_MIMXRT1165CVM5A
-        bool "Device part MIMXRT1165CVM5A"
+        bool "MIMXRT1165CVM5A"
         select MCUX_HW_DEVICE_ID_MIMXRT1165xxxxx
     config MCUX_HW_DEVICE_PART_MIMXRT1165XVM5A
-        bool "Device part MIMXRT1165XVM5A"
+        bool "MIMXRT1165XVM5A"
         select MCUX_HW_DEVICE_ID_MIMXRT1165xxxxx
 endchoice
 

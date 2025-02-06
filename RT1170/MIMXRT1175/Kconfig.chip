@@ -19,13 +19,13 @@ config MCUX_HW_DEVICE_ID_MIMXRT1175xxxxx
 choice MCUX_HW_DEVICE_PART_MIMXRT1175
     prompt "Device MIMXRT1175 Part"
     config MCUX_HW_DEVICE_PART_MIMXRT1175DVMAA
-        bool "Device part MIMXRT1175DVMAA"
+        bool "MIMXRT1175DVMAA"
         select MCUX_HW_DEVICE_ID_MIMXRT1175xxxxx
     config MCUX_HW_DEVICE_PART_MIMXRT1175AVM8A
-        bool "Device part MIMXRT1175AVM8A"
+        bool "MIMXRT1175AVM8A"
         select MCUX_HW_DEVICE_ID_MIMXRT1175xxxxx
     config MCUX_HW_DEVICE_PART_MIMXRT1175CVM8A
-        bool "Device part MIMXRT1175CVM8A"
+        bool "MIMXRT1175CVM8A"
         select MCUX_HW_DEVICE_ID_MIMXRT1175xxxxx
 endchoice
 

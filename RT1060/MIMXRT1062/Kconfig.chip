@@ -22,34 +22,34 @@ config MCUX_HW_DEVICE_ID_MIMXRT1062xxxxB
 choice MCUX_HW_DEVICE_PART_MIMXRT1062
     prompt "Device MIMXRT1062 Part"
     config MCUX_HW_DEVICE_PART_MIMXRT1062DVL6A
-        bool "Device part MIMXRT1062DVL6A"
+        bool "MIMXRT1062DVL6A"
         select MCUX_HW_DEVICE_ID_MIMXRT1062xxxxA
     config MCUX_HW_DEVICE_PART_MIMXRT1062CVL5A
-        bool "Device part MIMXRT1062CVL5A"
+        bool "MIMXRT1062CVL5A"
         select MCUX_HW_DEVICE_ID_MIMXRT1062xxxxA
     config MCUX_HW_DEVICE_PART_MIMXRT1062CVJ5A
-        bool "Device part MIMXRT1062CVJ5A"
+        bool "MIMXRT1062CVJ5A"
         select MCUX_HW_DEVICE_ID_MIMXRT1062xxxxA
     config MCUX_HW_DEVICE_PART_MIMXRT1062DVJ6A
-        bool "Device part MIMXRT1062DVJ6A"
+        bool "MIMXRT1062DVJ6A"
         select MCUX_HW_DEVICE_ID_MIMXRT1062xxxxA
     config MCUX_HW_DEVICE_PART_MIMXRT1062DVL6B
-        bool "Device part MIMXRT1062DVL6B"
+        bool "MIMXRT1062DVL6B"
         select MCUX_HW_DEVICE_ID_MIMXRT1062xxxxB
     config MCUX_HW_DEVICE_PART_MIMXRT1062CVL5B
-        bool "Device part MIMXRT1062CVL5B"
+        bool "MIMXRT1062CVL5B"
         select MCUX_HW_DEVICE_ID_MIMXRT1062xxxxB
     config MCUX_HW_DEVICE_PART_MIMXRT1062CVJ5B
-        bool "Device part MIMXRT1062CVJ5B"
+        bool "MIMXRT1062CVJ5B"
         select MCUX_HW_DEVICE_ID_MIMXRT1062xxxxB
     config MCUX_HW_DEVICE_PART_MIMXRT1062DVJ6B
-        bool "Device part MIMXRT1062DVJ6B"
+        bool "MIMXRT1062DVJ6B"
         select MCUX_HW_DEVICE_ID_MIMXRT1062xxxxB
     config MCUX_HW_DEVICE_PART_MIMXRT1062DVN6B
-        bool "Device part MIMXRT1062DVN6B"
+        bool "MIMXRT1062DVN6B"
         select MCUX_HW_DEVICE_ID_MIMXRT1062xxxxB
     config MCUX_HW_DEVICE_PART_MIMXRT1062XVN5B
-        bool "Device part MIMXRT1062XVN5B"
+        bool "MIMXRT1062XVN5B"
         select MCUX_HW_DEVICE_ID_MIMXRT1062xxxxB
 endchoice
 
