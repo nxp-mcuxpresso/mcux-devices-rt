@@ -3,15 +3,16 @@
 **     Processors:          MIMXRT685SFAWBR_cm33
 **                          MIMXRT685SFFOB_cm33
 **                          MIMXRT685SFVKB_cm33
+**                          MIMXRT685SVFVKB_cm33
 **
 **     Compilers:           GNU C Compiler
 **                          IAR ANSI C/C++ Compiler for ARM
 **                          Keil ARM C/C++ Compiler
 **                          MCUXpresso Compiler
 **
-**     Reference manual:    MIMXRT685 User manual Rev. 0.95 11 November 2019
+**     Reference manual:    MIMXRT685 User manual Rev. 1.8 21 November 2024
 **     Version:             rev. 2.0, 2019-11-12
-**     Build:               b240823
+**     Build:               b250210
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -19,7 +20,7 @@
 **         the oscillator (PLL) that is part of the microcontroller device.
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com

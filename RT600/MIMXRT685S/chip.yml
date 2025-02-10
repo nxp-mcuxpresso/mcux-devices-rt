@@ -141,4 +141,5 @@ device.hardware_data:
       - name: MIMXRT685SFVKB
       - name: MIMXRT685SFFOB
       - name: MIMXRT685SFAWBR
+      - name: MIMXRT685SVFVKB
       modules:

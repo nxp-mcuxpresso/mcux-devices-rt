@@ -3,17 +3,18 @@
 **     Processors:          MIMXRT685SFAWBR_dsp
 **                          MIMXRT685SFFOB_dsp
 **                          MIMXRT685SFVKB_dsp
+**                          MIMXRT685SVFVKB_dsp
 **
 **     Compiler:            Xtensa Compiler
-**     Reference manual:    MIMXRT685 User manual Rev. 0.95 11 November 2019
+**     Reference manual:    MIMXRT685 User manual Rev. 1.8 21 November 2024
 **     Version:             rev. 2.0, 2019-11-12
-**     Build:               b240705
+**     Build:               b250210
 **
 **     Abstract:
 **         Peripheral Access Layer for MIMXRT685S_dsp
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -51,6 +52,7 @@
 #include "PERI_CTIMER.h"
 #include "PERI_DMA.h"
 #include "PERI_DMIC.h"
+#include "PERI_ESPI.h"
 #include "PERI_FLEXCOMM.h"
 #include "PERI_FLEXSPI.h"
 #include "PERI_FREQME.h"
