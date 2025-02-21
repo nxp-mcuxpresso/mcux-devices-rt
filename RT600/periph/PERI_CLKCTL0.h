@@ -13,7 +13,7 @@
 **                          MIMXRT685SVFVKB_dsp
 **
 **     Version:             rev. 2.0, 2019-11-12
-**     Build:               b250210
+**     Build:               b250221
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CLKCTL0
@@ -160,7 +160,7 @@ typedef struct {
   __IO uint32_t SDIO1FCLKSEL;                      /**< SDIO1 FCLK selection, offset: 0x690 */
   __IO uint32_t SDIO1FCLKDIV;                      /**< SDIO1 FCLK divider, offset: 0x694 */
        uint8_t RESERVED_19[8];
-  __IO uint32_t ESPICLKSEL;                        /**< ESPI clock selection, offset: 0x6A0 */
+  __IO uint32_t ESPIFCLKSEL0;                      /**< ESPI clock selection, offset: 0x6A0 */
        uint8_t RESERVED_20[44];
   __IO uint32_t ADC0FCLKSEL0;                      /**< ADC0 fclk selection 0, offset: 0x6D0 */
   __IO uint32_t ADC0FCLKSEL1;                      /**< ADC0 fclk selection 1, offset: 0x6D4 */
@@ -1379,18 +1379,22 @@ typedef struct {
 #define CLKCTL0_SDIO1FCLKDIV_REQFLAG(x)          (((uint32_t)(((uint32_t)(x)) << CLKCTL0_SDIO1FCLKDIV_REQFLAG_SHIFT)) & CLKCTL0_SDIO1FCLKDIV_REQFLAG_MASK)
 /*! @} */
 
-/*! @name ESPICLKSEL - ESPI clock selection */
+/*! @name ESPIFCLKSEL0 - ESPI clock selection */
 /*! @{ */
 
-#define CLKCTL0_ESPICLKSEL_SEL_MASK              (0x7U)
-#define CLKCTL0_ESPICLKSEL_SEL_SHIFT             (0U)
-/*! SEL
- *  0b000..Use 48/60m_irc clock
- *  0b001..RESERVED
- *  0b010..reserved
- *  0b011..clock gated
+#define CLKCTL0_ESPIFCLKSEL0_SEL_MASK            (0x7U)
+#define CLKCTL0_ESPIFCLKSEL0_SEL_SHIFT           (0U)
+/*! SEL - eSPI Functional Clock Source Selection.
+ *  0b000..FFRO Clock (48/60m_irc).
+ *  0b001..Reserved.
+ *  0b010..Reserved.
+ *  0b011..Reserved.
+ *  0b100..Reserved.
+ *  0b101..Reserved.
+ *  0b110..Reserved.
+ *  0b111..None, this may be selected in order to reduce power when no output is needed.
  */
-#define CLKCTL0_ESPICLKSEL_SEL(x)                (((uint32_t)(((uint32_t)(x)) << CLKCTL0_ESPICLKSEL_SEL_SHIFT)) & CLKCTL0_ESPICLKSEL_SEL_MASK)
+#define CLKCTL0_ESPIFCLKSEL0_SEL(x)              (((uint32_t)(((uint32_t)(x)) << CLKCTL0_ESPIFCLKSEL0_SEL_SHIFT)) & CLKCTL0_ESPIFCLKSEL0_SEL_MASK)
 /*! @} */
 
 /*! @name ADC0FCLKSEL0 - ADC0 fclk selection 0 */
