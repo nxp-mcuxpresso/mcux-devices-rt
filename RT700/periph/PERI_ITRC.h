@@ -28,13 +28,13 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241121
+**     Build:               b250225
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for ITRC
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -692,15 +692,10 @@ typedef struct {
 /*! IN37_SELn - Selects GLIKEY error as a trigger source. */
 #define ITRC_OUT_SEL_2_IN37_SELn(x)              (((uint32_t)(((uint32_t)(x)) << ITRC_OUT_SEL_2_IN37_SELn_SHIFT)) & ITRC_OUT_SEL_2_IN37_SELn_MASK)
 
-#define ITRC_OUT_SEL_2_IN38_SEL0_MASK            (0x3000U)
-#define ITRC_OUT_SEL_2_IN38_SEL0_SHIFT           (12U)
-/*! IN38_SEL0 - Selects XSPI1 GCM error as a trigger source. */
-#define ITRC_OUT_SEL_2_IN38_SEL0(x)              (((uint32_t)(((uint32_t)(x)) << ITRC_OUT_SEL_2_IN38_SEL0_SHIFT)) & ITRC_OUT_SEL_2_IN38_SEL0_MASK)
-
-#define ITRC_OUT_SEL_2_IN38_SEL1_MASK            (0x3000U)
-#define ITRC_OUT_SEL_2_IN38_SEL1_SHIFT           (12U)
-/*! IN38_SEL1 - Selects XSPI1 GCM error as a trigger source. */
-#define ITRC_OUT_SEL_2_IN38_SEL1(x)              (((uint32_t)(((uint32_t)(x)) << ITRC_OUT_SEL_2_IN38_SEL1_SHIFT)) & ITRC_OUT_SEL_2_IN38_SEL1_MASK)
+#define ITRC_OUT_SEL_2_IN38_SELn_MASK            (0x3000U)
+#define ITRC_OUT_SEL_2_IN38_SELn_SHIFT           (12U)
+/*! IN38_SELn - Selects XSPI1 GCM error as a trigger source. */
+#define ITRC_OUT_SEL_2_IN38_SELn(x)              (((uint32_t)(((uint32_t)(x)) << ITRC_OUT_SEL_2_IN38_SELn_SHIFT)) & ITRC_OUT_SEL_2_IN38_SELn_MASK)
 
 #define ITRC_OUT_SEL_2_IN47_SELn_MASK            (0xC0000000U)
 #define ITRC_OUT_SEL_2_IN47_SELn_SHIFT           (30U)
