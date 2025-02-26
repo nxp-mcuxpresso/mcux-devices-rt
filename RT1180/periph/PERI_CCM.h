@@ -1,28 +1,46 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT1181CVP2B
+**                          MIMXRT1181CVP2C
 **                          MIMXRT1181XVP2B
+**                          MIMXRT1181XVP2C
 **                          MIMXRT1182CVP2B
+**                          MIMXRT1182CVP2C
 **                          MIMXRT1182XVP2B
+**                          MIMXRT1182XVP2C
+**                          MIMXRT1186CVJ8C_cm33
+**                          MIMXRT1186CVJ8C_cm7
+**                          MIMXRT1186XVJ8C_cm33
+**                          MIMXRT1186XVJ8C_cm7
 **                          MIMXRT1187AVM8B_cm33
 **                          MIMXRT1187AVM8B_cm7
+**                          MIMXRT1187AVM8C_cm33
+**                          MIMXRT1187AVM8C_cm7
 **                          MIMXRT1187CVM8B_cm33
 **                          MIMXRT1187CVM8B_cm7
+**                          MIMXRT1187CVM8C_cm33
+**                          MIMXRT1187CVM8C_cm7
 **                          MIMXRT1187XVM8B_cm33
 **                          MIMXRT1187XVM8B_cm7
+**                          MIMXRT1187XVM8C_cm33
+**                          MIMXRT1187XVM8C_cm7
 **                          MIMXRT1189CVM8B_cm33
 **                          MIMXRT1189CVM8B_cm7
+**                          MIMXRT1189CVM8C_cm33
+**                          MIMXRT1189CVM8C_cm7
 **                          MIMXRT1189XVM8B_cm33
 **                          MIMXRT1189XVM8B_cm7
+**                          MIMXRT1189XVM8C_cm33
+**                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b240705
+**     Build:               b250310
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CCM
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -49,17 +67,21 @@
 #if !defined(CCM_H_)
 #define CCM_H_                                   /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181XVP2B))
+#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181CVP2C) || defined(CPU_MIMXRT1181XVP2B) || defined(CPU_MIMXRT1181XVP2C))
 #include "MIMXRT1181_COMMON.h"
-#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182XVP2B))
+#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182CVP2C) || defined(CPU_MIMXRT1182XVP2B) || defined(CPU_MIMXRT1182XVP2C))
 #include "MIMXRT1182_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33))
+#elif (defined(CPU_MIMXRT1186CVJ8C_cm33) || defined(CPU_MIMXRT1186XVJ8C_cm33))
+#include "MIMXRT1186_cm33_COMMON.h"
+#elif (defined(CPU_MIMXRT1186CVJ8C_cm7) || defined(CPU_MIMXRT1186XVJ8C_cm7))
+#include "MIMXRT1186_cm7_COMMON.h"
+#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187AVM8C_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187CVM8C_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33) || defined(CPU_MIMXRT1187XVM8C_cm33))
 #include "MIMXRT1187_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7))
+#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187AVM8C_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187CVM8C_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7) || defined(CPU_MIMXRT1187XVM8C_cm7))
 #include "MIMXRT1187_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189CVM8C_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33) || defined(CPU_MIMXRT1189XVM8C_cm33))
 #include "MIMXRT1189_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189CVM8C_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7) || defined(CPU_MIMXRT1189XVM8C_cm7))
 #include "MIMXRT1189_cm7_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -345,9 +367,9 @@ typedef struct {
 #define CCM_CLOCK_ROOT_CONTROL_MUX_MASK          (0x300U)
 #define CCM_CLOCK_ROOT_CONTROL_MUX_SHIFT         (8U)
 /*! MUX - Clock multiplexer.
- *  0b10..Select clock source 2
  *  0b00..Select clock source 0
  *  0b01..Select clock source 1
+ *  0b10..Select clock source 2
  *  0b11..Select clock source 3
  */
 #define CCM_CLOCK_ROOT_CONTROL_MUX(x)            (((uint32_t)(((uint32_t)(x)) << CCM_CLOCK_ROOT_CONTROL_MUX_SHIFT)) & CCM_CLOCK_ROOT_CONTROL_MUX_MASK)
@@ -485,8 +507,8 @@ typedef struct {
 #define CCM_CLOCK_ROOT_AUTHEN_TZ_USER_MASK       (0x100U)
 #define CCM_CLOCK_ROOT_AUTHEN_TZ_USER_SHIFT      (8U)
 /*! TZ_USER - User access permission
- *  0b1..Clock Root settings can be changed in user mode.
  *  0b0..Clock Root settings cannot be changed in user mode.
+ *  0b1..Clock Root settings can be changed in user mode.
  */
 #define CCM_CLOCK_ROOT_AUTHEN_TZ_USER(x)         (((uint32_t)(((uint32_t)(x)) << CCM_CLOCK_ROOT_AUTHEN_TZ_USER_SHIFT)) & CCM_CLOCK_ROOT_AUTHEN_TZ_USER_MASK)
 
@@ -707,8 +729,8 @@ typedef struct {
 #define CCM_OBSERVE_STATUS_RESET_MASK            (0x8000U)
 #define CCM_OBSERVE_STATUS_RESET_SHIFT           (15U)
 /*! RESET - Reset state
- *  0b1..Observe divider is in reset state
  *  0b0..Observe divider is not in reset state
+ *  0b1..Observe divider is in reset state
  */
 #define CCM_OBSERVE_STATUS_RESET(x)              (((uint32_t)(((uint32_t)(x)) << CCM_OBSERVE_STATUS_RESET_SHIFT)) & CCM_OBSERVE_STATUS_RESET_MASK)
 
@@ -736,8 +758,8 @@ typedef struct {
 #define CCM_OBSERVE_STATUS_BUSY_MASK             (0x10000000U)
 #define CCM_OBSERVE_STATUS_BUSY_SHIFT            (28U)
 /*! BUSY - Busy
- *  0b1..Current observe is busy
  *  0b0..Current observe is not busy
+ *  0b1..Current observe is busy
  */
 #define CCM_OBSERVE_STATUS_BUSY(x)               (((uint32_t)(((uint32_t)(x)) << CCM_OBSERVE_STATUS_BUSY_SHIFT)) & CCM_OBSERVE_STATUS_BUSY_MASK)
 
@@ -761,8 +783,8 @@ typedef struct {
 #define CCM_OBSERVE_AUTHEN_TZ_USER_MASK          (0x100U)
 #define CCM_OBSERVE_AUTHEN_TZ_USER_SHIFT         (8U)
 /*! TZ_USER - User access permission
- *  0b1..Observe slice settings can be changed in user mode.
  *  0b0..Observe slice settings cannot be changed in user mode.
+ *  0b1..Observe slice settings can be changed in user mode.
  */
 #define CCM_OBSERVE_AUTHEN_TZ_USER(x)            (((uint32_t)(((uint32_t)(x)) << CCM_OBSERVE_AUTHEN_TZ_USER_SHIFT)) & CCM_OBSERVE_AUTHEN_TZ_USER_MASK)
 
@@ -793,12 +815,12 @@ typedef struct {
 #define CCM_OBSERVE_AUTHEN_WHITE_LIST_MASK       (0xFFFF0000U)
 #define CCM_OBSERVE_AUTHEN_WHITE_LIST_SHIFT      (16U)
 /*! WHITE_LIST - Whitelist settings
- *  0b0000000000001111..All domain can change.
+ *  0b0000000000000000..No domain can change.
+ *  0b0000000000000001..Domain 0 can change.
  *  0b0000000000000010..Domain 1 can change.
  *  0b0000000000000011..Domain 0 and domain 1 can change.
- *  0b0000000000000000..No domain can change.
  *  0b0000000000000100..Domain 2 can change.
- *  0b0000000000000001..Domain 0 can change.
+ *  0b0000000000001111..All domain can change.
  */
 #define CCM_OBSERVE_AUTHEN_WHITE_LIST(x)         (((uint32_t)(((uint32_t)(x)) << CCM_OBSERVE_AUTHEN_WHITE_LIST_SHIFT)) & CCM_OBSERVE_AUTHEN_WHITE_LIST_MASK)
 /*! @} */
@@ -1052,8 +1074,8 @@ typedef struct {
 #define CCM_GPR_SHARED0_AUTHEN_TZ_USER_MASK      (0x100U)
 #define CCM_GPR_SHARED0_AUTHEN_TZ_USER_SHIFT     (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED0_AUTHEN_TZ_USER(x)        (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED0_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED0_AUTHEN_TZ_USER_MASK)
 
@@ -1180,8 +1202,8 @@ typedef struct {
 #define CCM_GPR_SHARED1_AUTHEN_TZ_USER_MASK      (0x100U)
 #define CCM_GPR_SHARED1_AUTHEN_TZ_USER_SHIFT     (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED1_AUTHEN_TZ_USER(x)        (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED1_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED1_AUTHEN_TZ_USER_MASK)
 
@@ -1904,8 +1926,8 @@ typedef struct {
 #define CCM_GPR_SHARED2_AUTHEN_TZ_USER_MASK      (0x100U)
 #define CCM_GPR_SHARED2_AUTHEN_TZ_USER_SHIFT     (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED2_AUTHEN_TZ_USER(x)        (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED2_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED2_AUTHEN_TZ_USER_MASK)
 
@@ -2688,8 +2710,8 @@ typedef struct {
 #define CCM_GPR_SHARED3_AUTHEN_TZ_USER_MASK      (0x100U)
 #define CCM_GPR_SHARED3_AUTHEN_TZ_USER_SHIFT     (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED3_AUTHEN_TZ_USER(x)        (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED3_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED3_AUTHEN_TZ_USER_MASK)
 
@@ -2952,8 +2974,8 @@ typedef struct {
 #define CCM_GPR_SHARED4_AUTHEN_TZ_USER_MASK      (0x100U)
 #define CCM_GPR_SHARED4_AUTHEN_TZ_USER_SHIFT     (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED4_AUTHEN_TZ_USER(x)        (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED4_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED4_AUTHEN_TZ_USER_MASK)
 
@@ -3676,8 +3698,8 @@ typedef struct {
 #define CCM_GPR_SHARED5_AUTHEN_TZ_USER_MASK      (0x100U)
 #define CCM_GPR_SHARED5_AUTHEN_TZ_USER_SHIFT     (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED5_AUTHEN_TZ_USER(x)        (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED5_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED5_AUTHEN_TZ_USER_MASK)
 
@@ -4460,8 +4482,8 @@ typedef struct {
 #define CCM_GPR_SHARED6_AUTHEN_TZ_USER_MASK      (0x100U)
 #define CCM_GPR_SHARED6_AUTHEN_TZ_USER_SHIFT     (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED6_AUTHEN_TZ_USER(x)        (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED6_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED6_AUTHEN_TZ_USER_MASK)
 
@@ -4724,8 +4746,8 @@ typedef struct {
 #define CCM_GPR_SHARED7_AUTHEN_TZ_USER_MASK      (0x100U)
 #define CCM_GPR_SHARED7_AUTHEN_TZ_USER_SHIFT     (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED7_AUTHEN_TZ_USER(x)        (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED7_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED7_AUTHEN_TZ_USER_MASK)
 
@@ -5448,8 +5470,8 @@ typedef struct {
 #define CCM_GPR_SHARED8_AUTHEN_TZ_USER_MASK      (0x100U)
 #define CCM_GPR_SHARED8_AUTHEN_TZ_USER_SHIFT     (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED8_AUTHEN_TZ_USER(x)        (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED8_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED8_AUTHEN_TZ_USER_MASK)
 
@@ -6132,8 +6154,8 @@ typedef struct {
 #define CCM_GPR_SHARED9_AUTHEN_TZ_USER_MASK      (0x100U)
 #define CCM_GPR_SHARED9_AUTHEN_TZ_USER_SHIFT     (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED9_AUTHEN_TZ_USER(x)        (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED9_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED9_AUTHEN_TZ_USER_MASK)
 
@@ -6916,8 +6938,8 @@ typedef struct {
 #define CCM_GPR_SHARED10_AUTHEN_TZ_USER_MASK     (0x100U)
 #define CCM_GPR_SHARED10_AUTHEN_TZ_USER_SHIFT    (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED10_AUTHEN_TZ_USER(x)       (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED10_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED10_AUTHEN_TZ_USER_MASK)
 
@@ -7380,8 +7402,8 @@ typedef struct {
 #define CCM_GPR_SHARED11_AUTHEN_TZ_USER_MASK     (0x100U)
 #define CCM_GPR_SHARED11_AUTHEN_TZ_USER_SHIFT    (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED11_AUTHEN_TZ_USER(x)       (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED11_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED11_AUTHEN_TZ_USER_MASK)
 
@@ -8104,8 +8126,8 @@ typedef struct {
 #define CCM_GPR_SHARED12_AUTHEN_TZ_USER_MASK     (0x100U)
 #define CCM_GPR_SHARED12_AUTHEN_TZ_USER_SHIFT    (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED12_AUTHEN_TZ_USER(x)       (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED12_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED12_AUTHEN_TZ_USER_MASK)
 
@@ -8788,8 +8810,8 @@ typedef struct {
 #define CCM_GPR_SHARED13_AUTHEN_TZ_USER_MASK     (0x100U)
 #define CCM_GPR_SHARED13_AUTHEN_TZ_USER_SHIFT    (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED13_AUTHEN_TZ_USER(x)       (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED13_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED13_AUTHEN_TZ_USER_MASK)
 
@@ -9572,8 +9594,8 @@ typedef struct {
 #define CCM_GPR_SHARED14_AUTHEN_TZ_USER_MASK     (0x100U)
 #define CCM_GPR_SHARED14_AUTHEN_TZ_USER_SHIFT    (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED14_AUTHEN_TZ_USER(x)       (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED14_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED14_AUTHEN_TZ_USER_MASK)
 
@@ -10036,8 +10058,8 @@ typedef struct {
 #define CCM_GPR_SHARED15_AUTHEN_TZ_USER_MASK     (0x100U)
 #define CCM_GPR_SHARED15_AUTHEN_TZ_USER_SHIFT    (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of shared GPR slice can be changed in user mode.
  *  0b0..Registers of shared GPR slice cannot be changed in user mode.
+ *  0b1..Registers of shared GPR slice can be changed in user mode.
  */
 #define CCM_GPR_SHARED15_AUTHEN_TZ_USER(x)       (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED15_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_SHARED15_AUTHEN_TZ_USER_MASK)
 
@@ -10218,8 +10240,8 @@ typedef struct {
 #define CCM_GPR_PRIVATE_AUTHEN_TZ_USER_MASK      (0x100U)
 #define CCM_GPR_PRIVATE_AUTHEN_TZ_USER_SHIFT     (8U)
 /*! TZ_USER - User access permission
- *  0b1..Registers of private GPR can be changed in user mode.
  *  0b0..Registers of private GPR cannot be changed in user mode.
+ *  0b1..Registers of private GPR can be changed in user mode.
  */
 #define CCM_GPR_PRIVATE_AUTHEN_TZ_USER(x)        (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE_AUTHEN_TZ_USER_SHIFT)) & CCM_GPR_PRIVATE_AUTHEN_TZ_USER_MASK)
 
@@ -10636,8 +10658,8 @@ typedef struct {
 #define CCM_OSCPLL_AUTHEN_TZ_USER_MASK           (0x100U)
 #define CCM_OSCPLL_AUTHEN_TZ_USER_SHIFT          (8U)
 /*! TZ_USER - User access permission
- *  0b1..Clock Source settings can be changed in user mode.
  *  0b0..Clock Source settings cannot be changed in user mode.
+ *  0b1..Clock Source settings can be changed in user mode.
  */
 #define CCM_OSCPLL_AUTHEN_TZ_USER(x)             (((uint32_t)(((uint32_t)(x)) << CCM_OSCPLL_AUTHEN_TZ_USER_SHIFT)) & CCM_OSCPLL_AUTHEN_TZ_USER_MASK)
 
@@ -10942,8 +10964,8 @@ typedef struct {
 #define CCM_LPCG_AUTHEN_TZ_USER_MASK             (0x100U)
 #define CCM_LPCG_AUTHEN_TZ_USER_SHIFT            (8U)
 /*! TZ_USER - User access permission
- *  0b1..LPCG settings can be changed in user mode.
  *  0b0..LPCG settings cannot be changed in user mode.
+ *  0b1..LPCG settings can be changed in user mode.
  */
 #define CCM_LPCG_AUTHEN_TZ_USER(x)               (((uint32_t)(((uint32_t)(x)) << CCM_LPCG_AUTHEN_TZ_USER_SHIFT)) & CCM_LPCG_AUTHEN_TZ_USER_MASK)
 

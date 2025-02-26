@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
-**     Processors:          MIMXRT1182CVP2B_cm33
-**                          MIMXRT1182XVP2B_cm33
+**     Processors:          MIMXRT1182CVP2C_cm33
+**                          MIMXRT1182XVP2C_cm33
 **
 **     Compiler:            GNU C Compiler
 **     Reference manual:    IMXRT1180RM, Rev 5, 01/2024

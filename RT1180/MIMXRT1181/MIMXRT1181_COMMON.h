@@ -1,7 +1,9 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT1181CVP2B
+**                          MIMXRT1181CVP2C
 **                          MIMXRT1181XVP2B
+**                          MIMXRT1181XVP2C
 **
 **     Compilers:           GNU C Compiler
 **                          IAR ANSI C/C++ Compiler for ARM
@@ -10,13 +12,13 @@
 **
 **     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b241025
+**     Build:               b250310
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1181
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -127,11 +129,11 @@ typedef enum IRQn {
   LPUART2_IRQn                 = 20,               /**< LPUART2 interrupt */
   MU1_IRQn                     = 21,               /**< MU1 interrupt */
   MU2_IRQn                     = 22,               /**< MU2 interrupt */
-  PWM1_FAULT_IRQn              = 23,               /**< PWM1 fault or reload error interrupt */
-  PWM1_0_IRQn                  = 24,               /**< PWM1 capture 0, compare 0, or reload 0 interrupt */
-  PWM1_1_IRQn                  = 25,               /**< PWM1 capture 1, compare 1, or reload 1 interrupt */
-  PWM1_2_IRQn                  = 26,               /**< PWM1 capture 2, compare 2, or reload 2 interrupt */
-  PWM1_3_IRQn                  = 27,               /**< PWM1 capture 3, compare 3, or reload 3 interrupt */
+  Reserved39_IRQn              = 23,               /**< Reserved interrupt */
+  Reserved40_IRQn              = 24,               /**< Reserved interrupt */
+  Reserved41_IRQn              = 25,               /**< Reserved interrupt */
+  Reserved42_IRQn              = 26,               /**< Reserved interrupt */
+  Reserved43_IRQn              = 27,               /**< Reserved interrupt */
   EDGELOCK_TRUST_MUA_RX_FULL_IRQn = 28,            /**< Edgelock Trust MUA RX full interrupt */
   EDGELOCK_TRUST_MUA_TX_EMPTY_IRQn = 29,           /**< Edgelock Trust MUA TX empty interrupt */
   EDGELOCK_APPS_CORE_MUA_RX_FULL_IRQn = 30,        /**< Edgelock Apps Core MUA RX full interrupt */
@@ -155,8 +157,8 @@ typedef enum IRQn {
   CM33_TCM_ERROR_IRQn          = 48,               /**< M33 TCM Error interrupt */
   CM7_TCM_ECC_IRQn             = 49,               /**< M7 TCM ECC interrupt */
   CM7_TCM_ERROR_IRQn           = 50,               /**< M7 TCM Error interrupt */
-  CAN2_IRQn                    = 51,               /**< CAN2 interrupt */
-  CAN2_ERROR_IRQn              = 52,               /**< CAN2 error interrupt */
+  Reserved67_IRQn              = 51,               /**< Reserved interrupt */
+  Reserved68_IRQn              = 52,               /**< Reserved interrupt */
   FLEXIO1_IRQn                 = 53,               /**< FLEXIO1 interrupt */
   FLEXIO2_IRQn                 = 54,               /**< FLEXIO2 interrupt */
   FLEXSPI1_IRQn                = 55,               /**< FLEXSPI1 interrupt */
@@ -190,8 +192,8 @@ typedef enum IRQn {
   TMPSNS_INT_IRQn              = 83,               /**< Temperature alarm interrupt */
   BBSM_IRQn                    = 84,               /**< BBSM wakeup alarm interrupt */
   LDO_AON_ANA_IRQn             = 85,               /**< Brown out interrupt */
-  USDHC1_IRQn                  = 86,               /**< USDHC1 */
-  Reserved103_IRQn             = 87,               /**< Reserved interrupt */
+  Reserved102_IRQn             = 86,               /**< Reserved interrupt */
+  USDHC2_IRQn                  = 87,               /**< USDHC2 */
   TRDC_MGR_MEGA_IRQn           = 88,               /**< MEGAMIX TRDC transfer error interrupt */
   SFA_IRQn                     = 89,               /**< Signal Frequency Analyzer interrupt */
   LDO_AON_DIG_IRQn             = 90,               /**< Brown out interrupt */
@@ -250,7 +252,7 @@ typedef enum IRQn {
   DMA4_CH30_CH31_CH62_CH63_IRQn = 143,             /**< WAKEUP Domain eDMA channel 30/31/62/63 interrupt */
   XBAR1_CH0_CH1_IRQn           = 144,              /**< XBAR1 channel 0/1 interrupt */
   XBAR1_CH2_CH3_IRQn           = 145,              /**< XBAR1 channel 2/3 interrupt */
-  Reserved162_IRQn             = 146,              /**< Reserved interrupt */
+  SINC3_CH0_CH1_CH2_CH3_IRQn   = 146,              /**< SINC Filter Glue 3 channel 0/1/2/3 */
   EWM_IRQn                     = 147,              /**< EWM reset out interrupt */
   Reserved164_IRQn             = 148,              /**< Reserved interrupt */
   LPIT3_IRQn                   = 149,              /**< LPIT3 interrupt */
@@ -258,7 +260,7 @@ typedef enum IRQn {
   TMR4_IRQn                    = 151,              /**< TMR4 interrupt */
   Reserved168_IRQn             = 152,              /**< Reserved interrupt */
   Reserved169_IRQn             = 153,              /**< Reserved interrupt */
-  SAI4_IRQn                    = 154,              /**< SAI4 interrupt */
+  Reserved170_IRQn             = 154,              /**< Reserved interrupt */
   SPDIF_IRQn                   = 155,              /**< SPDIF interrupt */
   Reserved172_IRQn             = 156,              /**< Reserved interrupt */
   Reserved173_IRQn             = 157,              /**< Reserved interrupt */
@@ -274,40 +276,40 @@ typedef enum IRQn {
   M33_LOCKUP_IRQn              = 167,              /**< CM33 LOCKUP SRC reset source */
   M7_SYSRESET_REQ_IRQn         = 168,              /**< CM33 SYSREQRST SRC reset source */
   M7_LOCKUP_IRQn               = 169,              /**< CM33 LOCKUP SRC reset source */
-  PWM2_FAULT_IRQn              = 170,              /**< PWM2 fault or reload error interrupt */
-  PWM2_0_IRQn                  = 171,              /**< PWM2 capture 0, compare 0, or reload 0 interrupt */
-  PWM2_1_IRQn                  = 172,              /**< PWM2 capture 1, compare 1, or reload 1 interrupt */
-  PWM2_2_IRQn                  = 173,              /**< PWM2 capture 2, compare 2, or reload 2 interrupt */
-  PWM2_3_IRQn                  = 174,              /**< PWM2 capture 3, compare 3, or reload 3 interrupt */
-  Reserved191_IRQn             = 175,              /**< Reserved interrupt */
-  Reserved192_IRQn             = 176,              /**< Reserved interrupt */
-  Reserved193_IRQn             = 177,              /**< Reserved interrupt */
-  Reserved194_IRQn             = 178,              /**< Reserved interrupt */
-  Reserved195_IRQn             = 179,              /**< Reserved interrupt */
-  Reserved196_IRQn             = 180,              /**< Reserved interrupt */
-  Reserved197_IRQn             = 181,              /**< Reserved interrupt */
-  Reserved198_IRQn             = 182,              /**< Reserved interrupt */
-  Reserved199_IRQn             = 183,              /**< Reserved interrupt */
-  Reserved200_IRQn             = 184,              /**< Reserved interrupt */
+  Reserved186_IRQn             = 170,              /**< Reserved interrupt */
+  Reserved187_IRQn             = 171,              /**< Reserved interrupt */
+  Reserved188_IRQn             = 172,              /**< Reserved interrupt */
+  Reserved189_IRQn             = 173,              /**< Reserved interrupt */
+  Reserved190_IRQn             = 174,              /**< Reserved interrupt */
+  PWM3_FAULT_IRQn              = 175,              /**< PWM3 fault or reload error interrupt */
+  PWM3_0_IRQn                  = 176,              /**< PWM3 capture 0, compare 0, or reload 0 interrupt */
+  PWM3_1_IRQn                  = 177,              /**< PWM3 capture 1, compare 1, or reload 1 interrupt */
+  PWM3_2_IRQn                  = 178,              /**< PWM3 capture 2, compare 2, or reload 2 interrupt */
+  PWM3_3_IRQn                  = 179,              /**< PWM3 capture 3, compare 3, or reload 3 interrupt */
+  PWM4_FAULT_IRQn              = 180,              /**< PWM4 fault or reload error interrupt */
+  PWM4_0_IRQn                  = 181,              /**< PWM4 capture 0, compare 0, or reload 0 interrupt */
+  PWM4_1_IRQn                  = 182,              /**< PWM4 capture 1, compare 1, or reload 1 interrupt */
+  PWM4_2_IRQn                  = 183,              /**< PWM4 capture 2, compare 2, or reload 2 interrupt */
+  PWM4_3_IRQn                  = 184,              /**< PWM4 capture 3, compare 3, or reload 3 interrupt */
   EQDC1_IRQn                   = 185,              /**< EQDC1 interrupt */
   EQDC2_IRQn                   = 186,              /**< EQDC2 interrupt */
-  Reserved203_IRQn             = 187,              /**< Reserved interrupt */
-  Reserved204_IRQn             = 188,              /**< Reserved interrupt */
-  Reserved205_IRQn             = 189,              /**< Reserved interrupt */
+  EQDC3_IRQn                   = 187,              /**< EQDC3 interrupt */
+  EQDC4_IRQn                   = 188,              /**< EQDC4 interrupt */
+  ADC2_IRQn                    = 189,              /**< ADC2 interrupt */
   DCDC_IRQn                    = 190,              /**< DCDC brown out interrupt */
-  Reserved207_IRQn             = 191,              /**< Reserved interrupt */
-  Reserved208_IRQn             = 192,              /**< Reserved interrupt */
+  CAN3_IRQn                    = 191,              /**< CAN3 interrupt */
+  CAN3_ERROR_IRQn              = 192,              /**< CAN3 error interrupt */
   DAC_IRQn                     = 193,              /**< DAC interrupt */
-  Reserved210_IRQn             = 194,              /**< Reserved interrupt */
-  Reserved211_IRQn             = 195,              /**< Reserved interrupt */
+  LPSPI5_IRQn                  = 194,              /**< LPSPI5 interrupt */
+  LPSPI6_IRQn                  = 195,              /**< LPSPI6 interrupt */
   LPUART7_IRQn                 = 196,              /**< LPUART7 interrupt */
   LPUART8_IRQn                 = 197,              /**< LPUART8 interrupt */
-  SAI2_IRQn                    = 198,              /**< SAI2 interrupt */
-  SAI3_IRQn                    = 199,              /**< SAI3 interrupt */
-  ACMP1_IRQn                   = 200,              /**< CMP1 interrupt */
-  ACMP2_IRQn                   = 201,              /**< CMP2 interrupt */
+  Reserved214_IRQn             = 198,              /**< Reserved interrupt */
+  Reserved215_IRQn             = 199,              /**< Reserved interrupt */
+  Reserved216_IRQn             = 200,              /**< Reserved interrupt */
+  Reserved217_IRQn             = 201,              /**< Reserved interrupt */
   ACMP3_IRQn                   = 202,              /**< CMP3 interrupt */
-  ACMP4_IRQn                   = 203,              /**< CMP4 interrupt */
+  Reserved219_IRQn             = 203,              /**< Reserved interrupt */
   CM7_PS_IRQn                  = 204,              /**< M7 PS Tag/Data Parity Error */
   CM7_MCM_IRQn                 = 205,              /**< M7 MCM interrupt */
   CM33_MCM_IRQn                = 206,              /**< M33 MCM interrupt */
@@ -388,26 +390,38 @@ typedef enum IRQn {
   #define ADC1                                     ((ADC_Type *)ADC1_BASE)
   /** Peripheral ADC1 base pointer */
   #define ADC1_NS                                  ((ADC_Type *)ADC1_BASE_NS)
+  /** Peripheral ADC2 base address */
+  #define ADC2_BASE                                (0x52E00000u)
+  /** Peripheral ADC2 base address */
+  #define ADC2_BASE_NS                             (0x42E00000u)
+  /** Peripheral ADC2 base pointer */
+  #define ADC2                                     ((ADC_Type *)ADC2_BASE)
+  /** Peripheral ADC2 base pointer */
+  #define ADC2_NS                                  ((ADC_Type *)ADC2_BASE_NS)
   /** Array initializer of ADC peripheral base addresses */
-  #define ADC_BASE_ADDRS                           { 0u, ADC1_BASE }
+  #define ADC_BASE_ADDRS                           { 0u, ADC1_BASE, ADC2_BASE }
   /** Array initializer of ADC peripheral base pointers */
-  #define ADC_BASE_PTRS                            { (ADC_Type *)0u, ADC1 }
+  #define ADC_BASE_PTRS                            { (ADC_Type *)0u, ADC1, ADC2 }
   /** Array initializer of ADC peripheral base addresses */
-  #define ADC_BASE_ADDRS_NS                        { 0u, ADC1_BASE_NS }
+  #define ADC_BASE_ADDRS_NS                        { 0u, ADC1_BASE_NS, ADC2_BASE_NS }
   /** Array initializer of ADC peripheral base pointers */
-  #define ADC_BASE_PTRS_NS                         { (ADC_Type *)0u, ADC1_NS }
+  #define ADC_BASE_PTRS_NS                         { (ADC_Type *)0u, ADC1_NS, ADC2_NS }
 #else
   /** Peripheral ADC1 base address */
   #define ADC1_BASE                                (0x42600000u)
   /** Peripheral ADC1 base pointer */
   #define ADC1                                     ((ADC_Type *)ADC1_BASE)
+  /** Peripheral ADC2 base address */
+  #define ADC2_BASE                                (0x42E00000u)
+  /** Peripheral ADC2 base pointer */
+  #define ADC2                                     ((ADC_Type *)ADC2_BASE)
   /** Array initializer of ADC peripheral base addresses */
-  #define ADC_BASE_ADDRS                           { 0u, ADC1_BASE }
+  #define ADC_BASE_ADDRS                           { 0u, ADC1_BASE, ADC2_BASE }
   /** Array initializer of ADC peripheral base pointers */
-  #define ADC_BASE_PTRS                            { (ADC_Type *)0u, ADC1 }
+  #define ADC_BASE_PTRS                            { (ADC_Type *)0u, ADC1, ADC2 }
 #endif
 /** Interrupt vectors for the ADC peripheral type */
-#define ADC_IRQS                                 { NotAvail_IRQn, ADC1_IRQn }
+#define ADC_IRQS                                 { NotAvail_IRQn, ADC1_IRQn, ADC2_IRQn }
 
 /* ANADIG - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -923,43 +937,43 @@ typedef enum IRQn {
   #define CAN1                                     ((CAN_Type *)CAN1_BASE)
   /** Peripheral CAN1 base pointer */
   #define CAN1_NS                                  ((CAN_Type *)CAN1_BASE_NS)
-  /** Peripheral CAN2 base address */
-  #define CAN2_BASE                                (0x525B0000u)
-  /** Peripheral CAN2 base address */
-  #define CAN2_BASE_NS                             (0x425B0000u)
-  /** Peripheral CAN2 base pointer */
-  #define CAN2                                     ((CAN_Type *)CAN2_BASE)
-  /** Peripheral CAN2 base pointer */
-  #define CAN2_NS                                  ((CAN_Type *)CAN2_BASE_NS)
+  /** Peripheral CAN3 base address */
+  #define CAN3_BASE                                (0x545B0000u)
+  /** Peripheral CAN3 base address */
+  #define CAN3_BASE_NS                             (0x445B0000u)
+  /** Peripheral CAN3 base pointer */
+  #define CAN3                                     ((CAN_Type *)CAN3_BASE)
+  /** Peripheral CAN3 base pointer */
+  #define CAN3_NS                                  ((CAN_Type *)CAN3_BASE_NS)
   /** Array initializer of CAN peripheral base addresses */
-  #define CAN_BASE_ADDRS                           { 0u, CAN1_BASE, CAN2_BASE }
+  #define CAN_BASE_ADDRS                           { 0u, CAN1_BASE, 0u, CAN3_BASE }
   /** Array initializer of CAN peripheral base pointers */
-  #define CAN_BASE_PTRS                            { (CAN_Type *)0u, CAN1, CAN2 }
+  #define CAN_BASE_PTRS                            { (CAN_Type *)0u, CAN1, (CAN_Type *)0u, CAN3 }
   /** Array initializer of CAN peripheral base addresses */
-  #define CAN_BASE_ADDRS_NS                        { 0u, CAN1_BASE_NS, CAN2_BASE_NS }
+  #define CAN_BASE_ADDRS_NS                        { 0u, CAN1_BASE_NS, 0u, CAN3_BASE_NS }
   /** Array initializer of CAN peripheral base pointers */
-  #define CAN_BASE_PTRS_NS                         { (CAN_Type *)0u, CAN1_NS, CAN2_NS }
+  #define CAN_BASE_PTRS_NS                         { (CAN_Type *)0u, CAN1_NS, (CAN_Type *)0u, CAN3_NS }
 #else
   /** Peripheral CAN1 base address */
   #define CAN1_BASE                                (0x443A0000u)
   /** Peripheral CAN1 base pointer */
   #define CAN1                                     ((CAN_Type *)CAN1_BASE)
-  /** Peripheral CAN2 base address */
-  #define CAN2_BASE                                (0x425B0000u)
-  /** Peripheral CAN2 base pointer */
-  #define CAN2                                     ((CAN_Type *)CAN2_BASE)
+  /** Peripheral CAN3 base address */
+  #define CAN3_BASE                                (0x445B0000u)
+  /** Peripheral CAN3 base pointer */
+  #define CAN3                                     ((CAN_Type *)CAN3_BASE)
   /** Array initializer of CAN peripheral base addresses */
-  #define CAN_BASE_ADDRS                           { 0u, CAN1_BASE, CAN2_BASE }
+  #define CAN_BASE_ADDRS                           { 0u, CAN1_BASE, 0u, CAN3_BASE }
   /** Array initializer of CAN peripheral base pointers */
-  #define CAN_BASE_PTRS                            { (CAN_Type *)0u, CAN1, CAN2 }
+  #define CAN_BASE_PTRS                            { (CAN_Type *)0u, CAN1, (CAN_Type *)0u, CAN3 }
 #endif
 /** Interrupt vectors for the CAN peripheral type */
-#define CAN_Rx_Warning_IRQS                      { NotAvail_IRQn, CAN1_IRQn, CAN2_IRQn }
-#define CAN_Tx_Warning_IRQS                      { NotAvail_IRQn, CAN1_IRQn, CAN2_IRQn }
-#define CAN_Wake_Up_IRQS                         { NotAvail_IRQn, CAN1_IRQn, CAN2_IRQn }
-#define CAN_Error_IRQS                           { NotAvail_IRQn, CAN1_IRQn, CAN2_IRQn }
-#define CAN_Bus_Off_IRQS                         { NotAvail_IRQn, CAN1_IRQn, CAN2_IRQn }
-#define CAN_ORed_Message_buffer_IRQS             { NotAvail_IRQn, CAN1_IRQn, CAN2_IRQn }
+#define CAN_Rx_Warning_IRQS                      { NotAvail_IRQn, CAN1_IRQn, NotAvail_IRQn, CAN3_IRQn }
+#define CAN_Tx_Warning_IRQS                      { NotAvail_IRQn, CAN1_IRQn, NotAvail_IRQn, CAN3_IRQn }
+#define CAN_Wake_Up_IRQS                         { NotAvail_IRQn, CAN1_IRQn, NotAvail_IRQn, CAN3_IRQn }
+#define CAN_Error_IRQS                           { NotAvail_IRQn, CAN1_IRQn, NotAvail_IRQn, CAN3_IRQn }
+#define CAN_Bus_Off_IRQS                         { NotAvail_IRQn, CAN1_IRQn, NotAvail_IRQn, CAN3_IRQn }
+#define CAN_ORed_Message_buffer_IRQS             { NotAvail_IRQn, CAN1_IRQn, NotAvail_IRQn, CAN3_IRQn }
 
 /* CCM - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -992,22 +1006,6 @@ typedef enum IRQn {
 
 /* CMP - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
-  /** Peripheral CMP1 base address */
-  #define CMP1_BASE                                (0x52DC0000u)
-  /** Peripheral CMP1 base address */
-  #define CMP1_BASE_NS                             (0x42DC0000u)
-  /** Peripheral CMP1 base pointer */
-  #define CMP1                                     ((CMP_Type *)CMP1_BASE)
-  /** Peripheral CMP1 base pointer */
-  #define CMP1_NS                                  ((CMP_Type *)CMP1_BASE_NS)
-  /** Peripheral CMP2 base address */
-  #define CMP2_BASE                                (0x52DD0000u)
-  /** Peripheral CMP2 base address */
-  #define CMP2_BASE_NS                             (0x42DD0000u)
-  /** Peripheral CMP2 base pointer */
-  #define CMP2                                     ((CMP_Type *)CMP2_BASE)
-  /** Peripheral CMP2 base pointer */
-  #define CMP2_NS                                  ((CMP_Type *)CMP2_BASE_NS)
   /** Peripheral CMP3 base address */
   #define CMP3_BASE                                (0x52DE0000u)
   /** Peripheral CMP3 base address */
@@ -1016,46 +1014,26 @@ typedef enum IRQn {
   #define CMP3                                     ((CMP_Type *)CMP3_BASE)
   /** Peripheral CMP3 base pointer */
   #define CMP3_NS                                  ((CMP_Type *)CMP3_BASE_NS)
-  /** Peripheral CMP4 base address */
-  #define CMP4_BASE                                (0x52DF0000u)
-  /** Peripheral CMP4 base address */
-  #define CMP4_BASE_NS                             (0x42DF0000u)
-  /** Peripheral CMP4 base pointer */
-  #define CMP4                                     ((CMP_Type *)CMP4_BASE)
-  /** Peripheral CMP4 base pointer */
-  #define CMP4_NS                                  ((CMP_Type *)CMP4_BASE_NS)
   /** Array initializer of CMP peripheral base addresses */
-  #define CMP_BASE_ADDRS                           { 0u, CMP1_BASE, CMP2_BASE, CMP3_BASE, CMP4_BASE }
+  #define CMP_BASE_ADDRS                           { 0u, 0u, 0u, CMP3_BASE }
   /** Array initializer of CMP peripheral base pointers */
-  #define CMP_BASE_PTRS                            { (CMP_Type *)0u, CMP1, CMP2, CMP3, CMP4 }
+  #define CMP_BASE_PTRS                            { (CMP_Type *)0u, (CMP_Type *)0u, (CMP_Type *)0u, CMP3 }
   /** Array initializer of CMP peripheral base addresses */
-  #define CMP_BASE_ADDRS_NS                        { 0u, CMP1_BASE_NS, CMP2_BASE_NS, CMP3_BASE_NS, CMP4_BASE_NS }
+  #define CMP_BASE_ADDRS_NS                        { 0u, 0u, 0u, CMP3_BASE_NS }
   /** Array initializer of CMP peripheral base pointers */
-  #define CMP_BASE_PTRS_NS                         { (CMP_Type *)0u, CMP1_NS, CMP2_NS, CMP3_NS, CMP4_NS }
+  #define CMP_BASE_PTRS_NS                         { (CMP_Type *)0u, (CMP_Type *)0u, (CMP_Type *)0u, CMP3_NS }
 #else
-  /** Peripheral CMP1 base address */
-  #define CMP1_BASE                                (0x42DC0000u)
-  /** Peripheral CMP1 base pointer */
-  #define CMP1                                     ((CMP_Type *)CMP1_BASE)
-  /** Peripheral CMP2 base address */
-  #define CMP2_BASE                                (0x42DD0000u)
-  /** Peripheral CMP2 base pointer */
-  #define CMP2                                     ((CMP_Type *)CMP2_BASE)
   /** Peripheral CMP3 base address */
   #define CMP3_BASE                                (0x42DE0000u)
   /** Peripheral CMP3 base pointer */
   #define CMP3                                     ((CMP_Type *)CMP3_BASE)
-  /** Peripheral CMP4 base address */
-  #define CMP4_BASE                                (0x42DF0000u)
-  /** Peripheral CMP4 base pointer */
-  #define CMP4                                     ((CMP_Type *)CMP4_BASE)
   /** Array initializer of CMP peripheral base addresses */
-  #define CMP_BASE_ADDRS                           { 0u, CMP1_BASE, CMP2_BASE, CMP3_BASE, CMP4_BASE }
+  #define CMP_BASE_ADDRS                           { 0u, 0u, 0u, CMP3_BASE }
   /** Array initializer of CMP peripheral base pointers */
-  #define CMP_BASE_PTRS                            { (CMP_Type *)0u, CMP1, CMP2, CMP3, CMP4 }
+  #define CMP_BASE_PTRS                            { (CMP_Type *)0u, (CMP_Type *)0u, (CMP_Type *)0u, CMP3 }
 #endif
 /** Interrupt vectors for the CMP peripheral type */
-#define CMP_IRQS                                 { NotAvail_IRQn, ACMP1_IRQn, ACMP2_IRQn, ACMP3_IRQn, ACMP4_IRQn }
+#define CMP_IRQS                                 { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, ACMP3_IRQn }
 
 /* DAC - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -1524,14 +1502,30 @@ typedef enum IRQn {
   #define EQDC2                                    ((EQDC_Type *)EQDC2_BASE)
   /** Peripheral EQDC2 base pointer */
   #define EQDC2_NS                                 ((EQDC_Type *)EQDC2_BASE_NS)
+  /** Peripheral EQDC3 base address */
+  #define EQDC3_BASE                               (0x52730000u)
+  /** Peripheral EQDC3 base address */
+  #define EQDC3_BASE_NS                            (0x42730000u)
+  /** Peripheral EQDC3 base pointer */
+  #define EQDC3                                    ((EQDC_Type *)EQDC3_BASE)
+  /** Peripheral EQDC3 base pointer */
+  #define EQDC3_NS                                 ((EQDC_Type *)EQDC3_BASE_NS)
+  /** Peripheral EQDC4 base address */
+  #define EQDC4_BASE                               (0x52740000u)
+  /** Peripheral EQDC4 base address */
+  #define EQDC4_BASE_NS                            (0x42740000u)
+  /** Peripheral EQDC4 base pointer */
+  #define EQDC4                                    ((EQDC_Type *)EQDC4_BASE)
+  /** Peripheral EQDC4 base pointer */
+  #define EQDC4_NS                                 ((EQDC_Type *)EQDC4_BASE_NS)
   /** Array initializer of EQDC peripheral base addresses */
-  #define EQDC_BASE_ADDRS                          { 0u, EQDC1_BASE, EQDC2_BASE }
+  #define EQDC_BASE_ADDRS                          { 0u, EQDC1_BASE, EQDC2_BASE, EQDC3_BASE, EQDC4_BASE }
   /** Array initializer of EQDC peripheral base pointers */
-  #define EQDC_BASE_PTRS                           { (EQDC_Type *)0u, EQDC1, EQDC2 }
+  #define EQDC_BASE_PTRS                           { (EQDC_Type *)0u, EQDC1, EQDC2, EQDC3, EQDC4 }
   /** Array initializer of EQDC peripheral base addresses */
-  #define EQDC_BASE_ADDRS_NS                       { 0u, EQDC1_BASE_NS, EQDC2_BASE_NS }
+  #define EQDC_BASE_ADDRS_NS                       { 0u, EQDC1_BASE_NS, EQDC2_BASE_NS, EQDC3_BASE_NS, EQDC4_BASE_NS }
   /** Array initializer of EQDC peripheral base pointers */
-  #define EQDC_BASE_PTRS_NS                        { (EQDC_Type *)0u, EQDC1_NS, EQDC2_NS }
+  #define EQDC_BASE_PTRS_NS                        { (EQDC_Type *)0u, EQDC1_NS, EQDC2_NS, EQDC3_NS, EQDC4_NS }
 #else
   /** Peripheral EQDC1 base address */
   #define EQDC1_BASE                               (0x42710000u)
@@ -1541,17 +1535,25 @@ typedef enum IRQn {
   #define EQDC2_BASE                               (0x42720000u)
   /** Peripheral EQDC2 base pointer */
   #define EQDC2                                    ((EQDC_Type *)EQDC2_BASE)
+  /** Peripheral EQDC3 base address */
+  #define EQDC3_BASE                               (0x42730000u)
+  /** Peripheral EQDC3 base pointer */
+  #define EQDC3                                    ((EQDC_Type *)EQDC3_BASE)
+  /** Peripheral EQDC4 base address */
+  #define EQDC4_BASE                               (0x42740000u)
+  /** Peripheral EQDC4 base pointer */
+  #define EQDC4                                    ((EQDC_Type *)EQDC4_BASE)
   /** Array initializer of EQDC peripheral base addresses */
-  #define EQDC_BASE_ADDRS                          { 0u, EQDC1_BASE, EQDC2_BASE }
+  #define EQDC_BASE_ADDRS                          { 0u, EQDC1_BASE, EQDC2_BASE, EQDC3_BASE, EQDC4_BASE }
   /** Array initializer of EQDC peripheral base pointers */
-  #define EQDC_BASE_PTRS                           { (EQDC_Type *)0u, EQDC1, EQDC2 }
+  #define EQDC_BASE_PTRS                           { (EQDC_Type *)0u, EQDC1, EQDC2, EQDC3, EQDC4 }
 #endif
 /** Interrupt vectors for the EQDC peripheral type */
-#define EQDC_COMPARE_IRQS                        { NotAvail_IRQn, EQDC1_IRQn, EQDC2_IRQn }
-#define EQDC_HOME_IRQS                           { NotAvail_IRQn, EQDC1_IRQn, EQDC2_IRQn }
-#define EQDC_WDOG_IRQS                           { NotAvail_IRQn, EQDC1_IRQn, EQDC2_IRQn }
-#define EQDC_INDEX_IRQS                          { NotAvail_IRQn, EQDC1_IRQn, EQDC2_IRQn }
-#define EQDC_INPUT_SWITCH_IRQS                   { NotAvail_IRQn, EQDC1_IRQn, EQDC2_IRQn }
+#define EQDC_COMPARE_IRQS                        { NotAvail_IRQn, EQDC1_IRQn, EQDC2_IRQn, EQDC3_IRQn, EQDC4_IRQn }
+#define EQDC_HOME_IRQS                           { NotAvail_IRQn, EQDC1_IRQn, EQDC2_IRQn, EQDC3_IRQn, EQDC4_IRQn }
+#define EQDC_WDOG_IRQS                           { NotAvail_IRQn, EQDC1_IRQn, EQDC2_IRQn, EQDC3_IRQn, EQDC4_IRQn }
+#define EQDC_INDEX_IRQS                          { NotAvail_IRQn, EQDC1_IRQn, EQDC2_IRQn, EQDC3_IRQn, EQDC4_IRQn }
+#define EQDC_INPUT_SWITCH_IRQS                   { NotAvail_IRQn, EQDC1_IRQn, EQDC2_IRQn, EQDC3_IRQn, EQDC4_IRQn }
 
 /* ERM - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -1924,63 +1926,27 @@ typedef enum IRQn {
   #define SAI1                                     ((I2S_Type *)SAI1_BASE)
   /** Peripheral SAI1 base pointer */
   #define SAI1_NS                                  ((I2S_Type *)SAI1_BASE_NS)
-  /** Peripheral SAI2 base address */
-  #define SAI2_BASE                                (0x52BB0000u)
-  /** Peripheral SAI2 base address */
-  #define SAI2_BASE_NS                             (0x42BB0000u)
-  /** Peripheral SAI2 base pointer */
-  #define SAI2                                     ((I2S_Type *)SAI2_BASE)
-  /** Peripheral SAI2 base pointer */
-  #define SAI2_NS                                  ((I2S_Type *)SAI2_BASE_NS)
-  /** Peripheral SAI3 base address */
-  #define SAI3_BASE                                (0x52BC0000u)
-  /** Peripheral SAI3 base address */
-  #define SAI3_BASE_NS                             (0x42BC0000u)
-  /** Peripheral SAI3 base pointer */
-  #define SAI3                                     ((I2S_Type *)SAI3_BASE)
-  /** Peripheral SAI3 base pointer */
-  #define SAI3_NS                                  ((I2S_Type *)SAI3_BASE_NS)
-  /** Peripheral SAI4 base address */
-  #define SAI4_BASE                                (0x52BD0000u)
-  /** Peripheral SAI4 base address */
-  #define SAI4_BASE_NS                             (0x42BD0000u)
-  /** Peripheral SAI4 base pointer */
-  #define SAI4                                     ((I2S_Type *)SAI4_BASE)
-  /** Peripheral SAI4 base pointer */
-  #define SAI4_NS                                  ((I2S_Type *)SAI4_BASE_NS)
   /** Array initializer of I2S peripheral base addresses */
-  #define I2S_BASE_ADDRS                           { 0u, SAI1_BASE, SAI2_BASE, SAI3_BASE, SAI4_BASE }
+  #define I2S_BASE_ADDRS                           { 0u, SAI1_BASE }
   /** Array initializer of I2S peripheral base pointers */
-  #define I2S_BASE_PTRS                            { (I2S_Type *)0u, SAI1, SAI2, SAI3, SAI4 }
+  #define I2S_BASE_PTRS                            { (I2S_Type *)0u, SAI1 }
   /** Array initializer of I2S peripheral base addresses */
-  #define I2S_BASE_ADDRS_NS                        { 0u, SAI1_BASE_NS, SAI2_BASE_NS, SAI3_BASE_NS, SAI4_BASE_NS }
+  #define I2S_BASE_ADDRS_NS                        { 0u, SAI1_BASE_NS }
   /** Array initializer of I2S peripheral base pointers */
-  #define I2S_BASE_PTRS_NS                         { (I2S_Type *)0u, SAI1_NS, SAI2_NS, SAI3_NS, SAI4_NS }
+  #define I2S_BASE_PTRS_NS                         { (I2S_Type *)0u, SAI1_NS }
 #else
   /** Peripheral SAI1 base address */
   #define SAI1_BASE                                (0x443B0000u)
   /** Peripheral SAI1 base pointer */
   #define SAI1                                     ((I2S_Type *)SAI1_BASE)
-  /** Peripheral SAI2 base address */
-  #define SAI2_BASE                                (0x42BB0000u)
-  /** Peripheral SAI2 base pointer */
-  #define SAI2                                     ((I2S_Type *)SAI2_BASE)
-  /** Peripheral SAI3 base address */
-  #define SAI3_BASE                                (0x42BC0000u)
-  /** Peripheral SAI3 base pointer */
-  #define SAI3                                     ((I2S_Type *)SAI3_BASE)
-  /** Peripheral SAI4 base address */
-  #define SAI4_BASE                                (0x42BD0000u)
-  /** Peripheral SAI4 base pointer */
-  #define SAI4                                     ((I2S_Type *)SAI4_BASE)
   /** Array initializer of I2S peripheral base addresses */
-  #define I2S_BASE_ADDRS                           { 0u, SAI1_BASE, SAI2_BASE, SAI3_BASE, SAI4_BASE }
+  #define I2S_BASE_ADDRS                           { 0u, SAI1_BASE }
   /** Array initializer of I2S peripheral base pointers */
-  #define I2S_BASE_PTRS                            { (I2S_Type *)0u, SAI1, SAI2, SAI3, SAI4 }
+  #define I2S_BASE_PTRS                            { (I2S_Type *)0u, SAI1 }
 #endif
 /** Interrupt vectors for the I2S peripheral type */
-#define I2S_RX_IRQS                              { NotAvail_IRQn, SAI1_IRQn, SAI2_IRQn, SAI3_IRQn, SAI4_IRQn }
-#define I2S_TX_IRQS                              { NotAvail_IRQn, SAI1_IRQn, SAI2_IRQn, SAI3_IRQn, SAI4_IRQn }
+#define I2S_RX_IRQS                              { NotAvail_IRQn, SAI1_IRQn }
+#define I2S_TX_IRQS                              { NotAvail_IRQn, SAI1_IRQn }
 
 /* I3C - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -2374,14 +2340,30 @@ typedef enum IRQn {
   #define LPSPI4                                   ((LPSPI_Type *)LPSPI4_BASE)
   /** Peripheral LPSPI4 base pointer */
   #define LPSPI4_NS                                ((LPSPI_Type *)LPSPI4_BASE_NS)
+  /** Peripheral LPSPI5 base address */
+  #define LPSPI5_BASE                              (0x52D50000u)
+  /** Peripheral LPSPI5 base address */
+  #define LPSPI5_BASE_NS                           (0x42D50000u)
+  /** Peripheral LPSPI5 base pointer */
+  #define LPSPI5                                   ((LPSPI_Type *)LPSPI5_BASE)
+  /** Peripheral LPSPI5 base pointer */
+  #define LPSPI5_NS                                ((LPSPI_Type *)LPSPI5_BASE_NS)
+  /** Peripheral LPSPI6 base address */
+  #define LPSPI6_BASE                              (0x52D60000u)
+  /** Peripheral LPSPI6 base address */
+  #define LPSPI6_BASE_NS                           (0x42D60000u)
+  /** Peripheral LPSPI6 base pointer */
+  #define LPSPI6                                   ((LPSPI_Type *)LPSPI6_BASE)
+  /** Peripheral LPSPI6 base pointer */
+  #define LPSPI6_NS                                ((LPSPI_Type *)LPSPI6_BASE_NS)
   /** Array initializer of LPSPI peripheral base addresses */
-  #define LPSPI_BASE_ADDRS                         { 0u, LPSPI1_BASE, LPSPI2_BASE, LPSPI3_BASE, LPSPI4_BASE }
+  #define LPSPI_BASE_ADDRS                         { 0u, LPSPI1_BASE, LPSPI2_BASE, LPSPI3_BASE, LPSPI4_BASE, LPSPI5_BASE, LPSPI6_BASE }
   /** Array initializer of LPSPI peripheral base pointers */
-  #define LPSPI_BASE_PTRS                          { (LPSPI_Type *)0u, LPSPI1, LPSPI2, LPSPI3, LPSPI4 }
+  #define LPSPI_BASE_PTRS                          { (LPSPI_Type *)0u, LPSPI1, LPSPI2, LPSPI3, LPSPI4, LPSPI5, LPSPI6 }
   /** Array initializer of LPSPI peripheral base addresses */
-  #define LPSPI_BASE_ADDRS_NS                      { 0u, LPSPI1_BASE_NS, LPSPI2_BASE_NS, LPSPI3_BASE_NS, LPSPI4_BASE_NS }
+  #define LPSPI_BASE_ADDRS_NS                      { 0u, LPSPI1_BASE_NS, LPSPI2_BASE_NS, LPSPI3_BASE_NS, LPSPI4_BASE_NS, LPSPI5_BASE_NS, LPSPI6_BASE_NS }
   /** Array initializer of LPSPI peripheral base pointers */
-  #define LPSPI_BASE_PTRS_NS                       { (LPSPI_Type *)0u, LPSPI1_NS, LPSPI2_NS, LPSPI3_NS, LPSPI4_NS }
+  #define LPSPI_BASE_PTRS_NS                       { (LPSPI_Type *)0u, LPSPI1_NS, LPSPI2_NS, LPSPI3_NS, LPSPI4_NS, LPSPI5_NS, LPSPI6_NS }
 #else
   /** Peripheral LPSPI1 base address */
   #define LPSPI1_BASE                              (0x44360000u)
@@ -2399,13 +2381,21 @@ typedef enum IRQn {
   #define LPSPI4_BASE                              (0x42560000u)
   /** Peripheral LPSPI4 base pointer */
   #define LPSPI4                                   ((LPSPI_Type *)LPSPI4_BASE)
+  /** Peripheral LPSPI5 base address */
+  #define LPSPI5_BASE                              (0x42D50000u)
+  /** Peripheral LPSPI5 base pointer */
+  #define LPSPI5                                   ((LPSPI_Type *)LPSPI5_BASE)
+  /** Peripheral LPSPI6 base address */
+  #define LPSPI6_BASE                              (0x42D60000u)
+  /** Peripheral LPSPI6 base pointer */
+  #define LPSPI6                                   ((LPSPI_Type *)LPSPI6_BASE)
   /** Array initializer of LPSPI peripheral base addresses */
-  #define LPSPI_BASE_ADDRS                         { 0u, LPSPI1_BASE, LPSPI2_BASE, LPSPI3_BASE, LPSPI4_BASE }
+  #define LPSPI_BASE_ADDRS                         { 0u, LPSPI1_BASE, LPSPI2_BASE, LPSPI3_BASE, LPSPI4_BASE, LPSPI5_BASE, LPSPI6_BASE }
   /** Array initializer of LPSPI peripheral base pointers */
-  #define LPSPI_BASE_PTRS                          { (LPSPI_Type *)0u, LPSPI1, LPSPI2, LPSPI3, LPSPI4 }
+  #define LPSPI_BASE_PTRS                          { (LPSPI_Type *)0u, LPSPI1, LPSPI2, LPSPI3, LPSPI4, LPSPI5, LPSPI6 }
 #endif
 /** Interrupt vectors for the LPSPI peripheral type */
-#define LPSPI_IRQS                               { NotAvail_IRQn, LPSPI1_IRQn, LPSPI2_IRQn, LPSPI3_IRQn, LPSPI4_IRQn }
+#define LPSPI_IRQS                               { NotAvail_IRQn, LPSPI1_IRQn, LPSPI2_IRQn, LPSPI3_IRQn, LPSPI4_IRQn, LPSPI5_IRQn, LPSPI6_IRQn }
 
 /* LPTMR - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -3331,50 +3321,50 @@ typedef enum IRQn {
 
 /* PWM - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
-  /** Peripheral PWM1 base address */
-  #define PWM1_BASE                                (0x52650000u)
-  /** Peripheral PWM1 base address */
-  #define PWM1_BASE_NS                             (0x42650000u)
-  /** Peripheral PWM1 base pointer */
-  #define PWM1                                     ((PWM_Type *)PWM1_BASE)
-  /** Peripheral PWM1 base pointer */
-  #define PWM1_NS                                  ((PWM_Type *)PWM1_BASE_NS)
-  /** Peripheral PWM2 base address */
-  #define PWM2_BASE                                (0x52660000u)
-  /** Peripheral PWM2 base address */
-  #define PWM2_BASE_NS                             (0x42660000u)
-  /** Peripheral PWM2 base pointer */
-  #define PWM2                                     ((PWM_Type *)PWM2_BASE)
-  /** Peripheral PWM2 base pointer */
-  #define PWM2_NS                                  ((PWM_Type *)PWM2_BASE_NS)
+  /** Peripheral PWM3 base address */
+  #define PWM3_BASE                                (0x52670000u)
+  /** Peripheral PWM3 base address */
+  #define PWM3_BASE_NS                             (0x42670000u)
+  /** Peripheral PWM3 base pointer */
+  #define PWM3                                     ((PWM_Type *)PWM3_BASE)
+  /** Peripheral PWM3 base pointer */
+  #define PWM3_NS                                  ((PWM_Type *)PWM3_BASE_NS)
+  /** Peripheral PWM4 base address */
+  #define PWM4_BASE                                (0x52680000u)
+  /** Peripheral PWM4 base address */
+  #define PWM4_BASE_NS                             (0x42680000u)
+  /** Peripheral PWM4 base pointer */
+  #define PWM4                                     ((PWM_Type *)PWM4_BASE)
+  /** Peripheral PWM4 base pointer */
+  #define PWM4_NS                                  ((PWM_Type *)PWM4_BASE_NS)
   /** Array initializer of PWM peripheral base addresses */
-  #define PWM_BASE_ADDRS                           { 0u, PWM1_BASE, PWM2_BASE }
+  #define PWM_BASE_ADDRS                           { 0u, 0u, 0u, PWM3_BASE, PWM4_BASE }
   /** Array initializer of PWM peripheral base pointers */
-  #define PWM_BASE_PTRS                            { (PWM_Type *)0u, PWM1, PWM2 }
+  #define PWM_BASE_PTRS                            { (PWM_Type *)0u, (PWM_Type *)0u, (PWM_Type *)0u, PWM3, PWM4 }
   /** Array initializer of PWM peripheral base addresses */
-  #define PWM_BASE_ADDRS_NS                        { 0u, PWM1_BASE_NS, PWM2_BASE_NS }
+  #define PWM_BASE_ADDRS_NS                        { 0u, 0u, 0u, PWM3_BASE_NS, PWM4_BASE_NS }
   /** Array initializer of PWM peripheral base pointers */
-  #define PWM_BASE_PTRS_NS                         { (PWM_Type *)0u, PWM1_NS, PWM2_NS }
+  #define PWM_BASE_PTRS_NS                         { (PWM_Type *)0u, (PWM_Type *)0u, (PWM_Type *)0u, PWM3_NS, PWM4_NS }
 #else
-  /** Peripheral PWM1 base address */
-  #define PWM1_BASE                                (0x42650000u)
-  /** Peripheral PWM1 base pointer */
-  #define PWM1                                     ((PWM_Type *)PWM1_BASE)
-  /** Peripheral PWM2 base address */
-  #define PWM2_BASE                                (0x42660000u)
-  /** Peripheral PWM2 base pointer */
-  #define PWM2                                     ((PWM_Type *)PWM2_BASE)
+  /** Peripheral PWM3 base address */
+  #define PWM3_BASE                                (0x42670000u)
+  /** Peripheral PWM3 base pointer */
+  #define PWM3                                     ((PWM_Type *)PWM3_BASE)
+  /** Peripheral PWM4 base address */
+  #define PWM4_BASE                                (0x42680000u)
+  /** Peripheral PWM4 base pointer */
+  #define PWM4                                     ((PWM_Type *)PWM4_BASE)
   /** Array initializer of PWM peripheral base addresses */
-  #define PWM_BASE_ADDRS                           { 0u, PWM1_BASE, PWM2_BASE }
+  #define PWM_BASE_ADDRS                           { 0u, 0u, 0u, PWM3_BASE, PWM4_BASE }
   /** Array initializer of PWM peripheral base pointers */
-  #define PWM_BASE_PTRS                            { (PWM_Type *)0u, PWM1, PWM2 }
+  #define PWM_BASE_PTRS                            { (PWM_Type *)0u, (PWM_Type *)0u, (PWM_Type *)0u, PWM3, PWM4 }
 #endif
 /** Interrupt vectors for the PWM peripheral type */
-#define PWM_CMP_IRQS                             { { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { PWM1_0_IRQn, PWM1_1_IRQn, PWM1_2_IRQn, PWM1_3_IRQn }, { PWM2_0_IRQn, PWM2_1_IRQn, PWM2_2_IRQn, PWM2_3_IRQn } }
-#define PWM_RELOAD_IRQS                          { { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { PWM1_0_IRQn, PWM1_1_IRQn, PWM1_2_IRQn, PWM1_3_IRQn }, { PWM2_0_IRQn, PWM2_1_IRQn, PWM2_2_IRQn, PWM2_3_IRQn } }
-#define PWM_CAPTURE_IRQS                         { { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { PWM1_0_IRQn, PWM1_1_IRQn, PWM1_2_IRQn, PWM1_3_IRQn }, { PWM2_0_IRQn, PWM2_1_IRQn, PWM2_2_IRQn, PWM2_3_IRQn } }
-#define PWM_FAULT_IRQS                           { NotAvail_IRQn, PWM1_FAULT_IRQn, PWM2_FAULT_IRQn }
-#define PWM_RELOAD_ERROR_IRQS                    { NotAvail_IRQn, PWM1_FAULT_IRQn, PWM2_FAULT_IRQn }
+#define PWM_CMP_IRQS                             { { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { PWM3_0_IRQn, PWM3_1_IRQn, PWM3_2_IRQn, PWM3_3_IRQn }, { PWM4_0_IRQn, PWM4_1_IRQn, PWM4_2_IRQn, PWM4_3_IRQn } }
+#define PWM_RELOAD_IRQS                          { { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { PWM3_0_IRQn, PWM3_1_IRQn, PWM3_2_IRQn, PWM3_3_IRQn }, { PWM4_0_IRQn, PWM4_1_IRQn, PWM4_2_IRQn, PWM4_3_IRQn } }
+#define PWM_CAPTURE_IRQS                         { { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { PWM3_0_IRQn, PWM3_1_IRQn, PWM3_2_IRQn, PWM3_3_IRQn }, { PWM4_0_IRQn, PWM4_1_IRQn, PWM4_2_IRQn, PWM4_3_IRQn } }
+#define PWM_FAULT_IRQS                           { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, PWM3_FAULT_IRQn, PWM4_FAULT_IRQn }
+#define PWM_RELOAD_ERROR_IRQS                    { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, PWM3_FAULT_IRQn, PWM4_FAULT_IRQn }
 
 /* RGPIO - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -3632,6 +3622,37 @@ typedef enum IRQn {
   /** Array initializer of SEMA42 peripheral base pointers */
   #define SEMA42_BASE_PTRS                         { SEMA1, SEMA2 }
 #endif
+
+/* SINC - Peripheral instance base addresses */
+#if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
+  /** Peripheral SINC3 base address */
+  #define SINC3_BASE                               (0x52C10000u)
+  /** Peripheral SINC3 base address */
+  #define SINC3_BASE_NS                            (0x42C10000u)
+  /** Peripheral SINC3 base pointer */
+  #define SINC3                                    ((SINC_Type *)SINC3_BASE)
+  /** Peripheral SINC3 base pointer */
+  #define SINC3_NS                                 ((SINC_Type *)SINC3_BASE_NS)
+  /** Array initializer of SINC peripheral base addresses */
+  #define SINC_BASE_ADDRS                          { 0u, 0u, 0u, SINC3_BASE }
+  /** Array initializer of SINC peripheral base pointers */
+  #define SINC_BASE_PTRS                           { (SINC_Type *)0u, (SINC_Type *)0u, (SINC_Type *)0u, SINC3 }
+  /** Array initializer of SINC peripheral base addresses */
+  #define SINC_BASE_ADDRS_NS                       { 0u, 0u, 0u, SINC3_BASE_NS }
+  /** Array initializer of SINC peripheral base pointers */
+  #define SINC_BASE_PTRS_NS                        { (SINC_Type *)0u, (SINC_Type *)0u, (SINC_Type *)0u, SINC3_NS }
+#else
+  /** Peripheral SINC3 base address */
+  #define SINC3_BASE                               (0x42C10000u)
+  /** Peripheral SINC3 base pointer */
+  #define SINC3                                    ((SINC_Type *)SINC3_BASE)
+  /** Array initializer of SINC peripheral base addresses */
+  #define SINC_BASE_ADDRS                          { 0u, 0u, 0u, SINC3_BASE }
+  /** Array initializer of SINC peripheral base pointers */
+  #define SINC_BASE_PTRS                           { (SINC_Type *)0u, (SINC_Type *)0u, (SINC_Type *)0u, SINC3 }
+#endif
+/** Interrupt vectors for the SINC peripheral type */
+#define SINC_IRQS                                { { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn, NotAvail_IRQn }, { SINC3_CH0_CH1_CH2_CH3_IRQn, SINC3_CH0_CH1_CH2_CH3_IRQn, SINC3_CH0_CH1_CH2_CH3_IRQn, SINC3_CH0_CH1_CH2_CH3_IRQn } }
 
 /* SPDIF - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -4443,34 +4464,34 @@ typedef enum IRQn {
 
 /* USDHC - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
-  /** Peripheral USDHC1 base address */
-  #define USDHC1_BASE                              (0x52850000u)
-  /** Peripheral USDHC1 base address */
-  #define USDHC1_BASE_NS                           (0x42850000u)
-  /** Peripheral USDHC1 base pointer */
-  #define USDHC1                                   ((USDHC_Type *)USDHC1_BASE)
-  /** Peripheral USDHC1 base pointer */
-  #define USDHC1_NS                                ((USDHC_Type *)USDHC1_BASE_NS)
+  /** Peripheral USDHC2 base address */
+  #define USDHC2_BASE                              (0x52860000u)
+  /** Peripheral USDHC2 base address */
+  #define USDHC2_BASE_NS                           (0x42860000u)
+  /** Peripheral USDHC2 base pointer */
+  #define USDHC2                                   ((USDHC_Type *)USDHC2_BASE)
+  /** Peripheral USDHC2 base pointer */
+  #define USDHC2_NS                                ((USDHC_Type *)USDHC2_BASE_NS)
   /** Array initializer of USDHC peripheral base addresses */
-  #define USDHC_BASE_ADDRS                         { 0u, USDHC1_BASE }
+  #define USDHC_BASE_ADDRS                         { 0u, 0u, USDHC2_BASE }
   /** Array initializer of USDHC peripheral base pointers */
-  #define USDHC_BASE_PTRS                          { (USDHC_Type *)0u, USDHC1 }
+  #define USDHC_BASE_PTRS                          { (USDHC_Type *)0u, (USDHC_Type *)0u, USDHC2 }
   /** Array initializer of USDHC peripheral base addresses */
-  #define USDHC_BASE_ADDRS_NS                      { 0u, USDHC1_BASE_NS }
+  #define USDHC_BASE_ADDRS_NS                      { 0u, 0u, USDHC2_BASE_NS }
   /** Array initializer of USDHC peripheral base pointers */
-  #define USDHC_BASE_PTRS_NS                       { (USDHC_Type *)0u, USDHC1_NS }
+  #define USDHC_BASE_PTRS_NS                       { (USDHC_Type *)0u, (USDHC_Type *)0u, USDHC2_NS }
 #else
-  /** Peripheral USDHC1 base address */
-  #define USDHC1_BASE                              (0x42850000u)
-  /** Peripheral USDHC1 base pointer */
-  #define USDHC1                                   ((USDHC_Type *)USDHC1_BASE)
+  /** Peripheral USDHC2 base address */
+  #define USDHC2_BASE                              (0x42860000u)
+  /** Peripheral USDHC2 base pointer */
+  #define USDHC2                                   ((USDHC_Type *)USDHC2_BASE)
   /** Array initializer of USDHC peripheral base addresses */
-  #define USDHC_BASE_ADDRS                         { 0u, USDHC1_BASE }
+  #define USDHC_BASE_ADDRS                         { 0u, 0u, USDHC2_BASE }
   /** Array initializer of USDHC peripheral base pointers */
-  #define USDHC_BASE_PTRS                          { (USDHC_Type *)0u, USDHC1 }
+  #define USDHC_BASE_PTRS                          { (USDHC_Type *)0u, (USDHC_Type *)0u, USDHC2 }
 #endif
 /** Interrupt vectors for the USDHC peripheral type */
-#define USDHC_IRQS                               { NotAvail_IRQn, USDHC1_IRQn }
+#define USDHC_IRQS                               { NotAvail_IRQn, NotAvail_IRQn, USDHC2_IRQn }
 
 /* VMBANDGAP - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))

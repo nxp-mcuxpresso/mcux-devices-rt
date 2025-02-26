@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
-**     Processors:          MIMXRT1187CVM8B_cm7
-**                          MIMXRT1187XVM8B_cm7
+**     Processors:          MIMXRT1187CVM8C_cm7
+**                          MIMXRT1187XVM8C_cm7
 **
 **     Compiler:            IAR ANSI C/C++ Compiler for ARM
 **     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
