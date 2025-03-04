@@ -13,7 +13,7 @@
 **         Linker file for the Keil ARM C/C++ Compiler
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -52,9 +52,11 @@
 #if (defined(__use_shmem__))
   #define m_rpmsg_sh_mem_start         0x20200000
   #define m_rpmsg_sh_mem_size          0x00002000
-#elif (defined(__use_shmem_hifi1__))
-  #define m_rpmsg_sh_mem_start         0x20588000
-  #define m_rpmsg_sh_mem_size          0x20589FFF
+#endif
+
+#if (defined(__use_shmem_hifi1__))
+  #define m_rpmsg_sh_mem_hifi1_start   0x20588000
+  #define m_rpmsg_sh_mem_hifi1_size    0x20589FFF
 #endif
 
 LR_m_interrupts m_interrupts_start m_interrupts_size+m_text_size  {
@@ -84,5 +86,12 @@ LR_m_interrupts m_interrupts_start m_interrupts_size+m_text_size  {
   RPMSG_SH_MEM_unused +0 EMPTY m_rpmsg_sh_mem_size-ImageLength(RPMSG_SH_MEM) { ; Empty region added for MPU configuration
   }
 #endif
-}
 
+#if (defined(__use_shmem_hifi1__))
+  RPMSG_SH_MEM_HIFI1 m_rpmsg_sh_mem_hifi1_start UNINIT m_rpmsg_sh_mem_hifi1_size { ; Shared memory used by RPMSG for Hifi1 core
+  * (rpmsg_sh_mem_hifi1_section)
+  }
+  RPMSG_SH_MEM_HIFI1_unused +0 EMPTY m_rpmsg_sh_mem_hifi1_size-ImageLength(RPMSG_SH_MEM_HIFI1) { ; Empty region added for MPU configuration
+  }
+#endif
+}

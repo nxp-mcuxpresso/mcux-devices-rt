@@ -12,7 +12,7 @@
 **         Linker file for the GNU C Compiler
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -28,8 +28,10 @@ ENTRY(Reset_Handler)
 
 HEAP_SIZE  = DEFINED(__heap_size__)  ? __heap_size__  : 0x0400;
 STACK_SIZE = DEFINED(__stack_size__) ? __stack_size__ : 0x0400;
-RPMSG_SHMEM_SIZE = (DEFINED(__use_shmem__) || DEFINED(__use_shmem_hifi1__)) ? 0x2000 : 0;
-RPMSG_SHMEM_START = DEFINED(__use_shmem_hifi1__) ? 0x20588000 : 0x20200000;
+RPMSG_SHMEM_SIZE = DEFINED(__use_shmem__) ? 0x2000 : 0;
+RPMSG_SHMEM_START = 0x20200000;
+RPMSG_SHMEM_HIFI1_SIZE = DEFINED(__use_shmem_hifi1__) ? 0x2000 : 0;
+RPMSG_SHMEM_HIFI1_START = 0x20588000;
 
 /* Specify the memory areas */
 /* The SRAM region [0x580000-0x5BFFFF] is reserved for shared memory or application data. */
@@ -40,6 +42,7 @@ MEMORY
   m_text                (RX)  : ORIGIN = 0x00600200, LENGTH = 0x0007FE00
   m_data                (RW)  : ORIGIN = 0x205C0000, LENGTH = 0x00040000
   rpmsg_sh_mem          (RW)  : ORIGIN = RPMSG_SHMEM_START, LENGTH = RPMSG_SHMEM_SIZE
+  rpmsg_sh_mem_hifi1    (RW)  : ORIGIN = RPMSG_SHMEM_HIFI1_START, LENGTH = RPMSG_SHMEM_HIFI1_SIZE
 }
 
 /* Define output sections */
@@ -177,6 +180,15 @@ SECTIONS
      . = ALIGN(4) ;
      __RPMSG_SH_MEM_END__ = .;
   } > rpmsg_sh_mem
+
+  /* NOINIT section for rpmsg_sh_mem_hifi1 */
+  .noinit_rpmsg_sh_mem_hifi1 (NOLOAD) : ALIGN(4)
+  {
+     __RPMSG_SH_MEM_HIFI1_START__ = .;
+     *(.noinit.$rpmsg_sh_mem_hifi1*)
+     . = ALIGN(4) ;
+     __RPMSG_SH_MEM_HIFI1_END__ = .;
+  } > rpmsg_sh_mem_hifi1
 
   .bss :
   {
