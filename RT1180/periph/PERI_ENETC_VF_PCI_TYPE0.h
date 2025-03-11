@@ -1,46 +1,28 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT1181CVP2B
-**                          MIMXRT1181CVP2C
 **                          MIMXRT1181XVP2B
-**                          MIMXRT1181XVP2C
 **                          MIMXRT1182CVP2B
-**                          MIMXRT1182CVP2C
 **                          MIMXRT1182XVP2B
-**                          MIMXRT1182XVP2C
-**                          MIMXRT1186CVJ8C_cm33
-**                          MIMXRT1186CVJ8C_cm7
-**                          MIMXRT1186XVJ8C_cm33
-**                          MIMXRT1186XVJ8C_cm7
 **                          MIMXRT1187AVM8B_cm33
 **                          MIMXRT1187AVM8B_cm7
-**                          MIMXRT1187AVM8C_cm33
-**                          MIMXRT1187AVM8C_cm7
 **                          MIMXRT1187CVM8B_cm33
 **                          MIMXRT1187CVM8B_cm7
-**                          MIMXRT1187CVM8C_cm33
-**                          MIMXRT1187CVM8C_cm7
 **                          MIMXRT1187XVM8B_cm33
 **                          MIMXRT1187XVM8B_cm7
-**                          MIMXRT1187XVM8C_cm33
-**                          MIMXRT1187XVM8C_cm7
 **                          MIMXRT1189CVM8B_cm33
 **                          MIMXRT1189CVM8B_cm7
-**                          MIMXRT1189CVM8C_cm33
-**                          MIMXRT1189CVM8C_cm7
 **                          MIMXRT1189XVM8B_cm33
 **                          MIMXRT1189XVM8B_cm7
-**                          MIMXRT1189XVM8C_cm33
-**                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Build:               b240705
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for ENETC_VF_PCI_TYPE0
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2025 NXP
+**     Copyright 2016-2024 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -67,21 +49,17 @@
 #if !defined(ENETC_VF_PCI_TYPE0_H_)
 #define ENETC_VF_PCI_TYPE0_H_                    /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181CVP2C) || defined(CPU_MIMXRT1181XVP2B) || defined(CPU_MIMXRT1181XVP2C))
+#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181XVP2B))
 #include "MIMXRT1181_COMMON.h"
-#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182CVP2C) || defined(CPU_MIMXRT1182XVP2B) || defined(CPU_MIMXRT1182XVP2C))
+#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182XVP2B))
 #include "MIMXRT1182_COMMON.h"
-#elif (defined(CPU_MIMXRT1186CVJ8C_cm33) || defined(CPU_MIMXRT1186XVJ8C_cm33))
-#include "MIMXRT1186_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1186CVJ8C_cm7) || defined(CPU_MIMXRT1186XVJ8C_cm7))
-#include "MIMXRT1186_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187AVM8C_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187CVM8C_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33) || defined(CPU_MIMXRT1187XVM8C_cm33))
+#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33))
 #include "MIMXRT1187_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187AVM8C_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187CVM8C_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7) || defined(CPU_MIMXRT1187XVM8C_cm7))
+#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7))
 #include "MIMXRT1187_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189CVM8C_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33) || defined(CPU_MIMXRT1189XVM8C_cm33))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33))
 #include "MIMXRT1189_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189CVM8C_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7) || defined(CPU_MIMXRT1189XVM8C_cm7))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7))
 #include "MIMXRT1189_cm7_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -131,10 +109,10 @@ typedef struct {
   __IO uint16_t PCI_CFH_CMD;                       /**< PCI command register, offset: 0x4 */
   __I  uint16_t PCI_CFH_STAT;                      /**< PCI status register, offset: 0x6 */
   __I  uint32_t PCI_CFH_REVID_CLASSCODE;           /**< PCI revision ID and classcode register, offset: 0x8 */
-       uint8_t PCI_CFH_CL_SIZE;                    /**< PCI cache line size register, offset: 0xC */
-       uint8_t PCI_CFH_LAT_TIMER;                  /**< PCI latency timer register, offset: 0xD */
+  __I  uint8_t PCI_CFH_CL_SIZE;                    /**< PCI cache line size register, offset: 0xC */
+  __I  uint8_t PCI_CFH_LAT_TIMER;                  /**< PCI latency timer register, offset: 0xD */
   __I  uint8_t PCI_CFH_HDR_TYPE;                   /**< PCI header type register, offset: 0xE */
-       uint8_t PCI_CFH_BIST;                       /**< PCI BIST register, offset: 0xF */
+  __I  uint8_t PCI_CFH_BIST;                       /**< PCI BIST register, offset: 0xF */
   __I  uint32_t PCI_CFH_BAR0;                      /**< PCI base address register 0, offset: 0x10 */
   __I  uint32_t PCI_CFH_BAR1;                      /**< PCI base address register 1, offset: 0x14 */
   __I  uint32_t PCI_CFH_BAR2;                      /**< PCI base address register 2, offset: 0x18 */

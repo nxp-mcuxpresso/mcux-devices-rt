@@ -1,46 +1,28 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT1181CVP2B
-**                          MIMXRT1181CVP2C
 **                          MIMXRT1181XVP2B
-**                          MIMXRT1181XVP2C
 **                          MIMXRT1182CVP2B
-**                          MIMXRT1182CVP2C
 **                          MIMXRT1182XVP2B
-**                          MIMXRT1182XVP2C
-**                          MIMXRT1186CVJ8C_cm33
-**                          MIMXRT1186CVJ8C_cm7
-**                          MIMXRT1186XVJ8C_cm33
-**                          MIMXRT1186XVJ8C_cm7
 **                          MIMXRT1187AVM8B_cm33
 **                          MIMXRT1187AVM8B_cm7
-**                          MIMXRT1187AVM8C_cm33
-**                          MIMXRT1187AVM8C_cm7
 **                          MIMXRT1187CVM8B_cm33
 **                          MIMXRT1187CVM8B_cm7
-**                          MIMXRT1187CVM8C_cm33
-**                          MIMXRT1187CVM8C_cm7
 **                          MIMXRT1187XVM8B_cm33
 **                          MIMXRT1187XVM8B_cm7
-**                          MIMXRT1187XVM8C_cm33
-**                          MIMXRT1187XVM8C_cm7
 **                          MIMXRT1189CVM8B_cm33
 **                          MIMXRT1189CVM8B_cm7
-**                          MIMXRT1189CVM8C_cm33
-**                          MIMXRT1189CVM8C_cm7
 **                          MIMXRT1189XVM8B_cm33
 **                          MIMXRT1189XVM8B_cm7
-**                          MIMXRT1189XVM8C_cm33
-**                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Build:               b240705
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for IEE_APC
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2025 NXP
+**     Copyright 2016-2024 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -67,21 +49,17 @@
 #if !defined(IEE_APC_H_)
 #define IEE_APC_H_                               /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181CVP2C) || defined(CPU_MIMXRT1181XVP2B) || defined(CPU_MIMXRT1181XVP2C))
+#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181XVP2B))
 #include "MIMXRT1181_COMMON.h"
-#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182CVP2C) || defined(CPU_MIMXRT1182XVP2B) || defined(CPU_MIMXRT1182XVP2C))
+#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182XVP2B))
 #include "MIMXRT1182_COMMON.h"
-#elif (defined(CPU_MIMXRT1186CVJ8C_cm33) || defined(CPU_MIMXRT1186XVJ8C_cm33))
-#include "MIMXRT1186_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1186CVJ8C_cm7) || defined(CPU_MIMXRT1186XVJ8C_cm7))
-#include "MIMXRT1186_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187AVM8C_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187CVM8C_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33) || defined(CPU_MIMXRT1187XVM8C_cm33))
+#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33))
 #include "MIMXRT1187_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187AVM8C_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187CVM8C_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7) || defined(CPU_MIMXRT1187XVM8C_cm7))
+#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7))
 #include "MIMXRT1187_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189CVM8C_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33) || defined(CPU_MIMXRT1189XVM8C_cm33))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33))
 #include "MIMXRT1189_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189CVM8C_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7) || defined(CPU_MIMXRT1189XVM8C_cm7))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7))
 #include "MIMXRT1189_cm7_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -194,8 +172,8 @@ typedef struct {
 #define IEE_APC_REGION0_ENA_ENCRYPT_ENABLE_MASK  (0x1U)
 #define IEE_APC_REGION0_ENA_ENCRYPT_ENABLE_SHIFT (0U)
 /*! ENCRYPT_ENABLE - Enable this region
- *  0b0..This region is not enabled for IEE routing even hit
  *  0b1..This region is enabled for IEE routing once hit
+ *  0b0..This region is not enabled for IEE routing even hit
  */
 #define IEE_APC_REGION0_ENA_ENCRYPT_ENABLE(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION0_ENA_ENCRYPT_ENABLE_SHIFT)) & IEE_APC_REGION0_ENA_ENCRYPT_ENABLE_MASK)
 /*! @} */
@@ -219,16 +197,16 @@ typedef struct {
 #define IEE_APC_REGION0_ACC_CTL_ALLOW_NS_MASK    (0x10000U)
 #define IEE_APC_REGION0_ACC_CTL_ALLOW_NS_SHIFT   (16U)
 /*! ALLOW_NS - Allow nonsecure mode access
- *  0b0..Only secure access to this region's registers is allowed
  *  0b1..Secure and nonsecure access to this region's registers is allowed
+ *  0b0..Only secure access to this region's registers is allowed
  */
 #define IEE_APC_REGION0_ACC_CTL_ALLOW_NS(x)      (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION0_ACC_CTL_ALLOW_NS_SHIFT)) & IEE_APC_REGION0_ACC_CTL_ALLOW_NS_MASK)
 
 #define IEE_APC_REGION0_ACC_CTL_ALLOW_USER_MASK  (0x20000U)
 #define IEE_APC_REGION0_ACC_CTL_ALLOW_USER_SHIFT (17U)
 /*! ALLOW_USER - Allow user mode access
- *  0b0..Only privilege access to this region's registers is allowed
  *  0b1..User and privilege access to this region's registers is allowed
+ *  0b0..Only privilege access to this region's registers is allowed
  */
 #define IEE_APC_REGION0_ACC_CTL_ALLOW_USER(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION0_ACC_CTL_ALLOW_USER_SHIFT)) & IEE_APC_REGION0_ACC_CTL_ALLOW_USER_MASK)
 
@@ -265,8 +243,8 @@ typedef struct {
 #define IEE_APC_REGION1_ENA_ENCRYPT_ENABLE_MASK  (0x1U)
 #define IEE_APC_REGION1_ENA_ENCRYPT_ENABLE_SHIFT (0U)
 /*! ENCRYPT_ENABLE - Enable this region
- *  0b0..This region is not enabled for IEE routing even hit
  *  0b1..This region is enabled for IEE routing once hit
+ *  0b0..This region is not enabled for IEE routing even hit
  */
 #define IEE_APC_REGION1_ENA_ENCRYPT_ENABLE(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION1_ENA_ENCRYPT_ENABLE_SHIFT)) & IEE_APC_REGION1_ENA_ENCRYPT_ENABLE_MASK)
 /*! @} */
@@ -290,16 +268,16 @@ typedef struct {
 #define IEE_APC_REGION1_ACC_CTL_ALLOW_NS_MASK    (0x10000U)
 #define IEE_APC_REGION1_ACC_CTL_ALLOW_NS_SHIFT   (16U)
 /*! ALLOW_NS - Allow nonsecure mode access
- *  0b0..Only secure access to this region's registers is allowed
  *  0b1..Secure and nonsecure access to this region's registers is allowed
+ *  0b0..Only secure access to this region's registers is allowed
  */
 #define IEE_APC_REGION1_ACC_CTL_ALLOW_NS(x)      (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION1_ACC_CTL_ALLOW_NS_SHIFT)) & IEE_APC_REGION1_ACC_CTL_ALLOW_NS_MASK)
 
 #define IEE_APC_REGION1_ACC_CTL_ALLOW_USER_MASK  (0x20000U)
 #define IEE_APC_REGION1_ACC_CTL_ALLOW_USER_SHIFT (17U)
 /*! ALLOW_USER - Allow user mode access
- *  0b0..Only privilege access to this region's registers is allowed
  *  0b1..User and privilege access to this region's registers is allowed
+ *  0b0..Only privilege access to this region's registers is allowed
  */
 #define IEE_APC_REGION1_ACC_CTL_ALLOW_USER(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION1_ACC_CTL_ALLOW_USER_SHIFT)) & IEE_APC_REGION1_ACC_CTL_ALLOW_USER_MASK)
 
@@ -336,8 +314,8 @@ typedef struct {
 #define IEE_APC_REGION2_ENA_ENCRYPT_ENABLE_MASK  (0x1U)
 #define IEE_APC_REGION2_ENA_ENCRYPT_ENABLE_SHIFT (0U)
 /*! ENCRYPT_ENABLE - Enable this region
- *  0b0..This region is not enabled for IEE routing even hit
  *  0b1..This region is enabled for IEE routing once hit
+ *  0b0..This region is not enabled for IEE routing even hit
  */
 #define IEE_APC_REGION2_ENA_ENCRYPT_ENABLE(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION2_ENA_ENCRYPT_ENABLE_SHIFT)) & IEE_APC_REGION2_ENA_ENCRYPT_ENABLE_MASK)
 /*! @} */
@@ -361,16 +339,16 @@ typedef struct {
 #define IEE_APC_REGION2_ACC_CTL_ALLOW_NS_MASK    (0x10000U)
 #define IEE_APC_REGION2_ACC_CTL_ALLOW_NS_SHIFT   (16U)
 /*! ALLOW_NS - Allow nonsecure mode access
- *  0b0..Only secure access to this region's registers is allowed
  *  0b1..Secure and nonsecure access to this region's registers is allowed
+ *  0b0..Only secure access to this region's registers is allowed
  */
 #define IEE_APC_REGION2_ACC_CTL_ALLOW_NS(x)      (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION2_ACC_CTL_ALLOW_NS_SHIFT)) & IEE_APC_REGION2_ACC_CTL_ALLOW_NS_MASK)
 
 #define IEE_APC_REGION2_ACC_CTL_ALLOW_USER_MASK  (0x20000U)
 #define IEE_APC_REGION2_ACC_CTL_ALLOW_USER_SHIFT (17U)
 /*! ALLOW_USER - Allow user mode access
- *  0b0..Only privilege access to this region's registers is allowed
  *  0b1..User and privilege access to this region's registers is allowed
+ *  0b0..Only privilege access to this region's registers is allowed
  */
 #define IEE_APC_REGION2_ACC_CTL_ALLOW_USER(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION2_ACC_CTL_ALLOW_USER_SHIFT)) & IEE_APC_REGION2_ACC_CTL_ALLOW_USER_MASK)
 
@@ -407,8 +385,8 @@ typedef struct {
 #define IEE_APC_REGION3_ENA_ENCRYPT_ENABLE_MASK  (0x1U)
 #define IEE_APC_REGION3_ENA_ENCRYPT_ENABLE_SHIFT (0U)
 /*! ENCRYPT_ENABLE - Enable this region
- *  0b0..This region is not enabled for IEE routing even hit
  *  0b1..This region is enabled for IEE routing once hit
+ *  0b0..This region is not enabled for IEE routing even hit
  */
 #define IEE_APC_REGION3_ENA_ENCRYPT_ENABLE(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION3_ENA_ENCRYPT_ENABLE_SHIFT)) & IEE_APC_REGION3_ENA_ENCRYPT_ENABLE_MASK)
 /*! @} */
@@ -432,16 +410,16 @@ typedef struct {
 #define IEE_APC_REGION3_ACC_CTL_ALLOW_NS_MASK    (0x10000U)
 #define IEE_APC_REGION3_ACC_CTL_ALLOW_NS_SHIFT   (16U)
 /*! ALLOW_NS - Allow nonsecure mode access
- *  0b0..Only secure access to this region's registers is allowed
  *  0b1..Secure and nonsecure access to this region's registers is allowed
+ *  0b0..Only secure access to this region's registers is allowed
  */
 #define IEE_APC_REGION3_ACC_CTL_ALLOW_NS(x)      (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION3_ACC_CTL_ALLOW_NS_SHIFT)) & IEE_APC_REGION3_ACC_CTL_ALLOW_NS_MASK)
 
 #define IEE_APC_REGION3_ACC_CTL_ALLOW_USER_MASK  (0x20000U)
 #define IEE_APC_REGION3_ACC_CTL_ALLOW_USER_SHIFT (17U)
 /*! ALLOW_USER - Allow user mode access
- *  0b0..Only privilege access to this region's registers is allowed
  *  0b1..User and privilege access to this region's registers is allowed
+ *  0b0..Only privilege access to this region's registers is allowed
  */
 #define IEE_APC_REGION3_ACC_CTL_ALLOW_USER(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION3_ACC_CTL_ALLOW_USER_SHIFT)) & IEE_APC_REGION3_ACC_CTL_ALLOW_USER_MASK)
 
@@ -478,8 +456,8 @@ typedef struct {
 #define IEE_APC_REGION4_ENA_ENCRYPT_ENABLE_MASK  (0x1U)
 #define IEE_APC_REGION4_ENA_ENCRYPT_ENABLE_SHIFT (0U)
 /*! ENCRYPT_ENABLE - Enable this region
- *  0b0..This region is not enabled for IEE routing even hit
  *  0b1..This region is enabled for IEE routing once hit
+ *  0b0..This region is not enabled for IEE routing even hit
  */
 #define IEE_APC_REGION4_ENA_ENCRYPT_ENABLE(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION4_ENA_ENCRYPT_ENABLE_SHIFT)) & IEE_APC_REGION4_ENA_ENCRYPT_ENABLE_MASK)
 /*! @} */
@@ -503,16 +481,16 @@ typedef struct {
 #define IEE_APC_REGION4_ACC_CTL_ALLOW_NS_MASK    (0x10000U)
 #define IEE_APC_REGION4_ACC_CTL_ALLOW_NS_SHIFT   (16U)
 /*! ALLOW_NS - Allow nonsecure mode access
- *  0b0..Only secure access to this region's registers is allowed
  *  0b1..Secure and nonsecure access to this region's registers is allowed
+ *  0b0..Only secure access to this region's registers is allowed
  */
 #define IEE_APC_REGION4_ACC_CTL_ALLOW_NS(x)      (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION4_ACC_CTL_ALLOW_NS_SHIFT)) & IEE_APC_REGION4_ACC_CTL_ALLOW_NS_MASK)
 
 #define IEE_APC_REGION4_ACC_CTL_ALLOW_USER_MASK  (0x20000U)
 #define IEE_APC_REGION4_ACC_CTL_ALLOW_USER_SHIFT (17U)
 /*! ALLOW_USER - Allow user mode access
- *  0b0..Only privilege access to this region's registers is allowed
  *  0b1..User and privilege access to this region's registers is allowed
+ *  0b0..Only privilege access to this region's registers is allowed
  */
 #define IEE_APC_REGION4_ACC_CTL_ALLOW_USER(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION4_ACC_CTL_ALLOW_USER_SHIFT)) & IEE_APC_REGION4_ACC_CTL_ALLOW_USER_MASK)
 
@@ -549,8 +527,8 @@ typedef struct {
 #define IEE_APC_REGION5_ENA_ENCRYPT_ENABLE_MASK  (0x1U)
 #define IEE_APC_REGION5_ENA_ENCRYPT_ENABLE_SHIFT (0U)
 /*! ENCRYPT_ENABLE - Enable this region
- *  0b0..This region is not enabled for IEE routing even hit
  *  0b1..This region is enabled for IEE routing once hit
+ *  0b0..This region is not enabled for IEE routing even hit
  */
 #define IEE_APC_REGION5_ENA_ENCRYPT_ENABLE(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION5_ENA_ENCRYPT_ENABLE_SHIFT)) & IEE_APC_REGION5_ENA_ENCRYPT_ENABLE_MASK)
 /*! @} */
@@ -574,16 +552,16 @@ typedef struct {
 #define IEE_APC_REGION5_ACC_CTL_ALLOW_NS_MASK    (0x10000U)
 #define IEE_APC_REGION5_ACC_CTL_ALLOW_NS_SHIFT   (16U)
 /*! ALLOW_NS - Allow nonsecure mode access
- *  0b0..Only secure access to this region's registers is allowed
  *  0b1..Secure and nonsecure access to this region's registers is allowed
+ *  0b0..Only secure access to this region's registers is allowed
  */
 #define IEE_APC_REGION5_ACC_CTL_ALLOW_NS(x)      (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION5_ACC_CTL_ALLOW_NS_SHIFT)) & IEE_APC_REGION5_ACC_CTL_ALLOW_NS_MASK)
 
 #define IEE_APC_REGION5_ACC_CTL_ALLOW_USER_MASK  (0x20000U)
 #define IEE_APC_REGION5_ACC_CTL_ALLOW_USER_SHIFT (17U)
 /*! ALLOW_USER - Allow user mode access
- *  0b0..Only privilege access to this region's registers is allowed
  *  0b1..User and privilege access to this region's registers is allowed
+ *  0b0..Only privilege access to this region's registers is allowed
  */
 #define IEE_APC_REGION5_ACC_CTL_ALLOW_USER(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION5_ACC_CTL_ALLOW_USER_SHIFT)) & IEE_APC_REGION5_ACC_CTL_ALLOW_USER_MASK)
 
@@ -620,8 +598,8 @@ typedef struct {
 #define IEE_APC_REGION6_ENA_ENCRYPT_ENABLE_MASK  (0x1U)
 #define IEE_APC_REGION6_ENA_ENCRYPT_ENABLE_SHIFT (0U)
 /*! ENCRYPT_ENABLE - Enable this region
- *  0b0..This region is not enabled for IEE routing even hit
  *  0b1..This region is enabled for IEE routing once hit
+ *  0b0..This region is not enabled for IEE routing even hit
  */
 #define IEE_APC_REGION6_ENA_ENCRYPT_ENABLE(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION6_ENA_ENCRYPT_ENABLE_SHIFT)) & IEE_APC_REGION6_ENA_ENCRYPT_ENABLE_MASK)
 /*! @} */
@@ -645,16 +623,16 @@ typedef struct {
 #define IEE_APC_REGION6_ACC_CTL_ALLOW_NS_MASK    (0x10000U)
 #define IEE_APC_REGION6_ACC_CTL_ALLOW_NS_SHIFT   (16U)
 /*! ALLOW_NS - Allow nonsecure mode access
- *  0b0..Only secure access to this region's registers is allowed
  *  0b1..Secure and nonsecure access to this region's registers is allowed
+ *  0b0..Only secure access to this region's registers is allowed
  */
 #define IEE_APC_REGION6_ACC_CTL_ALLOW_NS(x)      (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION6_ACC_CTL_ALLOW_NS_SHIFT)) & IEE_APC_REGION6_ACC_CTL_ALLOW_NS_MASK)
 
 #define IEE_APC_REGION6_ACC_CTL_ALLOW_USER_MASK  (0x20000U)
 #define IEE_APC_REGION6_ACC_CTL_ALLOW_USER_SHIFT (17U)
 /*! ALLOW_USER - Allow user mode access
- *  0b0..Only privilege access to this region's registers is allowed
  *  0b1..User and privilege access to this region's registers is allowed
+ *  0b0..Only privilege access to this region's registers is allowed
  */
 #define IEE_APC_REGION6_ACC_CTL_ALLOW_USER(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION6_ACC_CTL_ALLOW_USER_SHIFT)) & IEE_APC_REGION6_ACC_CTL_ALLOW_USER_MASK)
 
@@ -691,8 +669,8 @@ typedef struct {
 #define IEE_APC_REGION7_ENA_ENCRYPT_ENABLE_MASK  (0x1U)
 #define IEE_APC_REGION7_ENA_ENCRYPT_ENABLE_SHIFT (0U)
 /*! ENCRYPT_ENABLE - Enable this region
- *  0b0..This region is not enabled for IEE routing even hit
  *  0b1..This region is enabled for IEE routing once hit
+ *  0b0..This region is not enabled for IEE routing even hit
  */
 #define IEE_APC_REGION7_ENA_ENCRYPT_ENABLE(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION7_ENA_ENCRYPT_ENABLE_SHIFT)) & IEE_APC_REGION7_ENA_ENCRYPT_ENABLE_MASK)
 /*! @} */
@@ -716,16 +694,16 @@ typedef struct {
 #define IEE_APC_REGION7_ACC_CTL_ALLOW_NS_MASK    (0x10000U)
 #define IEE_APC_REGION7_ACC_CTL_ALLOW_NS_SHIFT   (16U)
 /*! ALLOW_NS - Allow nonsecure mode access
- *  0b0..Only secure access to this region's registers is allowed
  *  0b1..Secure and nonsecure access to this region's registers is allowed
+ *  0b0..Only secure access to this region's registers is allowed
  */
 #define IEE_APC_REGION7_ACC_CTL_ALLOW_NS(x)      (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION7_ACC_CTL_ALLOW_NS_SHIFT)) & IEE_APC_REGION7_ACC_CTL_ALLOW_NS_MASK)
 
 #define IEE_APC_REGION7_ACC_CTL_ALLOW_USER_MASK  (0x20000U)
 #define IEE_APC_REGION7_ACC_CTL_ALLOW_USER_SHIFT (17U)
 /*! ALLOW_USER - Allow user mode access
- *  0b0..Only privilege access to this region's registers is allowed
  *  0b1..User and privilege access to this region's registers is allowed
+ *  0b0..Only privilege access to this region's registers is allowed
  */
 #define IEE_APC_REGION7_ACC_CTL_ALLOW_USER(x)    (((uint32_t)(((uint32_t)(x)) << IEE_APC_REGION7_ACC_CTL_ALLOW_USER_SHIFT)) & IEE_APC_REGION7_ACC_CTL_ALLOW_USER_MASK)
 

@@ -1,18 +1,16 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT1189CVM8B_cm33
-**                          MIMXRT1189CVM8C_cm33
 **                          MIMXRT1189XVM8B_cm33
-**                          MIMXRT1189XVM8C_cm33
 **
 **     Compilers:           GNU C Compiler
 **                          IAR ANSI C/C++ Compiler for ARM
 **                          Keil ARM C/C++ Compiler
 **                          MCUXpresso Compiler
 **
-**     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
-**     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Reference manual:    IMXRT1180RM, Rev 2, 12/2022
+**     Version:             rev. 0.1, 2021-03-09
+**     Build:               b231213
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -20,17 +18,15 @@
 **         the oscillator (PLL) that is part of the microcontroller device.
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2025 NXP
+**     Copyright 2016-2023 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
 **     mail:                 support@nxp.com
 **
 **     Revisions:
-**     - rev. 1.0 (2021-03-09)
+**     - rev. 0.1 (2021-03-09)
 **         Initial version.
-**     - rev. 2.0 (2024-01-18)
-**         Header RFP.
 **
 ** ###################################################################
 */
@@ -38,7 +34,7 @@
 /*!
  * @file MIMXRT1189_cm33
  * @version 1.0
- * @date 2025-03-10
+ * @date 2023-12-13
  * @brief Device specific configuration file for MIMXRT1189_cm33 (header file)
  *
  * Provides a system configuration function and a global variable that contains

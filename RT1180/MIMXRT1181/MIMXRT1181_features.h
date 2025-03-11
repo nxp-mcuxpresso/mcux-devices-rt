@@ -1,13 +1,13 @@
 /*
 ** ###################################################################
 **     Version:             rev. 0.1, 2021-03-09
-**     Build:               b250310
+**     Build:               b241212
 **
 **     Abstract:
 **         Chip specific module features.
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2025 NXP
+**     Copyright 2016-2024 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -26,7 +26,7 @@
 /* SOC module features */
 
 /* @brief ACMP availability on the SoC. */
-#define FSL_FEATURE_SOC_ACMP_COUNT (1)
+#define FSL_FEATURE_SOC_ACMP_COUNT (4)
 /* @brief AOI availability on the SoC. */
 #define FSL_FEATURE_SOC_AOI_COUNT (4)
 /* @brief ASRC availability on the SoC. */
@@ -46,7 +46,7 @@
 /* @brief EIM availability on the SoC. */
 #define FSL_FEATURE_SOC_EIM_COUNT (1)
 /* @brief EQDC availability on the SoC. */
-#define FSL_FEATURE_SOC_EQDC_COUNT (4)
+#define FSL_FEATURE_SOC_EQDC_COUNT (2)
 /* @brief EWM availability on the SoC. */
 #define FSL_FEATURE_SOC_EWM_COUNT (1)
 /* @brief FLEXCAN availability on the SoC. */
@@ -62,7 +62,7 @@
 /* @brief I3C availability on the SoC. */
 #define FSL_FEATURE_SOC_I3C_COUNT (2)
 /* @brief I2S availability on the SoC. */
-#define FSL_FEATURE_SOC_I2S_COUNT (1)
+#define FSL_FEATURE_SOC_I2S_COUNT (4)
 /* @brief IEE availability on the SoC. */
 #define FSL_FEATURE_SOC_IEE_COUNT (1)
 /* @brief IOMUXC availability on the SoC. */
@@ -70,13 +70,13 @@
 /* @brief KPP availability on the SoC. */
 #define FSL_FEATURE_SOC_KPP_COUNT (1)
 /* @brief LPADC availability on the SoC. */
-#define FSL_FEATURE_SOC_LPADC_COUNT (2)
+#define FSL_FEATURE_SOC_LPADC_COUNT (1)
 /* @brief LPI2C availability on the SoC. */
 #define FSL_FEATURE_SOC_LPI2C_COUNT (3)
 /* @brief LPIT availability on the SoC. */
 #define FSL_FEATURE_SOC_LPIT_COUNT (3)
 /* @brief LPSPI availability on the SoC. */
-#define FSL_FEATURE_SOC_LPSPI_COUNT (6)
+#define FSL_FEATURE_SOC_LPSPI_COUNT (4)
 /* @brief LPTMR availability on the SoC. */
 #define FSL_FEATURE_SOC_LPTMR_COUNT (1)
 /* @brief LPUART availability on the SoC. */
@@ -95,8 +95,6 @@
 #define FSL_FEATURE_SOC_RGPIO_COUNT (6)
 /* @brief SEMA42 availability on the SoC. */
 #define FSL_FEATURE_SOC_SEMA42_COUNT (2)
-/* @brief SINC availability on the SoC. */
-#define FSL_FEATURE_SOC_SINC_COUNT (1)
 /* @brief SPDIF availability on the SoC. */
 #define FSL_FEATURE_SOC_SPDIF_COUNT (1)
 /* @brief SYSPM availability on the SoC. */
@@ -458,8 +456,6 @@
 
 /* FLEXIO module features */
 
-/* @brief Has DOZEN bit(CTRL[DOZEN]) */
-#define FSL_FEATURE_FLEXIO_HAS_DOZE_MODE_SUPPORT (1)
 /* @brief FLEXIO support reset from RSTCTL */
 #define FSL_FEATURE_FLEXIO_HAS_RESET (0)
 /* @brief Has Shifter Status Register (FLEXIO_SHIFTSTAT) */
@@ -878,9 +874,17 @@
 /* SAI module features */
 
 /* @brief Receive/transmit FIFO size in item count (register bit fields TCSR[FRDE], TCSR[FRIE], TCSR[FRF], TCR1[TFW], RCSR[FRDE], RCSR[FRIE], RCSR[FRF], RCR1[RFW], registers TFRn, RFRn). */
-#define FSL_FEATURE_SAI_FIFO_COUNTn(x) (16)
+#define FSL_FEATURE_SAI_FIFO_COUNTn(x) \
+    (((x) == SAI1) ? (16) : \
+    (((x) == SAI2) ? (32) : \
+    (((x) == SAI3) ? (32) : \
+    (((x) == SAI4) ? (32) : (-1)))))
 /* @brief Receive/transmit channel number (register bit fields TCR3[TCE], RCR3[RCE], registers TDRn and RDRn). */
-#define FSL_FEATURE_SAI_CHANNEL_COUNTn(x) (2)
+#define FSL_FEATURE_SAI_CHANNEL_COUNTn(x) \
+    (((x) == SAI1) ? (2) : \
+    (((x) == SAI2) ? (1) : \
+    (((x) == SAI3) ? (1) : \
+    (((x) == SAI4) ? (4) : (-1)))))
 /* @brief Maximum words per frame (register bit fields TCR3[WDFL], TCR4[FRSZ], TMR[TWM], RCR3[WDFL], RCR4[FRSZ], RMR[RWM]). */
 #define FSL_FEATURE_SAI_MAX_WORDS_PER_FRAME (32)
 /* @brief Has support of combining multiple data channel FIFOs into single channel FIFO (register bit fields TCR3[CFR], TCR4[FCOMB], TFR0[WCP], TFR1[WCP], RCR3[CFR], RCR4[FCOMB], RFR0[RCP], RFR1[RCP]). */
@@ -918,13 +922,6 @@
 
 /* @brief Gate counts */
 #define FSL_FEATURE_SEMA42_GATE_COUNT (64)
-
-/* SINC module features */
-
-/* @brief SINC channel count. */
-#define FSL_FEATURE_SINC_CHANNEL_COUNT (4)
-/* @brief SINC CACFR register has bitfield ADMASEL. */
-#define FSL_FEATURE_SINC_CACFR_HAS_ADMASEL (0)
 
 /* SPDIF module features */
 
@@ -1020,7 +1017,7 @@
 /* @brief USDHC has no bitfield WTMK_LVL[WR_BRST_LEN] and WTMK_LVL[RD_BRST_LEN] */
 #define FSL_FEATURE_USDHC_HAS_NO_RW_BURST_LEN (1)
 /* @brief If USDHC instance support 8 bit width */
-#define FSL_FEATURE_USDHC_INSTANCE_SUPPORT_8_BIT_WIDTHn(x) (1)
+#define FSL_FEATURE_USDHC_INSTANCE_SUPPORT_8_BIT_WIDTHn(x) (0)
 /* @brief If USDHC instance support HS400 mode */
 #define FSL_FEATURE_USDHC_INSTANCE_SUPPORT_HS400_MODEn(x) (1)
 /* @brief If USDHC instance support 1v8 signal */

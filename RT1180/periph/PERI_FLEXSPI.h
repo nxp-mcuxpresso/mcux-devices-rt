@@ -1,46 +1,28 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT1181CVP2B
-**                          MIMXRT1181CVP2C
 **                          MIMXRT1181XVP2B
-**                          MIMXRT1181XVP2C
 **                          MIMXRT1182CVP2B
-**                          MIMXRT1182CVP2C
 **                          MIMXRT1182XVP2B
-**                          MIMXRT1182XVP2C
-**                          MIMXRT1186CVJ8C_cm33
-**                          MIMXRT1186CVJ8C_cm7
-**                          MIMXRT1186XVJ8C_cm33
-**                          MIMXRT1186XVJ8C_cm7
 **                          MIMXRT1187AVM8B_cm33
 **                          MIMXRT1187AVM8B_cm7
-**                          MIMXRT1187AVM8C_cm33
-**                          MIMXRT1187AVM8C_cm7
 **                          MIMXRT1187CVM8B_cm33
 **                          MIMXRT1187CVM8B_cm7
-**                          MIMXRT1187CVM8C_cm33
-**                          MIMXRT1187CVM8C_cm7
 **                          MIMXRT1187XVM8B_cm33
 **                          MIMXRT1187XVM8B_cm7
-**                          MIMXRT1187XVM8C_cm33
-**                          MIMXRT1187XVM8C_cm7
 **                          MIMXRT1189CVM8B_cm33
 **                          MIMXRT1189CVM8B_cm7
-**                          MIMXRT1189CVM8C_cm33
-**                          MIMXRT1189CVM8C_cm7
 **                          MIMXRT1189XVM8B_cm33
 **                          MIMXRT1189XVM8B_cm7
-**                          MIMXRT1189XVM8C_cm33
-**                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Build:               b240705
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for FLEXSPI
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2025 NXP
+**     Copyright 2016-2024 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -67,21 +49,17 @@
 #if !defined(FLEXSPI_H_)
 #define FLEXSPI_H_                               /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181CVP2C) || defined(CPU_MIMXRT1181XVP2B) || defined(CPU_MIMXRT1181XVP2C))
+#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181XVP2B))
 #include "MIMXRT1181_COMMON.h"
-#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182CVP2C) || defined(CPU_MIMXRT1182XVP2B) || defined(CPU_MIMXRT1182XVP2C))
+#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182XVP2B))
 #include "MIMXRT1182_COMMON.h"
-#elif (defined(CPU_MIMXRT1186CVJ8C_cm33) || defined(CPU_MIMXRT1186XVJ8C_cm33))
-#include "MIMXRT1186_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1186CVJ8C_cm7) || defined(CPU_MIMXRT1186XVJ8C_cm7))
-#include "MIMXRT1186_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187AVM8C_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187CVM8C_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33) || defined(CPU_MIMXRT1187XVM8C_cm33))
+#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33))
 #include "MIMXRT1187_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187AVM8C_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187CVM8C_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7) || defined(CPU_MIMXRT1187XVM8C_cm7))
+#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7))
 #include "MIMXRT1187_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189CVM8C_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33) || defined(CPU_MIMXRT1189XVM8C_cm33))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33))
 #include "MIMXRT1189_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189CVM8C_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7) || defined(CPU_MIMXRT1189XVM8C_cm7))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7))
 #include "MIMXRT1189_cm7_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -156,7 +134,7 @@ typedef struct {
   __IO uint32_t IPCR0;                             /**< IP Control 0, offset: 0xA0 */
   __IO uint32_t IPCR1;                             /**< IP Control 1, offset: 0xA4 */
        uint8_t RESERVED_3[8];
-  __IO uint32_t IPCMD;                             /**< IP Command, offset: 0xB0 */
+  __O  uint32_t IPCMD;                             /**< IP Command, offset: 0xB0 */
        uint8_t RESERVED_4[4];
   __IO uint32_t IPRXFCR;                           /**< IP Receive FIFO Control, offset: 0xB8 */
   __IO uint32_t IPTXFCR;                           /**< IP Transmit FIFO Control, offset: 0xBC */
@@ -335,8 +313,8 @@ typedef struct {
 #define FLEXSPI_MCR2_SCKBDIFFOPT_MASK            (0x80000U)
 #define FLEXSPI_MCR2_SCKBDIFFOPT_SHIFT           (19U)
 /*! SCKBDIFFOPT - SCLK Port B Differential Output
- *  0b0..Use B_SCLK pad as port B SCLK clock output. Port B flash memory access is available.
  *  0b1..Use B_SCLK pad as port A SCLK inverted clock output (Differential clock to A_SCLK). Port B flash memory access is not available.
+ *  0b0..Use B_SCLK pad as port B SCLK clock output. Port B flash memory access is available.
  */
 #define FLEXSPI_MCR2_SCKBDIFFOPT(x)              (((uint32_t)(((uint32_t)(x)) << FLEXSPI_MCR2_SCKBDIFFOPT_SHIFT)) & FLEXSPI_MCR2_SCKBDIFFOPT_MASK)
 
@@ -567,8 +545,8 @@ typedef struct {
 #define FLEXSPI_INTR_IPCMDDONE_SHIFT             (0U)
 /*! IPCMDDONE - IP-Triggered Command Sequences Execution Finished
  *  0b0..Interrupt condition has not occurred
- *  0b0..No effect
  *  0b1..Interrupt condition has occurred
+ *  0b0..No effect
  *  0b1..Clear the flag
  */
 #define FLEXSPI_INTR_IPCMDDONE(x)                (((uint32_t)(((uint32_t)(x)) << FLEXSPI_INTR_IPCMDDONE_SHIFT)) & FLEXSPI_INTR_IPCMDDONE_MASK)
@@ -577,8 +555,8 @@ typedef struct {
 #define FLEXSPI_INTR_IPCMDGE_SHIFT               (1U)
 /*! IPCMDGE - IP-Triggered Command Sequences Grant Timeout
  *  0b0..Interrupt condition has not occurred
- *  0b0..No effect
  *  0b1..Interrupt condition has occurred
+ *  0b0..No effect
  *  0b1..Clear the flag
  */
 #define FLEXSPI_INTR_IPCMDGE(x)                  (((uint32_t)(((uint32_t)(x)) << FLEXSPI_INTR_IPCMDGE_SHIFT)) & FLEXSPI_INTR_IPCMDGE_MASK)
@@ -587,8 +565,8 @@ typedef struct {
 #define FLEXSPI_INTR_AHBCMDGE_SHIFT              (2U)
 /*! AHBCMDGE - AHB-Triggered Command Sequences Grant Timeout
  *  0b0..Interrupt condition has not occurred
- *  0b0..No effect
  *  0b1..Interrupt condition has occurred
+ *  0b0..No effect
  *  0b1..Clear the flag
  */
 #define FLEXSPI_INTR_AHBCMDGE(x)                 (((uint32_t)(((uint32_t)(x)) << FLEXSPI_INTR_AHBCMDGE_SHIFT)) & FLEXSPI_INTR_AHBCMDGE_MASK)
@@ -597,8 +575,8 @@ typedef struct {
 #define FLEXSPI_INTR_IPCMDERR_SHIFT              (3U)
 /*! IPCMDERR - IP-Triggered Command Sequences Error
  *  0b0..Interrupt condition has not occurred
- *  0b0..No effect
  *  0b1..Interrupt condition has occurred
+ *  0b0..No effect
  *  0b1..Clear the flag
  */
 #define FLEXSPI_INTR_IPCMDERR(x)                 (((uint32_t)(((uint32_t)(x)) << FLEXSPI_INTR_IPCMDERR_SHIFT)) & FLEXSPI_INTR_IPCMDERR_MASK)
@@ -607,8 +585,8 @@ typedef struct {
 #define FLEXSPI_INTR_AHBCMDERR_SHIFT             (4U)
 /*! AHBCMDERR - AHB-Triggered Command Sequences Error
  *  0b0..Interrupt condition has not occurred
- *  0b0..No effect
  *  0b1..Interrupt condition has occurred
+ *  0b0..No effect
  *  0b1..Clear the flag
  */
 #define FLEXSPI_INTR_AHBCMDERR(x)                (((uint32_t)(((uint32_t)(x)) << FLEXSPI_INTR_AHBCMDERR_SHIFT)) & FLEXSPI_INTR_AHBCMDERR_MASK)
@@ -617,8 +595,8 @@ typedef struct {
 #define FLEXSPI_INTR_IPRXWA_SHIFT                (5U)
 /*! IPRXWA - IP Receive FIFO Watermark Available
  *  0b0..Interrupt condition has not occurred
- *  0b0..No effect
  *  0b1..Interrupt condition has occurred
+ *  0b0..No effect
  *  0b1..Clear the flag
  */
 #define FLEXSPI_INTR_IPRXWA(x)                   (((uint32_t)(((uint32_t)(x)) << FLEXSPI_INTR_IPRXWA_SHIFT)) & FLEXSPI_INTR_IPRXWA_MASK)
@@ -627,8 +605,8 @@ typedef struct {
 #define FLEXSPI_INTR_IPTXWE_SHIFT                (6U)
 /*! IPTXWE - IP Transmit FIFO Watermark Empty
  *  0b0..Interrupt condition has not occurred
- *  0b0..No effect
  *  0b1..Interrupt condition has occurred
+ *  0b0..No effect
  *  0b1..Clear the flag
  */
 #define FLEXSPI_INTR_IPTXWE(x)                   (((uint32_t)(((uint32_t)(x)) << FLEXSPI_INTR_IPTXWE_SHIFT)) & FLEXSPI_INTR_IPTXWE_MASK)
@@ -637,8 +615,8 @@ typedef struct {
 #define FLEXSPI_INTR_SCKSTOPBYRD_SHIFT           (8U)
 /*! SCKSTOPBYRD - SCLK Stopped Due To Full Receive FIFO
  *  0b0..Interrupt condition has not occurred
- *  0b0..No effect
  *  0b1..Interrupt condition has occurred
+ *  0b0..No effect
  *  0b1..Clear the flag
  */
 #define FLEXSPI_INTR_SCKSTOPBYRD(x)              (((uint32_t)(((uint32_t)(x)) << FLEXSPI_INTR_SCKSTOPBYRD_SHIFT)) & FLEXSPI_INTR_SCKSTOPBYRD_MASK)
@@ -647,8 +625,8 @@ typedef struct {
 #define FLEXSPI_INTR_SCKSTOPBYWR_SHIFT           (9U)
 /*! SCKSTOPBYWR - SCLK Stopped Due To Empty Transmit FIFO
  *  0b0..Interrupt condition has not occurred
- *  0b0..No effect
  *  0b1..Interrupt condition has occurred
+ *  0b0..No effect
  *  0b1..Clear the flag
  */
 #define FLEXSPI_INTR_SCKSTOPBYWR(x)              (((uint32_t)(((uint32_t)(x)) << FLEXSPI_INTR_SCKSTOPBYWR_SHIFT)) & FLEXSPI_INTR_SCKSTOPBYWR_MASK)
@@ -657,8 +635,8 @@ typedef struct {
 #define FLEXSPI_INTR_AHBBUSERROR_SHIFT           (10U)
 /*! AHBBUSERROR - AHB Bus Error
  *  0b0..Interrupt condition has not occurred
- *  0b0..No effect
  *  0b1..Interrupt condition has occurred
+ *  0b0..No effect
  *  0b1..Clear the flag
  */
 #define FLEXSPI_INTR_AHBBUSERROR(x)              (((uint32_t)(((uint32_t)(x)) << FLEXSPI_INTR_AHBBUSERROR_SHIFT)) & FLEXSPI_INTR_AHBBUSERROR_MASK)
@@ -667,8 +645,8 @@ typedef struct {
 #define FLEXSPI_INTR_SEQTIMEOUT_SHIFT            (11U)
 /*! SEQTIMEOUT - Sequence Execution Timeout
  *  0b0..Interrupt condition has not occurred
- *  0b0..No effect
  *  0b1..Interrupt condition has occurred
+ *  0b0..No effect
  *  0b1..Clear the flag
  */
 #define FLEXSPI_INTR_SEQTIMEOUT(x)               (((uint32_t)(((uint32_t)(x)) << FLEXSPI_INTR_SEQTIMEOUT_SHIFT)) & FLEXSPI_INTR_SEQTIMEOUT_MASK)
@@ -682,8 +660,8 @@ typedef struct {
 #define FLEXSPI_INTR_KEYERROR_SHIFT              (13U)
 /*! KEYERROR - OTFAD Key Blob Processing Error
  *  0b0..Interrupt condition has not occurred
- *  0b0..No effect
  *  0b1..Interrupt condition has occurred
+ *  0b0..No effect
  *  0b1..Clear the flag
  */
 #define FLEXSPI_INTR_KEYERROR(x)                 (((uint32_t)(((uint32_t)(x)) << FLEXSPI_INTR_KEYERROR_SHIFT)) & FLEXSPI_INTR_KEYERROR_MASK)

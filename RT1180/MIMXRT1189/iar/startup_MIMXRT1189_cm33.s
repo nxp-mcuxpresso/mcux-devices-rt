@@ -2,13 +2,13 @@
 ;  @file:    startup_MIMXRT1189_cm33.s
 ;  @purpose: CMSIS Cortex-M33 Core Device Startup File
 ;            MIMXRT1189_cm33
-;  @version: 2.0
-;  @date:    2024-1-18
-;  @build:   b250310
+;  @version: 0.1
+;  @date:    2021-3-9
+;  @build:   b231213
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.
-; Copyright 2016-2025 NXP
+; Copyright 2016-2023 NXP
 ; SPDX-License-Identifier: BSD-3-Clause
 ;
 ; The modules in this file are included in the libraries, and may be replaced

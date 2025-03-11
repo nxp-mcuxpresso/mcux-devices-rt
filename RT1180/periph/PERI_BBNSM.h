@@ -1,46 +1,28 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT1181CVP2B
-**                          MIMXRT1181CVP2C
 **                          MIMXRT1181XVP2B
-**                          MIMXRT1181XVP2C
 **                          MIMXRT1182CVP2B
-**                          MIMXRT1182CVP2C
 **                          MIMXRT1182XVP2B
-**                          MIMXRT1182XVP2C
-**                          MIMXRT1186CVJ8C_cm33
-**                          MIMXRT1186CVJ8C_cm7
-**                          MIMXRT1186XVJ8C_cm33
-**                          MIMXRT1186XVJ8C_cm7
 **                          MIMXRT1187AVM8B_cm33
 **                          MIMXRT1187AVM8B_cm7
-**                          MIMXRT1187AVM8C_cm33
-**                          MIMXRT1187AVM8C_cm7
 **                          MIMXRT1187CVM8B_cm33
 **                          MIMXRT1187CVM8B_cm7
-**                          MIMXRT1187CVM8C_cm33
-**                          MIMXRT1187CVM8C_cm7
 **                          MIMXRT1187XVM8B_cm33
 **                          MIMXRT1187XVM8B_cm7
-**                          MIMXRT1187XVM8C_cm33
-**                          MIMXRT1187XVM8C_cm7
 **                          MIMXRT1189CVM8B_cm33
 **                          MIMXRT1189CVM8B_cm7
-**                          MIMXRT1189CVM8C_cm33
-**                          MIMXRT1189CVM8C_cm7
 **                          MIMXRT1189XVM8B_cm33
 **                          MIMXRT1189XVM8B_cm7
-**                          MIMXRT1189XVM8C_cm33
-**                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Build:               b240705
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for BBNSM
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2025 NXP
+**     Copyright 2016-2024 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -67,21 +49,17 @@
 #if !defined(BBNSM_H_)
 #define BBNSM_H_                                 /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181CVP2C) || defined(CPU_MIMXRT1181XVP2B) || defined(CPU_MIMXRT1181XVP2C))
+#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181XVP2B))
 #include "MIMXRT1181_COMMON.h"
-#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182CVP2C) || defined(CPU_MIMXRT1182XVP2B) || defined(CPU_MIMXRT1182XVP2C))
+#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182XVP2B))
 #include "MIMXRT1182_COMMON.h"
-#elif (defined(CPU_MIMXRT1186CVJ8C_cm33) || defined(CPU_MIMXRT1186XVJ8C_cm33))
-#include "MIMXRT1186_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1186CVJ8C_cm7) || defined(CPU_MIMXRT1186XVJ8C_cm7))
-#include "MIMXRT1186_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187AVM8C_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187CVM8C_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33) || defined(CPU_MIMXRT1187XVM8C_cm33))
+#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33))
 #include "MIMXRT1187_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187AVM8C_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187CVM8C_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7) || defined(CPU_MIMXRT1187XVM8C_cm7))
+#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7))
 #include "MIMXRT1187_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189CVM8C_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33) || defined(CPU_MIMXRT1189XVM8C_cm33))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33))
 #include "MIMXRT1189_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189CVM8C_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7) || defined(CPU_MIMXRT1189XVM8C_cm7))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7))
 #include "MIMXRT1189_cm7_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -218,14 +196,14 @@ typedef struct {
 #define BBNSM_BBNSM_CTRL_CAL_VAL_MASK            (0x1F00U)
 #define BBNSM_BBNSM_CTRL_CAL_VAL_SHIFT           (8U)
 /*! CAL_VAL - Calibration Value
- *  0b00000..+0 counts per each 32768 ticks of the counter clock.
- *  0b00001..+1 counts per each 32768 ticks of the counter clock.
- *  0b00010..+2 counts per each 32768 ticks of the counter clock.
  *  0b01111..+15 counts per each 32768 ticks of the counter clock.
- *  0b10000..-16 counts per each 32768 ticks of the counter clock.
- *  0b10001..-15 counts per each 32768 ticks of the counter clock.
- *  0b11110..-2 counts per each 32768 ticks of the counter clock.
+ *  0b00010..+2 counts per each 32768 ticks of the counter clock.
+ *  0b00001..+1 counts per each 32768 ticks of the counter clock.
+ *  0b00000..+0 counts per each 32768 ticks of the counter clock.
  *  0b11111..-1 counts per each 32768 ticks of the counter clock.
+ *  0b11110..-2 counts per each 32768 ticks of the counter clock.
+ *  0b10001..-15 counts per each 32768 ticks of the counter clock.
+ *  0b10000..-16 counts per each 32768 ticks of the counter clock.
  */
 #define BBNSM_BBNSM_CTRL_CAL_VAL(x)              (((uint32_t)(((uint32_t)(x)) << BBNSM_BBNSM_CTRL_CAL_VAL_SHIFT)) & BBNSM_BBNSM_CTRL_CAL_VAL_MASK)
 

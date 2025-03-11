@@ -1,9 +1,7 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT1182CVP2B
-**                          MIMXRT1182CVP2C
 **                          MIMXRT1182XVP2B
-**                          MIMXRT1182XVP2C
 **
 **     Compilers:           GNU C Compiler
 **                          IAR ANSI C/C++ Compiler for ARM
@@ -12,13 +10,13 @@
 **
 **     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Build:               b240705
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1182
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2025 NXP
+**     Copyright 2016-2024 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -124,7 +122,6 @@
 #include "PERI_RTWDOG.h"
 #include "PERI_S3MU.h"
 #include "PERI_SEMA42.h"
-#include "PERI_SINC.h"
 #include "PERI_SPDIF.h"
 #include "PERI_SRC_GENERAL.h"
 #include "PERI_SRC_MIF_LN28FDSOI_SPLLRAM.h"
