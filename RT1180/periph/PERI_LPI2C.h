@@ -1,28 +1,46 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT1181CVP2B
+**                          MIMXRT1181CVP2C
 **                          MIMXRT1181XVP2B
+**                          MIMXRT1181XVP2C
 **                          MIMXRT1182CVP2B
+**                          MIMXRT1182CVP2C
 **                          MIMXRT1182XVP2B
+**                          MIMXRT1182XVP2C
+**                          MIMXRT1186CVJ8C_cm33
+**                          MIMXRT1186CVJ8C_cm7
+**                          MIMXRT1186XVJ8C_cm33
+**                          MIMXRT1186XVJ8C_cm7
 **                          MIMXRT1187AVM8B_cm33
 **                          MIMXRT1187AVM8B_cm7
+**                          MIMXRT1187AVM8C_cm33
+**                          MIMXRT1187AVM8C_cm7
 **                          MIMXRT1187CVM8B_cm33
 **                          MIMXRT1187CVM8B_cm7
+**                          MIMXRT1187CVM8C_cm33
+**                          MIMXRT1187CVM8C_cm7
 **                          MIMXRT1187XVM8B_cm33
 **                          MIMXRT1187XVM8B_cm7
+**                          MIMXRT1187XVM8C_cm33
+**                          MIMXRT1187XVM8C_cm7
 **                          MIMXRT1189CVM8B_cm33
 **                          MIMXRT1189CVM8B_cm7
+**                          MIMXRT1189CVM8C_cm33
+**                          MIMXRT1189CVM8C_cm7
 **                          MIMXRT1189XVM8B_cm33
 **                          MIMXRT1189XVM8B_cm7
+**                          MIMXRT1189XVM8C_cm33
+**                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b240705
+**     Build:               b250310
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for LPI2C
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -49,17 +67,21 @@
 #if !defined(LPI2C_H_)
 #define LPI2C_H_                                 /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181XVP2B))
+#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181CVP2C) || defined(CPU_MIMXRT1181XVP2B) || defined(CPU_MIMXRT1181XVP2C))
 #include "MIMXRT1181_COMMON.h"
-#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182XVP2B))
+#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182CVP2C) || defined(CPU_MIMXRT1182XVP2B) || defined(CPU_MIMXRT1182XVP2C))
 #include "MIMXRT1182_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33))
+#elif (defined(CPU_MIMXRT1186CVJ8C_cm33) || defined(CPU_MIMXRT1186XVJ8C_cm33))
+#include "MIMXRT1186_cm33_COMMON.h"
+#elif (defined(CPU_MIMXRT1186CVJ8C_cm7) || defined(CPU_MIMXRT1186XVJ8C_cm7))
+#include "MIMXRT1186_cm7_COMMON.h"
+#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187AVM8C_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187CVM8C_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33) || defined(CPU_MIMXRT1187XVM8C_cm33))
 #include "MIMXRT1187_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7))
+#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187AVM8C_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187CVM8C_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7) || defined(CPU_MIMXRT1187XVM8C_cm7))
 #include "MIMXRT1187_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189CVM8C_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33) || defined(CPU_MIMXRT1189XVM8C_cm33))
 #include "MIMXRT1189_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189CVM8C_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7) || defined(CPU_MIMXRT1189XVM8C_cm7))
 #include "MIMXRT1189_cm7_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -278,8 +300,8 @@ typedef struct {
 #define LPI2C_MSR_EPF_SHIFT                      (8U)
 /*! EPF - End Packet Flag
  *  0b0..No Stop or repeated Start generated
- *  0b1..Stop or repeated Start generated
  *  0b0..No effect
+ *  0b1..Stop or repeated Start generated
  *  0b1..Clear the flag
  */
 #define LPI2C_MSR_EPF(x)                         (((uint32_t)(((uint32_t)(x)) << LPI2C_MSR_EPF_SHIFT)) & LPI2C_MSR_EPF_MASK)
@@ -288,8 +310,8 @@ typedef struct {
 #define LPI2C_MSR_SDF_SHIFT                      (9U)
 /*! SDF - Stop Detect Flag
  *  0b0..No Stop condition generated
- *  0b1..Stop condition generated
  *  0b0..No effect
+ *  0b1..Stop condition generated
  *  0b1..Clear the flag
  */
 #define LPI2C_MSR_SDF(x)                         (((uint32_t)(((uint32_t)(x)) << LPI2C_MSR_SDF_SHIFT)) & LPI2C_MSR_SDF_MASK)
@@ -298,8 +320,8 @@ typedef struct {
 #define LPI2C_MSR_NDF_SHIFT                      (10U)
 /*! NDF - NACK Detect Flag
  *  0b0..No unexpected NACK detected
- *  0b1..Unexpected NACK detected
  *  0b0..No effect
+ *  0b1..Unexpected NACK detected
  *  0b1..Clear the flag
  */
 #define LPI2C_MSR_NDF(x)                         (((uint32_t)(((uint32_t)(x)) << LPI2C_MSR_NDF_SHIFT)) & LPI2C_MSR_NDF_MASK)
@@ -308,8 +330,8 @@ typedef struct {
 #define LPI2C_MSR_ALF_SHIFT                      (11U)
 /*! ALF - Arbitration Lost Flag
  *  0b0..Controller did not lose arbitration
- *  0b1..Controller lost arbitration
  *  0b0..No effect
+ *  0b1..Controller lost arbitration
  *  0b1..Clear the flag
  */
 #define LPI2C_MSR_ALF(x)                         (((uint32_t)(((uint32_t)(x)) << LPI2C_MSR_ALF_SHIFT)) & LPI2C_MSR_ALF_MASK)
@@ -318,8 +340,8 @@ typedef struct {
 #define LPI2C_MSR_FEF_SHIFT                      (12U)
 /*! FEF - FIFO Error Flag
  *  0b0..No FIFO error
- *  0b1..FIFO error
  *  0b0..No effect
+ *  0b1..FIFO error
  *  0b1..Clear the flag
  */
 #define LPI2C_MSR_FEF(x)                         (((uint32_t)(((uint32_t)(x)) << LPI2C_MSR_FEF_SHIFT)) & LPI2C_MSR_FEF_MASK)
@@ -328,8 +350,8 @@ typedef struct {
 #define LPI2C_MSR_PLTF_SHIFT                     (13U)
 /*! PLTF - Pin Low Timeout Flag
  *  0b0..Pin low timeout did not occur
- *  0b1..Pin low timeout occurred
  *  0b0..No effect
+ *  0b1..Pin low timeout occurred
  *  0b1..Clear the flag
  */
 #define LPI2C_MSR_PLTF(x)                        (((uint32_t)(((uint32_t)(x)) << LPI2C_MSR_PLTF_SHIFT)) & LPI2C_MSR_PLTF_MASK)
@@ -338,8 +360,8 @@ typedef struct {
 #define LPI2C_MSR_DMF_SHIFT                      (14U)
 /*! DMF - Data Match Flag
  *  0b0..Matching data not received
- *  0b1..Matching data received
  *  0b0..No effect
+ *  0b1..Matching data received
  *  0b1..Clear the flag
  */
 #define LPI2C_MSR_DMF(x)                         (((uint32_t)(((uint32_t)(x)) << LPI2C_MSR_DMF_SHIFT)) & LPI2C_MSR_DMF_MASK)
@@ -348,8 +370,8 @@ typedef struct {
 #define LPI2C_MSR_STF_SHIFT                      (15U)
 /*! STF - Start Flag
  *  0b0..Start condition not detected
- *  0b1..Start condition detected
  *  0b0..No effect
+ *  0b1..Start condition detected
  *  0b1..Clear the flag
  */
 #define LPI2C_MSR_STF(x)                         (((uint32_t)(((uint32_t)(x)) << LPI2C_MSR_STF_SHIFT)) & LPI2C_MSR_STF_MASK)
@@ -895,8 +917,8 @@ typedef struct {
 #define LPI2C_SSR_RSF_SHIFT                      (8U)
 /*! RSF - Repeated Start Flag
  *  0b0..No repeated Start detected
- *  0b1..Repeated Start detected
  *  0b0..No effect
+ *  0b1..Repeated Start detected
  *  0b1..Clear the flag
  */
 #define LPI2C_SSR_RSF(x)                         (((uint32_t)(((uint32_t)(x)) << LPI2C_SSR_RSF_SHIFT)) & LPI2C_SSR_RSF_MASK)
@@ -905,8 +927,8 @@ typedef struct {
 #define LPI2C_SSR_SDF_SHIFT                      (9U)
 /*! SDF - Stop Detect Flag
  *  0b0..No Stop detected
- *  0b1..Stop detected
  *  0b0..No effect
+ *  0b1..Stop detected
  *  0b1..Clear the flag
  */
 #define LPI2C_SSR_SDF(x)                         (((uint32_t)(((uint32_t)(x)) << LPI2C_SSR_SDF_SHIFT)) & LPI2C_SSR_SDF_MASK)
@@ -915,8 +937,8 @@ typedef struct {
 #define LPI2C_SSR_BEF_SHIFT                      (10U)
 /*! BEF - Bit Error Flag
  *  0b0..No bit error occurred
- *  0b1..Bit error occurred
  *  0b0..No effect
+ *  0b1..Bit error occurred
  *  0b1..Clear the flag
  */
 #define LPI2C_SSR_BEF(x)                         (((uint32_t)(((uint32_t)(x)) << LPI2C_SSR_BEF_SHIFT)) & LPI2C_SSR_BEF_MASK)
@@ -925,8 +947,8 @@ typedef struct {
 #define LPI2C_SSR_FEF_SHIFT                      (11U)
 /*! FEF - FIFO Error Flag
  *  0b0..No FIFO error
- *  0b1..FIFO error
  *  0b0..No effect
+ *  0b1..FIFO error
  *  0b1..Clear the flag
  */
 #define LPI2C_SSR_FEF(x)                         (((uint32_t)(((uint32_t)(x)) << LPI2C_SSR_FEF_SHIFT)) & LPI2C_SSR_FEF_MASK)

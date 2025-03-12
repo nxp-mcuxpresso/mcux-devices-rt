@@ -67,5 +67,7 @@ device.hardware_data:
         part:
           - name: "MIMXRT1182CVP2B"
           - name: "MIMXRT1182XVP2B"
+          - name: "MIMXRT1182CVP2C"
+          - name: "MIMXRT1182XVP2C"
         modules:
 ...

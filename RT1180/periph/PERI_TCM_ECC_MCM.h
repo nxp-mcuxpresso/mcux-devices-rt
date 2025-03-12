@@ -1,28 +1,46 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT1181CVP2B
+**                          MIMXRT1181CVP2C
 **                          MIMXRT1181XVP2B
+**                          MIMXRT1181XVP2C
 **                          MIMXRT1182CVP2B
+**                          MIMXRT1182CVP2C
 **                          MIMXRT1182XVP2B
+**                          MIMXRT1182XVP2C
+**                          MIMXRT1186CVJ8C_cm33
+**                          MIMXRT1186CVJ8C_cm7
+**                          MIMXRT1186XVJ8C_cm33
+**                          MIMXRT1186XVJ8C_cm7
 **                          MIMXRT1187AVM8B_cm33
 **                          MIMXRT1187AVM8B_cm7
+**                          MIMXRT1187AVM8C_cm33
+**                          MIMXRT1187AVM8C_cm7
 **                          MIMXRT1187CVM8B_cm33
 **                          MIMXRT1187CVM8B_cm7
+**                          MIMXRT1187CVM8C_cm33
+**                          MIMXRT1187CVM8C_cm7
 **                          MIMXRT1187XVM8B_cm33
 **                          MIMXRT1187XVM8B_cm7
+**                          MIMXRT1187XVM8C_cm33
+**                          MIMXRT1187XVM8C_cm7
 **                          MIMXRT1189CVM8B_cm33
 **                          MIMXRT1189CVM8B_cm7
+**                          MIMXRT1189CVM8C_cm33
+**                          MIMXRT1189CVM8C_cm7
 **                          MIMXRT1189XVM8B_cm33
 **                          MIMXRT1189XVM8B_cm7
+**                          MIMXRT1189XVM8C_cm33
+**                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b240705
+**     Build:               b250310
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for TCM_ECC_MCM
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -49,17 +67,21 @@
 #if !defined(TCM_ECC_MCM_H_)
 #define TCM_ECC_MCM_H_                           /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181XVP2B))
+#if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181CVP2C) || defined(CPU_MIMXRT1181XVP2B) || defined(CPU_MIMXRT1181XVP2C))
 #include "MIMXRT1181_COMMON.h"
-#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182XVP2B))
+#elif (defined(CPU_MIMXRT1182CVP2B) || defined(CPU_MIMXRT1182CVP2C) || defined(CPU_MIMXRT1182XVP2B) || defined(CPU_MIMXRT1182XVP2C))
 #include "MIMXRT1182_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33))
+#elif (defined(CPU_MIMXRT1186CVJ8C_cm33) || defined(CPU_MIMXRT1186XVJ8C_cm33))
+#include "MIMXRT1186_cm33_COMMON.h"
+#elif (defined(CPU_MIMXRT1186CVJ8C_cm7) || defined(CPU_MIMXRT1186XVJ8C_cm7))
+#include "MIMXRT1186_cm7_COMMON.h"
+#elif (defined(CPU_MIMXRT1187AVM8B_cm33) || defined(CPU_MIMXRT1187AVM8C_cm33) || defined(CPU_MIMXRT1187CVM8B_cm33) || defined(CPU_MIMXRT1187CVM8C_cm33) || defined(CPU_MIMXRT1187XVM8B_cm33) || defined(CPU_MIMXRT1187XVM8C_cm33))
 #include "MIMXRT1187_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7))
+#elif (defined(CPU_MIMXRT1187AVM8B_cm7) || defined(CPU_MIMXRT1187AVM8C_cm7) || defined(CPU_MIMXRT1187CVM8B_cm7) || defined(CPU_MIMXRT1187CVM8C_cm7) || defined(CPU_MIMXRT1187XVM8B_cm7) || defined(CPU_MIMXRT1187XVM8C_cm7))
 #include "MIMXRT1187_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm33) || defined(CPU_MIMXRT1189CVM8C_cm33) || defined(CPU_MIMXRT1189XVM8B_cm33) || defined(CPU_MIMXRT1189XVM8C_cm33))
 #include "MIMXRT1189_cm33_COMMON.h"
-#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7))
+#elif (defined(CPU_MIMXRT1189CVM8B_cm7) || defined(CPU_MIMXRT1189CVM8C_cm7) || defined(CPU_MIMXRT1189XVM8B_cm7) || defined(CPU_MIMXRT1189XVM8C_cm7))
 #include "MIMXRT1189_cm7_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -143,16 +165,16 @@ typedef struct {
 #define TCM_ECC_MCM_TCMECCR_WECC_DIS_MASK        (0x1U)
 #define TCM_ECC_MCM_TCMECCR_WECC_DIS_SHIFT       (0U)
 /*! WECC_DIS - TCM ECC Write Generation Disable
- *  0b1..Disable
  *  0b0..Enable
+ *  0b1..Disable
  */
 #define TCM_ECC_MCM_TCMECCR_WECC_DIS(x)          (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_TCMECCR_WECC_DIS_SHIFT)) & TCM_ECC_MCM_TCMECCR_WECC_DIS_MASK)
 
 #define TCM_ECC_MCM_TCMECCR_RECC_DIS_MASK        (0x2U)
 #define TCM_ECC_MCM_TCMECCR_RECC_DIS_SHIFT       (1U)
 /*! RECC_DIS - TCM ECC Read Check Disable
- *  0b1..Disable
  *  0b0..Enable
+ *  0b1..Disable
  */
 #define TCM_ECC_MCM_TCMECCR_RECC_DIS(x)          (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_TCMECCR_RECC_DIS_SHIFT)) & TCM_ECC_MCM_TCMECCR_RECC_DIS_MASK)
 /*! @} */
@@ -164,8 +186,8 @@ typedef struct {
 #define TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRM_INT_SHIFT (10U)
 /*! CODE_TCM_ECC_ERRM_INT - Code TCM Access Multibit ECC Error Interrupt Status
  *  0b0..No error
- *  0b1..Error
  *  0b0..No effect
+ *  0b1..Error
  *  0b1..Clear the flag
  */
 #define TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRM_INT(x) (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRM_INT_SHIFT)) & TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRM_INT_MASK)
@@ -174,8 +196,8 @@ typedef struct {
 #define TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRS_INT_SHIFT (11U)
 /*! CODE_TCM_ECC_ERRS_INT - Code TCM Access Single-Bit ECC Error Interrupt Status
  *  0b0..No error
- *  0b1..Error
  *  0b0..No effect
+ *  0b1..Error
  *  0b1..Clear the flag
  */
 #define TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRS_INT(x) (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRS_INT_SHIFT)) & TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRS_INT_MASK)
@@ -184,8 +206,8 @@ typedef struct {
 #define TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRM_INT_SHIFT (12U)
 /*! SYS_TCM_ECC_ERRM_INT - System TCM Access Multibit ECC Error Interrupt Status
  *  0b0..No error
- *  0b1..Error
  *  0b0..No effect
+ *  0b1..Error
  *  0b1..Clear the flag
  */
 #define TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRM_INT(x) (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRM_INT_SHIFT)) & TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRM_INT_MASK)
@@ -194,8 +216,8 @@ typedef struct {
 #define TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRS_INT_SHIFT (13U)
 /*! SYS_TCM_ECC_ERRS_INT - System TCM Access Single-Bit ECC Error Interrupt Status
  *  0b0..No error
- *  0b1..Error
  *  0b0..No effect
+ *  0b1..Error
  *  0b1..Clear the flag
  */
 #define TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRS_INT(x) (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRS_INT_SHIFT)) & TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRS_INT_MASK)
