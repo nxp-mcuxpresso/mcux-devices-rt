@@ -103,9 +103,9 @@
     (SLEEPCON1_SHA_MEDSEN_TSTAT0_FLEXIO_B_LPACCEPT_MASK | SLEEPCON1_SHA_MEDSEN_TSTAT0_MICFIL_STOP_MASK)
 #endif
 /* PMC PDSLEEPCFG0. Note, when V2COM_DSR other VDD2 and VDDN switches should be off.   */
-#define PCFG0_DEEP_SLEEP                                                                             \
-    (PMC_PDSLEEPCFG0_V2DSP_PD_MASK | PMC_PDSLEEPCFG0_V2MIPI_PD_MASK | PMC_PDSLEEPCFG0_DCDC_LP_MASK | \
-     PMC_PDSLEEPCFG0_V2NMED_DSR_MASK | PMC_PDSLEEPCFG0_VNCOM_DSR_MASK)
+#define PCFG0_DEEP_SLEEP                                                                                \
+    (PMC_PDSLEEPCFG0_V2DSP_PD_MASK | PMC_PDSLEEPCFG0_V2MIPI_PD_MASK | PMC_PDSLEEPCFG0_V2NMED_DSR_MASK | \
+     PMC_PDSLEEPCFG0_VNCOM_DSR_MASK)
 #define PCFG0_DSR                                                                                         \
     (PMC_PDSLEEPCFG0_V2COMP_DSR_MASK | PMC_PDSLEEPCFG0_V2NMED_DSR_MASK | PMC_PDSLEEPCFG0_V2COM_DSR_MASK | \
      PMC_PDSLEEPCFG0_VNCOM_DSR_MASK)
@@ -753,10 +753,20 @@ void POWER_SelectSleepSetpoint(power_regulator_t regulator, uint32_t setpoint)
 
 void POWER_SetRunRegulatorMode(power_regulator_t regulator, uint32_t mode)
 {
+    assert(mode <= 3U);
+
     if (regulator == kRegulator_DCDC)
     {
-        PMC->PDRUNCFG0 &= ~PMC_PDRUNCFG0_DCDC_LP_MASK;
-        PMC->PDRUNCFG0 |= PMC_PDRUNCFG0_DCDC_LP(mode);
+        if (SYSCON3->SILICONREV_ID == 0xA0000UL)
+        {
+            PMC->PDRUNCFG0 &= ~PMC_PDRUNCFG0_DCDC_MODE_MASK;
+            PMC->PDRUNCFG0 |= PMC_PDRUNCFG0_DCDC_MODE(mode << 1U); /* A0 only has Bit12 for HP/LP. */
+        }
+        else
+        {
+            PMC->PDRUNCFG0 &= ~PMC_PDRUNCFG0_DCDC_MODE_MASK;
+            PMC->PDRUNCFG0 |= PMC_PDRUNCFG0_DCDC_MODE(mode);
+        }
     }
     else if (regulator == kRegulator_Vdd2LDO)
     {
@@ -774,8 +784,13 @@ void POWER_SetSleepRegulatorMode(power_regulator_t regulator, uint32_t mode)
 {
     if (regulator == kRegulator_DCDC)
     {
-        PMC->PDSLEEPCFG0 &= ~PMC_PDSLEEPCFG0_DCDC_LP_MASK;
-        PMC->PDSLEEPCFG0 |= PMC_PDSLEEPCFG0_DCDC_LP(mode);
+#if defined(FSL_FEATURE_SILICON_VERSION_A)
+        PMC->PDSLEEPCFG0 &= ~PMC_PDRUNCFG0_DCDC_LP_MASK;
+        PMC->PDSLEEPCFG0 |= PMC_PDRUNCFG0_DCDC_LP(mode); 
+#else
+        PMC->PDSLEEPCFG0 &= ~PMC_PDRUNCFG0_DCDC_MODE_MASK;
+        PMC->PDSLEEPCFG0 |= PMC_PDRUNCFG0_DCDC_MODE(mode);
+#endif
     }
     else if (regulator == kRegulator_Vdd2LDO)
     {
@@ -822,8 +837,9 @@ void POWER_ConfigRBBVolt(const power_rbb_voltage_t *config)
 
 void POWER_SetVddnSupplySrc(power_vdd_src_t src)
 {
+#if defined(FSL_FEATURE_SILICON_VERSION_A) && (FSL_FEATURE_SILICON_VERSION_A != 0U)
     assert(src == kVddSrc_PMIC); /* The VDDN can't be supplied by DCDC due to ERRATA052405. */
-
+#endif
     s_vddnSrc = src;
     if (s_vddnSrc == kVddSrc_PMIC) /* If powered by external PMIC, power down DCDC. */
     {
