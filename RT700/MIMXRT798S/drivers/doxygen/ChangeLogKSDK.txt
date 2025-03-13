@@ -2,7 +2,10 @@
 @page driver_log Driver Change Log
 
 @section clock CLOCK
-  The current CLOCK driver version is 2.4.0.
+  The current CLOCK driver version is 2.4.1.
+  - 2.4.1
+    - Bug fixes
+      - Fixed bugs in POWER_DisableSleepRegulators POWER_EnableSleepRegulators.
   - 2.4.0
     - New features
       - Added return value for CLOCK_InitMainPfd CLOCK_InitAudioPfd.

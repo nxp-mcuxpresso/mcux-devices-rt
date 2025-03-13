@@ -1,5 +1,5 @@
 /*
- * Copyright 2023-2024 NXP
+ * Copyright 2023-2025 NXP
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
@@ -19,8 +19,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief power driver version 2.4.0. */
-#define FSL_POWER_DRIVER_VERSION (MAKE_VERSION(2, 4, 0))
+/*! @brief power driver version 2.4.1. */
+#define FSL_POWER_DRIVER_VERSION (MAKE_VERSION(2, 4, 1))
 /*@}*/
 
 /* Define the default PMIC modes for power modes. */

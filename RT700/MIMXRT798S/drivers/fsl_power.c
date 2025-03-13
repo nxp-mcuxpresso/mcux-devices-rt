@@ -856,12 +856,12 @@ void POWER_DisableRegulators(uint32_t mask)
 
 void POWER_EnableSleepRegulators(uint32_t mask)
 {
-    PMC->POWERCFG |= mask & 0x7FU; /* Ignore all mode control bits. */
+    PMC->POWERCFG &= ~(mask & 0x7FU); /* Ignore all mode control bits. */
 }
 
 void POWER_DisableSleepRegulators(uint32_t mask)
 {
-    PMC->POWERCFG &= ~(mask & 0x7FU); /* Ignore all mode control bits. */
+    PMC->POWERCFG |= mask & 0x7FU; /* Ignore all mode control bits. */
 }
 
 void POWER_SetPMICModeDelay(uint8_t value)
