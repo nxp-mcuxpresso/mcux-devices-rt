@@ -44,8 +44,8 @@ m_sdram_size             = DEFINED(__dual_image__) ? 0x00200000 : 0x02000000;
 m_hyperram_start         = DEFINED(__dual_image__) ? 0x14600000 : 0x14000000;
 m_hyperram_size          = DEFINED(__dual_image__) ? 0x00200000 : 0x00800000;
 m_flash_start            = 0x38000000;
-m_flash_s_size           = 0x00800000;
-m_flash_ns_size          = 0x00800000;
+m_flash_s_size           = 0x00400000;
+m_flash_ns_size          = 0x00400000;
 
 m_core1_image_maximum_size = 0x00040000;
 
@@ -64,7 +64,7 @@ m_xmcd_end               = m_xmcd_start + m_xmcd_size - 1;
 m_container_start        = m_flash_start + m_container_offset;
 m_container_end          = m_container_start + m_container_size - 1;
 
-app_image_offset         = DEFINED(__dual_image__) ? 0x0010B000 : 0x0000B000;
+app_image_offset         = 0x0000B000;
 vector_table_size        = 0x00000400;
 veneer_size              = 0x00000400;
 m_qacode_start           = m_code_tcm_start + (DEFINED(__ram_vector_table__) ? vector_table_size : 0);
