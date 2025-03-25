@@ -28,13 +28,13 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241121
+**     Build:               b250325
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for USBNC
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -142,7 +142,9 @@ typedef struct {
        uint8_t RESERVED_1[84];
   __IO uint32_t EUSB_CTRL0;                        /**< eUSB Control 0, offset: 0x100, available only on: USBNC1 (missing on USBNC0) */
   __IO uint32_t EUSB_CTRL1;                        /**< eUSB Control 1, offset: 0x104, available only on: USBNC1 (missing on USBNC0) */
-       uint8_t RESERVED_2[64];
+       uint8_t RESERVED_2[4];
+  __IO uint32_t EUSB_CTRL3;                        /**< eUSB Control 3, offset: 0x10C, available only on: USBNC1 (missing on USBNC0) */
+       uint8_t RESERVED_3[56];
   __IO uint32_t EUSB_RAP;                          /**< eUSB RAP Control and Status, offset: 0x148, available only on: USBNC1 (missing on USBNC0) */
 } USBNC_Type;
 
@@ -487,6 +489,32 @@ typedef struct {
  *  0b11..Slower 10%
  */
 #define USBNC_EUSB_CTRL1_EUSB_FSTX_OPT(x)        (((uint32_t)(((uint32_t)(x)) << USBNC_EUSB_CTRL1_EUSB_FSTX_OPT_SHIFT)) & USBNC_EUSB_CTRL1_EUSB_FSTX_OPT_MASK)
+/*! @} */
+
+/*! @name EUSB_CTRL3 - eUSB Control 3 */
+/*! @{ */
+
+#define USBNC_EUSB_CTRL3_XCfg_U2_SWING_MASK      (0xFU)
+#define USBNC_EUSB_CTRL3_XCfg_U2_SWING_SHIFT     (0U)
+/*! XCfg_U2_SWING - HSTX swing
+ *  0b0000..200mV
+ *  0b0001..195.9mV
+ *  0b0010..191.7mV
+ *  0b0011..187.5mV
+ *  0b0100..216.7mV
+ *  0b0101..212.5mV
+ *  0b0110..208.4mV
+ *  0b0111..204.2mV
+ *  0b1000..233.4mV
+ *  0b1001..229.2mV
+ *  0b1010..225mV
+ *  0b1011..220.9mV
+ *  0b1100..250mV
+ *  0b1101..245.9mV
+ *  0b1110..241.7mV
+ *  0b1111..237.5mV
+ */
+#define USBNC_EUSB_CTRL3_XCfg_U2_SWING(x)        (((uint32_t)(((uint32_t)(x)) << USBNC_EUSB_CTRL3_XCfg_U2_SWING_SHIFT)) & USBNC_EUSB_CTRL3_XCfg_U2_SWING_MASK)
 /*! @} */
 
 /*! @name EUSB_RAP - eUSB RAP Control and Status */
