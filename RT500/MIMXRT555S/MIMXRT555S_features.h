@@ -1,13 +1,13 @@
 /*
 ** ###################################################################
 **     Version:             rev. 4.0, 2020-05-18
-**     Build:               b241127
+**     Build:               b250325
 **
 **     Abstract:
 **         Chip specific module features.
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -160,6 +160,8 @@
 #define FSL_FEATURE_ACMP_HAS_C1_DMODE_BIT (1)
 /* @brief Has C2 RRE Bit */
 #define FSL_FEATURE_ACMP_HAS_C2_RRE_BIT (0)
+/* @brief Has C3 RDIVE Bit */
+#define FSL_FEATURE_ACMP_HAS_C3_RDIVE_BIT (1)
 /* @brief If support 3v domain */
 #define FSL_FEATURE_ACMP_HAS_NO_3V_DOMAIN (0)
 /* @brief If has acmp sample signal */
@@ -543,6 +545,12 @@
 #define FSL_FEATURE_I3C_HAS_ERRATA_051617 (1)
 /* @brief Has ERRATA_052123. */
 #define FSL_FEATURE_I3C_HAS_ERRATA_052123 (1)
+/* @brief Has ERRATA_052086. */
+#define FSL_FEATURE_I3C_HAS_ERRATA_052086 (0)
+/* @brief Has IBI bytes. */
+#define FSL_FEATURE_I3C_HAS_IBI_PAYLOAD_SIZE_OPTIONAL_BYTE (0)
+/* @brief Has SCL delay after START. */
+#define FSL_FEATURE_I3C_HAS_START_SCL_DELAY (0)
 /* @brief Has no the master write data register for DMA. */
 #define FSL_FEATURE_I3C_HAS_NO_MASTER_DMA_WDATA_REG (0)
 
