@@ -34,11 +34,9 @@ define symbol m_ocram1_size            = 0x0007C000;
 define symbol m_ocram2_start           = 0x20500000;
 define symbol m_ocram2_size            = 0x00040000;
 
-define symbol m_sdram_start            = 0x80000000;
-define symbol m_sdram_size             = 0x01E00000;  /* Reserved 2M for CM33 usage, so size = physical memory size - 2M */
-define symbol m_hyperram_start         = 0x04000000;
+define symbol m_hyperram_start         = 0x28000000;
 define symbol m_hyperram_size          = 0x00600000;  /* Reserved 2M for CM33 usage, so size = physical memory size - 2M */
-define symbol m_flash_start            = 0x28000000;
+define symbol m_flash_start            = 0x04000000;
 define symbol m_flash_size             = 0x01000000;
 
 /* General definition */

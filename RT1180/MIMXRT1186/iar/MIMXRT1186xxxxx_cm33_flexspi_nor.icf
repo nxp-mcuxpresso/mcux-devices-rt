@@ -36,11 +36,9 @@ define symbol m_ocram2_start           = 0x20500000;
 define symbol m_ocram2_size            = 0x00040000;
 
 /* CM33 use last 2M bytes space of sdram and hyperram for dual image framework */
-define symbol m_sdram_start            = isdefinedsymbol(__dual_image__) ? 0x81E00000 : 0x80000000;
-define symbol m_sdram_size             = isdefinedsymbol(__dual_image__) ? 0x00200000 : 0x02000000;
-define symbol m_hyperram_start         = isdefinedsymbol(__dual_image__) ? 0x04600000 : 0x04000000;
+define symbol m_hyperram_start         = isdefinedsymbol(__dual_image__) ? 0x28600000 : 0x28000000;
 define symbol m_hyperram_size          = isdefinedsymbol(__dual_image__) ? 0x00200000 : 0x00800000;
-define symbol m_flash_start            = 0x28000000;
+define symbol m_flash_start            = 0x04000000;
 define symbol m_flash_size             = 0x01000000;
 
 define symbol m_core1_image_maximum_size = 0x00040000;

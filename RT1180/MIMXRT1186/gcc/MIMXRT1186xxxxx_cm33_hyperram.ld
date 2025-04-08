@@ -35,11 +35,9 @@ m_ocram2_start           = 0x20500000;
 m_ocram2_size            = 0x00040000;
 
 /* CM33 use last 2M bytes space of sdram and hyperram for dual image framework */
-m_sdram_start            = DEFINED(__dual_image__) ? 0x81E00000 : 0x80000000;
-m_sdram_size             = DEFINED(__dual_image__) ? 0x00200000 : 0x02000000;
-m_hyperram_start         = DEFINED(__dual_image__) ? 0x04600000 : 0x04000000;
+m_hyperram_start         = DEFINED(__dual_image__) ? 0x28600000 : 0x28000000;
 m_hyperram_size          = DEFINED(__dual_image__) ? 0x00200000 : 0x00800000;
-m_flash_start            = 0x28000000;
+m_flash_start            = 0x04000000;
 m_flash_size             = 0x01000000;
 
 m_core1_image_maximum_size = 0x00040000;

@@ -39,18 +39,14 @@
 
 #if defined(__dual_image__)
 /* CM33 use last 2M bytes space of sdram and hyperram for dual image framework */
-#define m_sdram_start                  0x81E00000
-#define m_sdram_size                   0x00200000
-#define m_hyperram_start               0x04600000
+#define m_hyperram_start               0x28600000
 #define m_hyperram_size                0x00200000
 #else
-#define m_sdram_start                  0x80000000
-#define m_sdram_size                   0x02000000
-#define m_hyperram_start               0x04000000
+#define m_hyperram_start               0x28000000
 #define m_hyperram_size                0x00800000
 #endif
 
-#define m_flash_start                  0x28000000
+#define m_flash_start                  0x04000000
 #define m_flash_size                   0x01000000
 #define m_core1_image_maximum_size     0x00040000
 

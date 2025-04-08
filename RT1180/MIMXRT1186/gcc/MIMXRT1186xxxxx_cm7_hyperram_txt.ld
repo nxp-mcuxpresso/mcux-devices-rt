@@ -33,11 +33,9 @@ m_ocram1_start           = 0x20484000;  /* OCRAM1 first 16K access is blocked by
 m_ocram1_size            = 0x0007C000;
 m_ocram2_start           = 0x20500000;
 m_ocram2_size            = 0x00040000;
-m_sdram_start            = 0x80000000;
-m_sdram_size             = 0x01E00000;  /* Reserved 2M for CM33 usage, so size = physical memory size - 2M */
-m_hyperram_start         = 0x04000000;
+m_hyperram_start         = 0x28000000;
 m_hyperram_size          = 0x00600000;  /* Reserved 2M for CM33 usage, so size = physical memory size - 2M */
-m_flash_start            = 0x28000000;
+m_flash_start            = 0x04000000;
 m_flash_size             = 0x01000000;
 
 /* General definition */
