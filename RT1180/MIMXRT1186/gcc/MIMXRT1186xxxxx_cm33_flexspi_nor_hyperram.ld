@@ -57,7 +57,7 @@ m_xmcd_end               = m_xmcd_start + m_xmcd_size - 1;
 m_container_start        = m_flash_start + m_container_offset;
 m_container_end          = m_container_start + m_container_size - 1;
 
-app_image_offset         = DEFINED(__dual_image__) ? 0x0010B000 : 0x0000B000;
+app_image_offset         = 0x0000B000;
 vector_table_size        = 0x00000400;
 m_qacode_start           = m_code_tcm_start + (DEFINED(__ram_vector_table__) ? vector_table_size : 0);
 m_qacode_end             = m_code_tcm_start + m_code_tcm_size - 1;
