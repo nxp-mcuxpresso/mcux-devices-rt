@@ -35,11 +35,11 @@ m_ocram2_start           = 0x20500000;
 m_ocram2_size            = 0x00040000;
 m_hyperram_start         = 0x28000000;
 m_hyperram_size          = 0x00600000;  /* Reserved 2M for CM33 usage, so size = physical memory size - 2M */
-m_flash_start            = 0x04000000;
-m_flash_size             = 0x01000000;
+m_flash_start            = 0x04800000;
+m_flash_size             = 0x00800000;
 
 /* General definition */
-app_image_offset         = 0x0000B000;
+app_image_offset         = 0x00000000;
 vector_table_size        = 0x00000400;
 m_qacode_start           = m_itcm_start + (DEFINED(__ram_vector_table__) ? vector_table_size : 0);
 m_qacode_end             = m_itcm_start + m_dtcm_size - 1;
