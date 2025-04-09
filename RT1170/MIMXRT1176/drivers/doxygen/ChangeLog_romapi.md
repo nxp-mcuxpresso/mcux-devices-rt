@@ -1,5 +1,9 @@
 # ROMAPI
 
+## [1.1.2]
+- New features
+  - Support C0 silicon
+
 ## [1.1.1]
 
 - Improvements
