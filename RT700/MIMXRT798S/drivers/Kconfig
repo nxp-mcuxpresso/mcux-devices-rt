@@ -1,5 +1,4 @@
-# Copyright 2024 NXP
-# All rights reserved.
+# Copyright 2024-2025 NXP
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
@@ -12,6 +11,7 @@ menu "Device specific drivers configuration"
     rsource "./Kconfig_iopctl_soc"
     rsource "./Kconfig_mipi_dsi_soc"
     rsource "./Kconfig_power"
+    rsource "./Kconfig_pvts"
     rsource "./Kconfig_reset"
     rsource "./Kconfig_romapi"
 endmenu

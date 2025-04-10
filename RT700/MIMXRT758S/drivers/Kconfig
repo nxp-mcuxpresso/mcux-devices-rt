@@ -12,6 +12,7 @@ menu "Device specific drivers configuration"
     rsource "../../MIMXRT798S/drivers/Kconfig_iopctl_soc"
     rsource "../../MIMXRT798S/drivers/Kconfig_mipi_dsi_soc"
     rsource "../../MIMXRT798S/drivers/Kconfig_power"
+    rsource "../../MIMXRT798S/drivers/Kconfig_pvts"
     rsource "../../MIMXRT798S/drivers/Kconfig_reset"
     rsource "../../MIMXRT798S/drivers/Kconfig_romapi"
 endmenu
