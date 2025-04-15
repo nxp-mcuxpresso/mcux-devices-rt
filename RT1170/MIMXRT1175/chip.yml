@@ -120,5 +120,8 @@ device.hardware_data:
           - name: "MIMXRT1175DVMAA"
           - name: "MIMXRT1175AVM8A"
           - name: "MIMXRT1175CVM8A"
+          - name: "MIMXRT1175DVMAB"
+          - name: "MIMXRT1175AVM8B"
+          - name: "MIMXRT1175CVM8B"
         modules:
 ...

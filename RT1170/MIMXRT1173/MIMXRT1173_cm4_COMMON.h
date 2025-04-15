@@ -1,6 +1,8 @@
 /*
 ** ###################################################################
-**     Processor:           MIMXRT1173CVM8A_cm4
+**     Processors:          MIMXRT1173CVM8A_cm4
+**                          MIMXRT1173CVM8B_cm4
+**
 **     Compilers:           Freescale C/C++ for Embedded ARM
 **                          GNU C Compiler
 **                          IAR ANSI C/C++ Compiler for ARM
@@ -9,13 +11,13 @@
 **
 **     Reference manual:    IMXRT1170RM, Rev 1, 02/2021
 **     Version:             rev. 1.0, 2020-12-29
-**     Build:               b241025
+**     Build:               b250415
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1173_cm4
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com

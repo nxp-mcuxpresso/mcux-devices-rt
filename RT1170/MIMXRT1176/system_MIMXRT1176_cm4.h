@@ -1,8 +1,11 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT1176AVM8A_cm4
+**                          MIMXRT1176AVM8B_cm4
 **                          MIMXRT1176CVM8A_cm4
+**                          MIMXRT1176CVM8B_cm4
 **                          MIMXRT1176DVMAA_cm4
+**                          MIMXRT1176DVMAB_cm4
 **
 **     Compilers:           Freescale C/C++ for Embedded ARM
 **                          GNU C Compiler
@@ -12,7 +15,7 @@
 **
 **     Reference manual:    IMXRT1170RM, Rev 1, 02/2021
 **     Version:             rev. 1.0, 2020-12-29
-**     Build:               b240823
+**     Build:               b250415
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -20,7 +23,7 @@
 **         the oscillator (PLL) that is part of the microcontroller device.
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -38,7 +41,7 @@
 /*!
  * @file MIMXRT1176_cm4
  * @version 1.0
- * @date 2024-08-23
+ * @date 2025-04-15
  * @brief Device specific configuration file for MIMXRT1176_cm4 (header file)
  *
  * Provides a system configuration function and a global variable that contains

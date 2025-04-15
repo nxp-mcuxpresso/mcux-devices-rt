@@ -118,5 +118,6 @@ device.hardware_data:
           flash_size_kb: 0
         part:
           - name: "MIMXRT1173CVM8A"
+          - name: "MIMXRT1173CVM8B"
         modules:
 ...
