@@ -77,6 +77,16 @@ __attribute__((weak)) void SystemInit(void)
 
     SCB->NSACR |= ((3UL << 0) | (3UL << 10)); /* enable CP0, CP1, CP10, CP11 Non-secure Access */
 
+    if ((SYSCON3->TEMPDETECT_CTRL[0] & SYSCON3_TEMPDETECT_CTRL_ENABLE_MASK) != 0U)
+    {
+        SYSCON3->TEMPDETECT_CTRL[0] &= ~SYSCON3_TEMPDETECT_CTRL_ENABLE_MASK;
+    }
+    
+    if ((SYSCON3->TEMPDETECT_CTRL[1] & SYSCON3_TEMPDETECT_CTRL_ENABLE_MASK) != 0U)
+    {
+        SYSCON3->TEMPDETECT_CTRL[1] &= ~SYSCON3_TEMPDETECT_CTRL_ENABLE_MASK; 
+    }
+
     SYSCON0->DSPSTALL = SYSCON0_DSPSTALL_DSPSTALL_MASK;
 
     if ((XCACHE1->CCR & XCACHE_CCR_ENCACHE_MASK) == 0U) /* set XCACHE if not configured for code bus.*/
