@@ -1,4 +1,4 @@
-# Copyright 2024 NXP
+# Copyright 2025 NXP
 # All rights reserved.
 #
 # SPDX-License-Identifier: BSD-3-Clause
@@ -283,6 +283,11 @@ config MCUX_HW_IP_DriverType_MU_1
     depends on MCUX_HW_DEVICE_ID_MIMXRT1186xxxxx
 
 config MCUX_HW_IP_DriverType_NETC
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT1186xxxxx
+
+config MCUX_HW_IP_DriverType_ECAT
     bool
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT1186xxxxx
