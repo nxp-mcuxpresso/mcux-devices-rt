@@ -3,7 +3,8 @@
 ## [2.4.1]
 
 - Bug fixes
-  - Fixed bugs in POWER_DisableSleepRegulators POWER_EnableSleepRegulators.
+  - Added kCLOCK_Pvts0.
+  - Fixed bugs in CLOCK_GetWakeClk32KFreq.
 
 ## [2.4.0]
 

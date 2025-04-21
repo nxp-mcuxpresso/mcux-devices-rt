@@ -1,5 +1,10 @@
 # POWER
 
+## [2.4.1]
+
+- Bug fixes
+  - Fixed bugs in POWER_DisableSleepRegulators POWER_EnableSleepRegulators.
+
 ## [2.4.0]
 
 - New features
