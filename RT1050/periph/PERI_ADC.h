@@ -11,13 +11,13 @@
 **                          MIMXRT105SDVL6B
 **
 **     Version:             rev. 1.4, 2021-08-10
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for ADC
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -43,7 +43,7 @@
 */
 
 /*!
- * @file ADC.h
+ * @file PERI_ADC.h
  * @version 1.4
  * @date 2021-08-10
  * @brief CMSIS Peripheral Access Layer for ADC
@@ -51,8 +51,8 @@
  * CMSIS Peripheral Access Layer for ADC
  */
 
-#if !defined(ADC_H_)
-#define ADC_H_                                   /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_ADC_H_)
+#define PERI_ADC_H_                              /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1051CVJ5B) || defined(CPU_MIMXRT1051CVL5B) || defined(CPU_MIMXRT1051DVJ6B) || defined(CPU_MIMXRT1051DVL6B))
 #include "MIMXRT1051_COMMON.h"
@@ -152,8 +152,8 @@ typedef struct {
 #define ADC_HC_AIEN_MASK                         (0x80U)
 #define ADC_HC_AIEN_SHIFT                        (7U)
 /*! AIEN - Conversion Complete Interrupt Enable/Disable Control
- *  0b1..Conversion complete interrupt enabled
  *  0b0..Conversion complete interrupt disabled
+ *  0b1..Conversion complete interrupt enabled
  */
 #define ADC_HC_AIEN(x)                           (((uint32_t)(((uint32_t)(x)) << ADC_HC_AIEN_SHIFT)) & ADC_HC_AIEN_MASK)
 /*! @} */
@@ -303,8 +303,8 @@ typedef struct {
 #define ADC_CFG_OVWREN_MASK                      (0x10000U)
 #define ADC_CFG_OVWREN_SHIFT                     (16U)
 /*! OVWREN - Data Overwrite Enable
- *  0b1..Enable the overwriting.
  *  0b0..Disable the overwriting. Existing Data in Data result register will not be overwritten by subsequent converted data.
+ *  0b1..Enable the overwriting.
  */
 #define ADC_CFG_OVWREN(x)                        (((uint32_t)(((uint32_t)(x)) << ADC_CFG_OVWREN_SHIFT)) & ADC_CFG_OVWREN_MASK)
 /*! @} */
@@ -398,8 +398,8 @@ typedef struct {
 #define ADC_GS_AWKST_MASK                        (0x4U)
 #define ADC_GS_AWKST_SHIFT                       (2U)
 /*! AWKST - Asynchronous wakeup interrupt status
- *  0b1..Asynchronous wake up interrupt occurred in stop mode.
  *  0b0..No asynchronous interrupt.
+ *  0b1..Asynchronous wake up interrupt occurred in stop mode.
  */
 #define ADC_GS_AWKST(x)                          (((uint32_t)(((uint32_t)(x)) << ADC_GS_AWKST_SHIFT)) & ADC_GS_AWKST_MASK)
 /*! @} */
@@ -480,5 +480,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* ADC_H_ */
+#endif  /* PERI_ADC_H_ */
 

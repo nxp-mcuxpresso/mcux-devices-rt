@@ -4,13 +4,13 @@
 **                          MIMXRT1011DAE5A
 **
 **     Version:             rev. 1.2, 2021-08-10
-**     Build:               b240705
+**     Build:               b250414
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for AOI
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -30,7 +30,7 @@
 */
 
 /*!
- * @file AOI.h
+ * @file PERI_AOI.h
  * @version 1.2
  * @date 2021-08-10
  * @brief CMSIS Peripheral Access Layer for AOI
@@ -38,8 +38,8 @@
  * CMSIS Peripheral Access Layer for AOI
  */
 
-#if !defined(AOI_H_)
-#define AOI_H_                                   /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_AOI_H_)
+#define PERI_AOI_H_                              /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1011CAE4A) || defined(CPU_MIMXRT1011DAE5A))
 #include "MIMXRT1011_COMMON.h"
@@ -318,5 +318,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* AOI_H_ */
+#endif  /* PERI_AOI_H_ */
 

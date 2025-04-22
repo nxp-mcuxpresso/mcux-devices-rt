@@ -11,13 +11,13 @@
 **                          MIMXRT105SDVL6B
 **
 **     Version:             rev. 1.4, 2021-08-10
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for EWM
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -43,7 +43,7 @@
 */
 
 /*!
- * @file EWM.h
+ * @file PERI_EWM.h
  * @version 1.4
  * @date 2021-08-10
  * @brief CMSIS Peripheral Access Layer for EWM
@@ -51,8 +51,8 @@
  * CMSIS Peripheral Access Layer for EWM
  */
 
-#if !defined(EWM_H_)
-#define EWM_H_                                   /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_EWM_H_)
+#define PERI_EWM_H_                              /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1051CVJ5B) || defined(CPU_MIMXRT1051CVL5B) || defined(CPU_MIMXRT1051DVJ6B) || defined(CPU_MIMXRT1051DVL6B))
 #include "MIMXRT1051_COMMON.h"
@@ -108,7 +108,7 @@
 /** EWM - Register Layout Typedef */
 typedef struct {
   __IO uint8_t CTRL;                               /**< Control Register, offset: 0x0 */
-  __O  uint8_t SERV;                               /**< Service Register, offset: 0x1 */
+  __IO uint8_t SERV;                               /**< Service Register, offset: 0x1 */
   __IO uint8_t CMPL;                               /**< Compare Low Register, offset: 0x2 */
   __IO uint8_t CMPH;                               /**< Compare High Register, offset: 0x3 */
   __IO uint8_t CLKCTRL;                            /**< Clock Control Register, offset: 0x4 */
@@ -229,5 +229,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* EWM_H_ */
+#endif  /* PERI_EWM_H_ */
 

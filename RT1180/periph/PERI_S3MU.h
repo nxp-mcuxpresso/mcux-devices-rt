@@ -34,7 +34,7 @@
 **                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for S3MU
@@ -56,7 +56,7 @@
 */
 
 /*!
- * @file S3MU.h
+ * @file PERI_S3MU.h
  * @version 2.0
  * @date 2024-01-18
  * @brief CMSIS Peripheral Access Layer for S3MU
@@ -64,8 +64,8 @@
  * CMSIS Peripheral Access Layer for S3MU
  */
 
-#if !defined(S3MU_H_)
-#define S3MU_H_                                  /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_S3MU_H_)
+#define PERI_S3MU_H_                             /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181CVP2C) || defined(CPU_MIMXRT1181XVP2B) || defined(CPU_MIMXRT1181XVP2C))
 #include "MIMXRT1181_COMMON.h"
@@ -305,5 +305,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* S3MU_H_ */
+#endif  /* PERI_S3MU_H_ */
 

@@ -10,7 +10,7 @@
 **                          MIMXRT595SFFOC_dsp
 **
 **     Version:             rev. 5.0, 2020-08-27
-**     Build:               b240705
+**     Build:               b240823
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for POWERQUAD
@@ -303,8 +303,8 @@ typedef struct {
 #define POWERQUAD_CONTROL_INST_BUSY_MASK         (0x80000000U)
 #define POWERQUAD_CONTROL_INST_BUSY_SHIFT        (31U)
 /*! INST_BUSY - Instruction busy
- *  0b1..busy
  *  0b0..Not busy
+ *  0b1..busy
  */
 #define POWERQUAD_CONTROL_INST_BUSY(x)           (((uint32_t)(((uint32_t)(x)) << POWERQUAD_CONTROL_INST_BUSY_SHIFT)) & POWERQUAD_CONTROL_INST_BUSY_MASK)
 /*! @} */

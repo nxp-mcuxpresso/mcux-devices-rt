@@ -6,13 +6,13 @@
 **                          MIMXRT1015DAF5B
 **
 **     Version:             rev. 1.3, 2021-08-10
-**     Build:               b240705
+**     Build:               b250414
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CCM_ANALOG
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -34,7 +34,7 @@
 */
 
 /*!
- * @file CCM_ANALOG.h
+ * @file PERI_CCM_ANALOG.h
  * @version 1.3
  * @date 2021-08-10
  * @brief CMSIS Peripheral Access Layer for CCM_ANALOG
@@ -42,8 +42,8 @@
  * CMSIS Peripheral Access Layer for CCM_ANALOG
  */
 
-#if !defined(CCM_ANALOG_H_)
-#define CCM_ANALOG_H_                            /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_CCM_ANALOG_H_)
+#define PERI_CCM_ANALOG_H_                       /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1015CAF4A) || defined(CPU_MIMXRT1015CAF4B) || defined(CPU_MIMXRT1015DAF5A) || defined(CPU_MIMXRT1015DAF5B))
 #include "MIMXRT1015_COMMON.h"
@@ -2270,5 +2270,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* CCM_ANALOG_H_ */
+#endif  /* PERI_CCM_ANALOG_H_ */
 

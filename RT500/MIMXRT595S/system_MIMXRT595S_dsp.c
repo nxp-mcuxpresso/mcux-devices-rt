@@ -6,7 +6,7 @@
 **     Compiler:            Xtensa Compiler
 **     Reference manual:    iMXRT500RM Rev.1, 07/2022
 **     Version:             rev. 5.0, 2020-08-27
-**     Build:               b231102
+**     Build:               b240823
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -14,7 +14,7 @@
 **         the oscillator (PLL) that is part of the microcontroller device.
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2023 NXP
+**     Copyright 2016-2024 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -38,7 +38,7 @@
 /*!
  * @file MIMXRT595S
  * @version 1.0
- * @date 021123
+ * @date 230824
  * @brief Device specific configuration file for MIMXRT595S (implementation file)
  *
  * Provides a system configuration function and a global variable that contains
@@ -87,7 +87,7 @@ uint32_t SystemCoreClock = DEFAULT_SYSTEM_CLOCK;
    -- SystemInit()
    ---------------------------------------------------------------------------- */
 
-__attribute__((weak)) void SystemInit(void)
+__attribute__ ((weak)) void SystemInit (void)
 {
     SystemInitHook();
 }
@@ -96,7 +96,7 @@ __attribute__((weak)) void SystemInit(void)
    -- SystemCoreClockUpdate()
    ---------------------------------------------------------------------------- */
 
-void SystemCoreClockUpdate(void)
+void SystemCoreClockUpdate (void)
 {
     /* iMXRT5xx systemCoreClockUpdate */
     uint32_t freq = 0U;
@@ -124,9 +124,8 @@ void SystemCoreClockUpdate(void)
             freq = getSpllFreq();
             if (((CLKCTL0->SYSPLL0CTL0) & CLKCTL0_SYSPLL0CTL0_BYPASS_MASK) == 0U)
             {
-                freq =
-                    (uint32_t)((uint64_t)freq * 18U /
-                               ((CLKCTL0->SYSPLL0PFD & CLKCTL0_SYSPLL0PFD_PFD0_MASK) >> CLKCTL0_SYSPLL0PFD_PFD0_SHIFT));
+                freq = (uint32_t)((uint64_t)freq * 18U /
+                       ((CLKCTL0->SYSPLL0PFD & CLKCTL0_SYSPLL0PFD_PFD0_MASK) >> CLKCTL0_SYSPLL0PFD_PFD0_SHIFT));
             }
             freq = freq / ((CLKCTL0->MAINPLLCLKDIV & CLKCTL0_MAINPLLCLKDIV_DIV_MASK) + 1U);
             break;
@@ -134,9 +133,8 @@ void SystemCoreClockUpdate(void)
             freq = getSpllFreq();
             if (((CLKCTL0->SYSPLL0CTL0) & CLKCTL0_SYSPLL0CTL0_BYPASS_MASK) == 0U)
             {
-                freq =
-                    (uint32_t)((uint64_t)freq * 18U /
-                               ((CLKCTL0->SYSPLL0PFD & CLKCTL0_SYSPLL0PFD_PFD1_MASK) >> CLKCTL0_SYSPLL0PFD_PFD1_SHIFT));
+                freq = (uint32_t)((uint64_t)freq * 18U /
+                       ((CLKCTL0->SYSPLL0PFD & CLKCTL0_SYSPLL0PFD_PFD1_MASK) >> CLKCTL0_SYSPLL0PFD_PFD1_SHIFT));
             }
             freq = freq / ((CLKCTL0->DSPPLLCLKDIV & CLKCTL0_DSPPLLCLKDIV_DIV_MASK) + 1U);
             break;
@@ -155,7 +153,7 @@ void SystemCoreClockUpdate(void)
    -- SystemInitHook()
    ---------------------------------------------------------------------------- */
 
-__attribute__((weak)) void SystemInitHook(void)
+__attribute__ ((weak)) void SystemInitHook (void)
 {
     /* Void implementation of the weak function. */
 }

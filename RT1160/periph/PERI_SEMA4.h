@@ -14,13 +14,13 @@
 **                          MIMXRT1166XVM5A_cm7
 **
 **     Version:             rev. 0.1, 2020-12-29
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SEMA4
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -34,7 +34,7 @@
 */
 
 /*!
- * @file SEMA4.h
+ * @file PERI_SEMA4.h
  * @version 0.1
  * @date 2020-12-29
  * @brief CMSIS Peripheral Access Layer for SEMA4
@@ -42,8 +42,8 @@
  * CMSIS Peripheral Access Layer for SEMA4
  */
 
-#if !defined(SEMA4_H_)
-#define SEMA4_H_                                 /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_SEMA4_H_)
+#define PERI_SEMA4_H_                            /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1165CVM5A_cm4) || defined(CPU_MIMXRT1165DVM6A_cm4) || defined(CPU_MIMXRT1165XVM5A_cm4))
 #include "MIMXRT1165_cm4_COMMON.h"
@@ -418,5 +418,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* SEMA4_H_ */
+#endif  /* PERI_SEMA4_H_ */
 

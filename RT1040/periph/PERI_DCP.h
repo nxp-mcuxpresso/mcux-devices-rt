@@ -14,13 +14,13 @@
 **                          MIMXRT1046XFQ5B
 **
 **     Version:             rev. 0.1, 2021-07-20
-**     Build:               b241021
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for DCP
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -34,7 +34,7 @@
 */
 
 /*!
- * @file DCP.h
+ * @file PERI_DCP.h
  * @version 0.1
  * @date 2021-07-20
  * @brief CMSIS Peripheral Access Layer for DCP
@@ -42,8 +42,8 @@
  * CMSIS Peripheral Access Layer for DCP
  */
 
-#if !defined(DCP_H_)
-#define DCP_H_                                   /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_DCP_H_)
+#define PERI_DCP_H_                              /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1041DFP6B) || defined(CPU_MIMXRT1041DJM6B) || defined(CPU_MIMXRT1041XFP5B) || defined(CPU_MIMXRT1041XJM5B))
 #include "MIMXRT1041_COMMON.h"
@@ -2098,5 +2098,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* DCP_H_ */
+#endif  /* PERI_DCP_H_ */
 

@@ -11,13 +11,13 @@
 **                          MIMXRT105SDVL6B
 **
 **     Version:             rev. 1.4, 2021-08-10
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for RTWDOG
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -43,7 +43,7 @@
 */
 
 /*!
- * @file RTWDOG.h
+ * @file PERI_RTWDOG.h
  * @version 1.4
  * @date 2021-08-10
  * @brief CMSIS Peripheral Access Layer for RTWDOG
@@ -51,8 +51,8 @@
  * CMSIS Peripheral Access Layer for RTWDOG
  */
 
-#if !defined(RTWDOG_H_)
-#define RTWDOG_H_                                /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_RTWDOG_H_)
+#define PERI_RTWDOG_H_                           /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1051CVJ5B) || defined(CPU_MIMXRT1051CVL5B) || defined(CPU_MIMXRT1051DVJ6B) || defined(CPU_MIMXRT1051DVL6B))
 #include "MIMXRT1051_COMMON.h"
@@ -320,5 +320,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* RTWDOG_H_ */
+#endif  /* PERI_RTWDOG_H_ */
 

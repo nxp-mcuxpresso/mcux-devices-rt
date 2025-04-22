@@ -10,13 +10,13 @@
 **                          MIMXRT1064DVL6B
 **
 **     Version:             rev. 1.3, 2021-08-10
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CCM
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -38,7 +38,7 @@
 */
 
 /*!
- * @file CCM.h
+ * @file PERI_CCM.h
  * @version 1.3
  * @date 2021-08-10
  * @brief CMSIS Peripheral Access Layer for CCM
@@ -46,8 +46,8 @@
  * CMSIS Peripheral Access Layer for CCM
  */
 
-#if !defined(CCM_H_)
-#define CCM_H_                                   /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_CCM_H_)
+#define PERI_CCM_H_                              /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1064CVJ5A) || defined(CPU_MIMXRT1064CVJ5B) || defined(CPU_MIMXRT1064CVL5A) || defined(CPU_MIMXRT1064CVL5B) || defined(CPU_MIMXRT1064DVJ6A) || defined(CPU_MIMXRT1064DVJ6B) || defined(CPU_MIMXRT1064DVL6A) || defined(CPU_MIMXRT1064DVL6B))
 #include "MIMXRT1064_COMMON.h"
@@ -175,8 +175,8 @@ typedef struct {
 #define CCM_CCR_RBC_EN_MASK                      (0x8000000U)
 #define CCM_CCR_RBC_EN_SHIFT                     (27U)
 /*! RBC_EN
- *  0b1..REG_BYPASS_COUNTER enabled.
  *  0b0..REG_BYPASS_COUNTER disabled
+ *  0b1..REG_BYPASS_COUNTER enabled.
  */
 #define CCM_CCR_RBC_EN(x)                        (((uint32_t)(((uint32_t)(x)) << CCM_CCR_RBC_EN_SHIFT)) & CCM_CCR_RBC_EN_MASK)
 /*! @} */
@@ -1426,16 +1426,16 @@ typedef struct {
 #define CCM_CLPCR_MASK_SCU_IDLE_MASK             (0x4000000U)
 #define CCM_CLPCR_MASK_SCU_IDLE_SHIFT            (26U)
 /*! MASK_SCU_IDLE
- *  0b1..SCU IDLE is masked
  *  0b0..SCU IDLE is not masked
+ *  0b1..SCU IDLE is masked
  */
 #define CCM_CLPCR_MASK_SCU_IDLE(x)               (((uint32_t)(((uint32_t)(x)) << CCM_CLPCR_MASK_SCU_IDLE_SHIFT)) & CCM_CLPCR_MASK_SCU_IDLE_MASK)
 
 #define CCM_CLPCR_MASK_L2CC_IDLE_MASK            (0x8000000U)
 #define CCM_CLPCR_MASK_L2CC_IDLE_SHIFT           (27U)
 /*! MASK_L2CC_IDLE
- *  0b1..L2CC IDLE is masked
  *  0b0..L2CC IDLE is not masked
+ *  0b1..L2CC IDLE is masked
  */
 #define CCM_CLPCR_MASK_L2CC_IDLE(x)              (((uint32_t)(((uint32_t)(x)) << CCM_CLPCR_MASK_L2CC_IDLE_SHIFT)) & CCM_CLPCR_MASK_L2CC_IDLE_MASK)
 /*! @} */
@@ -2303,5 +2303,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* CCM_H_ */
+#endif  /* PERI_CCM_H_ */
 

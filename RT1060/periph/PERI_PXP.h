@@ -26,13 +26,13 @@
 **                          MIMXRT106SDVL6A
 **
 **     Version:             rev. 1.4, 2022-03-25
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for PXP
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -56,7 +56,7 @@
 */
 
 /*!
- * @file PXP.h
+ * @file PERI_PXP.h
  * @version 1.4
  * @date 2022-03-25
  * @brief CMSIS Peripheral Access Layer for PXP
@@ -64,8 +64,8 @@
  * CMSIS Peripheral Access Layer for PXP
  */
 
-#if !defined(PXP_H_)
-#define PXP_H_                                   /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_PXP_H_)
+#define PERI_PXP_H_                              /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1061CVJ5A) || defined(CPU_MIMXRT1061CVJ5B) || defined(CPU_MIMXRT1061CVL5A) || defined(CPU_MIMXRT1061CVL5B) || defined(CPU_MIMXRT1061DVJ6A) || defined(CPU_MIMXRT1061DVJ6B) || defined(CPU_MIMXRT1061DVL6A) || defined(CPU_MIMXRT1061DVL6B) || defined(CPU_MIMXRT1061XVN5B))
 #include "MIMXRT1061_COMMON.h"
@@ -216,16 +216,16 @@ typedef struct {
 #define PXP_CTRL_ENABLE_MASK                     (0x1U)
 #define PXP_CTRL_ENABLE_SHIFT                    (0U)
 /*! ENABLE
- *  0b1..PXP is enabled
  *  0b0..PXP is disabled
+ *  0b1..PXP is enabled
  */
 #define PXP_CTRL_ENABLE(x)                       (((uint32_t)(((uint32_t)(x)) << PXP_CTRL_ENABLE_SHIFT)) & PXP_CTRL_ENABLE_MASK)
 
 #define PXP_CTRL_IRQ_ENABLE_MASK                 (0x2U)
 #define PXP_CTRL_IRQ_ENABLE_SHIFT                (1U)
 /*! IRQ_ENABLE
- *  0b1..PXP interrupt is enabled
  *  0b0..PXP interrupt is disabled
+ *  0b1..PXP interrupt is enabled
  */
 #define PXP_CTRL_IRQ_ENABLE(x)                   (((uint32_t)(((uint32_t)(x)) << PXP_CTRL_IRQ_ENABLE_SHIFT)) & PXP_CTRL_IRQ_ENABLE_MASK)
 
@@ -282,8 +282,8 @@ typedef struct {
 #define PXP_CTRL_EN_REPEAT_MASK                  (0x10000000U)
 #define PXP_CTRL_EN_REPEAT_SHIFT                 (28U)
 /*! EN_REPEAT
- *  0b1..PXP will repeat based on the current configuration register settings
  *  0b0..PXP will complete the process and enter the idle state ready to accept the next frame to be processed
+ *  0b1..PXP will repeat based on the current configuration register settings
  */
 #define PXP_CTRL_EN_REPEAT(x)                    (((uint32_t)(((uint32_t)(x)) << PXP_CTRL_EN_REPEAT_SHIFT)) & PXP_CTRL_EN_REPEAT_MASK)
 
@@ -310,16 +310,16 @@ typedef struct {
 #define PXP_CTRL_SET_ENABLE_MASK                 (0x1U)
 #define PXP_CTRL_SET_ENABLE_SHIFT                (0U)
 /*! ENABLE
- *  0b1..PXP is enabled
  *  0b0..PXP is disabled
+ *  0b1..PXP is enabled
  */
 #define PXP_CTRL_SET_ENABLE(x)                   (((uint32_t)(((uint32_t)(x)) << PXP_CTRL_SET_ENABLE_SHIFT)) & PXP_CTRL_SET_ENABLE_MASK)
 
 #define PXP_CTRL_SET_IRQ_ENABLE_MASK             (0x2U)
 #define PXP_CTRL_SET_IRQ_ENABLE_SHIFT            (1U)
 /*! IRQ_ENABLE
- *  0b1..PXP interrupt is enabled
  *  0b0..PXP interrupt is disabled
+ *  0b1..PXP interrupt is enabled
  */
 #define PXP_CTRL_SET_IRQ_ENABLE(x)               (((uint32_t)(((uint32_t)(x)) << PXP_CTRL_SET_IRQ_ENABLE_SHIFT)) & PXP_CTRL_SET_IRQ_ENABLE_MASK)
 
@@ -376,8 +376,8 @@ typedef struct {
 #define PXP_CTRL_SET_EN_REPEAT_MASK              (0x10000000U)
 #define PXP_CTRL_SET_EN_REPEAT_SHIFT             (28U)
 /*! EN_REPEAT
- *  0b1..PXP will repeat based on the current configuration register settings
  *  0b0..PXP will complete the process and enter the idle state ready to accept the next frame to be processed
+ *  0b1..PXP will repeat based on the current configuration register settings
  */
 #define PXP_CTRL_SET_EN_REPEAT(x)                (((uint32_t)(((uint32_t)(x)) << PXP_CTRL_SET_EN_REPEAT_SHIFT)) & PXP_CTRL_SET_EN_REPEAT_MASK)
 
@@ -404,16 +404,16 @@ typedef struct {
 #define PXP_CTRL_CLR_ENABLE_MASK                 (0x1U)
 #define PXP_CTRL_CLR_ENABLE_SHIFT                (0U)
 /*! ENABLE
- *  0b1..PXP is enabled
  *  0b0..PXP is disabled
+ *  0b1..PXP is enabled
  */
 #define PXP_CTRL_CLR_ENABLE(x)                   (((uint32_t)(((uint32_t)(x)) << PXP_CTRL_CLR_ENABLE_SHIFT)) & PXP_CTRL_CLR_ENABLE_MASK)
 
 #define PXP_CTRL_CLR_IRQ_ENABLE_MASK             (0x2U)
 #define PXP_CTRL_CLR_IRQ_ENABLE_SHIFT            (1U)
 /*! IRQ_ENABLE
- *  0b1..PXP interrupt is enabled
  *  0b0..PXP interrupt is disabled
+ *  0b1..PXP interrupt is enabled
  */
 #define PXP_CTRL_CLR_IRQ_ENABLE(x)               (((uint32_t)(((uint32_t)(x)) << PXP_CTRL_CLR_IRQ_ENABLE_SHIFT)) & PXP_CTRL_CLR_IRQ_ENABLE_MASK)
 
@@ -470,8 +470,8 @@ typedef struct {
 #define PXP_CTRL_CLR_EN_REPEAT_MASK              (0x10000000U)
 #define PXP_CTRL_CLR_EN_REPEAT_SHIFT             (28U)
 /*! EN_REPEAT
- *  0b1..PXP will repeat based on the current configuration register settings
  *  0b0..PXP will complete the process and enter the idle state ready to accept the next frame to be processed
+ *  0b1..PXP will repeat based on the current configuration register settings
  */
 #define PXP_CTRL_CLR_EN_REPEAT(x)                (((uint32_t)(((uint32_t)(x)) << PXP_CTRL_CLR_EN_REPEAT_SHIFT)) & PXP_CTRL_CLR_EN_REPEAT_MASK)
 
@@ -498,16 +498,16 @@ typedef struct {
 #define PXP_CTRL_TOG_ENABLE_MASK                 (0x1U)
 #define PXP_CTRL_TOG_ENABLE_SHIFT                (0U)
 /*! ENABLE
- *  0b1..PXP is enabled
  *  0b0..PXP is disabled
+ *  0b1..PXP is enabled
  */
 #define PXP_CTRL_TOG_ENABLE(x)                   (((uint32_t)(((uint32_t)(x)) << PXP_CTRL_TOG_ENABLE_SHIFT)) & PXP_CTRL_TOG_ENABLE_MASK)
 
 #define PXP_CTRL_TOG_IRQ_ENABLE_MASK             (0x2U)
 #define PXP_CTRL_TOG_IRQ_ENABLE_SHIFT            (1U)
 /*! IRQ_ENABLE
- *  0b1..PXP interrupt is enabled
  *  0b0..PXP interrupt is disabled
+ *  0b1..PXP interrupt is enabled
  */
 #define PXP_CTRL_TOG_IRQ_ENABLE(x)               (((uint32_t)(((uint32_t)(x)) << PXP_CTRL_TOG_IRQ_ENABLE_SHIFT)) & PXP_CTRL_TOG_IRQ_ENABLE_MASK)
 
@@ -564,8 +564,8 @@ typedef struct {
 #define PXP_CTRL_TOG_EN_REPEAT_MASK              (0x10000000U)
 #define PXP_CTRL_TOG_EN_REPEAT_SHIFT             (28U)
 /*! EN_REPEAT
- *  0b1..PXP will repeat based on the current configuration register settings
  *  0b0..PXP will complete the process and enter the idle state ready to accept the next frame to be processed
+ *  0b1..PXP will repeat based on the current configuration register settings
  */
 #define PXP_CTRL_TOG_EN_REPEAT(x)                (((uint32_t)(((uint32_t)(x)) << PXP_CTRL_TOG_EN_REPEAT_SHIFT)) & PXP_CTRL_TOG_EN_REPEAT_MASK)
 
@@ -1689,5 +1689,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* PXP_H_ */
+#endif  /* PERI_PXP_H_ */
 

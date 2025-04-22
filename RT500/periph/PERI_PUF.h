@@ -10,7 +10,7 @@
 **                          MIMXRT595SFFOC_dsp
 **
 **     Version:             rev. 5.0, 2020-08-27
-**     Build:               b240705
+**     Build:               b240823
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for PUF
@@ -547,63 +547,63 @@ typedef struct {
 #define PUF_IDXBLK_L_IDX1_MASK                   (0xCU)
 #define PUF_IDXBLK_L_IDX1_SHIFT                  (2U)
 /*! IDX1 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_IDX1(x)                     (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_IDX1_SHIFT)) & PUF_IDXBLK_L_IDX1_MASK)
 
 #define PUF_IDXBLK_L_IDX2_MASK                   (0x30U)
 #define PUF_IDXBLK_L_IDX2_SHIFT                  (4U)
 /*! IDX2 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_IDX2(x)                     (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_IDX2_SHIFT)) & PUF_IDXBLK_L_IDX2_MASK)
 
 #define PUF_IDXBLK_L_IDX3_MASK                   (0xC0U)
 #define PUF_IDXBLK_L_IDX3_SHIFT                  (6U)
 /*! IDX3 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_IDX3(x)                     (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_IDX3_SHIFT)) & PUF_IDXBLK_L_IDX3_MASK)
 
 #define PUF_IDXBLK_L_IDX4_MASK                   (0x300U)
 #define PUF_IDXBLK_L_IDX4_SHIFT                  (8U)
 /*! IDX4 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_IDX4(x)                     (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_IDX4_SHIFT)) & PUF_IDXBLK_L_IDX4_MASK)
 
 #define PUF_IDXBLK_L_IDX5_MASK                   (0xC00U)
 #define PUF_IDXBLK_L_IDX5_SHIFT                  (10U)
 /*! IDX5 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_IDX5(x)                     (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_IDX5_SHIFT)) & PUF_IDXBLK_L_IDX5_MASK)
 
 #define PUF_IDXBLK_L_IDX6_MASK                   (0x3000U)
 #define PUF_IDXBLK_L_IDX6_SHIFT                  (12U)
 /*! IDX6 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_IDX6(x)                     (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_IDX6_SHIFT)) & PUF_IDXBLK_L_IDX6_MASK)
 
 #define PUF_IDXBLK_L_IDX7_MASK                   (0xC000U)
 #define PUF_IDXBLK_L_IDX7_SHIFT                  (14U)
 /*! IDX7 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_IDX7(x)                     (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_IDX7_SHIFT)) & PUF_IDXBLK_L_IDX7_MASK)
 
@@ -619,72 +619,72 @@ typedef struct {
 #define PUF_IDXBLK_H_DP_IDX8_MASK                (0x3U)
 #define PUF_IDXBLK_H_DP_IDX8_SHIFT               (0U)
 /*! IDX8 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_DP_IDX8(x)                  (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_DP_IDX8_SHIFT)) & PUF_IDXBLK_H_DP_IDX8_MASK)
 
 #define PUF_IDXBLK_H_DP_IDX9_MASK                (0xCU)
 #define PUF_IDXBLK_H_DP_IDX9_SHIFT               (2U)
 /*! IDX9 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_DP_IDX9(x)                  (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_DP_IDX9_SHIFT)) & PUF_IDXBLK_H_DP_IDX9_MASK)
 
 #define PUF_IDXBLK_H_DP_IDX10_MASK               (0x30U)
 #define PUF_IDXBLK_H_DP_IDX10_SHIFT              (4U)
 /*! IDX10 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_DP_IDX10(x)                 (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_DP_IDX10_SHIFT)) & PUF_IDXBLK_H_DP_IDX10_MASK)
 
 #define PUF_IDXBLK_H_DP_IDX11_MASK               (0xC0U)
 #define PUF_IDXBLK_H_DP_IDX11_SHIFT              (6U)
 /*! IDX11 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_DP_IDX11(x)                 (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_DP_IDX11_SHIFT)) & PUF_IDXBLK_H_DP_IDX11_MASK)
 
 #define PUF_IDXBLK_H_DP_IDX12_MASK               (0x300U)
 #define PUF_IDXBLK_H_DP_IDX12_SHIFT              (8U)
 /*! IDX12 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_DP_IDX12(x)                 (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_DP_IDX12_SHIFT)) & PUF_IDXBLK_H_DP_IDX12_MASK)
 
 #define PUF_IDXBLK_H_DP_IDX13_MASK               (0xC00U)
 #define PUF_IDXBLK_H_DP_IDX13_SHIFT              (10U)
 /*! IDX13 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_DP_IDX13(x)                 (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_DP_IDX13_SHIFT)) & PUF_IDXBLK_H_DP_IDX13_MASK)
 
 #define PUF_IDXBLK_H_DP_IDX14_MASK               (0x3000U)
 #define PUF_IDXBLK_H_DP_IDX14_SHIFT              (12U)
 /*! IDX14 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_DP_IDX14(x)                 (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_DP_IDX14_SHIFT)) & PUF_IDXBLK_H_DP_IDX14_MASK)
 
 #define PUF_IDXBLK_H_DP_IDX15_MASK               (0xC000U)
 #define PUF_IDXBLK_H_DP_IDX15_SHIFT              (14U)
 /*! IDX15 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_DP_IDX15(x)                 (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_DP_IDX15_SHIFT)) & PUF_IDXBLK_H_DP_IDX15_MASK)
 /*! @} */
@@ -704,72 +704,72 @@ typedef struct {
 #define PUF_IDXBLK_H_IDX8_MASK                   (0x3U)
 #define PUF_IDXBLK_H_IDX8_SHIFT                  (0U)
 /*! IDX8 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_IDX8(x)                     (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_IDX8_SHIFT)) & PUF_IDXBLK_H_IDX8_MASK)
 
 #define PUF_IDXBLK_H_IDX9_MASK                   (0xCU)
 #define PUF_IDXBLK_H_IDX9_SHIFT                  (2U)
 /*! IDX9 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_IDX9(x)                     (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_IDX9_SHIFT)) & PUF_IDXBLK_H_IDX9_MASK)
 
 #define PUF_IDXBLK_H_IDX10_MASK                  (0x30U)
 #define PUF_IDXBLK_H_IDX10_SHIFT                 (4U)
 /*! IDX10 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_IDX10(x)                    (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_IDX10_SHIFT)) & PUF_IDXBLK_H_IDX10_MASK)
 
 #define PUF_IDXBLK_H_IDX11_MASK                  (0xC0U)
 #define PUF_IDXBLK_H_IDX11_SHIFT                 (6U)
 /*! IDX11 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_IDX11(x)                    (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_IDX11_SHIFT)) & PUF_IDXBLK_H_IDX11_MASK)
 
 #define PUF_IDXBLK_H_IDX12_MASK                  (0x300U)
 #define PUF_IDXBLK_H_IDX12_SHIFT                 (8U)
 /*! IDX12 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_IDX12(x)                    (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_IDX12_SHIFT)) & PUF_IDXBLK_H_IDX12_MASK)
 
 #define PUF_IDXBLK_H_IDX13_MASK                  (0xC00U)
 #define PUF_IDXBLK_H_IDX13_SHIFT                 (10U)
 /*! IDX13 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_IDX13(x)                    (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_IDX13_SHIFT)) & PUF_IDXBLK_H_IDX13_MASK)
 
 #define PUF_IDXBLK_H_IDX14_MASK                  (0x3000U)
 #define PUF_IDXBLK_H_IDX14_SHIFT                 (12U)
 /*! IDX14 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_IDX14(x)                    (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_IDX14_SHIFT)) & PUF_IDXBLK_H_IDX14_MASK)
 
 #define PUF_IDXBLK_H_IDX15_MASK                  (0xC000U)
 #define PUF_IDXBLK_H_IDX15_SHIFT                 (14U)
 /*! IDX15 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_H_IDX15(x)                    (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_H_IDX15_SHIFT)) & PUF_IDXBLK_H_IDX15_MASK)
 
@@ -785,72 +785,72 @@ typedef struct {
 #define PUF_IDXBLK_L_DP_IDX0_MASK                (0x3U)
 #define PUF_IDXBLK_L_DP_IDX0_SHIFT               (0U)
 /*! IDX0 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_DP_IDX0(x)                  (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_DP_IDX0_SHIFT)) & PUF_IDXBLK_L_DP_IDX0_MASK)
 
 #define PUF_IDXBLK_L_DP_IDX1_MASK                (0xCU)
 #define PUF_IDXBLK_L_DP_IDX1_SHIFT               (2U)
 /*! IDX1 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_DP_IDX1(x)                  (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_DP_IDX1_SHIFT)) & PUF_IDXBLK_L_DP_IDX1_MASK)
 
 #define PUF_IDXBLK_L_DP_IDX2_MASK                (0x30U)
 #define PUF_IDXBLK_L_DP_IDX2_SHIFT               (4U)
 /*! IDX2 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_DP_IDX2(x)                  (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_DP_IDX2_SHIFT)) & PUF_IDXBLK_L_DP_IDX2_MASK)
 
 #define PUF_IDXBLK_L_DP_IDX3_MASK                (0xC0U)
 #define PUF_IDXBLK_L_DP_IDX3_SHIFT               (6U)
 /*! IDX3 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_DP_IDX3(x)                  (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_DP_IDX3_SHIFT)) & PUF_IDXBLK_L_DP_IDX3_MASK)
 
 #define PUF_IDXBLK_L_DP_IDX4_MASK                (0x300U)
 #define PUF_IDXBLK_L_DP_IDX4_SHIFT               (8U)
 /*! IDX4 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_DP_IDX4(x)                  (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_DP_IDX4_SHIFT)) & PUF_IDXBLK_L_DP_IDX4_MASK)
 
 #define PUF_IDXBLK_L_DP_IDX5_MASK                (0xC00U)
 #define PUF_IDXBLK_L_DP_IDX5_SHIFT               (10U)
 /*! IDX5 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_DP_IDX5(x)                  (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_DP_IDX5_SHIFT)) & PUF_IDXBLK_L_DP_IDX5_MASK)
 
 #define PUF_IDXBLK_L_DP_IDX6_MASK                (0x3000U)
 #define PUF_IDXBLK_L_DP_IDX6_SHIFT               (12U)
 /*! IDX6 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_DP_IDX6(x)                  (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_DP_IDX6_SHIFT)) & PUF_IDXBLK_L_DP_IDX6_MASK)
 
 #define PUF_IDXBLK_L_DP_IDX7_MASK                (0xC000U)
 #define PUF_IDXBLK_L_DP_IDX7_SHIFT               (14U)
 /*! IDX7 - Index n
- *  0b10..PUF index is accessible.
- *  0b01..PUF index is blocked.
  *  0b00, 0b11..Reserved
+ *  0b01..PUF index is blocked.
+ *  0b10..PUF index is accessible.
  */
 #define PUF_IDXBLK_L_DP_IDX7(x)                  (((uint32_t)(((uint32_t)(x)) << PUF_IDXBLK_L_DP_IDX7_SHIFT)) & PUF_IDXBLK_L_DP_IDX7_MASK)
 /*! @} */

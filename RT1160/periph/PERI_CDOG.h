@@ -14,13 +14,13 @@
 **                          MIMXRT1166XVM5A_cm7
 **
 **     Version:             rev. 0.1, 2020-12-29
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CDOG
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -34,7 +34,7 @@
 */
 
 /*!
- * @file CDOG.h
+ * @file PERI_CDOG.h
  * @version 0.1
  * @date 2020-12-29
  * @brief CMSIS Peripheral Access Layer for CDOG
@@ -42,8 +42,8 @@
  * CMSIS Peripheral Access Layer for CDOG
  */
 
-#if !defined(CDOG_H_)
-#define CDOG_H_                                  /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_CDOG_H_)
+#define PERI_CDOG_H_                             /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1165CVM5A_cm4) || defined(CPU_MIMXRT1165DVM6A_cm4) || defined(CPU_MIMXRT1165XVM5A_cm4))
 #include "MIMXRT1165_cm4_COMMON.h"
@@ -144,18 +144,18 @@ typedef struct {
 #define CDOG_CONTROL_TIMEOUT_CTRL_MASK           (0x1CU)
 #define CDOG_CONTROL_TIMEOUT_CTRL_SHIFT          (2U)
 /*! TIMEOUT_CTRL - TIMEOUT fault control
- *  0b100..Disable both reset and interrupt
  *  0b001..Enable reset
  *  0b010..Enable interrupt
+ *  0b100..Disable both reset and interrupt
  */
 #define CDOG_CONTROL_TIMEOUT_CTRL(x)             (((uint32_t)(((uint32_t)(x)) << CDOG_CONTROL_TIMEOUT_CTRL_SHIFT)) & CDOG_CONTROL_TIMEOUT_CTRL_MASK)
 
 #define CDOG_CONTROL_MISCOMPARE_CTRL_MASK        (0xE0U)
 #define CDOG_CONTROL_MISCOMPARE_CTRL_SHIFT       (5U)
 /*! MISCOMPARE_CTRL - MISCOMPARE fault control
- *  0b100..Disable both reset and interrupt
  *  0b001..Enable reset
  *  0b010..Enable interrupt
+ *  0b100..Disable both reset and interrupt
  */
 #define CDOG_CONTROL_MISCOMPARE_CTRL(x)          (((uint32_t)(((uint32_t)(x)) << CDOG_CONTROL_MISCOMPARE_CTRL_SHIFT)) & CDOG_CONTROL_MISCOMPARE_CTRL_MASK)
 
@@ -485,5 +485,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* CDOG_H_ */
+#endif  /* PERI_CDOG_H_ */
 

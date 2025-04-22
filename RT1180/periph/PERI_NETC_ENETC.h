@@ -34,7 +34,7 @@
 **                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for NETC_ENETC
@@ -56,7 +56,7 @@
 */
 
 /*!
- * @file NETC_ENETC.h
+ * @file PERI_NETC_ENETC.h
  * @version 2.0
  * @date 2024-01-18
  * @brief CMSIS Peripheral Access Layer for NETC_ENETC
@@ -64,8 +64,8 @@
  * CMSIS Peripheral Access Layer for NETC_ENETC
  */
 
-#if !defined(NETC_ENETC_H_)
-#define NETC_ENETC_H_                            /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_NETC_ENETC_H_)
+#define PERI_NETC_ENETC_H_                       /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181CVP2C) || defined(CPU_MIMXRT1181XVP2B) || defined(CPU_MIMXRT1181XVP2C))
 #include "MIMXRT1181_COMMON.h"
@@ -1142,5 +1142,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* NETC_ENETC_H_ */
+#endif  /* PERI_NETC_ENETC_H_ */
 

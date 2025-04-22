@@ -13,7 +13,7 @@
 **
 **     Reference manual:    IMXRT1015RM Rev.1, 02/2021 | IMXRT102XSRM Rev.0
 **     Version:             rev. 1.3, 2021-08-10
-**     Build:               b240705
+**     Build:               b240823
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1015

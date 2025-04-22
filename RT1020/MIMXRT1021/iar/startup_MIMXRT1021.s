@@ -4,11 +4,11 @@
 ;            MIMXRT1021
 ;  @version: 1.2
 ;  @date:    2021-8-10
-;  @build:   b240823
+;  @build:   b250331
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.
-; Copyright 2016-2024 NXP
+; Copyright 2016-2025 NXP
 ; SPDX-License-Identifier: BSD-3-Clause
 ;
 ; The modules in this file are included in the libraries, and may be replaced

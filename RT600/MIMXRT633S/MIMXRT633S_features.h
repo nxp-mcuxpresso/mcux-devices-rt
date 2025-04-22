@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 1.0, 2018-06-19
-**     Build:               b250325
+**     Build:               b250403
 **
 **     Abstract:
 **         Chip specific module features.
@@ -215,8 +215,6 @@
 #define FSL_FEATURE_ACMP_HAS_C0_LINKEN_BIT (1)
 /* @brief Has C0 OFFSET Bit */
 #define FSL_FEATURE_ACMP_HAS_C0_OFFSET_BIT (0)
-/* @brief Has C0 HYSTCTR Bit */
-#define FSL_FEATURE_ACMP_HAS_C0_HYSTCTR_BIT (1)
 /* @brief Has C1 INPSEL Bit */
 #define FSL_FEATURE_ACMP_HAS_C1_INPSEL_BIT (0)
 /* @brief Has C1 INNSEL Bit */
@@ -229,8 +227,18 @@
 #define FSL_FEATURE_ACMP_HAS_C2_RRE_BIT (0)
 /* @brief Has C3 RDIVE Bit */
 #define FSL_FEATURE_ACMP_HAS_C3_RDIVE_BIT (1)
+/* @brief Has C0 HYSTCTR Bit */
+#define FSL_FEATURE_ACMP_HAS_C0_HYSTCTR_BIT (1)
+/* @brief If support round-robin mode */
+#define FSL_FEATURE_ACMP_HAS_NO_ROUNDROBIN_MODE (0)
 /* @brief If support 3v domain */
 #define FSL_FEATURE_ACMP_HAS_NO_3V_DOMAIN (0)
+/* @brief If support window mode */
+#define FSL_FEATURE_ACMP_HAS_NO_WINDOW_MODE (0)
+/* @brief If support filter mode */
+#define FSL_FEATURE_ACMP_HAS_NO_FILTER_MODE (0)
+/* @brief Has No C0 SE Bit */
+#define FSL_FEATURE_ACMP_HAS_NO_C0_SE_BIT (0)
 /* @brief If has acmp sample signal */
 #define FSL_FEATURE_ACMP_HAS_NO_SAMPLE_SIGNAL (1)
 

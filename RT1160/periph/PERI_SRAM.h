@@ -14,13 +14,13 @@
 **                          MIMXRT1166XVM5A_cm7
 **
 **     Version:             rev. 0.1, 2020-12-29
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SRAM
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -34,7 +34,7 @@
 */
 
 /*!
- * @file SRAM.h
+ * @file PERI_SRAM.h
  * @version 0.1
  * @date 2020-12-29
  * @brief CMSIS Peripheral Access Layer for SRAM
@@ -42,8 +42,8 @@
  * CMSIS Peripheral Access Layer for SRAM
  */
 
-#if !defined(SRAM_H_)
-#define SRAM_H_                                  /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_SRAM_H_)
+#define PERI_SRAM_H_                             /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1165CVM5A_cm4) || defined(CPU_MIMXRT1165DVM6A_cm4) || defined(CPU_MIMXRT1165XVM5A_cm4))
 #include "MIMXRT1165_cm4_COMMON.h"
@@ -195,5 +195,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* SRAM_H_ */
+#endif  /* PERI_SRAM_H_ */
 

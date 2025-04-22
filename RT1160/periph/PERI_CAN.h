@@ -14,13 +14,13 @@
 **                          MIMXRT1166XVM5A_cm7
 **
 **     Version:             rev. 0.1, 2020-12-29
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CAN
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -34,7 +34,7 @@
 */
 
 /*!
- * @file CAN.h
+ * @file PERI_CAN.h
  * @version 0.1
  * @date 2020-12-29
  * @brief CMSIS Peripheral Access Layer for CAN
@@ -42,8 +42,8 @@
  * CMSIS Peripheral Access Layer for CAN
  */
 
-#if !defined(CAN_H_)
-#define CAN_H_                                   /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_CAN_H_)
+#define PERI_CAN_H_                              /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1165CVM5A_cm4) || defined(CPU_MIMXRT1165DVM6A_cm4) || defined(CPU_MIMXRT1165XVM5A_cm4))
 #include "MIMXRT1165_cm4_COMMON.h"
@@ -238,8 +238,8 @@ typedef struct {
 #define CAN_MCR_FDEN_MASK                        (0x800U)
 #define CAN_MCR_FDEN_SHIFT                       (11U)
 /*! FDEN - CAN FD operation enable
- *  0b1..CAN FD is enabled. FlexCAN is able to receive and transmit messages in both CAN FD and CAN 2.0 formats.
  *  0b0..CAN FD is disabled. FlexCAN is able to receive and transmit messages in CAN 2.0 format.
+ *  0b1..CAN FD is enabled. FlexCAN is able to receive and transmit messages in both CAN FD and CAN 2.0 formats.
  */
 #define CAN_MCR_FDEN(x)                          (((uint32_t)(((uint32_t)(x)) << CAN_MCR_FDEN_SHIFT)) & CAN_MCR_FDEN_MASK)
 
@@ -2426,5 +2426,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* CAN_H_ */
+#endif  /* PERI_CAN_H_ */
 

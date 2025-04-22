@@ -14,13 +14,13 @@
 **                          MIMXRT1024DAG5B
 **
 **     Version:             rev. 1.2, 2021-08-10
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for XBARA
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -40,7 +40,7 @@
 */
 
 /*!
- * @file XBARA.h
+ * @file PERI_XBARA.h
  * @version 1.2
  * @date 2021-08-10
  * @brief CMSIS Peripheral Access Layer for XBARA
@@ -48,8 +48,8 @@
  * CMSIS Peripheral Access Layer for XBARA
  */
 
-#if !defined(XBARA_H_)
-#define XBARA_H_                                 /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_XBARA_H_)
+#define PERI_XBARA_H_                            /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1021CAF4A) || defined(CPU_MIMXRT1021CAF4B) || defined(CPU_MIMXRT1021CAG4A) || defined(CPU_MIMXRT1021CAG4B) || defined(CPU_MIMXRT1021DAF5A) || defined(CPU_MIMXRT1021DAF5B) || defined(CPU_MIMXRT1021DAG5A) || defined(CPU_MIMXRT1021DAG5B))
 #include "MIMXRT1021_COMMON.h"
@@ -1477,5 +1477,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* XBARA_H_ */
+#endif  /* PERI_XBARA_H_ */
 

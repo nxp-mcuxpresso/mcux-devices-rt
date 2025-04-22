@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b250325
+**     Build:               b250414
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for LPI2C
@@ -50,7 +50,7 @@
 */
 
 /*!
- * @file LPI2C.h
+ * @file PERI_LPI2C.h
  * @version 2.0
  * @date 2024-05-28
  * @brief CMSIS Peripheral Access Layer for LPI2C
@@ -58,8 +58,8 @@
  * CMSIS Peripheral Access Layer for LPI2C
  */
 
-#if !defined(LPI2C_H_)
-#define LPI2C_H_                                 /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_LPI2C_H_)
+#define PERI_LPI2C_H_                            /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT735SGAWAR_cm33_core0) || defined(CPU_MIMXRT735SGFOA_cm33_core0))
 #include "MIMXRT735S_cm33_core0_COMMON.h"
@@ -1242,16 +1242,16 @@ typedef struct {
 #define LPI2C_SCFGR1_TXCFG_MASK                  (0x400U)
 #define LPI2C_SCFGR1_TXCFG_SHIFT                 (10U)
 /*! TXCFG - Transmit Flag Configuration
- *  0b0..SSR[TDF] is set only during a target-transmit transfer when STDR is empty
- *  0b1..SSR[TDF] is set whenever STDR is empty
+ *  0b0..MSR[TDF] is set only during a target-transmit transfer when STDR is empty
+ *  0b1..MSR[TDF] is set whenever STDR is empty
  */
 #define LPI2C_SCFGR1_TXCFG(x)                    (((uint32_t)(((uint32_t)(x)) << LPI2C_SCFGR1_TXCFG_SHIFT)) & LPI2C_SCFGR1_TXCFG_MASK)
 
 #define LPI2C_SCFGR1_RXCFG_MASK                  (0x800U)
 #define LPI2C_SCFGR1_RXCFG_SHIFT                 (11U)
 /*! RXCFG - Receive Data Configuration
- *  0b0..Return received data, clear SSR[RDF]
- *  0b1..Return SASR and clear SSR[AVF] when SSR[AVF] is set, return received data and clear SSR[RDF] when SSR[AFV] is not set
+ *  0b0..Return received data, clear MSR[RDF]
+ *  0b1..Return SASR and clear SSR[AVF] when SSR[AVF] is set, return received data and clear MSR[RDF] when SSR[AFV] is not set
  */
 #define LPI2C_SCFGR1_RXCFG(x)                    (((uint32_t)(((uint32_t)(x)) << LPI2C_SCFGR1_RXCFG_SHIFT)) & LPI2C_SCFGR1_RXCFG_MASK)
 
@@ -1520,5 +1520,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* LPI2C_H_ */
+#endif  /* PERI_LPI2C_H_ */
 

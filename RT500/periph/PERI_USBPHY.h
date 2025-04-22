@@ -10,7 +10,7 @@
 **                          MIMXRT595SFFOC_dsp
 **
 **     Version:             rev. 5.0, 2020-08-27
-**     Build:               b240705
+**     Build:               b240823
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for USBPHY
@@ -1118,8 +1118,8 @@ typedef struct {
 #define USBPHY_STATUS_HOSTDISCONDETECT_STATUS_MASK (0x8U)
 #define USBPHY_STATUS_HOSTDISCONDETECT_STATUS_SHIFT (3U)
 /*! HOSTDISCONDETECT_STATUS - Host disconnect status
- *  0b1..USB cable disconnect has been detected at the local host
  *  0b0..USB cable disconnect has not been detected at the local host
+ *  0b1..USB cable disconnect has been detected at the local host
  */
 #define USBPHY_STATUS_HOSTDISCONDETECT_STATUS(x) (((uint32_t)(((uint32_t)(x)) << USBPHY_STATUS_HOSTDISCONDETECT_STATUS_SHIFT)) & USBPHY_STATUS_HOSTDISCONDETECT_STATUS_MASK)
 

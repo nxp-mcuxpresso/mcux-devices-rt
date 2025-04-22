@@ -12,8 +12,8 @@
 **                          MCUXpresso Compiler
 **
 **     Reference manual:    IMXRT1024RM Rev.1, 02/2021 | IMXRT102XSRM Rev.0
-**     Version:             rev. 1.0, 2021-08-10
-**     Build:               b240822
+**     Version:             rev. 1.2, 2021-08-10
+**     Build:               b250331
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -21,17 +21,21 @@
 **         the oscillator (PLL) that is part of the microcontroller device.
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
 **     mail:                 support@nxp.com
 **
 **     Revisions:
-**     - rev. 0.1 (2020-01-15)
+**     - rev. 0.1 (2017-11-06)
 **         Initial version.
-**     - rev. 1.0 (2021-08-10)
-**         Update header files to align with IMXRT1024RM Rev.1.
+**     - rev. 1.0 (2018-11-27)
+**         Update header files to align with IMXRT1020RM Rev.1.
+**     - rev. 1.1 (2019-04-29)
+**         Add SET/CLR/TOG register group to register CTRL, STAT, CHANNELCTRL, CH0STAT, CH0OPTS, CH1STAT, CH1OPTS, CH2STAT, CH2OPTS, CH3STAT, CH3OPTS of DCP module.
+**     - rev. 1.2 (2021-08-10)
+**         Update header files to align with IMXRT1020RM Rev.2.
 **
 ** ###################################################################
 */
@@ -39,7 +43,7 @@
 /*!
  * @file MIMXRT1024
  * @version 1.0
- * @date 220824
+ * @date 310325
  * @brief Device specific configuration file for MIMXRT1024 (implementation file)
  *
  * Provides a system configuration function and a global variable that contains

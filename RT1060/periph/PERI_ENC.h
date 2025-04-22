@@ -26,13 +26,13 @@
 **                          MIMXRT106SDVL6A
 **
 **     Version:             rev. 1.4, 2022-03-25
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for ENC
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -56,7 +56,7 @@
 */
 
 /*!
- * @file ENC.h
+ * @file PERI_ENC.h
  * @version 1.4
  * @date 2022-03-25
  * @brief CMSIS Peripheral Access Layer for ENC
@@ -64,8 +64,8 @@
  * CMSIS Peripheral Access Layer for ENC
  */
 
-#if !defined(ENC_H_)
-#define ENC_H_                                   /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_ENC_H_)
+#define PERI_ENC_H_                              /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1061CVJ5A) || defined(CPU_MIMXRT1061CVJ5B) || defined(CPU_MIMXRT1061CVL5A) || defined(CPU_MIMXRT1061CVL5B) || defined(CPU_MIMXRT1061DVJ6A) || defined(CPU_MIMXRT1061DVJ6B) || defined(CPU_MIMXRT1061DVL6A) || defined(CPU_MIMXRT1061DVL6B) || defined(CPU_MIMXRT1061XVN5B))
 #include "MIMXRT1061_COMMON.h"
@@ -650,5 +650,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* ENC_H_ */
+#endif  /* PERI_ENC_H_ */
 

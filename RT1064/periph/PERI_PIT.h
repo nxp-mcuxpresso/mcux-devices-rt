@@ -10,13 +10,13 @@
 **                          MIMXRT1064DVL6B
 **
 **     Version:             rev. 1.3, 2021-08-10
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for PIT
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -38,7 +38,7 @@
 */
 
 /*!
- * @file PIT.h
+ * @file PERI_PIT.h
  * @version 1.3
  * @date 2021-08-10
  * @brief CMSIS Peripheral Access Layer for PIT
@@ -46,8 +46,8 @@
  * CMSIS Peripheral Access Layer for PIT
  */
 
-#if !defined(PIT_H_)
-#define PIT_H_                                   /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_PIT_H_)
+#define PERI_PIT_H_                              /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1064CVJ5A) || defined(CPU_MIMXRT1064CVJ5B) || defined(CPU_MIMXRT1064CVL5A) || defined(CPU_MIMXRT1064CVL5B) || defined(CPU_MIMXRT1064DVJ6A) || defined(CPU_MIMXRT1064DVJ6B) || defined(CPU_MIMXRT1064DVL6A) || defined(CPU_MIMXRT1064DVL6B))
 #include "MIMXRT1064_COMMON.h"
@@ -267,5 +267,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* PIT_H_ */
+#endif  /* PERI_PIT_H_ */
 

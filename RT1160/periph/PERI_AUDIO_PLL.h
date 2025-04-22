@@ -14,13 +14,13 @@
 **                          MIMXRT1166XVM5A_cm7
 **
 **     Version:             rev. 0.1, 2020-12-29
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for AUDIO_PLL
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -34,7 +34,7 @@
 */
 
 /*!
- * @file AUDIO_PLL.h
+ * @file PERI_AUDIO_PLL.h
  * @version 0.1
  * @date 2020-12-29
  * @brief CMSIS Peripheral Access Layer for AUDIO_PLL
@@ -42,8 +42,8 @@
  * CMSIS Peripheral Access Layer for AUDIO_PLL
  */
 
-#if !defined(AUDIO_PLL_H_)
-#define AUDIO_PLL_H_                             /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_AUDIO_PLL_H_)
+#define PERI_AUDIO_PLL_H_                        /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1165CVM5A_cm4) || defined(CPU_MIMXRT1165DVM6A_cm4) || defined(CPU_MIMXRT1165XVM5A_cm4))
 #include "MIMXRT1165_cm4_COMMON.h"
@@ -162,24 +162,24 @@ typedef struct {
 #define AUDIO_PLL_CTRL0_POWERUP_MASK             (0x4000U)
 #define AUDIO_PLL_CTRL0_POWERUP_SHIFT            (14U)
 /*! POWERUP - POWERUP
- *  0b1..Power Up the PLL
  *  0b0..Power down the PLL
+ *  0b1..Power Up the PLL
  */
 #define AUDIO_PLL_CTRL0_POWERUP(x)               (((uint32_t)(((uint32_t)(x)) << AUDIO_PLL_CTRL0_POWERUP_SHIFT)) & AUDIO_PLL_CTRL0_POWERUP_MASK)
 
 #define AUDIO_PLL_CTRL0_ENABLE_MASK              (0x8000U)
 #define AUDIO_PLL_CTRL0_ENABLE_SHIFT             (15U)
 /*! ENABLE - ENABLE
- *  0b1..Enable the clock output
  *  0b0..Disable the clock output
+ *  0b1..Enable the clock output
  */
 #define AUDIO_PLL_CTRL0_ENABLE(x)                (((uint32_t)(((uint32_t)(x)) << AUDIO_PLL_CTRL0_ENABLE_SHIFT)) & AUDIO_PLL_CTRL0_ENABLE_MASK)
 
 #define AUDIO_PLL_CTRL0_BYPASS_MASK              (0x10000U)
 #define AUDIO_PLL_CTRL0_BYPASS_SHIFT             (16U)
 /*! BYPASS - BYPASS
- *  0b1..Bypass the PLL
  *  0b0..No Bypass
+ *  0b1..Bypass the PLL
  */
 #define AUDIO_PLL_CTRL0_BYPASS(x)                (((uint32_t)(((uint32_t)(x)) << AUDIO_PLL_CTRL0_BYPASS_SHIFT)) & AUDIO_PLL_CTRL0_BYPASS_MASK)
 
@@ -295,5 +295,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* AUDIO_PLL_H_ */
+#endif  /* PERI_AUDIO_PLL_H_ */
 

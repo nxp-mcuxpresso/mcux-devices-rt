@@ -34,7 +34,7 @@
 **                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SRC_MIF_LN28FDSOI_SPLLRAM
@@ -56,7 +56,7 @@
 */
 
 /*!
- * @file SRC_MIF_LN28FDSOI_SPLLRAM.h
+ * @file PERI_SRC_MIF_LN28FDSOI_SPLLRAM.h
  * @version 2.0
  * @date 2024-01-18
  * @brief CMSIS Peripheral Access Layer for SRC_MIF_LN28FDSOI_SPLLRAM
@@ -64,8 +64,8 @@
  * CMSIS Peripheral Access Layer for SRC_MIF_LN28FDSOI_SPLLRAM
  */
 
-#if !defined(SRC_MIF_LN28FDSOI_SPLLRAM_H_)
-#define SRC_MIF_LN28FDSOI_SPLLRAM_H_             /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_SRC_MIF_LN28FDSOI_SPLLRAM_H_)
+#define PERI_SRC_MIF_LN28FDSOI_SPLLRAM_H_        /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181CVP2C) || defined(CPU_MIMXRT1181XVP2B) || defined(CPU_MIMXRT1181XVP2C))
 #include "MIMXRT1181_COMMON.h"
@@ -338,5 +338,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* SRC_MIF_LN28FDSOI_SPLLRAM_H_ */
+#endif  /* PERI_SRC_MIF_LN28FDSOI_SPLLRAM_H_ */
 

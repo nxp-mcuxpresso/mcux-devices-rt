@@ -28,13 +28,13 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241121
+**     Build:               b250414
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for PINT
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -50,7 +50,7 @@
 */
 
 /*!
- * @file PINT.h
+ * @file PERI_PINT.h
  * @version 2.0
  * @date 2024-05-28
  * @brief CMSIS Peripheral Access Layer for PINT
@@ -58,8 +58,8 @@
  * CMSIS Peripheral Access Layer for PINT
  */
 
-#if !defined(PINT_H_)
-#define PINT_H_                                  /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_PINT_H_)
+#define PERI_PINT_H_                             /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT735SGAWAR_cm33_core0) || defined(CPU_MIMXRT735SGFOA_cm33_core0))
 #include "MIMXRT735S_cm33_core0_COMMON.h"
@@ -648,5 +648,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* PINT_H_ */
+#endif  /* PERI_PINT_H_ */
 

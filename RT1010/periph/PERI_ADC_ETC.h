@@ -4,13 +4,13 @@
 **                          MIMXRT1011DAE5A
 **
 **     Version:             rev. 1.2, 2021-08-10
-**     Build:               b240705
+**     Build:               b250414
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for ADC_ETC
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -30,7 +30,7 @@
 */
 
 /*!
- * @file ADC_ETC.h
+ * @file PERI_ADC_ETC.h
  * @version 1.2
  * @date 2021-08-10
  * @brief CMSIS Peripheral Access Layer for ADC_ETC
@@ -38,8 +38,8 @@
  * CMSIS Peripheral Access Layer for ADC_ETC
  */
 
-#if !defined(ADC_ETC_H_)
-#define ADC_ETC_H_                               /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_ADC_ETC_H_)
+#define PERI_ADC_ETC_H_                          /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1011CAE4A) || defined(CPU_MIMXRT1011DAE5A))
 #include "MIMXRT1011_COMMON.h"
@@ -1307,5 +1307,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* ADC_ETC_H_ */
+#endif  /* PERI_ADC_ETC_H_ */
 

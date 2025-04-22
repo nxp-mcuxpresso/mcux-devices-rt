@@ -10,7 +10,7 @@
 **                          MIMXRT595SFFOC_dsp
 **
 **     Version:             rev. 5.0, 2020-08-27
-**     Build:               b240705
+**     Build:               b240823
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for I3C
@@ -779,16 +779,16 @@ typedef struct {
 #define I3C_SDATACTRL_TXFULL_MASK                (0x40000000U)
 #define I3C_SDATACTRL_TXFULL_SHIFT               (30U)
 /*! TXFULL - TX is full
- *  0b1..TX is full
  *  0b0..TX is not full
+ *  0b1..TX is full
  */
 #define I3C_SDATACTRL_TXFULL(x)                  (((uint32_t)(((uint32_t)(x)) << I3C_SDATACTRL_TXFULL_SHIFT)) & I3C_SDATACTRL_TXFULL_MASK)
 
 #define I3C_SDATACTRL_RXEMPTY_MASK               (0x80000000U)
 #define I3C_SDATACTRL_RXEMPTY_SHIFT              (31U)
 /*! RXEMPTY - RX is empty
- *  0b1..RX is empty
  *  0b0..RX is not empty
+ *  0b1..RX is empty
  */
 #define I3C_SDATACTRL_RXEMPTY(x)                 (((uint32_t)(((uint32_t)(x)) << I3C_SDATACTRL_RXEMPTY_SHIFT)) & I3C_SDATACTRL_RXEMPTY_MASK)
 /*! @} */
@@ -967,16 +967,16 @@ typedef struct {
 #define I3C_SCAPABILITIES_INT_MASK               (0x40000000U)
 #define I3C_SCAPABILITIES_INT_SHIFT              (30U)
 /*! INT - Interrupt
- *  0b1..Interrupts are supported.
  *  0b0..Interrupts are not supported
+ *  0b1..Interrupts are supported.
  */
 #define I3C_SCAPABILITIES_INT(x)                 (((uint32_t)(((uint32_t)(x)) << I3C_SCAPABILITIES_INT_SHIFT)) & I3C_SCAPABILITIES_INT_MASK)
 
 #define I3C_SCAPABILITIES_DMA_MASK               (0x80000000U)
 #define I3C_SCAPABILITIES_DMA_SHIFT              (31U)
 /*! DMA - DMA
- *  0b1..DMA is supported
  *  0b0..DMA is not supported
+ *  0b1..DMA is supported
  */
 #define I3C_SCAPABILITIES_DMA(x)                 (((uint32_t)(((uint32_t)(x)) << I3C_SCAPABILITIES_DMA_SHIFT)) & I3C_SCAPABILITIES_DMA_MASK)
 /*! @} */

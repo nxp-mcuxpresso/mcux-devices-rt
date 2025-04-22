@@ -6,13 +6,13 @@
 **                          MIMXRT1015DAF5B
 **
 **     Version:             rev. 1.3, 2021-08-10
-**     Build:               b240705
+**     Build:               b250414
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for GPC
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -34,7 +34,7 @@
 */
 
 /*!
- * @file GPC.h
+ * @file PERI_GPC.h
  * @version 1.3
  * @date 2021-08-10
  * @brief CMSIS Peripheral Access Layer for GPC
@@ -42,8 +42,8 @@
  * CMSIS Peripheral Access Layer for GPC
  */
 
-#if !defined(GPC_H_)
-#define GPC_H_                                   /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_GPC_H_)
+#define PERI_GPC_H_                              /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1015CAF4A) || defined(CPU_MIMXRT1015CAF4B) || defined(CPU_MIMXRT1015DAF5A) || defined(CPU_MIMXRT1015DAF5B))
 #include "MIMXRT1015_COMMON.h"
@@ -138,8 +138,8 @@ typedef struct {
 #define GPC_CNTR_PDRAM0_PGE_MASK                 (0x400000U)
 #define GPC_CNTR_PDRAM0_PGE_SHIFT                (22U)
 /*! PDRAM0_PGE
- *  0b1..FlexRAM PDRAM0 domain will be powered down when the CPU core is powered down..
  *  0b0..FlexRAM PDRAM0 domain will keep power even if the CPU core is powered down.
+ *  0b1..FlexRAM PDRAM0 domain will be powered down when the CPU core is powered down..
  */
 #define GPC_CNTR_PDRAM0_PGE(x)                   (((uint32_t)(((uint32_t)(x)) << GPC_CNTR_PDRAM0_PGE_SHIFT)) & GPC_CNTR_PDRAM0_PGE_MASK)
 /*! @} */
@@ -236,5 +236,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* GPC_H_ */
+#endif  /* PERI_GPC_H_ */
 

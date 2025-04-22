@@ -6,7 +6,7 @@
 **     Compiler:            Xtensa Compiler
 **     Reference manual:    iMXRT500RM Rev.1, 07/2022
 **     Version:             rev. 5.0, 2020-08-27
-**     Build:               b240705
+**     Build:               b240823
 **
 **     Abstract:
 **         Peripheral Access Layer for MIMXRT595S_dsp

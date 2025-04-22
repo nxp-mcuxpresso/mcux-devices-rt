@@ -13,7 +13,7 @@
 **                          MIMXRT685SVFVKB_dsp
 **
 **     Version:             rev. 2.0, 2019-11-12
-**     Build:               b250210
+**     Build:               b250211
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for OCOTP

@@ -10,7 +10,7 @@
 **                          MIMXRT595SFFOC_dsp
 **
 **     Version:             rev. 5.0, 2020-08-27
-**     Build:               b240705
+**     Build:               b240823
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CLKCTL0

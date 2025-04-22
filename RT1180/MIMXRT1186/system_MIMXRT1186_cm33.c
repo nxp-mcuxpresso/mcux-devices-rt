@@ -10,7 +10,7 @@
 **
 **     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Build:               b250331
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -36,7 +36,7 @@
 /*!
  * @file MIMXRT1186_cm33
  * @version 1.0
- * @date 2025-03-10
+ * @date 2025-03-31
  * @brief Device specific configuration file for MIMXRT1186_cm33 (implementation file)
  *
  * Provides a system configuration function and a global variable that contains

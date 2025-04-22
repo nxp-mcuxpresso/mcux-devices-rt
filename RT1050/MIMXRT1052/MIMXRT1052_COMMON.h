@@ -13,13 +13,13 @@
 **
 **     Reference manual:    IMXRT1050RM Rev.5, 07/2021 | IMXRT1050SRM Rev.2
 **     Version:             rev. 1.4, 2021-08-10
-**     Build:               b240823
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1052
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -374,6 +374,14 @@ typedef enum IRQn {
 #define CAN_Error_IRQS                           { NotAvail_IRQn, CAN1_IRQn, CAN2_IRQn }
 #define CAN_Bus_Off_IRQS                         { NotAvail_IRQn, CAN1_IRQn, CAN2_IRQn }
 #define CAN_ORed_Message_buffer_IRQS             { NotAvail_IRQn, CAN1_IRQn, CAN2_IRQn }
+/* Backward compatibility */
+#define CAN_ECR_TXERRCNT_MASK         CAN_ECR_TX_ERR_COUNTER_MASK
+#define CAN_ECR_TXERRCNT_SHIFT        CAN_ECR_TX_ERR_COUNTER_SHIFT
+#define CAN_ECR_TXERRCNT(x)           CAN_ECR_TX_ERR_COUNTER(x)
+#define CAN_ECR_RXERRCNT_MASK         CAN_ECR_RX_ERR_COUNTER_MASK
+#define CAN_ECR_RXERRCNT_SHIFT        CAN_ECR_RX_ERR_COUNTER_SHIFT
+#define CAN_ECR_RXERRCNT(x)           CAN_ECR_RX_ERR_COUNTER(x)
+
 
 /* CCM - Peripheral instance base addresses */
 /** Peripheral CCM base address */

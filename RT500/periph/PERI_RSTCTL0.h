@@ -10,7 +10,7 @@
 **                          MIMXRT595SFFOC_dsp
 **
 **     Version:             rev. 5.0, 2020-08-27
-**     Build:               b240705
+**     Build:               b240823
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for RSTCTL0
@@ -185,144 +185,144 @@ typedef struct {
 #define RSTCTL0_PRSTCTL0_AXI_SWITCH_MASK         (0x8U)
 #define RSTCTL0_PRSTCTL0_AXI_SWITCH_SHIFT        (3U)
 /*! AXI_SWITCH - AXI Switch reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_AXI_SWITCH(x)           (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_AXI_SWITCH_SHIFT)) & RSTCTL0_PRSTCTL0_AXI_SWITCH_MASK)
 
 #define RSTCTL0_PRSTCTL0_POWERQUAD_MASK          (0x100U)
 #define RSTCTL0_PRSTCTL0_POWERQUAD_SHIFT         (8U)
 /*! POWERQUAD - POWERQUAD reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_POWERQUAD(x)            (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_POWERQUAD_SHIFT)) & RSTCTL0_PRSTCTL0_POWERQUAD_MASK)
 
 #define RSTCTL0_PRSTCTL0_CASPER_MASK             (0x200U)
 #define RSTCTL0_PRSTCTL0_CASPER_SHIFT            (9U)
 /*! CASPER - CASPER reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_CASPER(x)               (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CASPER_SHIFT)) & RSTCTL0_PRSTCTL0_CASPER_MASK)
 
 #define RSTCTL0_PRSTCTL0_HASHCRYPT_MASK          (0x400U)
 #define RSTCTL0_PRSTCTL0_HASHCRYPT_SHIFT         (10U)
 /*! HASHCRYPT - Hash-Crypt reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_HASHCRYPT(x)            (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_HASHCRYPT_SHIFT)) & RSTCTL0_PRSTCTL0_HASHCRYPT_MASK)
 
 #define RSTCTL0_PRSTCTL0_PUF_MASK                (0x800U)
 #define RSTCTL0_PRSTCTL0_PUF_SHIFT               (11U)
 /*! PUF - PUF reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_PUF(x)                  (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_PUF_SHIFT)) & RSTCTL0_PRSTCTL0_PUF_MASK)
 
 #define RSTCTL0_PRSTCTL0_RNG_MASK                (0x1000U)
 #define RSTCTL0_PRSTCTL0_RNG_SHIFT               (12U)
 /*! RNG - RNG reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_RNG(x)                  (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_RNG_SHIFT)) & RSTCTL0_PRSTCTL0_RNG_MASK)
 
 #define RSTCTL0_PRSTCTL0_FLEXSPI0_OTFAD_MASK     (0x10000U)
 #define RSTCTL0_PRSTCTL0_FLEXSPI0_OTFAD_SHIFT    (16U)
 /*! FLEXSPI0_OTFAD - FLEXSPI0 and OTFAD reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_FLEXSPI0_OTFAD(x)       (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_FLEXSPI0_OTFAD_SHIFT)) & RSTCTL0_PRSTCTL0_FLEXSPI0_OTFAD_MASK)
 
 #define RSTCTL0_PRSTCTL0_FLEXSPI1_MASK           (0x40000U)
 #define RSTCTL0_PRSTCTL0_FLEXSPI1_SHIFT          (18U)
 /*! FLEXSPI1 - FLEXSPI1 reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_FLEXSPI1(x)             (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_FLEXSPI1_SHIFT)) & RSTCTL0_PRSTCTL0_FLEXSPI1_MASK)
 
 #define RSTCTL0_PRSTCTL0_USBHS_PHY_MASK          (0x100000U)
 #define RSTCTL0_PRSTCTL0_USBHS_PHY_SHIFT         (20U)
 /*! USBHS_PHY - USB PHY reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_USBHS_PHY(x)            (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_USBHS_PHY_SHIFT)) & RSTCTL0_PRSTCTL0_USBHS_PHY_MASK)
 
 #define RSTCTL0_PRSTCTL0_USBHS_DEVICE_MASK       (0x200000U)
 #define RSTCTL0_PRSTCTL0_USBHS_DEVICE_SHIFT      (21U)
 /*! USBHS_DEVICE - USB HS Device reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_USBHS_DEVICE(x)         (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_USBHS_DEVICE_SHIFT)) & RSTCTL0_PRSTCTL0_USBHS_DEVICE_MASK)
 
 #define RSTCTL0_PRSTCTL0_USBHS_HOST_MASK         (0x400000U)
 #define RSTCTL0_PRSTCTL0_USBHS_HOST_SHIFT        (22U)
 /*! USBHS_HOST - USB HOST reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_USBHS_HOST(x)           (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_USBHS_HOST_SHIFT)) & RSTCTL0_PRSTCTL0_USBHS_HOST_MASK)
 
 #define RSTCTL0_PRSTCTL0_USBHS_SRAM_MASK         (0x800000U)
 #define RSTCTL0_PRSTCTL0_USBHS_SRAM_SHIFT        (23U)
 /*! USBHS_SRAM - USB RAM reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_USBHS_SRAM(x)           (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_USBHS_SRAM_SHIFT)) & RSTCTL0_PRSTCTL0_USBHS_SRAM_MASK)
 
 #define RSTCTL0_PRSTCTL0_SCT_MASK                (0x1000000U)
 #define RSTCTL0_PRSTCTL0_SCT_SHIFT               (24U)
 /*! SCT - SCTimer reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_SCT(x)                  (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SCT_SHIFT)) & RSTCTL0_PRSTCTL0_SCT_MASK)
 
 #define RSTCTL0_PRSTCTL0_GPU_MASK                (0x4000000U)
 #define RSTCTL0_PRSTCTL0_GPU_SHIFT               (26U)
 /*! GPU - GPU reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_GPU(x)                  (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_GPU_SHIFT)) & RSTCTL0_PRSTCTL0_GPU_MASK)
 
 #define RSTCTL0_PRSTCTL0_DISPLAY_CONTROLLER_MASK (0x8000000U)
 #define RSTCTL0_PRSTCTL0_DISPLAY_CONTROLLER_SHIFT (27U)
 /*! DISPLAY_CONTROLLER - LCDIF Display Controller reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_DISPLAY_CONTROLLER(x)   (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_DISPLAY_CONTROLLER_SHIFT)) & RSTCTL0_PRSTCTL0_DISPLAY_CONTROLLER_MASK)
 
 #define RSTCTL0_PRSTCTL0_MIPI_DSI_CONTROLLER_MASK (0x10000000U)
 #define RSTCTL0_PRSTCTL0_MIPI_DSI_CONTROLLER_SHIFT (28U)
 /*! MIPI_DSI_CONTROLLER - MIPI Digital serial Interface controller reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_MIPI_DSI_CONTROLLER(x)  (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_MIPI_DSI_CONTROLLER_SHIFT)) & RSTCTL0_PRSTCTL0_MIPI_DSI_CONTROLLER_MASK)
 
 #define RSTCTL0_PRSTCTL0_MIPI_DSI_PHY_MASK       (0x20000000U)
 #define RSTCTL0_PRSTCTL0_MIPI_DSI_PHY_SHIFT      (29U)
 /*! MIPI_DSI_PHY - MIPI DSI PHY reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_MIPI_DSI_PHY(x)         (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_MIPI_DSI_PHY_SHIFT)) & RSTCTL0_PRSTCTL0_MIPI_DSI_PHY_MASK)
 
 #define RSTCTL0_PRSTCTL0_SMARTDMA_MASK           (0x40000000U)
 #define RSTCTL0_PRSTCTL0_SMARTDMA_SHIFT          (30U)
 /*! SMARTDMA - SMARTDMA Event/Algorithm handler reset control
- *  0b1..Set Reset
  *  0b0..Clear Reset
+ *  0b1..Set Reset
  */
 #define RSTCTL0_PRSTCTL0_SMARTDMA(x)             (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SMARTDMA_SHIFT)) & RSTCTL0_PRSTCTL0_SMARTDMA_MASK)
 /*! @} */
@@ -405,144 +405,144 @@ typedef struct {
 #define RSTCTL0_PRSTCTL0_SET_AXI_SWITCH_MASK     (0x8U)
 #define RSTCTL0_PRSTCTL0_SET_AXI_SWITCH_SHIFT    (3U)
 /*! AXI_SWITCH - AXI SWITCH reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_AXI_SWITCH(x)       (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_AXI_SWITCH_SHIFT)) & RSTCTL0_PRSTCTL0_SET_AXI_SWITCH_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_POWERQUAD_MASK      (0x100U)
 #define RSTCTL0_PRSTCTL0_SET_POWERQUAD_SHIFT     (8U)
 /*! POWERQUAD - POWERQUAD reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_POWERQUAD(x)        (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_POWERQUAD_SHIFT)) & RSTCTL0_PRSTCTL0_SET_POWERQUAD_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_CASPER_MASK         (0x200U)
 #define RSTCTL0_PRSTCTL0_SET_CASPER_SHIFT        (9U)
 /*! CASPER - CASPER reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_CASPER(x)           (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_CASPER_SHIFT)) & RSTCTL0_PRSTCTL0_SET_CASPER_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_HASHCRYPT_MASK      (0x400U)
 #define RSTCTL0_PRSTCTL0_SET_HASHCRYPT_SHIFT     (10U)
 /*! HASHCRYPT - HASHCRYPT reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_HASHCRYPT(x)        (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_HASHCRYPT_SHIFT)) & RSTCTL0_PRSTCTL0_SET_HASHCRYPT_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_PUF_MASK            (0x800U)
 #define RSTCTL0_PRSTCTL0_SET_PUF_SHIFT           (11U)
 /*! PUF - PUF reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_PUF(x)              (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_PUF_SHIFT)) & RSTCTL0_PRSTCTL0_SET_PUF_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_RNG_MASK            (0x1000U)
 #define RSTCTL0_PRSTCTL0_SET_RNG_SHIFT           (12U)
 /*! RNG - RNG reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_RNG(x)              (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_RNG_SHIFT)) & RSTCTL0_PRSTCTL0_SET_RNG_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_FLEXSPI0_OTFAD_MASK (0x10000U)
 #define RSTCTL0_PRSTCTL0_SET_FLEXSPI0_OTFAD_SHIFT (16U)
 /*! FLEXSPI0_OTFAD - FLEXSPI0 and OTFAD reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_FLEXSPI0_OTFAD(x)   (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_FLEXSPI0_OTFAD_SHIFT)) & RSTCTL0_PRSTCTL0_SET_FLEXSPI0_OTFAD_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_FLEXSPI1_MASK       (0x40000U)
 #define RSTCTL0_PRSTCTL0_SET_FLEXSPI1_SHIFT      (18U)
 /*! FLEXSPI1 - FLEXSPI1 reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_FLEXSPI1(x)         (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_FLEXSPI1_SHIFT)) & RSTCTL0_PRSTCTL0_SET_FLEXSPI1_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_USBHS_PHY_MASK      (0x100000U)
 #define RSTCTL0_PRSTCTL0_SET_USBHS_PHY_SHIFT     (20U)
 /*! USBHS_PHY - USB PHY reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_USBHS_PHY(x)        (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_USBHS_PHY_SHIFT)) & RSTCTL0_PRSTCTL0_SET_USBHS_PHY_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_USBHS_DEVICE_MASK   (0x200000U)
 #define RSTCTL0_PRSTCTL0_SET_USBHS_DEVICE_SHIFT  (21U)
 /*! USBHS_DEVICE - USB Device reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_USBHS_DEVICE(x)     (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_USBHS_DEVICE_SHIFT)) & RSTCTL0_PRSTCTL0_SET_USBHS_DEVICE_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_USBHS_HOST_MASK     (0x400000U)
 #define RSTCTL0_PRSTCTL0_SET_USBHS_HOST_SHIFT    (22U)
 /*! USBHS_HOST - USB HOST reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_USBHS_HOST(x)       (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_USBHS_HOST_SHIFT)) & RSTCTL0_PRSTCTL0_SET_USBHS_HOST_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_USBHS_SRAM_MASK     (0x800000U)
 #define RSTCTL0_PRSTCTL0_SET_USBHS_SRAM_SHIFT    (23U)
 /*! USBHS_SRAM - USBHS SRAM reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_USBHS_SRAM(x)       (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_USBHS_SRAM_SHIFT)) & RSTCTL0_PRSTCTL0_SET_USBHS_SRAM_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_SCT_MASK            (0x1000000U)
 #define RSTCTL0_PRSTCTL0_SET_SCT_SHIFT           (24U)
 /*! SCT - SCTimer reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_SCT(x)              (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_SCT_SHIFT)) & RSTCTL0_PRSTCTL0_SET_SCT_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_GPU_MASK            (0x4000000U)
 #define RSTCTL0_PRSTCTL0_SET_GPU_SHIFT           (26U)
 /*! GPU - GPU reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_GPU(x)              (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_GPU_SHIFT)) & RSTCTL0_PRSTCTL0_SET_GPU_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_DISPLAY_CONTROLLER_MASK (0x8000000U)
 #define RSTCTL0_PRSTCTL0_SET_DISPLAY_CONTROLLER_SHIFT (27U)
 /*! DISPLAY_CONTROLLER - LCDIF DISPLAY CONTROLLER reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_DISPLAY_CONTROLLER(x) (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_DISPLAY_CONTROLLER_SHIFT)) & RSTCTL0_PRSTCTL0_SET_DISPLAY_CONTROLLER_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_MIPI_DSI_CONTROLLER_MASK (0x10000000U)
 #define RSTCTL0_PRSTCTL0_SET_MIPI_DSI_CONTROLLER_SHIFT (28U)
 /*! MIPI_DSI_CONTROLLER - MIPI DSI controller reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_MIPI_DSI_CONTROLLER(x) (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_MIPI_DSI_CONTROLLER_SHIFT)) & RSTCTL0_PRSTCTL0_SET_MIPI_DSI_CONTROLLER_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_MIPI_DSI_PHY_MASK   (0x20000000U)
 #define RSTCTL0_PRSTCTL0_SET_MIPI_DSI_PHY_SHIFT  (29U)
 /*! MIPI_DSI_PHY - MIPI DSI PHY reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_MIPI_DSI_PHY(x)     (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_MIPI_DSI_PHY_SHIFT)) & RSTCTL0_PRSTCTL0_SET_MIPI_DSI_PHY_MASK)
 
 #define RSTCTL0_PRSTCTL0_SET_SMARTDMA_MASK       (0x40000000U)
 #define RSTCTL0_PRSTCTL0_SET_SMARTDMA_SHIFT      (30U)
 /*! SMARTDMA - SMARTDMA Event/Algorithm handler reset set
- *  0b1..Sets the PRSTCTL0 Bit
  *  0b0..No Effect
+ *  0b1..Sets the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_SET_SMARTDMA(x)         (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_SET_SMARTDMA_SHIFT)) & RSTCTL0_PRSTCTL0_SET_SMARTDMA_MASK)
 /*! @} */
@@ -625,144 +625,144 @@ typedef struct {
 #define RSTCTL0_PRSTCTL0_CLR_AXI_SWITCH_MASK     (0x8U)
 #define RSTCTL0_PRSTCTL0_CLR_AXI_SWITCH_SHIFT    (3U)
 /*! AXI_SWITCH - AXI SWITCH reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_AXI_SWITCH(x)       (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_AXI_SWITCH_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_AXI_SWITCH_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_POWERQUAD_MASK      (0x100U)
 #define RSTCTL0_PRSTCTL0_CLR_POWERQUAD_SHIFT     (8U)
 /*! POWERQUAD - POWERQUAD reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_POWERQUAD(x)        (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_POWERQUAD_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_POWERQUAD_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_CASPER_MASK         (0x200U)
 #define RSTCTL0_PRSTCTL0_CLR_CASPER_SHIFT        (9U)
 /*! CASPER - CASPER reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_CASPER(x)           (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_CASPER_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_CASPER_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_HASHCRYPT_MASK      (0x400U)
 #define RSTCTL0_PRSTCTL0_CLR_HASHCRYPT_SHIFT     (10U)
 /*! HASHCRYPT - HASHCRYPT reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_HASHCRYPT(x)        (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_HASHCRYPT_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_HASHCRYPT_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_PUF_MASK            (0x800U)
 #define RSTCTL0_PRSTCTL0_CLR_PUF_SHIFT           (11U)
 /*! PUF - PUF reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_PUF(x)              (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_PUF_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_PUF_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_RNG_MASK            (0x1000U)
 #define RSTCTL0_PRSTCTL0_CLR_RNG_SHIFT           (12U)
 /*! RNG - RNG reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_RNG(x)              (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_RNG_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_RNG_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_FLEXSPI0_OTFAD_MASK (0x10000U)
 #define RSTCTL0_PRSTCTL0_CLR_FLEXSPI0_OTFAD_SHIFT (16U)
 /*! FLEXSPI0_OTFAD - FLEXSPI0 and OTFAD reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_FLEXSPI0_OTFAD(x)   (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_FLEXSPI0_OTFAD_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_FLEXSPI0_OTFAD_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_FLEXSPI1_MASK       (0x40000U)
 #define RSTCTL0_PRSTCTL0_CLR_FLEXSPI1_SHIFT      (18U)
 /*! FLEXSPI1 - FLEXSPI1 reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_FLEXSPI1(x)         (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_FLEXSPI1_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_FLEXSPI1_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_USBHS_PHY_MASK      (0x100000U)
 #define RSTCTL0_PRSTCTL0_CLR_USBHS_PHY_SHIFT     (20U)
 /*! USBHS_PHY - USB PHY reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_USBHS_PHY(x)        (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_USBHS_PHY_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_USBHS_PHY_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_USBHS_DEVICE_MASK   (0x200000U)
 #define RSTCTL0_PRSTCTL0_CLR_USBHS_DEVICE_SHIFT  (21U)
 /*! USBHS_DEVICE - USB DEVICE reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_USBHS_DEVICE(x)     (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_USBHS_DEVICE_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_USBHS_DEVICE_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_USBHS_HOST_MASK     (0x400000U)
 #define RSTCTL0_PRSTCTL0_CLR_USBHS_HOST_SHIFT    (22U)
 /*! USBHS_HOST - USB HOST reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_USBHS_HOST(x)       (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_USBHS_HOST_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_USBHS_HOST_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_USBHS_SRAM_MASK     (0x800000U)
 #define RSTCTL0_PRSTCTL0_CLR_USBHS_SRAM_SHIFT    (23U)
 /*! USBHS_SRAM - USBHS SRAM reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_USBHS_SRAM(x)       (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_USBHS_SRAM_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_USBHS_SRAM_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_SCT_MASK            (0x1000000U)
 #define RSTCTL0_PRSTCTL0_CLR_SCT_SHIFT           (24U)
 /*! SCT - SCT reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_SCT(x)              (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_SCT_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_SCT_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_GPU_MASK            (0x4000000U)
 #define RSTCTL0_PRSTCTL0_CLR_GPU_SHIFT           (26U)
 /*! GPU - GPU reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_GPU(x)              (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_GPU_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_GPU_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_DISPLAY_CONTROLLER_MASK (0x8000000U)
 #define RSTCTL0_PRSTCTL0_CLR_DISPLAY_CONTROLLER_SHIFT (27U)
 /*! DISPLAY_CONTROLLER - LCDIF DISPLAY CONTROLLER reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_DISPLAY_CONTROLLER(x) (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_DISPLAY_CONTROLLER_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_DISPLAY_CONTROLLER_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_MIPI_DSI_CONTROLLER_MASK (0x10000000U)
 #define RSTCTL0_PRSTCTL0_CLR_MIPI_DSI_CONTROLLER_SHIFT (28U)
 /*! MIPI_DSI_CONTROLLER - MIPI DSI controller reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_MIPI_DSI_CONTROLLER(x) (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_MIPI_DSI_CONTROLLER_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_MIPI_DSI_CONTROLLER_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_MIPI_DSI_PHY_MASK   (0x20000000U)
 #define RSTCTL0_PRSTCTL0_CLR_MIPI_DSI_PHY_SHIFT  (29U)
 /*! MIPI_DSI_PHY - MIPI DSI PHY reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_MIPI_DSI_PHY(x)     (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_MIPI_DSI_PHY_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_MIPI_DSI_PHY_MASK)
 
 #define RSTCTL0_PRSTCTL0_CLR_SMARTDMA_MASK       (0x40000000U)
 #define RSTCTL0_PRSTCTL0_CLR_SMARTDMA_SHIFT      (30U)
 /*! SMARTDMA - SMARTDMA Event/Algorithm handler reset clear
- *  0b1..Clears the PRSTCTL0 Bit
  *  0b0..No effect
+ *  0b1..Clears the PRSTCTL0 Bit
  */
 #define RSTCTL0_PRSTCTL0_CLR_SMARTDMA(x)         (((uint32_t)(((uint32_t)(x)) << RSTCTL0_PRSTCTL0_CLR_SMARTDMA_SHIFT)) & RSTCTL0_PRSTCTL0_CLR_SMARTDMA_MASK)
 /*! @} */

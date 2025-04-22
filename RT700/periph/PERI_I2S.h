@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b250124
+**     Build:               b250414
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for I2S
@@ -50,7 +50,7 @@
 */
 
 /*!
- * @file I2S.h
+ * @file PERI_I2S.h
  * @version 2.0
  * @date 2024-05-28
  * @brief CMSIS Peripheral Access Layer for I2S
@@ -58,8 +58,8 @@
  * CMSIS Peripheral Access Layer for I2S
  */
 
-#if !defined(I2S_H_)
-#define I2S_H_                                   /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_I2S_H_)
+#define PERI_I2S_H_                              /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT735SGAWAR_cm33_core0) || defined(CPU_MIMXRT735SGFOA_cm33_core0))
 #include "MIMXRT735S_cm33_core0_COMMON.h"
@@ -1249,5 +1249,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* I2S_H_ */
+#endif  /* PERI_I2S_H_ */
 

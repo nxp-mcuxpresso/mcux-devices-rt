@@ -34,7 +34,7 @@
 **                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CACHE_ECC_MCM
@@ -56,7 +56,7 @@
 */
 
 /*!
- * @file CACHE_ECC_MCM.h
+ * @file PERI_CACHE_ECC_MCM.h
  * @version 2.0
  * @date 2024-01-18
  * @brief CMSIS Peripheral Access Layer for CACHE_ECC_MCM
@@ -64,8 +64,8 @@
  * CMSIS Peripheral Access Layer for CACHE_ECC_MCM
  */
 
-#if !defined(CACHE_ECC_MCM_H_)
-#define CACHE_ECC_MCM_H_                         /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_CACHE_ECC_MCM_H_)
+#define PERI_CACHE_ECC_MCM_H_                    /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181CVP2C) || defined(CPU_MIMXRT1181XVP2B) || defined(CPU_MIMXRT1181XVP2C))
 #include "MIMXRT1181_COMMON.h"
@@ -972,5 +972,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* CACHE_ECC_MCM_H_ */
+#endif  /* PERI_CACHE_ECC_MCM_H_ */
 

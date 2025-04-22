@@ -34,7 +34,7 @@
 **                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for ENETC_PF_EMDIO
@@ -56,7 +56,7 @@
 */
 
 /*!
- * @file ENETC_PF_EMDIO.h
+ * @file PERI_ENETC_PF_EMDIO.h
  * @version 2.0
  * @date 2024-01-18
  * @brief CMSIS Peripheral Access Layer for ENETC_PF_EMDIO
@@ -64,8 +64,8 @@
  * CMSIS Peripheral Access Layer for ENETC_PF_EMDIO
  */
 
-#if !defined(ENETC_PF_EMDIO_H_)
-#define ENETC_PF_EMDIO_H_                        /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_ENETC_PF_EMDIO_H_)
+#define PERI_ENETC_PF_EMDIO_H_                   /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181CVP2C) || defined(CPU_MIMXRT1181XVP2B) || defined(CPU_MIMXRT1181XVP2C))
 #include "MIMXRT1181_COMMON.h"
@@ -471,5 +471,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* ENETC_PF_EMDIO_H_ */
+#endif  /* PERI_ENETC_PF_EMDIO_H_ */
 

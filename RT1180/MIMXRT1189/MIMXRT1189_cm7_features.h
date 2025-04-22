@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 0.1, 2021-03-09
-**     Build:               b250325
+**     Build:               b250411
 **
 **     Abstract:
 **         Chip specific module features.
@@ -269,6 +269,8 @@
 #define FSL_FEATURE_FLEXCAN_HAS_PN_MODE (0)
 /* @brief Has Enhanced Rx FIFO. */
 #define FSL_FEATURE_FLEXCAN_HAS_ENHANCED_RX_FIFO (1)
+/* @brief Has Enhanced Rx FIFO. */
+#define FSL_FEATURE_FLEXCAN_INSTANCE_HAS_ENHANCED_RX_FIFOn(x) (1)
 /* @brief Enhanced Rx FIFO size (Indicates how many CAN FD messages can be stored). */
 #define FSL_FEATURE_FLEXCAN_HAS_ENHANCED_RX_FIFO_SIZE (20)
 /* @brief The number of enhanced Rx FIFO filter element registers. */
@@ -279,12 +281,22 @@
 #define FSL_FEATURE_FLEXCAN_HAS_MORE_THAN_64_MB (1)
 /* @brief Does not support self wake feature(bitfield MCR[SLFWAK]) */
 #define FSL_FEATURE_FLEXCAN_HAS_NO_SLFWAK_SUPPORT (0)
-/* @brief Has time tick source selection(bitfield CTRL2[TIMER_SRC]) */
+/* @brief Has external time tick source (bitfield CTRL2[TIMER_SRC]). */
 #define FSL_FEATURE_FLEXCAN_HAS_EXTERNAL_TIME_TICK (1)
-/* @brief Has Time Stamp Capture Point(bitfield CTRL2[TSTAMPCAP]) */
+/* @brief Instance has external time tick source (register bit field CTRL2[TIMER_SRC]). */
+#define FSL_FEATURE_FLEXCAN_INSTANCE_HAS_EXTERNAL_TIME_TICKn(x) (1)
+/* @brief Has Time Stamp Capture Point(bitfield CTRL2[TSTAMPCAP]). */
 #define FSL_FEATURE_FLEXCAN_HAS_HIGH_RESOLUTION_TIMESTAMP (1)
-/* @brief Has Enhanced Rx FIFO. */
-#define FSL_FEATURE_FLEXCAN_INSTANCE_HAS_ENHANCED_RX_FIFOn(x) (1)
+/* @brief Instance has Pretended Networking option (register bit field MCR[PNET_EN]). */
+#define FSL_FEATURE_FLEXCAN_INSTANCE_HAS_PN_MODEn(x) (0)
+/* @brief FlexCAN maximum data rate. */
+#define FSL_FEATURE_FLEXCAN_MAX_CANFD_BITRATE (8000000)
+/* @brief Support payload endianness selection (bitfield CTRL2[PES]). */
+#define FSL_FEATURE_FLEXCAN_HAS_ENDIANNESS_SELECTION (0)
+/* @brief Enter Freeze mode before entering Disable and Stop mode. */
+#define FSL_FEATURE_FLEXCAN_ENTER_FREEZE_MODE (0)
+/* @brief Is affected by errata with ID 8341 (FlexCAN: Entering Freeze Mode or Low Power Mode from Normal Mode can cause the FlexCAN module to stop operating). */
+#define FSL_FEATURE_FLEXCAN_HAS_ERRATA_8341 (0)
 
 /* SCB module features */
 
@@ -583,6 +595,8 @@
 #define FSL_FEATURE_LPI2C_HAS_SEPARATE_DMA_RX_TX_REQn(x) (1)
 /* @brief Capacity (number of entries) of the transmit/receive FIFO (or zero if no FIFO is available). */
 #define FSL_FEATURE_LPI2C_FIFO_SIZEn(x) (8)
+/* @brief Has dedicated interrupt for master and slave. */
+#define FSL_FEATURE_LPI2C_HAS_ROLE_SPLIT_IRQ (0)
 
 /* LPIT module features */
 
@@ -809,6 +823,18 @@
 #define FSL_FEATURE_NETC_HAS_NO_XGMII (0)
 /* @brief NXP Switch Tag support. */
 #define FSL_FEATURE_NETC_HAS_SWITCH_TAG (0)
+/* @brief Actual MAC Tx IPG is longer than configured when transmitting back-to-back packets in MII half duplex mode. */
+#define FSL_FEATURE_NETC_HAS_ERRATA_052167 (1)
+/* @brief The actual offset of the SG_DROP_COUNT in the Ingress Stream Count Table STSE_DATA element is not as document. */
+#define FSL_FEATURE_NETC_HAS_ERRATA_052206 (1)
+/* @brief The receiving NETC MAC cannot reliably detect the frame when IPG length and flexiable preamble are set to the minimum value. */
+#define FSL_FEATURE_NETC_HAS_ERRATA_052129 (1)
+/* @brief PTCaTSDR registers are implemented in the wrong order within the memory map. */
+#define FSL_FEATURE_NETC_HAS_ERRATA_052031 (1)
+/* @brief The NETC does not always obey the wakeup time in PMn_LPWAKETIMER. */
+#define FSL_FEATURE_NETC_HAS_ERRATA_051994 (1)
+/* @brief MAC Tx FIFO status may not report empty after FLR when operating in RGMII half duplex mode. */
+#define FSL_FEATURE_NETC_HAS_ERRATA_051936 (1)
 
 /* NVIC module features */
 

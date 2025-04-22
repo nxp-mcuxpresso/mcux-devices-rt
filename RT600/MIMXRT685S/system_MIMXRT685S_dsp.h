@@ -8,7 +8,7 @@
 **     Compiler:            Xtensa Compiler
 **     Reference manual:    MIMXRT685 User manual Rev. 1.8 21 November 2024
 **     Version:             rev. 2.0, 2019-11-12
-**     Build:               b250210
+**     Build:               b250211
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -34,7 +34,7 @@
 /*!
  * @file MIMXRT685S
  * @version 1.0
- * @date 100225
+ * @date 110225
  * @brief Device specific configuration file for MIMXRT685S (header file)
  *
  * Provides a system configuration function and a global variable that contains

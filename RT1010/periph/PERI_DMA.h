@@ -4,13 +4,13 @@
 **                          MIMXRT1011DAE5A
 **
 **     Version:             rev. 1.2, 2021-08-10
-**     Build:               b240705
+**     Build:               b250414
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for DMA
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -30,7 +30,7 @@
 */
 
 /*!
- * @file DMA.h
+ * @file PERI_DMA.h
  * @version 1.2
  * @date 2021-08-10
  * @brief CMSIS Peripheral Access Layer for DMA
@@ -38,8 +38,8 @@
  * CMSIS Peripheral Access Layer for DMA
  */
 
-#if !defined(DMA_H_)
-#define DMA_H_                                   /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_DMA_H_)
+#define PERI_DMA_H_                              /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1011CAE4A) || defined(CPU_MIMXRT1011DAE5A))
 #include "MIMXRT1011_COMMON.h"
@@ -99,14 +99,14 @@ typedef struct {
   __IO uint32_t ERQ;                               /**< Enable Request, offset: 0xC */
        uint8_t RESERVED_1[4];
   __IO uint32_t EEI;                               /**< Enable Error Interrupt, offset: 0x14 */
-  __O  uint8_t CEEI;                               /**< Clear Enable Error Interrupt, offset: 0x18 */
-  __O  uint8_t SEEI;                               /**< Set Enable Error Interrupt, offset: 0x19 */
-  __O  uint8_t CERQ;                               /**< Clear Enable Request, offset: 0x1A */
-  __O  uint8_t SERQ;                               /**< Set Enable Request, offset: 0x1B */
-  __O  uint8_t CDNE;                               /**< Clear DONE Status Bit, offset: 0x1C */
-  __O  uint8_t SSRT;                               /**< Set START Bit, offset: 0x1D */
-  __O  uint8_t CERR;                               /**< Clear Error, offset: 0x1E */
-  __O  uint8_t CINT;                               /**< Clear Interrupt Request, offset: 0x1F */
+  __IO uint8_t CEEI;                               /**< Clear Enable Error Interrupt, offset: 0x18 */
+  __IO uint8_t SEEI;                               /**< Set Enable Error Interrupt, offset: 0x19 */
+  __IO uint8_t CERQ;                               /**< Clear Enable Request, offset: 0x1A */
+  __IO uint8_t SERQ;                               /**< Set Enable Request, offset: 0x1B */
+  __IO uint8_t CDNE;                               /**< Clear DONE Status Bit, offset: 0x1C */
+  __IO uint8_t SSRT;                               /**< Set START Bit, offset: 0x1D */
+  __IO uint8_t CERR;                               /**< Clear Error, offset: 0x1E */
+  __IO uint8_t CINT;                               /**< Clear Interrupt Request, offset: 0x1F */
        uint8_t RESERVED_2[4];
   __IO uint32_t INT;                               /**< Interrupt Request, offset: 0x24 */
        uint8_t RESERVED_3[4];
@@ -2128,5 +2128,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* DMA_H_ */
+#endif  /* PERI_DMA_H_ */
 

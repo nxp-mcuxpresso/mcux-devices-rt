@@ -14,13 +14,13 @@
 **                          MIMXRT1024DAG5B
 **
 **     Version:             rev. 1.2, 2021-08-10
-**     Build:               b240705
+**     Build:               b250331
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for PWM
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -40,7 +40,7 @@
 */
 
 /*!
- * @file PWM.h
+ * @file PERI_PWM.h
  * @version 1.2
  * @date 2021-08-10
  * @brief CMSIS Peripheral Access Layer for PWM
@@ -48,8 +48,8 @@
  * CMSIS Peripheral Access Layer for PWM
  */
 
-#if !defined(PWM_H_)
-#define PWM_H_                                   /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_PWM_H_)
+#define PERI_PWM_H_                              /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1021CAF4A) || defined(CPU_MIMXRT1021CAF4B) || defined(CPU_MIMXRT1021CAG4A) || defined(CPU_MIMXRT1021CAG4B) || defined(CPU_MIMXRT1021DAF5A) || defined(CPU_MIMXRT1021DAF5B) || defined(CPU_MIMXRT1021DAG5A) || defined(CPU_MIMXRT1021DAG5B))
 #include "MIMXRT1021_COMMON.h"
@@ -881,12 +881,12 @@ typedef struct {
 #define PWM_TCTRL_OUT_TRIG_EN_MASK               (0x3FU)
 #define PWM_TCTRL_OUT_TRIG_EN_SHIFT              (0U)
 /*! OUT_TRIG_EN - Output Trigger Enables
- *  0bxxxxx1..PWM_OUT_TRIG0 will set when the counter value matches the VAL0 value.
- *  0bxxxx1x..PWM_OUT_TRIG1 will set when the counter value matches the VAL1 value.
- *  0bxxx1xx..PWM_OUT_TRIG0 will set when the counter value matches the VAL2 value.
- *  0bxx1xxx..PWM_OUT_TRIG1 will set when the counter value matches the VAL3 value.
- *  0bx1xxxx..PWM_OUT_TRIG0 will set when the counter value matches the VAL4 value.
  *  0b1xxxxx..PWM_OUT_TRIG1 will set when the counter value matches the VAL5 value.
+ *  0bx1xxxx..PWM_OUT_TRIG0 will set when the counter value matches the VAL4 value.
+ *  0bxx1xxx..PWM_OUT_TRIG1 will set when the counter value matches the VAL3 value.
+ *  0bxxx1xx..PWM_OUT_TRIG0 will set when the counter value matches the VAL2 value.
+ *  0bxxxx1x..PWM_OUT_TRIG1 will set when the counter value matches the VAL1 value.
+ *  0bxxxxx1..PWM_OUT_TRIG0 will set when the counter value matches the VAL0 value.
  */
 #define PWM_TCTRL_OUT_TRIG_EN(x)                 (((uint16_t)(((uint16_t)(x)) << PWM_TCTRL_OUT_TRIG_EN_SHIFT)) & PWM_TCTRL_OUT_TRIG_EN_MASK)
 
@@ -1816,5 +1816,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* PWM_H_ */
+#endif  /* PERI_PWM_H_ */
 

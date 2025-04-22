@@ -28,13 +28,13 @@
 **                          MIMXRT798SGFOA_hifi4
 **
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b241121
+**     Build:               b250414
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for RSTCTL4
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -50,7 +50,7 @@
 */
 
 /*!
- * @file RSTCTL4.h
+ * @file PERI_RSTCTL4.h
  * @version 2.0
  * @date 2024-05-28
  * @brief CMSIS Peripheral Access Layer for RSTCTL4
@@ -58,8 +58,8 @@
  * CMSIS Peripheral Access Layer for RSTCTL4
  */
 
-#if !defined(RSTCTL4_H_)
-#define RSTCTL4_H_                               /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_RSTCTL4_H_)
+#define PERI_RSTCTL4_H_                          /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT735SGAWAR_cm33_core0) || defined(CPU_MIMXRT735SGFOA_cm33_core0))
 #include "MIMXRT735S_cm33_core0_COMMON.h"
@@ -573,5 +573,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* RSTCTL4_H_ */
+#endif  /* PERI_RSTCTL4_H_ */
 

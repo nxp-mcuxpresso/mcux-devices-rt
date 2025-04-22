@@ -12,7 +12,7 @@
 **
 **     Reference manual:    IMXRT1160RM, Rev 0, 03/2021
 **     Version:             rev. 0.1, 2020-12-29
-**     Build:               b240823
+**     Build:               b250331
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -20,7 +20,7 @@
 **         the oscillator (PLL) that is part of the microcontroller device.
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2025 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -36,7 +36,7 @@
 /*!
  * @file MIMXRT1166_cm7
  * @version 1.0
- * @date 2024-08-23
+ * @date 2025-03-31
  * @brief Device specific configuration file for MIMXRT1166_cm7 (implementation
  *        file)
  *
