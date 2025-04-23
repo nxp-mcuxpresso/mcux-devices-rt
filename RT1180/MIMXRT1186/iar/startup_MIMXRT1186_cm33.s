@@ -4,7 +4,7 @@
 ;            MIMXRT1186_cm33
 ;  @version: 2.0
 ;  @date:    2024-1-18
-;  @build:   b250331
+;  @build:   b250423
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.
@@ -283,10 +283,10 @@ __vector_table_0x1c
         DCD     GPT1_IRQHandler                               ;GPT1 interrupt
         DCD     GPT2_IRQHandler                               ;GPT2 interrupt
         DCD     KPP_IRQHandler                                ;KPP interrupt
-        DCD     Reserved228_IRQHandler                        ;Reserved interrupt
-        DCD     USBPHY2_IRQHandler                            ;USBPHY2 interrupt
-        DCD     USB_OTG2_IRQHandler                           ;USBOTG2 interrupt
-        DCD     Reserved231_IRQHandler                        ;Reserved interrupt
+        DCD     USBPHY1_IRQHandler                            ;USBPHY1 interrupt
+        DCD     Reserved229_IRQHandler                        ;Reserved interrupt
+        DCD     Reserved230_IRQHandler                        ;Reserved interrupt
+        DCD     USB_OTG1_IRQHandler                           ;USBOTG1 interrupt
         DCD     FLEXSPI_SLV_IRQHandler                        ;FLEXSPI follower interrupt
         DCD     NETC_IRQHandler                               ;NETC interrupt
         DCD     MSGINTR1_IRQHandler                           ;MSGINTR1 interrupt
@@ -1174,10 +1174,10 @@ SAI2_IRQHandler
         PUBWEAK GPT1_IRQHandler
         PUBWEAK GPT2_IRQHandler
         PUBWEAK KPP_IRQHandler
-        PUBWEAK Reserved228_IRQHandler
-        PUBWEAK USBPHY2_IRQHandler
-        PUBWEAK USB_OTG2_IRQHandler
-        PUBWEAK Reserved231_IRQHandler
+        PUBWEAK USBPHY1_IRQHandler
+        PUBWEAK Reserved229_IRQHandler
+        PUBWEAK Reserved230_IRQHandler
+        PUBWEAK USB_OTG1_IRQHandler
         PUBWEAK FLEXSPI_SLV_IRQHandler
         PUBWEAK FLEXSPI_SLV_DriverIRQHandler
         SECTION .text:CODE:REORDER:NOROOT(2)
@@ -1427,10 +1427,10 @@ SAFETY_CLK_MON_IRQHandler
 GPT1_IRQHandler
 GPT2_IRQHandler
 KPP_IRQHandler
-Reserved228_IRQHandler
-USBPHY2_IRQHandler
-USB_OTG2_IRQHandler
-Reserved231_IRQHandler
+USBPHY1_IRQHandler
+Reserved229_IRQHandler
+Reserved230_IRQHandler
+USB_OTG1_IRQHandler
 FLEXSPI_SLV_DriverIRQHandler
 NETC_IRQHandler
 MSGINTR1_IRQHandler

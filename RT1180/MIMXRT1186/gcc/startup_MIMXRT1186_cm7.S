@@ -4,7 +4,7 @@
 /*            MIMXRT1186_cm7                                                 */
 /*  @version: 2.0                                                            */
 /*  @date:    2024-1-18                                                      */
-/*  @build:   b250331                                                        */
+/*  @build:   b250423                                                        */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Copyright 1997-2016 Freescale Semiconductor, Inc.                         */
@@ -250,10 +250,10 @@ __isr_vector:
     .long   GPT1_IRQHandler                                 /* GPT1 interrupt*/
     .long   GPT2_IRQHandler                                 /* GPT2 interrupt*/
     .long   KPP_IRQHandler                                  /* KPP interrupt*/
-    .long   Reserved228_IRQHandler                          /* Reserved interrupt*/
-    .long   USBPHY2_IRQHandler                              /* USBPHY2 interrupt*/
-    .long   USB_OTG2_IRQHandler                             /* USBOTG2 interrupt*/
-    .long   Reserved231_IRQHandler                          /* Reserved interrupt*/
+    .long   USBPHY1_IRQHandler                              /* USBPHY1 interrupt*/
+    .long   Reserved229_IRQHandler                          /* Reserved interrupt*/
+    .long   Reserved230_IRQHandler                          /* Reserved interrupt*/
+    .long   USB_OTG1_IRQHandler                             /* USBOTG1 interrupt*/
     .long   FLEXSPI_SLV_IRQHandler                          /* FLEXSPI follower interrupt*/
     .long   NETC_IRQHandler                                 /* NETC interrupt*/
     .long   MSGINTR1_IRQHandler                             /* MSGINTR1 interrupt*/
@@ -1567,10 +1567,10 @@ ASRC_IRQHandler:
     def_irq_handler    GPT1_IRQHandler
     def_irq_handler    GPT2_IRQHandler
     def_irq_handler    KPP_IRQHandler
-    def_irq_handler    Reserved228_IRQHandler
-    def_irq_handler    USBPHY2_IRQHandler
-    def_irq_handler    USB_OTG2_IRQHandler
-    def_irq_handler    Reserved231_IRQHandler
+    def_irq_handler    USBPHY1_IRQHandler
+    def_irq_handler    Reserved229_IRQHandler
+    def_irq_handler    Reserved230_IRQHandler
+    def_irq_handler    USB_OTG1_IRQHandler
     def_irq_handler    FLEXSPI_SLV_DriverIRQHandler
     def_irq_handler    NETC_IRQHandler
     def_irq_handler    MSGINTR1_IRQHandler

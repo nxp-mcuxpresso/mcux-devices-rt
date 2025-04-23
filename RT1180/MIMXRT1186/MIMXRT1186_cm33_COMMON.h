@@ -316,10 +316,10 @@ typedef enum IRQn {
   GPT1_IRQn                    = 209,              /**< GPT1 interrupt */
   GPT2_IRQn                    = 210,              /**< GPT2 interrupt */
   KPP_IRQn                     = 211,              /**< KPP interrupt */
-  Reserved228_IRQn             = 212,              /**< Reserved interrupt */
-  USBPHY2_IRQn                 = 213,              /**< USBPHY2 interrupt */
-  USB_OTG2_IRQn                = 214,              /**< USBOTG2 interrupt */
-  Reserved231_IRQn             = 215,              /**< Reserved interrupt */
+  USBPHY1_IRQn                 = 212,              /**< USBPHY1 interrupt */
+  Reserved229_IRQn             = 213,              /**< Reserved interrupt */
+  Reserved230_IRQn             = 214,              /**< Reserved interrupt */
+  USB_OTG1_IRQn                = 215,              /**< USBOTG1 interrupt */
   FLEXSPI_SLV_IRQn             = 216,              /**< FLEXSPI follower interrupt */
   NETC_IRQn                    = 217,              /**< NETC interrupt */
   MSGINTR1_IRQn                = 218,              /**< MSGINTR1 interrupt */
@@ -4641,38 +4641,38 @@ typedef enum IRQn {
 
 /* USB - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
-  /** Peripheral USB_OTG2 base address */
-  #define USB_OTG2_BASE                            (0x52C90000u)
-  /** Peripheral USB_OTG2 base address */
-  #define USB_OTG2_BASE_NS                         (0x42C90000u)
-  /** Peripheral USB_OTG2 base pointer */
-  #define USB_OTG2                                 ((USB_Type *)USB_OTG2_BASE)
-  /** Peripheral USB_OTG2 base pointer */
-  #define USB_OTG2_NS                              ((USB_Type *)USB_OTG2_BASE_NS)
+  /** Peripheral USB_OTG1 base address */
+  #define USB_OTG1_BASE                            (0x52C80000u)
+  /** Peripheral USB_OTG1 base address */
+  #define USB_OTG1_BASE_NS                         (0x42C80000u)
+  /** Peripheral USB_OTG1 base pointer */
+  #define USB_OTG1                                 ((USB_Type *)USB_OTG1_BASE)
+  /** Peripheral USB_OTG1 base pointer */
+  #define USB_OTG1_NS                              ((USB_Type *)USB_OTG1_BASE_NS)
   /** Array initializer of USB peripheral base addresses */
-  #define USB_BASE_ADDRS                           { 0u, 0u, USB_OTG2_BASE }
+  #define USB_BASE_ADDRS                           { 0u, USB_OTG1_BASE }
   /** Array initializer of USB peripheral base pointers */
-  #define USB_BASE_PTRS                            { (USB_Type *)0u, (USB_Type *)0u, USB_OTG2 }
+  #define USB_BASE_PTRS                            { (USB_Type *)0u, USB_OTG1 }
   /** Array initializer of USB peripheral base addresses */
-  #define USB_BASE_ADDRS_NS                        { 0u, 0u, USB_OTG2_BASE_NS }
+  #define USB_BASE_ADDRS_NS                        { 0u, USB_OTG1_BASE_NS }
   /** Array initializer of USB peripheral base pointers */
-  #define USB_BASE_PTRS_NS                         { (USB_Type *)0u, (USB_Type *)0u, USB_OTG2_NS }
+  #define USB_BASE_PTRS_NS                         { (USB_Type *)0u, USB_OTG1_NS }
 #else
-  /** Peripheral USB_OTG2 base address */
-  #define USB_OTG2_BASE                            (0x42C90000u)
-  /** Peripheral USB_OTG2 base pointer */
-  #define USB_OTG2                                 ((USB_Type *)USB_OTG2_BASE)
+  /** Peripheral USB_OTG1 base address */
+  #define USB_OTG1_BASE                            (0x42C80000u)
+  /** Peripheral USB_OTG1 base pointer */
+  #define USB_OTG1                                 ((USB_Type *)USB_OTG1_BASE)
   /** Array initializer of USB peripheral base addresses */
-  #define USB_BASE_ADDRS                           { 0u, 0u, USB_OTG2_BASE }
+  #define USB_BASE_ADDRS                           { 0u, USB_OTG1_BASE }
   /** Array initializer of USB peripheral base pointers */
-  #define USB_BASE_PTRS                            { (USB_Type *)0u, (USB_Type *)0u, USB_OTG2 }
+  #define USB_BASE_PTRS                            { (USB_Type *)0u, USB_OTG1 }
 #endif
 /** Interrupt vectors for the USB peripheral type */
-#define USB_IRQS                                 { NotAvail_IRQn, NotAvail_IRQn, USB_OTG2_IRQn }
+#define USB_IRQS                                 { NotAvail_IRQn, USB_OTG1_IRQn }
 /* Backward compatibility */
-#define USBHS_IRQS                               { USB_OTG2_IRQn }
-#define USBHS_IRQHandler                         USB_OTG2_IRQHandler
-#define USBHS_STACK_BASE_ADDRS                   { USB_OTG2_BASE }
+#define USBHS_IRQS                               { USB_OTG1_IRQn }
+#define USBHS_IRQHandler                         USB_OTG1_IRQHandler
+#define USBHS_STACK_BASE_ADDRS                   { USB_OTG1_BASE }
 
 
 /* USBHSDCD - Peripheral instance base addresses */
@@ -4726,31 +4726,31 @@ typedef enum IRQn {
 
 /* USBNC - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
-  /** Peripheral USBNC_OTG2 base address */
-  #define USBNC_OTG2_BASE                          (0x52C90200u)
-  /** Peripheral USBNC_OTG2 base address */
-  #define USBNC_OTG2_BASE_NS                       (0x42C90200u)
-  /** Peripheral USBNC_OTG2 base pointer */
-  #define USBNC_OTG2                               ((USBNC_Type *)USBNC_OTG2_BASE)
-  /** Peripheral USBNC_OTG2 base pointer */
-  #define USBNC_OTG2_NS                            ((USBNC_Type *)USBNC_OTG2_BASE_NS)
+  /** Peripheral USBNC_OTG1 base address */
+  #define USBNC_OTG1_BASE                          (0x52C80200u)
+  /** Peripheral USBNC_OTG1 base address */
+  #define USBNC_OTG1_BASE_NS                       (0x42C80200u)
+  /** Peripheral USBNC_OTG1 base pointer */
+  #define USBNC_OTG1                               ((USBNC_Type *)USBNC_OTG1_BASE)
+  /** Peripheral USBNC_OTG1 base pointer */
+  #define USBNC_OTG1_NS                            ((USBNC_Type *)USBNC_OTG1_BASE_NS)
   /** Array initializer of USBNC peripheral base addresses */
-  #define USBNC_BASE_ADDRS                         { 0u, 0u, USBNC_OTG2_BASE }
+  #define USBNC_BASE_ADDRS                         { 0u, USBNC_OTG1_BASE }
   /** Array initializer of USBNC peripheral base pointers */
-  #define USBNC_BASE_PTRS                          { (USBNC_Type *)0u, (USBNC_Type *)0u, USBNC_OTG2 }
+  #define USBNC_BASE_PTRS                          { (USBNC_Type *)0u, USBNC_OTG1 }
   /** Array initializer of USBNC peripheral base addresses */
-  #define USBNC_BASE_ADDRS_NS                      { 0u, 0u, USBNC_OTG2_BASE_NS }
+  #define USBNC_BASE_ADDRS_NS                      { 0u, USBNC_OTG1_BASE_NS }
   /** Array initializer of USBNC peripheral base pointers */
-  #define USBNC_BASE_PTRS_NS                       { (USBNC_Type *)0u, (USBNC_Type *)0u, USBNC_OTG2_NS }
+  #define USBNC_BASE_PTRS_NS                       { (USBNC_Type *)0u, USBNC_OTG1_NS }
 #else
-  /** Peripheral USBNC_OTG2 base address */
-  #define USBNC_OTG2_BASE                          (0x42C90200u)
-  /** Peripheral USBNC_OTG2 base pointer */
-  #define USBNC_OTG2                               ((USBNC_Type *)USBNC_OTG2_BASE)
+  /** Peripheral USBNC_OTG1 base address */
+  #define USBNC_OTG1_BASE                          (0x42C80200u)
+  /** Peripheral USBNC_OTG1 base pointer */
+  #define USBNC_OTG1                               ((USBNC_Type *)USBNC_OTG1_BASE)
   /** Array initializer of USBNC peripheral base addresses */
-  #define USBNC_BASE_ADDRS                         { 0u, 0u, USBNC_OTG2_BASE }
+  #define USBNC_BASE_ADDRS                         { 0u, USBNC_OTG1_BASE }
   /** Array initializer of USBNC peripheral base pointers */
-  #define USBNC_BASE_PTRS                          { (USBNC_Type *)0u, (USBNC_Type *)0u, USBNC_OTG2 }
+  #define USBNC_BASE_PTRS                          { (USBNC_Type *)0u, USBNC_OTG1 }
 #endif
 /* Backward compatibility */
 #define USB_OTGn_CTRL     CTRL1
@@ -4794,34 +4794,34 @@ typedef enum IRQn {
 
 /* USBPHY - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
-  /** Peripheral USBPHY2 base address */
-  #define USBPHY2_BASE                             (0x52CB0000u)
-  /** Peripheral USBPHY2 base address */
-  #define USBPHY2_BASE_NS                          (0x42CB0000u)
-  /** Peripheral USBPHY2 base pointer */
-  #define USBPHY2                                  ((USBPHY_Type *)USBPHY2_BASE)
-  /** Peripheral USBPHY2 base pointer */
-  #define USBPHY2_NS                               ((USBPHY_Type *)USBPHY2_BASE_NS)
+  /** Peripheral USBPHY1 base address */
+  #define USBPHY1_BASE                             (0x52CA0000u)
+  /** Peripheral USBPHY1 base address */
+  #define USBPHY1_BASE_NS                          (0x42CA0000u)
+  /** Peripheral USBPHY1 base pointer */
+  #define USBPHY1                                  ((USBPHY_Type *)USBPHY1_BASE)
+  /** Peripheral USBPHY1 base pointer */
+  #define USBPHY1_NS                               ((USBPHY_Type *)USBPHY1_BASE_NS)
   /** Array initializer of USBPHY peripheral base addresses */
-  #define USBPHY_BASE_ADDRS                        { 0u, 0u, USBPHY2_BASE }
+  #define USBPHY_BASE_ADDRS                        { 0u, USBPHY1_BASE }
   /** Array initializer of USBPHY peripheral base pointers */
-  #define USBPHY_BASE_PTRS                         { (USBPHY_Type *)0u, (USBPHY_Type *)0u, USBPHY2 }
+  #define USBPHY_BASE_PTRS                         { (USBPHY_Type *)0u, USBPHY1 }
   /** Array initializer of USBPHY peripheral base addresses */
-  #define USBPHY_BASE_ADDRS_NS                     { 0u, 0u, USBPHY2_BASE_NS }
+  #define USBPHY_BASE_ADDRS_NS                     { 0u, USBPHY1_BASE_NS }
   /** Array initializer of USBPHY peripheral base pointers */
-  #define USBPHY_BASE_PTRS_NS                      { (USBPHY_Type *)0u, (USBPHY_Type *)0u, USBPHY2_NS }
+  #define USBPHY_BASE_PTRS_NS                      { (USBPHY_Type *)0u, USBPHY1_NS }
 #else
-  /** Peripheral USBPHY2 base address */
-  #define USBPHY2_BASE                             (0x42CB0000u)
-  /** Peripheral USBPHY2 base pointer */
-  #define USBPHY2                                  ((USBPHY_Type *)USBPHY2_BASE)
+  /** Peripheral USBPHY1 base address */
+  #define USBPHY1_BASE                             (0x42CA0000u)
+  /** Peripheral USBPHY1 base pointer */
+  #define USBPHY1                                  ((USBPHY_Type *)USBPHY1_BASE)
   /** Array initializer of USBPHY peripheral base addresses */
-  #define USBPHY_BASE_ADDRS                        { 0u, 0u, USBPHY2_BASE }
+  #define USBPHY_BASE_ADDRS                        { 0u, USBPHY1_BASE }
   /** Array initializer of USBPHY peripheral base pointers */
-  #define USBPHY_BASE_PTRS                         { (USBPHY_Type *)0u, (USBPHY_Type *)0u, USBPHY2 }
+  #define USBPHY_BASE_PTRS                         { (USBPHY_Type *)0u, USBPHY1 }
 #endif
 /** Interrupt vectors for the USBPHY peripheral type */
-#define USBPHY_IRQS                              { NotAvail_IRQn, NotAvail_IRQn, USBPHY2_IRQn }
+#define USBPHY_IRQS                              { NotAvail_IRQn, USBPHY1_IRQn }
 /* Backward compatibility */
 #define USBPHY_CTRL_ENDEVPLUGINDET_MASK     USBPHY_CTRL_ENDEVPLUGINDETECT_MASK
 #define USBPHY_CTRL_ENDEVPLUGINDET_SHIFT    USBPHY_CTRL_ENDEVPLUGINDETECT_SHIFT
@@ -4831,10 +4831,10 @@ typedef enum IRQn {
 #define USBPHY_TX_TXCAL45DM(x)              USBPHY_TX_TXCAL45DN(x)
 
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
-#define USBPHY_STACK_BASE_ADDRS             { USBPHY2_BASE }
-#define USBPHY_STACK_BASE_ADDRS_NS          { USBPHY2_BASE_NS }
+#define USBPHY_STACK_BASE_ADDRS             { USBPHY1_BASE }
+#define USBPHY_STACK_BASE_ADDRS_NS          { USBPHY1_BASE_NS }
 #else
-#define USBPHY_STACK_BASE_ADDRS             { USBPHY2_BASE }
+#define USBPHY_STACK_BASE_ADDRS             { USBPHY1_BASE }
 #endif
 
 
