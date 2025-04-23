@@ -34,7 +34,7 @@
 **                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250331
+**     Build:               b250423
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for USB
@@ -1983,9 +1983,6 @@ typedef struct {
 #define USBHS_EPCR_COUNT                         USB_ENDPTCTRL_COUNT
 #define USBHS_Type                               USB_Type
 #define USBHS_BASE_ADDRS                         USB_BASE_ADDRS
-#define USBHS_IRQS                               { USB_OTG1_IRQn, USB_OTG2_IRQn }
-#define USBHS_IRQHandler                         USB_OTG1_IRQHandler
-#define USBHS_STACK_BASE_ADDRS                   { USB_OTG1_BASE, USB_OTG2_BASE }
 
 
 /*!

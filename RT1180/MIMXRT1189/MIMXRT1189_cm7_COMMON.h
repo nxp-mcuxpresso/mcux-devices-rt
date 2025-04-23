@@ -12,7 +12,7 @@
 **
 **     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Build:               b250423
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1189_cm7
@@ -1970,6 +1970,11 @@ typedef enum IRQn {
 #define USB_BASE_PTRS                            { (USB_Type *)0u, USB_OTG1, USB_OTG2 }
 /** Interrupt vectors for the USB peripheral type */
 #define USB_IRQS                                 { NotAvail_IRQn, USB_OTG1_IRQn, USB_OTG2_IRQn }
+/* Backward compatibility */
+#define USBHS_IRQS                               { USB_OTG1_IRQn, USB_OTG2_IRQn }
+#define USBHS_IRQHandler                         USB_OTG1_IRQHandler
+#define USBHS_STACK_BASE_ADDRS                   { USB_OTG1_BASE, USB_OTG2_BASE }
+
 
 /* USBHSDCD - Peripheral instance base addresses */
 /** Peripheral USBHSDCD1 base address */
