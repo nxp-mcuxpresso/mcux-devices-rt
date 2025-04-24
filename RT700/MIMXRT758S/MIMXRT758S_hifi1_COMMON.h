@@ -180,7 +180,9 @@ typedef enum IRQn {
  */ /* end of group Interrupt_vector_numbers */
 
 
+#ifndef MIMXRT758S_hifi1_SERIES
 #define MIMXRT758S_hifi1_SERIES
+#endif
 /* CPU specific feature definitions */
 #include "MIMXRT758S_hifi1_features.h"
 
@@ -3215,4 +3217,3 @@ typedef enum _dma_request_source
 
 
 #endif  /* MIMXRT758S_HIFI1_COMMON_H_ */
-

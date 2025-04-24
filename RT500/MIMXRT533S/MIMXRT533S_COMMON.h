@@ -186,7 +186,9 @@ typedef enum IRQn {
  */ /* end of group Cortex_Core_Configuration */
 
 
+#ifndef MIMXRT533S_SERIES
 #define MIMXRT533S_SERIES
+#endif
 /* CPU specific feature definitions */
 #include "MIMXRT533S_features.h"
 
@@ -2855,4 +2857,3 @@ typedef enum IRQn {
 
 
 #endif  /* MIMXRT533S_COMMON_H_ */
-

@@ -169,7 +169,9 @@ typedef enum IRQn {
  */ /* end of group Interrupt_vector_numbers */
 
 
+#ifndef MIMXRT685S_dsp_SERIES
 #define MIMXRT685S_dsp_SERIES
+#endif
 /* CPU specific feature definitions */
 #include "MIMXRT685S_dsp_features.h"
 
@@ -863,4 +865,3 @@ typedef enum IRQn {
 
 
 #endif  /* MIMXRT685S_DSP_COMMON_H_ */
-

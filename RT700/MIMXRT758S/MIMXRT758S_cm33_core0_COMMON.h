@@ -268,7 +268,9 @@ typedef enum IRQn {
  */ /* end of group Cortex_Core_Configuration */
 
 
+#ifndef MIMXRT758S_cm33_core0_SERIES
 #define MIMXRT758S_cm33_core0_SERIES
+#endif
 /* CPU specific feature definitions */
 #include "MIMXRT758S_cm33_core0_features.h"
 
@@ -4911,4 +4913,3 @@ typedef enum _dma_request_source
 
 
 #endif  /* MIMXRT758S_CM33_CORE0_COMMON_H_ */
-
