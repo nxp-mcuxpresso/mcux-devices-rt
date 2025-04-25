@@ -1691,7 +1691,6 @@ uint32_t CLOCK_GetFreqFromObs(uint8_t obsIndex, uint32_t obsSigIndex)
 }
 
 #if !(defined(MIMXRT1181_SERIES) || defined(MIMXRT1182_SERIES))
-#if !(defined(MIMXRT1186_cm33_SERIES) || defined(MIMXRT1186_cm7_SERIES))
 /*! brief Enable USB HS clock.
  *
  * This function only enables the access to USB HS prepheral, upper layer
@@ -1807,7 +1806,7 @@ void CLOCK_DisableUsbhs0PhyPllClock(void)
     USBPHY1->PLL_SIC_CLR = (USBPHY_PLL_SIC_PLL_EN_USB_CLKS_MASK);
     USBPHY1->CTRL |= USBPHY_CTRL_CLKGATE_MASK; /* Set to 1U to gate clocks */
 }
-#endif
+#if !(defined(MIMXRT1186_cm33_SERIES) || defined(MIMXRT1186_cm7_SERIES))
 bool CLOCK_EnableUsbhs1Clock(clock_usb_src_t src, uint32_t freq)
 {
     return true;
@@ -1902,6 +1901,7 @@ void CLOCK_DisableUsbhs1PhyPllClock(void)
     USBPHY2->PLL_SIC_CLR = (USBPHY_PLL_SIC_PLL_EN_USB_CLKS_MASK);
     USBPHY2->CTRL |= USBPHY_CTRL_CLKGATE_MASK; /* Set to 1U to gate clocks */
 }
+#endif
 #endif
 
 void CLOCK_OSCPLL_ControlByCpuLowPowerMode(clock_name_t name, uint32_t domainMap, clock_level_t level)

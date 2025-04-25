@@ -2133,7 +2133,6 @@ uint32_t CLOCK_GetPfdFreq(clock_pll_t pll, clock_pfd_t pfd);
 uint32_t CLOCK_GetFreqFromObs(uint8_t obsIndex, uint32_t obsSigIndex);
 
 #if !(defined(MIMXRT1181_SERIES) || defined(MIMXRT1182_SERIES))
-#if !(defined(MIMXRT1186_cm33_SERIES) || defined(MIMXRT1186_cm7_SERIES))
 /*! @brief Enable USB HS clock.
  *
  * This function only enables the access to USB HS prepheral, upper layer
@@ -2163,8 +2162,8 @@ bool CLOCK_EnableUsbhs0PhyPllClock(clock_usb_phy_src_t src, uint32_t freq);
  * This function disables USB HS PHY PLL clock.
  */
 void CLOCK_DisableUsbhs0PhyPllClock(void);
-#endif
 
+#if !(defined(MIMXRT1186_cm33_SERIES) || defined(MIMXRT1186_cm7_SERIES))
 /*! @brief Enable USB HS clock.
  *
  * This function only enables the access to USB HS prepheral, upper layer
@@ -2194,6 +2193,7 @@ void CLOCK_DisableUsbhs0PhyPllClock(void);
  * This function disables USB HS PHY PLL clock.
  */
 void CLOCK_DisableUsbhs1PhyPllClock(void);
+#endif
 #endif
 
 /*!
