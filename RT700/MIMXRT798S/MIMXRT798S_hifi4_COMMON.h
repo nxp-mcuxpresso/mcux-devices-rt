@@ -6,7 +6,7 @@
 **     Compiler:            Xtensa Compiler
 **     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b250123
+**     Build:               b250507
 **
 **     Abstract:
 **         Peripheral Access Layer for MIMXRT798S_hifi4
@@ -90,15 +90,13 @@ typedef enum IRQn {
   /* Auxiliary constants */
   NotAvail_IRQn                = -128,             /**< Not available device specific interrupt */
 
-  /* Core interrupts */
-  NonMaskableInt_IRQn          = 0,                /**< SysIRQ, Non Maskable Interrupt */
+  /* Device specific interrupts */
+  NonMaskableInt_IRQn          = 0,                /**< Interrupt selected by HIFI4_INTERRUPT0 */
   Software_IRQn                = 1,                /**< Software triggered Interrupt */
   RtosTimer0_IRQn              = 2,                /**< Internal RTOS Timer0 Interrupt */
   RtosTimer1_IRQn              = 3,                /**< Internal RTOS Timer1 Interrupt */
   Profiling_IRQn               = 4,                /**< Profiling Interrupt */
-
-  /* Device specific interrupts */
-  DSP_INT0_SEL0_IRQn           = 5,                /**< Interrupt selected by HIFI4_INTERRUPT0 */
+  WriteError_IRQn              = 5,                /**< Write Error */
   DSP_INT0_SEL1_IRQn           = 6,                /**< Interrupt selected by HIFI4_INTERRUPT1 */
   DSP_INT0_SEL2_IRQn           = 7,                /**< Interrupt selected by HIFI4_INTERRUPT2 */
   DSP_INT0_SEL3_IRQn           = 8,                /**< Interrupt selected by HIFI4_INTERRUPT3 */
@@ -242,6 +240,16 @@ typedef enum IRQn {
 /* CPU specific feature definitions */
 #include "MIMXRT798S_hifi4_features.h"
 
+/* ----------------------------------------------------------------------------
+   -- Mapping Information
+   ---------------------------------------------------------------------------- */
+
+/*!
+ * @addtogroup Mapping_Information Mapping Information
+ * @{
+ */
+
+/** Mapping Information */
 /*!
  * @addtogroup edma_request
  * @{
@@ -266,14 +274,14 @@ typedef enum _dma_request_source
     kDmaRequestMuxXspi1Tx           = 5U,          /**< XSPI1 Transmit */
     kDmaRequestMuxXspi2Rx           = 6U,          /**< XSPI2 Receive */
     kDmaRequestMuxXspi2Tx           = 7U,          /**< XSPI2 Transmit */
-    kDmaRequestMuxPinInt0           = 8U,          /**< PINT0 INT0 */
-    kDmaRequestMuxPinInt1           = 9U,          /**< PINT0 INT1 */
-    kDmaRequestMuxPinInt2           = 10U,         /**< PINT0 INT2 */
-    kDmaRequestMuxPinInt3           = 11U,         /**< PINT0 INT3 */
-    kDmaRequestMuxPinInt4           = 12U,         /**< PINT0 INT4 */
-    kDmaRequestMuxPinInt5           = 13U,         /**< PINT0 INT5 */
-    kDmaRequestMuxPinInt6           = 14U,         /**< PINT0 INT6 */
-    kDmaRequestMuxPinInt7           = 15U,         /**< PINT0 INT7 */
+    kDmaRequestMuxPinInt0           = 8U,          /**< PINT INT0 */
+    kDmaRequestMuxPinInt1           = 9U,          /**< PINT INT1 */
+    kDmaRequestMuxPinInt2           = 10U,         /**< PINT INT2 */
+    kDmaRequestMuxPinInt3           = 11U,         /**< PINT INT3 */
+    kDmaRequestMuxPinInt4           = 12U,         /**< PINT INT4 */
+    kDmaRequestMuxPinInt5           = 13U,         /**< PINT INT5 */
+    kDmaRequestMuxPinInt6           = 14U,         /**< PINT INT6 */
+    kDmaRequestMuxPinInt7           = 15U,         /**< PINT INT7 */
     kDmaRequestMuxCtimer0M0         = 16U,         /**< CTIMER0 Match channel 0 request */
     kDmaRequestMuxCtimer0M1         = 17U,         /**< CTIMER0 Match channel 1 request */
     kDmaRequestMuxCtimer1M0         = 18U,         /**< CTIMER1 Match channel 0 request */
@@ -366,6 +374,12 @@ typedef enum _dma_request_source
 } dma_request_source_t;
 
 /* @} */
+
+
+/*!
+ * @}
+ */ /* end of group Mapping_Information */
+
 
 /* ADC - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -4786,3 +4800,4 @@ typedef enum _dma_request_source
 
 
 #endif  /* MIMXRT798S_HIFI4_COMMON_H_ */
+

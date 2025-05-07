@@ -10,7 +10,7 @@
 **
 **     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b250123
+**     Build:               b250507
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT735S_cm33_core0
@@ -264,6 +264,27 @@ typedef enum IRQn {
 #include "system_MIMXRT735S_cm33_core0.h" /* Device specific configuration file */
 
 /*!
+ * @}
+ */ /* end of group Cortex_Core_Configuration */
+
+
+#ifndef MIMXRT735S_cm33_core0_SERIES
+#define MIMXRT735S_cm33_core0_SERIES
+#endif
+/* CPU specific feature definitions */
+#include "MIMXRT735S_cm33_core0_features.h"
+
+/* ----------------------------------------------------------------------------
+   -- Mapping Information
+   ---------------------------------------------------------------------------- */
+
+/*!
+ * @addtogroup Mapping_Information Mapping Information
+ * @{
+ */
+
+/** Mapping Information */
+/*!
  * @addtogroup edma_request
  * @{
  */
@@ -287,14 +308,14 @@ typedef enum _dma_request_source
     kDmaRequestMuxXspi1Tx           = 5U,          /**< XSPI1 Transmit */
     kDmaRequestMuxXspi2Rx           = 6U,          /**< XSPI2 Receive */
     kDmaRequestMuxXspi2Tx           = 7U,          /**< XSPI2 Transmit */
-    kDmaRequestMuxPinInt0           = 8U,          /**< PINT0 INT0 */
-    kDmaRequestMuxPinInt1           = 9U,          /**< PINT0 INT1 */
-    kDmaRequestMuxPinInt2           = 10U,         /**< PINT0 INT2 */
-    kDmaRequestMuxPinInt3           = 11U,         /**< PINT0 INT3 */
-    kDmaRequestMuxPinInt4           = 12U,         /**< PINT0 INT4 */
-    kDmaRequestMuxPinInt5           = 13U,         /**< PINT0 INT5 */
-    kDmaRequestMuxPinInt6           = 14U,         /**< PINT0 INT6 */
-    kDmaRequestMuxPinInt7           = 15U,         /**< PINT0 INT7 */
+    kDmaRequestMuxPinInt0           = 8U,          /**< PINT INT0 */
+    kDmaRequestMuxPinInt1           = 9U,          /**< PINT INT1 */
+    kDmaRequestMuxPinInt2           = 10U,         /**< PINT INT2 */
+    kDmaRequestMuxPinInt3           = 11U,         /**< PINT INT3 */
+    kDmaRequestMuxPinInt4           = 12U,         /**< PINT INT4 */
+    kDmaRequestMuxPinInt5           = 13U,         /**< PINT INT5 */
+    kDmaRequestMuxPinInt6           = 14U,         /**< PINT INT6 */
+    kDmaRequestMuxPinInt7           = 15U,         /**< PINT INT7 */
     kDmaRequestMuxCtimer0M0         = 16U,         /**< CTIMER0 Match channel 0 request */
     kDmaRequestMuxCtimer0M1         = 17U,         /**< CTIMER0 Match channel 1 request */
     kDmaRequestMuxCtimer1M0         = 18U,         /**< CTIMER1 Match channel 0 request */
@@ -389,17 +410,10 @@ typedef enum _dma_request_source
 /* @} */
 
 
-
 /*!
  * @}
- */ /* end of group Cortex_Core_Configuration */
+ */ /* end of group Mapping_Information */
 
-
-#ifndef MIMXRT735S_cm33_core0_SERIES
-#define MIMXRT735S_cm33_core0_SERIES
-#endif
-/* CPU specific feature definitions */
-#include "MIMXRT735S_cm33_core0_features.h"
 
 /* ADC - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
@@ -4796,3 +4810,4 @@ typedef enum _dma_request_source
 
 
 #endif  /* MIMXRT735S_CM33_CORE0_COMMON_H_ */
+

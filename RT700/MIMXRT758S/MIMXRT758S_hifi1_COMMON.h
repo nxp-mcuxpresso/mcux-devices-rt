@@ -6,7 +6,7 @@
 **     Compiler:            Xtensa Compiler
 **     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
 **     Version:             rev. 2.0, 2024-05-28
-**     Build:               b250123
+**     Build:               b250507
 **
 **     Abstract:
 **         Peripheral Access Layer for MIMXRT758S_hifi1
@@ -90,15 +90,13 @@ typedef enum IRQn {
   /* Auxiliary constants */
   NotAvail_IRQn                = -128,             /**< Not available device specific interrupt */
 
-  /* Core interrupts */
-  NonMaskableInt_IRQn          = 0,                /**< SysIRQ, Non Maskable Interrupt */
+  /* Device specific interrupts */
+  NonMaskableInt_IRQn          = 0,                /**< Interrupt selected by HIFI1_INTERRUPT0 */
   Software_IRQn                = 1,                /**< Software triggered Interrupt */
   RtosTimer0_IRQn              = 2,                /**< Internal RTOS Timer0 Interrupt */
   RtosTimer1_IRQn              = 3,                /**< Internal RTOS Timer1 Interrupt */
   Profiling_IRQn               = 4,                /**< Profiling Interrupt */
-
-  /* Device specific interrupts */
-  DSP_INT0_SEL0_IRQn           = 5,                /**< Interrupt selected by HIFI1_INTERRUPT0 */
+  WriteError_IRQn              = 5,                /**< Write Error */
   DSP_INT0_SEL1_IRQn           = 6,                /**< Interrupt selected by HIFI1_INTERRUPT1 */
   DSP_INT0_SEL2_IRQn           = 7,                /**< Interrupt selected by HIFI1_INTERRUPT2 */
   DSP_INT0_SEL3_IRQn           = 8,                /**< Interrupt selected by HIFI1_INTERRUPT3 */
@@ -186,6 +184,16 @@ typedef enum IRQn {
 /* CPU specific feature definitions */
 #include "MIMXRT758S_hifi1_features.h"
 
+/* ----------------------------------------------------------------------------
+   -- Mapping Information
+   ---------------------------------------------------------------------------- */
+
+/*!
+ * @addtogroup Mapping_Information Mapping Information
+ * @{
+ */
+
+/** Mapping Information */
 /*!
  * @addtogroup edma_request
  * @{
@@ -203,13 +211,13 @@ typedef enum IRQn {
 typedef enum _dma_request_source
 {
     kDmaRequestMuxDisabled          = 0U,          /**< Unused DMA request 0 */
-    kDmaRequestMuxMicfil            = 1U,          /**< MICFIL0 FIFO_request */
+    kDmaRequestMuxMicfil            = 1U,          /**< MICFIL FIFO_request */
     kDmaRequestMuxXspi2Rx           = 2U,          /**< XSPI2 Receive */
     kDmaRequestMuxXspi2Tx           = 3U,          /**< XSPI2 Transmit */
-    kDmaRequestMuxPinInt0           = 4U,          /**< PINT1 INT0 */
-    kDmaRequestMuxPinInt1           = 5U,          /**< PINT1 INT1 */
-    kDmaRequestMuxPinInt2           = 6U,          /**< PINT1 INT2 */
-    kDmaRequestMuxPinInt3           = 7U,          /**< PINT1 INT3 */
+    kDmaRequestMuxPinInt0           = 4U,          /**< PINT INT0 */
+    kDmaRequestMuxPinInt1           = 5U,          /**< PINT INT1 */
+    kDmaRequestMuxPinInt2           = 6U,          /**< PINT INT2 */
+    kDmaRequestMuxPinInt3           = 7U,          /**< PINT INT3 */
     kDmaRequestMuxCtimer5M0         = 8U,          /**< CTIMER5 Match channel 0 request */
     kDmaRequestMuxCtimer5M1         = 9U,          /**< CTIMER5 Match channel 1 request */
     kDmaRequestMuxCtimer6M0         = 10U,         /**< CTIMER6 Match channel 0 request */
@@ -253,11 +261,16 @@ typedef enum _dma_request_source
     kDmaRequestMuxGpio9PinEventRequest1 = 48U,     /**< GPIO9 Pin event request 1 */
     kDmaRequestMuxGpio10PinEventRequest0 = 49U,    /**< GPIO10 Pin event request 0 */
     kDmaRequestMuxGpio10PinEventRequest1 = 50U,    /**< GPIO10 Pin event request 1 */
-    kDmaRequestMuxLpi2c15Rx         = 51U,         /**< LPI2C receive request */
-    kDmaRequestMuxLpi2c15Tx         = 52U,         /**< LPI2C transmit request */
+    kDmaRequestMuxLpi2c15Rx         = 51U,         /**< LPI2C15 receive request */
+    kDmaRequestMuxLpi2c15Tx         = 52U,         /**< LPI2C15 transmit request */
 } dma_request_source_t;
 
 /* @} */
+
+
+/*!
+ * @}
+ */ /* end of group Mapping_Information */
 
 
 /* ADC - Peripheral instance base addresses */
@@ -3217,3 +3230,4 @@ typedef enum _dma_request_source
 
 
 #endif  /* MIMXRT758S_HIFI1_COMMON_H_ */
+

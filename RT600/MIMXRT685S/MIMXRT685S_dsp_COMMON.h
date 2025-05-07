@@ -8,7 +8,7 @@
 **     Compiler:            Xtensa Compiler
 **     Reference manual:    MIMXRT685 User manual Rev. 1.8 21 November 2024
 **     Version:             rev. 2.0, 2019-11-12
-**     Build:               b250211
+**     Build:               b250507
 **
 **     Abstract:
 **         Peripheral Access Layer for MIMXRT685S_dsp
@@ -92,14 +92,12 @@ typedef enum IRQn {
   /* Auxiliary constants */
   NotAvail_IRQn                = -128,             /**< Not available device specific interrupt */
 
-  /* Core interrupts */
+  /* Device specific interrupts */
   NonMaskableInt_IRQn          = 0,                /**< SysIRQ, Non Maskable Interrupt */
   Software_IRQn                = 1,                /**< Software triggered Interrupt */
   RtosTimer0_IRQn              = 2,                /**< Internal RTOS Timer0 Interrupt */
   RtosTimer1_IRQn              = 3,                /**< Internal RTOS Timer1 Interrupt */
   Profiling_IRQn               = 4,                /**< Profiling Interrupt */
-
-  /* Device specific interrupts */
   DSP_INT0_SEL0_IRQn           = 5,                /**< Interrupt selected by DSP_INT0_SEL0 */
   DSP_INT0_SEL1_IRQn           = 6,                /**< Interrupt selected by DSP_INT0_SEL1 */
   DSP_INT0_SEL2_IRQn           = 7,                /**< Interrupt selected by DSP_INT0_SEL2 */
@@ -865,3 +863,4 @@ typedef enum IRQn {
 
 
 #endif  /* MIMXRT685S_DSP_COMMON_H_ */
+
