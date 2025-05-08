@@ -915,7 +915,6 @@ typedef enum _clock_name
 #define SARADCFCLKSEL_OFFSET      0x620
 #define SARADCFCLKDIV_OFFSET      0x624
 #define WAKE32KCLKSEL_OFFSET      0x750
-#define A32KHZWAKECLKDIV_OFFSET   0x754
 #define MICFIL0FCLKSEL_OFFSET     0x780
 #define MICFIL0FCLKDIV_OFFSET     0x784
 #define LPI2CFCLKSEL_OFFSET       0x788
@@ -1738,7 +1737,6 @@ typedef enum _clock_div_name
     kCLOCK_DivOstimerClk    = CLKCTL3_TUPLE_MUXA(OSEVENTFCLKDIV_OFFSET, 0),     /*!< OSTIMER Clk Divider. */
     kCLOCK_DivSdadcClk      = CLKCTL3_TUPLE_MUXA(SDADCFCLKDIV_OFFSET, 0),       /*!< SDADC Clk Divider. */
     kCLOCK_DivAdcClk        = CLKCTL3_TUPLE_MUXA(SARADCFCLKDIV_OFFSET, 0),      /*!< SARADC Clk Divider. */
-    kCLOCK_Div32KhzWakeClk  = CLKCTL3_TUPLE_MUXA(A32KHZWAKECLKDIV_OFFSET, 0),   /*!< 32KHZ Wakeup Clk Divider. */
     kCLOCK_DivMicfil0Clk    = CLKCTL3_TUPLE_MUXA(MICFIL0FCLKDIV_OFFSET, 0),     /*!< DMIC0 Clk Divider. */
     kCLOCK_DivLpi2c15Clk    = CLKCTL3_TUPLE_MUXA(LPI2CFCLKDIV_OFFSET, 0),       /*!< PMIC LPI2C Clk Divider. */
     kCLOCK_DivVdd1ClockOut  = CLKCTL3_TUPLE_MUXA(SENSE_CLKOUTCLKDIV_OFFSET, 0), /*!< CLKOUT_VDD1 Clk Divider. */

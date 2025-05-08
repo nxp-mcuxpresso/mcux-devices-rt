@@ -4,7 +4,7 @@
 
 - Bug fixes
   - Added kCLOCK_Pvts0.
-  - Fixed bugs in CLOCK_GetWakeClk32KFreq.
+  - Fixed bugs in CLOCK_GetWakeClk32KFreq. Reserved CLKCTL3->WAKE32KCLKDIV.
 
 ## [2.4.0]
 

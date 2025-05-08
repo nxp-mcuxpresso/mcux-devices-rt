@@ -1891,7 +1891,7 @@ uint32_t CLOCK_GetWakeClk32KFreq(void)
             break;
         case CLKCTL3_WAKE32KCLKSEL_SEL(1):
             freq = CLOCK_GetLpOscFreq();
-            freq /= (CLKCTL3->WAKE32KCLKDIV & CLKCTL3_WAKE32KCLKDIV_DIV_MASK) + 1U;
+            freq /= 32U;
             break;
         default:
             freq = 0U;
