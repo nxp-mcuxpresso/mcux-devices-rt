@@ -105,7 +105,7 @@ __attribute__((weak)) void SystemInit(void)
         __DSB();
     }
 
-#if STARTUP_XSPI0_CACHE_POLICY
+#if defined(STARTUP_XSPI0_CACHE_POLICY) && (STARTUP_XSPI0_CACHE_POLICY != 0U)
     if ((CACHE64_CTRL0->CCR & CACHE64_CTRL_CCR_ENCACHE_MASK) == 0U)
     {
         /* Enable XSPI0 caches */
@@ -124,7 +124,7 @@ __attribute__((weak)) void SystemInit(void)
     }
 #endif
 
-#if STARTUP_XSPI1_CACHE_POLICY
+#if defined(STARTUP_XSPI1_CACHE_POLICY) && (STARTUP_XSPI1_CACHE_POLICY != 0U)
     if ((CACHE64_CTRL1->CCR & CACHE64_CTRL_CCR_ENCACHE_MASK) == 0U)
     {
         /* Enable XSPI0 caches */
