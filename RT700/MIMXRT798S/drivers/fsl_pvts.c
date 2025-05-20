@@ -12,6 +12,11 @@
 /*******************************************************************************
  * Defines
  ******************************************************************************/
+/* Component ID definition, used by tools. */
+#ifndef FSL_COMPONENT_ID
+#define FSL_COMPONENT_ID "platform.drivers.pvts"
+#endif
+
 #define PVTS_NUM_OF_SP           3U  /* Sum of setpoints. */
 #define PVTS_DELAY_MAX_CTRL_WORD 0x3FFU
 #define PVTS_DELAY_MAX           62U /* Delay 0 -> 31, Delay 1 -> 31*/
@@ -68,7 +73,7 @@ static uint32_t PVTS_GetFuseAddrIndex(uint32_t cpu_frequency, uint32_t pvts)
 status_t PVTS_ReadDelayFromOTP(bool otp_initialized,
                                pvts_instance_t instance,
                                uint32_t core_freq_hz,
-                               pvts_delay_t *delay_value)
+                               uint32_t *delayValues)
 {
     uint32_t new_delay;
     int32_t pvts_fuse_addr_index;
@@ -94,12 +99,16 @@ status_t PVTS_ReadDelayFromOTP(bool otp_initialized,
         otp_deinit();
     }
 
-    if (!IS_DELAY_VALID(new_delay))
+    if (!IS_DELAY_VALID(PVTS_GET_DELAY0_FROM_FUSE_VALUE(new_delay)))
+    {
+        return kStatus_Fail;
+    }
+    if (!IS_DELAY_VALID(PVTS_GET_DELAY1_FROM_FUSE_VALUE(new_delay)))
     {
         return kStatus_Fail;
     }
 
-    *delay_value = new_delay;
+    *delayValues = new_delay;
 
     return kStatus_Success;
 }
@@ -131,6 +140,7 @@ void PVTS_Init(void)
     CLOCK_EnableClock(kCLOCK_Pvts0);
 #else
     CLOCK_EnableClock(kCLOCK_Pvts1);
+    RESET_ClearPeripheralReset(kPVTS1_RST_SHIFT_RSTn);
 #endif
     /* Initialize the delay to off */
     delay[0] = PVTS_DELAY_OFF;
