@@ -125,7 +125,7 @@ __STATIC_INLINE void IOPCTL_SetPinMuxing(const iopctl_group_t *pinArray, uint32_
 
     for (i = 0U; i < arrayLength; i++)
     {
-        IOPCTL_PinMuxSet(pinArray[i].port, pinArray[i].pin, pinArray[i].modefunc);
+        IOPCTL_PinMuxSet((uint8_t)pinArray[i].port, (uint8_t)pinArray[i].pin, pinArray[i].modefunc);
     }
 }
 

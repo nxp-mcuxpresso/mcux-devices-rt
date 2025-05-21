@@ -4,6 +4,7 @@
 
 - Improvement
   - Added IOPCTL_FULLDRIVE_EN for full driver enablement.
+  - Fixed MISRA C-2012 10.3 issues. 
   
 ## [2.0.2]
 
