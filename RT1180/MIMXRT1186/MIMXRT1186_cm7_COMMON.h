@@ -9,8 +9,8 @@
 **                          MCUXpresso Compiler
 **
 **     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
-**     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250423
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250523
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1186_cm7
@@ -27,14 +27,17 @@
 **         Initial version.
 **     - rev. 2.0 (2024-01-18)
 **         Header RFP.
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file MIMXRT1186_cm7_COMMON.h
- * @version 2.0
- * @date 2024-01-18
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for MIMXRT1186_cm7
  *
  * CMSIS Peripheral Access Layer for MIMXRT1186_cm7
@@ -45,7 +48,7 @@
 
 /** Memory map major version (memory maps with equal major version number are
  * compatible) */
-#define MCU_MEM_MAP_VERSION 0x0200U
+#define MCU_MEM_MAP_VERSION 0x0300U
 /** Memory map minor version */
 #define MCU_MEM_MAP_VERSION_MINOR 0x0000U
 
@@ -1978,7 +1981,7 @@ typedef enum IRQn {
 #define USBNC_USB_OTGn_CTRL_WIR_MASK     USBNC_CTRL1_WIR_MASK
 #define USBNC_USB_OTGn_CTRL_WIR_SHIFT     USBNC_CTRL1_WIR_SHIFT
 #define USBNC_USB_OTGn_CTRL_WIR(x)     USBNC_CTRL1_WIR(x)
-#define USBNC_STACK_BASE_ADDRS                { USBNC_OTG1_BASE, USBNC_OTG2_BASE }
+#define USBNC_STACK_BASE_ADDRS                { USBNC_OTG1_BASE }
 
 
 /* USBPHY - Peripheral instance base addresses */
@@ -2113,3 +2116,4 @@ typedef enum IRQn {
 
 
 #endif  /* MIMXRT1186_CM7_COMMON_H_ */
+
