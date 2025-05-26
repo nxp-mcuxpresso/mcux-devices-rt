@@ -11,8 +11,8 @@
 **                          MCUXpresso Compiler
 **
 **     Reference manual:    IMXRT1160RM, Rev 0, 03/2021
-**     Version:             rev. 0.1, 2020-12-29
-**     Build:               b250331
+**     Version:             rev. 1.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1165_cm4
@@ -27,14 +27,17 @@
 **     Revisions:
 **     - rev. 0.1 (2020-12-29)
 **         Initial version.
+**     - rev. 1.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file MIMXRT1165_cm4_COMMON.h
- * @version 0.1
- * @date 2020-12-29
+ * @version 1.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for MIMXRT1165_cm4
  *
  * CMSIS Peripheral Access Layer for MIMXRT1165_cm4
@@ -45,9 +48,9 @@
 
 /** Memory map major version (memory maps with equal major version number are
  * compatible) */
-#define MCU_MEM_MAP_VERSION 0x0000U
+#define MCU_MEM_MAP_VERSION 0x0100U
 /** Memory map minor version */
-#define MCU_MEM_MAP_VERSION_MINOR 0x0001U
+#define MCU_MEM_MAP_VERSION_MINOR 0x0000U
 
 
 /* ----------------------------------------------------------------------------
@@ -1937,3 +1940,4 @@ typedef enum IRQn {
 
 
 #endif  /* MIMXRT1165_CM4_COMMON_H_ */
+

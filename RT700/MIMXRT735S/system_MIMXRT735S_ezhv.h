@@ -4,8 +4,8 @@
 **                          MIMXRT735SGFOA_ezhv
 **
 **     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
-**     Version:             rev. 2.0, 2024-05-28
-**     Build:               b250123
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -24,6 +24,9 @@
 **         Initial version.
 **     - rev. 2.0 (2024-05-28)
 **         Rev2 DraftA.
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
@@ -31,7 +34,7 @@
 /*!
  * @file MIMXRT735S_ezhv
  * @version 1.0
- * @date 2025-01-23
+ * @date 2025-05-20
  * @brief Device specific configuration file for MIMXRT735S_ezhv (header file)
  *
  * Provides a system configuration function and a global variable that contains
@@ -39,8 +42,8 @@
  * (PLL) that is part of the microcontroller device.
  */
 
-#ifndef _SYSTEM_MIMXRT735S_EZHV_H_
-#define _SYSTEM_MIMXRT735S_EZHV_H_ /**< Symbol preventing repeated inclusion */
+#ifndef _SYSTEM_MIMXRT735S_ezhv_H_
+#define _SYSTEM_MIMXRT735S_ezhv_H_ /**< Symbol preventing repeated inclusion */
 
 #ifdef __cplusplus
 extern "C" {
@@ -108,4 +111,4 @@ void SystemInitHook (void);
 }
 #endif
 
-#endif /* _SYSTEM_MIMXRT735S_EZHV_H_ */
+#endif /* _SYSTEM_MIMXRT735S_ezhv_H_ */

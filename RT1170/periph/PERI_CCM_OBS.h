@@ -53,8 +53,8 @@
 **                          MIMXRT117HDVMAB_cm4
 **                          MIMXRT117HDVMAB_cm7
 **
-**     Version:             rev. 1.0, 2020-12-29
-**     Build:               b250415
+**     Version:             rev. 2.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CCM_OBS
@@ -71,21 +71,24 @@
 **         Initial version.
 **     - rev. 1.0 (2020-12-29)
 **         Update header files to align with IMXRT1170RM Rev.0.
+**     - rev. 2.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
- * @file CCM_OBS.h
- * @version 1.0
- * @date 2020-12-29
+ * @file PERI_CCM_OBS.h
+ * @version 2.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for CCM_OBS
  *
  * CMSIS Peripheral Access Layer for CCM_OBS
  */
 
-#if !defined(CCM_OBS_H_)
-#define CCM_OBS_H_                               /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_CCM_OBS_H_)
+#define PERI_CCM_OBS_H_                          /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1171AVM8A) || defined(CPU_MIMXRT1171AVM8B) || defined(CPU_MIMXRT1171CVM8A) || defined(CPU_MIMXRT1171CVM8B) || defined(CPU_MIMXRT1171DVMAA) || defined(CPU_MIMXRT1171DVMAB))
 #include "MIMXRT1171_COMMON.h"
@@ -659,5 +662,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* CCM_OBS_H_ */
+#endif  /* PERI_CCM_OBS_H_ */
 

@@ -27,8 +27,8 @@
 **                          MIMXRT798SGFOA_hifi1
 **                          MIMXRT798SGFOA_hifi4
 **
-**     Version:             rev. 2.0, 2024-05-28
-**     Build:               b250414
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250526
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for USBNC
@@ -45,14 +45,17 @@
 **         Initial version.
 **     - rev. 2.0 (2024-05-28)
 **         Rev2 DraftA.
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_USBNC.h
- * @version 2.0
- * @date 2024-05-28
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for USBNC
  *
  * CMSIS Peripheral Access Layer for USBNC
@@ -257,10 +260,10 @@ typedef struct {
 #define USBNC_CTRL2_UTMI_CLK_VLD_MASK            (0x80000000U)
 #define USBNC_CTRL2_UTMI_CLK_VLD_SHIFT           (31U)
 /*! UTMI_CLK_VLD - UTMI Clock Valid Flag
- *  0b0..Not valid
  *  0b0..No effect
- *  0b1..Valid
+ *  0b0..Not valid
  *  0b1..Clear the flag
+ *  0b1..Valid
  */
 #define USBNC_CTRL2_UTMI_CLK_VLD(x)              (((uint32_t)(((uint32_t)(x)) << USBNC_CTRL2_UTMI_CLK_VLD_SHIFT)) & USBNC_CTRL2_UTMI_CLK_VLD_MASK)
 /*! @} */

@@ -27,8 +27,8 @@
 **                          MIMXRT798SGFOA_hifi1
 **                          MIMXRT798SGFOA_hifi4
 **
-**     Version:             rev. 2.0, 2024-05-28
-**     Build:               b250414
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250526
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SEMA42
@@ -45,14 +45,17 @@
 **         Initial version.
 **     - rev. 2.0 (2024-05-28)
 **         Rev2 DraftA.
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_SEMA42.h
- * @version 2.0
- * @date 2024-05-28
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for SEMA42
  *
  * CMSIS Peripheral Access Layer for SEMA42

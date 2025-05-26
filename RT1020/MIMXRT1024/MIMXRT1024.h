@@ -12,8 +12,8 @@
 **                          MCUXpresso Compiler
 **
 **     Reference manual:    IMXRT1024RM Rev.1, 02/2021 | IMXRT102XSRM Rev.0
-**     Version:             rev. 1.2, 2021-08-10
-**     Build:               b250331
+**     Version:             rev. 2.0, 2024-10-29
+**     Build:               b250521
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1024
@@ -34,14 +34,17 @@
 **         Add SET/CLR/TOG register group to register CTRL, STAT, CHANNELCTRL, CH0STAT, CH0OPTS, CH1STAT, CH1OPTS, CH2STAT, CH2OPTS, CH3STAT, CH3OPTS of DCP module.
 **     - rev. 1.2 (2021-08-10)
 **         Update header files to align with IMXRT1020RM Rev.2.
+**     - rev. 2.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file MIMXRT1024.h
- * @version 1.2
- * @date 2021-08-10
+ * @version 2.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for MIMXRT1024
  *
  * CMSIS Peripheral Access Layer for MIMXRT1024

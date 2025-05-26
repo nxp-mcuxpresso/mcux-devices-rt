@@ -12,8 +12,8 @@
 **                          MIMXRT685SVFVKB_cm33
 **                          MIMXRT685SVFVKB_dsp
 **
-**     Version:             rev. 2.0, 2019-11-12
-**     Build:               b250211
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for USBHSH
@@ -30,21 +30,24 @@
 **         Initial version.
 **     - rev. 2.0 (2019-11-12)
 **         Base on rev 0.95 RM (B0 Header)
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
- * @file USBHSH.h
- * @version 2.0
- * @date 2019-11-12
+ * @file PERI_USBHSH.h
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for USBHSH
  *
  * CMSIS Peripheral Access Layer for USBHSH
  */
 
-#if !defined(USBHSH_H_)
-#define USBHSH_H_                                /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_USBHSH_H_)
+#define PERI_USBHSH_H_                           /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT633SFAWBR) || defined(CPU_MIMXRT633SFFOB) || defined(CPU_MIMXRT633SFVKB))
 #include "MIMXRT633S_COMMON.h"
@@ -590,5 +593,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* USBHSH_H_ */
+#endif  /* PERI_USBHSH_H_ */
 

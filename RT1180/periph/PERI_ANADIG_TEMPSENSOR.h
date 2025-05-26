@@ -33,8 +33,8 @@
 **                          MIMXRT1189XVM8C_cm33
 **                          MIMXRT1189XVM8C_cm7
 **
-**     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250310
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for ANADIG_TEMPSENSOR
@@ -51,21 +51,24 @@
 **         Initial version.
 **     - rev. 2.0 (2024-01-18)
 **         Header RFP.
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
- * @file ANADIG_TEMPSENSOR.h
- * @version 2.0
- * @date 2024-01-18
+ * @file PERI_ANADIG_TEMPSENSOR.h
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for ANADIG_TEMPSENSOR
  *
  * CMSIS Peripheral Access Layer for ANADIG_TEMPSENSOR
  */
 
-#if !defined(ANADIG_TEMPSENSOR_H_)
-#define ANADIG_TEMPSENSOR_H_                     /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_ANADIG_TEMPSENSOR_H_)
+#define PERI_ANADIG_TEMPSENSOR_H_                /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1181CVP2B) || defined(CPU_MIMXRT1181CVP2C) || defined(CPU_MIMXRT1181XVP2B) || defined(CPU_MIMXRT1181XVP2C))
 #include "MIMXRT1181_COMMON.h"
@@ -183,5 +186,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* ANADIG_TEMPSENSOR_H_ */
+#endif  /* PERI_ANADIG_TEMPSENSOR_H_ */
 

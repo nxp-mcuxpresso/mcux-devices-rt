@@ -33,8 +33,8 @@
 **                          MIMXRT1189XVM8C_cm33
 **                          MIMXRT1189XVM8C_cm7
 **
-**     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250331
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CMP
@@ -51,14 +51,17 @@
 **         Initial version.
 **     - rev. 2.0 (2024-01-18)
 **         Header RFP.
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_CMP.h
- * @version 2.0
- * @date 2024-01-18
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for CMP
  *
  * CMSIS Peripheral Access Layer for CMP
@@ -259,20 +262,20 @@ typedef struct {
 #define CMP_C0_CFF_MASK                          (0x2000000U)
 #define CMP_C0_CFF_SHIFT                         (25U)
 /*! CFF - Analog Comparator Flag Falling
- *  0b0..Not detected
  *  0b0..No effect
- *  0b1..Detected
+ *  0b0..Not detected
  *  0b1..Clear the flag
+ *  0b1..Detected
  */
 #define CMP_C0_CFF(x)                            (((uint32_t)(((uint32_t)(x)) << CMP_C0_CFF_SHIFT)) & CMP_C0_CFF_MASK)
 
 #define CMP_C0_CFR_MASK                          (0x4000000U)
 #define CMP_C0_CFR_SHIFT                         (26U)
 /*! CFR - Analog Comparator Flag Rising
- *  0b0..Not detected
  *  0b0..No effect
- *  0b1..Detected
+ *  0b0..Not detected
  *  0b1..Clear the flag
+ *  0b1..Detected
  */
 #define CMP_C0_CFR(x)                            (((uint32_t)(((uint32_t)(x)) << CMP_C0_CFR_SHIFT)) & CMP_C0_CFR_MASK)
 

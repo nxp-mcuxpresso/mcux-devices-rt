@@ -9,8 +9,8 @@
 **                          MIMXRT1064DVL6A
 **                          MIMXRT1064DVL6B
 **
-**     Version:             rev. 1.3, 2021-08-10
-**     Build:               b250331
+**     Version:             rev. 2.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CAN
@@ -33,14 +33,17 @@
 **         Add SET/CLR/TOG register group to register CTRL, STAT, CHANNELCTRL, CH0STAT, CH0OPTS, CH1STAT, CH1OPTS, CH2STAT, CH2OPTS, CH3STAT, CH3OPTS of DCP module.
 **     - rev. 1.3 (2021-08-10)
 **         Update header files to align with IMXRT1064RM Rev.2.
+**     - rev. 2.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_CAN.h
- * @version 1.3
- * @date 2021-08-10
+ * @version 2.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for CAN
  *
  * CMSIS Peripheral Access Layer for CAN
@@ -550,22 +553,14 @@ typedef struct {
 /*! @name ECR - Error Counter */
 /*! @{ */
 
-#define CAN_ECR_TXERRCNT_MASK                    (0xFFU)
-#define CAN_ECR_TXERRCNT_SHIFT                   (0U)
-/*! TXERRCNT - Transmit Error Counter */
-#define CAN_ECR_TXERRCNT(x)                      (((uint32_t)(((uint32_t)(x)) << CAN_ECR_TXERRCNT_SHIFT)) & CAN_ECR_TXERRCNT_MASK)
-
 #define CAN_ECR_TX_ERR_COUNTER_MASK              (0xFFU)
 #define CAN_ECR_TX_ERR_COUNTER_SHIFT             (0U)
+/*! TX_ERR_COUNTER - Transmit Error Counter */
 #define CAN_ECR_TX_ERR_COUNTER(x)                (((uint32_t)(((uint32_t)(x)) << CAN_ECR_TX_ERR_COUNTER_SHIFT)) & CAN_ECR_TX_ERR_COUNTER_MASK)
-
-#define CAN_ECR_RXERRCNT_MASK                    (0xFF00U)
-#define CAN_ECR_RXERRCNT_SHIFT                   (8U)
-/*! RXERRCNT - Receive Error Counter */
-#define CAN_ECR_RXERRCNT(x)                      (((uint32_t)(((uint32_t)(x)) << CAN_ECR_RXERRCNT_SHIFT)) & CAN_ECR_RXERRCNT_MASK)
 
 #define CAN_ECR_RX_ERR_COUNTER_MASK              (0xFF00U)
 #define CAN_ECR_RX_ERR_COUNTER_SHIFT             (8U)
+/*! RX_ERR_COUNTER - Receive Error Counter */
 #define CAN_ECR_RX_ERR_COUNTER(x)                (((uint32_t)(((uint32_t)(x)) << CAN_ECR_RX_ERR_COUNTER_SHIFT)) & CAN_ECR_RX_ERR_COUNTER_MASK)
 
 #define CAN_ECR_TXERRCNT_FAST_MASK               (0xFF0000U)

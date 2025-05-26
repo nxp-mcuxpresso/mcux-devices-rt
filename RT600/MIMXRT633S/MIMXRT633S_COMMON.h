@@ -10,8 +10,8 @@
 **                          MCUXpresso Compiler
 **
 **     Reference manual:    MIMXRT685 User manual Rev. 1.8 21 November 2024
-**     Version:             rev. 2.0, 2019-11-12
-**     Build:               b250507
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT633S
@@ -28,14 +28,17 @@
 **         Initial version.
 **     - rev. 2.0 (2019-11-12)
 **         Base on rev 0.95 RM (B0 Header)
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file MIMXRT633S_COMMON.h
- * @version 2.0
- * @date 2019-11-12
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for MIMXRT633S
  *
  * CMSIS Peripheral Access Layer for MIMXRT633S
@@ -46,7 +49,7 @@
 
 /** Memory map major version (memory maps with equal major version number are
  * compatible) */
-#define MCU_MEM_MAP_VERSION 0x0200U
+#define MCU_MEM_MAP_VERSION 0x0300U
 /** Memory map minor version */
 #define MCU_MEM_MAP_VERSION_MINOR 0x0000U
 

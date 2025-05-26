@@ -2,9 +2,9 @@
 /*  @file:    startup_MIMXRT633S.s                                           */
 /*  @purpose: CMSIS Cortex-M33 Core Device Startup File                      */
 /*            MIMXRT633S                                                     */
-/*  @version: 2.0                                                            */
-/*  @date:    2019-11-12                                                     */
-/*  @build:   b250211                                                        */
+/*  @version: 3.0                                                            */
+/*  @date:    2024-10-29                                                     */
+/*  @build:   b250520                                                        */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Copyright 1997-2016 Freescale Semiconductor, Inc.                         */

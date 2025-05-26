@@ -3,8 +3,8 @@
 **     Processors:          MIMXRT1011CAE4A
 **                          MIMXRT1011DAE5A
 **
-**     Version:             rev. 1.2, 2021-08-10
-**     Build:               b250414
+**     Version:             rev. 2.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for FLEXRAM
@@ -25,14 +25,17 @@
 **         Update header files to align with IMXRT1010RM Rev.B.
 **     - rev. 1.2 (2021-08-10)
 **         Update header files to align with IMXRT1010RM Rev.1.
+**     - rev. 2.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_FLEXRAM.h
- * @version 1.2
- * @date 2021-08-10
+ * @version 2.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for FLEXRAM
  *
  * CMSIS Peripheral Access Layer for FLEXRAM

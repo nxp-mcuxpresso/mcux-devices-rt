@@ -27,8 +27,8 @@
 **                          MIMXRT798SGFOA_hifi1
 **                          MIMXRT798SGFOA_hifi4
 **
-**     Version:             rev. 2.0, 2024-05-28
-**     Build:               b250414
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250526
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MU
@@ -45,14 +45,17 @@
 **         Initial version.
 **     - rev. 2.0 (2024-05-28)
 **         Rev2 DraftA.
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_MU.h
- * @version 2.0
- * @date 2024-05-28
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for MU
  *
  * CMSIS Peripheral Access Layer for MU
@@ -477,40 +480,40 @@ typedef struct {
 #define MU_GSR_GIP0_MASK                         (0x1U)
 #define MU_GSR_GIP0_SHIFT                        (0U)
 /*! GIP0 - MUB General-Purpose Interrupt Request Pending
- *  0b0..Not pending
  *  0b0..No effect
- *  0b1..Pending
+ *  0b0..Not pending
  *  0b1..Clear the flag
+ *  0b1..Pending
  */
 #define MU_GSR_GIP0(x)                           (((uint32_t)(((uint32_t)(x)) << MU_GSR_GIP0_SHIFT)) & MU_GSR_GIP0_MASK)
 
 #define MU_GSR_GIP1_MASK                         (0x2U)
 #define MU_GSR_GIP1_SHIFT                        (1U)
 /*! GIP1 - MUB General-Purpose Interrupt Request Pending
- *  0b0..Not pending
  *  0b0..No effect
- *  0b1..Pending
+ *  0b0..Not pending
  *  0b1..Clear the flag
+ *  0b1..Pending
  */
 #define MU_GSR_GIP1(x)                           (((uint32_t)(((uint32_t)(x)) << MU_GSR_GIP1_SHIFT)) & MU_GSR_GIP1_MASK)
 
 #define MU_GSR_GIP2_MASK                         (0x4U)
 #define MU_GSR_GIP2_SHIFT                        (2U)
 /*! GIP2 - MUB General-Purpose Interrupt Request Pending
- *  0b0..Not pending
  *  0b0..No effect
- *  0b1..Pending
+ *  0b0..Not pending
  *  0b1..Clear the flag
+ *  0b1..Pending
  */
 #define MU_GSR_GIP2(x)                           (((uint32_t)(((uint32_t)(x)) << MU_GSR_GIP2_SHIFT)) & MU_GSR_GIP2_MASK)
 
 #define MU_GSR_GIP3_MASK                         (0x8U)
 #define MU_GSR_GIP3_SHIFT                        (3U)
 /*! GIP3 - MUB General-Purpose Interrupt Request Pending
- *  0b0..Not pending
  *  0b0..No effect
- *  0b1..Pending
+ *  0b0..Not pending
  *  0b1..Clear the flag
+ *  0b1..Pending
  */
 #define MU_GSR_GIP3(x)                           (((uint32_t)(((uint32_t)(x)) << MU_GSR_GIP3_SHIFT)) & MU_GSR_GIP3_MASK)
 /*! @} */

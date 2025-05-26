@@ -13,8 +13,8 @@
 **                          MIMXRT1166XVM5A_cm4
 **                          MIMXRT1166XVM5A_cm7
 **
-**     Version:             rev. 0.1, 2020-12-29
-**     Build:               b250331
+**     Version:             rev. 1.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for FLEXRAM
@@ -29,14 +29,17 @@
 **     Revisions:
 **     - rev. 0.1 (2020-12-29)
 **         Initial version.
+**     - rev. 1.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_FLEXRAM.h
- * @version 0.1
- * @date 2020-12-29
+ * @version 1.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for FLEXRAM
  *
  * CMSIS Peripheral Access Layer for FLEXRAM

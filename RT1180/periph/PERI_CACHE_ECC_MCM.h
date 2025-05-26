@@ -33,8 +33,8 @@
 **                          MIMXRT1189XVM8C_cm33
 **                          MIMXRT1189XVM8C_cm7
 **
-**     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250331
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CACHE_ECC_MCM
@@ -51,14 +51,17 @@
 **         Initial version.
 **     - rev. 2.0 (2024-01-18)
 **         Header RFP.
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_CACHE_ECC_MCM.h
- * @version 2.0
- * @date 2024-01-18
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for CACHE_ECC_MCM
  *
  * CMSIS Peripheral Access Layer for CACHE_ECC_MCM
@@ -189,80 +192,80 @@ typedef struct {
 #define CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRM_INT_MASK (0x100U)
 #define CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRM_INT_SHIFT (8U)
 /*! CODE_CACHE_ECC_ERRM_INT - Code Cache Access Multibit ECC Error Interrupt Status
- *  0b0..No error
  *  0b0..No effect
- *  0b1..Error
+ *  0b0..No error
  *  0b1..Clear the flag
+ *  0b1..Error
  */
 #define CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRM_INT(x) (((uint32_t)(((uint32_t)(x)) << CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRM_INT_SHIFT)) & CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRM_INT_MASK)
 
 #define CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRS_INT_MASK (0x200U)
 #define CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRS_INT_SHIFT (9U)
 /*! CODE_CACHE_ECC_ERRS_INT - Code Cache Access Single-Bit ECC Error Interrupt Status
- *  0b0..No error
  *  0b0..No effect
- *  0b1..Error
+ *  0b0..No error
  *  0b1..Clear the flag
+ *  0b1..Error
  */
 #define CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRS_INT(x) (((uint32_t)(((uint32_t)(x)) << CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRS_INT_SHIFT)) & CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRS_INT_MASK)
 
 #define CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRM_OVER_INT_MASK (0x400U)
 #define CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRM_OVER_INT_SHIFT (10U)
 /*! CODE_CACHE_ECC_ERRM_OVER_INT - Code Cache Access Multiple Multibit ECC Error Interrupt Status
- *  0b0..Not more than one error
  *  0b0..No effect
- *  0b1..Multiple errors
+ *  0b0..Not more than one error
  *  0b1..Clear the flag
+ *  0b1..Multiple errors
  */
 #define CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRM_OVER_INT(x) (((uint32_t)(((uint32_t)(x)) << CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRM_OVER_INT_SHIFT)) & CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRM_OVER_INT_MASK)
 
 #define CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRS_OVER_INT_MASK (0x800U)
 #define CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRS_OVER_INT_SHIFT (11U)
 /*! CODE_CACHE_ECC_ERRS_OVER_INT - Code Cache Access Multiple Single-Bit ECC Error Interrupt Status
- *  0b0..Not more than one error
  *  0b0..No effect
- *  0b1..Multiple errors
+ *  0b0..Not more than one error
  *  0b1..Clear the flag
+ *  0b1..Multiple errors
  */
 #define CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRS_OVER_INT(x) (((uint32_t)(((uint32_t)(x)) << CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRS_OVER_INT_SHIFT)) & CACHE_ECC_MCM_INT_STATUS_CODE_CACHE_ECC_ERRS_OVER_INT_MASK)
 
 #define CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRM_INT_MASK (0x1000U)
 #define CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRM_INT_SHIFT (12U)
 /*! SYSTEM_CACHE_ECC_ERRM_INT - System Cache Access Multibit ECC Error Interrupt Status
- *  0b0..No error
  *  0b0..No effect
- *  0b1..Error
+ *  0b0..No error
  *  0b1..Clear the flag
+ *  0b1..Error
  */
 #define CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRM_INT(x) (((uint32_t)(((uint32_t)(x)) << CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRM_INT_SHIFT)) & CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRM_INT_MASK)
 
 #define CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRS_INT_MASK (0x2000U)
 #define CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRS_INT_SHIFT (13U)
 /*! SYSTEM_CACHE_ECC_ERRS_INT - System Cache Access Single-Bit ECC Error Interrupt Status
- *  0b0..No error
  *  0b0..No effect
- *  0b1..Error
+ *  0b0..No error
  *  0b1..Clear the flag
+ *  0b1..Error
  */
 #define CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRS_INT(x) (((uint32_t)(((uint32_t)(x)) << CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRS_INT_SHIFT)) & CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRS_INT_MASK)
 
 #define CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRM_OVER_INT_MASK (0x4000U)
 #define CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRM_OVER_INT_SHIFT (14U)
 /*! SYSTEM_CACHE_ECC_ERRM_OVER_INT - System Cache Access Multiple Multibit ECC Error Interrupt Status
- *  0b0..Not more than one error
  *  0b0..No effect
- *  0b1..Multiple errors
+ *  0b0..Not more than one error
  *  0b1..Clear the flag
+ *  0b1..Multiple errors
  */
 #define CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRM_OVER_INT(x) (((uint32_t)(((uint32_t)(x)) << CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRM_OVER_INT_SHIFT)) & CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRM_OVER_INT_MASK)
 
 #define CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRS_OVER_INT_MASK (0x8000U)
 #define CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRS_OVER_INT_SHIFT (15U)
 /*! SYSTEM_CACHE_ECC_ERRS_OVER_INT - System Cache Access Multiple Single-Bit ECC Error Interrupt Status
- *  0b0..Not more than one error
  *  0b0..No effect
- *  0b1..Multiple errors
+ *  0b0..Not more than one error
  *  0b1..Clear the flag
+ *  0b1..Multiple errors
  */
 #define CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRS_OVER_INT(x) (((uint32_t)(((uint32_t)(x)) << CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRS_OVER_INT_SHIFT)) & CACHE_ECC_MCM_INT_STATUS_SYSTEM_CACHE_ECC_ERRS_OVER_INT_MASK)
 /*! @} */

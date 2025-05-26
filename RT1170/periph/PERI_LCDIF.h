@@ -53,8 +53,8 @@
 **                          MIMXRT117HDVMAB_cm4
 **                          MIMXRT117HDVMAB_cm7
 **
-**     Version:             rev. 1.0, 2020-12-29
-**     Build:               b250415
+**     Version:             rev. 2.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for LCDIF
@@ -71,21 +71,24 @@
 **         Initial version.
 **     - rev. 1.0 (2020-12-29)
 **         Update header files to align with IMXRT1170RM Rev.0.
+**     - rev. 2.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
- * @file LCDIF.h
- * @version 1.0
- * @date 2020-12-29
+ * @file PERI_LCDIF.h
+ * @version 2.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for LCDIF
  *
  * CMSIS Peripheral Access Layer for LCDIF
  */
 
-#if !defined(LCDIF_H_)
-#define LCDIF_H_                                 /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_LCDIF_H_)
+#define PERI_LCDIF_H_                            /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1171AVM8A) || defined(CPU_MIMXRT1171AVM8B) || defined(CPU_MIMXRT1171CVM8A) || defined(CPU_MIMXRT1171CVM8B) || defined(CPU_MIMXRT1171DVMAA) || defined(CPU_MIMXRT1171DVMAB))
 #include "MIMXRT1171_COMMON.h"
@@ -299,8 +302,8 @@ typedef struct {
 #define LCDIF_CTRL_CSC_DATA_SWIZZLE_MASK         (0x3000U)
 #define LCDIF_CTRL_CSC_DATA_SWIZZLE_SHIFT        (12U)
 /*! CSC_DATA_SWIZZLE
- *  0b00..No byte swapping.(Little endian)
  *  0b00..Little Endian byte ordering (same as NO_SWAP).
+ *  0b00..No byte swapping.(Little endian)
  *  0b01..Big Endian swap (swap bytes 0,3 and 1,2).
  *  0b01..Swizzle all bytes, swap bytes 0,3 and 1,2 (aka Big Endian).
  *  0b10..Swap half-words.
@@ -311,8 +314,8 @@ typedef struct {
 #define LCDIF_CTRL_INPUT_DATA_SWIZZLE_MASK       (0xC000U)
 #define LCDIF_CTRL_INPUT_DATA_SWIZZLE_SHIFT      (14U)
 /*! INPUT_DATA_SWIZZLE
- *  0b00..No byte swapping.(Little endian)
  *  0b00..Little Endian byte ordering (same as NO_SWAP).
+ *  0b00..No byte swapping.(Little endian)
  *  0b01..Big Endian swap (swap bytes 0,3 and 1,2).
  *  0b01..Swizzle all bytes, swap bytes 0,3 and 1,2 (aka Big Endian).
  *  0b10..Swap half-words.
@@ -412,8 +415,8 @@ typedef struct {
 #define LCDIF_CTRL_SET_CSC_DATA_SWIZZLE_MASK     (0x3000U)
 #define LCDIF_CTRL_SET_CSC_DATA_SWIZZLE_SHIFT    (12U)
 /*! CSC_DATA_SWIZZLE
- *  0b00..No byte swapping.(Little endian)
  *  0b00..Little Endian byte ordering (same as NO_SWAP).
+ *  0b00..No byte swapping.(Little endian)
  *  0b01..Big Endian swap (swap bytes 0,3 and 1,2).
  *  0b01..Swizzle all bytes, swap bytes 0,3 and 1,2 (aka Big Endian).
  *  0b10..Swap half-words.
@@ -424,8 +427,8 @@ typedef struct {
 #define LCDIF_CTRL_SET_INPUT_DATA_SWIZZLE_MASK   (0xC000U)
 #define LCDIF_CTRL_SET_INPUT_DATA_SWIZZLE_SHIFT  (14U)
 /*! INPUT_DATA_SWIZZLE
- *  0b00..No byte swapping.(Little endian)
  *  0b00..Little Endian byte ordering (same as NO_SWAP).
+ *  0b00..No byte swapping.(Little endian)
  *  0b01..Big Endian swap (swap bytes 0,3 and 1,2).
  *  0b01..Swizzle all bytes, swap bytes 0,3 and 1,2 (aka Big Endian).
  *  0b10..Swap half-words.
@@ -525,8 +528,8 @@ typedef struct {
 #define LCDIF_CTRL_CLR_CSC_DATA_SWIZZLE_MASK     (0x3000U)
 #define LCDIF_CTRL_CLR_CSC_DATA_SWIZZLE_SHIFT    (12U)
 /*! CSC_DATA_SWIZZLE
- *  0b00..No byte swapping.(Little endian)
  *  0b00..Little Endian byte ordering (same as NO_SWAP).
+ *  0b00..No byte swapping.(Little endian)
  *  0b01..Big Endian swap (swap bytes 0,3 and 1,2).
  *  0b01..Swizzle all bytes, swap bytes 0,3 and 1,2 (aka Big Endian).
  *  0b10..Swap half-words.
@@ -537,8 +540,8 @@ typedef struct {
 #define LCDIF_CTRL_CLR_INPUT_DATA_SWIZZLE_MASK   (0xC000U)
 #define LCDIF_CTRL_CLR_INPUT_DATA_SWIZZLE_SHIFT  (14U)
 /*! INPUT_DATA_SWIZZLE
- *  0b00..No byte swapping.(Little endian)
  *  0b00..Little Endian byte ordering (same as NO_SWAP).
+ *  0b00..No byte swapping.(Little endian)
  *  0b01..Big Endian swap (swap bytes 0,3 and 1,2).
  *  0b01..Swizzle all bytes, swap bytes 0,3 and 1,2 (aka Big Endian).
  *  0b10..Swap half-words.
@@ -638,8 +641,8 @@ typedef struct {
 #define LCDIF_CTRL_TOG_CSC_DATA_SWIZZLE_MASK     (0x3000U)
 #define LCDIF_CTRL_TOG_CSC_DATA_SWIZZLE_SHIFT    (12U)
 /*! CSC_DATA_SWIZZLE
- *  0b00..No byte swapping.(Little endian)
  *  0b00..Little Endian byte ordering (same as NO_SWAP).
+ *  0b00..No byte swapping.(Little endian)
  *  0b01..Big Endian swap (swap bytes 0,3 and 1,2).
  *  0b01..Swizzle all bytes, swap bytes 0,3 and 1,2 (aka Big Endian).
  *  0b10..Swap half-words.
@@ -650,8 +653,8 @@ typedef struct {
 #define LCDIF_CTRL_TOG_INPUT_DATA_SWIZZLE_MASK   (0xC000U)
 #define LCDIF_CTRL_TOG_INPUT_DATA_SWIZZLE_SHIFT  (14U)
 /*! INPUT_DATA_SWIZZLE
- *  0b00..No byte swapping.(Little endian)
  *  0b00..Little Endian byte ordering (same as NO_SWAP).
+ *  0b00..No byte swapping.(Little endian)
  *  0b01..Big Endian swap (swap bytes 0,3 and 1,2).
  *  0b01..Swizzle all bytes, swap bytes 0,3 and 1,2 (aka Big Endian).
  *  0b10..Swap half-words.
@@ -2062,5 +2065,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* LCDIF_H_ */
+#endif  /* PERI_LCDIF_H_ */
 

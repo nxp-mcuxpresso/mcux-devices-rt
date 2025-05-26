@@ -25,8 +25,8 @@
 **                          MIMXRT106LDVL6A
 **                          MIMXRT106SDVL6A
 **
-**     Version:             rev. 1.4, 2022-03-25
-**     Build:               b250331
+**     Version:             rev. 2.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for DMA
@@ -51,14 +51,17 @@
 **         Update header files to align with IMXRT1060RM Rev.3.
 **     - rev. 1.4 (2022-03-25)
 **         Add RT1060X device
+**     - rev. 2.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_DMA.h
- * @version 1.4
- * @date 2022-03-25
+ * @version 2.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for DMA
  *
  * CMSIS Peripheral Access Layer for DMA

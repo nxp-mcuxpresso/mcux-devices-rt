@@ -33,8 +33,8 @@
 **                          MIMXRT1189XVM8C_cm33
 **                          MIMXRT1189XVM8C_cm7
 **
-**     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250331
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CAN
@@ -51,14 +51,17 @@
 **         Initial version.
 **     - rev. 2.0 (2024-01-18)
 **         Header RFP.
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_CAN.h
- * @version 2.0
- * @date 2024-01-18
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for CAN
  *
  * CMSIS Peripheral Access Layer for CAN

@@ -53,8 +53,8 @@
 **                          MIMXRT117HDVMAB_cm4
 **                          MIMXRT117HDVMAB_cm7
 **
-**     Version:             rev. 1.0, 2020-12-29
-**     Build:               b250415
+**     Version:             rev. 2.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for PGMC_BPC
@@ -71,21 +71,24 @@
 **         Initial version.
 **     - rev. 1.0 (2020-12-29)
 **         Update header files to align with IMXRT1170RM Rev.0.
+**     - rev. 2.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
- * @file PGMC_BPC.h
- * @version 1.0
- * @date 2020-12-29
+ * @file PERI_PGMC_BPC.h
+ * @version 2.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for PGMC_BPC
  *
  * CMSIS Peripheral Access Layer for PGMC_BPC
  */
 
-#if !defined(PGMC_BPC_H_)
-#define PGMC_BPC_H_                              /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_PGMC_BPC_H_)
+#define PERI_PGMC_BPC_H_                         /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT1171AVM8A) || defined(CPU_MIMXRT1171AVM8B) || defined(CPU_MIMXRT1171CVM8A) || defined(CPU_MIMXRT1171CVM8B) || defined(CPU_MIMXRT1171DVMAA) || defined(CPU_MIMXRT1171DVMAB))
 #include "MIMXRT1171_COMMON.h"
@@ -371,5 +374,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* PGMC_BPC_H_ */
+#endif  /* PERI_PGMC_BPC_H_ */
 

@@ -12,8 +12,8 @@
 **                          MIMXRT685SVFVKB_cm33
 **                          MIMXRT685SVFVKB_dsp
 **
-**     Version:             rev. 2.0, 2019-11-12
-**     Build:               b250211
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for GPIO
@@ -30,21 +30,24 @@
 **         Initial version.
 **     - rev. 2.0 (2019-11-12)
 **         Base on rev 0.95 RM (B0 Header)
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
- * @file GPIO.h
- * @version 2.0
- * @date 2019-11-12
+ * @file PERI_GPIO.h
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for GPIO
  *
  * CMSIS Peripheral Access Layer for GPIO
  */
 
-#if !defined(GPIO_H_)
-#define GPIO_H_                                  /**< Symbol preventing repeated inclusion */
+#if !defined(PERI_GPIO_H_)
+#define PERI_GPIO_H_                             /**< Symbol preventing repeated inclusion */
 
 #if (defined(CPU_MIMXRT633SFAWBR) || defined(CPU_MIMXRT633SFFOB) || defined(CPU_MIMXRT633SFVKB))
 #include "MIMXRT633S_COMMON.h"
@@ -411,5 +414,5 @@ typedef struct {
  */ /* end of group Peripheral_access_layer */
 
 
-#endif  /* GPIO_H_ */
+#endif  /* PERI_GPIO_H_ */
 

@@ -27,8 +27,8 @@
 **                          MIMXRT798SGFOA_hifi1
 **                          MIMXRT798SGFOA_hifi4
 **
-**     Version:             rev. 2.0, 2024-05-28
-**     Build:               b250414
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250526
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for USDHC
@@ -45,14 +45,17 @@
 **         Initial version.
 **     - rev. 2.0 (2024-05-28)
 **         Rev2 DraftA.
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_USDHC.h
- * @version 2.0
- * @date 2024-05-28
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for USDHC
  *
  * CMSIS Peripheral Access Layer for USDHC
@@ -358,7 +361,7 @@ typedef struct {
  *  0b00..Normal other commands
  *  0b01..Suspend CMD52 for writing bus suspend in CCCR
  *  0b10..Resume CMD52 for writing function select in CCCR
- *  0b11..Stop CMD12, CMD52 for writing I/O Stop in CCCR
+ *  0b11..Abort CMD12, CMD52 for writing I/O Abort in CCCR
  */
 #define USDHC_CMD_XFR_TYP_CMDTYP(x)              (((uint32_t)(((uint32_t)(x)) << USDHC_CMD_XFR_TYP_CMDTYP_SHIFT)) & USDHC_CMD_XFR_TYP_CMDTYP_MASK)
 
@@ -645,8 +648,8 @@ typedef struct {
 #define USDHC_PROT_CTRL_NON_EXACT_BLK_RD_MASK    (0x40000000U)
 #define USDHC_PROT_CTRL_NON_EXACT_BLK_RD_SHIFT   (30U)
 /*! NON_EXACT_BLK_RD - Non-exact block read
- *  0b0..The block read is exact block read. Host driver does not need to issue Stop command to terminate this multi-block read.
- *  0b1..The block read is non-exact block read. Host driver needs to issue Stop command to terminate this multi-block read.
+ *  0b0..The block read is exact block read. Host driver does not need to issue abort command to terminate this multi-block read.
+ *  0b1..The block read is non-exact block read. Host driver needs to issue abort command to terminate this multi-block read.
  */
 #define USDHC_PROT_CTRL_NON_EXACT_BLK_RD(x)      (((uint32_t)(((uint32_t)(x)) << USDHC_PROT_CTRL_NON_EXACT_BLK_RD_SHIFT)) & USDHC_PROT_CTRL_NON_EXACT_BLK_RD_MASK)
 /*! @} */

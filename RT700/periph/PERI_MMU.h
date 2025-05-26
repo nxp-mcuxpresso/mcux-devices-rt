@@ -27,8 +27,8 @@
 **                          MIMXRT798SGFOA_hifi1
 **                          MIMXRT798SGFOA_hifi4
 **
-**     Version:             rev. 2.0, 2024-05-28
-**     Build:               b250414
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250526
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MMU
@@ -45,14 +45,17 @@
 **         Initial version.
 **     - rev. 2.0 (2024-05-28)
 **         Rev2 DraftA.
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_MMU.h
- * @version 2.0
- * @date 2024-05-28
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for MMU
  *
  * CMSIS Peripheral Access Layer for MMU
@@ -242,50 +245,50 @@ typedef struct {
 #define MMU_STS_LUT_INVALID_MASK                 (0x2U)
 #define MMU_STS_LUT_INVALID_SHIFT                (1U)
 /*! LUT_INVALID - LUT Invalid
- *  0b0..Valid
  *  0b0..No effect
- *  0b1..Invalid
+ *  0b0..Valid
  *  0b1..Clear the flag
+ *  0b1..Invalid
  */
 #define MMU_STS_LUT_INVALID(x)                   (((uint32_t)(((uint32_t)(x)) << MMU_STS_LUT_INVALID_SHIFT)) & MMU_STS_LUT_INVALID_MASK)
 
 #define MMU_STS_INVALID_ADDR_MASK                (0x4U)
 #define MMU_STS_INVALID_ADDR_SHIFT               (2U)
 /*! INVALID_ADDR - Invalid Address
- *  0b0..Within range
  *  0b0..No effect
- *  0b1..Out of range
+ *  0b0..Within range
  *  0b1..Clear the flag
+ *  0b1..Out of range
  */
 #define MMU_STS_INVALID_ADDR(x)                  (((uint32_t)(((uint32_t)(x)) << MMU_STS_INVALID_ADDR_SHIFT)) & MMU_STS_INVALID_ADDR_MASK)
 
 #define MMU_STS_PARITY_ERROR_MASK                (0x8U)
 #define MMU_STS_PARITY_ERROR_SHIFT               (3U)
 /*! PARITY_ERROR - Parity Error
- *  0b0..Not detected
  *  0b0..No effect
- *  0b1..Detected
+ *  0b0..Not detected
  *  0b1..Clear the flag
+ *  0b1..Detected
  */
 #define MMU_STS_PARITY_ERROR(x)                  (((uint32_t)(((uint32_t)(x)) << MMU_STS_PARITY_ERROR_SHIFT)) & MMU_STS_PARITY_ERROR_MASK)
 
 #define MMU_STS_LOCK_ERROR_MASK                  (0x10U)
 #define MMU_STS_LOCK_ERROR_SHIFT                 (4U)
 /*! LOCK_ERROR - Lock Error
- *  0b0..Not detected
  *  0b0..No effect
- *  0b1..Detected
+ *  0b0..Not detected
  *  0b1..Clear the flag
+ *  0b1..Detected
  */
 #define MMU_STS_LOCK_ERROR(x)                    (((uint32_t)(((uint32_t)(x)) << MMU_STS_LOCK_ERROR_SHIFT)) & MMU_STS_LOCK_ERROR_MASK)
 
 #define MMU_STS_IPS_READ_ERROR_MASK              (0x20U)
 #define MMU_STS_IPS_READ_ERROR_SHIFT             (5U)
 /*! IPS_READ_ERROR - IPS Read Error
- *  0b0..Not detected
  *  0b0..No effect
- *  0b1..Detected
+ *  0b0..Not detected
  *  0b1..Clear the flag
+ *  0b1..Detected
  */
 #define MMU_STS_IPS_READ_ERROR(x)                (((uint32_t)(((uint32_t)(x)) << MMU_STS_IPS_READ_ERROR_SHIFT)) & MMU_STS_IPS_READ_ERROR_MASK)
 

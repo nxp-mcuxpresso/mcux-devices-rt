@@ -2,9 +2,9 @@
 ;  @file:    startup_MIMXRT1024.s
 ;  @purpose: CMSIS Cortex-M7 Core Device Startup File
 ;            MIMXRT1024
-;  @version: 1.2
-;  @date:    2021-8-10
-;  @build:   b250331
+;  @version: 2.0
+;  @date:    2024-10-29
+;  @build:   b250521
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.

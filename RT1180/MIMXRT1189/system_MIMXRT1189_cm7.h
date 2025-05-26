@@ -11,8 +11,8 @@
 **                          MCUXpresso Compiler
 **
 **     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
-**     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250331
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -31,6 +31,9 @@
 **         Initial version.
 **     - rev. 2.0 (2024-01-18)
 **         Header RFP.
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
@@ -38,7 +41,7 @@
 /*!
  * @file MIMXRT1189_cm7
  * @version 1.0
- * @date 2025-03-31
+ * @date 2025-05-20
  * @brief Device specific configuration file for MIMXRT1189_cm7 (header file)
  *
  * Provides a system configuration function and a global variable that contains

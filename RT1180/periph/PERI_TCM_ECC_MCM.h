@@ -33,8 +33,8 @@
 **                          MIMXRT1189XVM8C_cm33
 **                          MIMXRT1189XVM8C_cm7
 **
-**     Version:             rev. 2.0, 2024-01-18
-**     Build:               b250331
+**     Version:             rev. 3.0, 2024-10-29
+**     Build:               b250520
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for TCM_ECC_MCM
@@ -51,14 +51,17 @@
 **         Initial version.
 **     - rev. 2.0 (2024-01-18)
 **         Header RFP.
+**     - rev. 3.0 (2024-10-29)
+**         Change the device header file from single flat file to multiple files based on peripherals,
+**         each peripheral with dedicated header file located in periphN folder.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_TCM_ECC_MCM.h
- * @version 2.0
- * @date 2024-01-18
+ * @version 3.0
+ * @date 2024-10-29
  * @brief CMSIS Peripheral Access Layer for TCM_ECC_MCM
  *
  * CMSIS Peripheral Access Layer for TCM_ECC_MCM
@@ -185,40 +188,40 @@ typedef struct {
 #define TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRM_INT_MASK (0x400U)
 #define TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRM_INT_SHIFT (10U)
 /*! CODE_TCM_ECC_ERRM_INT - Code TCM Access Multibit ECC Error Interrupt Status
- *  0b0..No error
  *  0b0..No effect
- *  0b1..Error
+ *  0b0..No error
  *  0b1..Clear the flag
+ *  0b1..Error
  */
 #define TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRM_INT(x) (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRM_INT_SHIFT)) & TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRM_INT_MASK)
 
 #define TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRS_INT_MASK (0x800U)
 #define TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRS_INT_SHIFT (11U)
 /*! CODE_TCM_ECC_ERRS_INT - Code TCM Access Single-Bit ECC Error Interrupt Status
- *  0b0..No error
  *  0b0..No effect
- *  0b1..Error
+ *  0b0..No error
  *  0b1..Clear the flag
+ *  0b1..Error
  */
 #define TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRS_INT(x) (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRS_INT_SHIFT)) & TCM_ECC_MCM_INT_STATUS_CODE_TCM_ECC_ERRS_INT_MASK)
 
 #define TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRM_INT_MASK (0x1000U)
 #define TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRM_INT_SHIFT (12U)
 /*! SYS_TCM_ECC_ERRM_INT - System TCM Access Multibit ECC Error Interrupt Status
- *  0b0..No error
  *  0b0..No effect
- *  0b1..Error
+ *  0b0..No error
  *  0b1..Clear the flag
+ *  0b1..Error
  */
 #define TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRM_INT(x) (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRM_INT_SHIFT)) & TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRM_INT_MASK)
 
 #define TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRS_INT_MASK (0x2000U)
 #define TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRS_INT_SHIFT (13U)
 /*! SYS_TCM_ECC_ERRS_INT - System TCM Access Single-Bit ECC Error Interrupt Status
- *  0b0..No error
  *  0b0..No effect
- *  0b1..Error
+ *  0b0..No error
  *  0b1..Clear the flag
+ *  0b1..Error
  */
 #define TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRS_INT(x) (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRS_INT_SHIFT)) & TCM_ECC_MCM_INT_STATUS_SYS_TCM_ECC_ERRS_INT_MASK)
 /*! @} */
