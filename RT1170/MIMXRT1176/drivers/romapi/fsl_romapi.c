@@ -247,13 +247,17 @@ status_t ROM_FLEXSPI_NorFlash_UpdateLut(uint32_t instance,
 void ROM_FLEXSPI_NorFlash_ClearCache(uint32_t instance)
 {
     uint32_t clearCacheFunctionAddress;
-    if ((ANADIG_MISC->MISC_DIFPROG & ANADIG_MISC_MISC_DIFPROG_CHIPID(0x10U)) != 0U)
+    if (ANADIG_MISC->MISC_DIFPROG == 0x001170a0U)
+    {
+        clearCacheFunctionAddress = 0x0020426bU;
+    }
+    else if (ANADIG_MISC->MISC_DIFPROG == 0x001170b0U)
     {
         clearCacheFunctionAddress = 0x0021a3b7U;
     }
     else
     {
-        clearCacheFunctionAddress = 0x0020426bU;
+        clearCacheFunctionAddress = 0x0021a3bfU;
     }
     clearCacheCommand_t clearCacheCommand;
     MISRA_CAST(clearCacheCommand_t, clearCacheCommand, uint32_t, clearCacheFunctionAddress);

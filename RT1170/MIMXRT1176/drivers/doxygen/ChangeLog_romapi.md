@@ -2,7 +2,7 @@
 
 ## [1.1.2]
 - New features
-  - Support C0 silicon
+  - Support new silicon Rev
 
 ## [1.1.1]
 

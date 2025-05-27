@@ -1,5 +1,9 @@
 # ROMAPI
 
+## [1.1.2]
+- New features
+  - Support new silicon Rev
+
 ## [1.1.1]
 
 - Improvements
