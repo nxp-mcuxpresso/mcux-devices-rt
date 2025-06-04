@@ -1,5 +1,10 @@
 # CLOCK
 
+## [2.4.2]
+
+- Improvement
+  - Updated CLOCK_GetSenseAudioClkFreq for compute domain to support silicon B0.
+
 ## [2.4.1]
 
 - Bug fixes

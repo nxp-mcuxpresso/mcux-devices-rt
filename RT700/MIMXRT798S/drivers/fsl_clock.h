@@ -25,8 +25,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief CLOCK driver version 2.4.1 */
-#define FSL_CLOCK_DRIVER_VERSION (MAKE_VERSION(2, 4, 1))
+/*! @brief CLOCK driver version 2.4.2 */
+#define FSL_CLOCK_DRIVER_VERSION (MAKE_VERSION(2, 4, 2))
 /*@}*/
 
 #if defined(MIMXRT798S_hifi1_SERIES) || defined(MIMXRT798S_cm33_core1_SERIES) || \
@@ -113,9 +113,10 @@ extern volatile uint32_t g_mclkFreq;
 #if defined(FSL_CLOCK_DRIVER_COMPUTE) || defined(FSL_CLOCK_DRIVER_MEDIA)
 /*! @brief VDD1(Sense) audio_clk clock frequency.
  *
- *NOTE, The compute domain can't read the Sense VDD1 audio_clk selection. The compute domain need call
- *CLOCK_SetSenseAudioClkFreq() to tell the clock driver the frequncy of current VDD1 audio_clk, and then
- *CLOCK_GetSenseAudioClkFreq() can return the correct value.
+ * NOTE, For A0 silicon, the compute domain can't read the Sense VDD1 audio_clk selection. The compute domain need call
+ * CLOCK_SetSenseAudioClkFreq() to tell the clock driver the frequncy of current VDD1 audio_clk, and then
+ * CLOCK_GetSenseAudioClkFreq() can return the correct value. For later silicon version(from B0),
+ * the CLOCK_SetSenseAudioClkFreq is not needed.
  * @code
  * CLOCK_SetSenseAudioClkFreq(24000000);
  * @endcode
@@ -344,27 +345,27 @@ extern volatile uint32_t g_senseAudioClkFreq;
 
 #if defined(FSL_CLOCK_DRIVER_COMPUTE) || defined(FSL_CLOCK_DRIVER_MEDIA)
 /*! @brief Clock ip name array for GDET. */
-#define GDET_CLOCKS                                            \
-    {                                                          \
-        kCLOCK_Gdet0, kCLOCK_IpInvalid, kCLOCK_IpInvalid, kCLOCK_Gdet3 \
-    }
-
-/*! @brief Clock ip name array for GDET_REF. */
-#define GDET_REF_CLOCKS                                                    \
-    {                                                                      \
-        kCLOCK_Gdet0Ref, kCLOCK_IpInvalid, kCLOCK_IpInvalid, kCLOCK_Gdet3Ref \
-    }
-#endif
-#if defined(FSL_CLOCK_DRIVER_SENSE)
-/*! @brief Clock ip name array for GDET. */
 #define GDET_CLOCKS                                                    \
     {                                                                  \
-        kCLOCK_IpInvalid, kCLOCK_IpInvalid, kCLOCK_IpInvalid, kCLOCK_Gdet3 \
+        kCLOCK_Gdet0, kCLOCK_IpInvalid, kCLOCK_IpInvalid, kCLOCK_Gdet3 \
     }
 
 /*! @brief Clock ip name array for GDET_REF. */
 #define GDET_REF_CLOCKS                                                      \
     {                                                                        \
+        kCLOCK_Gdet0Ref, kCLOCK_IpInvalid, kCLOCK_IpInvalid, kCLOCK_Gdet3Ref \
+    }
+#endif
+#if defined(FSL_CLOCK_DRIVER_SENSE)
+/*! @brief Clock ip name array for GDET. */
+#define GDET_CLOCKS                                                        \
+    {                                                                      \
+        kCLOCK_IpInvalid, kCLOCK_IpInvalid, kCLOCK_IpInvalid, kCLOCK_Gdet3 \
+    }
+
+/*! @brief Clock ip name array for GDET_REF. */
+#define GDET_REF_CLOCKS                                                       \
+    {                                                                         \
         kCLOCK_IpInvalid, kCLOCK_IpInvalid, kCLOCK_IpInvalid, kCLOCK_Gdet3Ref \
     }
 #endif

@@ -1251,7 +1251,42 @@ uint32_t CLOCK_GetComputeAudioClkFreq(void)
 
 uint32_t CLOCK_GetSenseAudioClkFreq(void)
 {
-    return g_senseAudioClkFreq;
+    uint32_t freq   = 0U;
+    uint32_t clkSel = 0U;
+
+    if (SYSCON3->SILICONREV_ID == 0xA0000UL)
+    {
+        freq = g_senseAudioClkFreq;
+    }
+    else
+    {
+        clkSel = CLKCTL3->SENSEBASECLKSEL & CLKCTL3_SENSEBASECLKSEL_AUDIOCLKSEL_MASK;
+
+        /* Read again to avoid glitch. */
+        if (clkSel == (CLKCTL3->SENSEBASECLKSEL & CLKCTL3_SENSEBASECLKSEL_AUDIOCLKSEL_MASK))
+        {
+            switch (clkSel)
+            {
+                case CLKCTL3_SENSEBASECLKSEL_AUDIOCLKSEL(0U):
+                    freq = CLOCK_GetMclkInClkFreq();
+                    break;
+                case CLKCTL3_SENSEBASECLKSEL_AUDIOCLKSEL(1U):
+                    freq = CLOCK_GetXtalInClkFreq();
+                    break;
+                case CLKCTL3_SENSEBASECLKSEL_AUDIOCLKSEL(2U):
+                    freq = CLOCK_GetFroClkFreq(2U) / 8U;
+                    break;
+                case CLKCTL3_SENSEBASECLKSEL_AUDIOCLKSEL(3U):
+                    freq = CLOCK_GetAudioPfdFreq(kCLOCK_Pfd3);
+                    break;
+                default:
+                    freq = 0U;
+                    break;
+            }
+        }
+    }
+
+    return freq;
 }
 
 /* Get FCCLK Clk frequency */
