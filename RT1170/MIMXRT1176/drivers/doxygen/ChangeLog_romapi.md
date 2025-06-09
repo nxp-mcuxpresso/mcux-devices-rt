@@ -1,5 +1,9 @@
 # ROMAPI
 
+## [1.1.3]
+- Improvements
+  - Avoid invoking non-documented "clear cache" function
+
 ## [1.1.2]
 - New features
   - Support new silicon Rev
