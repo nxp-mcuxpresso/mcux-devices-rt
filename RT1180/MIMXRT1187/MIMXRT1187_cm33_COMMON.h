@@ -14,7 +14,7 @@
 **
 **     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
 **     Version:             rev. 3.0, 2024-10-29
-**     Build:               b250520
+**     Build:               b250611
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1187_cm33
@@ -1367,35 +1367,6 @@ typedef enum _xbar_output_signal
   #define ANADIG_LDO_BBSM_BASE_ADDRS               { ANADIG_LDO_BBSM_BASE }
   /** Array initializer of ANADIG_LDO_BBSM peripheral base pointers */
   #define ANADIG_LDO_BBSM_BASE_PTRS                { ANADIG_LDO_BBSM }
-#endif
-
-/* ANADIG_MISC - Peripheral instance base addresses */
-#if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
-  /** Peripheral ANADIG_MISC base address */
-  #define ANADIG_MISC_BASE                         (0x54480000u)
-  /** Peripheral ANADIG_MISC base address */
-  #define ANADIG_MISC_BASE_NS                      (0x44480000u)
-  /** Peripheral ANADIG_MISC base pointer */
-  #define ANADIG_MISC                              ((ANADIG_MISC_Type *)ANADIG_MISC_BASE)
-  /** Peripheral ANADIG_MISC base pointer */
-  #define ANADIG_MISC_NS                           ((ANADIG_MISC_Type *)ANADIG_MISC_BASE_NS)
-  /** Array initializer of ANADIG_MISC peripheral base addresses */
-  #define ANADIG_MISC_BASE_ADDRS                   { ANADIG_MISC_BASE }
-  /** Array initializer of ANADIG_MISC peripheral base pointers */
-  #define ANADIG_MISC_BASE_PTRS                    { ANADIG_MISC }
-  /** Array initializer of ANADIG_MISC peripheral base addresses */
-  #define ANADIG_MISC_BASE_ADDRS_NS                { ANADIG_MISC_BASE_NS }
-  /** Array initializer of ANADIG_MISC peripheral base pointers */
-  #define ANADIG_MISC_BASE_PTRS_NS                 { ANADIG_MISC_NS }
-#else
-  /** Peripheral ANADIG_MISC base address */
-  #define ANADIG_MISC_BASE                         (0x44480000u)
-  /** Peripheral ANADIG_MISC base pointer */
-  #define ANADIG_MISC                              ((ANADIG_MISC_Type *)ANADIG_MISC_BASE)
-  /** Array initializer of ANADIG_MISC peripheral base addresses */
-  #define ANADIG_MISC_BASE_ADDRS                   { ANADIG_MISC_BASE }
-  /** Array initializer of ANADIG_MISC peripheral base pointers */
-  #define ANADIG_MISC_BASE_PTRS                    { ANADIG_MISC }
 #endif
 
 /* ANADIG_OSC - Peripheral instance base addresses */

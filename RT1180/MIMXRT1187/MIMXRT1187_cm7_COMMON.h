@@ -14,7 +14,7 @@
 **
 **     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
 **     Version:             rev. 3.0, 2024-10-29
-**     Build:               b250520
+**     Build:               b250611
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1187_cm7
@@ -1303,16 +1303,6 @@ typedef enum _xbar_output_signal
 #define ANADIG_LDO_BBSM_BASE_ADDRS               { ANADIG_LDO_BBSM_BASE }
 /** Array initializer of ANADIG_LDO_BBSM peripheral base pointers */
 #define ANADIG_LDO_BBSM_BASE_PTRS                { ANADIG_LDO_BBSM }
-
-/* ANADIG_MISC - Peripheral instance base addresses */
-/** Peripheral ANADIG_MISC base address */
-#define ANADIG_MISC_BASE                         (0x44480000u)
-/** Peripheral ANADIG_MISC base pointer */
-#define ANADIG_MISC                              ((ANADIG_MISC_Type *)ANADIG_MISC_BASE)
-/** Array initializer of ANADIG_MISC peripheral base addresses */
-#define ANADIG_MISC_BASE_ADDRS                   { ANADIG_MISC_BASE }
-/** Array initializer of ANADIG_MISC peripheral base pointers */
-#define ANADIG_MISC_BASE_PTRS                    { ANADIG_MISC }
 
 /* ANADIG_OSC - Peripheral instance base addresses */
 /** Peripheral ANADIG_OSC base address */
