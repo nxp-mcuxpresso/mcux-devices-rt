@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOB_hifi4
 **
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250606
+**     Build:               b250612
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SYSCON3
@@ -140,6 +140,7 @@
 #define SYSCON3_GDET_CTRL_2_COUNT                 1u
 #define SYSCON3_TEMPDETECT_CTRL_COUNT             2u
 #define SYSCON3_SWD_ACCESS_CPU_COUNT              2u
+#define SYSCON3_DATA_REGS_COUNT                   8u
 
 /** SYSCON3 - Register Layout Typedef */
 typedef struct {
@@ -164,7 +165,9 @@ typedef struct {
        uint8_t RESERVED_6[656];
   __IO uint32_t TEMPDETECT_CTRL[SYSCON3_TEMPDETECT_CTRL_COUNT]; /**< TEMPDETECT0 Control..TEMPDETECT1 Control, array offset: 0x514, array step: 0x4 */
   __I  uint32_t TEMPDETECT_FLAGS;                  /**< TEMPDETECT Interrupts Output, offset: 0x51C */
-       uint8_t RESERVED_7[736];
+       uint8_t RESERVED_7[224];
+  __IO uint32_t TEMPDETECT_INT_EN;                 /**< TEMPDETECT Interrupts Enable, offset: 0x600 */
+       uint8_t RESERVED_8[508];
   __IO uint32_t SWD_ACCESS_CPU[SYSCON3_SWD_ACCESS_CPU_COUNT]; /**< CPU0 Software Debug Access..CPU1 Software Debug Access, array offset: 0x800, array step: 0x4 */
   __IO uint32_t SWD_ACCESS_APBAP;                  /**< APB-AP Software Debug Access, offset: 0x808 */
   __IO uint32_t SWD_ACCESS_AHBAP;                  /**< AHB-AP Software Debug Access, offset: 0x80C */
@@ -172,11 +175,13 @@ typedef struct {
   __IO uint32_t DEBUG_FEATURES;                    /**< Cortex Debug Features Control, offset: 0x814 */
   __IO uint32_t DEBUG_FEATURES_DP;                 /**< Cortex Debug Features Control, offset: 0x818 */
   __IO uint32_t DEBUG_AUTH_BEACON;                 /**< Debug Authentication Beacon, offset: 0x81C */
-       uint8_t RESERVED_8[832];
+       uint8_t RESERVED_9[832];
   __IO uint32_t GRAY_CODE_LSB;                     /**< Gray to Binary Converter - Gray Code [31:0], offset: 0xB60 */
   __IO uint32_t GRAY_CODE_MSB;                     /**< Gray to Binary Converter - Gray Code [63:32], offset: 0xB64 */
   __I  uint32_t BINARY_CODE_LSB;                   /**< Gray to Binary Converter - Binary Code [31:0], offset: 0xB68 */
   __I  uint32_t BINARY_CODE_MSB;                   /**< Gray to Binary Converter - Binary Code [63:32], offset: 0xB6C */
+       uint8_t RESERVED_10[1136];
+       uint32_t DATA_REG[SYSCON3_DATA_REGS_COUNT]; /**< Data Register 0..Data Register 7, array offset: 0xFE0, array step: 0x4 */
 } SYSCON3_Type;
 
 /* ----------------------------------------------------------------------------
@@ -625,6 +630,26 @@ typedef struct {
 #define SYSCON3_TEMPDETECT_FLAGS_TEMPDETECT1(x)  (((uint32_t)(((uint32_t)(x)) << SYSCON3_TEMPDETECT_FLAGS_TEMPDETECT1_SHIFT)) & SYSCON3_TEMPDETECT_FLAGS_TEMPDETECT1_MASK)
 /*! @} */
 
+/*! @name TEMPDETECT_INT_EN - TEMPDETECT Interrupts Enable */
+/*! @{ */
+
+#define SYSCON3_TEMPDETECT_INT_EN_TEMPDETECT0_INT_EN_MASK (0x40U)
+#define SYSCON3_TEMPDETECT_INT_EN_TEMPDETECT0_INT_EN_SHIFT (6U)
+/*! TEMPDETECT0_INT_EN - TEMPDETECT0 Interrupt Enable
+ *  0b0..Disables
+ *  0b1..Enables
+ */
+#define SYSCON3_TEMPDETECT_INT_EN_TEMPDETECT0_INT_EN(x) (((uint32_t)(((uint32_t)(x)) << SYSCON3_TEMPDETECT_INT_EN_TEMPDETECT0_INT_EN_SHIFT)) & SYSCON3_TEMPDETECT_INT_EN_TEMPDETECT0_INT_EN_MASK)
+
+#define SYSCON3_TEMPDETECT_INT_EN_TEMPDETECT1_INT_EN_MASK (0x80U)
+#define SYSCON3_TEMPDETECT_INT_EN_TEMPDETECT1_INT_EN_SHIFT (7U)
+/*! TEMPDETECT1_INT_EN - TEMPDETECT1 Interrupt Enable
+ *  0b0..Disables
+ *  0b1..Enables
+ */
+#define SYSCON3_TEMPDETECT_INT_EN_TEMPDETECT1_INT_EN(x) (((uint32_t)(((uint32_t)(x)) << SYSCON3_TEMPDETECT_INT_EN_TEMPDETECT1_INT_EN_SHIFT)) & SYSCON3_TEMPDETECT_INT_EN_TEMPDETECT1_INT_EN_MASK)
+/*! @} */
+
 /*! @name SWD_ACCESS_CPU - CPU0 Software Debug Access..CPU1 Software Debug Access */
 /*! @{ */
 
@@ -981,6 +1006,9 @@ typedef struct {
 /*! CODE_BIN_63_32 - Binary Code [63:32] */
 #define SYSCON3_BINARY_CODE_MSB_CODE_BIN_63_32(x) (((uint32_t)(((uint32_t)(x)) << SYSCON3_BINARY_CODE_MSB_CODE_BIN_63_32_SHIFT)) & SYSCON3_BINARY_CODE_MSB_CODE_BIN_63_32_MASK)
 /*! @} */
+
+/* The count of SYSCON3_DATA_REG */
+#define SYSCON3_DATA_REG_COUNT                   (8U)
 
 
 /*!

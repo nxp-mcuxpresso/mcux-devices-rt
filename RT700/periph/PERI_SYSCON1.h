@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOB_hifi4
 **
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250606
+**     Build:               b250612
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SYSCON1
@@ -507,8 +507,8 @@ typedef struct {
 #define SYSCON1_DSP_VECT_REMAP_STATVECSELECT_MASK (0x1000U)
 #define SYSCON1_DSP_VECT_REMAP_STATVECSELECT_SHIFT (12U)
 /*! STATVECSELECT - Static Vector Select
- *  0b0..0058_0000h to another address in RAM0
- *  0b1..0060_0000h to another address in RAM1
+ *  0b0..Selects the primary static vector address (0058_0000h)
+ *  0b1..No effect
  */
 #define SYSCON1_DSP_VECT_REMAP_STATVECSELECT(x)  (((uint32_t)(((uint32_t)(x)) << SYSCON1_DSP_VECT_REMAP_STATVECSELECT_SHIFT)) & SYSCON1_DSP_VECT_REMAP_STATVECSELECT_MASK)
 /*! @} */

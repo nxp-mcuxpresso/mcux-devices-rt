@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOB_hifi4
 **
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250606
+**     Build:               b250612
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for PUF
@@ -159,8 +159,7 @@ typedef struct {
   __I  uint32_t PSR;                               /**< PUF Score, offset: 0xDC */
   __I  uint32_t HW_RUC0;                           /**< Hardware Restrict User Context 0, offset: 0xE0 */
   __I  uint32_t HW_RUC1;                           /**< Hardware Restrict User Context 1, offset: 0xE4 */
-       uint8_t RESERVED_6[12];
-  __I  uint32_t HW_INFO;                           /**< Hardware Information, offset: 0xF4 */
+       uint8_t RESERVED_6[16];
   __I  uint32_t HW_ID;                             /**< Hardware Identifier, offset: 0xF8 */
   __I  uint32_t HW_VER;                            /**< Hardware Version, offset: 0xFC */
   __IO uint32_t CONFIG;                            /**< PUF command blocking configuration, offset: 0x100 */
@@ -713,26 +712,6 @@ typedef struct {
 #define PUF_HW_RUC1_APP_CTX_SHIFT                (0U)
 /*! APP_CTX - Restrict user context 1 */
 #define PUF_HW_RUC1_APP_CTX(x)                   (((uint32_t)(((uint32_t)(x)) << PUF_HW_RUC1_APP_CTX_SHIFT)) & PUF_HW_RUC1_APP_CTX_MASK)
-/*! @} */
-
-/*! @name HW_INFO - Hardware Information */
-/*! @{ */
-
-#define PUF_HW_INFO_CONFIG_WRAP_MASK             (0x1000000U)
-#define PUF_HW_INFO_CONFIG_WRAP_SHIFT            (24U)
-/*! CONFIG_WRAP - Wrap configuration
- *  0b0..Indicates that Wrap is not included
- *  0b1..Indicates that Wrap is included
- */
-#define PUF_HW_INFO_CONFIG_WRAP(x)               (((uint32_t)(((uint32_t)(x)) << PUF_HW_INFO_CONFIG_WRAP_SHIFT)) & PUF_HW_INFO_CONFIG_WRAP_MASK)
-
-#define PUF_HW_INFO_CONFIG_TYPE_MASK             (0xF0000000U)
-#define PUF_HW_INFO_CONFIG_TYPE_SHIFT            (28U)
-/*! CONFIG_TYPE - PUF configuration
- *  0b0001..Indicates that PUF configuration is Safe.
- *  0b0010..Indicates that PUF configuration is Plus.
- */
-#define PUF_HW_INFO_CONFIG_TYPE(x)               (((uint32_t)(((uint32_t)(x)) << PUF_HW_INFO_CONFIG_TYPE_SHIFT)) & PUF_HW_INFO_CONFIG_TYPE_MASK)
 /*! @} */
 
 /*! @name HW_ID - Hardware Identifier */

@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOB_hifi4
 **
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250606
+**     Build:               b250612
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for XSPI
@@ -213,7 +213,7 @@ typedef struct {
   __IO uint32_t AHB_ERR_PAYLOAD_HI;                /**< AHB Error Payload High, offset: 0x4E0 */
   __IO uint32_t AHB_ERR_PAYLOAD_LO;                /**< AHB Error Payload Low, offset: 0x4E4 */
   __I  uint32_t AHB_RD_ERR_ADDR;                   /**< AHB Read Error Address, offset: 0x4E8 */
-  __I  uint32_t AHB_RD_ERR_MID;                    /**< AHB Read Error Manager ID, offset: 0x4EC */
+  __I  uint32_t AHB_RD_ERR_MID;                    /**< AHB Read Error Initiator ID, offset: 0x4EC */
   __I  uint32_t SPNDST_ADDR;                       /**< Suspend Transaction Address, offset: 0x4F0 */
   __IO uint32_t PPWF_TCNT;                         /**< Page Program Wait Time Counter, offset: 0x4F4 */
   __IO uint32_t PPW_RDSR;                          /**< Page Program Wait Read Status, offset: 0x4F8 */
@@ -286,15 +286,15 @@ typedef struct {
   __I  uint32_t FRAD7_WORD5;                       /**< Flash Region Word 5 - Compare Status Data, offset: 0x8F4 */
        uint8_t RESERVED_23[4];
   __IO uint32_t SFP_ARB_TIMEOUT;                   /**< SFP Arbitration Lock Timeout Counter, offset: 0x8FC */
-  __IO uint32_t TG0MDAD;                           /**< Target Group Manager Domain Access Descriptor, offset: 0x900 */
+  __IO uint32_t TG0MDAD;                           /**< Target Group Initiator Domain Access Descriptor, offset: 0x900 */
   __I  uint32_t TGSFAR;                            /**< Target Group SFAR Address, offset: 0x904 */
   __IO uint32_t TGSFARS;                           /**< Target Group SFAR Status, offset: 0x908 */
   __IO uint32_t TGIPCRS;                           /**< Target Group IP Configuration Status, offset: 0x90C */
-  __IO uint32_t TG1MDAD;                           /**< Target Group Manager Domain Access Descriptor, offset: 0x910 */
+  __IO uint32_t TG1MDAD;                           /**< Target Group Initiator Domain Access Descriptor, offset: 0x910 */
        uint8_t RESERVED_24[12];
-  __IO uint32_t MGC;                               /**< Manager Global Configuration, offset: 0x920 */
-  __IO uint32_t MRC;                               /**< Manager Read Command, offset: 0x924 */
-  __IO uint32_t MTO;                               /**< Manager Timeout, offset: 0x928 */
+  __IO uint32_t MGC;                               /**< Initiator Global Configuration, offset: 0x920 */
+  __IO uint32_t MRC;                               /**< Initiator Read Command, offset: 0x924 */
+  __IO uint32_t MTO;                               /**< Initiator Timeout, offset: 0x928 */
   __I  uint32_t FLSEQREQ;                          /**< Flash Sequence Request, offset: 0x92C */
   __I  uint32_t FSMSTAT;                           /**< FSM Status, offset: 0x930 */
   __IO uint32_t IPSERROR;                          /**< IPS Error, offset: 0x934 */
@@ -535,7 +535,7 @@ typedef struct {
 
 #define XSPI_BUFCR_MSTRID_MASK                   (0x1FU)
 #define XSPI_BUFCR_MSTRID_SHIFT                  (0U)
-/*! MSTRID - Manager ID */
+/*! MSTRID - Initiator ID */
 #define XSPI_BUFCR_MSTRID(x)                     (((uint32_t)(((uint32_t)(x)) << XSPI_BUFCR_MSTRID_SHIFT)) & XSPI_BUFCR_MSTRID_MASK)
 
 #define XSPI_BUFCR_ADATSZ_MASK                   (0x3FF00U)
@@ -583,7 +583,7 @@ typedef struct {
 
 #define XSPI_BUFCR_ALLMST_MASK                   (0x80000000U)
 #define XSPI_BUFCR_ALLMST_SHIFT                  (31U)
-/*! ALLMST - All Manager Enable
+/*! ALLMST - All Initiator Enable
  *  0b0..Disables
  *  0b1..Enables
  */
@@ -988,7 +988,7 @@ typedef struct {
 
 #define XSPI_DLLSR_DLLA_RANGE_ERR_MASK           (0x2000U)
 #define XSPI_DLLSR_DLLA_RANGE_ERR_SHIFT          (13U)
-/*! DLLA_RANGE_ERR - DLL Manager Delay Chain Range Error - Flash Memory A
+/*! DLLA_RANGE_ERR - DLL Initiator Delay Chain Range Error - Flash Memory A
  *  0b0..In range
  *  0b1..Out of range
  */
@@ -2213,12 +2213,12 @@ typedef struct {
 #define XSPI_AHB_RD_ERR_ADDR_READDR(x)           (((uint32_t)(((uint32_t)(x)) << XSPI_AHB_RD_ERR_ADDR_READDR_SHIFT)) & XSPI_AHB_RD_ERR_ADDR_READDR_MASK)
 /*! @} */
 
-/*! @name AHB_RD_ERR_MID - AHB Read Error Manager ID */
+/*! @name AHB_RD_ERR_MID - AHB Read Error Initiator ID */
 /*! @{ */
 
 #define XSPI_AHB_RD_ERR_MID_REMID_MASK           (0x1FU)
 #define XSPI_AHB_RD_ERR_MID_REMID_SHIFT          (0U)
-/*! REMID - Read Error Manager ID */
+/*! REMID - Read Error Initiator ID */
 #define XSPI_AHB_RD_ERR_MID_REMID(x)             (((uint32_t)(((uint32_t)(x)) << XSPI_AHB_RD_ERR_MID_REMID_SHIFT)) & XSPI_AHB_RD_ERR_MID_REMID_MASK)
 /*! @} */
 
@@ -2550,12 +2550,12 @@ typedef struct {
 
 #define XSPI_FRAD0_WORD2_MD0ACP_MASK             (0x7U)
 #define XSPI_FRAD0_WORD2_MD0ACP_SHIFT            (0U)
-/*! MD0ACP - Manager Domain Access Control Policy */
+/*! MD0ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD0_WORD2_MD0ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD0_WORD2_MD0ACP_SHIFT)) & XSPI_FRAD0_WORD2_MD0ACP_MASK)
 
 #define XSPI_FRAD0_WORD2_MD1ACP_MASK             (0x38U)
 #define XSPI_FRAD0_WORD2_MD1ACP_SHIFT            (3U)
-/*! MD1ACP - Manager Domain Access Control Policy */
+/*! MD1ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD0_WORD2_MD1ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD0_WORD2_MD1ACP_SHIFT)) & XSPI_FRAD0_WORD2_MD1ACP_MASK)
 
 #define XSPI_FRAD0_WORD2_EALO_MASK               (0x3F000000U)
@@ -2582,7 +2582,7 @@ typedef struct {
 /*! LOCK - Descriptor Lock
  *  0b00..Unlocks
  *  0b01..Locks until hard reset
- *  0b10..Locks except for manager
+ *  0b10..Locks except for initiator
  *  0b11..Locks
  */
 #define XSPI_FRAD0_WORD3_LOCK(x)                 (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD0_WORD3_LOCK_SHIFT)) & XSPI_FRAD0_WORD3_LOCK_MASK)
@@ -2610,7 +2610,7 @@ typedef struct {
 
 #define XSPI_FRAD0_WORD5_CMP_MDID_MASK           (0x3FU)
 #define XSPI_FRAD0_WORD5_CMP_MDID_SHIFT          (0U)
-/*! CMP_MDID - Captured Manager Value */
+/*! CMP_MDID - Captured Initiator Value */
 #define XSPI_FRAD0_WORD5_CMP_MDID(x)             (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD0_WORD5_CMP_MDID_SHIFT)) & XSPI_FRAD0_WORD5_CMP_MDID_MASK)
 
 #define XSPI_FRAD0_WORD5_CMP_SA_MASK             (0x40U)
@@ -2669,12 +2669,12 @@ typedef struct {
 
 #define XSPI_FRAD1_WORD2_MD0ACP_MASK             (0x7U)
 #define XSPI_FRAD1_WORD2_MD0ACP_SHIFT            (0U)
-/*! MD0ACP - Manager Domain Access Control Policy */
+/*! MD0ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD1_WORD2_MD0ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD1_WORD2_MD0ACP_SHIFT)) & XSPI_FRAD1_WORD2_MD0ACP_MASK)
 
 #define XSPI_FRAD1_WORD2_MD1ACP_MASK             (0x38U)
 #define XSPI_FRAD1_WORD2_MD1ACP_SHIFT            (3U)
-/*! MD1ACP - Manager Domain Access Control Policy */
+/*! MD1ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD1_WORD2_MD1ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD1_WORD2_MD1ACP_SHIFT)) & XSPI_FRAD1_WORD2_MD1ACP_MASK)
 
 #define XSPI_FRAD1_WORD2_EALO_MASK               (0x3F000000U)
@@ -2701,7 +2701,7 @@ typedef struct {
 /*! LOCK - Descriptor Lock
  *  0b00..Unlocks
  *  0b01..Locks until hard reset
- *  0b10..Locks except for manager
+ *  0b10..Locks except for initiator
  *  0b11..Locks
  */
 #define XSPI_FRAD1_WORD3_LOCK(x)                 (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD1_WORD3_LOCK_SHIFT)) & XSPI_FRAD1_WORD3_LOCK_MASK)
@@ -2729,7 +2729,7 @@ typedef struct {
 
 #define XSPI_FRAD1_WORD5_CMP_MDID_MASK           (0x3FU)
 #define XSPI_FRAD1_WORD5_CMP_MDID_SHIFT          (0U)
-/*! CMP_MDID - Captured Manager Value */
+/*! CMP_MDID - Captured Initiator Value */
 #define XSPI_FRAD1_WORD5_CMP_MDID(x)             (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD1_WORD5_CMP_MDID_SHIFT)) & XSPI_FRAD1_WORD5_CMP_MDID_MASK)
 
 #define XSPI_FRAD1_WORD5_CMP_SA_MASK             (0x40U)
@@ -2788,12 +2788,12 @@ typedef struct {
 
 #define XSPI_FRAD2_WORD2_MD0ACP_MASK             (0x7U)
 #define XSPI_FRAD2_WORD2_MD0ACP_SHIFT            (0U)
-/*! MD0ACP - Manager Domain Access Control Policy */
+/*! MD0ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD2_WORD2_MD0ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD2_WORD2_MD0ACP_SHIFT)) & XSPI_FRAD2_WORD2_MD0ACP_MASK)
 
 #define XSPI_FRAD2_WORD2_MD1ACP_MASK             (0x38U)
 #define XSPI_FRAD2_WORD2_MD1ACP_SHIFT            (3U)
-/*! MD1ACP - Manager Domain Access Control Policy */
+/*! MD1ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD2_WORD2_MD1ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD2_WORD2_MD1ACP_SHIFT)) & XSPI_FRAD2_WORD2_MD1ACP_MASK)
 
 #define XSPI_FRAD2_WORD2_EALO_MASK               (0x3F000000U)
@@ -2820,7 +2820,7 @@ typedef struct {
 /*! LOCK - Descriptor Lock
  *  0b00..Unlocks
  *  0b01..Locks until hard reset
- *  0b10..Locks except for manager
+ *  0b10..Locks except for initiator
  *  0b11..Locks
  */
 #define XSPI_FRAD2_WORD3_LOCK(x)                 (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD2_WORD3_LOCK_SHIFT)) & XSPI_FRAD2_WORD3_LOCK_MASK)
@@ -2848,7 +2848,7 @@ typedef struct {
 
 #define XSPI_FRAD2_WORD5_CMP_MDID_MASK           (0x3FU)
 #define XSPI_FRAD2_WORD5_CMP_MDID_SHIFT          (0U)
-/*! CMP_MDID - Captured Manager Value */
+/*! CMP_MDID - Captured Initiator Value */
 #define XSPI_FRAD2_WORD5_CMP_MDID(x)             (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD2_WORD5_CMP_MDID_SHIFT)) & XSPI_FRAD2_WORD5_CMP_MDID_MASK)
 
 #define XSPI_FRAD2_WORD5_CMP_SA_MASK             (0x40U)
@@ -2907,12 +2907,12 @@ typedef struct {
 
 #define XSPI_FRAD3_WORD2_MD0ACP_MASK             (0x7U)
 #define XSPI_FRAD3_WORD2_MD0ACP_SHIFT            (0U)
-/*! MD0ACP - Manager Domain Access Control Policy */
+/*! MD0ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD3_WORD2_MD0ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD3_WORD2_MD0ACP_SHIFT)) & XSPI_FRAD3_WORD2_MD0ACP_MASK)
 
 #define XSPI_FRAD3_WORD2_MD1ACP_MASK             (0x38U)
 #define XSPI_FRAD3_WORD2_MD1ACP_SHIFT            (3U)
-/*! MD1ACP - Manager Domain Access Control Policy */
+/*! MD1ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD3_WORD2_MD1ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD3_WORD2_MD1ACP_SHIFT)) & XSPI_FRAD3_WORD2_MD1ACP_MASK)
 
 #define XSPI_FRAD3_WORD2_EALO_MASK               (0x3F000000U)
@@ -2939,7 +2939,7 @@ typedef struct {
 /*! LOCK - Descriptor Lock
  *  0b00..Unlocks
  *  0b01..Locks until hard reset
- *  0b10..Locks except for manager
+ *  0b10..Locks except for initiator
  *  0b11..Locks
  */
 #define XSPI_FRAD3_WORD3_LOCK(x)                 (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD3_WORD3_LOCK_SHIFT)) & XSPI_FRAD3_WORD3_LOCK_MASK)
@@ -2967,7 +2967,7 @@ typedef struct {
 
 #define XSPI_FRAD3_WORD5_CMP_MDID_MASK           (0x3FU)
 #define XSPI_FRAD3_WORD5_CMP_MDID_SHIFT          (0U)
-/*! CMP_MDID - Captured Manager Value */
+/*! CMP_MDID - Captured Initiator Value */
 #define XSPI_FRAD3_WORD5_CMP_MDID(x)             (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD3_WORD5_CMP_MDID_SHIFT)) & XSPI_FRAD3_WORD5_CMP_MDID_MASK)
 
 #define XSPI_FRAD3_WORD5_CMP_SA_MASK             (0x40U)
@@ -3026,12 +3026,12 @@ typedef struct {
 
 #define XSPI_FRAD4_WORD2_MD0ACP_MASK             (0x7U)
 #define XSPI_FRAD4_WORD2_MD0ACP_SHIFT            (0U)
-/*! MD0ACP - Manager Domain Access Control Policy */
+/*! MD0ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD4_WORD2_MD0ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD4_WORD2_MD0ACP_SHIFT)) & XSPI_FRAD4_WORD2_MD0ACP_MASK)
 
 #define XSPI_FRAD4_WORD2_MD1ACP_MASK             (0x38U)
 #define XSPI_FRAD4_WORD2_MD1ACP_SHIFT            (3U)
-/*! MD1ACP - Manager Domain Access Control Policy */
+/*! MD1ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD4_WORD2_MD1ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD4_WORD2_MD1ACP_SHIFT)) & XSPI_FRAD4_WORD2_MD1ACP_MASK)
 
 #define XSPI_FRAD4_WORD2_EALO_MASK               (0x3F000000U)
@@ -3058,7 +3058,7 @@ typedef struct {
 /*! LOCK - Descriptor Lock
  *  0b00..Unlocks
  *  0b01..Locks until hard reset
- *  0b10..Locks except for manager
+ *  0b10..Locks except for initiator
  *  0b11..Locks
  */
 #define XSPI_FRAD4_WORD3_LOCK(x)                 (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD4_WORD3_LOCK_SHIFT)) & XSPI_FRAD4_WORD3_LOCK_MASK)
@@ -3086,7 +3086,7 @@ typedef struct {
 
 #define XSPI_FRAD4_WORD5_CMP_MDID_MASK           (0x3FU)
 #define XSPI_FRAD4_WORD5_CMP_MDID_SHIFT          (0U)
-/*! CMP_MDID - Captured Manager Value */
+/*! CMP_MDID - Captured Initiator Value */
 #define XSPI_FRAD4_WORD5_CMP_MDID(x)             (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD4_WORD5_CMP_MDID_SHIFT)) & XSPI_FRAD4_WORD5_CMP_MDID_MASK)
 
 #define XSPI_FRAD4_WORD5_CMP_SA_MASK             (0x40U)
@@ -3145,12 +3145,12 @@ typedef struct {
 
 #define XSPI_FRAD5_WORD2_MD0ACP_MASK             (0x7U)
 #define XSPI_FRAD5_WORD2_MD0ACP_SHIFT            (0U)
-/*! MD0ACP - Manager Domain Access Control Policy */
+/*! MD0ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD5_WORD2_MD0ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD5_WORD2_MD0ACP_SHIFT)) & XSPI_FRAD5_WORD2_MD0ACP_MASK)
 
 #define XSPI_FRAD5_WORD2_MD1ACP_MASK             (0x38U)
 #define XSPI_FRAD5_WORD2_MD1ACP_SHIFT            (3U)
-/*! MD1ACP - Manager Domain Access Control Policy */
+/*! MD1ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD5_WORD2_MD1ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD5_WORD2_MD1ACP_SHIFT)) & XSPI_FRAD5_WORD2_MD1ACP_MASK)
 
 #define XSPI_FRAD5_WORD2_EALO_MASK               (0x3F000000U)
@@ -3177,7 +3177,7 @@ typedef struct {
 /*! LOCK - Descriptor Lock
  *  0b00..Unlocks
  *  0b01..Locks until hard reset
- *  0b10..Locks except for manager
+ *  0b10..Locks except for initiator
  *  0b11..Locks
  */
 #define XSPI_FRAD5_WORD3_LOCK(x)                 (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD5_WORD3_LOCK_SHIFT)) & XSPI_FRAD5_WORD3_LOCK_MASK)
@@ -3205,7 +3205,7 @@ typedef struct {
 
 #define XSPI_FRAD5_WORD5_CMP_MDID_MASK           (0x3FU)
 #define XSPI_FRAD5_WORD5_CMP_MDID_SHIFT          (0U)
-/*! CMP_MDID - Captured Manager Value */
+/*! CMP_MDID - Captured Initiator Value */
 #define XSPI_FRAD5_WORD5_CMP_MDID(x)             (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD5_WORD5_CMP_MDID_SHIFT)) & XSPI_FRAD5_WORD5_CMP_MDID_MASK)
 
 #define XSPI_FRAD5_WORD5_CMP_SA_MASK             (0x40U)
@@ -3264,12 +3264,12 @@ typedef struct {
 
 #define XSPI_FRAD6_WORD2_MD0ACP_MASK             (0x7U)
 #define XSPI_FRAD6_WORD2_MD0ACP_SHIFT            (0U)
-/*! MD0ACP - Manager Domain Access Control Policy */
+/*! MD0ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD6_WORD2_MD0ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD6_WORD2_MD0ACP_SHIFT)) & XSPI_FRAD6_WORD2_MD0ACP_MASK)
 
 #define XSPI_FRAD6_WORD2_MD1ACP_MASK             (0x38U)
 #define XSPI_FRAD6_WORD2_MD1ACP_SHIFT            (3U)
-/*! MD1ACP - Manager Domain Access Control Policy */
+/*! MD1ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD6_WORD2_MD1ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD6_WORD2_MD1ACP_SHIFT)) & XSPI_FRAD6_WORD2_MD1ACP_MASK)
 
 #define XSPI_FRAD6_WORD2_EALO_MASK               (0x3F000000U)
@@ -3296,7 +3296,7 @@ typedef struct {
 /*! LOCK - Descriptor Lock
  *  0b00..Unlocks
  *  0b01..Locks until hard reset
- *  0b10..Locks except for manager
+ *  0b10..Locks except for initiator
  *  0b11..Locks
  */
 #define XSPI_FRAD6_WORD3_LOCK(x)                 (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD6_WORD3_LOCK_SHIFT)) & XSPI_FRAD6_WORD3_LOCK_MASK)
@@ -3324,7 +3324,7 @@ typedef struct {
 
 #define XSPI_FRAD6_WORD5_CMP_MDID_MASK           (0x3FU)
 #define XSPI_FRAD6_WORD5_CMP_MDID_SHIFT          (0U)
-/*! CMP_MDID - Captured Manager Value */
+/*! CMP_MDID - Captured Initiator Value */
 #define XSPI_FRAD6_WORD5_CMP_MDID(x)             (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD6_WORD5_CMP_MDID_SHIFT)) & XSPI_FRAD6_WORD5_CMP_MDID_MASK)
 
 #define XSPI_FRAD6_WORD5_CMP_SA_MASK             (0x40U)
@@ -3383,12 +3383,12 @@ typedef struct {
 
 #define XSPI_FRAD7_WORD2_MD0ACP_MASK             (0x7U)
 #define XSPI_FRAD7_WORD2_MD0ACP_SHIFT            (0U)
-/*! MD0ACP - Manager Domain Access Control Policy */
+/*! MD0ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD7_WORD2_MD0ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD7_WORD2_MD0ACP_SHIFT)) & XSPI_FRAD7_WORD2_MD0ACP_MASK)
 
 #define XSPI_FRAD7_WORD2_MD1ACP_MASK             (0x38U)
 #define XSPI_FRAD7_WORD2_MD1ACP_SHIFT            (3U)
-/*! MD1ACP - Manager Domain Access Control Policy */
+/*! MD1ACP - Initiator Domain Access Control Policy */
 #define XSPI_FRAD7_WORD2_MD1ACP(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD7_WORD2_MD1ACP_SHIFT)) & XSPI_FRAD7_WORD2_MD1ACP_MASK)
 
 #define XSPI_FRAD7_WORD2_EALO_MASK               (0x3F000000U)
@@ -3415,7 +3415,7 @@ typedef struct {
 /*! LOCK - Descriptor Lock
  *  0b00..Unlocks
  *  0b01..Locks until hard reset
- *  0b10..Locks except for manager
+ *  0b10..Locks except for initiator
  *  0b11..Locks
  */
 #define XSPI_FRAD7_WORD3_LOCK(x)                 (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD7_WORD3_LOCK_SHIFT)) & XSPI_FRAD7_WORD3_LOCK_MASK)
@@ -3443,7 +3443,7 @@ typedef struct {
 
 #define XSPI_FRAD7_WORD5_CMP_MDID_MASK           (0x3FU)
 #define XSPI_FRAD7_WORD5_CMP_MDID_SHIFT          (0U)
-/*! CMP_MDID - Captured Manager Value */
+/*! CMP_MDID - Captured Initiator Value */
 #define XSPI_FRAD7_WORD5_CMP_MDID(x)             (((uint32_t)(((uint32_t)(x)) << XSPI_FRAD7_WORD5_CMP_MDID_SHIFT)) & XSPI_FRAD7_WORD5_CMP_MDID_MASK)
 
 #define XSPI_FRAD7_WORD5_CMP_SA_MASK             (0x40U)
@@ -3488,12 +3488,12 @@ typedef struct {
 #define XSPI_SFP_ARB_TIMEOUT_SFP_ARB_TOC(x)      (((uint32_t)(((uint32_t)(x)) << XSPI_SFP_ARB_TIMEOUT_SFP_ARB_TOC_SHIFT)) & XSPI_SFP_ARB_TIMEOUT_SFP_ARB_TOC_MASK)
 /*! @} */
 
-/*! @name TG0MDAD - Target Group Manager Domain Access Descriptor */
+/*! @name TG0MDAD - Target Group Initiator Domain Access Descriptor */
 /*! @{ */
 
 #define XSPI_TG0MDAD_MIDMATCH_MASK               (0x3FU)
 #define XSPI_TG0MDAD_MIDMATCH_SHIFT              (0U)
-/*! MIDMATCH - Manager ID Reference */
+/*! MIDMATCH - Initiator ID Reference */
 #define XSPI_TG0MDAD_MIDMATCH(x)                 (((uint32_t)(((uint32_t)(x)) << XSPI_TG0MDAD_MIDMATCH_SHIFT)) & XSPI_TG0MDAD_MIDMATCH_MASK)
 
 #define XSPI_TG0MDAD_MASK_MASK                   (0xFC0U)
@@ -3550,7 +3550,7 @@ typedef struct {
 
 #define XSPI_TGSFARS_TG_MID_MASK                 (0x3FU)
 #define XSPI_TGSFARS_TG_MID_SHIFT                (0U)
-/*! TG_MID - Transaction Manager ID */
+/*! TG_MID - Transaction Initiator ID */
 #define XSPI_TGSFARS_TG_MID(x)                   (((uint32_t)(((uint32_t)(x)) << XSPI_TGSFARS_TG_MID_SHIFT)) & XSPI_TGSFARS_TG_MID_MASK)
 
 #define XSPI_TGSFARS_SA_MASK                     (0x400U)
@@ -3652,12 +3652,12 @@ typedef struct {
 #define XSPI_TGIPCRS_VLD(x)                      (((uint32_t)(((uint32_t)(x)) << XSPI_TGIPCRS_VLD_SHIFT)) & XSPI_TGIPCRS_VLD_MASK)
 /*! @} */
 
-/*! @name TG1MDAD - Target Group Manager Domain Access Descriptor */
+/*! @name TG1MDAD - Target Group Initiator Domain Access Descriptor */
 /*! @{ */
 
 #define XSPI_TG1MDAD_MIDMATCH_MASK               (0x3FU)
 #define XSPI_TG1MDAD_MIDMATCH_SHIFT              (0U)
-/*! MIDMATCH - Manager ID Reference */
+/*! MIDMATCH - Initiator ID Reference */
 #define XSPI_TG1MDAD_MIDMATCH(x)                 (((uint32_t)(((uint32_t)(x)) << XSPI_TG1MDAD_MIDMATCH_SHIFT)) & XSPI_TG1MDAD_MIDMATCH_MASK)
 
 #define XSPI_TG1MDAD_MASK_MASK                   (0xFC0U)
@@ -3700,7 +3700,7 @@ typedef struct {
 #define XSPI_TG1MDAD_VLD(x)                      (((uint32_t)(((uint32_t)(x)) << XSPI_TG1MDAD_VLD_SHIFT)) & XSPI_TG1MDAD_VLD_MASK)
 /*! @} */
 
-/*! @name MGC - Manager Global Configuration */
+/*! @name MGC - Initiator Global Configuration */
 /*! @{ */
 
 #define XSPI_MGC_GCLCKMID_MASK                   (0x3FU)
@@ -3750,7 +3750,7 @@ typedef struct {
 #define XSPI_MGC_GVLD(x)                         (((uint32_t)(((uint32_t)(x)) << XSPI_MGC_GVLD_SHIFT)) & XSPI_MGC_GVLD_MASK)
 /*! @} */
 
-/*! @name MRC - Manager Read Command */
+/*! @name MRC - Initiator Read Command */
 /*! @{ */
 
 #define XSPI_MRC_READ_CMD0_MASK                  (0x3FU)
@@ -3790,7 +3790,7 @@ typedef struct {
 #define XSPI_MRC_VLDCMD03(x)                     (((uint32_t)(((uint32_t)(x)) << XSPI_MRC_VLDCMD03_SHIFT)) & XSPI_MRC_VLDCMD03_MASK)
 /*! @} */
 
-/*! @name MTO - Manager Timeout */
+/*! @name MTO - Initiator Timeout */
 /*! @{ */
 
 #define XSPI_MTO_SFP_ACC_TO_MASK                 (0xFFFFFFFFU)
@@ -3804,7 +3804,7 @@ typedef struct {
 
 #define XSPI_FLSEQREQ_REQ_MID_MASK               (0x3FU)
 #define XSPI_FLSEQREQ_REQ_MID_SHIFT              (0U)
-/*! REQ_MID - Flash Sequence Request Manager ID */
+/*! REQ_MID - Flash Sequence Request Initiator ID */
 #define XSPI_FLSEQREQ_REQ_MID(x)                 (((uint32_t)(((uint32_t)(x)) << XSPI_FLSEQREQ_REQ_MID_SHIFT)) & XSPI_FLSEQREQ_REQ_MID_MASK)
 
 #define XSPI_FLSEQREQ_REQ_TG_MASK                (0x40U)
@@ -3889,7 +3889,7 @@ typedef struct {
 
 #define XSPI_FSMSTAT_MID_MASK                    (0x3F00U)
 #define XSPI_FSMSTAT_MID_SHIFT                   (8U)
-/*! MID - Manager ID */
+/*! MID - Initiator ID */
 #define XSPI_FSMSTAT_MID(x)                      (((uint32_t)(((uint32_t)(x)) << XSPI_FSMSTAT_MID_SHIFT)) & XSPI_FSMSTAT_MID_MASK)
 
 #define XSPI_FSMSTAT_CMD_MASK                    (0x10000U)
@@ -3922,7 +3922,7 @@ typedef struct {
 
 #define XSPI_IPSERROR_MID_MASK                   (0x3FU)
 #define XSPI_IPSERROR_MID_SHIFT                  (0U)
-/*! MID - IPS Manager ID */
+/*! MID - IPS Initiator ID */
 #define XSPI_IPSERROR_MID(x)                     (((uint32_t)(((uint32_t)(x)) << XSPI_IPSERROR_MID_SHIFT)) & XSPI_IPSERROR_MID_MASK)
 
 #define XSPI_IPSERROR_TG0LCK_MASK                (0x100U)
@@ -3959,7 +3959,7 @@ typedef struct {
 
 #define XSPI_IPSERROR_TG0MID_MASK                (0x1000U)
 #define XSPI_IPSERROR_TG0MID_SHIFT               (12U)
-/*! TG0MID - TGn Manager-ID Status
+/*! TG0MID - TGn Initiator-ID Status
  *  0b0..Passed
  *  0b1..Failed
  */
@@ -3967,7 +3967,7 @@ typedef struct {
 
 #define XSPI_IPSERROR_TG1MID_MASK                (0x2000U)
 #define XSPI_IPSERROR_TG1MID_SHIFT               (13U)
-/*! TG1MID - TGn Manager-ID Status
+/*! TG1MID - TGn Initiator-ID Status
  *  0b0..Passed
  *  0b1..Failed
  */
@@ -4582,7 +4582,7 @@ typedef struct {
 
 #define XSPI_TGSFARS_SUB_TG_MID_MASK             (0x3FU)
 #define XSPI_TGSFARS_SUB_TG_MID_SHIFT            (0U)
-/*! TG_MID - Transaction Manager ID */
+/*! TG_MID - Transaction Initiator ID */
 #define XSPI_TGSFARS_SUB_TG_MID(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_TGSFARS_SUB_TG_MID_SHIFT)) & XSPI_TGSFARS_SUB_TG_MID_MASK)
 
 #define XSPI_TGSFARS_SUB_SA_MASK                 (0x400U)

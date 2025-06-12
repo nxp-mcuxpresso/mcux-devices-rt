@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOB_hifi4
 **
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250609
+**     Build:               b250612
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CLKCTL0
@@ -1472,7 +1472,7 @@ typedef struct {
 #define CLKCTL0_PSCCTL3_SET_PVTS0_MASK           (0x40U)
 #define CLKCTL0_PSCCTL3_SET_PVTS0_SHIFT          (6U)
 /*! PVTS0 - PVTS0 Clock
- *  0b0..Disable
+ *  0b0..No effect
  *  0b1..Enable
  */
 #define CLKCTL0_PSCCTL3_SET_PVTS0(x)             (((uint32_t)(((uint32_t)(x)) << CLKCTL0_PSCCTL3_SET_PVTS0_SHIFT)) & CLKCTL0_PSCCTL3_SET_PVTS0_MASK)
@@ -2152,8 +2152,8 @@ typedef struct {
 #define CLKCTL0_PSCCTL3_CLR_PVTS0_MASK           (0x40U)
 #define CLKCTL0_PSCCTL3_CLR_PVTS0_SHIFT          (6U)
 /*! PVTS0 - PVTS0 Clock
- *  0b0..Disable
- *  0b1..Enable
+ *  0b0..No effect
+ *  0b1..Disable
  */
 #define CLKCTL0_PSCCTL3_CLR_PVTS0(x)             (((uint32_t)(((uint32_t)(x)) << CLKCTL0_PSCCTL3_CLR_PVTS0_SHIFT)) & CLKCTL0_PSCCTL3_CLR_PVTS0_MASK)
 

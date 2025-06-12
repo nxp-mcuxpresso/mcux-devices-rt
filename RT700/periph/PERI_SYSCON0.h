@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOB_hifi4
 **
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250606
+**     Build:               b250612
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SYSCON0
@@ -231,9 +231,11 @@ typedef struct {
   __I  uint32_t ELS_OTP_LC_STATE_DP;               /**< Lifecycle State, offset: 0xB04 */
   __IO uint32_t ELS_TEMPORAL_STATE;                /**< ELS Temporal State, offset: 0xB08 */
   __IO uint32_t ELS_KDF_MASK;                      /**< Key Derivation Function Mask, offset: 0xB0C */
-       uint8_t RESERVED_26[44];
+       uint8_t RESERVED_26[40];
+  __I  uint32_t ELS_BOOT_STATE0;                   /**< ELS Boot State 0, offset: 0xB38 */
   __I  uint32_t ELS_BOOT_STATE1;                   /**< ELS Boot State 1, offset: 0xB3C */
-       uint8_t RESERVED_27[40];
+  __I  uint32_t ELS_BOOT_STATE2;                   /**< ELS Boot State 2, offset: 0xB40 */
+       uint8_t RESERVED_27[36];
   __IO uint32_t ELS_ASSET_PROT;                    /**< ELS Asset Protection, offset: 0xB68 */
        uint8_t RESERVED_28[84];
   __I  uint32_t ELS_AS_UUID[SYSCON0_ELS_AS_UUID_COUNT]; /**< ELS AS UUID, array offset: 0xBC0, array step: 0x4 */
@@ -3489,6 +3491,131 @@ typedef struct {
 #define SYSCON0_ELS_KDF_MASK_KDF_MASK(x)         (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_KDF_MASK_KDF_MASK_SHIFT)) & SYSCON0_ELS_KDF_MASK_KDF_MASK_MASK)
 /*! @} */
 
+/*! @name ELS_BOOT_STATE0 - ELS Boot State 0 */
+/*! @{ */
+
+#define SYSCON0_ELS_BOOT_STATE0_BOOT_SRC_MASK    (0x7U)
+#define SYSCON0_ELS_BOOT_STATE0_BOOT_SRC_SHIFT   (0U)
+/*! BOOT_SRC - Boot Image Source
+ *  0b000..XSPI NOR instance 0
+ *  0b001..XSPI NOR instance 1
+ *  0b010..eMMC instance 0
+ *  0b011..eMMC instance 1
+ *  0b100..Recovery SPI flash image
+ *  0b101..Serial boot image (execute ISP command used)
+ *  0b110..XSPI NAND instance 0
+ *  0b111..XSPI NAND instance 1
+ */
+#define SYSCON0_ELS_BOOT_STATE0_BOOT_SRC(x)      (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_BOOT_SRC_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_BOOT_SRC_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE0_SB_JUMP_MASK     (0x8U)
+#define SYSCON0_ELS_BOOT_STATE0_SB_JUMP_SHIFT    (3U)
+/*! SB_JUMP - SB3 Containing SB_JUMP Command
+ *  0b0..Fail
+ *  0b1..Success
+ */
+#define SYSCON0_ELS_BOOT_STATE0_SB_JUMP(x)       (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_SB_JUMP_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_SB_JUMP_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE0_PSRAM_MASK       (0x30U)
+#define SYSCON0_ELS_BOOT_STATE0_PSRAM_SHIFT      (4U)
+/*! PSRAM - Image XIP or Copy-to-PSRAM
+ *  0b00..PSRAM is disabled
+ *  0b01..PSRAM is enabled
+ */
+#define SYSCON0_ELS_BOOT_STATE0_PSRAM(x)         (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_PSRAM_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_PSRAM_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE0_IMAGE_TYP_MASK   (0xC0U)
+#define SYSCON0_ELS_BOOT_STATE0_IMAGE_TYP_SHIFT  (6U)
+/*! IMAGE_TYP - Image Type
+ *  0b00..Signed image (ECDSA)
+ *  0b01..CRC image (CRC)
+ */
+#define SYSCON0_ELS_BOOT_STATE0_IMAGE_TYP(x)     (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_IMAGE_TYP_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_IMAGE_TYP_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE0_SB3_IMAGE_MASK   (0x100U)
+#define SYSCON0_ELS_BOOT_STATE0_SB3_IMAGE_SHIFT  (8U)
+/*! SB3_IMAGE - SB3 Image Receive
+ *  0b0..Fail
+ *  0b1..Success
+ */
+#define SYSCON0_ELS_BOOT_STATE0_SB3_IMAGE(x)     (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_SB3_IMAGE_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_SB3_IMAGE_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE0_CDI_DEV_KEY_MASK (0x200U)
+#define SYSCON0_ELS_BOOT_STATE0_CDI_DEV_KEY_SHIFT (9U)
+/*! CDI_DEV_KEY - CDI Based Device Keys for CSR Harvesting
+ *  0b0..Fail
+ *  0b1..CDI device keys derived
+ */
+#define SYSCON0_ELS_BOOT_STATE0_CDI_DEV_KEY(x)   (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_CDI_DEV_KEY_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_CDI_DEV_KEY_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE0_CDI_COMP_MASK    (0x400U)
+#define SYSCON0_ELS_BOOT_STATE0_CDI_COMP_SHIFT   (10U)
+/*! CDI_COMP - CDI per DICE Specification
+ *  0b0..Fail
+ *  0b1..CDI compute done
+ */
+#define SYSCON0_ELS_BOOT_STATE0_CDI_COMP(x)      (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_CDI_COMP_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_CDI_COMP_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE0_TZ_PRESET_DATA_MASK (0x800U)
+#define SYSCON0_ELS_BOOT_STATE0_TZ_PRESET_DATA_SHIFT (11U)
+/*! TZ_PRESET_DATA - TrustZone Preset Data
+ *  0b0..Fail
+ *  0b1..TrustZone preset data loaded
+ */
+#define SYSCON0_ELS_BOOT_STATE0_TZ_PRESET_DATA(x) (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_TZ_PRESET_DATA_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_TZ_PRESET_DATA_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE0_DEBUG_AUTH_MASK  (0x1000U)
+#define SYSCON0_ELS_BOOT_STATE0_DEBUG_AUTH_SHIFT (12U)
+/*! DEBUG_AUTH - Debug Authentication
+ *  0b0..Fail
+ *  0b1..Debug authentication done
+ */
+#define SYSCON0_ELS_BOOT_STATE0_DEBUG_AUTH(x)    (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_DEBUG_AUTH_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_DEBUG_AUTH_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE0_ITRC_ZEROIZE_MASK (0x2000U)
+#define SYSCON0_ELS_BOOT_STATE0_ITRC_ZEROIZE_SHIFT (13U)
+/*! ITRC_ZEROIZE - ITRC Zeroize Event
+ *  0b0..Fail
+ *  0b1..ITRC zeroize done
+ */
+#define SYSCON0_ELS_BOOT_STATE0_ITRC_ZEROIZE(x)  (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_ITRC_ZEROIZE_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_ITRC_ZEROIZE_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE0_XSPI0_IPED_EN_MASK (0x4000U)
+#define SYSCON0_ELS_BOOT_STATE0_XSPI0_IPED_EN_SHIFT (14U)
+/*! XSPI0_IPED_EN - XSPI0 IPED Enable
+ *  0b0..Disabled
+ *  0b1..Enabled
+ */
+#define SYSCON0_ELS_BOOT_STATE0_XSPI0_IPED_EN(x) (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_XSPI0_IPED_EN_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_XSPI0_IPED_EN_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE0_XSPI1_IPED_EN_MASK (0x8000U)
+#define SYSCON0_ELS_BOOT_STATE0_XSPI1_IPED_EN_SHIFT (15U)
+/*! XSPI1_IPED_EN - XSPI1 IPED Enable
+ *  0b0..Disabled
+ *  0b1..Enabled
+ */
+#define SYSCON0_ELS_BOOT_STATE0_XSPI1_IPED_EN(x) (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_XSPI1_IPED_EN_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_XSPI1_IPED_EN_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE0_BOOT_PIN_STATE_MASK (0x1C00000U)
+#define SYSCON0_ELS_BOOT_STATE0_BOOT_PIN_STATE_SHIFT (22U)
+/*! BOOT_PIN_STATE - Boot Pin State
+ *  0b000..kBootPinSrc_eMMC_uSDHC0
+ *  0b001..kBootSrc_XSPI0
+ *  0b010..kBootSrc_ISP_AUTO
+ *  0b011..kBootSrc_XSPI1
+ *  0b100..Boot pin not working
+ */
+#define SYSCON0_ELS_BOOT_STATE0_BOOT_PIN_STATE(x) (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_BOOT_PIN_STATE_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_BOOT_PIN_STATE_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE0_DED_ERR_DET_MASK (0xE000000U)
+#define SYSCON0_ELS_BOOT_STATE0_DED_ERR_DET_SHIFT (25U)
+/*! DED_ERR_DET - DED Error Detect
+ *  0b010..Error detected
+ *  0b101..No error
+ */
+#define SYSCON0_ELS_BOOT_STATE0_DED_ERR_DET(x)   (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE0_DED_ERR_DET_SHIFT)) & SYSCON0_ELS_BOOT_STATE0_DED_ERR_DET_MASK)
+/*! @} */
+
 /*! @name ELS_BOOT_STATE1 - ELS Boot State 1 */
 /*! @{ */
 
@@ -3504,7 +3631,7 @@ typedef struct {
  *  0b00000011..FIPS_AES_STEN
  *  0b00000100..FIPS_ECDSA_STEN
  *  0b00000101..FIPS_DRBG_STEN
- *  0b00000110..FIPS_CMAC_STEN
+ *  0b00000110..FIPS_HMAC_STEN
  *  0b00000111..FIPS_CKDF_STEN
  *  0b00001000..FIPS_HKDF_STEN
  *  0b00001001..
@@ -3534,6 +3661,42 @@ typedef struct {
 #define SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_17_16_SHIFT (18U)
 /*! PMC0_FLAGS_17_16 - PMC0.FLAGS[17:16] */
 #define SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_17_16(x) (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_17_16_SHIFT)) & SYSCON0_ELS_BOOT_STATE1_PMC0_FLAGS_17_16_MASK)
+/*! @} */
+
+/*! @name ELS_BOOT_STATE2 - ELS Boot State 2 */
+/*! @{ */
+
+#define SYSCON0_ELS_BOOT_STATE2_VDD_POR_MASK     (0x1U)
+#define SYSCON0_ELS_BOOT_STATE2_VDD_POR_SHIFT    (0U)
+/*! VDD_POR - VDD POR
+ *  0b0..No reset event
+ *  0b1..Reset event detected
+ */
+#define SYSCON0_ELS_BOOT_STATE2_VDD_POR(x)       (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE2_VDD_POR_SHIFT)) & SYSCON0_ELS_BOOT_STATE2_VDD_POR_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE2_RESETN_RST_MASK  (0x2U)
+#define SYSCON0_ELS_BOOT_STATE2_RESETN_RST_SHIFT (1U)
+/*! RESETN_RST - RESETN Reset
+ *  0b0..No reset event
+ *  0b1..Reset event detected
+ */
+#define SYSCON0_ELS_BOOT_STATE2_RESETN_RST(x)    (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE2_RESETN_RST_SHIFT)) & SYSCON0_ELS_BOOT_STATE2_RESETN_RST_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE2_ISP_AP_RST_MASK  (0x4U)
+#define SYSCON0_ELS_BOOT_STATE2_ISP_AP_RST_SHIFT (2U)
+/*! ISP_AP_RST - ISP_AP Reset
+ *  0b0..No reset event
+ *  0b1..Reset event detected
+ */
+#define SYSCON0_ELS_BOOT_STATE2_ISP_AP_RST(x)    (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE2_ISP_AP_RST_SHIFT)) & SYSCON0_ELS_BOOT_STATE2_ISP_AP_RST_MASK)
+
+#define SYSCON0_ELS_BOOT_STATE2_ITRC_SW_RST_MASK (0x8U)
+#define SYSCON0_ELS_BOOT_STATE2_ITRC_SW_RST_SHIFT (3U)
+/*! ITRC_SW_RST - ITRC_SW Reset
+ *  0b0..No reset event
+ *  0b1..Reset event detected
+ */
+#define SYSCON0_ELS_BOOT_STATE2_ITRC_SW_RST(x)   (((uint32_t)(((uint32_t)(x)) << SYSCON0_ELS_BOOT_STATE2_ITRC_SW_RST_SHIFT)) & SYSCON0_ELS_BOOT_STATE2_ITRC_SW_RST_MASK)
 /*! @} */
 
 /*! @name ELS_ASSET_PROT - ELS Asset Protection */
