@@ -76,7 +76,7 @@ status_t PVTS_ReadDelayFromOTP(bool otp_initialized,
                                uint32_t *delayValues)
 {
     uint32_t new_delay;
-    int32_t pvts_fuse_addr_index;
+    uint32_t pvts_fuse_addr_index;
 
     if (!otp_initialized)
     {
@@ -126,6 +126,10 @@ static uint32_t delay_to_control_word(pvts_delay_t delay_value)
     if (delay_value >= PVTS_DELAY_MAX)
     {
         return PVTS_DELAY_MAX_CTRL_WORD;
+    }
+    if (delay_value < PVTS_DELAY_MIN)
+    {
+        return PVTS_DELAY_OFF;
     }
 
     delay1 = delay_value >> 1U;

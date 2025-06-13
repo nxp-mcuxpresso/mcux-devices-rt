@@ -2292,6 +2292,7 @@ status_t CLOCK_InitMainPfd(clock_pfd_t pfd, uint8_t divider);
  */
 static inline void CLOCK_DeinitMainPfd(clock_pfd_t pfd)
 {
+    assert(pfd <= kCLOCK_Pfd3);
     CLKCTL2->MAINPLL0PFD |= ((uint32_t)CLKCTL2_AUDIOPLL0PFD_PFD0_CLKGATE_MASK << (8UL * (uint32_t)pfd));
 }
 
@@ -2326,8 +2327,9 @@ status_t CLOCK_InitAudioPfd(clock_pfd_t pfd, uint8_t divider);
 /*! brief Disable the audio PLL PFD.
  *  param pfd    : Which PFD clock to disable.
  */
-static inline void CLOCK_DeinitAudioPfd(uint32_t pfd)
+static inline void CLOCK_DeinitAudioPfd(clock_pfd_t pfd)
 {
+    assert(pfd <= kCLOCK_Pfd3);
     CLKCTL2->AUDIOPLL0PFD |= ((uint32_t)CLKCTL2_AUDIOPLL0PFD_PFD0_CLKGATE_MASK << (8UL * (uint32_t)pfd));
 }
 

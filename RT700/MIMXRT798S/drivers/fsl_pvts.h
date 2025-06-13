@@ -22,7 +22,7 @@
 /*! @name Driver version */
 /*@{*/
 /*! @brief pvts driver version 2.0.0. */
-#define FSL_PVTS_DRIVER_VERSION (MAKE_VERSION(2, 0, 0))
+#define FSL_PVTS_DRIVER_VERSION (MAKE_VERSION(2, 0, 1))
 /*@}*/
 
 #define PVTS_GET_DELAY0_FROM_FUSE_VALUE(fuse) ((pvts_delay_t)(fuse & 0x00FFU))         /*!< Calculate delay0 value from fuse word. */
