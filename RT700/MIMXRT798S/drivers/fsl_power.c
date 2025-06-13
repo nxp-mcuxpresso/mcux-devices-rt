@@ -321,6 +321,8 @@ void POWER_DisableInterrupts(uint32_t interruptMask)
 
 void EnableDeepSleepIRQ(IRQn_Type interrupt)
 {
+    assert(interrupt < NUMBER_OF_INT_VECTORS - 16U);
+
     uint32_t intNumber = (uint32_t)interrupt;
 
 #if defined(PMC0)
@@ -354,6 +356,8 @@ void EnableDeepSleepIRQ(IRQn_Type interrupt)
 
 void DisableDeepSleepIRQ(IRQn_Type interrupt)
 {
+    assert(interrupt < NUMBER_OF_INT_VECTORS - 16U);
+
     uint32_t intNumber = (uint32_t)interrupt;
 
     /* also disable interrupt at NVIC */
