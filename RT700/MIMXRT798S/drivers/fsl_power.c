@@ -501,7 +501,7 @@ uint32_t POWER_CalcVoltLevel(power_regulator_t regulator, uint32_t maxFreqHz, ui
 
 static void POWER_SetRegulatorRegister(power_regulator_t regulator, uint32_t ldoVolt, uint32_t lvdVolt, uint32_t index)
 {
-    assert(index < 4);
+    assert(index < 4U);
 
     uint32_t shift  = index * 8UL;
     uint32_t ldoReg = POWER_CalRegValueFromVolt(ldoVolt, POWER_MINI_LDO_VOLT, POWER_LDO_VOLT_SLOPE);

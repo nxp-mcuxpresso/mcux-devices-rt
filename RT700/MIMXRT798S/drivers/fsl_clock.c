@@ -608,9 +608,9 @@ static uint32_t CLOCK_CalFroFreq(FRO_Type *base)
     {
         if ((base->TEXPCNT.RW & FRO_TEXPCNT_TEXPCNT_MASK) != 0u)
         {
-            freq = ((uint32_t)((uint64_t)(base->TEXPCNT.RW & FRO_TEXPCNT_TEXPCNT_MASK) *
-                               ((uint64_t)refFreq / (uint64_t)((base->CNFG1.RW & FRO_CNFG1_REFDIV_MASK) + 1UL)) /
-                               (uint64_t)((base->CNFG1.RW & FRO_CNFG1_RFCLKCNT_MASK) >> FRO_CNFG1_RFCLKCNT_SHIFT)));
+            freq = ((uint32_t)(((uint64_t)base->TEXPCNT.RW & FRO_TEXPCNT_TEXPCNT_MASK) *
+                               ((uint64_t)refFreq / (((uint64_t)base->CNFG1.RW & FRO_CNFG1_REFDIV_MASK) + 1ULL)) /
+                               (((uint64_t)base->CNFG1.RW & FRO_CNFG1_RFCLKCNT_MASK) >> FRO_CNFG1_RFCLKCNT_SHIFT)));
         }
         else
         {

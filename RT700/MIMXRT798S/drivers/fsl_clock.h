@@ -2039,6 +2039,11 @@ uint32_t CLOCK_GetTpiuClkFreq(void);
  */
 uint32_t CLOCK_GetTrngClkFreq(void);
 
+/*! @brief  Return Frequency of VDD2 ClockOut
+ *  @return Frequency of ClockOut
+ */
+uint32_t CLOCK_GetClockOutClkFreq(void);
+
 #else  /* Sense domain specific APIs */
 
 /*! @brief  Return Frequency of VDD1 audio clk
@@ -2511,11 +2516,6 @@ uint32_t CLOCK_GetMicfilClkFreq(void);
  *  @return Frequency of Ctimer Clock
  */
 uint32_t CLOCK_GetCTimerClkFreq(uint32_t id);
-
-/*! @brief  Return Frequency of VDD2 ClockOut
- *  @return Frequency of ClockOut
- */
-uint32_t CLOCK_GetClockOutClkFreq(void);
 
 /*! @brief  Return Frequency of VDD1 Clock Out
  *  @return Frequency of ClockOut of sense domain

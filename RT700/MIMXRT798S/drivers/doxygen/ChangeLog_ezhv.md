@@ -1,5 +1,10 @@
 # EZHV
 
+## [2.1.2]
+
+- Improvements.
+  - Fixed some MISRA issues. 
+
 ## [2.1.1]
 
 - Improvements.

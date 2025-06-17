@@ -4,6 +4,7 @@
 
 - Improvement
   - Updated CLOCK_GetSenseAudioClkFreq for compute domain to support silicon B0.
+  - Fixed MISRA issues.
 
 ## [2.4.1]
 
