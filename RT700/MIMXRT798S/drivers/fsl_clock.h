@@ -315,7 +315,20 @@ extern volatile uint32_t g_senseAudioClkFreq;
         kCLOCK_TrngRef \
     }
 
-#endif /* FSL_CLOCK_DRIVER_COMPUTE */
+#if defined(FSL_CLOCK_DRIVER_MEDIA)
+/*! @brief Clock ip name array for INPUTMUX. */
+#define INPUTMUX_CLOCKS                      \
+    {                                        \
+        kCLOCK_InputMux0, kCLOCK_InputMux1   \
+    }
+#else
+#define INPUTMUX_CLOCKS    \
+    {                      \
+        kCLOCK_InputMux0   \
+    }
+#endif /* FSL_CLOCK_DRIVER_MEDIA */
+
+#endif /* FSL_CLOCK_DRIVER_COMPUTE || FSL_CLOCK_DRIVER_MEDIA */
 
 #if defined(FSL_CLOCK_DRIVER_SENSE)
 #ifndef __XTENSA__
@@ -334,6 +347,12 @@ extern volatile uint32_t g_senseAudioClkFreq;
 #define EDMA_CLOCKS              \
     {                            \
         kCLOCK_Dma2, kCLOCK_Dma3 \
+    }
+
+/*! @brief Clock ip name array for INPUTMUX. */
+#define INPUTMUX_CLOCKS    \
+    {                      \
+        kCLOCK_InputMux1   \
     }
 #endif /* FSL_CLOCK_DRIVER_SENSE */
 
