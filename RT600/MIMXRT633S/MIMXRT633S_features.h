@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 1.0, 2018-06-19
-**     Build:               b250512
+**     Build:               b250603
 **
 **     Abstract:
 **         Chip specific module features.
@@ -249,11 +249,6 @@
 #define FSL_FEATURE_ACMP_HAS_NO_C0_SE_BIT (0)
 /* @brief If has acmp sample signal */
 #define FSL_FEATURE_ACMP_HAS_NO_SAMPLE_SIGNAL (1)
-
-/* CRC module features */
-
-/* @brief Has data register with name CRC */
-#define FSL_FEATURE_CRC_HAS_CRC_REG (0)
 
 /* CTIMER module features */
 

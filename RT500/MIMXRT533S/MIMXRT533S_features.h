@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 4.0, 2020-05-18
-**     Build:               b250512
+**     Build:               b250603
 **
 **     Abstract:
 **         Chip specific module features.
@@ -261,11 +261,6 @@
 
 /* @brief Base address of the CASPER dedicated RAM. */
 #define FSL_FEATURE_CASPER_RAM_BASE_ADDRESS (0x40202000u)
-
-/* CRC module features */
-
-/* @brief Has data register with name CRC */
-#define FSL_FEATURE_CRC_HAS_CRC_REG (0)
 
 /* CTIMER module features */
 

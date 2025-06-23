@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 0.1, 2021-03-09
-**     Build:               b250512
+**     Build:               b250623
 **
 **     Abstract:
 **         Chip specific module features.
@@ -303,6 +303,8 @@
 #define FSL_FEATURE_FLEXCAN_ENTER_FREEZE_MODE (0)
 /* @brief Is affected by errata with ID 8341 (FlexCAN: Entering Freeze Mode or Low Power Mode from Normal Mode can cause the FlexCAN module to stop operating). */
 #define FSL_FEATURE_FLEXCAN_HAS_ERRATA_8341 (0)
+/* @brief Is affected by errata with ID 050443 (FlexCAN: : Receive Message Buffers may have its CODE Field corrupted if the Receive FIFO function is used in Classical CAN mode). */
+#define FSL_FEATURE_FLEXCAN_HAS_ERRATA_050443 (0)
 
 /* SCB module features */
 
@@ -719,6 +721,8 @@
 #define FSL_FEATURE_LPUART_HAS_TIMEOUT (1)
 /* @brief UART support swap TX and RX (has bit CTRL[SWAP]). */
 #define FSL_FEATURE_LPUART_HAS_CTRL_SWAP (0)
+/* @brief UART support receive rts configuration (has bit MODIR[RTSWATER]). */
+#define FSL_FEATURE_LPUART_HAS_MODIR_RTSWATER (1)
 
 /* SYSPM module features */
 
@@ -939,6 +943,8 @@
 
 /* SAI module features */
 
+/* @brief SAI has FIFO in this soc (register bit fields TCR1[TFW]. */
+#define FSL_FEATURE_SAI_HAS_FIFO (1)
 /* @brief Receive/transmit FIFO size in item count (register bit fields TCSR[FRDE], TCSR[FRIE], TCSR[FRF], TCR1[TFW], RCSR[FRDE], RCSR[FRIE], RCSR[FRF], RCR1[RFW], registers TFRn, RFRn). */
 #define FSL_FEATURE_SAI_FIFO_COUNTn(x) \
     (((x) == SAI1) ? (16) : \
@@ -977,12 +983,12 @@
 #define FSL_FEATURE_SAI_HAS_MCR_MCLK_POST_DIV (0)
 /* @brief Support Channel Mode (register bit fields TCR4[CHMOD]). */
 #define FSL_FEATURE_SAI_HAS_CHANNEL_MODE (1)
-/* @brief SAI has FIFO in this soc (register bit fields TCR1[TFW]. */
-#define FSL_FEATURE_SAI_HAS_FIFO (1)
 /* @brief Support synchronous with another SAI. */
 #define FSL_FEATURE_SAI_HAS_SYNC_WITH_ANOTHER_SAI (0)
 /* @brief Has Bit Clock Swap option (register bit fields RCR2[BCS]) */
 #define FSL_FEATURE_SAI_HAS_BIT_CLOCK_SWAP (1)
+/* @brief SAI5 and SAI6 share one irq number. */
+#define FSL_FEATURE_SAI_SAI5_SAI6_SHARE_IRQ (0)
 
 /* SEMA42 module features */
 

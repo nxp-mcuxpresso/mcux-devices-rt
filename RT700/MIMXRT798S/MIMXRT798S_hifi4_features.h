@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 3.0, 2025-06-06
-**     Build:               b250606
+**     Build:               b250623
 **
 **     Abstract:
 **         Chip specific module features.
@@ -548,6 +548,8 @@
 #define FSL_FEATURE_LPUART_HAS_TIMEOUT (0)
 /* @brief UART support swap TX and RX (has bit CTRL[SWAP]). */
 #define FSL_FEATURE_LPUART_HAS_CTRL_SWAP (0)
+/* @brief UART support receive rts configuration (has bit MODIR[RTSWATER]). */
+#define FSL_FEATURE_LPUART_HAS_MODIR_RTSWATER (1)
 
 /* MIPI_DSI_HOST module features */
 
@@ -703,6 +705,8 @@
 
 /* SAI module features */
 
+/* @brief SAI has FIFO in this soc (register bit fields TCR1[TFW]. */
+#define FSL_FEATURE_SAI_HAS_FIFO (1)
 /* @brief Receive/transmit FIFO size in item count (register bit fields TCSR[FRDE], TCSR[FRIE], TCSR[FRF], TCR1[TFW], RCSR[FRDE], RCSR[FRIE], RCSR[FRF], RCR1[RFW], registers TFRn, RFRn). */
 #define FSL_FEATURE_SAI_FIFO_COUNTn(x) (8)
 /* @brief Receive/transmit channel number (register bit fields TCR3[TCE], RCR3[RCE], registers TDRn and RDRn). */
@@ -735,12 +739,12 @@
 #define FSL_FEATURE_SAI_HAS_MCR_MCLK_POST_DIV (1)
 /* @brief Support Channel Mode (register bit fields TCR4[CHMOD]). */
 #define FSL_FEATURE_SAI_HAS_CHANNEL_MODE (1)
-/* @brief SAI has FIFO in this soc (register bit fields TCR1[TFW]. */
-#define FSL_FEATURE_SAI_HAS_FIFO (1)
 /* @brief Support synchronous with another SAI. */
 #define FSL_FEATURE_SAI_HAS_SYNC_WITH_ANOTHER_SAI (0)
 /* @brief Has Bit Clock Swap option (register bit fields RCR2[BCS]) */
 #define FSL_FEATURE_SAI_HAS_BIT_CLOCK_SWAP (1)
+/* @brief SAI5 and SAI6 share one irq number. */
+#define FSL_FEATURE_SAI_SAI5_SAI6_SHARE_IRQ (0)
 
 /* SCT module features */
 
