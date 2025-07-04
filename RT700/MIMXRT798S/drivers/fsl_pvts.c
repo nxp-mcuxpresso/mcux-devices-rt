@@ -80,7 +80,7 @@ status_t PVTS_ReadDelayFromOTP(bool otp_initialized,
 
     if (!otp_initialized)
     {
-        otp_init();
+        otp_init(core_freq_hz);
     }
 
     pvts_fuse_addr_index = PVTS_GetFuseAddrIndex(core_freq_hz, (uint32_t)instance);
