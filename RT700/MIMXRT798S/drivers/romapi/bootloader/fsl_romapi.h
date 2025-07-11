@@ -55,8 +55,8 @@
 |           |                   | Prime boot mode    |                      |          |          |          |          |
 |           |                   | 4 - XSPI NOR       |                      |          |          |          |          |
 |           |                   | 5 - LPSPI NOR      |                      |          |          |          |          |
-|           |                   | 6 - DFU            |                      |          |          |          |          |
 |           |                   | 7 - eMMC           |                      |          |          |          |          |
+|           |                   | 9 - XSPI NAND      |                      |          |          |          |          |
 
 */
 /* clang-format on */
