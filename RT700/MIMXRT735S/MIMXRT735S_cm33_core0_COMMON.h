@@ -11,7 +11,7 @@
 **
 **     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250606
+**     Build:               b250714
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT735S_cm33_core0
@@ -143,7 +143,7 @@ typedef enum IRQn {
   FLEXIO_IRQn                  = 55,               /**< FLEXIO: Interrupt request */
   Reserved72_IRQn              = 56,               /**< Reserved interrupt */
   Reserved73_IRQn              = 57,               /**< Reserved interrupt */
-  Reserved74_IRQn              = 58,               /**< Reserved interrupt */
+  MIPI_IRQn                    = 58,               /**< DSI: Interrupt request */
   EDMA0_CH0_IRQn               = 59,               /**< EDMA: Channel 0 interrupt */
   EDMA0_CH1_IRQn               = 60,               /**< EDMA: Channel 1 interrupt */
   EDMA0_CH2_IRQn               = 61,               /**< EDMA: Channel 2 interrupt */
@@ -2734,6 +2734,37 @@ typedef enum _dma_request_source
 #endif
 /** Interrupt vectors for the LP_FLEXCOMM peripheral type */
 #define LP_FLEXCOMM_IRQS                         { LP_FLEXCOMM0_IRQn, LP_FLEXCOMM1_IRQn, LP_FLEXCOMM2_IRQn, LP_FLEXCOMM3_IRQn, LP_FLEXCOMM4_IRQn, LP_FLEXCOMM5_IRQn, LP_FLEXCOMM6_IRQn, LP_FLEXCOMM7_IRQn, LP_FLEXCOMM8_IRQn, LP_FLEXCOMM9_IRQn, LP_FLEXCOMM10_IRQn, LP_FLEXCOMM11_IRQn, LP_FLEXCOMM12_IRQn, LP_FLEXCOMM13_IRQn }
+
+/* MIPI_DSI_HOST - Peripheral instance base addresses */
+#if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
+  /** Peripheral MIPI_DSI_HOST base address */
+  #define MIPI_DSI_HOST_BASE                       (0x50417000u)
+  /** Peripheral MIPI_DSI_HOST base address */
+  #define MIPI_DSI_HOST_BASE_NS                    (0x40417000u)
+  /** Peripheral MIPI_DSI_HOST base pointer */
+  #define MIPI_DSI_HOST                            ((MIPI_DSI_HOST_Type *)MIPI_DSI_HOST_BASE)
+  /** Peripheral MIPI_DSI_HOST base pointer */
+  #define MIPI_DSI_HOST_NS                         ((MIPI_DSI_HOST_Type *)MIPI_DSI_HOST_BASE_NS)
+  /** Array initializer of MIPI_DSI_HOST peripheral base addresses */
+  #define MIPI_DSI_HOST_BASE_ADDRS                 { MIPI_DSI_HOST_BASE }
+  /** Array initializer of MIPI_DSI_HOST peripheral base pointers */
+  #define MIPI_DSI_HOST_BASE_PTRS                  { MIPI_DSI_HOST }
+  /** Array initializer of MIPI_DSI_HOST peripheral base addresses */
+  #define MIPI_DSI_HOST_BASE_ADDRS_NS              { MIPI_DSI_HOST_BASE_NS }
+  /** Array initializer of MIPI_DSI_HOST peripheral base pointers */
+  #define MIPI_DSI_HOST_BASE_PTRS_NS               { MIPI_DSI_HOST_NS }
+#else
+  /** Peripheral MIPI_DSI_HOST base address */
+  #define MIPI_DSI_HOST_BASE                       (0x40417000u)
+  /** Peripheral MIPI_DSI_HOST base pointer */
+  #define MIPI_DSI_HOST                            ((MIPI_DSI_HOST_Type *)MIPI_DSI_HOST_BASE)
+  /** Array initializer of MIPI_DSI_HOST peripheral base addresses */
+  #define MIPI_DSI_HOST_BASE_ADDRS                 { MIPI_DSI_HOST_BASE }
+  /** Array initializer of MIPI_DSI_HOST peripheral base pointers */
+  #define MIPI_DSI_HOST_BASE_PTRS                  { MIPI_DSI_HOST }
+#endif
+/** Interrupt vectors for the MIPI_DSI_HOST peripheral type */
+#define MIPI_DSI_HOST_IRQS                       { MIPI_IRQn }
 
 /* MMU - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))

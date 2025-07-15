@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 3.0, 2025-06-06
-**     Build:               b250623
+**     Build:               b250715
 **
 **     Abstract:
 **         Chip specific module features.
@@ -65,6 +65,8 @@
 #define FSL_FEATURE_SOC_LPSPI_COUNT (20)
 /* @brief LPUART availability on the SoC. */
 #define FSL_FEATURE_SOC_LPUART_COUNT (18)
+/* @brief MIPI_DSI_HOST availability on the SoC. */
+#define FSL_FEATURE_SOC_MIPI_DSI_HOST_COUNT (1)
 /* @brief MRT availability on the SoC. */
 #define FSL_FEATURE_SOC_MRT_COUNT (2)
 /* @brief MU availability on the SoC. */
@@ -541,6 +543,27 @@
 #define FSL_FEATURE_LPUART_HAS_CTRL_SWAP (0)
 /* @brief UART support receive rts configuration (has bit MODIR[RTSWATER]). */
 #define FSL_FEATURE_LPUART_HAS_MODIR_RTSWATER (1)
+
+/* MIPI_DSI_HOST module features */
+
+/* @brief Does not have DPHY PLL(DPHY_CM) */
+#define FSL_FEATURE_MIPI_DSI_HOST_NO_DPHY_PLL (1)
+/* @brief Support TX ULPS */
+#define FSL_FEATURE_MIPI_DSI_HOST_HAS_ULPS (1)
+/* @brief Has control register to enable or disable TX ULPS */
+#define FSL_FEATURE_MIPI_DSI_HOST_HAS_ULPS_CTRL (0)
+/* @brief Has pixel-link to DPI remap */
+#define FSL_FEATURE_MIPI_DSI_HOST_HAS_PXL2DPI (0)
+/* @brief Has DBI Pixel Format register */
+#define FSL_FEATURE_MIPI_DSI_HOST_DBI_HAS_PIXEL_FORMAT (1)
+/* @brief Has PHY ready status register */
+#define FSL_FEATURE_MIPI_DSI_HOST_HAS_PHY_RDY (1)
+/* @brief Has HS control HS_MODE_ENABLE register */
+#define FSL_FEATURE_MIPI_DSI_HOST_HAS_HS_CTRL (1)
+/* @brief Has bitfield HOST_TURNAROUND[REQUEST_BTA] */
+#define FSL_FEATURE_MIPI_DSI_HOST_HAS_BTA_CTRL (1)
+/* @brief Has separate ULPS control */
+#define FSL_FEATURE_MIPI_DSI_HOST_HAS_SEPARATE_ULPS_CTRL (1)
 
 /* MRT module features */
 
