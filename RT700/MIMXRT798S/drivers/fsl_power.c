@@ -1233,6 +1233,8 @@ AT_QUICKACCESS_SECTION_CODE(static void POWER_EnterLowPower_FullConfig(const uin
             pdsleepcfg0 &= ~(PMC_PDSLEEPCFG0_PMICMODE_MASK | PMC_PDSLEEPCFG0_FDSR_MASK);
             PMC->PDSLEEPCFG0 =
                 pdsleepcfg0 | ((PCFG0_DEEP_SLEEP | PCFG0_DSR) & ~exclude_from_pd[1]) | PMC_PDSLEEPCFG0_DPD_MASK;
+            /* Clear DSR bits in PDRUNCFG0. */
+            PMC->PDRUNCFG0 &= ~(PMC_PDRUNCFG0_V2NMED_DSR_MASK | PMC_PDRUNCFG0_VNCOM_DSR_MASK);
             break;
 
         case kPower_FullDeepPowerDown:

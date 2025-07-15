@@ -1,5 +1,11 @@
 # POWER
 
+## [2.4.2]
+
+- Bug fixes
+  - Clear PDRUNCFG0 bit6 and bit8 before entering Deep Power Down(DPD) mode to make sure the domain 
+    is reset correctly after wake up from DPD.
+
 ## [2.4.1]
 
 - Bug fixes

@@ -19,8 +19,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief power driver version 2.4.1. */
-#define FSL_POWER_DRIVER_VERSION (MAKE_VERSION(2, 4, 1))
+/*! @brief power driver version 2.4.2. */
+#define FSL_POWER_DRIVER_VERSION (MAKE_VERSION(2, 4, 2))
 /*@}*/
 
 /* Define the default PMIC modes for power modes. */
