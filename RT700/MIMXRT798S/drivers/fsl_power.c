@@ -786,15 +786,20 @@ void POWER_SetRunRegulatorMode(power_regulator_t regulator, uint32_t mode)
 
 void POWER_SetSleepRegulatorMode(power_regulator_t regulator, uint32_t mode)
 {
+    assert(mode <= 3U);
+
     if (regulator == kRegulator_DCDC)
     {
-#if defined(FSL_FEATURE_SILICON_VERSION_A)
-        PMC->PDSLEEPCFG0 &= ~PMC_PDRUNCFG0_DCDC_LP_MASK;
-        PMC->PDSLEEPCFG0 |= PMC_PDRUNCFG0_DCDC_LP(mode); 
-#else
-        PMC->PDSLEEPCFG0 &= ~PMC_PDRUNCFG0_DCDC_MODE_MASK;
-        PMC->PDSLEEPCFG0 |= PMC_PDRUNCFG0_DCDC_MODE(mode);
-#endif
+        if (SYSCON3->SILICONREV_ID == 0xA0000UL)
+        {
+            PMC->PDSLEEPCFG0 &= ~PMC_PDRUNCFG0_DCDC_MODE_MASK;
+            PMC->PDSLEEPCFG0 |= PMC_PDRUNCFG0_DCDC_MODE(mode << 1U); /* A0 only has Bit12 for HP/LP. */
+        }
+        else
+        {
+            PMC->PDSLEEPCFG0 &= ~PMC_PDRUNCFG0_DCDC_MODE_MASK;
+            PMC->PDSLEEPCFG0 |= PMC_PDRUNCFG0_DCDC_MODE(mode);
+        }
     }
     else if (regulator == kRegulator_Vdd2LDO)
     {
