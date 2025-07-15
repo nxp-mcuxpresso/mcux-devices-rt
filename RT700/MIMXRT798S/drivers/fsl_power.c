@@ -122,7 +122,6 @@
 #define PCFG5_DEEP_SLEEP (0xFFFFFFFFU)
 
 #define POWER_FREQ_LEVELS_NUM  (5U)
-#define POWER_DEFAULT_LVD_VOLT (200000U)       /* Default LVD threshold 200mV. */
 
 #define POWER_INVALID_VOLT_LEVEL (0xFFFFFFFFU) /*! Invalid voltage level. */
 #define POWER_MINI_ACTIVE_VOLT   (700000U)     /* Minimum VDD1/VDD2 volt for active mode. */
@@ -792,13 +791,13 @@ void POWER_SetSleepRegulatorMode(power_regulator_t regulator, uint32_t mode)
     {
         if (SYSCON3->SILICONREV_ID == 0xA0000UL)
         {
-            PMC->PDSLEEPCFG0 &= ~PMC_PDRUNCFG0_DCDC_MODE_MASK;
-            PMC->PDSLEEPCFG0 |= PMC_PDRUNCFG0_DCDC_MODE(mode << 1U); /* A0 only has Bit12 for HP/LP. */
+            PMC->PDSLEEPCFG0 &= ~PMC_PDSLEEPCFG0_DCDC_MODE_MASK;
+            PMC->PDSLEEPCFG0 |= PMC_PDSLEEPCFG0_DCDC_MODE(mode << 1U); /* A0 only has Bit12 for HP/LP. */
         }
         else
         {
-            PMC->PDSLEEPCFG0 &= ~PMC_PDRUNCFG0_DCDC_MODE_MASK;
-            PMC->PDSLEEPCFG0 |= PMC_PDRUNCFG0_DCDC_MODE(mode);
+            PMC->PDSLEEPCFG0 &= ~PMC_PDSLEEPCFG0_DCDC_MODE_MASK;
+            PMC->PDSLEEPCFG0 |= PMC_PDSLEEPCFG0_DCDC_MODE(mode);
         }
     }
     else if (regulator == kRegulator_Vdd2LDO)
@@ -1386,6 +1385,9 @@ AT_QUICKACCESS_SECTION_CODE(static void POWER_EnterLowPower_FullConfig(const uin
     /* Init XSPI in case XIP */
     initXip();
 
+    /* Clear LVD flags */
+    PMC->FLAGS = PMC_FLAGS_LVDVDD1F_MASK | PMC_FLAGS_LVDVDD2F_MASK | PMC_FLAGS_LVDVDDNF_MASK |
+                             PMC_FLAGS_AGDET1F_MASK | PMC_FLAGS_AGDET2F_MASK;
     /* Restore PMC LVD core reset and OTP switch setting */
     PMC->CTRL = pmc_ctrl;
 
@@ -1601,6 +1603,9 @@ AT_QUICKACCESS_SECTION_CODE(void static POWER_EnterLowPower_FullConfig(const uin
         POWER_DMA_HWWake_LPRestore();
     }
 
+    /* Clear LVD flags */
+    PMC->FLAGS = PMC_FLAGS_LVDVDD1F_MASK | PMC_FLAGS_LVDVDD2F_MASK | PMC_FLAGS_LVDVDDNF_MASK |
+                             PMC_FLAGS_AGDET1F_MASK | PMC_FLAGS_AGDET2F_MASK;
     /* Restore PMC LVD core reset and OTP switch setting */
     PMC->CTRL = pmc_ctrl;
 

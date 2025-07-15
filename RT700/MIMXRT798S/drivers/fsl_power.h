@@ -37,6 +37,11 @@
 #define POWER_DEFAULT_PMICMODE_FDPD 3U
 #endif
 
+/* Define the default LVD threshold.  */
+#ifndef POWER_DEFAULT_LVD_VOLT
+#define POWER_DEFAULT_LVD_VOLT (100000U)       /*<! Default LVD threshold 100mV. */
+#endif
+
 #define MAKE_PD_BITS(reg, slot)   (((reg) << 8) | (slot))
 #define GET_PD_REG_FROM_BITS(bit) (((uint32_t)(bit) >> 8U) & 0xFFU)
 
