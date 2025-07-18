@@ -2311,8 +2311,8 @@ static inline void CLOCK_DeinitMainPll(void)
  */
 status_t CLOCK_InitMainPfd(clock_pfd_t pfd, uint8_t divider);
 
-/*! brief Disable the Main PLL PFD.
- *  param pfd    : Which PFD clock to disable.
+/*! @brief Disable the Main PLL PFD.
+ *  @param pfd    : Which PFD clock to disable.
  */
 static inline void CLOCK_DeinitMainPfd(clock_pfd_t pfd)
 {
@@ -2325,8 +2325,8 @@ static inline void CLOCK_DeinitMainPfd(clock_pfd_t pfd)
  */
 void CLOCK_InitAudioPll(const clock_audio_pll_config_t *config);
 
-/*! brief  Deinit the Audio PLL.
- *  param  none.
+/*! @brief  Deinit the Audio PLL.
+ *  @param  none.
  */
 static inline void CLOCK_DeinitAudioPll(void)
 {
