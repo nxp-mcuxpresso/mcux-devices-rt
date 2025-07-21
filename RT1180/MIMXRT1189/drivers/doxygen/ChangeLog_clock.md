@@ -1,5 +1,10 @@
 # CLOCK
 
+## [2.2.0]
+
+- New Features
+  - Added APIs to set/get CLKO1/O2.
+
 ## [2.1.5]
 
 - Improvements
