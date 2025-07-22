@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 4.0, 2020-05-18
-**     Build:               b250603
+**     Build:               b250707
 **
 **     Abstract:
 **         Chip specific module features.
@@ -484,38 +484,62 @@
 
 /* @brief FlexSPI AHB buffer count */
 #define FSL_FEATURE_FLEXSPI_AHB_BUFFER_COUNTn(x) (8)
-/* @brief FlexSPI0 and FlexSPI1 have shared IRQ */
-#define FSL_FEATURE_FLEXSPI_HAS_SHARED_IRQ0_IRQ1 (1)
-/* @brief FlexSPI has no MCR0 ARDFEN bit */
-#define FSL_FEATURE_FLEXSPI_HAS_NO_MCR0_ARDFEN (1)
-/* @brief FlexSPI has no MCR0 ATDFEN bit */
-#define FSL_FEATURE_FLEXSPI_HAS_NO_MCR0_ATDFEN (1)
-/* @brief FlexSPI DMA needs multiple DES to transfer */
-#define FSL_FEATURE_FLEXSPI_DMA_MULTIPLE_DES (1)
-/* @brief FlexSPI uses min DQS delay */
-#define FSL_FEATURE_FLEXSPI_DQS_DELAY_MIN (1)
-/* @brief FlexSPI has no MCR0 COMBINATIONEN bit */
-#define FSL_FEATURE_FLEXSPI_HAS_NO_MCR0_COMBINATIONEN (1)
+/* @brief FlexSPI has no data learn. */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_DATA_LEARN (0)
+/* @brief There is AHBBUSERROREN bit in INTEN register. */
+#define FSL_FEATURE_FLEXSPI_HAS_INTEN_AHBBUSERROREN (1)
+/* @brief There is CLRAHBTX_RXBUF bit in AHBCR register. */
+#define FSL_FEATURE_FLEXSPI_HAS_AHBCR_CLRAHBTX_RXBUF (1)
 /* @brief FLEXSPI has no IP parallel mode. */
 #define FSL_FEATURE_FLEXSPI_HAS_NO_IP_PARALLEL_MODE (0)
 /* @brief FLEXSPI has no AHB parallel mode. */
 #define FSL_FEATURE_FLEXSPI_HAS_NO_AHB_PARALLEL_MODE (0)
 /* @brief FLEXSPI support address shift. */
 #define FSL_FEATURE_FLEXSPI_SUPPORT_ADDRESS_SHIFT (0)
+/* @brief FlexSPI has no MCR0 ARDFEN bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_MCR0_ARDFEN (1)
+/* @brief FlexSPI has no MCR0 ATDFEN bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_MCR0_ATDFEN (1)
+/* @brief FlexSPI has no MCR0 COMBINATIONEN bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_MCR0_COMBINATIONEN (1)
 /* @brief FlexSPI has no FLSHCR4 WMENB bit */
 #define FSL_FEATURE_FLEXSPI_HAS_NO_FLSHCR4_WMENB (1)
 /* @brief FlexSPI has no STS0 DATALEARNPHASEB bit */
 #define FSL_FEATURE_FLEXSPI_HAS_NO_STS0_DATALEARNPHASEB (1)
 /* @brief FlexSPI has no MCR2 SCKBDIFFOPT bit */
 #define FSL_FEATURE_FLEXSPI_HAS_NO_MCR2_SCKBDIFFOPT (1)
-/* @brief Has Errata 051426 */
-#define FSL_FEATURE_FLEXSPI_HAS_ERRATA_051426 (1)
 /* @brief FlexSPI AHB RX buffer size (byte) */
 #define FSL_FEATURE_FLEXSPI_AHB_RX_BUFFER_SIZEn(x) \
     (((x) == FLEXSPI0) ? (1024) : \
     (((x) == FLEXSPI1) ? (2048) : (-1)))
 /* @brief FlexSPI Array Length */
 #define FSL_FEATURE_FLEXSPI_ARRAY_LEN (2)
+/* @brief FlexSPI has no STS2 BSLVLOCK bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_STS2_BSLVLOCK (0)
+/* @brief FlexSPI has no STS2 BREFLOCK bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_STS2_BREFLOCK (0)
+/* @brief FlexSPI supports Port A only, do not support Port B. */
+#define FSL_FEATURE_FLEXSPI_NO_SUPPORT_PORTB (0)
+/* @brief FlexSPI LUTKEY is read only. */
+#define FSL_FEATURE_FLEXSPI_LUTKEY_IS_RO (0)
+/* @brief FlexSPI0 and FlexSPI1 have shared IRQ */
+#define FSL_FEATURE_FLEXSPI_HAS_SHARED_IRQ0_IRQ1 (1)
+/* @brief FlexSPI DMA needs multiple DES to transfer */
+#define FSL_FEATURE_FLEXSPI_DMA_MULTIPLE_DES (1)
+/* @brief FlexSPI uses min DQS delay */
+#define FSL_FEATURE_FLEXSPI_DQS_DELAY_MIN (1)
+/* @brief FlexSPI support sample clock source selection */
+#define FSL_FEATURE_FLEXSPI_SUPPORT_SEPERATE_RXCLKSRC_PORTB (0)
+/* @brief FlexSPI support sample clock source or source_b selection */
+#define FSL_FEATURE_FLEXSPI_SUPPORT_RXCLKSRC_DIFF (0)
+/* @brief FlexSPI IPED REGION COUNT */
+#define FSL_FEATURE_FLEXSPI_IPED_REGION_COUNT (0)
+/* @brief FlexSPI Has ERRATA052733 */
+#define FSL_FEATURE_FLEXSPI_HAS_ERRATA_052733 (0)
+/* @brief FlexSPI Has ERRATA051426 */
+#define FSL_FEATURE_FLEXSPI_HAS_ERRATA_051426 (1)
+/* @brief FlexSPI has AHBCR RESUMEDISABLE bit */
+#define FSL_FEATURE_FLEXSPI_RESUMEDISABLE_BIT_CONFIG_SUPPORT (1)
 
 /* GPIO module features */
 
@@ -548,14 +572,14 @@
 #define FSL_FEATURE_I3C_HAS_NO_SCONFIG_IDRAND (0)
 /* @brief Register SCONFIG has HDROK bitfield. */
 #define FSL_FEATURE_I3C_HAS_HDROK (0)
-/* @brief SOC doesn't support slave IBI/MR/HJ. */
-#define FSL_FEATURE_I3C_HAS_NO_SLAVE_IBI_MR_HJ (0)
 /* @brief Has ERRATA_051617. */
 #define FSL_FEATURE_I3C_HAS_ERRATA_051617 (1)
-/* @brief Has ERRATA_052123. */
-#define FSL_FEATURE_I3C_HAS_ERRATA_052123 (1)
+/* @brief SOC does not support slave IBI/MR/HJ */
+#define FSL_FEATURE_I3C_HAS_NO_SLAVE_IBI_MR_HJ (0)
 /* @brief Has ERRATA_052086. */
 #define FSL_FEATURE_I3C_HAS_ERRATA_052086 (0)
+/* @brief Has ERRATA_052123. */
+#define FSL_FEATURE_I3C_HAS_ERRATA_052123 (1)
 /* @brief Has IBI bytes. */
 #define FSL_FEATURE_I3C_HAS_IBI_PAYLOAD_SIZE_OPTIONAL_BYTE (0)
 /* @brief Has SCL delay after START. */

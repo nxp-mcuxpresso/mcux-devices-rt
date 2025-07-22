@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 0.1, 2020-12-29
-**     Build:               b250623
+**     Build:               b250626
 **
 **     Abstract:
 **         Chip specific module features.
@@ -526,12 +526,44 @@
 #define FSL_FEATURE_FLEXSPI_HAS_NO_MCR0_ARDFEN (0)
 /* @brief FlexSPI has no MCR0 ATDFEN bit */
 #define FSL_FEATURE_FLEXSPI_HAS_NO_MCR0_ATDFEN (0)
+/* @brief FlexSPI has no MCR0 COMBINATIONEN bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_MCR0_COMBINATIONEN (0)
+/* @brief FlexSPI has no FLSHCR4 WMENB bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_FLSHCR4_WMENB (0)
 /* @brief FlexSPI has no STS0 DATALEARNPHASEB bit */
 #define FSL_FEATURE_FLEXSPI_HAS_NO_STS0_DATALEARNPHASEB (1)
+/* @brief FlexSPI has no MCR2 SCKBDIFFOPT bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_MCR2_SCKBDIFFOPT (0)
 /* @brief FlexSPI AHB RX buffer size (byte) */
 #define FSL_FEATURE_FLEXSPI_AHB_RX_BUFFER_SIZEn(x) (4096)
 /* @brief FlexSPI Array Length */
 #define FSL_FEATURE_FLEXSPI_ARRAY_LEN (3)
+/* @brief FlexSPI has no STS2 BSLVLOCK bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_STS2_BSLVLOCK (0)
+/* @brief FlexSPI has no STS2 BREFLOCK bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_STS2_BREFLOCK (0)
+/* @brief FlexSPI supports Port A only, do not support Port B. */
+#define FSL_FEATURE_FLEXSPI_NO_SUPPORT_PORTB (0)
+/* @brief FlexSPI LUTKEY is read only. */
+#define FSL_FEATURE_FLEXSPI_LUTKEY_IS_RO (0)
+/* @brief FlexSPI0 and FlexSPI1 have shared IRQ */
+#define FSL_FEATURE_FLEXSPI_HAS_SHARED_IRQ0_IRQ1 (0)
+/* @brief FlexSPI DMA needs multiple DES to transfer */
+#define FSL_FEATURE_FLEXSPI_DMA_MULTIPLE_DES (0)
+/* @brief FlexSPI uses min DQS delay */
+#define FSL_FEATURE_FLEXSPI_DQS_DELAY_MIN (0)
+/* @brief FlexSPI support sample clock source selection */
+#define FSL_FEATURE_FLEXSPI_SUPPORT_SEPERATE_RXCLKSRC_PORTB (0)
+/* @brief FlexSPI support sample clock source or source_b selection */
+#define FSL_FEATURE_FLEXSPI_SUPPORT_RXCLKSRC_DIFF (0)
+/* @brief FlexSPI IPED REGION COUNT */
+#define FSL_FEATURE_FLEXSPI_IPED_REGION_COUNT (0)
+/* @brief FlexSPI Has ERRATA052733 */
+#define FSL_FEATURE_FLEXSPI_HAS_ERRATA_052733 (0)
+/* @brief FlexSPI Has ERRATA051426 */
+#define FSL_FEATURE_FLEXSPI_HAS_ERRATA_051426 (0)
+/* @brief FlexSPI has AHBCR RESUMEDISABLE bit */
+#define FSL_FEATURE_FLEXSPI_RESUMEDISABLE_BIT_CONFIG_SUPPORT (0)
 
 /* GPC_CPU_CTRL module features */
 
@@ -975,14 +1007,6 @@
 #define FSL_FEATURE_SEMC_HAS_DELAY_CHAIN_CONTROL (1)
 /* @brief Has read hold time feature (register bit field SRAMCR2[RDH] or SRAMCR6[RDH]). */
 #define FSL_FEATURE_SEMC_HAS_SRAM_RDH_TIME (1)
-/* @brief Has read hold time feature (register bit field SRAMCR0[SYNCEN] or SRAMCR4[SYNCEN]). */
-#define FSL_FEATURE_SEMC_HAS_SRAM_SYNCEN (1)
-/* @brief Has read hold time feature (register bit field SRAMCR0[WAITEN] or SRAMCR4[WAITEN]). */
-#define FSL_FEATURE_SEMC_HAS_SRAM_WAITEN (1)
-/* @brief Has read hold time feature (register bit field SRAMCR0[WAITSP] or SRAMCR4[WAITSP]). */
-#define FSL_FEATURE_SEMC_HAS_SRAM_WAITSP (1)
-/* @brief Has read hold time feature (register bit field SRAMCR0[ADVH] or SRAMCR4[ADVH]). */
-#define FSL_FEATURE_SEMC_HAS_SRAM_ADVH (1)
 /* @brief Width of SDRAMCR0[PS] bitfields. */
 #define FSL_FEATURE_SEMC_SUPPORT_SDRAM_PS_BITWIDTH (2)
 /* @brief If SEMC has errata 050577. */
@@ -993,6 +1017,14 @@
 #define FSL_FEATURE_SEMC_HAS_DBICR2 (1)
 /* @brief SEMC supports hardware ECC on NAND flash interface. */
 #define FSL_FEATURE_SEMC_HAS_NAND_HW_ECC (0)
+/* @brief Has read hold time feature (register bit field SRAMCR0[SYNCEN] or SRAMCR4[SYNCEN]). */
+#define FSL_FEATURE_SEMC_HAS_SRAM_SYNCEN (1)
+/* @brief Has read hold time feature (register bit field SRAMCR0[WAITEN] or SRAMCR4[WAITEN]). */
+#define FSL_FEATURE_SEMC_HAS_SRAM_WAITEN (1)
+/* @brief Has read hold time feature (register bit field SRAMCR0[WAITSP] or SRAMCR4[WAITSP]). */
+#define FSL_FEATURE_SEMC_HAS_SRAM_WAITSP (1)
+/* @brief Has read hold time feature (register bit field SRAMCR0[ADVH] or SRAMCR4[ADVH]). */
+#define FSL_FEATURE_SEMC_HAS_SRAM_ADVH (1)
 
 /* SNVS module features */
 
@@ -1004,6 +1036,11 @@
 #define FSL_FEATURE_SNVS_HAS_ACTIVE_TAMPERS (0)
 /* @brief Number of TAMPER. */
 #define FSL_FEATURE_SNVS_HAS_MULTIPLE_TAMPER (0)
+
+/* SPDIF module features */
+
+/* @brief SPDIF has no register SIC. */
+#define FSL_FEATURE_SPDIF_HAS_NO_SIC_REGISTER (0)
 
 /* SSARC_HP module features */
 

@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 1.0, 2020-12-29
-**     Build:               b250623
+**     Build:               b250703
 **
 **     Abstract:
 **         Chip specific module features.
@@ -390,7 +390,7 @@
 /* @brief Has register POSDPERBFR, POSDPERH, or POSDPER. */
 #define FSL_FEATURE_ENC_HAS_POSDPER (1)
 /* @brief Has bitfiled FILT[FILT_PRSC]. */
-#define FSL_FEATURE_ENC_HAS_FILT_PRSC (1)
+#define FSL_FEATURE_ENC_HAS_FILT_PRSC (0)
 
 /* ENET module features */
 
@@ -513,12 +513,44 @@
 #define FSL_FEATURE_FLEXSPI_HAS_NO_MCR0_ARDFEN (0)
 /* @brief FlexSPI has no MCR0 ATDFEN bit */
 #define FSL_FEATURE_FLEXSPI_HAS_NO_MCR0_ATDFEN (0)
+/* @brief FlexSPI has no MCR0 COMBINATIONEN bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_MCR0_COMBINATIONEN (0)
+/* @brief FlexSPI has no FLSHCR4 WMENB bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_FLSHCR4_WMENB (0)
 /* @brief FlexSPI has no STS0 DATALEARNPHASEB bit */
 #define FSL_FEATURE_FLEXSPI_HAS_NO_STS0_DATALEARNPHASEB (1)
+/* @brief FlexSPI has no MCR2 SCKBDIFFOPT bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_MCR2_SCKBDIFFOPT (0)
 /* @brief FlexSPI AHB RX buffer size (byte) */
 #define FSL_FEATURE_FLEXSPI_AHB_RX_BUFFER_SIZEn(x) (4096)
 /* @brief FlexSPI Array Length */
 #define FSL_FEATURE_FLEXSPI_ARRAY_LEN (3)
+/* @brief FlexSPI has no STS2 BSLVLOCK bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_STS2_BSLVLOCK (0)
+/* @brief FlexSPI has no STS2 BREFLOCK bit */
+#define FSL_FEATURE_FLEXSPI_HAS_NO_STS2_BREFLOCK (0)
+/* @brief FlexSPI supports Port A only, do not support Port B. */
+#define FSL_FEATURE_FLEXSPI_NO_SUPPORT_PORTB (0)
+/* @brief FlexSPI LUTKEY is read only. */
+#define FSL_FEATURE_FLEXSPI_LUTKEY_IS_RO (0)
+/* @brief FlexSPI0 and FlexSPI1 have shared IRQ */
+#define FSL_FEATURE_FLEXSPI_HAS_SHARED_IRQ0_IRQ1 (0)
+/* @brief FlexSPI DMA needs multiple DES to transfer */
+#define FSL_FEATURE_FLEXSPI_DMA_MULTIPLE_DES (0)
+/* @brief FlexSPI uses min DQS delay */
+#define FSL_FEATURE_FLEXSPI_DQS_DELAY_MIN (0)
+/* @brief FlexSPI support sample clock source selection */
+#define FSL_FEATURE_FLEXSPI_SUPPORT_SEPERATE_RXCLKSRC_PORTB (0)
+/* @brief FlexSPI support sample clock source or source_b selection */
+#define FSL_FEATURE_FLEXSPI_SUPPORT_RXCLKSRC_DIFF (0)
+/* @brief FlexSPI IPED REGION COUNT */
+#define FSL_FEATURE_FLEXSPI_IPED_REGION_COUNT (0)
+/* @brief FlexSPI Has ERRATA052733 */
+#define FSL_FEATURE_FLEXSPI_HAS_ERRATA_052733 (0)
+/* @brief FlexSPI Has ERRATA051426 */
+#define FSL_FEATURE_FLEXSPI_HAS_ERRATA_051426 (0)
+/* @brief FlexSPI has AHBCR RESUMEDISABLE bit */
+#define FSL_FEATURE_FLEXSPI_RESUMEDISABLE_BIT_CONFIG_SUPPORT (0)
 
 /* GPC_CPU_CTRL module features */
 
