@@ -1,5 +1,11 @@
 # CLOCK
 
+## [2.5.0]
+
+- New features
+  - Updated CLOCK_EnableFroClkFreqCloseLoop to support timeout mechanism. 
+  - Added new API CLOCK_FroTuneOnce to allow frequency measurement in open loop mode.
+
 ## [2.4.2]
 
 - Improvement

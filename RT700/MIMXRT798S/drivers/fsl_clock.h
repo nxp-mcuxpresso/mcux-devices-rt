@@ -25,8 +25,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief CLOCK driver version 2.4.2 */
-#define FSL_CLOCK_DRIVER_VERSION (MAKE_VERSION(2, 4, 2))
+/*! @brief CLOCK driver version 2.5.0 */
+#define FSL_CLOCK_DRIVER_VERSION (MAKE_VERSION(2, 5, 0))
 /*@}*/
 
 #if defined(MIMXRT798S_hifi1_SERIES) || defined(MIMXRT798S_cm33_core1_SERIES) || \
@@ -317,14 +317,14 @@ extern volatile uint32_t g_senseAudioClkFreq;
 
 #if defined(FSL_CLOCK_DRIVER_MEDIA)
 /*! @brief Clock ip name array for INPUTMUX. */
-#define INPUTMUX_CLOCKS                      \
-    {                                        \
-        kCLOCK_InputMux0, kCLOCK_InputMux1   \
+#define INPUTMUX_CLOCKS                    \
+    {                                      \
+        kCLOCK_InputMux0, kCLOCK_InputMux1 \
     }
 #else
-#define INPUTMUX_CLOCKS    \
-    {                      \
-        kCLOCK_InputMux0   \
+#define INPUTMUX_CLOCKS  \
+    {                    \
+        kCLOCK_InputMux0 \
     }
 #endif /* FSL_CLOCK_DRIVER_MEDIA */
 
@@ -350,9 +350,9 @@ extern volatile uint32_t g_senseAudioClkFreq;
     }
 
 /*! @brief Clock ip name array for INPUTMUX. */
-#define INPUTMUX_CLOCKS    \
-    {                      \
-        kCLOCK_InputMux1   \
+#define INPUTMUX_CLOCKS  \
+    {                    \
+        kCLOCK_InputMux1 \
     }
 #endif /* FSL_CLOCK_DRIVER_SENSE */
 
@@ -2116,7 +2116,7 @@ void CLOCK_EnableFroClkFreq(FRO_Type *base, uint32_t targetFreq, uint32_t divOut
  * @code
  *     const clock_fro_config_t config = {
  *      .targetFreq = 200000000U,
- *      .range = 50U,
+ *      .range = 100U,
  *      .trim1DelayUs = 15U,
  *      .trim2DelayUs = 150U,
  *      .refDiv = 0U,
@@ -2125,14 +2125,36 @@ void CLOCK_EnableFroClkFreq(FRO_Type *base, uint32_t targetFreq, uint32_t divOut
  *  };
  *  CLOCK_EnableFroClkFreqCloseLoop(FRO2, &config, kCLOCK_FroAllOutEn);
  * @endcode
+ *  If the API returns kStatus_Timeout or kStatus_Fail, the CLOCK_FroTuneOnce and trim value from AUTOTRIM register can
+ * be used to get the desired frequency in open loop mode.
  *  @param  base : base address of FRO.
  *  @param  config : The configuration for FRO.
  *  @param  divOutEnable : Or'ed value of clock_fro_output_en_t to enable certain clock freq output.
  *  @retval kStatus_Success successfully tuned to the target configuration.
  *  @retval kStatus_InvalidArgument Invalid arguement.
- *  @retval kStatus_Fail failed to lock to the target frequency.
+ *  @retval kStatus_Timeout Timeout to lock to the target frequency. The config->range may too strict(Suggested range >=100)
+ *  or the auto tuner can't lock to the desired frequency.   
+ *  @retval kStatus_Fail The FRO locked with error.
  */
 status_t CLOCK_EnableFroClkFreqCloseLoop(FRO_Type *base, const clock_fro_config_t *config, uint32_t divOutEnable);
+
+/*! @brief  FRO Tune once. Use FRO tuneonce feature to calculate the FRO output frequency with given trimVal.
+ *  The FRO should be powered up and reference clock(SOSC) should be enabled.
+ *  @param  base : base address of FRO.
+ *  @param  trimVal : trim value.
+ *  @return FRO frequency in Hz.
+ */
+uint32_t CLOCK_FroTuneOnce(FRO_Type *base, uint16_t trimVal);
+
+/*! @brief  Fine tune FRO output frequency in open loop mode. 
+ *  The FRO should be powered up and reference clock(SOSC) should be enabled. The API uses the FRO tuneonce feature to
+ *  try trim values from (trimVal-1, trimVal, trimVal+1) and select a best one.
+ *  @param  base : base address of FRO.
+ *  @param  targetFreq : Target frequency in Hz.
+ *  @param  trimVal : trim value. When CLOCK_EnableFroClkFreqCloseLoop failed to lock, the value in FRO AUTOTRIM register
+ *  can be used to do fine tune. 
+ */
+void CLOCK_FroFineTune(FRO_Type *base, uint32_t targetFreq, uint16_t trimVal);
 
 /*! @brief  Get FRO flags.
  *  @param  base : base address of FRO.
