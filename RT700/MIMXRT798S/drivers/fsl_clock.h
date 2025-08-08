@@ -2311,8 +2311,8 @@ void CLOCK_EnableAudioPllVcoClkForDomain(uint32_t domainEnable);
  */
 void CLOCK_InitMainPll(const clock_main_pll_config_t *config);
 
-/*! brief  Deinit the Main PLL.
- *  param  none.
+/*! @brief  Deinit the Main PLL.
+ *  @param  none.
  */
 static inline void CLOCK_DeinitMainPll(void)
 {
@@ -2370,8 +2370,8 @@ static inline void CLOCK_DeinitAudioPll(void)
  *  @note It is recommended that PFD settings are kept between 12-35.
  */
 status_t CLOCK_InitAudioPfd(clock_pfd_t pfd, uint8_t divider);
-/*! brief Disable the audio PLL PFD.
- *  param pfd    : Which PFD clock to disable.
+/*! @brief Disable the audio PLL PFD.
+ *  @param pfd    : Which PFD clock to disable.
  */
 static inline void CLOCK_DeinitAudioPfd(clock_pfd_t pfd)
 {
@@ -2604,31 +2604,31 @@ uint32_t CLOCK_GetMipiDphyEscTxClkFreq(void);
  */
 uint32_t CLOCK_GetUsdhcClkFreq(uint32_t id);
 
-/*! brief Enable USB HS PHY PLL clock.
+/*! @brief Enable USB HS PHY PLL clock.
  *
  * This function enables the internal 480MHz USB PHY PLL clock.
  *
- * param src  USB HS PHY PLL clock source.
- * param freq The frequency specified by src.
- * retval true The clock is set successfully.
- * retval false The clock source is invalid to get proper USB HS clock.
+ * @param src  USB HS PHY PLL clock source.
+ * @param freq The frequency specified by src.
+ * @retval true The clock is set successfully.
+ * @retval false The clock source is invalid to get proper USB HS clock.
  */
 bool CLOCK_EnableUsbhs0PhyPllClock(clock_usb_phy_src_t src, uint32_t freq);
 
-/*! brief Enable USB HS clock.
+/*! @brief Enable USB HS clock.
  *
  * This function only enables the access to USB HS prepheral, upper layer
  * should first call the ref CLOCK_EnableUsbhs0PhyPllClock to enable the PHY
  * clock to use USB HS.
  *
- * param src  USB HS does not care about the clock source, here must be ref kCLOCK_UsbSrcUnused.
- * param freq USB HS does not care about the clock source, so this parameter is ignored.
- * retval true The clock is set successfully.
- * retval false The clock source is invalid to get proper USB HS clock.
+ * @param src  USB HS does not care about the clock source, here must be ref kCLOCK_UsbSrcUnused.
+ * @param freq USB HS does not care about the clock source, so this parameter is ignored.
+ * @retval true The clock is set successfully.
+ * @retval false The clock source is invalid to get proper USB HS clock.
  */
 bool CLOCK_EnableUsbhs0Clock(clock_usb_src_t src, uint32_t freq);
 
-/*! brief Disable USB HS PHY PLL clock.
+/*! @brief Disable USB HS PHY PLL clock.
  *
  * This function disables USB HS PHY PLL clock.
  */

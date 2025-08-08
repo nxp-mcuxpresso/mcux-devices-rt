@@ -1,5 +1,5 @@
 /*
- * Copyright 2023-2024 NXP
+ * Copyright 2023-2025 NXP
  *
  * SPDX-License-Identifier: BSD-3-Clause
  */
@@ -121,7 +121,7 @@
 #define PCFG4_DEEP_SLEEP (0xFFFFFFFFU)
 #define PCFG5_DEEP_SLEEP (0xFFFFFFFFU)
 
-#define POWER_FREQ_LEVELS_NUM  (5U)
+#define POWER_FREQ_LEVELS_NUM (5U)
 
 #define POWER_INVALID_VOLT_LEVEL (0xFFFFFFFFU) /*! Invalid voltage level. */
 #define POWER_MINI_ACTIVE_VOLT   (700000U)     /* Minimum VDD1/VDD2 volt for active mode. */
@@ -459,7 +459,8 @@ static uint32_t POWER_CalRegValueFromVolt(uint32_t volt, uint32_t base, uint32_t
     }
     else
     {
-        temp     = volt - base - 1U; /* Rounding up.*/
+        temp = volt - base - 1U; /* Rounding up.*/
+        assert(temp < (UINT32_MAX - slope));
         regValue = (uint32_t)((temp + slope) / slope);
     }
 
@@ -1386,8 +1387,8 @@ AT_QUICKACCESS_SECTION_CODE(static void POWER_EnterLowPower_FullConfig(const uin
     initXip();
 
     /* Clear LVD flags */
-    PMC->FLAGS = PMC_FLAGS_LVDVDD1F_MASK | PMC_FLAGS_LVDVDD2F_MASK | PMC_FLAGS_LVDVDDNF_MASK |
-                             PMC_FLAGS_AGDET1F_MASK | PMC_FLAGS_AGDET2F_MASK;
+    PMC->FLAGS = PMC_FLAGS_LVDVDD1F_MASK | PMC_FLAGS_LVDVDD2F_MASK | PMC_FLAGS_LVDVDDNF_MASK | PMC_FLAGS_AGDET1F_MASK |
+                 PMC_FLAGS_AGDET2F_MASK;
     /* Restore PMC LVD core reset and OTP switch setting */
     PMC->CTRL = pmc_ctrl;
 
@@ -1604,8 +1605,8 @@ AT_QUICKACCESS_SECTION_CODE(void static POWER_EnterLowPower_FullConfig(const uin
     }
 
     /* Clear LVD flags */
-    PMC->FLAGS = PMC_FLAGS_LVDVDD1F_MASK | PMC_FLAGS_LVDVDD2F_MASK | PMC_FLAGS_LVDVDDNF_MASK |
-                             PMC_FLAGS_AGDET1F_MASK | PMC_FLAGS_AGDET2F_MASK;
+    PMC->FLAGS = PMC_FLAGS_LVDVDD1F_MASK | PMC_FLAGS_LVDVDD2F_MASK | PMC_FLAGS_LVDVDDNF_MASK | PMC_FLAGS_AGDET1F_MASK |
+                 PMC_FLAGS_AGDET2F_MASK;
     /* Restore PMC LVD core reset and OTP switch setting */
     PMC->CTRL = pmc_ctrl;
 

@@ -1854,6 +1854,8 @@ void CLOCK_EnableMainPllPfdClkForDomain(clock_pfd_t pfd, uint32_t domainEnable)
     uint32_t pfdIndex = (uint32_t)pfd;
     uint32_t pfdValue;
 
+    assert(pfdIndex < 4U);
+
     pfdValue = CLKCTL2->MAINPLL0PFDDOMAINEN & (~(0x7FUL << (8UL * pfdIndex)));
 
     CLKCTL2->MAINPLL0PFDDOMAINEN = pfdValue | ((domainEnable & (uint32_t)kCLOCK_AllDomainEnable) << (8UL * pfdIndex));
@@ -1863,6 +1865,8 @@ void CLOCK_EnableAudioPllPfdClkForDomain(clock_pfd_t pfd, uint32_t domainEnable)
 {
     uint32_t pfdIndex = (uint32_t)pfd;
     uint32_t pfdValue;
+
+    assert(pfdIndex < 4U);
 
     pfdValue = CLKCTL2->AUDIOPLL0PFDDOMAINEN & (~(0x7FUL << (8UL * pfdIndex)));
 
