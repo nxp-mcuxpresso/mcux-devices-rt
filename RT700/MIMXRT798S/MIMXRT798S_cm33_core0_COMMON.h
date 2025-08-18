@@ -9,9 +9,9 @@
 **                          Keil ARM C/C++ Compiler
 **                          MCUXpresso Compiler
 **
-**     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
+**     Reference manual:    iMXRT700RM Rev.3, 05/2025
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250606
+**     Build:               b250722
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT798S_cm33_core0
@@ -3535,6 +3535,9 @@ typedef enum _dma_request_source
   /** Array initializer of RTC peripheral base pointers */
   #define RTC_BASE_PTRS                            { RTC0 }
 #endif
+/** Interrupt vectors for the RTC peripheral type */
+#define RTC_ALARM_IRQS                           { RTC0_ALARM_IRQn }
+#define RTC_WAKEUP_IRQS                          { RTC0_IRQn }
 
 /* SCT - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))

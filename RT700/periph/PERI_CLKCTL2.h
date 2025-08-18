@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOB_hifi4
 **
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250606
+**     Build:               b250722
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CLKCTL2

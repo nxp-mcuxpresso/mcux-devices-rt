@@ -3,9 +3,9 @@
 **     Processors:          MIMXRT798SGAWBR_ezhv
 **                          MIMXRT798SGFOB_ezhv
 **
-**     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
+**     Reference manual:    iMXRT700RM Rev.3, 05/2025
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250606
+**     Build:               b250722
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -36,7 +36,7 @@
 /*!
  * @file MIMXRT798S_ezhv
  * @version 1.0
- * @date 2025-06-06
+ * @date 2025-07-22
  * @brief Device specific configuration file for MIMXRT798S_ezhv (header file)
  *
  * Provides a system configuration function and a global variable that contains

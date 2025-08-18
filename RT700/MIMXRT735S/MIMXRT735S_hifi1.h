@@ -4,9 +4,9 @@
 **                          MIMXRT735SGFOB_hifi1
 **
 **     Compiler:            Xtensa Compiler
-**     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
+**     Reference manual:    iMXRT700RM Rev.3, 05/2025
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250714
+**     Build:               b250722
 **
 **     Abstract:
 **         Peripheral Access Layer for MIMXRT735S_hifi1

@@ -9,9 +9,9 @@
 **                          Keil ARM C/C++ Compiler
 **                          MCUXpresso Compiler
 **
-**     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
+**     Reference manual:    iMXRT700RM Rev.3, 05/2025
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250606
+**     Build:               b250722
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -42,7 +42,7 @@
 /*!
  * @file MIMXRT735S_cm33_core0
  * @version 1.0
- * @date 2025-06-06
+ * @date 2025-07-22
  * @brief Device specific configuration file for MIMXRT735S_cm33_core0
  *  (implementation file)
  *
@@ -112,7 +112,7 @@ __attribute__((weak)) void SystemInit(void)
 
     if ((SYSCON3->TEMPDETECT_CTRL[1] & SYSCON3_TEMPDETECT_CTRL_ENABLE_MASK) != 0U)
     {
-        SYSCON3->TEMPDETECT_CTRL[1] &= ~SYSCON3_TEMPDETECT_CTRL_ENABLE_MASK; 
+        SYSCON3->TEMPDETECT_CTRL[1] &= ~SYSCON3_TEMPDETECT_CTRL_ENABLE_MASK;
     }
 
     if ((SYSCON0->ELS_AS_CFG0 & 0x06009500U) == 0x06009500U) /* Disable aGDET, dGDET, HVD, LVD reset. */
@@ -123,7 +123,7 @@ __attribute__((weak)) void SystemInit(void)
         if (GDET0->GDET_ENABLE1 != 0U) /* Disable GDET0 */
         {
             GlikeyWriteEnable(GLIKEY3, 0U);
-            GDET0->GDET_ENABLE1 = 0U;            
+            GDET0->GDET_ENABLE1 = 0U;
             CLKCTL0->ONE_SRC_CLKSLICE_ENABLE &= ~CLKCTL0_ONE_SRC_CLKSLICE_ENABLE_DGDET0_FCLK_EN_MASK;
             GlikeyClearConfig(GLIKEY3);
         }

@@ -9,9 +9,9 @@
 **                          Keil ARM C/C++ Compiler
 **                          MCUXpresso Compiler
 **
-**     Reference manual:    iMXRT700RM Rev.2 DraftA, 05/2024
+**     Reference manual:    iMXRT700RM Rev.3, 05/2025
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250714
+**     Build:               b250722
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT735S_cm33_core1

@@ -34,7 +34,7 @@
 **                          MIMXRT1189XVM8C_cm7
 **
 **     Version:             rev. 3.0, 2024-10-29
-**     Build:               b250611
+**     Build:               b250721
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for GPC_SYS_SLEEP_CTRL

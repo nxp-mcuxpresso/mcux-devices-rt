@@ -4,7 +4,7 @@
 ;            MIMXRT1189_cm7
 ;  @version: 3.0
 ;  @date:    2024-10-29
-;  @build:   b250520
+;  @build:   b250721
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.
