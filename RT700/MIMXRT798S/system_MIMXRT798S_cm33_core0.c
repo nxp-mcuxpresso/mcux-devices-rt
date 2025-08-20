@@ -123,6 +123,7 @@ __attribute__((weak)) void SystemInit(void)
         if (GDET0->GDET_ENABLE1 != 0U) /* Disable GDET0 */
         {
             GlikeyWriteEnable(GLIKEY3, 0U);
+            SYSCON0->GDET_CTRL[0] = (SYSCON0->GDET_CTRL[0] & (~SYSCON0_GDET_CTRL_GDET_ISO_SW_MASK)) | SYSCON0_GDET_CTRL_GDET_ISO_SW(0x2U);
             GDET0->GDET_ENABLE1 = 0U;
             CLKCTL0->ONE_SRC_CLKSLICE_ENABLE &= ~CLKCTL0_ONE_SRC_CLKSLICE_ENABLE_DGDET0_FCLK_EN_MASK;
             GlikeyClearConfig(GLIKEY3);
@@ -131,6 +132,7 @@ __attribute__((weak)) void SystemInit(void)
         if (GDET3->GDET_ENABLE1 != 0U) /* Disable GDET3 */
         {
             GlikeyWriteEnable(GLIKEY4, 0U);
+            SYSCON3->GDET_CTRL[0] = (SYSCON3->GDET_CTRL[0] & (~SYSCON3_GDET_CTRL_GDET_ISO_SW_MASK)) | SYSCON3_GDET_CTRL_GDET_ISO_SW(0x2U);
             GDET3->GDET_ENABLE1 = 0U;
             CLKCTL3->ONE_SRC_CLKSLICE_ENABLE_SENSE &= ~CLKCTL3_ONE_SRC_CLKSLICE_ENABLE_SENSE_DGDET3_FCLK_EN_MASK;
             GlikeyClearConfig(GLIKEY4);
