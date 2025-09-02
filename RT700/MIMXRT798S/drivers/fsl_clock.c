@@ -881,7 +881,9 @@ uint32_t CLOCK_FroTuneOnce(FRO_Type *base, uint16_t trimVal)
 void CLOCK_FroFineTune(FRO_Type *base, uint32_t targetFreq, uint16_t trimVal)
 {
     uint32_t prevFreq, curFreq, nextFreq, prevDelta, curDelta, nextDelta;
-    uint32_t fineTrim = 0U;
+    uint16_t fineTrim = 0U;
+
+    assert(trimVal > 1U);
 
     prevFreq = CLOCK_FroTuneOnce(base, trimVal - 1U);
     curFreq  = CLOCK_FroTuneOnce(base, trimVal);
@@ -966,12 +968,12 @@ status_t CLOCK_EnableFroClkFreqCloseLoop(FRO_Type *base, const clock_fro_config_
         /* Polling wait tune finish. */
         while ((base->CSR.RW & FRO_CSR_TRIM_LOCK_MASK) == 0U)
         {
-            timeout--;
             if (timeout == 0U)
             {
                 ret = kStatus_Timeout;
                 break;
             }
+            timeout--;
         }
         if (ret == kStatus_Success)
         {

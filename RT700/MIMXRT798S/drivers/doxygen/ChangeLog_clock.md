@@ -1,5 +1,10 @@
 # CLOCK
 
+## [2.5.1]
+
+- Improvement
+  - Added a check for the temporary parameter to prevent potential wrapping issues.
+ 
 ## [2.5.0]
 
 - New features
