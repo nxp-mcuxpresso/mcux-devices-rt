@@ -274,6 +274,11 @@ config MCUX_HW_IP_DriverType_SMARTDMA
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT533S
 
+config MCUX_HW_IP_DriverType_SMARTDMA_RT500
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT533S
+
 config MCUX_HW_IP_DriverType_LPC_SYSCTL0
     bool
     default y

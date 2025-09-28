@@ -208,6 +208,11 @@ config MCUX_HW_IP_DriverType_SMARTDMA
     default y if MCUX_HW_DEVICE_MIMXRT595S_CORE_ID_cm33
     depends on MCUX_HW_DEVICE_ID_MIMXRT595S
 
+config MCUX_HW_IP_DriverType_SMARTDMA_RT500
+    bool
+    default y if MCUX_HW_DEVICE_MIMXRT595S_CORE_ID_cm33
+    depends on MCUX_HW_DEVICE_ID_MIMXRT595S
+
 config MCUX_HW_IP_DriverType_LPC_SYSCTL0
     bool
     default y
