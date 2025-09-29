@@ -157,6 +157,11 @@ config MCUX_HW_IP_DriverType_FLEXIO
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT1186xxxxx
 
+config MCUX_HW_IP_DriverType_FLEXIO_ENDAT2P2
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT1186xxxxx
+
 config MCUX_HW_IP_DriverType_FLEXSPI
     bool
     default y
