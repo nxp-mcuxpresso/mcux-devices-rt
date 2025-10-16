@@ -1,5 +1,9 @@
 # PMU
 
+## [2.1.3]
+- Bug Fixes
+  - Modify PMU_BIAS_CTRL value from 0x11009002 to 0x110081EE.
+
 ## [2.1.2]
 
 - Bug Fixes
