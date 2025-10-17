@@ -423,6 +423,13 @@ void POWER_EnableRunAFBB(uint32_t mask)
     PMC->PDRUNCFG0 |= mask;
 }
 
+void POWER_EnableSleepAFBB(uint32_t mask)
+{
+    /* clear AFBBxxx_PD, set RBBxxx_PD. No AFBBSRAM1 bit. */
+    PMC->PDSLEEPCFG0 &= ~POWER_AFBB_BITS_MASK(mask);
+    PMC->PDSLEEPCFG0 |= mask;
+}
+
 void POWER_EnableRunRBB(uint32_t mask)
 {
     PMC->PDRUNCFG0 &= ~mask; /* Clear RBB* bits, set AFBB* bits */

@@ -19,8 +19,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief power driver version 2.4.2. */
-#define FSL_POWER_DRIVER_VERSION (MAKE_VERSION(2, 4, 2))
+/*! @brief power driver version 2.5.0. */
+#define FSL_POWER_DRIVER_VERSION (MAKE_VERSION(2, 5, 0))
 /*@}*/
 
 /* Define the default PMIC modes for power modes. */
@@ -858,6 +858,14 @@ void POWER_DisableLPRequestMask(uint32_t mask);
  * descritpion in RM.
  */
 void POWER_EnableRunAFBB(uint32_t mask);
+
+/*!
+ * @brief Enable AFBB mode for various domains in deep sleep mode.
+ * Note, users should call POWER_ApplyPD() to make the change take effect.
+ * @param mask : A bitmask of domains to enable AFBB mode, refer to @ref _body_bias_domain and PMC PDSLEEPCFG0 register
+ * descritpion in RM.
+ */
+void POWER_EnableSleepAFBB(uint32_t mask);
 
 /*!
  * @brief Enable RBB mode for various domains in active mode.

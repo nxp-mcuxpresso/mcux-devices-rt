@@ -1,5 +1,10 @@
 # POWER
 
+## [2.5.0]
+
+- New features
+  - Added API POWER_EnableSleepAFBB to configure body bias to AFBB in deep sleep mode. 
+
 ## [2.4.2]
 
 - Bug fixes
