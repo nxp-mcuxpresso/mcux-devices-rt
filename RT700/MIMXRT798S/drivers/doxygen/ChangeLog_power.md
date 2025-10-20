@@ -4,6 +4,8 @@
 
 - New features
   - Added API POWER_EnableSleepAFBB to configure body bias to AFBB in deep sleep mode. 
+  - Added user configurable macro POWER_LDO_SAFE_MARGIN(x) with default value "0" to allow adding LDO output safe margin
+    when using API POWER_ConfigRegulatorSetpointsForFreq.
 
 ## [2.4.2]
 

@@ -23,7 +23,7 @@
 #define FSL_POWER_DRIVER_VERSION (MAKE_VERSION(2, 5, 0))
 /*@}*/
 
-/* Define the default PMIC modes for power modes. */
+/*! @brief Define the default PMIC modes for power modes. */
 #ifndef POWER_DEFAULT_PMICMODE_DS
 #define POWER_DEFAULT_PMICMODE_DS 1U
 #endif
@@ -37,9 +37,17 @@
 #define POWER_DEFAULT_PMICMODE_FDPD 3U
 #endif
 
-/* Define the default LVD threshold.  */
+/*! @brief Define the default LVD threshold.  */
 #ifndef POWER_DEFAULT_LVD_VOLT
-#define POWER_DEFAULT_LVD_VOLT (100000U)       /*<! Default LVD threshold 100mV. */
+#define POWER_DEFAULT_LVD_VOLT (100000U) /*<! Default LVD threshold 100mV. */
+#endif
+
+/*! @brief Define the safe margin for regulator output voltage levels. */
+#ifndef POWER_LDO_SAFE_MARGIN
+/* For the internal LDOs, the voltage accuracy is +/-5%. The target voltage should be configured as required voltage +
+ * 5% to ensure that if the accuracy ends up in the -%5 case the minimum voltage is still supplied to the chip. */
+/* #define POWER_LDO_SAFE_MARGIN(x) ((x) / 20U) */
+#define POWER_LDO_SAFE_MARGIN(x) (0U)
 #endif
 
 #define MAKE_PD_BITS(reg, slot)   (((reg) << 8) | (slot))
