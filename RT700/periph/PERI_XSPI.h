@@ -28,7 +28,7 @@
 **                          MIMXRT798SGFOB_hifi4
 **
 **     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250722
+**     Build:               b251103
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for XSPI
@@ -605,6 +605,14 @@ typedef struct {
 #define XSPI_BFGENCR_SEQID_RDSR_SHIFT            (0U)
 /*! SEQID_RDSR - Read Status Register Sequence ID in LUT */
 #define XSPI_BFGENCR_SEQID_RDSR(x)               (((uint32_t)(((uint32_t)(x)) << XSPI_BFGENCR_SEQID_RDSR_SHIFT)) & XSPI_BFGENCR_SEQID_RDSR_MASK)
+
+#define XSPI_BFGENCR_WRTER_EN_MASK               (0x10U)
+#define XSPI_BFGENCR_WRTER_EN_SHIFT              (4U)
+/*! WRTER_EN - Write Terminate Enable
+ *  0b0..Disables
+ *  0b1..Enables
+ */
+#define XSPI_BFGENCR_WRTER_EN(x)                 (((uint32_t)(((uint32_t)(x)) << XSPI_BFGENCR_WRTER_EN_SHIFT)) & XSPI_BFGENCR_WRTER_EN_MASK)
 
 #define XSPI_BFGENCR_SPLITEN_MASK                (0x100U)
 #define XSPI_BFGENCR_SPLITEN_SHIFT               (8U)
