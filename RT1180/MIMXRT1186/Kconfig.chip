@@ -491,3 +491,8 @@ config MCUX_HW_IP_DriverType_FLEXIO_T-FORMAT
     bool
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT1186xxxxx
+
+config MCUX_HW_IP_DriverType_FLEXIO_BISS
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT1186xxxxx
