@@ -1,5 +1,9 @@
 # ROMAPI
 
+## [1.1.3]
+- Bug Fixes
+  - Correct FLEXSPI Serial Clock Frequency.
+
 ## [1.1.2]
 
 - Improvements
