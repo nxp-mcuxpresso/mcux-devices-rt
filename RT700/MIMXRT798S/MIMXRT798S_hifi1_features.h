@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 3.0, 2025-06-06
-**     Build:               b251024
+**     Build:               b251105
 **
 **     Abstract:
 **         Chip specific module features.
@@ -813,6 +813,8 @@
 #define FSL_FEATURE_XSPI_HAS_END_CFG (1)
 /* @brief XSPI has Doze Enable */
 #define FSL_FEATURE_XSPI_HAS_DOZE_MODE (1)
+/* @brief XSPI has Write Terminate Enable */
+#define FSL_FEATURE_XSPI_HAS_WRTER_EN_BIT (1)
 
 #endif /* _MIMXRT798S_hifi1_FEATURES_H_ */
 
