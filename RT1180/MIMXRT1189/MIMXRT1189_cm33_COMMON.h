@@ -12,7 +12,7 @@
 **
 **     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
 **     Version:             rev. 3.0, 2024-10-29
-**     Build:               b250930
+**     Build:               b251106
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1189_cm33
@@ -2753,6 +2753,8 @@ typedef enum _xbar_output_signal
   /** Array initializer of FLEXSPI_SLV peripheral base pointers */
   #define FLEXSPI_SLV_BASE_PTRS                    { FLEXSPI_SLV }
 #endif
+/** Interrupt vectors for the FLEXSPI_SLV peripheral type */
+#define FLEXSPI_SLV_IRQS                         { FLEXSPI_SLV_IRQn }
 
 /* GPC_CPU_CTRL - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
