@@ -1,5 +1,10 @@
 # PVTS
 
+## [2.1.0]
+
+- New features
+ - Added API PVTS_ReadParametersFromOTP to read A/B paramters of PVTS.
+
 ## [2.0.2]
 
 - New features
