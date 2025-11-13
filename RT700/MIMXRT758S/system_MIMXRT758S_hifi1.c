@@ -5,8 +5,8 @@
 **
 **     Compiler:            Xtensa Compiler
 **     Reference manual:    iMXRT700RM Rev.3, 05/2025
-**     Version:             rev. 4.0, 2025-06-06
-**     Build:               b250722
+**     Version:             rev. 5.0, 2025-11-13
+**     Build:               b251113
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -30,6 +30,8 @@
 **         each peripheral with dedicated header file located in periphN folder.
 **     - rev. 4.0 (2025-06-06)
 **         B0 initial version
+**     - rev. 5.0 (2025-11-13)
+**         Add puf/sdadc irq and cache64 compatibility macros to common header.
 **
 ** ###################################################################
 */
@@ -37,7 +39,7 @@
 /*!
  * @file MIMXRT758S
  * @version 1.0
- * @date 2025-07-22
+ * @date 2025-11-13
  * @brief Device specific configuration file for MIMXRT758S
  *  (implementation file)
  *

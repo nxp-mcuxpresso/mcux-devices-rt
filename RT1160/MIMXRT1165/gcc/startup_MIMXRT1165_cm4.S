@@ -2,9 +2,9 @@
 /*  @file:    startup_MIMXRT1165_cm4.s                                       */
 /*  @purpose: CMSIS Cortex-M4 Core Device Startup File                       */
 /*            MIMXRT1165_cm4                                                 */
-/*  @version: 1.0                                                            */
-/*  @date:    2024-10-29                                                     */
-/*  @build:   b250520                                                        */
+/*  @version: 2.0                                                            */
+/*  @date:    2025-11-13                                                     */
+/*  @build:   b251114                                                        */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Copyright 1997-2016 Freescale Semiconductor, Inc.                         */

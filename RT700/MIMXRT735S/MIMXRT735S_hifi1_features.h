@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
-**     Version:             rev. 3.0, 2025-06-06
-**     Build:               b251105
+**     Version:             rev. 4.0, 2025-11-13
+**     Build:               b251113
 **
 **     Abstract:
 **         Chip specific module features.
@@ -20,6 +20,8 @@
 **         Rev2 DraftA.
 **     - rev. 3.0 (2025-06-06)
 **         B0 initial version
+**     - rev. 4.0 (2025-11-13)
+**         Update ocotp/cache64/trng/pdm feature to align with shared definition changes.
 **
 ** ###################################################################
 */
@@ -402,6 +404,8 @@
 #define FSL_FEATURE_LPI2C_FIFO_SIZEn(x) (8)
 /* @brief Has dedicated interrupt for master and slave. */
 #define FSL_FEATURE_LPI2C_HAS_ROLE_SPLIT_IRQ (0)
+/* @brief Belong to LPFLEXCOMM */
+#define FSL_FEATURE_LPI2C_IS_LPFLEXCOMM (1)
 
 /* LPSPI module features */
 
@@ -415,6 +419,8 @@
 #define FSL_FEATURE_LPSPI_HAS_NO_PCSCFG (0)
 /* @brief Has no WIDTH bits in TCR register. */
 #define FSL_FEATURE_LPSPI_HAS_NO_MULTI_WIDTH (0)
+/* @brief Belong to LPFLEXCOMM */
+#define FSL_FEATURE_LPSPI_IS_LPFLEXCOMM (1)
 
 /* LPUART module features */
 
@@ -582,22 +588,24 @@
 #define FSL_FEATURE_PDM_HAS_RANGE_CTRL (1)
 /* @brief PDM Has Low Frequency */
 #define FSL_FEATURE_PDM_HAS_STATUS_LOW_FREQ (0)
-/* @brief PDM Has DC_OUT_CTRL. */
-#define FSL_FEATURE_PDM_HAS_DC_OUT_CTRL (1)
-/* @brief PDM Has Fixed DC CTRL VALUE. */
-#define FSL_FEATURE_PDM_DC_CTRL_VALUE_FIXED (1)
-/* @brief PDM Has no independent error IRQ. */
-#define FSL_FEATURE_PDM_HAS_NO_INDEPENDENT_ERROR_IRQ (1)
-/* @brief PDM has no minimum clkdiv. */
-#define FSL_FEATURE_PDM_HAS_NO_MINIMUM_CLKDIV (1)
 /* @brief PDM Has No VADEF Bitfield In PDM VAD0_STAT Register */
 #define FSL_FEATURE_PDM_HAS_NO_VADEF (1)
+/* @brief PDM has no minimum clkdiv. */
+#define FSL_FEATURE_PDM_HAS_NO_MINIMUM_CLKDIV (1)
 /* @brief PDM Has no FIR_RDY Bitfield In PDM STAT Register */
 #define FSL_FEATURE_PDM_HAS_NO_FIR_RDY (1)
 /* @brief PDM Has no DOZEN Bitfield In PDM CTRL_1 Register */
 #define FSL_FEATURE_PDM_HAS_NO_DOZEN (0)
 /* @brief PDM Has DEC_BYPASS Bitfield In PDM CTRL_2 Register */
 #define FSL_FEATURE_PDM_HAS_DECIMATION_FILTER_BYPASS (1)
+/* @brief PDM Has DC_OUT_CTRL. */
+#define FSL_FEATURE_PDM_HAS_DC_OUT_CTRL (1)
+/* @brief PDM Has Fixed DC CTRL VALUE. */
+#define FSL_FEATURE_PDM_DC_CTRL_VALUE_FIXED (1)
+/* @brief PDM Has no independent error IRQ. */
+#define FSL_FEATURE_PDM_HAS_NO_INDEPENDENT_ERROR_IRQ (1)
+/* @brief PDM has no hardware Voice Activity Detector */
+#define FSL_FEATURE_PDM_HAS_NO_HWVAD (0)
 
 /* PINT module features */
 
@@ -611,7 +619,7 @@
 
 /* RTC module features */
 
-/* @brief Has Tamper Direction Register support */
+/* @brief Has Tamper Direction Register support. */
 #define FSL_FEATURE_RTC_HAS_TAMPER_DIRECTION (0)
 /* @brief Has SUBSECOND_CTRL register. */
 #define FSL_FEATURE_RTC_HAS_SUBSECOND (0)
@@ -619,7 +627,7 @@
 #define FSL_FEATURE_RTC_HAS_TAMPER_QUEUE (0)
 /* @brief Has RTC subsystem. */
 #define FSL_FEATURE_RTC_HAS_SUBSYSTEM (1)
-/* @brief Has RTC Tamper 23 Filter Configuration Register support */
+/* @brief Has RTC Tamper 23 Filter Configuration Register support. */
 #define FSL_FEATURE_RTC_HAS_FILTER23_CFG (0)
 /* @brief Has WAKEUP_MODE bitfile in CTRL2 register. */
 #define FSL_FEATURE_RTC_HAS_NO_CTRL2_WAKEUP_MODE (1)

@@ -53,8 +53,8 @@
 **                          MIMXRT117HDVMAB_cm4
 **                          MIMXRT117HDVMAB_cm7
 **
-**     Version:             rev. 2.0, 2024-10-29
-**     Build:               b250703
+**     Version:             rev. 3.0, 2025-11-13
+**     Build:               b251114
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for PXP
@@ -74,14 +74,16 @@
 **     - rev. 2.0 (2024-10-29)
 **         Change the device header file from single flat file to multiple files based on peripherals,
 **         each peripheral with dedicated header file located in periphN folder.
+**     - rev. 3.0 (2025-11-13)
+**         Consolidate asrc/xbar and enet macros into common header.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_PXP.h
- * @version 2.0
- * @date 2024-10-29
+ * @version 3.0
+ * @date 2025-11-13
  * @brief CMSIS Peripheral Access Layer for PXP
  *
  * CMSIS Peripheral Access Layer for PXP

@@ -2,9 +2,9 @@
 /*  @file:    startup_MIMXRT595S_cm33.s                                      */
 /*  @purpose: CMSIS Cortex-M33 Core Device Startup File                      */
 /*            MIMXRT595S_cm33                                                */
-/*  @version: 6.0                                                            */
-/*  @date:    2024-10-29                                                     */
-/*  @build:   b250520                                                        */
+/*  @version: 7.0                                                            */
+/*  @date:    2025-11-13                                                     */
+/*  @build:   b251113                                                        */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Copyright 1997-2016 Freescale Semiconductor, Inc.                         */
