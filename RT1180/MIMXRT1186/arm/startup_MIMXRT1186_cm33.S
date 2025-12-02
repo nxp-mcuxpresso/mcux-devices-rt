@@ -4,7 +4,7 @@
 /*            MIMXRT1186_cm33                                                */
 /*  @version: 3.0                                                            */
 /*  @date:    2024-10-29                                                     */
-/*  @build:   b250721                                                        */
+/*  @build:   b251201                                                        */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Copyright 1997-2016 Freescale Semiconductor, Inc.                         */
@@ -90,8 +90,8 @@ __Vectors:
     .long   CM33_TCM_ERROR_IRQHandler                       /* M33 TCM Error interrupt*/
     .long   CM7_TCM_ECC_IRQHandler                          /* M7 TCM ECC interrupt*/
     .long   CM7_TCM_ERROR_IRQHandler                        /* M7 TCM Error interrupt*/
-    .long   CAN2_IRQHandler                                 /* CAN2 interrupt*/
-    .long   CAN2_ERROR_IRQHandler                           /* CAN2 error interrupt*/
+    .long   Reserved67_IRQHandler                           /* Reserved interrupt*/
+    .long   Reserved68_IRQHandler                           /* Reserved interrupt*/
     .long   FLEXIO1_IRQHandler                              /* FLEXIO1 interrupt*/
     .long   FLEXIO2_IRQHandler                              /* FLEXIO2 interrupt*/
     .long   FLEXSPI1_IRQHandler                             /* FLEXSPI1 interrupt*/
@@ -230,8 +230,8 @@ __Vectors:
     .long   EQDC4_IRQHandler                                /* EQDC4 interrupt*/
     .long   ADC2_IRQHandler                                 /* ADC2 interrupt*/
     .long   DCDC_IRQHandler                                 /* DCDC brown out interrupt*/
-    .long   Reserved207_IRQHandler                          /* Reserved interrupt*/
-    .long   Reserved208_IRQHandler                          /* Reserved interrupt*/
+    .long   CAN3_IRQHandler                                 /* CAN3 interrupt*/
+    .long   CAN3_ERROR_IRQHandler                           /* CAN3 error interrupt*/
     .long   DAC_IRQHandler                                  /* DAC interrupt*/
     .long   LPSPI5_IRQHandler                               /* LPSPI5 interrupt*/
     .long   LPSPI6_IRQHandler                               /* LPSPI6 interrupt*/
@@ -488,24 +488,6 @@ SAI1_IRQHandler:
     ldr   r0,=SAI1_DriverIRQHandler
     bx    r0
     .size SAI1_IRQHandler, . - SAI1_IRQHandler
-
-    .align 1
-    .thumb_func
-    .weak CAN2_IRQHandler
-    .type CAN2_IRQHandler, %function
-CAN2_IRQHandler:
-    ldr   r0,=CAN2_DriverIRQHandler
-    bx    r0
-    .size CAN2_IRQHandler, . - CAN2_IRQHandler
-
-    .align 1
-    .thumb_func
-    .weak CAN2_ERROR_IRQHandler
-    .type CAN2_ERROR_IRQHandler, %function
-CAN2_ERROR_IRQHandler:
-    ldr   r0,=CAN2_ERROR_DriverIRQHandler
-    bx    r0
-    .size CAN2_ERROR_IRQHandler, . - CAN2_ERROR_IRQHandler
 
     .align 1
     .thumb_func
@@ -1103,6 +1085,24 @@ SPDIF_IRQHandler:
 
     .align 1
     .thumb_func
+    .weak CAN3_IRQHandler
+    .type CAN3_IRQHandler, %function
+CAN3_IRQHandler:
+    ldr   r0,=CAN3_DriverIRQHandler
+    bx    r0
+    .size CAN3_IRQHandler, . - CAN3_IRQHandler
+
+    .align 1
+    .thumb_func
+    .weak CAN3_ERROR_IRQHandler
+    .type CAN3_ERROR_IRQHandler, %function
+CAN3_ERROR_IRQHandler:
+    ldr   r0,=CAN3_ERROR_DriverIRQHandler
+    bx    r0
+    .size CAN3_ERROR_IRQHandler, . - CAN3_ERROR_IRQHandler
+
+    .align 1
+    .thumb_func
     .weak LPSPI5_IRQHandler
     .type LPSPI5_IRQHandler, %function
 LPSPI5_IRQHandler:
@@ -1230,8 +1230,8 @@ ASRC_IRQHandler:
     def_irq_handler    CM33_TCM_ERROR_IRQHandler
     def_irq_handler    CM7_TCM_ECC_IRQHandler
     def_irq_handler    CM7_TCM_ERROR_IRQHandler
-    def_irq_handler    CAN2_DriverIRQHandler
-    def_irq_handler    CAN2_ERROR_DriverIRQHandler
+    def_irq_handler    Reserved67_IRQHandler
+    def_irq_handler    Reserved68_IRQHandler
     def_irq_handler    FLEXIO1_DriverIRQHandler
     def_irq_handler    FLEXIO2_DriverIRQHandler
     def_irq_handler    FLEXSPI1_DriverIRQHandler
@@ -1370,8 +1370,8 @@ ASRC_IRQHandler:
     def_irq_handler    EQDC4_IRQHandler
     def_irq_handler    ADC2_IRQHandler
     def_irq_handler    DCDC_IRQHandler
-    def_irq_handler    Reserved207_IRQHandler
-    def_irq_handler    Reserved208_IRQHandler
+    def_irq_handler    CAN3_DriverIRQHandler
+    def_irq_handler    CAN3_ERROR_DriverIRQHandler
     def_irq_handler    DAC_IRQHandler
     def_irq_handler    LPSPI5_DriverIRQHandler
     def_irq_handler    LPSPI6_DriverIRQHandler

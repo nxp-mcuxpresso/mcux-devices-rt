@@ -4,7 +4,7 @@
 ;            MIMXRT1186_cm33
 ;  @version: 3.0
 ;  @date:    2024-10-29
-;  @build:   b250721
+;  @build:   b251201
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.
@@ -122,8 +122,8 @@ __vector_table_0x1c
         DCD     CM33_TCM_ERROR_IRQHandler                     ;M33 TCM Error interrupt
         DCD     CM7_TCM_ECC_IRQHandler                        ;M7 TCM ECC interrupt
         DCD     CM7_TCM_ERROR_IRQHandler                      ;M7 TCM Error interrupt
-        DCD     CAN2_IRQHandler                               ;CAN2 interrupt
-        DCD     CAN2_ERROR_IRQHandler                         ;CAN2 error interrupt
+        DCD     Reserved67_IRQHandler                         ;Reserved interrupt
+        DCD     Reserved68_IRQHandler                         ;Reserved interrupt
         DCD     FLEXIO1_IRQHandler                            ;FLEXIO1 interrupt
         DCD     FLEXIO2_IRQHandler                            ;FLEXIO2 interrupt
         DCD     FLEXSPI1_IRQHandler                           ;FLEXSPI1 interrupt
@@ -262,8 +262,8 @@ __vector_table_0x1c
         DCD     EQDC4_IRQHandler                              ;EQDC4 interrupt
         DCD     ADC2_IRQHandler                               ;ADC2 interrupt
         DCD     DCDC_IRQHandler                               ;DCDC brown out interrupt
-        DCD     Reserved207_IRQHandler                        ;Reserved interrupt
-        DCD     Reserved208_IRQHandler                        ;Reserved interrupt
+        DCD     CAN3_IRQHandler                               ;CAN3 interrupt
+        DCD     CAN3_ERROR_IRQHandler                         ;CAN3 error interrupt
         DCD     DAC_IRQHandler                                ;DAC interrupt
         DCD     LPSPI5_IRQHandler                             ;LPSPI5 interrupt
         DCD     LPSPI6_IRQHandler                             ;LPSPI6 interrupt
@@ -575,20 +575,8 @@ SAI1_IRQHandler
         PUBWEAK CM33_TCM_ERROR_IRQHandler
         PUBWEAK CM7_TCM_ECC_IRQHandler
         PUBWEAK CM7_TCM_ERROR_IRQHandler
-        PUBWEAK CAN2_IRQHandler
-        PUBWEAK CAN2_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN2_IRQHandler
-        LDR     R0, =CAN2_DriverIRQHandler
-        BX      R0
-
-        PUBWEAK CAN2_ERROR_IRQHandler
-        PUBWEAK CAN2_ERROR_DriverIRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(2)
-CAN2_ERROR_IRQHandler
-        LDR     R0, =CAN2_ERROR_DriverIRQHandler
-        BX      R0
-
+        PUBWEAK Reserved67_IRQHandler
+        PUBWEAK Reserved68_IRQHandler
         PUBWEAK FLEXIO1_IRQHandler
         PUBWEAK FLEXIO1_DriverIRQHandler
         SECTION .text:CODE:REORDER:NOROOT(2)
@@ -1123,8 +1111,20 @@ SPDIF_IRQHandler
         PUBWEAK EQDC4_IRQHandler
         PUBWEAK ADC2_IRQHandler
         PUBWEAK DCDC_IRQHandler
-        PUBWEAK Reserved207_IRQHandler
-        PUBWEAK Reserved208_IRQHandler
+        PUBWEAK CAN3_IRQHandler
+        PUBWEAK CAN3_DriverIRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(2)
+CAN3_IRQHandler
+        LDR     R0, =CAN3_DriverIRQHandler
+        BX      R0
+
+        PUBWEAK CAN3_ERROR_IRQHandler
+        PUBWEAK CAN3_ERROR_DriverIRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(2)
+CAN3_ERROR_IRQHandler
+        LDR     R0, =CAN3_ERROR_DriverIRQHandler
+        BX      R0
+
         PUBWEAK DAC_IRQHandler
         PUBWEAK LPSPI5_IRQHandler
         PUBWEAK LPSPI5_DriverIRQHandler
@@ -1266,8 +1266,8 @@ CM33_TCM_ECC_IRQHandler
 CM33_TCM_ERROR_IRQHandler
 CM7_TCM_ECC_IRQHandler
 CM7_TCM_ERROR_IRQHandler
-CAN2_DriverIRQHandler
-CAN2_ERROR_DriverIRQHandler
+Reserved67_IRQHandler
+Reserved68_IRQHandler
 FLEXIO1_DriverIRQHandler
 FLEXIO2_DriverIRQHandler
 FLEXSPI1_DriverIRQHandler
@@ -1406,8 +1406,8 @@ EQDC3_IRQHandler
 EQDC4_IRQHandler
 ADC2_IRQHandler
 DCDC_IRQHandler
-Reserved207_IRQHandler
-Reserved208_IRQHandler
+CAN3_DriverIRQHandler
+CAN3_ERROR_DriverIRQHandler
 DAC_IRQHandler
 LPSPI5_DriverIRQHandler
 LPSPI6_DriverIRQHandler
