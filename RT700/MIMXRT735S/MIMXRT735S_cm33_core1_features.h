@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
-**     Version:             rev. 4.0, 2025-11-13
-**     Build:               b251113
+**     Version:             rev. 5.0, 2025-12-03
+**     Build:               b251203
 **
 **     Abstract:
 **         Chip specific module features.
@@ -22,6 +22,8 @@
 **         B0 initial version
 **     - rev. 4.0 (2025-11-13)
 **         Update ocotp/cache64/trng/pdm feature to align with shared definition changes.
+**     - rev. 5.0 (2025-12-03)
+**         Added new features to rtc/xspi as part of the driver update.
 **
 ** ###################################################################
 */
@@ -651,6 +653,14 @@
 #define FSL_FEATURE_RTC_HAS_NO_TIMER_STB_MASK (1)
 /* @brief Target(slave) instance. */
 #define FSL_FEATURE_RTC_IS_SLAVE (1)
+/* @brief Has RTC Tamper 45 Filter Configuration Register support */
+#define FSL_FEATURE_RTC_HAS_FILTER45_CFG (0)
+/* @brief Has RTC Tamper 67 Filter Configuration Register support */
+#define FSL_FEATURE_RTC_HAS_FILTER67_CFG (0)
+/* @brief Has RTC Minutes Count Down Timer Register support */
+#define FSL_FEATURE_RTC_HAS_MINUTES_TIMER_FEATURE (0)
+/* @brief Has RTC BCD mode support */
+#define FSL_FEATURE_RTC_HAS_BCD_MODE (0)
 
 /* SAI module features */
 
@@ -823,6 +833,12 @@
 #define FSL_FEATURE_XSPI_HAS_DOZE_MODE (1)
 /* @brief XSPI has Write Terminate Enable */
 #define FSL_FEATURE_XSPI_HAS_WRTER_EN_BIT (1)
+/* @brief Multi IRQ count for one instance */
+#define FSL_FEATURE_XSPI_MULTI_IRQ_COUNT (0U)
+/* @brief XSPI has DDR Mode Enable */
+#define FSL_FEATURE_XSPI_HAS_DDR (1)
+/* @brief XSPI has Environment Module Configuration */
+#define FSL_FEATURE_XSPI_HAS_EENV (0)
 
 #endif /* _MIMXRT735S_cm33_core1_FEATURES_H_ */
 
