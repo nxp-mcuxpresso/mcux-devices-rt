@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 5.0, 2025-12-03
-**     Build:               b251203
+**     Build:               b251210
 **
 **     Abstract:
 **         Chip specific module features.
@@ -209,6 +209,8 @@
 #define FSL_FEATURE_LPADC_HAS_CMDH_CMPEN (1)
 /* @brief Has High Speed Mode Trim Request (bitfield CTRL[CALHS]). */
 #define FSL_FEATURE_LPADC_HAS_CTRL_CALHS (0)
+/* @brief Has Justified Left Enable (bitfield CFG2[JLEFT]). */
+#define FSL_FEATURE_LPADC_HAS_CFG2_JLEFT (1)
 /* @brief Buffer size of temperature sensor (CMDHa[LOOP] value to be set in process of calculate the temperature). */
 #define FSL_FEATURE_LPADC_TEMP_SENS_BUFFER_SIZE (2U)
 /* @brief Temperature sensor parameter A (slope). */
