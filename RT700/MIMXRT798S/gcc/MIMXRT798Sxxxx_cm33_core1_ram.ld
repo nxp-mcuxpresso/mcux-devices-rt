@@ -4,9 +4,9 @@
 **                          MIMXRT798SGFOB_cm33_core1
 **
 **     Compiler:            GNU C Compiler
-**     Reference manual:    iMXRT700RM Rev.3, 05/2025
+**     Reference manual:    iMXRT700RM Rev.5, 10/2025
 **     Version:             rev. 3.1, 2025-11-07
-**     Build:               b251107
+**     Build:               b251208
 **
 **     Abstract:
 **         Linker file for the GNU C Compiler

@@ -4,9 +4,9 @@
 **                          MIMXRT735SGFOB_hifi1
 **
 **     Compiler:            Xtensa Compiler
-**     Reference manual:    iMXRT700RM Rev.3, 05/2025
-**     Version:             rev. 5.0, 2025-11-13
-**     Build:               b251113
+**     Reference manual:    iMXRT700RM Rev.5, 10/2025
+**     Version:             rev. 5.1, 2025-12-08
+**     Build:               b251208
 **
 **     Abstract:
 **         Peripheral Access Layer for MIMXRT735S_hifi1
@@ -30,14 +30,16 @@
 **         B0 initial version
 **     - rev. 5.0 (2025-11-13)
 **         Add puf/sdadc irq and cache64 compatibility macros to common header.
+**     - rev. 5.1 (2025-12-08)
+**         Update RM version and add pdm irq for hifi1/hifi4.
 **
 ** ###################################################################
 */
 
 /*!
  * @file MIMXRT735S_hifi1_COMMON.h
- * @version 5.0
- * @date 2025-11-13
+ * @version 5.1
+ * @date 2025-12-08
  * @brief Peripheral Access Layer for MIMXRT735S_hifi1
  *
  * Peripheral Access Layer for MIMXRT735S_hifi1
@@ -50,7 +52,7 @@
  * compatible) */
 #define MCU_MEM_MAP_VERSION 0x0500U
 /** Memory map minor version */
-#define MCU_MEM_MAP_VERSION_MINOR 0x0000U
+#define MCU_MEM_MAP_VERSION_MINOR 0x0001U
 
 /* ----------------------------------------------------------------------------
    --
@@ -1727,6 +1729,11 @@ typedef enum _dma_request_source
   /** Array initializer of PDM peripheral base pointers */
   #define PDM_BASE_PTRS                            { PDM }
 #endif
+/** Interrupt vectors for the PDM peripheral type */
+#define PDM_HWVAD_Event_IRQS                     { PDM_HWVAD_EVENT_IRQn }
+#define PDM_HWVAD_Error_IRQS                     { PDM_HWVAD_EVENT_IRQn }
+#define PDM_Event_IRQS                           { PDM_EVENT_IRQn }
+#define PDM_Error_IRQS                           { PDM_EVENT_IRQn }
 
 /* PINT - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))

@@ -4,9 +4,9 @@
 **                          MIMXRT798SGFOB_hifi4
 **
 **     Compiler:            Xtensa Compiler
-**     Reference manual:    iMXRT700RM Rev.3, 05/2025
-**     Version:             rev. 5.0, 2025-11-13
-**     Build:               b251113
+**     Reference manual:    iMXRT700RM Rev.5, 10/2025
+**     Version:             rev. 5.1, 2025-12-08
+**     Build:               b251208
 **
 **     Abstract:
 **         Peripheral Access Layer for MIMXRT798S_hifi4
@@ -30,14 +30,16 @@
 **         B0 initial version
 **     - rev. 5.0 (2025-11-13)
 **         Add puf/sdadc irq and cache64 compatibility macros to common header.
+**     - rev. 5.1 (2025-12-08)
+**         Update RM version and add pdm irq for hifi1/hifi4.
 **
 ** ###################################################################
 */
 
 /*!
  * @file MIMXRT798S_hifi4.h
- * @version 5.0
- * @date 2025-11-13
+ * @version 5.1
+ * @date 2025-12-08
  * @brief Peripheral Access Layer for MIMXRT798S_hifi4
  *
  * Peripheral Access Layer for MIMXRT798S_hifi4

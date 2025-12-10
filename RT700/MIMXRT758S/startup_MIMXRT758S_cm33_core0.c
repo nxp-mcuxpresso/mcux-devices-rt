@@ -1,7 +1,7 @@
 //*****************************************************************************
 // MIMXRT758S_cm33_core0 startup code
 //
-// Version : 271025
+// Version : 081225
 //*****************************************************************************
 //
 // Copyright 2016-2025 NXP
@@ -468,17 +468,23 @@ extern uint32_t __StackLimit[];
 
 extern uint32_t _image_size[];
 
+/*
+ * Data section ROM and RAM addresses
+ */
 extern uint32_t __etext[];
 extern uint32_t __data_start__[];
 extern uint32_t __data_end__[];
+extern uint32_t __bss_start__[];
+extern uint32_t __bss_end__[];
 
+/*
+ * Non Cache Data section ROM and RAM addresses
+ */
 extern uint32_t __NDATA_ROM[];
 extern uint32_t __noncachedata_start__[];
 extern uint32_t __noncachedata_init_end__[];
 extern uint32_t __noncachedata_end__[];
 
-extern uint32_t __bss_start__[];
-extern uint32_t __bss_end__[];
 #else
 #error Unsupported toolchain!
 #endif //(__CC_ARM) || (__ARMCC_VERSION)
@@ -761,7 +767,6 @@ void Reset_Handler_C(void)
 #if defined(__CC_ARM) || defined(__ARMCC_VERSION)
     __asm volatile ("cpsie i");
     __main();
-
 #elif defined(__MCUXPRESSO)
     //
     // Copy the data sections from flash to SRAM.
@@ -815,8 +820,8 @@ void Reset_Handler_C(void)
     /*     Loop to copy data from read only memory to RAM. The ranges
      *      of copy from/to are specified by following symbols evaluated in
      *      linker script.
-     *      1. __etext/_data_start__/__data_end__
-     *      2. __NDATA_ROM/__noncachedata_start__/__noncachedata_init_end__
+     *      *. __etext/_data_start__/__data_end__
+     *      *. __NDATA_ROM/__noncachedata_start__/__noncachedata_init_end__
      *      Note: All must be aligned to 4 bytes boundary.
      */
     uint32_t *pDataSrc, *pDataDest;

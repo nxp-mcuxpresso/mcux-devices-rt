@@ -4,9 +4,9 @@
 **                          MIMXRT798SGFOB_hifi1
 **
 **     Compiler:            Xtensa Compiler
-**     Reference manual:    iMXRT700RM Rev.3, 05/2025
-**     Version:             rev. 5.0, 2025-11-13
-**     Build:               b251113
+**     Reference manual:    iMXRT700RM Rev.5, 10/2025
+**     Version:             rev. 5.1, 2025-12-08
+**     Build:               b251208
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -32,6 +32,8 @@
 **         B0 initial version
 **     - rev. 5.0 (2025-11-13)
 **         Add puf/sdadc irq and cache64 compatibility macros to common header.
+**     - rev. 5.1 (2025-12-08)
+**         Update RM version and add pdm irq for hifi1/hifi4.
 **
 ** ###################################################################
 */
@@ -39,7 +41,7 @@
 /*!
  * @file MIMXRT798S
  * @version 1.0
- * @date 2025-11-13
+ * @date 2025-12-08
  * @brief Device specific configuration file for MIMXRT798S (header file)
  *
  * Provides a system configuration function and a global variable that contains

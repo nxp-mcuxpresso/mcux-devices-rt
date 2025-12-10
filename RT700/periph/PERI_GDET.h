@@ -27,8 +27,8 @@
 **                          MIMXRT798SGFOB_hifi1
 **                          MIMXRT798SGFOB_hifi4
 **
-**     Version:             rev. 5.0, 2025-11-13
-**     Build:               b251113
+**     Version:             rev. 5.1, 2025-12-08
+**     Build:               b251208
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for GDET
@@ -52,14 +52,16 @@
 **         B0 initial version
 **     - rev. 5.0 (2025-11-13)
 **         Add puf/sdadc irq and cache64 compatibility macros to common header.
+**     - rev. 5.1 (2025-12-08)
+**         Update RM version and add pdm irq for hifi1/hifi4.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_GDET.h
- * @version 5.0
- * @date 2025-11-13
+ * @version 5.1
+ * @date 2025-12-08
  * @brief CMSIS Peripheral Access Layer for GDET
  *
  * CMSIS Peripheral Access Layer for GDET
