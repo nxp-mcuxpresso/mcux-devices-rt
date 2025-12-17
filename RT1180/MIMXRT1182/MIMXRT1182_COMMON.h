@@ -12,7 +12,7 @@
 **
 **     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
 **     Version:             rev. 3.0, 2024-10-29
-**     Build:               b251114
+**     Build:               b251217
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1182
@@ -5587,10 +5587,21 @@ typedef enum _xbar_output_signal
   /** Array initializer of XCACHE peripheral base pointers */
   #define XCACHE_BASE_PTRS                         { XCACHE_PC, XCACHE_PS }
 #endif
+#if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
 /** XCACHE physical memory base address */
-#define XCACHE_PHYMEM_BASES                        { 0x00000000u, 0x20000000u }
+ #define XCACHE_PHYMEM_BASES                       { 0x10000000u, 0x30000000u }
 /** XCACHE physical memory size */
-#define XCACHE_PHYMEM_SIZES                        { 0x20000000u, 0xE0000000u }
+ #define XCACHE_PHYMEM_SIZES                       { 0x20000000u, 0xE0000000u }
+/** XCACHE physical memory base address */
+ #define XCACHE_PHYMEM_BASES_NS                    { 0x00000000u, 0x20000000u }
+/** XCACHE physical memory size */
+ #define XCACHE_PHYMEM_SIZES_NS                    { 0x20000000u, 0xE0000000u }
+#else
+/** XCACHE physical memory base address */
+ #define XCACHE_PHYMEM_BASES                       { 0x00000000u, 0x20000000u }
+/** XCACHE physical memory size */
+ #define XCACHE_PHYMEM_SIZES                       { 0x20000000u, 0xE0000000u }
+#endif
 
 
 /* ----------------------------------------------------------------------------

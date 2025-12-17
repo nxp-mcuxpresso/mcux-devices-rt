@@ -11,7 +11,7 @@
 **
 **     Reference manual:    iMXRT700RM Rev.5, 10/2025
 **     Version:             rev. 5.1, 2025-12-08
-**     Build:               b251208
+**     Build:               b251217
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT735S_cm33_core1

@@ -11,7 +11,7 @@
 **
 **     Reference manual:    iMXRT700RM Rev.5, 10/2025
 **     Version:             rev. 5.1, 2025-12-08
-**     Build:               b251208
+**     Build:               b251217
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT758S_cm33_core0
@@ -4815,10 +4815,21 @@ typedef enum _dma_request_source
   /** Array initializer of XCACHE peripheral base pointers */
   #define XCACHE_BASE_PTRS                         { XCACHE0, XCACHE1 }
 #endif
+#if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
+/** XCACHE physical memory base address */
+ #define XCACHE_PHYMEM_BASES                       { 0x30000000u, 0x10000000u }
+/** XCACHE physical memory size */
+ #define XCACHE_PHYMEM_SIZES                       { 0x780000u, 0x780000u }
+/** XCACHE physical memory base address */
+ #define XCACHE_PHYMEM_BASES_NS                    { 0x20000000u, 0x00000000u }
+/** XCACHE physical memory size */
+ #define XCACHE_PHYMEM_SIZES_NS                    { 0x780000u, 0x780000u }
+#else
 /** XCACHE physical memory base address */
  #define XCACHE_PHYMEM_BASES                       { 0x20000000u, 0x00000000u }
 /** XCACHE physical memory size */
  #define XCACHE_PHYMEM_SIZES                       { 0x780000u, 0x780000u }
+#endif
 /* Backward compatibility */
 #define XCACHE_CSAR_PHYADDR_MASK (XCACHE_CSAR_PHYADDR27_1_MASK | XCACHE_CSAR_PHYADDR31_29_MASK)
 
