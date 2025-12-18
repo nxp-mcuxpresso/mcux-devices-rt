@@ -1,5 +1,10 @@
 # RESET
 
+## [2.2.2]
+
+- Improvements
+  - Added reset array for several peripherals
+
 ## [2.2.1]
 
 - Bug Fiexs
