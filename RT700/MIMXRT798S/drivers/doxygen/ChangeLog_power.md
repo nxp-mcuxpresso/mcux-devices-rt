@@ -1,5 +1,9 @@
 # POWER
 
+## [2.5.1]
+- Improvement
+  - Added configurable timeout support for endless while loop. 
+
 ## [2.5.0]
 
 - New features
