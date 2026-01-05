@@ -1,5 +1,4 @@
-# Copyright 2024 NXP
-# All rights reserved.
+# Copyright 2024-2026 NXP
 #
 # SPDX-License-Identifier: BSD-3-Clause
 # core related
@@ -70,6 +69,7 @@ config MCUX_TOOLCHAIN_MDK_CPU_IDENTIFIER
     string
     default "MIMXRT758SGFOB:cm33_core0" if MCUX_HW_DEVICE_PART_MIMXRT758SGFOB
     default "MIMXRT758SGAWBR:cm33_core0" if MCUX_HW_DEVICE_PART_MIMXRT758SGAWBR
+    default "MIMXRT758SGVKB:cm33_core0" if MCUX_HW_DEVICE_PART_MIMXRT758SGVKB
 
 config MCUX_TOOLCHAIN_JLINK_CPU_IDENTIFIER
     string

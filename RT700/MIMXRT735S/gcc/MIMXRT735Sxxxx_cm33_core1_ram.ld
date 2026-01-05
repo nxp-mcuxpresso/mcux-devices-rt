@@ -2,17 +2,18 @@
 ** ###################################################################
 **     Processors:          MIMXRT735SGAWBR_cm33_core1
 **                          MIMXRT735SGFOB_cm33_core1
+**                          MIMXRT735SGVKB_cm33_core1
 **
 **     Compiler:            GNU C Compiler
 **     Reference manual:    iMXRT700RM Rev.5, 10/2025
-**     Version:             rev. 3.1, 2025-11-07
-**     Build:               b251208
+**     Version:             rev. 4.0, 2025-12-29
+**     Build:               b260330
 **
 **     Abstract:
 **         Linker file for the GNU C Compiler
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2025 NXP
+**     Copyright 2016-2026 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com

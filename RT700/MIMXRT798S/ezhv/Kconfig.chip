@@ -1,4 +1,4 @@
-# Copyright 2024 NXP
+# Copyright 2024-2026 NXP
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
@@ -26,12 +26,3 @@ config MCUX_HW_DEVICE_CORE
 config MCUX_HW_SOC_SERIES_RT
     bool
     default y
-
-# For chipmodel generated files
-config MCUX_TOOLCHAIN_LINKER_DEVICE_PREFIX
-    string
-    default "MIMXRT798S_ezhv" if MCUX_HW_DEVICE_ID_MIMXRT798S
-
-config MCUX_TOOLCHAIN_MCUX_STARTUP
-    string
-    default "mimxrt798s_ezhv"

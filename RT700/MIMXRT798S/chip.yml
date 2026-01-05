@@ -184,5 +184,6 @@ device.hardware_data:
         part:
           - name: "MIMXRT798SGFOB"
           - name: "MIMXRT798SGAWBR"
+          - name: "MIMXRT798SGVKB"
         modules:
 ...

@@ -2,17 +2,18 @@
 ** ###################################################################
 **     Processors:          MIMXRT758SGAWBR_cm33_core0
 **                          MIMXRT758SGFOB_cm33_core0
+**                          MIMXRT758SGVKB_cm33_core0
 **
 **     Compiler:            IAR ANSI C/C++ Compiler for ARM
 **     Reference manual:    iMXRT700RM Rev.5, 10/2025
-**     Version:             rev. 3.1, 2025-11-07
-**     Build:               b251208
+**     Version:             rev. 4.0, 2025-12-29
+**     Build:               b260330
 **
 **     Abstract:
 **         Linker file for the IAR ANSI C/C++ Compiler for ARM
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2025 NXP
+**     Copyright 2016-2026 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -37,7 +38,6 @@ if (isdefinedsymbol(__heap_size__)) {
 /* The SRAM region [0x000000-0x013FFF] is reserved for ROM bootloader execution. Can be reused after boot. */
 /* The SRAM region [0x014000-0x07FFFF] is reserved for Non-cached shared memory or application data. */
 /* The SRAM region [0x080000-0x3FFFFF] is reserved for CPU0 application, last 2MB non-cacheable data for NPU/GPU/Display etc. */
-
 
 define symbol m_text_start                     = 0x00080000;
 define symbol m_text_end                       = 0x0017FFFF;
