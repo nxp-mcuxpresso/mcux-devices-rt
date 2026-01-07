@@ -2,13 +2,13 @@
 /*  @file:    startup_MIMXRT1173_cm4.s                                       */
 /*  @purpose: CMSIS Cortex-M4 Core Device Startup File                       */
 /*            MIMXRT1173_cm4                                                 */
-/*  @version: 3.0                                                            */
-/*  @date:    2025-11-13                                                     */
-/*  @build:   b251114                                                        */
+/*  @version: 4.0                                                            */
+/*  @date:    2026-1-6                                                       */
+/*  @build:   b260106                                                        */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Copyright 1997-2016 Freescale Semiconductor, Inc.                         */
-/* Copyright 2016-2025 NXP                                                   */
+/* Copyright 2016-2026 NXP                                                   */
 /* SPDX-License-Identifier: BSD-3-Clause                                     */
 /*****************************************************************************/
 /* Version: GCC for ARM Embedded Processors                                  */
@@ -125,7 +125,7 @@ __isr_vector:
     .long   TMPSNS_LOW_HIGH_IRQHandler                      /* TMPSNS low high interrupt*/
     .long   TMPSNS_PANIC_IRQHandler                         /* TMPSNS panic interrupt*/
     .long   LPSR_LP8_BROWNOUT_IRQHandler                    /* LPSR 1p8 brownout interrupt*/
-    .long   LPSR_LP0_BROWNOUT_IRQHandler                    /* LPSR 1p0 brownout interrupt*/
+    .long   Reserved103_IRQHandler                          /* Reserved interrupt*/
     .long   ADC1_IRQHandler                                 /* ADC1 interrupt*/
     .long   ADC2_IRQHandler                                 /* ADC2 interrupt*/
     .long   USBPHY1_IRQHandler                              /* USBPHY1 interrupt*/
@@ -1293,7 +1293,7 @@ XECC_FLEXSPI2_FATAL_INT_IRQHandler:
     def_irq_handler    TMPSNS_LOW_HIGH_IRQHandler
     def_irq_handler    TMPSNS_PANIC_IRQHandler
     def_irq_handler    LPSR_LP8_BROWNOUT_IRQHandler
-    def_irq_handler    LPSR_LP0_BROWNOUT_IRQHandler
+    def_irq_handler    Reserved103_IRQHandler
     def_irq_handler    ADC1_IRQHandler
     def_irq_handler    ADC2_IRQHandler
     def_irq_handler    USBPHY1_IRQHandler

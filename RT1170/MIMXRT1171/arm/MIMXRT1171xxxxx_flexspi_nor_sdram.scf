@@ -9,15 +9,15 @@
 **                          MIMXRT1171DVMAB_cm7
 **
 **     Compiler:            Keil ARM C/C++ Compiler
-**     Reference manual:    IMXRT1170RM, Rev 1, 02/2021
+**     Reference manual:    IMXRT1170RM, Rev 5, 12/2025
 **     Version:             rev. 1.2, 2025-11-07
-**     Build:               b251107
+**     Build:               b260106
 **
 **     Abstract:
 **         Linker file for the Keil ARM C/C++ Compiler
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2025 NXP
+**     Copyright 2016-2026 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com

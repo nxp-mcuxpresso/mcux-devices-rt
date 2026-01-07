@@ -2,13 +2,13 @@
 ;  @file:    startup_MIMXRT1172.s
 ;  @purpose: CMSIS Cortex-M7 Core Device Startup File
 ;            MIMXRT1172
-;  @version: 3.0
-;  @date:    2025-11-13
-;  @build:   b251114
+;  @version: 4.0
+;  @date:    2026-1-6
+;  @build:   b260106
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.
-; Copyright 2016-2025 NXP
+; Copyright 2016-2026 NXP
 ; SPDX-License-Identifier: BSD-3-Clause
 ;
 ; The modules in this file are included in the libraries, and may be replaced
@@ -154,7 +154,7 @@ __vector_table_0x1c
         DCD     TMPSNS_LOW_HIGH_IRQHandler                    ;TMPSNS low high interrupt
         DCD     TMPSNS_PANIC_IRQHandler                       ;TMPSNS panic interrupt
         DCD     LPSR_LP8_BROWNOUT_IRQHandler                  ;LPSR 1p8 brownout interrupt
-        DCD     LPSR_LP0_BROWNOUT_IRQHandler                  ;LPSR 1p0 brownout interrupt
+        DCD     Reserved103_IRQHandler                        ;Reserved interrupt
         DCD     ADC1_IRQHandler                               ;ADC1 interrupt
         DCD     ADC2_IRQHandler                               ;ADC2 interrupt
         DCD     USBPHY1_IRQHandler                            ;USBPHY1 interrupt
@@ -850,7 +850,7 @@ SPDIF_IRQHandler
         PUBWEAK TMPSNS_LOW_HIGH_IRQHandler
         PUBWEAK TMPSNS_PANIC_IRQHandler
         PUBWEAK LPSR_LP8_BROWNOUT_IRQHandler
-        PUBWEAK LPSR_LP0_BROWNOUT_IRQHandler
+        PUBWEAK Reserved103_IRQHandler
         PUBWEAK ADC1_IRQHandler
         PUBWEAK ADC2_IRQHandler
         PUBWEAK USBPHY1_IRQHandler
@@ -1196,7 +1196,7 @@ TMPSNS_INT_IRQHandler
 TMPSNS_LOW_HIGH_IRQHandler
 TMPSNS_PANIC_IRQHandler
 LPSR_LP8_BROWNOUT_IRQHandler
-LPSR_LP0_BROWNOUT_IRQHandler
+Reserved103_IRQHandler
 ADC1_IRQHandler
 ADC2_IRQHandler
 USBPHY1_IRQHandler

@@ -53,14 +53,14 @@
 **                          MIMXRT117HDVMAB_cm4
 **                          MIMXRT117HDVMAB_cm7
 **
-**     Version:             rev. 3.0, 2025-11-13
-**     Build:               b251114
+**     Version:             rev. 4.0, 2026-01-06
+**     Build:               b260106
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CCM
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2025 NXP
+**     Copyright 2016-2026 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -76,14 +76,16 @@
 **         each peripheral with dedicated header file located in periphN folder.
 **     - rev. 3.0 (2025-11-13)
 **         Consolidate asrc/xbar and enet macros into common header.
+**     - rev. 4.0 (2026-01-06)
+**         Update header files to align with IMXRT1170RM Rev.5.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_CCM.h
- * @version 3.0
- * @date 2025-11-13
+ * @version 4.0
+ * @date 2026-01-06
  * @brief CMSIS Peripheral Access Layer for CCM
  *
  * CMSIS Peripheral Access Layer for CCM
@@ -543,9 +545,9 @@ typedef struct {
 
 #define CCM_CLOCK_ROOT_AUTHEN_LOCK_TZ_MASK       (0x10U)
 #define CCM_CLOCK_ROOT_AUTHEN_LOCK_TZ_SHIFT      (4U)
-/*! LOCK_TZ - Lock truszone setting
- *  0b0..Trustzone setting is not locked
- *  0b1..Trustzone setting is locked
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS
+ *  0b0..Not locked
+ *  0b1..Locked
  */
 #define CCM_CLOCK_ROOT_AUTHEN_LOCK_TZ(x)         (((uint32_t)(((uint32_t)(x)) << CCM_CLOCK_ROOT_AUTHEN_LOCK_TZ_SHIFT)) & CCM_CLOCK_ROOT_AUTHEN_LOCK_TZ_MASK)
 
@@ -608,7 +610,7 @@ typedef struct {
 
 #define CCM_CLOCK_ROOT_AUTHEN_SET_LOCK_TZ_MASK   (0x10U)
 #define CCM_CLOCK_ROOT_AUTHEN_SET_LOCK_TZ_SHIFT  (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_CLOCK_ROOT_AUTHEN_SET_LOCK_TZ(x)     (((uint32_t)(((uint32_t)(x)) << CCM_CLOCK_ROOT_AUTHEN_SET_LOCK_TZ_SHIFT)) & CCM_CLOCK_ROOT_AUTHEN_SET_LOCK_TZ_MASK)
 
 #define CCM_CLOCK_ROOT_AUTHEN_SET_WHITE_LIST_MASK (0xF00U)
@@ -655,7 +657,7 @@ typedef struct {
 
 #define CCM_CLOCK_ROOT_AUTHEN_CLR_LOCK_TZ_MASK   (0x10U)
 #define CCM_CLOCK_ROOT_AUTHEN_CLR_LOCK_TZ_SHIFT  (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_CLOCK_ROOT_AUTHEN_CLR_LOCK_TZ(x)     (((uint32_t)(((uint32_t)(x)) << CCM_CLOCK_ROOT_AUTHEN_CLR_LOCK_TZ_SHIFT)) & CCM_CLOCK_ROOT_AUTHEN_CLR_LOCK_TZ_MASK)
 
 #define CCM_CLOCK_ROOT_AUTHEN_CLR_WHITE_LIST_MASK (0xF00U)
@@ -702,7 +704,7 @@ typedef struct {
 
 #define CCM_CLOCK_ROOT_AUTHEN_TOG_LOCK_TZ_MASK   (0x10U)
 #define CCM_CLOCK_ROOT_AUTHEN_TOG_LOCK_TZ_SHIFT  (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_CLOCK_ROOT_AUTHEN_TOG_LOCK_TZ(x)     (((uint32_t)(((uint32_t)(x)) << CCM_CLOCK_ROOT_AUTHEN_TOG_LOCK_TZ_SHIFT)) & CCM_CLOCK_ROOT_AUTHEN_TOG_LOCK_TZ_MASK)
 
 #define CCM_CLOCK_ROOT_AUTHEN_TOG_WHITE_LIST_MASK (0xF00U)
@@ -1008,9 +1010,9 @@ typedef struct {
 
 #define CCM_CLOCK_GROUP_AUTHEN_LOCK_TZ_MASK      (0x10U)
 #define CCM_CLOCK_GROUP_AUTHEN_LOCK_TZ_SHIFT     (4U)
-/*! LOCK_TZ - Lock truszone setting
- *  0b0..Trustzone setting is not locked.
- *  0b1..Trustzone setting is locked.
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS
+ *  0b0..Not locked.
+ *  0b1..Locked.
  */
 #define CCM_CLOCK_GROUP_AUTHEN_LOCK_TZ(x)        (((uint32_t)(((uint32_t)(x)) << CCM_CLOCK_GROUP_AUTHEN_LOCK_TZ_SHIFT)) & CCM_CLOCK_GROUP_AUTHEN_LOCK_TZ_MASK)
 
@@ -1067,7 +1069,7 @@ typedef struct {
 
 #define CCM_CLOCK_GROUP_AUTHEN_SET_LOCK_TZ_MASK  (0x10U)
 #define CCM_CLOCK_GROUP_AUTHEN_SET_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_CLOCK_GROUP_AUTHEN_SET_LOCK_TZ(x)    (((uint32_t)(((uint32_t)(x)) << CCM_CLOCK_GROUP_AUTHEN_SET_LOCK_TZ_SHIFT)) & CCM_CLOCK_GROUP_AUTHEN_SET_LOCK_TZ_MASK)
 
 #define CCM_CLOCK_GROUP_AUTHEN_SET_WHITE_LIST_MASK (0xF00U)
@@ -1114,7 +1116,7 @@ typedef struct {
 
 #define CCM_CLOCK_GROUP_AUTHEN_CLR_LOCK_TZ_MASK  (0x10U)
 #define CCM_CLOCK_GROUP_AUTHEN_CLR_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_CLOCK_GROUP_AUTHEN_CLR_LOCK_TZ(x)    (((uint32_t)(((uint32_t)(x)) << CCM_CLOCK_GROUP_AUTHEN_CLR_LOCK_TZ_SHIFT)) & CCM_CLOCK_GROUP_AUTHEN_CLR_LOCK_TZ_MASK)
 
 #define CCM_CLOCK_GROUP_AUTHEN_CLR_WHITE_LIST_MASK (0xF00U)
@@ -1161,7 +1163,7 @@ typedef struct {
 
 #define CCM_CLOCK_GROUP_AUTHEN_TOG_LOCK_TZ_MASK  (0x10U)
 #define CCM_CLOCK_GROUP_AUTHEN_TOG_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_CLOCK_GROUP_AUTHEN_TOG_LOCK_TZ(x)    (((uint32_t)(((uint32_t)(x)) << CCM_CLOCK_GROUP_AUTHEN_TOG_LOCK_TZ_SHIFT)) & CCM_CLOCK_GROUP_AUTHEN_TOG_LOCK_TZ_MASK)
 
 #define CCM_CLOCK_GROUP_AUTHEN_TOG_WHITE_LIST_MASK (0xF00U)
@@ -1298,9 +1300,9 @@ typedef struct {
 
 #define CCM_GPR_SHARED_AUTHEN_LOCK_TZ_MASK       (0x10U)
 #define CCM_GPR_SHARED_AUTHEN_LOCK_TZ_SHIFT      (4U)
-/*! LOCK_TZ - Lock truszone setting
- *  0b0..Trustzone setting is not locked.
- *  0b1..Trustzone setting is locked.
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS
+ *  0b0..Not locked.
+ *  0b1..Locked.
  */
 #define CCM_GPR_SHARED_AUTHEN_LOCK_TZ(x)         (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED_AUTHEN_LOCK_TZ_SHIFT)) & CCM_GPR_SHARED_AUTHEN_LOCK_TZ_MASK)
 
@@ -1355,7 +1357,7 @@ typedef struct {
 
 #define CCM_GPR_SHARED_AUTHEN_SET_LOCK_TZ_MASK   (0x10U)
 #define CCM_GPR_SHARED_AUTHEN_SET_LOCK_TZ_SHIFT  (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_SHARED_AUTHEN_SET_LOCK_TZ(x)     (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED_AUTHEN_SET_LOCK_TZ_SHIFT)) & CCM_GPR_SHARED_AUTHEN_SET_LOCK_TZ_MASK)
 
 #define CCM_GPR_SHARED_AUTHEN_SET_WHITE_LIST_MASK (0xF00U)
@@ -1397,7 +1399,7 @@ typedef struct {
 
 #define CCM_GPR_SHARED_AUTHEN_CLR_LOCK_TZ_MASK   (0x10U)
 #define CCM_GPR_SHARED_AUTHEN_CLR_LOCK_TZ_SHIFT  (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_SHARED_AUTHEN_CLR_LOCK_TZ(x)     (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED_AUTHEN_CLR_LOCK_TZ_SHIFT)) & CCM_GPR_SHARED_AUTHEN_CLR_LOCK_TZ_MASK)
 
 #define CCM_GPR_SHARED_AUTHEN_CLR_WHITE_LIST_MASK (0xF00U)
@@ -1439,7 +1441,7 @@ typedef struct {
 
 #define CCM_GPR_SHARED_AUTHEN_TOG_LOCK_TZ_MASK   (0x10U)
 #define CCM_GPR_SHARED_AUTHEN_TOG_LOCK_TZ_SHIFT  (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_SHARED_AUTHEN_TOG_LOCK_TZ(x)     (((uint32_t)(((uint32_t)(x)) << CCM_GPR_SHARED_AUTHEN_TOG_LOCK_TZ_SHIFT)) & CCM_GPR_SHARED_AUTHEN_TOG_LOCK_TZ_MASK)
 
 #define CCM_GPR_SHARED_AUTHEN_TOG_WHITE_LIST_MASK (0xF00U)
@@ -1523,9 +1525,9 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE1_AUTHEN_LOCK_TZ_MASK     (0x10U)
 #define CCM_GPR_PRIVATE1_AUTHEN_LOCK_TZ_SHIFT    (4U)
-/*! LOCK_TZ - Lock truszone setting
- *  0b0..Trustzone setting is not locked.
- *  0b1..Trustzone setting is locked.
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS
+ *  0b0..Not locked.
+ *  0b1..Locked.
  */
 #define CCM_GPR_PRIVATE1_AUTHEN_LOCK_TZ(x)       (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE1_AUTHEN_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE1_AUTHEN_LOCK_TZ_MASK)
 
@@ -1577,7 +1579,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE1_AUTHEN_SET_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE1_AUTHEN_SET_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE1_AUTHEN_SET_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE1_AUTHEN_SET_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE1_AUTHEN_SET_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE1_AUTHEN_SET_WHITE_LIST_MASK (0xF00U)
@@ -1616,7 +1618,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE1_AUTHEN_CLR_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE1_AUTHEN_CLR_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE1_AUTHEN_CLR_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE1_AUTHEN_CLR_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE1_AUTHEN_CLR_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE1_AUTHEN_CLR_WHITE_LIST_MASK (0xF00U)
@@ -1655,7 +1657,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE1_AUTHEN_TOG_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE1_AUTHEN_TOG_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE1_AUTHEN_TOG_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE1_AUTHEN_TOG_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE1_AUTHEN_TOG_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE1_AUTHEN_TOG_WHITE_LIST_MASK (0xF00U)
@@ -1736,9 +1738,9 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE2_AUTHEN_LOCK_TZ_MASK     (0x10U)
 #define CCM_GPR_PRIVATE2_AUTHEN_LOCK_TZ_SHIFT    (4U)
-/*! LOCK_TZ - Lock truszone setting
- *  0b0..Trustzone setting is not locked.
- *  0b1..Trustzone setting is locked.
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS
+ *  0b0..Not locked.
+ *  0b1..Locked.
  */
 #define CCM_GPR_PRIVATE2_AUTHEN_LOCK_TZ(x)       (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE2_AUTHEN_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE2_AUTHEN_LOCK_TZ_MASK)
 
@@ -1790,7 +1792,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE2_AUTHEN_SET_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE2_AUTHEN_SET_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE2_AUTHEN_SET_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE2_AUTHEN_SET_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE2_AUTHEN_SET_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE2_AUTHEN_SET_WHITE_LIST_MASK (0xF00U)
@@ -1829,7 +1831,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE2_AUTHEN_CLR_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE2_AUTHEN_CLR_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE2_AUTHEN_CLR_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE2_AUTHEN_CLR_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE2_AUTHEN_CLR_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE2_AUTHEN_CLR_WHITE_LIST_MASK (0xF00U)
@@ -1868,7 +1870,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE2_AUTHEN_TOG_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE2_AUTHEN_TOG_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE2_AUTHEN_TOG_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE2_AUTHEN_TOG_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE2_AUTHEN_TOG_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE2_AUTHEN_TOG_WHITE_LIST_MASK (0xF00U)
@@ -1949,9 +1951,9 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE3_AUTHEN_LOCK_TZ_MASK     (0x10U)
 #define CCM_GPR_PRIVATE3_AUTHEN_LOCK_TZ_SHIFT    (4U)
-/*! LOCK_TZ - Lock truszone setting
- *  0b0..Trustzone setting is not locked.
- *  0b1..Trustzone setting is locked.
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS
+ *  0b0..Not locked.
+ *  0b1..Locked.
  */
 #define CCM_GPR_PRIVATE3_AUTHEN_LOCK_TZ(x)       (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE3_AUTHEN_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE3_AUTHEN_LOCK_TZ_MASK)
 
@@ -2003,7 +2005,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE3_AUTHEN_SET_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE3_AUTHEN_SET_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE3_AUTHEN_SET_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE3_AUTHEN_SET_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE3_AUTHEN_SET_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE3_AUTHEN_SET_WHITE_LIST_MASK (0xF00U)
@@ -2042,7 +2044,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE3_AUTHEN_CLR_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE3_AUTHEN_CLR_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE3_AUTHEN_CLR_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE3_AUTHEN_CLR_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE3_AUTHEN_CLR_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE3_AUTHEN_CLR_WHITE_LIST_MASK (0xF00U)
@@ -2081,7 +2083,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE3_AUTHEN_TOG_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE3_AUTHEN_TOG_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE3_AUTHEN_TOG_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE3_AUTHEN_TOG_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE3_AUTHEN_TOG_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE3_AUTHEN_TOG_WHITE_LIST_MASK (0xF00U)
@@ -2162,9 +2164,9 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE4_AUTHEN_LOCK_TZ_MASK     (0x10U)
 #define CCM_GPR_PRIVATE4_AUTHEN_LOCK_TZ_SHIFT    (4U)
-/*! LOCK_TZ - Lock truszone setting
- *  0b0..Trustzone setting is not locked.
- *  0b1..Trustzone setting is locked.
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS
+ *  0b0..Not locked.
+ *  0b1..Locked.
  */
 #define CCM_GPR_PRIVATE4_AUTHEN_LOCK_TZ(x)       (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE4_AUTHEN_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE4_AUTHEN_LOCK_TZ_MASK)
 
@@ -2216,7 +2218,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE4_AUTHEN_SET_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE4_AUTHEN_SET_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE4_AUTHEN_SET_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE4_AUTHEN_SET_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE4_AUTHEN_SET_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE4_AUTHEN_SET_WHITE_LIST_MASK (0xF00U)
@@ -2255,7 +2257,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE4_AUTHEN_CLR_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE4_AUTHEN_CLR_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE4_AUTHEN_CLR_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE4_AUTHEN_CLR_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE4_AUTHEN_CLR_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE4_AUTHEN_CLR_WHITE_LIST_MASK (0xF00U)
@@ -2294,7 +2296,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE4_AUTHEN_TOG_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE4_AUTHEN_TOG_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE4_AUTHEN_TOG_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE4_AUTHEN_TOG_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE4_AUTHEN_TOG_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE4_AUTHEN_TOG_WHITE_LIST_MASK (0xF00U)
@@ -2375,9 +2377,9 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE5_AUTHEN_LOCK_TZ_MASK     (0x10U)
 #define CCM_GPR_PRIVATE5_AUTHEN_LOCK_TZ_SHIFT    (4U)
-/*! LOCK_TZ - Lock truszone setting
- *  0b0..Trustzone setting is not locked.
- *  0b1..Trustzone setting is locked.
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS
+ *  0b0..Not locked.
+ *  0b1..Locked.
  */
 #define CCM_GPR_PRIVATE5_AUTHEN_LOCK_TZ(x)       (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE5_AUTHEN_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE5_AUTHEN_LOCK_TZ_MASK)
 
@@ -2429,7 +2431,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE5_AUTHEN_SET_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE5_AUTHEN_SET_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE5_AUTHEN_SET_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE5_AUTHEN_SET_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE5_AUTHEN_SET_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE5_AUTHEN_SET_WHITE_LIST_MASK (0xF00U)
@@ -2468,7 +2470,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE5_AUTHEN_CLR_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE5_AUTHEN_CLR_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE5_AUTHEN_CLR_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE5_AUTHEN_CLR_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE5_AUTHEN_CLR_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE5_AUTHEN_CLR_WHITE_LIST_MASK (0xF00U)
@@ -2507,7 +2509,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE5_AUTHEN_TOG_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE5_AUTHEN_TOG_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE5_AUTHEN_TOG_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE5_AUTHEN_TOG_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE5_AUTHEN_TOG_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE5_AUTHEN_TOG_WHITE_LIST_MASK (0xF00U)
@@ -2588,9 +2590,9 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE6_AUTHEN_LOCK_TZ_MASK     (0x10U)
 #define CCM_GPR_PRIVATE6_AUTHEN_LOCK_TZ_SHIFT    (4U)
-/*! LOCK_TZ - Lock truszone setting
- *  0b0..Trustzone setting is not locked.
- *  0b1..Trustzone setting is locked.
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS
+ *  0b0..Not locked.
+ *  0b1..Locked.
  */
 #define CCM_GPR_PRIVATE6_AUTHEN_LOCK_TZ(x)       (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE6_AUTHEN_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE6_AUTHEN_LOCK_TZ_MASK)
 
@@ -2642,7 +2644,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE6_AUTHEN_SET_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE6_AUTHEN_SET_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE6_AUTHEN_SET_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE6_AUTHEN_SET_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE6_AUTHEN_SET_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE6_AUTHEN_SET_WHITE_LIST_MASK (0xF00U)
@@ -2681,7 +2683,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE6_AUTHEN_CLR_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE6_AUTHEN_CLR_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE6_AUTHEN_CLR_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE6_AUTHEN_CLR_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE6_AUTHEN_CLR_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE6_AUTHEN_CLR_WHITE_LIST_MASK (0xF00U)
@@ -2720,7 +2722,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE6_AUTHEN_TOG_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE6_AUTHEN_TOG_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE6_AUTHEN_TOG_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE6_AUTHEN_TOG_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE6_AUTHEN_TOG_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE6_AUTHEN_TOG_WHITE_LIST_MASK (0xF00U)
@@ -2801,9 +2803,9 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE7_AUTHEN_LOCK_TZ_MASK     (0x10U)
 #define CCM_GPR_PRIVATE7_AUTHEN_LOCK_TZ_SHIFT    (4U)
-/*! LOCK_TZ - Lock truszone setting
- *  0b0..Trustzone setting is not locked.
- *  0b1..Trustzone setting is locked.
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS
+ *  0b0..Not locked.
+ *  0b1..Locked.
  */
 #define CCM_GPR_PRIVATE7_AUTHEN_LOCK_TZ(x)       (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE7_AUTHEN_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE7_AUTHEN_LOCK_TZ_MASK)
 
@@ -2855,7 +2857,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE7_AUTHEN_SET_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE7_AUTHEN_SET_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE7_AUTHEN_SET_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE7_AUTHEN_SET_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE7_AUTHEN_SET_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE7_AUTHEN_SET_WHITE_LIST_MASK (0xF00U)
@@ -2894,7 +2896,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE7_AUTHEN_CLR_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE7_AUTHEN_CLR_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE7_AUTHEN_CLR_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE7_AUTHEN_CLR_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE7_AUTHEN_CLR_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE7_AUTHEN_CLR_WHITE_LIST_MASK (0xF00U)
@@ -2933,7 +2935,7 @@ typedef struct {
 
 #define CCM_GPR_PRIVATE7_AUTHEN_TOG_LOCK_TZ_MASK (0x10U)
 #define CCM_GPR_PRIVATE7_AUTHEN_TOG_LOCK_TZ_SHIFT (4U)
-/*! LOCK_TZ - Lock truszone setting */
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS */
 #define CCM_GPR_PRIVATE7_AUTHEN_TOG_LOCK_TZ(x)   (((uint32_t)(((uint32_t)(x)) << CCM_GPR_PRIVATE7_AUTHEN_TOG_LOCK_TZ_SHIFT)) & CCM_GPR_PRIVATE7_AUTHEN_TOG_LOCK_TZ_MASK)
 
 #define CCM_GPR_PRIVATE7_AUTHEN_TOG_WHITE_LIST_MASK (0xF00U)
@@ -3368,9 +3370,9 @@ typedef struct {
 
 #define CCM_OSCPLL_AUTHEN_LOCK_TZ_MASK           (0x10U)
 #define CCM_OSCPLL_AUTHEN_LOCK_TZ_SHIFT          (4U)
-/*! LOCK_TZ - lock truszone setting
- *  0b0..Trustzone setting is not locked.
- *  0b1..Trustzone setting is locked.
+/*! LOCK_TZ - Lock TZ_USER and TZ_NS
+ *  0b0..Not locked.
+ *  0b1..Locked.
  */
 #define CCM_OSCPLL_AUTHEN_LOCK_TZ(x)             (((uint32_t)(((uint32_t)(x)) << CCM_OSCPLL_AUTHEN_LOCK_TZ_SHIFT)) & CCM_OSCPLL_AUTHEN_LOCK_TZ_MASK)
 
@@ -3767,9 +3769,9 @@ typedef struct {
 
 #define CCM_LPCG_AUTHEN_LOCK_TZ_MASK             (0x10U)
 #define CCM_LPCG_AUTHEN_LOCK_TZ_SHIFT            (4U)
-/*! LOCK_TZ - lock truszone setting
- *  0b0..Trustzone setting is not locked.
- *  0b1..Trustzone setting is locked.
+/*! LOCK_TZ - Lock TZ_USER AND TZ_NS
+ *  0b0..Not locked.
+ *  0b1..Locked.
  */
 #define CCM_LPCG_AUTHEN_LOCK_TZ(x)               (((uint32_t)(((uint32_t)(x)) << CCM_LPCG_AUTHEN_LOCK_TZ_SHIFT)) & CCM_LPCG_AUTHEN_LOCK_TZ_MASK)
 

@@ -53,14 +53,14 @@
 **                          MIMXRT117HDVMAB_cm4
 **                          MIMXRT117HDVMAB_cm7
 **
-**     Version:             rev. 3.0, 2025-11-13
-**     Build:               b251114
+**     Version:             rev. 4.0, 2026-01-06
+**     Build:               b260106
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for ANADIG_LDO_SNVS_DIG
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2025 NXP
+**     Copyright 2016-2026 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -76,14 +76,16 @@
 **         each peripheral with dedicated header file located in periphN folder.
 **     - rev. 3.0 (2025-11-13)
 **         Consolidate asrc/xbar and enet macros into common header.
+**     - rev. 4.0 (2026-01-06)
+**         Update header files to align with IMXRT1170RM Rev.5.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_ANADIG_LDO_SNVS_DIG.h
- * @version 3.0
- * @date 2025-11-13
+ * @version 4.0
+ * @date 2026-01-06
  * @brief CMSIS Peripheral Access Layer for ANADIG_LDO_SNVS_DIG
  *
  * CMSIS Peripheral Access Layer for ANADIG_LDO_SNVS_DIG
@@ -189,6 +191,11 @@ typedef struct {
 #define ANADIG_LDO_SNVS_DIG_PMU_LDO_SNVS_DIG_REG_EN_SHIFT (2U)
 /*! REG_EN - REG_EN */
 #define ANADIG_LDO_SNVS_DIG_PMU_LDO_SNVS_DIG_REG_EN(x) (((uint32_t)(((uint32_t)(x)) << ANADIG_LDO_SNVS_DIG_PMU_LDO_SNVS_DIG_REG_EN_SHIFT)) & ANADIG_LDO_SNVS_DIG_PMU_LDO_SNVS_DIG_REG_EN_MASK)
+
+#define ANADIG_LDO_SNVS_DIG_PMU_LDO_SNVS_DIG_TRIM_MASK (0x1F00U)
+#define ANADIG_LDO_SNVS_DIG_PMU_LDO_SNVS_DIG_TRIM_SHIFT (8U)
+/*! TRIM - trim */
+#define ANADIG_LDO_SNVS_DIG_PMU_LDO_SNVS_DIG_TRIM(x) (((uint32_t)(((uint32_t)(x)) << ANADIG_LDO_SNVS_DIG_PMU_LDO_SNVS_DIG_TRIM_SHIFT)) & ANADIG_LDO_SNVS_DIG_PMU_LDO_SNVS_DIG_TRIM_MASK)
 /*! @} */
 
 

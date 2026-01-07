@@ -13,15 +13,15 @@
 **                          Keil ARM C/C++ Compiler
 **                          MCUXpresso Compiler
 **
-**     Reference manual:    IMXRT1170RM, Rev 1, 02/2021
-**     Version:             rev. 3.0, 2025-11-13
-**     Build:               b251114
+**     Reference manual:    IMXRT1170RM, Rev 5, 12/2025
+**     Version:             rev. 4.0, 2026-01-06
+**     Build:               b260106
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1176_cm4
 **
 **     Copyright 1997-2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2025 NXP
+**     Copyright 2016-2026 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -37,14 +37,16 @@
 **         each peripheral with dedicated header file located in periphN folder.
 **     - rev. 3.0 (2025-11-13)
 **         Consolidate asrc/xbar and enet macros into common header.
+**     - rev. 4.0 (2026-01-06)
+**         Update header files to align with IMXRT1170RM Rev.5.
 **
 ** ###################################################################
 */
 
 /*!
  * @file MIMXRT1176_cm4_COMMON.h
- * @version 3.0
- * @date 2025-11-13
+ * @version 4.0
+ * @date 2026-01-06
  * @brief CMSIS Peripheral Access Layer for MIMXRT1176_cm4
  *
  * CMSIS Peripheral Access Layer for MIMXRT1176_cm4
@@ -55,7 +57,7 @@
 
 /** Memory map major version (memory maps with equal major version number are
  * compatible) */
-#define MCU_MEM_MAP_VERSION 0x0300U
+#define MCU_MEM_MAP_VERSION 0x0400U
 /** Memory map minor version */
 #define MCU_MEM_MAP_VERSION_MINOR 0x0000U
 
@@ -188,7 +190,7 @@ typedef enum IRQn {
   TMPSNS_LOW_HIGH_IRQn         = 84,               /**< TMPSNS low high interrupt */
   TMPSNS_PANIC_IRQn            = 85,               /**< TMPSNS panic interrupt */
   LPSR_LP8_BROWNOUT_IRQn       = 86,               /**< LPSR 1p8 brownout interrupt */
-  LPSR_LP0_BROWNOUT_IRQn       = 87,               /**< LPSR 1p0 brownout interrupt */
+  Reserved103_IRQn             = 87,               /**< Reserved interrupt */
   ADC1_IRQn                    = 88,               /**< ADC1 interrupt */
   ADC2_IRQn                    = 89,               /**< ADC2 interrupt */
   USBPHY1_IRQn                 = 90,               /**< USBPHY1 interrupt */
