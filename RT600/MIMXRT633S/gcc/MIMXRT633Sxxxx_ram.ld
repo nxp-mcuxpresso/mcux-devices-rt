@@ -5,15 +5,15 @@
 **                          MIMXRT633SFVKB_cm33
 **
 **     Compiler:            GNU C Compiler
-**     Reference manual:    MIMXRT685 User manual Rev. 0.95 11 November 2019
+**     Reference manual:    MIMXRT685 User manual Rev. 1.8 21 November 2024
 **     Version:             rev. 1.0, 2018-06-19
-**     Build:               b241125
+**     Build:               b260205
 **
 **     Abstract:
 **         Linker file for the GNU C Compiler
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2026 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com

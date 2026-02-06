@@ -6,13 +6,13 @@
 **     Compiler:            GNU C Compiler
 **     Reference manual:    iMXRT500RM Rev.1, 07/2022
 **     Version:             rev. 5.0, 2021-07-28
-**     Build:               b241125
+**     Build:               b260205
 **
 **     Abstract:
 **         Linker file for the GNU C Compiler
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2026 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -40,6 +40,7 @@ MEMORY
   m_interrupts          (RX)  : ORIGIN = 0x10280000, LENGTH = 0x00000180
   m_text                (RX)  : ORIGIN = 0x10280180, LENGTH = 0x0003FC80
   m_veneer_table        (RX)  : ORIGIN = 0x102BFE00, LENGTH = 0x00000200
+  /* Use the same SRAM partition with ram_s linker to share the same SAU configuration. */
   m_data                (RW)  : ORIGIN = 0x30340000, LENGTH = 0x00040000
   m_usb_sram            (RW)  : ORIGIN = 0x50140000, LENGTH = 0x00004000
 }
