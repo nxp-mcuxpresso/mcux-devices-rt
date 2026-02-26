@@ -1,0 +1,24 @@
+/*!
+@page driver_log Driver Change Log
+
+@section xip_device XIP_DEVICE
+  Current XIP_DEVICE driver version is 2.0.5
+
+  - 2.0.5
+    - Add conditional compliation before including board.h.
+
+  - 2.0.4
+    - Update DCD_ADDRESS in ivt table.
+
+  - 2.0.3
+    - Add support for "plain load" option of MCUX IDE.
+
+  - 2.0.2
+    - Align fsl_flexspi_nor_boot.h with previous RT1xxx.
+
+  - 2.0.1
+    - Add used attribute for sections of .boot_hdr.ivt and .boot_hrd.boot_data
+
+  - 2.0.0
+    - Initial version.
+*/

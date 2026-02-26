@@ -1,0 +1,11 @@
+/*!
+@defgroup romapi ROMAPI Driver
+@details The ROMAPI driver provides the functionalities to operate the external
+         NOR Flash connected to the FLEXSPI controller.
+
+The ROMAPI driver supports:
+  - Initialize serial NOR flash via FLEXSPI
+  - Program data to serial NOR flash via FLEXSPI.
+  - Erase serial NOR flash region via FLEXSPI.
+
+*/

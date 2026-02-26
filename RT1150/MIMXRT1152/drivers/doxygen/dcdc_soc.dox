@@ -1,0 +1,20 @@
+/*!
+@defgroup dcdc_soc DCDC_SOC driver
+@details The MCUXpresso SDK provides APIs for MCUXpresso SDK devices' dcdc operation.
+
+The DCDC Converter(DCDC) is used for generating the power supply for the chip's core logic. It can provide two outputs for
+SoC peripherals and external devices with high conversion efficiency. As a module to provide the power for hardware
+system, the DCDC starts working when the system is powered up before the software takes over the SoC. Some important
+configuration is done by the board settings. Before the software can access the DCDC's register, the DCDC is already
+working normally with the default settings. However, if the application needs to improve the DCDC's performance or change
+the default settings, this DCDC driver would be helpful. The DCDC's register cannot be accessed by software before its
+initialization (open the clock gate).
+
+The DCDC module supports two control modes: Static control mode and Set point control mode.
+When the module controlled by GPC set points, that is set point control mode, the DCDC_SetPointInit() function can be
+used to enable DCDC module, set outputs' target voltage in the specific set point.
+When the control mode is set as static control mode, to change the target voltage value of DCDC's outputs, the APIs in
+"Outputs' Target Voltage Related Interfaces" function group can be used. To set DCDC module's power mode, the APIs in
+"Power Mode Related Interfaces" function group can be used.
+
+ */

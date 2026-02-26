@@ -1,0 +1,20 @@
+/*!
+@defgroup soc_src SOC_SRC Driver
+@details The MCUXpresso SDK provides APIs for MCUXpresso SDK devices' src operation.
+
+The System Reset Controller(SRC) is responsible for generation of all reset signals and the boot argument latching.
+To get the latched boot arguments, the driver provides "Latched Boot Arguments Related Interfaces"  function group, all
+APIs in this group can be used to get the latched boot arguments.
+There are four situations cause an certain reset event:
+    - Power-on Reset
+    - Global System reset request
+    - Software configuration
+    - Low-power mode transaction
+The System Reset Controller(SRC) can generate reset events of the last 3 types. For the "Global System reset request", the
+APIs in "Global System Related Interfaces" can be used to set global reset mode or get the global reset status flags.
+For the "Software configuration", the APIs in "Slice Software Reset Related Interfaces" can be used. For the "Low-power
+mode transaction", the APIs in "Slice Low-Power Mode Transition Related Interfaces" can be used. If the reset behavior
+is controlled by CPU low-power mode, the function SRC_SetSliceDomainModeAuthentication() and SRC_SetSliceDomainModeConfig()
+can be invoked. If the the reset behavior is controlled by set point the function SRC_SetSliceSetPointAuthentication()
+and SRC_SetSliceSetPointConfig() can be used.
+*/

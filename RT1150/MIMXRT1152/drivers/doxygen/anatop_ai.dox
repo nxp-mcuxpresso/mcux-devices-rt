@@ -1,0 +1,6 @@
+/*!
+@defgroup anatop_ai ANATOP_AI driver
+@details The MCUXpresso SDK provides APIs for MCUXpresso SDK devices' anatop_ai operation.
+
+
+ */
