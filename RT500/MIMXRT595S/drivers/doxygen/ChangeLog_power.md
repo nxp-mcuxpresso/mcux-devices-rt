@@ -1,5 +1,9 @@
 # POWER
 
+## [2.6.2]
+- Improvement
+  - Support customizing default PMIC mode for low power modes by overriding macro value of POWER_DEFAULT_PMICMODE_xx.
+
 ## [2.6.1]
 
 - Bug Fixes
