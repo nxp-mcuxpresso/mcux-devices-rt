@@ -1187,7 +1187,7 @@ void POWER_EnterDeepPowerDown(const uint32_t exclude_from_pd[4])
                SYSCTL0_PDSLEEPCFG0_PMIC_MODE0_SHIFT;
     if (pmicMode == 0U) /* Use default PMIC Mode configuration. */
     {
-        /* Set PMIC mode pin as POWER_DEFAULT_PMICMODE_DPD(0b10) to let PMC trun off VDDCORE */
+        /* Set PMIC mode pin as POWER_DEFAULT_PMICMODE_DPD(0b10) to let PMC turn off VDDCORE */
         POWER_SetPmicMode(POWER_DEFAULT_PMICMODE_DPD, kCfg_Sleep);
     }
     else /* User defined PMIC mode. */
@@ -1231,7 +1231,7 @@ void POWER_EnterFullDeepPowerDown(const uint32_t exclude_from_pd[4])
                SYSCTL0_PDSLEEPCFG0_PMIC_MODE0_SHIFT;
     if (pmicMode == 0U) /* Use default PMIC Mode configuration. */
     {
-        /* Set PMIC mode pin as POWER_DEFAULT_PMICMODE_FDPD(0b11) to let PMC trun off VDDCORE and VDD1V8*/
+        /* Set PMIC mode pin as POWER_DEFAULT_PMICMODE_FDPD(0b11) to let PMC turn off VDDCORE and VDD1V8*/
         POWER_SetPmicMode(POWER_DEFAULT_PMICMODE_FDPD, kCfg_Sleep);
     }
     else /* User defined PMIC mode. */
