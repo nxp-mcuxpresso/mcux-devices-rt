@@ -1,5 +1,10 @@
 # CLOCK
 
+## [2.6.1]
+
+- Bug Fixes
+  - Fixed logical issue in CLOCK_InitPfd() for PFD gate status check of PLL2/PLL3.
+
 ## [2.6.0]
 
 - New Features
