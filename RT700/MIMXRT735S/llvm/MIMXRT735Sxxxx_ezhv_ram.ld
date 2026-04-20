@@ -2,6 +2,7 @@
 ** ###################################################################
 **     Processors:          MIMXRT735SGAWBR_ezhv
 **                          MIMXRT735SGFOB_ezhv
+**                          MIMXRT735SGVKB_ezhv
 **
 **     Compiler:            LLVM C Compiler
 **     Reference manual:    iMXRT700RM Rev.1, 08/2022

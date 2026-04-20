@@ -2,6 +2,7 @@
 ** ###################################################################
 **     Processors:          MIMXRT758SGAWBR_ezhv
 **                          MIMXRT758SGFOB_ezhv
+**                          MIMXRT758SGVKB_ezhv
 **
 **     Compiler:            LLVM C Compiler
 **     Reference manual:    iMXRT700RM Rev.1, 08/2022
