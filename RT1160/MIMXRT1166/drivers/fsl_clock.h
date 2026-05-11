@@ -2398,25 +2398,6 @@ static inline void CLOCK_OSC_SetOscRc400MControlMode(clock_control_mode_t contro
 void CLOCK_OSC_EnableOscRc400M(void);
 
 /*!
- * @brief Gate/ungate 400MHz RC oscillator.
- *
- * @param enableGate Used to gate/ungate 400MHz RC oscillator.
- *          - \b true Gate the 400MHz RC oscillator.
- *          - \b false Ungate the 400MHz RC oscillator.
- */
-static inline void CLOCK_OSC_GateOscRc400M(bool enableGate)
-{
-    if (enableGate)
-    {
-        ANADIG_OSC->OSC_400M_CTRL1 |= ANADIG_OSC_OSC_400M_CTRL1_CLKGATE_400MEG_MASK;
-    }
-    else
-    {
-        ANADIG_OSC->OSC_400M_CTRL1 &= ~ANADIG_OSC_OSC_400M_CTRL1_CLKGATE_400MEG_MASK;
-    }
-}
-
-/*!
  * @brief Trims OSC RC 400MHz.
  *
  * @param enable Used to enable trim function.

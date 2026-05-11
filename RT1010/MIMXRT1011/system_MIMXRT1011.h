@@ -11,7 +11,7 @@
 **
 **     Reference manual:    IMXRT1010RM Rev.1, 10/2021 | IMXRT1010SRM Rev.0
 **     Version:             rev. 2.0, 2024-10-29
-**     Build:               b250520
+**     Build:               b260509
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -107,7 +107,8 @@ void SystemCoreClockUpdate (void);
  *
  * This weak function allows to call specific initialization code during the
  * SystemInit() execution.This can be used when an application specific code needs
- * to be called as close to the reset entry as possible.
+ * to be called as close to the reset entry as possible (for example the Multicore
+ * Manager MCMGR_EarlyInit() function call).
  * NOTE: No global r/w variables can be used in this hook function because the
  * initialization of these variables happens after this function.
  */

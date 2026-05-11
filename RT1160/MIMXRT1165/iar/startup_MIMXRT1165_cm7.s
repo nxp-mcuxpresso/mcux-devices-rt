@@ -4,11 +4,11 @@
 ;            MIMXRT1165_cm7
 ;  @version: 2.0
 ;  @date:    2025-11-13
-;  @build:   b251114
+;  @build:   b260512
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.
-; Copyright 2016-2025 NXP
+; Copyright 2016-2026 NXP
 ; SPDX-License-Identifier: BSD-3-Clause
 ;
 ; The modules in this file are included in the libraries, and may be replaced

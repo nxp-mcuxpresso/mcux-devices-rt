@@ -4,11 +4,11 @@
 /*            MIMXRT1046                                                     */
 /*  @version: 2.0                                                            */
 /*  @date:    2025-11-13                                                     */
-/*  @build:   b251113                                                        */
+/*  @build:   b260509                                                        */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Copyright 1997-2016 Freescale Semiconductor, Inc.                         */
-/* Copyright 2016-2025 NXP                                                   */
+/* Copyright 2016-2026 NXP                                                   */
 /* SPDX-License-Identifier: BSD-3-Clause                                     */
 /*****************************************************************************/
 /* Version: GCC for ARM Embedded Processors                                  */
