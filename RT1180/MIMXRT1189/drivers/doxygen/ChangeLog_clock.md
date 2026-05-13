@@ -1,5 +1,12 @@
 # CLOCK
 
+## [2.2.2]
+
+- Bug Fixes
+  - Fixed CERT-C INT30-C unsigned wrap and INT31-C narrowing-cast MSG violations in CLOCK_CalcPllSpreadSpectrum,
+    CLOCK_InitSysPll2, CLOCK_OSC_SetLocked1MHzCount, CLOCK_GetPllFreq (ARM PLL), CLOCK_OSC_TrimOscRc400M,
+    USB PHY multiplier compute, CLOCK_ControlGate, and CLOCK_SetClockOutput1/2.
+
 ## [2.2.1]
 
 - Bug Fixes
