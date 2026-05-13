@@ -6,7 +6,7 @@
 **     Compiler:            Xtensa Compiler
 **     Reference manual:    iMXRT500RM Rev.1, 07/2022
 **     Version:             rev. 7.0, 2025-11-13
-**     Build:               b260509
+**     Build:               b260513
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -43,7 +43,7 @@
 /*!
  * @file MIMXRT595S
  * @version 1.0
- * @date 090526
+ * @date 130526
  * @brief Device specific configuration file for MIMXRT595S (header file)
  *
  * Provides a system configuration function and a global variable that contains
@@ -121,8 +121,7 @@ void SystemCoreClockUpdate (void);
  *
  * This weak function allows to call specific initialization code during the
  * SystemInit() execution.This can be used when an application specific code needs
- * to be called as close to the reset entry as possible (for example the Multicore
- * Manager MCMGR_EarlyInit() function call).
+ * to be called as close to the reset entry as possible.
  * NOTE: No global r/w variables can be used in this hook function because the
  * initialization of these variables happens after this function.
  */
