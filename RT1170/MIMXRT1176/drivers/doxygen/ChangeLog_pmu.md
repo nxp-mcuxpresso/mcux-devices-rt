@@ -1,5 +1,12 @@
 # PMU
 
+## [2.1.3]
+
+- Bug Fixes
+  - Fixed CERT-C INT31-C MSG violations on bool-to-unsigned-long casts of config flags in
+    PMU_StaticLpsrAnaLdoInit and PMU_BandgapInit, and on narrowing-cast/promotion sites in
+    PMU_GPCSetLpsrDigLdoTargetVoltage.
+
 ## [2.1.2]
 
 - Bug Fixes
