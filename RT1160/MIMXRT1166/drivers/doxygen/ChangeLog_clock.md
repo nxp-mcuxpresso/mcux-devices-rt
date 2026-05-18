@@ -1,5 +1,17 @@
 # CLOCK
 
+## [2.2.2]
+
+- Bug Fixes
+  - Fixed CERT-C INT30-C unsigned-wrap and INT31-C narrowing-cast MSG violations in
+    CLOCK_CalcPllSpreadSpectrum (uint64 widening + 16-bit mask), CLOCK_InitSysPll2 (bool ssEnable
+    via ternary), CLOCK_GetPfdFreq (uint64 intermediate + 32-bit mask), CLOCK_OSC_SetOsc16MConfig
+    (bool casts via ternary), CLOCK_OSC_SetLocked1MHzCount (signed int32 diff arithmetic),
+    CLOCK_GetPllFreq (uint64 widening for ARM PLL postDiv/divSelect math), CLOCK_OSC_TrimOscRc400M
+    (bool bypass via ternary), CLOCK_EnableUsbhs{0,1}PhyPllClock (uint16 multiplier mask), and in
+    CLOCK_ControlGate / CLOCK_ROOT_ConfigSetPoint / CLOCK_SetClockOutput{1,2} on enum-to-uint and
+    bool-to-uint casts.
+
 ## [2.2.1]
 
 - Bug Fixes
