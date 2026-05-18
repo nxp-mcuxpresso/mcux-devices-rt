@@ -332,13 +332,15 @@ uint32_t MEMORY_ConvertMemoryMapAddress(uint32_t addr,
   case kMEMORY_Local2DMA: {
 #if (__CORTEX_M == 33U)
     if (((addr >= m33_ctcm_start) && (addr <= m33_ctcm_end)) ||
-        ((addr >= (m33_ctcm_start + FSL_MEM_M33_SECURE_ADDRESS_OFFSET)) &&
+        ((addr >= (uint32_t)(((uint64_t)m33_ctcm_start +
+                              FSL_MEM_M33_SECURE_ADDRESS_OFFSET) & 0xFFFFFFFFUL)) &&
          (addr <= (uint32_t)(((uint64_t)m33_ctcm_end +
                               FSL_MEM_M33_SECURE_ADDRESS_OFFSET) & 0xFFFFFFFFUL)))) {
       dest = (uint32_t)(((uint64_t)addr + m33_ctcm_offset) & 0xFFFFFFFFUL);
     } else if (((addr >= m33_stcm_start) && (addr <= m33_stcm_end)) ||
                ((addr >=
-                 (m33_stcm_start + FSL_MEM_M33_SECURE_ADDRESS_OFFSET)) &&
+                 (uint32_t)(((uint64_t)m33_stcm_start +
+                             FSL_MEM_M33_SECURE_ADDRESS_OFFSET) & 0xFFFFFFFFUL)) &&
                 (addr <= (uint32_t)(((uint64_t)m33_stcm_end +
                                      FSL_MEM_M33_SECURE_ADDRESS_OFFSET) & 0xFFFFFFFFUL)))) {
       dest = (uint32_t)(((uint64_t)addr + m33_stcm_offset) & 0xFFFFFFFFUL);
@@ -366,14 +368,16 @@ uint32_t MEMORY_ConvertMemoryMapAddress(uint32_t addr,
   case kMEMORY_DMA2Local: {
 #if (__CORTEX_M == 33U)
     if (((addr >= m33_ctcm_start_alias) && (addr <= m33_ctcm_end_alias)) ||
-        ((addr >= (m33_ctcm_start_alias + FSL_MEM_M33_SECURE_ADDRESS_OFFSET)) &&
+        ((addr >= (uint32_t)(((uint64_t)m33_ctcm_start_alias +
+                              FSL_MEM_M33_SECURE_ADDRESS_OFFSET) & 0xFFFFFFFFUL)) &&
          (addr <= (uint32_t)(((uint64_t)m33_ctcm_end_alias +
                               FSL_MEM_M33_SECURE_ADDRESS_OFFSET) & 0xFFFFFFFFUL)))) {
       dest = (uint32_t)(((uint64_t)addr - m33_ctcm_offset) & 0xFFFFFFFFUL);
     } else if (((addr >= m33_stcm_start_alias) &&
                 (addr <= m33_stcm_end_alias)) ||
                ((addr >=
-                 (m33_stcm_start_alias + FSL_MEM_M33_SECURE_ADDRESS_OFFSET)) &&
+                 (uint32_t)(((uint64_t)m33_stcm_start_alias +
+                             FSL_MEM_M33_SECURE_ADDRESS_OFFSET) & 0xFFFFFFFFUL)) &&
                 (addr <=
                  (uint32_t)(((uint64_t)m33_stcm_end_alias +
                              FSL_MEM_M33_SECURE_ADDRESS_OFFSET) & 0xFFFFFFFFUL)))) {
