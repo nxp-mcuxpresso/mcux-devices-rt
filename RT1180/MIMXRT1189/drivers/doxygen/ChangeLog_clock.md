@@ -1,5 +1,10 @@
 # CLOCK
 
+## [2.2.3]
+
+- Bug Fixes
+  - Fixed CERT-C INT30-C unsigned-wrap MSG violations in clock root divider APIs.
+
 ## [2.2.2]
 
 - Bug Fixes
