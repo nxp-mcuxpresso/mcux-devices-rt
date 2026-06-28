@@ -1,0 +1,9 @@
+/*!
+@defgroup nic301 NIC301 Driver
+@details The MCUXpresso SDK provides APIs for MCUXpresso SDK devices' nic operation.
+
+The NIC301 driver supports:
+  - Set IB configuration
+  - Get IB current configuration
+
+*/

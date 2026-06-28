@@ -1,0 +1,27 @@
+// <<< Use Configuration Wizard in Context Menu >>>
+
+// <h> Trace Clock Selection
+//   <o0.8..10> Clock Source
+//     <i> select clock from 8 clock sources
+//     <0x0 => OSC_RC_48M_DIV2
+//     <0x1 => OSC_24M
+//     <0x2 => OSC_RC_400M
+//     <0x3 => OSC_RC_16M
+//     <0x4 => SYS_PLL3_DIV2
+//     <0x5 => SYS_PLL1_DIV5
+//     <0x6 => SYS_PLL2_CLK
+//     <0x7 => SYS_PLL2_PFD3
+//   <o0.0..7> Divider <1-256><#-1>
+//     <i> divider for the selected clock
+// </h>
+CLOCK_ROOT6_CONTROL_value = 0x000001FF ;
+
+// <h> SWO Pin Routing
+//   <o0> SWO
+//     <i> serial wire trace output
+//     <0x00000001 => GPIO_DISP_B2_07
+//     <0x00000002 => GPIO_LPSR_11
+// </h>
+SWO_Pin = 0x00000002;
+
+// <<< end of configuration section >>>
