@@ -1,5 +1,13 @@
 # CLOCK
 
+## [2.6.4]
+
+- Bug Fixes
+  - Fixed CLOCK_SetClockOutput1/2 truncating a divider of 256 to divide-by-1. The
+    uint8_t clock_root_config_t.div field dropped the value; the 32-bit divider is
+    now written to the CCM CLOCK_ROOT DIV field directly (DIV = divider - 1), so a
+    divider of 256 correctly yields divide-by-256.
+
 ## [2.6.3]
 
 - Bug Fixes

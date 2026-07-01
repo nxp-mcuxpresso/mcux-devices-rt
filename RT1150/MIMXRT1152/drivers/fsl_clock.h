@@ -39,7 +39,7 @@
 /*! @name Driver version */
 /*@{*/
 /*! @brief CLOCK driver version. */
-#define FSL_CLOCK_DRIVER_VERSION (MAKE_VERSION(2, 6, 0))
+#define FSL_CLOCK_DRIVER_VERSION (MAKE_VERSION(2, 6, 1))
 
 /* Definition for delay API in clock driver, users can redefine it to the real application. */
 #ifndef SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY
@@ -3291,11 +3291,15 @@ static inline void CLOCK_LPCG_ControlByDomainMode(clock_lpcg_t name, uint8_t dom
  */
 static inline void CLOCK_SetClockOutput1(clock_output1_selection_t selection, uint32_t divider)
 {
-    clock_root_config_t rootCfg = {0};
+    /* divider is the actual clock divider (1..256); the CCM DIV field holds
+     * divider-1. Program MUX+DIV in one write. Using the 32-bit divider avoids
+     * the old truncation of 256 in the uint8_t clock_root_config_t.div field. */
+    assert((divider >= 1U) && (divider <= 256U));
 
-    rootCfg.mux = selection;
-    rootCfg.div = divider;
-    CLOCK_SetRootClock(kCLOCK_Root_Cko1, &rootCfg);
+    CCM->CLOCK_ROOT[kCLOCK_Root_Cko1].CONTROL = CCM_CLOCK_ROOT_CONTROL_MUX((uint32_t)selection) |
+                                                CCM_CLOCK_ROOT_CONTROL_DIV(divider - 1UL);
+    __DSB();
+    __ISB();
 }
 
 /*!
@@ -3306,11 +3310,15 @@ static inline void CLOCK_SetClockOutput1(clock_output1_selection_t selection, ui
  */
 static inline void CLOCK_SetClockOutput2(clock_output2_selection_t selection, uint32_t divider)
 {
-    clock_root_config_t rootCfg = {0};
+    /* divider is the actual clock divider (1..256); the CCM DIV field holds
+     * divider-1. Program MUX+DIV in one write. Using the 32-bit divider avoids
+     * the old truncation of 256 in the uint8_t clock_root_config_t.div field. */
+    assert((divider >= 1U) && (divider <= 256U));
 
-    rootCfg.mux = selection;
-    rootCfg.div = divider;
-    CLOCK_SetRootClock(kCLOCK_Root_Cko2, &rootCfg);
+    CCM->CLOCK_ROOT[kCLOCK_Root_Cko2].CONTROL = CCM_CLOCK_ROOT_CONTROL_MUX((uint32_t)selection) |
+                                                CCM_CLOCK_ROOT_CONTROL_DIV(divider - 1UL);
+    __DSB();
+    __ISB();
 }
 
 /*!
