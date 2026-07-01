@@ -4,7 +4,7 @@
 ;            MIMXRT1152
 ;  @version: 0.2
 ;  @date:    2026-2-26
-;  @build:   b260622
+;  @build:   b260701
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.
@@ -159,7 +159,7 @@ __vector_table_0x1c
         DCD     ADC2_IRQHandler                               ;ADC2 interrupt
         DCD     USBPHY1_IRQHandler                            ;USBPHY1 interrupt
         DCD     USBPHY2_IRQHandler                            ;USBPHY2 interrupt
-        DCD     RDC_IRQHandler                                ;RDC interrupt
+        DCD     Reserved108_IRQHandler                        ;Reserved interrupt
         DCD     GPIO13_Combined_0_31_IRQHandler               ;Combined interrupt indication for GPIO13 signal 0 throughout 31
         DCD     Reserved110_IRQHandler                        ;Reserved interrupt
         DCD     DCIC1_IRQHandler                              ;DCIC1 interrupt
@@ -242,8 +242,8 @@ __vector_table_0x1c
         DCD     TMR2_IRQHandler                               ;TMR2 interrupt
         DCD     TMR3_IRQHandler                               ;TMR3 interrupt
         DCD     TMR4_IRQHandler                               ;TMR4 interrupt
-        DCD     SEMA4_CP0_IRQHandler                          ;SEMA4 CP0 interrupt
-        DCD     SEMA4_CP1_IRQHandler                          ;SEMA4 CP1 interrupt
+        DCD     Reserved191_IRQHandler                        ;Reserved interrupt
+        DCD     Reserved192_IRQHandler                        ;Reserved interrupt
         DCD     PWM2_0_IRQHandler                             ;PWM2 capture 0, compare 0, or reload 0 interrupt
         DCD     PWM2_1_IRQHandler                             ;PWM2 capture 1, compare 1, or reload 0 interrupt
         DCD     PWM2_2_IRQHandler                             ;PWM2 capture 2, compare 2, or reload 0 interrupt
@@ -807,7 +807,7 @@ SPDIF_IRQHandler
         PUBWEAK ADC2_IRQHandler
         PUBWEAK USBPHY1_IRQHandler
         PUBWEAK USBPHY2_IRQHandler
-        PUBWEAK RDC_IRQHandler
+        PUBWEAK Reserved108_IRQHandler
         PUBWEAK GPIO13_Combined_0_31_IRQHandler
         PUBWEAK Reserved110_IRQHandler
         PUBWEAK DCIC1_IRQHandler
@@ -956,8 +956,8 @@ ENET_1G_1588_Timer_IRQHandler
         PUBWEAK TMR2_IRQHandler
         PUBWEAK TMR3_IRQHandler
         PUBWEAK TMR4_IRQHandler
-        PUBWEAK SEMA4_CP0_IRQHandler
-        PUBWEAK SEMA4_CP1_IRQHandler
+        PUBWEAK Reserved191_IRQHandler
+        PUBWEAK Reserved192_IRQHandler
         PUBWEAK PWM2_0_IRQHandler
         PUBWEAK PWM2_1_IRQHandler
         PUBWEAK PWM2_2_IRQHandler
@@ -1153,7 +1153,7 @@ ADC1_IRQHandler
 ADC2_IRQHandler
 USBPHY1_IRQHandler
 USBPHY2_IRQHandler
-RDC_IRQHandler
+Reserved108_IRQHandler
 GPIO13_Combined_0_31_IRQHandler
 Reserved110_IRQHandler
 DCIC1_IRQHandler
@@ -1236,8 +1236,8 @@ TMR1_IRQHandler
 TMR2_IRQHandler
 TMR3_IRQHandler
 TMR4_IRQHandler
-SEMA4_CP0_IRQHandler
-SEMA4_CP1_IRQHandler
+Reserved191_IRQHandler
+Reserved192_IRQHandler
 PWM2_0_IRQHandler
 PWM2_1_IRQHandler
 PWM2_2_IRQHandler

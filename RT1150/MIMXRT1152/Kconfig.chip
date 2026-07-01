@@ -391,16 +391,6 @@ config MCUX_HW_IP_DriverType_PXP
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT1152xxxxx
 
-config MCUX_HW_IP_DriverType_RDC
-    bool
-    default y
-    depends on MCUX_HW_DEVICE_ID_MIMXRT1152xxxxx
-
-config MCUX_HW_IP_DriverType_RDC_SEMAPHORE
-    bool
-    default y
-    depends on MCUX_HW_DEVICE_ID_MIMXRT1152xxxxx
-
 config MCUX_HW_IP_DriverType_ROMC
     bool
     default y
@@ -412,11 +402,6 @@ config MCUX_HW_IP_DriverType_RTWDOG
     depends on MCUX_HW_DEVICE_ID_MIMXRT1152xxxxx
 
 config MCUX_HW_IP_DriverType_SAI
-    bool
-    default y
-    depends on MCUX_HW_DEVICE_ID_MIMXRT1152xxxxx
-
-config MCUX_HW_IP_DriverType_SEMA4
     bool
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT1152xxxxx

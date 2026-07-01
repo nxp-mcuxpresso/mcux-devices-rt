@@ -15,7 +15,7 @@
 **
 **     Reference manual:    IMXRT1150RM, Rev 1, 01/2026
 **     Version:             rev. 0.2, 2026-02-26
-**     Build:               b260622
+**     Build:               b260701
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1152
@@ -188,7 +188,7 @@ typedef enum IRQn {
   ADC2_IRQn                    = 89,               /**< ADC2 interrupt */
   USBPHY1_IRQn                 = 90,               /**< USBPHY1 interrupt */
   USBPHY2_IRQn                 = 91,               /**< USBPHY2 interrupt */
-  RDC_IRQn                     = 92,               /**< RDC interrupt */
+  Reserved108_IRQn             = 92,               /**< Reserved interrupt */
   GPIO13_Combined_0_31_IRQn    = 93,               /**< Combined interrupt indication for GPIO13 signal 0 throughout 31 */
   Reserved110_IRQn             = 94,               /**< Reserved interrupt */
   DCIC1_IRQn                   = 95,               /**< DCIC1 interrupt */
@@ -271,8 +271,8 @@ typedef enum IRQn {
   TMR2_IRQn                    = 172,              /**< TMR2 interrupt */
   TMR3_IRQn                    = 173,              /**< TMR3 interrupt */
   TMR4_IRQn                    = 174,              /**< TMR4 interrupt */
-  SEMA4_CP0_IRQn               = 175,              /**< SEMA4 CP0 interrupt */
-  SEMA4_CP1_IRQn               = 176,              /**< SEMA4 CP1 interrupt */
+  Reserved191_IRQn             = 175,              /**< Reserved interrupt */
+  Reserved192_IRQn             = 176,              /**< Reserved interrupt */
   PWM2_0_IRQn                  = 177,              /**< PWM2 capture 0, compare 0, or reload 0 interrupt */
   PWM2_1_IRQn                  = 178,              /**< PWM2 capture 1, compare 1, or reload 0 interrupt */
   PWM2_2_IRQn                  = 179,              /**< PWM2 capture 2, compare 2, or reload 0 interrupt */
@@ -437,7 +437,6 @@ typedef enum _ssarc_power_domain_name
 typedef enum _ssarc_cpu_domain_name
 {
     kSSARC_CM7Core                  = 0U,          /**< CM7 Core domain. */
-    kSSARC_CM4Core                  = 1U,          /**< CM4 Core domain. */
 } ssarc_cpu_domain_name_t;
 
 /* @} */
@@ -458,14 +457,10 @@ typedef enum _ssarc_cpu_domain_name
 typedef enum _xrdc2_master
 {
     kXRDC2_Master_M7_AHB            = 0U,          /**< M7 AHB */
-    kXRDC2_Master_M4_AHBC           = 0U,          /**< M4 AHBC */
     kXRDC2_Master_M7_AXI            = 1U,          /**< M7 AXI */
-    kXRDC2_Master_M4_AHBS           = 1U,          /**< M4 AHBS */
     kXRDC2_Master_CAAM              = 2U,          /**< CAAM */
     kXRDC2_Master_CSI               = 3U,          /**< CSI */
     kXRDC2_Master_M7_EDMA           = 4U,          /**< M7 EDMA */
-    kXRDC2_Master_M4_EDMA           = 4U,          /**< M4 EDMA */
-    kXRDC2_Master_ENET              = 5U,          /**< ENET */
     kXRDC2_Master_ENET_1G_RX        = 6U,          /**< ENET_1G_RX */
     kXRDC2_Master_ENET_1G_TX        = 7U,          /**< ENET_1G_TX */
     kXRDC2_Master_ENET_QOS          = 8U,          /**< ENET_QOS */
@@ -544,22 +539,6 @@ typedef enum _xrdc2_mem
     kXRDC2_Mem_FLEXSPI2_Region13    = XRDC2_MAKE_MEM(2, 13), /**< MRC2 Memory 13 */
     kXRDC2_Mem_FLEXSPI2_Region14    = XRDC2_MAKE_MEM(2, 14), /**< MRC2 Memory 14 */
     kXRDC2_Mem_FLEXSPI2_Region15    = XRDC2_MAKE_MEM(2, 15), /**< MRC2 Memory 15 */
-    kXRDC2_Mem_M4LMEM_Region0       = XRDC2_MAKE_MEM(3, 0), /**< MRC3 Memory 0 */
-    kXRDC2_Mem_M4LMEM_Region1       = XRDC2_MAKE_MEM(3, 1), /**< MRC3 Memory 1 */
-    kXRDC2_Mem_M4LMEM_Region2       = XRDC2_MAKE_MEM(3, 2), /**< MRC3 Memory 2 */
-    kXRDC2_Mem_M4LMEM_Region3       = XRDC2_MAKE_MEM(3, 3), /**< MRC3 Memory 3 */
-    kXRDC2_Mem_M4LMEM_Region4       = XRDC2_MAKE_MEM(3, 4), /**< MRC3 Memory 4 */
-    kXRDC2_Mem_M4LMEM_Region5       = XRDC2_MAKE_MEM(3, 5), /**< MRC3 Memory 5 */
-    kXRDC2_Mem_M4LMEM_Region6       = XRDC2_MAKE_MEM(3, 6), /**< MRC3 Memory 6 */
-    kXRDC2_Mem_M4LMEM_Region7       = XRDC2_MAKE_MEM(3, 7), /**< MRC3 Memory 7 */
-    kXRDC2_Mem_M4LMEM_Region8       = XRDC2_MAKE_MEM(3, 8), /**< MRC3 Memory 8 */
-    kXRDC2_Mem_M4LMEM_Region9       = XRDC2_MAKE_MEM(3, 9), /**< MRC3 Memory 9 */
-    kXRDC2_Mem_M4LMEM_Region10      = XRDC2_MAKE_MEM(3, 10), /**< MRC3 Memory 10 */
-    kXRDC2_Mem_M4LMEM_Region11      = XRDC2_MAKE_MEM(3, 11), /**< MRC3 Memory 11 */
-    kXRDC2_Mem_M4LMEM_Region12      = XRDC2_MAKE_MEM(3, 12), /**< MRC3 Memory 12 */
-    kXRDC2_Mem_M4LMEM_Region13      = XRDC2_MAKE_MEM(3, 13), /**< MRC3 Memory 13 */
-    kXRDC2_Mem_M4LMEM_Region14      = XRDC2_MAKE_MEM(3, 14), /**< MRC3 Memory 14 */
-    kXRDC2_Mem_M4LMEM_Region15      = XRDC2_MAKE_MEM(3, 15), /**< MRC3 Memory 15 */
     kXRDC2_Mem_M7OC_Region0         = XRDC2_MAKE_MEM(4, 0), /**< MRC4 Memory 0 */
     kXRDC2_Mem_M7OC_Region1         = XRDC2_MAKE_MEM(4, 1), /**< MRC4 Memory 1 */
     kXRDC2_Mem_M7OC_Region2         = XRDC2_MAKE_MEM(4, 2), /**< MRC4 Memory 2 */
@@ -682,8 +661,6 @@ typedef enum _xrdc2_periph
     kXRDC2_Periph_QTIMER3           = XRDC2_MAKE_PERIPH(0, 89 ), /**< QTIMER3 */
     kXRDC2_Periph_QTIMER2           = XRDC2_MAKE_PERIPH(0, 88 ), /**< QTIMER2 */
     kXRDC2_Periph_QTIMER1           = XRDC2_MAKE_PERIPH(0, 87 ), /**< QTIMER1 */
-    kXRDC2_Periph_SIM2              = XRDC2_MAKE_PERIPH(0, 86 ), /**< SIM2 */
-    kXRDC2_Periph_SIM1              = XRDC2_MAKE_PERIPH(0, 85 ), /**< SIM1 */
     kXRDC2_Periph_CCM_OBS           = XRDC2_MAKE_PERIPH(0, 84 ), /**< CCM_OBS */
     kXRDC2_Periph_GPIO6             = XRDC2_MAKE_PERIPH(0, 80 ), /**< GPIO6 */
     kXRDC2_Periph_GPIO5             = XRDC2_MAKE_PERIPH(0, 79 ), /**< GPIO5 */
@@ -718,13 +695,11 @@ typedef enum _xrdc2_periph
     kXRDC2_Periph_AOI1              = XRDC2_MAKE_PERIPH(0, 46 ), /**< AOI1 */
     kXRDC2_Periph_FLEXIO2           = XRDC2_MAKE_PERIPH(0, 44 ), /**< FLEXIO2 */
     kXRDC2_Periph_FLEXIO1           = XRDC2_MAKE_PERIPH(0, 43 ), /**< FLEXIO1 */
-    kXRDC2_Periph_LPUART10          = XRDC2_MAKE_PERIPH(0, 40 ), /**< LPUART10 */
     kXRDC2_Periph_LPUART9           = XRDC2_MAKE_PERIPH(0, 39 ), /**< LPUART9 */
     kXRDC2_Periph_LPUART8           = XRDC2_MAKE_PERIPH(0, 38 ), /**< LPUART8 */
     kXRDC2_Periph_LPUART7           = XRDC2_MAKE_PERIPH(0, 37 ), /**< LPUART7 */
     kXRDC2_Periph_LPUART6           = XRDC2_MAKE_PERIPH(0, 36 ), /**< LPUART6 */
     kXRDC2_Periph_LPUART5           = XRDC2_MAKE_PERIPH(0, 35 ), /**< LPUART5 */
-    kXRDC2_Periph_LPUART4           = XRDC2_MAKE_PERIPH(0, 34 ), /**< LPUART4 */
     kXRDC2_Periph_LPUART3           = XRDC2_MAKE_PERIPH(0, 33 ), /**< LPUART3 */
     kXRDC2_Periph_LPUART2           = XRDC2_MAKE_PERIPH(0, 32 ), /**< LPUART2 */
     kXRDC2_Periph_LPUART1           = XRDC2_MAKE_PERIPH(0, 31 ), /**< LPUART1 */
@@ -785,7 +760,6 @@ typedef enum _xrdc2_periph
     kXRDC2_Periph_USB_OTG           = XRDC2_MAKE_PERIPH(1, 12 ), /**< USB_OTG */
     kXRDC2_Periph_USB_OTG2          = XRDC2_MAKE_PERIPH(1, 11 ), /**< USB_OTG2 */
     kXRDC2_Periph_USB_PL301         = XRDC2_MAKE_PERIPH(1, 10 ), /**< USB_PL301 */
-    kXRDC2_Periph_ENET              = XRDC2_MAKE_PERIPH(1, 9  ), /**< ENET */
     kXRDC2_Periph_ENET_1G           = XRDC2_MAKE_PERIPH(1, 8  ), /**< ENET_1G */
     kXRDC2_Periph_USDHC2            = XRDC2_MAKE_PERIPH(1, 7  ), /**< USDHC2 */
     kXRDC2_Periph_USDHC1            = XRDC2_MAKE_PERIPH(1, 6  ), /**< USDHC1 */
@@ -809,8 +783,6 @@ typedef enum _xrdc2_periph
     kXRDC2_Periph_XRDC2_MGR_M4_2    = XRDC2_MAKE_PERIPH(3, 54 ), /**< XRDC2_MGR_M4_2 */
     kXRDC2_Periph_XRDC2_MGR_M4_1    = XRDC2_MAKE_PERIPH(3, 53 ), /**< XRDC2_MGR_M4_1 */
     kXRDC2_Periph_XRDC2_MGR_M4_0    = XRDC2_MAKE_PERIPH(3, 52 ), /**< XRDC2_MGR_M4_0 */
-    kXRDC2_Periph_SEMA2             = XRDC2_MAKE_PERIPH(3, 51 ), /**< SEMA2 */
-    kXRDC2_Periph_SEMA_HS           = XRDC2_MAKE_PERIPH(3, 50 ), /**< SEMA_HS */
     kXRDC2_Periph_CCM_1             = XRDC2_MAKE_PERIPH(3, 49 ), /**< CCM_1 */
     kXRDC2_Periph_CCM_0             = XRDC2_MAKE_PERIPH(3, 48 ), /**< CCM_0 */
     kXRDC2_Periph_SSARC_LP          = XRDC2_MAKE_PERIPH(3, 46 ), /**< SSARC_LP */
@@ -834,21 +806,12 @@ typedef enum _xrdc2_periph
     kXRDC2_Periph_GPIO9             = XRDC2_MAKE_PERIPH(3, 25 ), /**< GPIO9 */
     kXRDC2_Periph_GPIO8             = XRDC2_MAKE_PERIPH(3, 24 ), /**< GPIO8 */
     kXRDC2_Periph_GPIO7             = XRDC2_MAKE_PERIPH(3, 23 ), /**< GPIO7 */
-    kXRDC2_Periph_MU_B              = XRDC2_MAKE_PERIPH(3, 19 ), /**< MU_B */
-    kXRDC2_Periph_MU_A              = XRDC2_MAKE_PERIPH(3, 18 ), /**< MU_A */
-    kXRDC2_Periph_SEMA1             = XRDC2_MAKE_PERIPH(3, 17 ), /**< SEMA1 */
-    kXRDC2_Periph_SAI4              = XRDC2_MAKE_PERIPH(3, 16 ), /**< SAI4 */
-    kXRDC2_Periph_CAN3              = XRDC2_MAKE_PERIPH(3, 15 ), /**< CAN3 */
     kXRDC2_Periph_LPI2C6            = XRDC2_MAKE_PERIPH(3, 14 ), /**< LPI2C6 */
-    kXRDC2_Periph_LPI2C5            = XRDC2_MAKE_PERIPH(3, 13 ), /**< LPI2C5 */
-    kXRDC2_Periph_LPSPI6            = XRDC2_MAKE_PERIPH(3, 12 ), /**< LPSPI6 */
     kXRDC2_Periph_LPSPI5            = XRDC2_MAKE_PERIPH(3, 11 ), /**< LPSPI5 */
     kXRDC2_Periph_LPUART12          = XRDC2_MAKE_PERIPH(3, 10 ), /**< LPUART12 */
-    kXRDC2_Periph_LPUART11          = XRDC2_MAKE_PERIPH(3, 9  ), /**< LPUART11 */
     kXRDC2_Periph_MIC               = XRDC2_MAKE_PERIPH(3, 8  ), /**< MIC */
     kXRDC2_Periph_DMA_CH_MUX_LPSR   = XRDC2_MAKE_PERIPH(3, 6  ), /**< DMA_CH_MUX_LPSR */
     kXRDC2_Periph_EDMA_LPSR         = XRDC2_MAKE_PERIPH(3, 5  ), /**< EDMA_LPSR */
-    kXRDC2_Periph_WDOG4             = XRDC2_MAKE_PERIPH(3, 4  ), /**< WDOG4 */
     kXRDC2_Periph_IOMUXC_LPSR_GPR   = XRDC2_MAKE_PERIPH(3, 3  ), /**< IOMUXC_LPSR_GPR */
     kXRDC2_Periph_IOMUXC_LPSR       = XRDC2_MAKE_PERIPH(3, 2  ), /**< IOMUXC_LPSR */
     kXRDC2_Periph_SRC               = XRDC2_MAKE_PERIPH(3, 1  ), /**< SRC */
@@ -1998,32 +1961,6 @@ typedef enum _xrdc2_periph
 /** Interrupt vectors for the PXP peripheral type */
 #define PXP_IRQ0_IRQS                            { PXP_IRQn }
 
-/* RDC - Peripheral instance base addresses */
-/** Peripheral RDC base address */
-#define RDC_BASE                                 (0x40C78000u)
-/** Peripheral RDC base pointer */
-#define RDC                                      ((RDC_Type *)RDC_BASE)
-/** Array initializer of RDC peripheral base addresses */
-#define RDC_BASE_ADDRS                           { RDC_BASE }
-/** Array initializer of RDC peripheral base pointers */
-#define RDC_BASE_PTRS                            { RDC }
-/** Interrupt vectors for the RDC peripheral type */
-#define RDC_IRQS                                 { RDC_IRQn }
-
-/* RDC_SEMAPHORE - Peripheral instance base addresses */
-/** Peripheral RDC_SEMAPHORE1 base address */
-#define RDC_SEMAPHORE1_BASE                      (0x40C44000u)
-/** Peripheral RDC_SEMAPHORE1 base pointer */
-#define RDC_SEMAPHORE1                           ((RDC_SEMAPHORE_Type *)RDC_SEMAPHORE1_BASE)
-/** Peripheral RDC_SEMAPHORE2 base address */
-#define RDC_SEMAPHORE2_BASE                      (0x40CCC000u)
-/** Peripheral RDC_SEMAPHORE2 base pointer */
-#define RDC_SEMAPHORE2                           ((RDC_SEMAPHORE_Type *)RDC_SEMAPHORE2_BASE)
-/** Array initializer of RDC_SEMAPHORE peripheral base addresses */
-#define RDC_SEMAPHORE_BASE_ADDRS                 { RDC_SEMAPHORE1_BASE, RDC_SEMAPHORE2_BASE }
-/** Array initializer of RDC_SEMAPHORE peripheral base pointers */
-#define RDC_SEMAPHORE_BASE_PTRS                  { RDC_SEMAPHORE1, RDC_SEMAPHORE2 }
-
 /* RTWDOG - Peripheral instance base addresses */
 /** Peripheral RTWDOG3 base address */
 #define RTWDOG3_BASE                             (0x40038000u)
@@ -2039,16 +1976,6 @@ typedef enum _xrdc2_periph
 #define RTWDOG_UPDATE_KEY                        (0xD928C520U)
 #define RTWDOG_REFRESH_KEY                       (0xB480A602U)
 
-
-/* SEMA4 - Peripheral instance base addresses */
-/** Peripheral SEMA4 base address */
-#define SEMA4_BASE                               (0x40CC8000u)
-/** Peripheral SEMA4 base pointer */
-#define SEMA4                                    ((SEMA4_Type *)SEMA4_BASE)
-/** Array initializer of SEMA4 peripheral base addresses */
-#define SEMA4_BASE_ADDRS                         { SEMA4_BASE }
-/** Array initializer of SEMA4 peripheral base pointers */
-#define SEMA4_BASE_PTRS                          { SEMA4 }
 
 /* SEMC - Peripheral instance base addresses */
 /** Peripheral SEMC base address */

@@ -8,7 +8,7 @@
 **     Compiler:            IAR ANSI C/C++ Compiler for ARM
 **     Reference manual:    IMXRT1150RM, Rev 1, 01/2026
 **     Version:             rev. 0.1, 2026-01-09
-**     Build:               b260622
+**     Build:               b260701
 **
 **     Abstract:
 **         Linker file for the IAR ANSI C/C++ Compiler for ARM
@@ -23,11 +23,11 @@
 ** ###################################################################
 */
 
-define symbol m_interrupts_start       = 0x80000000;
-define symbol m_interrupts_end         = 0x800003FF;
+define symbol m_interrupts_start       = 0x60000000;
+define symbol m_interrupts_end         = 0x600003FF;
 
-define symbol m_text_start             = 0x80000400;
-define symbol m_text_end               = 0x801FFFFF;
+define symbol m_text_start             = 0x60000400;
+define symbol m_text_end               = 0x601FFFFF;
 
 define symbol m_data_start             = 0x20000000;
 define symbol m_data_end               = 0x2003FFFF;
@@ -35,11 +35,11 @@ define symbol m_data_end               = 0x2003FFFF;
 define symbol m_data2_start            = 0x202C0000;
 define symbol m_data2_end              = 0x2033FFFF;
 
-define symbol m_data3_start            = 0x80200000;
-define symbol m_data3_end              = 0x82FFFFFF;
+define symbol m_data3_start            = 0x60200000;
+define symbol m_data3_end              = 0x60FFFFFF;
 
-define symbol m_ncache_start                   = 0x83000000;
-define symbol m_ncache_end                     = 0x83FFFFFF;
+define symbol m_ncache_start                   = 0x61000000;
+define symbol m_ncache_end                     = 0x61FFFFFF;
 
 define exported symbol __NCACHE_REGION_START   = m_ncache_start;
 define exported symbol __NCACHE_REGION_SIZE    = m_ncache_end - m_ncache_start + 1;

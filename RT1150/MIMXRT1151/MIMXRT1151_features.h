@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 0.2, 2026-02-26
-**     Build:               b260622
+**     Build:               b260701
 **
 **     Abstract:
 **         Chip specific module features.
@@ -101,12 +101,6 @@
 #define FSL_FEATURE_SOC_PWM_COUNT (4)
 /* @brief PUF availability on the SoC. */
 #define FSL_FEATURE_SOC_PUF_COUNT (1)
-/* @brief RDC availability on the SoC. */
-#define FSL_FEATURE_SOC_RDC_COUNT (1)
-/* @brief RDC_SEMAPHORE availability on the SoC. */
-#define FSL_FEATURE_SOC_RDC_SEMAPHORE_COUNT (2)
-/* @brief SEMA4 availability on the SoC. */
-#define FSL_FEATURE_SOC_SEMA4_COUNT (1)
 /* @brief SEMC availability on the SoC. */
 #define FSL_FEATURE_SOC_SEMC_COUNT (1)
 /* @brief SNVS availability on the SoC. */
@@ -947,11 +941,6 @@
 #define FSL_FEATURE_SAI_HAS_BIT_CLOCK_SWAP (1)
 /* @brief SAI5 and SAI6 share one irq number. */
 #define FSL_FEATURE_SAI_SAI5_SAI6_SHARE_IRQ (0)
-
-/* SEMA4 module features */
-
-/* @brief Gate counts */
-#define FSL_FEATURE_SEMA4_GATE_COUNT (16)
 
 /* SEMC module features */
 

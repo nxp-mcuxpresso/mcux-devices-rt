@@ -9,7 +9,7 @@
 **     Compiler:            Keil ARM C/C++ Compiler
 **     Reference manual:    IMXRT1150RM, Rev 1, 01/2026
 **     Version:             rev. 0.1, 2026-01-09
-**     Build:               b260622
+**     Build:               b260701
 **
 **     Abstract:
 **         Linker file for the Keil ARM C/C++ Compiler
@@ -24,10 +24,10 @@
 ** ###################################################################
 */
 
-#define m_interrupts_start             0x80000000
+#define m_interrupts_start             0x60000000
 #define m_interrupts_size              0x00000400
 
-#define m_text_start                   0x80000400
+#define m_text_start                   0x60000400
 #define m_text_size                    0x001FFC00
 
 #define m_qacode_start                 0x00000000
@@ -39,10 +39,10 @@
 #define m_data2_start                  0x20000000
 #define m_data2_size                   0x00040000
 
-#define m_data3_start                  0x80200000
-#define m_data3_size                   0x02E00000
+#define m_data3_start                  0x60200000
+#define m_data3_size                   0x00E00000
 
-#define m_ncache_start                 0x83000000
+#define m_ncache_start                 0x61000000
 #define m_ncache_size                  0x01000000
 
 /* Sizes */

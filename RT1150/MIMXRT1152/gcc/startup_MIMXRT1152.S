@@ -4,7 +4,7 @@
 /*            MIMXRT1152                                                     */
 /*  @version: 0.2                                                            */
 /*  @date:    2026-2-26                                                      */
-/*  @build:   b260622                                                        */
+/*  @build:   b260701                                                        */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Copyright 1997-2016 Freescale Semiconductor, Inc.                         */
@@ -130,7 +130,7 @@ __isr_vector:
     .long   ADC2_IRQHandler                                 /* ADC2 interrupt*/
     .long   USBPHY1_IRQHandler                              /* USBPHY1 interrupt*/
     .long   USBPHY2_IRQHandler                              /* USBPHY2 interrupt*/
-    .long   RDC_IRQHandler                                  /* RDC interrupt*/
+    .long   Reserved108_IRQHandler                          /* Reserved interrupt*/
     .long   GPIO13_Combined_0_31_IRQHandler                 /* Combined interrupt indication for GPIO13 signal 0 throughout 31*/
     .long   Reserved110_IRQHandler                          /* Reserved interrupt*/
     .long   DCIC1_IRQHandler                                /* DCIC1 interrupt*/
@@ -213,8 +213,8 @@ __isr_vector:
     .long   TMR2_IRQHandler                                 /* TMR2 interrupt*/
     .long   TMR3_IRQHandler                                 /* TMR3 interrupt*/
     .long   TMR4_IRQHandler                                 /* TMR4 interrupt*/
-    .long   SEMA4_CP0_IRQHandler                            /* SEMA4 CP0 interrupt*/
-    .long   SEMA4_CP1_IRQHandler                            /* SEMA4 CP1 interrupt*/
+    .long   Reserved191_IRQHandler                          /* Reserved interrupt*/
+    .long   Reserved192_IRQHandler                          /* Reserved interrupt*/
     .long   PWM2_0_IRQHandler                               /* PWM2 capture 0, compare 0, or reload 0 interrupt*/
     .long   PWM2_1_IRQHandler                               /* PWM2 capture 1, compare 1, or reload 0 interrupt*/
     .long   PWM2_2_IRQHandler                               /* PWM2 capture 2, compare 2, or reload 0 interrupt*/
@@ -1268,7 +1268,7 @@ ENET_QOS_PMT_IRQHandler:
     def_irq_handler    ADC2_IRQHandler
     def_irq_handler    USBPHY1_IRQHandler
     def_irq_handler    USBPHY2_IRQHandler
-    def_irq_handler    RDC_IRQHandler
+    def_irq_handler    Reserved108_IRQHandler
     def_irq_handler    GPIO13_Combined_0_31_IRQHandler
     def_irq_handler    Reserved110_IRQHandler
     def_irq_handler    DCIC1_IRQHandler
@@ -1351,8 +1351,8 @@ ENET_QOS_PMT_IRQHandler:
     def_irq_handler    TMR2_IRQHandler
     def_irq_handler    TMR3_IRQHandler
     def_irq_handler    TMR4_IRQHandler
-    def_irq_handler    SEMA4_CP0_IRQHandler
-    def_irq_handler    SEMA4_CP1_IRQHandler
+    def_irq_handler    Reserved191_IRQHandler
+    def_irq_handler    Reserved192_IRQHandler
     def_irq_handler    PWM2_0_IRQHandler
     def_irq_handler    PWM2_1_IRQHandler
     def_irq_handler    PWM2_2_IRQHandler

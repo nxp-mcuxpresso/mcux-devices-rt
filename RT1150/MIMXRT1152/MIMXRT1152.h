@@ -15,7 +15,7 @@
 **
 **     Reference manual:    IMXRT1150RM, Rev 1, 01/2026
 **     Version:             rev. 0.2, 2026-02-26
-**     Build:               b260622
+**     Build:               b260701
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1152
@@ -124,10 +124,7 @@
 #include "PERI_PUF.h"
 #include "PERI_PWM.h"
 #include "PERI_PXP.h"
-#include "PERI_RDC.h"
-#include "PERI_RDC_SEMAPHORE.h"
 #include "PERI_RTWDOG.h"
-#include "PERI_SEMA4.h"
 #include "PERI_SEMC.h"
 #include "PERI_SNVS.h"
 #include "PERI_SPDIF.h"
