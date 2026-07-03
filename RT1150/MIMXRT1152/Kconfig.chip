@@ -256,6 +256,11 @@ config MCUX_HW_IP_DriverType_FLEXIO
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT1152xxxxx
 
+config MCUX_HW_IP_DriverType_FLEXRAM
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT1152xxxxx
+
 config MCUX_HW_IP_DriverType_FLEXSPI
     bool
     default y
