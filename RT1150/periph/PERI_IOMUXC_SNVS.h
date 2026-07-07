@@ -12,7 +12,7 @@
 **                          MIMXRT1152XVM8B
 **
 **     Version:             rev. 0.2, 2026-02-26
-**     Build:               b260622
+**     Build:               b260707
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for IOMUXC_SNVS
@@ -418,10 +418,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_TEST_MODE_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_TEST_MODE_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_TEST_MODE_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_TEST_MODE_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_TEST_MODE_DIG_DWP_MASK)
 
@@ -458,10 +458,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_POR_B_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_POR_B_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_POR_B_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_POR_B_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_POR_B_DIG_DWP_MASK)
 
@@ -498,10 +498,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_ONOFF_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_ONOFF_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_ONOFF_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_ONOFF_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_ONOFF_DIG_DWP_MASK)
 
@@ -546,10 +546,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_WAKEUP_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_WAKEUP_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_WAKEUP_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_WAKEUP_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_WAKEUP_DIG_DWP_MASK)
 
@@ -594,10 +594,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_PMIC_ON_REQ_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_PMIC_ON_REQ_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_PMIC_ON_REQ_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_PMIC_ON_REQ_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_PMIC_ON_REQ_DIG_DWP_MASK)
 
@@ -642,10 +642,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_PMIC_STBY_REQ_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_PMIC_STBY_REQ_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_PMIC_STBY_REQ_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_PMIC_STBY_REQ_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_PMIC_STBY_REQ_DIG_DWP_MASK)
 
@@ -690,10 +690,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_00_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_00_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_00_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_00_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_00_DIG_DWP_MASK)
 
@@ -738,10 +738,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_01_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_01_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_01_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_01_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_01_DIG_DWP_MASK)
 
@@ -786,10 +786,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_02_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_02_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_02_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_02_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_02_DIG_DWP_MASK)
 
@@ -834,10 +834,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_03_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_03_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_03_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_03_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_03_DIG_DWP_MASK)
 
@@ -882,10 +882,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_04_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_04_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_04_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_04_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_04_DIG_DWP_MASK)
 
@@ -930,10 +930,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_05_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_05_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_05_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_05_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_05_DIG_DWP_MASK)
 
@@ -978,10 +978,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_06_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_06_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_06_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_06_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_06_DIG_DWP_MASK)
 
@@ -1026,10 +1026,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_07_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_07_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_07_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_07_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_07_DIG_DWP_MASK)
 
@@ -1074,10 +1074,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_08_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_08_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_08_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_08_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_08_DIG_DWP_MASK)
 
@@ -1122,10 +1122,10 @@ typedef struct {
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_09_DIG_DWP_MASK (0x30000000U)
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_09_DIG_DWP_SHIFT (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_09_DIG_DWP(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_09_DIG_DWP_SHIFT)) & IOMUXC_SNVS_SW_PAD_CTL_PAD_GPIO_SNVS_09_DIG_DWP_MASK)
 

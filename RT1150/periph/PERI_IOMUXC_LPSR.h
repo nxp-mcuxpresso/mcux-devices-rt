@@ -12,7 +12,7 @@
 **                          MIMXRT1152XVM8B
 **
 **     Version:             rev. 0.2, 2026-02-26
-**     Build:               b260622
+**     Build:               b260707
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for IOMUXC_LPSR
@@ -148,30 +148,19 @@ typedef enum _iomuxc_lpsr_sw_pad_ctl_pad
  */
 typedef enum _iomuxc_lpsr_select_input
 {
-    kIOMUXC_LPSR_CAN3_IPP_IND_CANRX_SELECT_INPUT = 0U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_LPI2C5_IPP_IND_LPI2C_SCL_SELECT_INPUT = 1U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_LPI2C5_IPP_IND_LPI2C_SDA_SELECT_INPUT = 2U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_LPI2C6_IPP_IND_LPI2C_SCL_SELECT_INPUT = 3U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_LPI2C6_IPP_IND_LPI2C_SDA_SELECT_INPUT = 4U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_LPSPI5_IPP_IND_LPSPI_PCS_SELECT_INPUT_0 = 5U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_LPSPI5_IPP_IND_LPSPI_SCK_SELECT_INPUT = 6U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_LPSPI5_IPP_IND_LPSPI_SDI_SELECT_INPUT = 7U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_LPSPI5_IPP_IND_LPSPI_SDO_SELECT_INPUT = 8U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_LPUART11_IPP_IND_LPUART_RXD_SELECT_INPUT = 9U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_LPUART11_IPP_IND_LPUART_TXD_SELECT_INPUT = 10U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_LPUART12_IPP_IND_LPUART_RXD_SELECT_INPUT = 11U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_LPUART12_IPP_IND_LPUART_TXD_SELECT_INPUT = 12U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_MIC_IPP_IND_MIC_PDM_BITSTREAM_SELECT_INPUT_0 = 13U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_MIC_IPP_IND_MIC_PDM_BITSTREAM_SELECT_INPUT_1 = 14U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_MIC_IPP_IND_MIC_PDM_BITSTREAM_SELECT_INPUT_2 = 15U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_MIC_IPP_IND_MIC_PDM_BITSTREAM_SELECT_INPUT_3 = 16U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_NMI_GLUE_IPP_IND_NMI_SELECT_INPUT = 17U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_SAI4_IPG_CLK_SAI_MCLK_SELECT_INPUT = 18U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_SAI4_IPP_IND_SAI_RXBCLK_SELECT_INPUT = 19U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_SAI4_IPP_IND_SAI_RXDATA_SELECT_INPUT_0 = 20U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_SAI4_IPP_IND_SAI_RXSYNC_SELECT_INPUT = 21U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_SAI4_IPP_IND_SAI_TXBCLK_SELECT_INPUT = 22U, /**< IOMUXC select input index */
-    kIOMUXC_LPSR_SAI4_IPP_IND_SAI_TXSYNC_SELECT_INPUT = 23U, /**< IOMUXC select input index */
+    kIOMUXC_LPSR_LPI2C6_IPP_IND_LPI2C_SCL_SELECT_INPUT = 0U, /**< IOMUXC select input index */
+    kIOMUXC_LPSR_LPI2C6_IPP_IND_LPI2C_SDA_SELECT_INPUT = 1U, /**< IOMUXC select input index */
+    kIOMUXC_LPSR_LPSPI5_IPP_IND_LPSPI_PCS_SELECT_INPUT_0 = 2U, /**< IOMUXC select input index */
+    kIOMUXC_LPSR_LPSPI5_IPP_IND_LPSPI_SCK_SELECT_INPUT = 3U, /**< IOMUXC select input index */
+    kIOMUXC_LPSR_LPSPI5_IPP_IND_LPSPI_SDI_SELECT_INPUT = 4U, /**< IOMUXC select input index */
+    kIOMUXC_LPSR_LPSPI5_IPP_IND_LPSPI_SDO_SELECT_INPUT = 5U, /**< IOMUXC select input index */
+    kIOMUXC_LPSR_LPUART12_IPP_IND_LPUART_RXD_SELECT_INPUT = 8U, /**< IOMUXC select input index */
+    kIOMUXC_LPSR_LPUART12_IPP_IND_LPUART_TXD_SELECT_INPUT = 9U, /**< IOMUXC select input index */
+    kIOMUXC_LPSR_MIC_IPP_IND_MIC_PDM_BITSTREAM_SELECT_INPUT_0 = 10U, /**< IOMUXC select input index */
+    kIOMUXC_LPSR_MIC_IPP_IND_MIC_PDM_BITSTREAM_SELECT_INPUT_1 = 11U, /**< IOMUXC select input index */
+    kIOMUXC_LPSR_MIC_IPP_IND_MIC_PDM_BITSTREAM_SELECT_INPUT_2 = 12U, /**< IOMUXC select input index */
+    kIOMUXC_LPSR_MIC_IPP_IND_MIC_PDM_BITSTREAM_SELECT_INPUT_3 = 13U, /**< IOMUXC select input index */
+    kIOMUXC_LPSR_NMI_GLUE_IPP_IND_NMI_SELECT_INPUT = 14U, /**< IOMUXC select input index */
 } iomuxc_lpsr_select_input_t;
 #endif /* IOMUXC_LPSR_SELECT_INPUT_T_ */
 
@@ -225,13 +214,14 @@ typedef enum _iomuxc_lpsr_select_input
 /** IOMUXC_LPSR - Size of Registers Arrays */
 #define IOMUXC_LPSR_SW_MUX_CTL_PAD_COUNT          16u
 #define IOMUXC_LPSR_SW_PAD_CTL_PAD_COUNT          16u
-#define IOMUXC_LPSR_SELECT_INPUT_COUNT            24u
+#define IOMUXC_LPSR_SELECT_INPUT_COUNT            15u
 
 /** IOMUXC_LPSR - Register Layout Typedef */
 typedef struct {
   __IO uint32_t SW_MUX_CTL_PAD[IOMUXC_LPSR_SW_MUX_CTL_PAD_COUNT]; /**< SW_MUX_CTL_PAD_GPIO_LPSR_00 SW MUX Control Register..SW_MUX_CTL_PAD_GPIO_LPSR_15 SW MUX Control Register, array offset: 0x0, array step: 0x4 */
   __IO uint32_t SW_PAD_CTL_PAD[IOMUXC_LPSR_SW_PAD_CTL_PAD_COUNT]; /**< SW_PAD_CTL_PAD_GPIO_LPSR_00 SW PAD Control Register..SW_PAD_CTL_PAD_GPIO_LPSR_15 SW PAD Control Register, array offset: 0x40, array step: 0x4 */
-  __IO uint32_t SELECT_INPUT[IOMUXC_LPSR_SELECT_INPUT_COUNT]; /**< CAN3_IPP_IND_CANRX_SELECT_INPUT DAISY Register..SAI4_IPP_IND_SAI_TXSYNC_SELECT_INPUT DAISY Register, array offset: 0x80, array step: 0x4 */
+       uint8_t RESERVED_0[12];
+  __IO uint32_t SELECT_INPUT[IOMUXC_LPSR_SELECT_INPUT_COUNT]; /**< LPI2C6_IPP_IND_LPI2C_SCL_SELECT_INPUT DAISY Register..NMI_GLUE_IPP_IND_NMI_SELECT_INPUT DAISY Register, array offset: 0x8C, array step: 0x4, valid indices: [0-5, 8-14] */
 } IOMUXC_LPSR_Type;
 
 /* ----------------------------------------------------------------------------
@@ -249,16 +239,13 @@ typedef struct {
 #define IOMUXC_LPSR_SW_MUX_CTL_PAD_MUX_MODE_MASK (0xFU)
 #define IOMUXC_LPSR_SW_MUX_CTL_PAD_MUX_MODE_SHIFT (0U)
 /*! MUX_MODE - MUX Mode Select Field.
- *  0b0000..Select mux mode: ALT0 mux port: JTAG_MUX_TRSTB of instance: JTAG_MUX
- *  0b0001..Select mux mode: ALT1 mux port: LPUART11_CTS_B of instance: LPUART11
- *  0b0010..Select mux mode: ALT2 mux port: LPI2C6_SDA of instance: LPI2C6
- *  0b0011..Select mux mode: ALT3 mux port: MIC_BITSTREAM1 of instance: MIC
- *  0b0100..Select mux mode: ALT4 mux port: LPSPI6_SCK of instance: LPSPI6
- *  0b0101..Select mux mode: ALT5 mux port: GPIO_MUX6_IO10 of instance: GPIO_MUX6
- *  0b0110..Select mux mode: ALT6 mux port: LPI2C5_SCLS of instance: LPI2C5
- *  0b0111..Select mux mode: ALT7 mux port: SAI4_TX_SYNC of instance: SAI4
- *  0b1000..Select mux mode: ALT8 mux port: LPUART12_TXD of instance: LPUART12
- *  0b1010..Select mux mode: ALT10 mux port: GPIO12_IO10 of instance: GPIO12
+ *  0b0000..Select mux mode: ALT0 mux port: JTAG_MUX_TDO of instance: JTAG_MUX
+ *  0b0010..Select mux mode: ALT2 mux port: LPI2C6_SCL of instance: LPI2C6
+ *  0b0011..Select mux mode: ALT3 mux port: MIC_BITSTREAM2 of instance: MIC
+ *  0b0101..Select mux mode: ALT5 mux port: GPIO_MUX6_IO11 of instance: GPIO_MUX6
+ *  0b0111..Select mux mode: ALT7 mux port: ARM_TRACE_SWO of instance: ARM
+ *  0b1000..Select mux mode: ALT8 mux port: LPUART12_RXD of instance: LPUART12
+ *  0b1010..Select mux mode: ALT10 mux port: GPIO12_IO11 of instance: GPIO12
  */
 #define IOMUXC_LPSR_SW_MUX_CTL_PAD_MUX_MODE(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_SW_MUX_CTL_PAD_MUX_MODE_SHIFT)) & IOMUXC_LPSR_SW_MUX_CTL_PAD_MUX_MODE_MASK)
 
@@ -317,10 +304,10 @@ typedef struct {
 #define IOMUXC_LPSR_SW_PAD_CTL_PAD_DWP_MASK      (0x30000000U)
 #define IOMUXC_LPSR_SW_PAD_CTL_PAD_DWP_SHIFT     (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_LPSR_SW_PAD_CTL_PAD_DWP(x)        (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_SW_PAD_CTL_PAD_DWP_SHIFT)) & IOMUXC_LPSR_SW_PAD_CTL_PAD_DWP_MASK)
 
@@ -335,7 +322,7 @@ typedef struct {
 #define IOMUXC_LPSR_SW_PAD_CTL_PAD_DWP_LOCK(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_SW_PAD_CTL_PAD_DWP_LOCK_SHIFT)) & IOMUXC_LPSR_SW_PAD_CTL_PAD_DWP_LOCK_MASK)
 /*! @} */
 
-/*! @name SELECT_INPUT - CAN3_IPP_IND_CANRX_SELECT_INPUT DAISY Register..SAI4_IPP_IND_SAI_TXSYNC_SELECT_INPUT DAISY Register */
+/*! @name SELECT_INPUT - LPI2C6_IPP_IND_LPI2C_SCL_SELECT_INPUT DAISY Register..NMI_GLUE_IPP_IND_NMI_SELECT_INPUT DAISY Register */
 /*! @{ */
 
 #define IOMUXC_LPSR_SELECT_INPUT_DAISY_MASK      (0x3U)  /* Merged from fields with different position or width, of widths (1, 2), largest definition used */

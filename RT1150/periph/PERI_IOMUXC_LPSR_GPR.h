@@ -12,7 +12,7 @@
 **                          MIMXRT1152XVM8B
 **
 **     Version:             rev. 0.2, 2026-02-26
-**     Build:               b260622
+**     Build:               b260707
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for IOMUXC_LPSR_GPR
@@ -147,21 +147,6 @@ typedef struct {
 /*! @name GPR0 - GPR0 General Purpose Register */
 /*! @{ */
 
-#define IOMUXC_LPSR_GPR_GPR0_CM4_INIT_VTOR_LOW_MASK (0xFFF8U)
-#define IOMUXC_LPSR_GPR_GPR0_CM4_INIT_VTOR_LOW_SHIFT (3U)
-/*! CM4_INIT_VTOR_LOW - CM4 Vector table offset value lower bits out of reset */
-#define IOMUXC_LPSR_GPR_GPR0_CM4_INIT_VTOR_LOW(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR0_CM4_INIT_VTOR_LOW_SHIFT)) & IOMUXC_LPSR_GPR_GPR0_CM4_INIT_VTOR_LOW_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR0_DWP_MASK            (0x30000000U)
-#define IOMUXC_LPSR_GPR_GPR0_DWP_SHIFT           (28U)
-/*! DWP - Domain write protection
- *  0b00..Both cores are allowed
- *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
- */
-#define IOMUXC_LPSR_GPR_GPR0_DWP(x)              (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR0_DWP_SHIFT)) & IOMUXC_LPSR_GPR_GPR0_DWP_MASK)
-
 #define IOMUXC_LPSR_GPR_GPR0_DWP_LOCK_MASK       (0xC0000000U)
 #define IOMUXC_LPSR_GPR_GPR0_DWP_LOCK_SHIFT      (30U)
 /*! DWP_LOCK - Domain write protection lock
@@ -175,21 +160,6 @@ typedef struct {
 
 /*! @name GPR1 - GPR1 General Purpose Register */
 /*! @{ */
-
-#define IOMUXC_LPSR_GPR_GPR1_CM4_INIT_VTOR_HIGH_MASK (0xFFFFU)
-#define IOMUXC_LPSR_GPR_GPR1_CM4_INIT_VTOR_HIGH_SHIFT (0U)
-/*! CM4_INIT_VTOR_HIGH - CM4 Vector table offset value higher bits out of reset */
-#define IOMUXC_LPSR_GPR_GPR1_CM4_INIT_VTOR_HIGH(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR1_CM4_INIT_VTOR_HIGH_SHIFT)) & IOMUXC_LPSR_GPR_GPR1_CM4_INIT_VTOR_HIGH_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR1_DWP_MASK            (0x30000000U)
-#define IOMUXC_LPSR_GPR_GPR1_DWP_SHIFT           (28U)
-/*! DWP - Domain write protection
- *  0b00..Both cores are allowed
- *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
- */
-#define IOMUXC_LPSR_GPR_GPR1_DWP(x)              (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR1_DWP_SHIFT)) & IOMUXC_LPSR_GPR_GPR1_DWP_MASK)
 
 #define IOMUXC_LPSR_GPR_GPR1_DWP_LOCK_MASK       (0xC0000000U)
 #define IOMUXC_LPSR_GPR_GPR1_DWP_LOCK_SHIFT      (30U)
@@ -636,10 +606,10 @@ typedef struct {
 #define IOMUXC_LPSR_GPR_GPR26_DWP_MASK           (0x30000000U)
 #define IOMUXC_LPSR_GPR_GPR26_DWP_SHIFT          (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_LPSR_GPR_GPR26_DWP(x)             (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR26_DWP_SHIFT)) & IOMUXC_LPSR_GPR_GPR26_DWP_MASK)
 
@@ -657,11 +627,6 @@ typedef struct {
 /*! @name GPR33 - GPR33 General Purpose Register */
 /*! @{ */
 
-#define IOMUXC_LPSR_GPR_GPR33_M4_NMI_CLEAR_MASK  (0x1U)
-#define IOMUXC_LPSR_GPR_GPR33_M4_NMI_CLEAR_SHIFT (0U)
-/*! M4_NMI_CLEAR - Clear CM4 NMI holding register */
-#define IOMUXC_LPSR_GPR_GPR33_M4_NMI_CLEAR(x)    (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR33_M4_NMI_CLEAR_SHIFT)) & IOMUXC_LPSR_GPR_GPR33_M4_NMI_CLEAR_MASK)
-
 #define IOMUXC_LPSR_GPR_GPR33_USBPHY1_WAKEUP_IRQ_CLEAR_MASK (0x100U)
 #define IOMUXC_LPSR_GPR_GPR33_USBPHY1_WAKEUP_IRQ_CLEAR_SHIFT (8U)
 /*! USBPHY1_WAKEUP_IRQ_CLEAR - Clear USBPHY1 wakeup interrupt holding register */
@@ -675,10 +640,10 @@ typedef struct {
 #define IOMUXC_LPSR_GPR_GPR33_DWP_MASK           (0x30000000U)
 #define IOMUXC_LPSR_GPR_GPR33_DWP_SHIFT          (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_LPSR_GPR_GPR33_DWP(x)             (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR33_DWP_SHIFT)) & IOMUXC_LPSR_GPR_GPR33_DWP_MASK)
 
@@ -714,22 +679,6 @@ typedef struct {
  */
 #define IOMUXC_LPSR_GPR_GPR34_M7_NMI_MASK(x)     (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR34_M7_NMI_MASK_SHIFT)) & IOMUXC_LPSR_GPR_GPR34_M7_NMI_MASK_MASK)
 
-#define IOMUXC_LPSR_GPR_GPR34_M4_NMI_MASK_MASK   (0x10U)
-#define IOMUXC_LPSR_GPR_GPR34_M4_NMI_MASK_SHIFT  (4U)
-/*! M4_NMI_MASK - Mask CM4 NMI pin input
- *  0b0..NMI input from IO to CM4 is not blocked
- *  0b1..NMI input from IO to CM4 is blocked
- */
-#define IOMUXC_LPSR_GPR_GPR34_M4_NMI_MASK(x)     (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR34_M4_NMI_MASK_SHIFT)) & IOMUXC_LPSR_GPR_GPR34_M4_NMI_MASK_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR34_M4_GPC_SLEEP_SEL_MASK (0x20U)
-#define IOMUXC_LPSR_GPR_GPR34_M4_GPC_SLEEP_SEL_SHIFT (5U)
-/*! M4_GPC_SLEEP_SEL - CM4 sleep request selection
- *  0b0..CM4 SLEEPDEEP is sent to GPC
- *  0b1..CM4 SLEEPING is sent to GPC
- */
-#define IOMUXC_LPSR_GPR_GPR34_M4_GPC_SLEEP_SEL(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR34_M4_GPC_SLEEP_SEL_SHIFT)) & IOMUXC_LPSR_GPR_GPR34_M4_GPC_SLEEP_SEL_MASK)
-
 #define IOMUXC_LPSR_GPR_GPR34_SEC_ERR_RESP_MASK  (0x800U)
 #define IOMUXC_LPSR_GPR_GPR34_SEC_ERR_RESP_SHIFT (11U)
 /*! SEC_ERR_RESP - Security error response enable
@@ -741,10 +690,10 @@ typedef struct {
 #define IOMUXC_LPSR_GPR_GPR34_DWP_MASK           (0x30000000U)
 #define IOMUXC_LPSR_GPR_GPR34_DWP_SHIFT          (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_LPSR_GPR_GPR34_DWP(x)             (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR34_DWP_SHIFT)) & IOMUXC_LPSR_GPR_GPR34_DWP_MASK)
 
@@ -812,7 +761,7 @@ typedef struct {
 
 #define IOMUXC_LPSR_GPR_GPR35_CAAM_IPG_DOZE_MASK (0x40U)
 #define IOMUXC_LPSR_GPR_GPR35_CAAM_IPG_DOZE_SHIFT (6U)
-/*! CAAM_IPG_DOZE - CAN3 doze mode
+/*! CAAM_IPG_DOZE - CAAM doze mode
  *  0b0..Not in doze mode
  *  0b1..In doze mode
  */
@@ -858,22 +807,6 @@ typedef struct {
  */
 #define IOMUXC_LPSR_GPR_GPR35_CAN2_STOP_REQ(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR35_CAN2_STOP_REQ_SHIFT)) & IOMUXC_LPSR_GPR_GPR35_CAN2_STOP_REQ_MASK)
 
-#define IOMUXC_LPSR_GPR_GPR35_CAN3_IPG_DOZE_MASK (0x1000U)
-#define IOMUXC_LPSR_GPR_GPR35_CAN3_IPG_DOZE_SHIFT (12U)
-/*! CAN3_IPG_DOZE - CAN3 doze mode
- *  0b0..Not in doze mode
- *  0b1..In doze mode
- */
-#define IOMUXC_LPSR_GPR_GPR35_CAN3_IPG_DOZE(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR35_CAN3_IPG_DOZE_SHIFT)) & IOMUXC_LPSR_GPR_GPR35_CAN3_IPG_DOZE_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR35_CAN3_STOP_REQ_MASK (0x2000U)
-#define IOMUXC_LPSR_GPR_GPR35_CAN3_STOP_REQ_SHIFT (13U)
-/*! CAN3_STOP_REQ - CAN3 stop request
- *  0b0..Stop request off
- *  0b1..Stop request on
- */
-#define IOMUXC_LPSR_GPR_GPR35_CAN3_STOP_REQ(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR35_CAN3_STOP_REQ_SHIFT)) & IOMUXC_LPSR_GPR_GPR35_CAN3_STOP_REQ_MASK)
-
 #define IOMUXC_LPSR_GPR_GPR35_EDMA_STOP_REQ_MASK (0x8000U)
 #define IOMUXC_LPSR_GPR_GPR35_EDMA_STOP_REQ_SHIFT (15U)
 /*! EDMA_STOP_REQ - EDMA stop request
@@ -889,22 +822,6 @@ typedef struct {
  *  0b1..Stop request on
  */
 #define IOMUXC_LPSR_GPR_GPR35_EDMA_LPSR_STOP_REQ(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR35_EDMA_LPSR_STOP_REQ_SHIFT)) & IOMUXC_LPSR_GPR_GPR35_EDMA_LPSR_STOP_REQ_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR35_ENET_IPG_DOZE_MASK (0x20000U)
-#define IOMUXC_LPSR_GPR_GPR35_ENET_IPG_DOZE_SHIFT (17U)
-/*! ENET_IPG_DOZE - ENET doze mode
- *  0b0..Not in doze mode
- *  0b1..In doze mode
- */
-#define IOMUXC_LPSR_GPR_GPR35_ENET_IPG_DOZE(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR35_ENET_IPG_DOZE_SHIFT)) & IOMUXC_LPSR_GPR_GPR35_ENET_IPG_DOZE_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR35_ENET_STOP_REQ_MASK (0x40000U)
-#define IOMUXC_LPSR_GPR_GPR35_ENET_STOP_REQ_SHIFT (18U)
-/*! ENET_STOP_REQ - ENET stop request
- *  0b0..Stop request off
- *  0b1..Stop request on
- */
-#define IOMUXC_LPSR_GPR_GPR35_ENET_STOP_REQ(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR35_ENET_STOP_REQ_SHIFT)) & IOMUXC_LPSR_GPR_GPR35_ENET_STOP_REQ_MASK)
 
 #define IOMUXC_LPSR_GPR_GPR35_ENET1G_IPG_DOZE_MASK (0x80000U)
 #define IOMUXC_LPSR_GPR_GPR35_ENET1G_IPG_DOZE_SHIFT (19U)
@@ -973,10 +890,10 @@ typedef struct {
 #define IOMUXC_LPSR_GPR_GPR35_DWP_MASK           (0x30000000U)
 #define IOMUXC_LPSR_GPR_GPR35_DWP_SHIFT          (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_LPSR_GPR_GPR35_DWP(x)             (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR35_DWP_SHIFT)) & IOMUXC_LPSR_GPR_GPR35_DWP_MASK)
 
@@ -1138,30 +1055,6 @@ typedef struct {
  */
 #define IOMUXC_LPSR_GPR_GPR36_LPI2C4_IPG_STOP_MODE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR36_LPI2C4_IPG_STOP_MODE_SHIFT)) & IOMUXC_LPSR_GPR_GPR36_LPI2C4_IPG_STOP_MODE_MASK)
 
-#define IOMUXC_LPSR_GPR_GPR36_LPI2C5_IPG_DOZE_MASK (0x40000U)
-#define IOMUXC_LPSR_GPR_GPR36_LPI2C5_IPG_DOZE_SHIFT (18U)
-/*! LPI2C5_IPG_DOZE - LPI2C5 doze mode
- *  0b0..Not in doze mode
- *  0b1..In doze mode
- */
-#define IOMUXC_LPSR_GPR_GPR36_LPI2C5_IPG_DOZE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR36_LPI2C5_IPG_DOZE_SHIFT)) & IOMUXC_LPSR_GPR_GPR36_LPI2C5_IPG_DOZE_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR36_LPI2C5_STOP_REQ_MASK (0x80000U)
-#define IOMUXC_LPSR_GPR_GPR36_LPI2C5_STOP_REQ_SHIFT (19U)
-/*! LPI2C5_STOP_REQ - LPI2C5 stop request
- *  0b0..Stop request off
- *  0b1..Stop request on
- */
-#define IOMUXC_LPSR_GPR_GPR36_LPI2C5_STOP_REQ(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR36_LPI2C5_STOP_REQ_SHIFT)) & IOMUXC_LPSR_GPR_GPR36_LPI2C5_STOP_REQ_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR36_LPI2C5_IPG_STOP_MODE_MASK (0x100000U)
-#define IOMUXC_LPSR_GPR_GPR36_LPI2C5_IPG_STOP_MODE_SHIFT (20U)
-/*! LPI2C5_IPG_STOP_MODE - LPI2C5 stop mode selection. This bitfield cannot change when LPI2C5_STOP_REQ is asserted.
- *  0b0..This module is functional in Stop Mode
- *  0b1..This module is not functional in Stop Mode and the corresponding x_STOP_REQ field is set to '1'.
- */
-#define IOMUXC_LPSR_GPR_GPR36_LPI2C5_IPG_STOP_MODE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR36_LPI2C5_IPG_STOP_MODE_SHIFT)) & IOMUXC_LPSR_GPR_GPR36_LPI2C5_IPG_STOP_MODE_MASK)
-
 #define IOMUXC_LPSR_GPR_GPR36_LPI2C6_IPG_DOZE_MASK (0x200000U)
 #define IOMUXC_LPSR_GPR_GPR36_LPI2C6_IPG_DOZE_SHIFT (21U)
 /*! LPI2C6_IPG_DOZE - LPI2C6 doze mode
@@ -1213,10 +1106,10 @@ typedef struct {
 #define IOMUXC_LPSR_GPR_GPR36_DWP_MASK           (0x30000000U)
 #define IOMUXC_LPSR_GPR_GPR36_DWP_SHIFT          (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_LPSR_GPR_GPR36_DWP(x)             (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR36_DWP_SHIFT)) & IOMUXC_LPSR_GPR_GPR36_DWP_MASK)
 
@@ -1330,30 +1223,6 @@ typedef struct {
  */
 #define IOMUXC_LPSR_GPR_GPR37_LPSPI5_IPG_STOP_MODE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR37_LPSPI5_IPG_STOP_MODE_SHIFT)) & IOMUXC_LPSR_GPR_GPR37_LPSPI5_IPG_STOP_MODE_MASK)
 
-#define IOMUXC_LPSR_GPR_GPR37_LPSPI6_IPG_DOZE_MASK (0x1000U)
-#define IOMUXC_LPSR_GPR_GPR37_LPSPI6_IPG_DOZE_SHIFT (12U)
-/*! LPSPI6_IPG_DOZE - LPSPI6 doze mode
- *  0b0..Not in doze mode
- *  0b1..In doze mode
- */
-#define IOMUXC_LPSR_GPR_GPR37_LPSPI6_IPG_DOZE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR37_LPSPI6_IPG_DOZE_SHIFT)) & IOMUXC_LPSR_GPR_GPR37_LPSPI6_IPG_DOZE_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR37_LPSPI6_STOP_REQ_MASK (0x2000U)
-#define IOMUXC_LPSR_GPR_GPR37_LPSPI6_STOP_REQ_SHIFT (13U)
-/*! LPSPI6_STOP_REQ - LPSPI6 stop request
- *  0b0..Stop request off
- *  0b1..Stop request on
- */
-#define IOMUXC_LPSR_GPR_GPR37_LPSPI6_STOP_REQ(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR37_LPSPI6_STOP_REQ_SHIFT)) & IOMUXC_LPSR_GPR_GPR37_LPSPI6_STOP_REQ_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR37_LPSPI6_IPG_STOP_MODE_MASK (0x4000U)
-#define IOMUXC_LPSR_GPR_GPR37_LPSPI6_IPG_STOP_MODE_SHIFT (14U)
-/*! LPSPI6_IPG_STOP_MODE - LPSPI6 stop mode selection. This bitfield cannot change when LPSPI6_STOP_REQ is asserted.
- *  0b0..This module is functional in Stop Mode
- *  0b1..This module is not functional in Stop Mode and the corresponding x_STOP_REQ field is set to '1'.
- */
-#define IOMUXC_LPSR_GPR_GPR37_LPSPI6_IPG_STOP_MODE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR37_LPSPI6_IPG_STOP_MODE_SHIFT)) & IOMUXC_LPSR_GPR_GPR37_LPSPI6_IPG_STOP_MODE_MASK)
-
 #define IOMUXC_LPSR_GPR_GPR37_LPUART1_IPG_DOZE_MASK (0x8000U)
 #define IOMUXC_LPSR_GPR_GPR37_LPUART1_IPG_DOZE_SHIFT (15U)
 /*! LPUART1_IPG_DOZE - LPUART1 doze mode
@@ -1426,37 +1295,13 @@ typedef struct {
  */
 #define IOMUXC_LPSR_GPR_GPR37_LPUART3_IPG_STOP_MODE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR37_LPUART3_IPG_STOP_MODE_SHIFT)) & IOMUXC_LPSR_GPR_GPR37_LPUART3_IPG_STOP_MODE_MASK)
 
-#define IOMUXC_LPSR_GPR_GPR37_LPUART4_IPG_DOZE_MASK (0x1000000U)
-#define IOMUXC_LPSR_GPR_GPR37_LPUART4_IPG_DOZE_SHIFT (24U)
-/*! LPUART4_IPG_DOZE - LPUART4 doze mode
- *  0b0..Not in doze mode
- *  0b1..In doze mode
- */
-#define IOMUXC_LPSR_GPR_GPR37_LPUART4_IPG_DOZE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR37_LPUART4_IPG_DOZE_SHIFT)) & IOMUXC_LPSR_GPR_GPR37_LPUART4_IPG_DOZE_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR37_LPUART4_STOP_REQ_MASK (0x2000000U)
-#define IOMUXC_LPSR_GPR_GPR37_LPUART4_STOP_REQ_SHIFT (25U)
-/*! LPUART4_STOP_REQ - LPUART4 stop request
- *  0b0..Stop request off
- *  0b1..Stop request on
- */
-#define IOMUXC_LPSR_GPR_GPR37_LPUART4_STOP_REQ(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR37_LPUART4_STOP_REQ_SHIFT)) & IOMUXC_LPSR_GPR_GPR37_LPUART4_STOP_REQ_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR37_LPUART4_IPG_STOP_MODE_MASK (0x4000000U)
-#define IOMUXC_LPSR_GPR_GPR37_LPUART4_IPG_STOP_MODE_SHIFT (26U)
-/*! LPUART4_IPG_STOP_MODE - LPUART4 stop mode selection. This bitfield cannot change when LPUART4_STOP_REQ is asserted.
- *  0b0..This module is functional in Stop Mode
- *  0b1..This module is not functional in Stop Mode and the corresponding x_STOP_REQ field is set to '1'.
- */
-#define IOMUXC_LPSR_GPR_GPR37_LPUART4_IPG_STOP_MODE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR37_LPUART4_IPG_STOP_MODE_SHIFT)) & IOMUXC_LPSR_GPR_GPR37_LPUART4_IPG_STOP_MODE_MASK)
-
 #define IOMUXC_LPSR_GPR_GPR37_DWP_MASK           (0x30000000U)
 #define IOMUXC_LPSR_GPR_GPR37_DWP_SHIFT          (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_LPSR_GPR_GPR37_DWP(x)             (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR37_DWP_SHIFT)) & IOMUXC_LPSR_GPR_GPR37_DWP_MASK)
 
@@ -1594,54 +1439,6 @@ typedef struct {
  */
 #define IOMUXC_LPSR_GPR_GPR38_LPUART9_IPG_STOP_MODE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR38_LPUART9_IPG_STOP_MODE_SHIFT)) & IOMUXC_LPSR_GPR_GPR38_LPUART9_IPG_STOP_MODE_MASK)
 
-#define IOMUXC_LPSR_GPR_GPR38_LPUART10_IPG_DOZE_MASK (0x8000U)
-#define IOMUXC_LPSR_GPR_GPR38_LPUART10_IPG_DOZE_SHIFT (15U)
-/*! LPUART10_IPG_DOZE - LPUART10 doze mode
- *  0b0..Not in doze mode
- *  0b1..In doze mode
- */
-#define IOMUXC_LPSR_GPR_GPR38_LPUART10_IPG_DOZE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR38_LPUART10_IPG_DOZE_SHIFT)) & IOMUXC_LPSR_GPR_GPR38_LPUART10_IPG_DOZE_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR38_LPUART10_STOP_REQ_MASK (0x10000U)
-#define IOMUXC_LPSR_GPR_GPR38_LPUART10_STOP_REQ_SHIFT (16U)
-/*! LPUART10_STOP_REQ - LPUART10 stop request
- *  0b0..Stop request off
- *  0b1..Stop request on
- */
-#define IOMUXC_LPSR_GPR_GPR38_LPUART10_STOP_REQ(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR38_LPUART10_STOP_REQ_SHIFT)) & IOMUXC_LPSR_GPR_GPR38_LPUART10_STOP_REQ_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR38_LPUART10_IPG_STOP_MODE_MASK (0x20000U)
-#define IOMUXC_LPSR_GPR_GPR38_LPUART10_IPG_STOP_MODE_SHIFT (17U)
-/*! LPUART10_IPG_STOP_MODE - LPUART10 stop mode selection. This bitfield cannot change when LPUART10_STOP_REQ is asserted.
- *  0b0..This module is functional in Stop Mode
- *  0b1..This module is not functional in Stop Mode and the corresponding x_STOP_REQ field is set to '1'.
- */
-#define IOMUXC_LPSR_GPR_GPR38_LPUART10_IPG_STOP_MODE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR38_LPUART10_IPG_STOP_MODE_SHIFT)) & IOMUXC_LPSR_GPR_GPR38_LPUART10_IPG_STOP_MODE_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR38_LPUART11_IPG_DOZE_MASK (0x40000U)
-#define IOMUXC_LPSR_GPR_GPR38_LPUART11_IPG_DOZE_SHIFT (18U)
-/*! LPUART11_IPG_DOZE - LPUART11 doze mode
- *  0b0..Not in doze mode
- *  0b1..In doze mode
- */
-#define IOMUXC_LPSR_GPR_GPR38_LPUART11_IPG_DOZE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR38_LPUART11_IPG_DOZE_SHIFT)) & IOMUXC_LPSR_GPR_GPR38_LPUART11_IPG_DOZE_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR38_LPUART11_STOP_REQ_MASK (0x80000U)
-#define IOMUXC_LPSR_GPR_GPR38_LPUART11_STOP_REQ_SHIFT (19U)
-/*! LPUART11_STOP_REQ - LPUART11 stop request
- *  0b0..Stop request off
- *  0b1..Stop request on
- */
-#define IOMUXC_LPSR_GPR_GPR38_LPUART11_STOP_REQ(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR38_LPUART11_STOP_REQ_SHIFT)) & IOMUXC_LPSR_GPR_GPR38_LPUART11_STOP_REQ_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR38_LPUART11_IPG_STOP_MODE_MASK (0x100000U)
-#define IOMUXC_LPSR_GPR_GPR38_LPUART11_IPG_STOP_MODE_SHIFT (20U)
-/*! LPUART11_IPG_STOP_MODE - LPUART11 stop mode selection. This bitfield cannot change when LPUART11_STOP_REQ is asserted.
- *  0b0..This module is functional in Stop Mode
- *  0b1..This module is not functional in Stop Mode and the corresponding x_STOP_REQ field is set to '1'.
- */
-#define IOMUXC_LPSR_GPR_GPR38_LPUART11_IPG_STOP_MODE(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR38_LPUART11_IPG_STOP_MODE_SHIFT)) & IOMUXC_LPSR_GPR_GPR38_LPUART11_IPG_STOP_MODE_MASK)
-
 #define IOMUXC_LPSR_GPR_GPR38_LPUART12_IPG_DOZE_MASK (0x200000U)
 #define IOMUXC_LPSR_GPR_GPR38_LPUART12_IPG_DOZE_SHIFT (21U)
 /*! LPUART12_IPG_DOZE - LPUART12 doze mode
@@ -1693,10 +1490,10 @@ typedef struct {
 #define IOMUXC_LPSR_GPR_GPR38_DWP_MASK           (0x30000000U)
 #define IOMUXC_LPSR_GPR_GPR38_DWP_SHIFT          (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_LPSR_GPR_GPR38_DWP(x)             (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR38_DWP_SHIFT)) & IOMUXC_LPSR_GPR_GPR38_DWP_MASK)
 
@@ -1737,22 +1534,6 @@ typedef struct {
  *  0b1..Stop request on
  */
 #define IOMUXC_LPSR_GPR_GPR39_SEMC_STOP_REQ(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR39_SEMC_STOP_REQ_SHIFT)) & IOMUXC_LPSR_GPR_GPR39_SEMC_STOP_REQ_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR39_SIM1_IPG_DOZE_MASK (0x10U)
-#define IOMUXC_LPSR_GPR_GPR39_SIM1_IPG_DOZE_SHIFT (4U)
-/*! SIM1_IPG_DOZE - SIM1 doze mode
- *  0b0..Not in doze mode
- *  0b1..In doze mode
- */
-#define IOMUXC_LPSR_GPR_GPR39_SIM1_IPG_DOZE(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR39_SIM1_IPG_DOZE_SHIFT)) & IOMUXC_LPSR_GPR_GPR39_SIM1_IPG_DOZE_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR39_SIM2_IPG_DOZE_MASK (0x20U)
-#define IOMUXC_LPSR_GPR_GPR39_SIM2_IPG_DOZE_SHIFT (5U)
-/*! SIM2_IPG_DOZE - SIM2 doze mode
- *  0b0..Not in doze mode
- *  0b1..In doze mode
- */
-#define IOMUXC_LPSR_GPR_GPR39_SIM2_IPG_DOZE(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR39_SIM2_IPG_DOZE_SHIFT)) & IOMUXC_LPSR_GPR_GPR39_SIM2_IPG_DOZE_MASK)
 
 #define IOMUXC_LPSR_GPR_GPR39_SNVS_HP_IPG_DOZE_MASK (0x40U)
 #define IOMUXC_LPSR_GPR_GPR39_SNVS_HP_IPG_DOZE_SHIFT (6U)
@@ -1810,14 +1591,6 @@ typedef struct {
  */
 #define IOMUXC_LPSR_GPR_GPR39_SAI3_STOP_REQ(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR39_SAI3_STOP_REQ_SHIFT)) & IOMUXC_LPSR_GPR_GPR39_SAI3_STOP_REQ_MASK)
 
-#define IOMUXC_LPSR_GPR_GPR39_SAI4_STOP_REQ_MASK (0x2000U)
-#define IOMUXC_LPSR_GPR_GPR39_SAI4_STOP_REQ_SHIFT (13U)
-/*! SAI4_STOP_REQ - SAI4 stop request
- *  0b0..Stop request off
- *  0b1..Stop request on
- */
-#define IOMUXC_LPSR_GPR_GPR39_SAI4_STOP_REQ(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR39_SAI4_STOP_REQ_SHIFT)) & IOMUXC_LPSR_GPR_GPR39_SAI4_STOP_REQ_MASK)
-
 #define IOMUXC_LPSR_GPR_GPR39_FLEXIO1_STOP_REQ_BUS_MASK (0x4000U)
 #define IOMUXC_LPSR_GPR_GPR39_FLEXIO1_STOP_REQ_BUS_SHIFT (14U)
 /*! FLEXIO1_STOP_REQ_BUS - FLEXIO1 bus clock domain stop request
@@ -1853,10 +1626,10 @@ typedef struct {
 #define IOMUXC_LPSR_GPR_GPR39_DWP_MASK           (0x30000000U)
 #define IOMUXC_LPSR_GPR_GPR39_DWP_SHIFT          (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_LPSR_GPR_GPR39_DWP(x)             (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR39_DWP_SHIFT)) & IOMUXC_LPSR_GPR_GPR39_DWP_MASK)
 
@@ -1899,11 +1672,6 @@ typedef struct {
 /*! CAN2_STOP_ACK - CAN2 stop acknowledge */
 #define IOMUXC_LPSR_GPR_GPR40_CAN2_STOP_ACK(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR40_CAN2_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR40_CAN2_STOP_ACK_MASK)
 
-#define IOMUXC_LPSR_GPR_GPR40_CAN3_STOP_ACK_MASK (0x20U)
-#define IOMUXC_LPSR_GPR_GPR40_CAN3_STOP_ACK_SHIFT (5U)
-/*! CAN3_STOP_ACK - CAN3 stop acknowledge */
-#define IOMUXC_LPSR_GPR_GPR40_CAN3_STOP_ACK(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR40_CAN3_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR40_CAN3_STOP_ACK_MASK)
-
 #define IOMUXC_LPSR_GPR_GPR40_EDMA_STOP_ACK_MASK (0x40U)
 #define IOMUXC_LPSR_GPR_GPR40_EDMA_STOP_ACK_SHIFT (6U)
 /*! EDMA_STOP_ACK - EDMA stop acknowledge */
@@ -1913,11 +1681,6 @@ typedef struct {
 #define IOMUXC_LPSR_GPR_GPR40_EDMA_LPSR_STOP_ACK_SHIFT (7U)
 /*! EDMA_LPSR_STOP_ACK - EDMA_LPSR stop acknowledge */
 #define IOMUXC_LPSR_GPR_GPR40_EDMA_LPSR_STOP_ACK(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR40_EDMA_LPSR_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR40_EDMA_LPSR_STOP_ACK_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR40_ENET_STOP_ACK_MASK (0x100U)
-#define IOMUXC_LPSR_GPR_GPR40_ENET_STOP_ACK_SHIFT (8U)
-/*! ENET_STOP_ACK - ENET stop acknowledge */
-#define IOMUXC_LPSR_GPR_GPR40_ENET_STOP_ACK(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR40_ENET_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR40_ENET_STOP_ACK_MASK)
 
 #define IOMUXC_LPSR_GPR_GPR40_ENET1G_STOP_ACK_MASK (0x200U)
 #define IOMUXC_LPSR_GPR_GPR40_ENET1G_STOP_ACK_SHIFT (9U)
@@ -1954,11 +1717,6 @@ typedef struct {
 /*! LPI2C4_STOP_ACK - LPI2C4 stop acknowledge */
 #define IOMUXC_LPSR_GPR_GPR40_LPI2C4_STOP_ACK(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR40_LPI2C4_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR40_LPI2C4_STOP_ACK_MASK)
 
-#define IOMUXC_LPSR_GPR_GPR40_LPI2C5_STOP_ACK_MASK (0x10000U)
-#define IOMUXC_LPSR_GPR_GPR40_LPI2C5_STOP_ACK_SHIFT (16U)
-/*! LPI2C5_STOP_ACK - LPI2C5 stop acknowledge */
-#define IOMUXC_LPSR_GPR_GPR40_LPI2C5_STOP_ACK(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR40_LPI2C5_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR40_LPI2C5_STOP_ACK_MASK)
-
 #define IOMUXC_LPSR_GPR_GPR40_LPI2C6_STOP_ACK_MASK (0x20000U)
 #define IOMUXC_LPSR_GPR_GPR40_LPI2C6_STOP_ACK_SHIFT (17U)
 /*! LPI2C6_STOP_ACK - LPI2C6 stop acknowledge */
@@ -1989,11 +1747,6 @@ typedef struct {
 /*! LPSPI5_STOP_ACK - LPSPI5 stop acknowledge */
 #define IOMUXC_LPSR_GPR_GPR40_LPSPI5_STOP_ACK(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR40_LPSPI5_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR40_LPSPI5_STOP_ACK_MASK)
 
-#define IOMUXC_LPSR_GPR_GPR40_LPSPI6_STOP_ACK_MASK (0x800000U)
-#define IOMUXC_LPSR_GPR_GPR40_LPSPI6_STOP_ACK_SHIFT (23U)
-/*! LPSPI6_STOP_ACK - LPSPI6 stop acknowledge */
-#define IOMUXC_LPSR_GPR_GPR40_LPSPI6_STOP_ACK(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR40_LPSPI6_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR40_LPSPI6_STOP_ACK_MASK)
-
 #define IOMUXC_LPSR_GPR_GPR40_LPUART1_STOP_ACK_MASK (0x1000000U)
 #define IOMUXC_LPSR_GPR_GPR40_LPUART1_STOP_ACK_SHIFT (24U)
 /*! LPUART1_STOP_ACK - LPUART1 stop acknowledge */
@@ -2008,11 +1761,6 @@ typedef struct {
 #define IOMUXC_LPSR_GPR_GPR40_LPUART3_STOP_ACK_SHIFT (26U)
 /*! LPUART3_STOP_ACK - LPUART3 stop acknowledge */
 #define IOMUXC_LPSR_GPR_GPR40_LPUART3_STOP_ACK(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR40_LPUART3_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR40_LPUART3_STOP_ACK_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR40_LPUART4_STOP_ACK_MASK (0x8000000U)
-#define IOMUXC_LPSR_GPR_GPR40_LPUART4_STOP_ACK_SHIFT (27U)
-/*! LPUART4_STOP_ACK - LPUART4 stop acknowledge */
-#define IOMUXC_LPSR_GPR_GPR40_LPUART4_STOP_ACK(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR40_LPUART4_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR40_LPUART4_STOP_ACK_MASK)
 
 #define IOMUXC_LPSR_GPR_GPR40_LPUART5_STOP_ACK_MASK (0x10000000U)
 #define IOMUXC_LPSR_GPR_GPR40_LPUART5_STOP_ACK_SHIFT (28U)
@@ -2042,16 +1790,6 @@ typedef struct {
 #define IOMUXC_LPSR_GPR_GPR41_LPUART9_STOP_ACK_SHIFT (0U)
 /*! LPUART9_STOP_ACK - LPUART9 stop acknowledge */
 #define IOMUXC_LPSR_GPR_GPR41_LPUART9_STOP_ACK(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR41_LPUART9_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR41_LPUART9_STOP_ACK_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR41_LPUART10_STOP_ACK_MASK (0x2U)
-#define IOMUXC_LPSR_GPR_GPR41_LPUART10_STOP_ACK_SHIFT (1U)
-/*! LPUART10_STOP_ACK - LPUART10 stop acknowledge */
-#define IOMUXC_LPSR_GPR_GPR41_LPUART10_STOP_ACK(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR41_LPUART10_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR41_LPUART10_STOP_ACK_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR41_LPUART11_STOP_ACK_MASK (0x4U)
-#define IOMUXC_LPSR_GPR_GPR41_LPUART11_STOP_ACK_SHIFT (2U)
-/*! LPUART11_STOP_ACK - LPUART11 stop acknowledge */
-#define IOMUXC_LPSR_GPR_GPR41_LPUART11_STOP_ACK(x) (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR41_LPUART11_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR41_LPUART11_STOP_ACK_MASK)
 
 #define IOMUXC_LPSR_GPR_GPR41_LPUART12_STOP_ACK_MASK (0x8U)
 #define IOMUXC_LPSR_GPR_GPR41_LPUART12_STOP_ACK_SHIFT (3U)
@@ -2097,11 +1835,6 @@ typedef struct {
 #define IOMUXC_LPSR_GPR_GPR41_SAI3_STOP_ACK_SHIFT (11U)
 /*! SAI3_STOP_ACK - SAI3 stop acknowledge */
 #define IOMUXC_LPSR_GPR_GPR41_SAI3_STOP_ACK(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR41_SAI3_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR41_SAI3_STOP_ACK_MASK)
-
-#define IOMUXC_LPSR_GPR_GPR41_SAI4_STOP_ACK_MASK (0x1000U)
-#define IOMUXC_LPSR_GPR_GPR41_SAI4_STOP_ACK_SHIFT (12U)
-/*! SAI4_STOP_ACK - SAI4 stop acknowledge */
-#define IOMUXC_LPSR_GPR_GPR41_SAI4_STOP_ACK(x)   (((uint32_t)(((uint32_t)(x)) << IOMUXC_LPSR_GPR_GPR41_SAI4_STOP_ACK_SHIFT)) & IOMUXC_LPSR_GPR_GPR41_SAI4_STOP_ACK_MASK)
 
 #define IOMUXC_LPSR_GPR_GPR41_FLEXIO1_STOP_ACK_BUS_MASK (0x2000U)
 #define IOMUXC_LPSR_GPR_GPR41_FLEXIO1_STOP_ACK_BUS_SHIFT (13U)

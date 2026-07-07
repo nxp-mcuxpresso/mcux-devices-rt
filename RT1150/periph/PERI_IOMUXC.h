@@ -12,7 +12,7 @@
 **                          MIMXRT1152XVM8B
 **
 **     Version:             rev. 0.2, 2026-02-26
-**     Build:               b260622
+**     Build:               b260707
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for IOMUXC
@@ -410,13 +410,6 @@ typedef enum _iomuxc_select_input
     kIOMUXC_FLEXCAN2_RX_SELECT_INPUT = 1U,         /**< IOMUXC select input index */
     kIOMUXC_CCM_ENET_QOS_REF_CLK_SELECT_INPUT = 2U, /**< IOMUXC select input index */
     kIOMUXC_CCM_ENET_QOS_TX_CLK_SELECT_INPUT = 3U, /**< IOMUXC select input index */
-    kIOMUXC_ENET_IPG_CLK_RMII_SELECT_INPUT = 4U,   /**< IOMUXC select input index */
-    kIOMUXC_ENET_MAC0_MDIO_SELECT_INPUT = 5U,      /**< IOMUXC select input index */
-    kIOMUXC_ENET_MAC0_RXDATA_SELECT_INPUT_0 = 6U,  /**< IOMUXC select input index */
-    kIOMUXC_ENET_MAC0_RXDATA_SELECT_INPUT_1 = 7U,  /**< IOMUXC select input index */
-    kIOMUXC_ENET_MAC0_RXEN_SELECT_INPUT = 8U,      /**< IOMUXC select input index */
-    kIOMUXC_ENET_MAC0_RXERR_SELECT_INPUT = 9U,     /**< IOMUXC select input index */
-    kIOMUXC_ENET_MAC0_TXCLK_SELECT_INPUT = 10U,    /**< IOMUXC select input index */
     kIOMUXC_ENET_1G_IPG_CLK_RMII_SELECT_INPUT = 11U, /**< IOMUXC select input index */
     kIOMUXC_ENET_1G_MAC0_MDIO_SELECT_INPUT = 12U,  /**< IOMUXC select input index */
     kIOMUXC_ENET_1G_MAC0_RXCLK_SELECT_INPUT = 13U, /**< IOMUXC select input index */
@@ -505,8 +498,6 @@ typedef enum _iomuxc_select_input
     kIOMUXC_LPSPI4_LPSPI_SDO_SELECT_INPUT = 96U,   /**< IOMUXC select input index */
     kIOMUXC_LPUART1_LPUART_RXD_SELECT_INPUT = 97U, /**< IOMUXC select input index */
     kIOMUXC_LPUART1_LPUART_TXD_SELECT_INPUT = 98U, /**< IOMUXC select input index */
-    kIOMUXC_LPUART10_LPUART_RXD_SELECT_INPUT = 99U, /**< IOMUXC select input index */
-    kIOMUXC_LPUART10_LPUART_TXD_SELECT_INPUT = 100U, /**< IOMUXC select input index */
     kIOMUXC_LPUART7_LPUART_RXD_SELECT_INPUT = 101U, /**< IOMUXC select input index */
     kIOMUXC_LPUART7_LPUART_TXD_SELECT_INPUT = 102U, /**< IOMUXC select input index */
     kIOMUXC_LPUART8_LPUART_RXD_SELECT_INPUT = 103U, /**< IOMUXC select input index */
@@ -529,12 +520,6 @@ typedef enum _iomuxc_select_input
     kIOMUXC_SAI1_SAI_RXSYNC_SELECT_INPUT = 120U,   /**< IOMUXC select input index */
     kIOMUXC_SAI1_SAI_TXBCLK_SELECT_INPUT = 121U,   /**< IOMUXC select input index */
     kIOMUXC_SAI1_SAI_TXSYNC_SELECT_INPUT = 122U,   /**< IOMUXC select input index */
-    kIOMUXC_EMVSIM1_SIO_SELECT_INPUT = 129U,       /**< IOMUXC select input index */
-    kIOMUXC_EMVSIM1_IPP_SIMPD_SELECT_INPUT = 130U, /**< IOMUXC select input index */
-    kIOMUXC_EMVSIM1_POWER_FAIL_SELECT_INPUT = 131U, /**< IOMUXC select input index */
-    kIOMUXC_EMVSIM2_SIO_SELECT_INPUT = 132U,       /**< IOMUXC select input index */
-    kIOMUXC_EMVSIM2_IPP_SIMPD_SELECT_INPUT = 133U, /**< IOMUXC select input index */
-    kIOMUXC_EMVSIM2_POWER_FAIL_SELECT_INPUT = 134U, /**< IOMUXC select input index */
     kIOMUXC_SPDIF_SPDIF_IN1_SELECT_INPUT = 135U,   /**< IOMUXC select input index */
     kIOMUXC_USB_OTG2_OC_SELECT_INPUT = 136U,       /**< IOMUXC select input index */
     kIOMUXC_USB_OTG_OC_SELECT_INPUT = 137U,        /**< IOMUXC select input index */
@@ -620,7 +605,7 @@ typedef struct {
        uint8_t RESERVED_0[16];
   __IO uint32_t SW_MUX_CTL_PAD[IOMUXC_SW_MUX_CTL_PAD_COUNT]; /**< SW_MUX_CTL_PAD_GPIO_EMC_B1_00 SW MUX Control Register..SW_MUX_CTL_PAD_GPIO_DISP_B2_15 SW MUX Control Register, array offset: 0x10, array step: 0x4 */
   __IO uint32_t SW_PAD_CTL_PAD[IOMUXC_SW_PAD_CTL_PAD_COUNT]; /**< SW_PAD_CTL_PAD_GPIO_EMC_B1_00 SW PAD Control Register..SW_PAD_CTL_PAD_GPIO_DISP_B2_15 SW PAD Control Register, array offset: 0x254, array step: 0x4 */
-  __IO uint32_t SELECT_INPUT[IOMUXC_SELECT_INPUT_COUNT]; /**< FLEXCAN1_RX_SELECT_INPUT DAISY Register..XBAR1_IN_SELECT_INPUT_35 DAISY Register, array offset: 0x498, array step: 0x4, valid indices: [0-122, 129-159] */
+  __IO uint32_t SELECT_INPUT[IOMUXC_SELECT_INPUT_COUNT]; /**< FLEXCAN1_RX_SELECT_INPUT DAISY Register..XBAR1_IN_SELECT_INPUT_35 DAISY Register, array offset: 0x498, array step: 0x4, valid indices: [0-3, 11-98, 101-122, 135-159] */
 } IOMUXC_Type;
 
 /* ----------------------------------------------------------------------------
@@ -638,18 +623,18 @@ typedef struct {
 #define IOMUXC_SW_MUX_CTL_PAD_MUX_MODE_MASK      (0xFU)
 #define IOMUXC_SW_MUX_CTL_PAD_MUX_MODE_SHIFT     (0U)
 /*! MUX_MODE - MUX Mode Select Field.
- *  0b0000..Select mux mode: ALT0 mux port: SEMC_DATA16 of instance: SEMC
- *  0b0001..Select mux mode: ALT1 mux port: CCM_ENET_REF_CLK_25M of instance: CCM
- *  0b0010..Select mux mode: ALT2 mux port: TMR3_TIMER1 of instance: TMR3
- *  0b0011..Select mux mode: ALT3 mux port: LPUART6_CTS_B of instance: LPUART6
- *  0b0100..Select mux mode: ALT4 mux port: FLEXSPI2_B_DATA06 of instance: FLEXSPI2
- *  0b0101..Select mux mode: ALT5 mux port: GPIO_MUX2_IO10 of instance: GPIO_MUX2
- *  0b0110..Select mux mode: ALT6 mux port: XBAR1_INOUT20 of instance: XBAR1
- *  0b0111..Select mux mode: ALT7 mux port: ENET_QOS_1588_EVENT1_OUT of instance: ENET_QOS
- *  0b1000..Select mux mode: ALT8 mux port: LPSPI1_SCK of instance: LPSPI1
- *  0b1001..Select mux mode: ALT9 mux port: LPI2C2_SCL of instance: LPI2C2
- *  0b1010..Select mux mode: ALT10 mux port: GPIO8_IO10 of instance: GPIO8
- *  0b1011..Select mux mode: ALT11 mux port: FLEXPWM3_PWM0_A of instance: FLEXPWM3
+ *  0b0000..Select mux mode: ALT0 mux port: SEMC_DATA17 of instance: SEMC
+ *  0b0001..Select mux mode: ALT1 mux port: USDHC2_CD_B of instance: USDHC2
+ *  0b0010..Select mux mode: ALT2 mux port: TMR4_TIMER1 of instance: TMR4
+ *  0b0011..Select mux mode: ALT3 mux port: LPUART6_RTS_B of instance: LPUART6
+ *  0b0100..Select mux mode: ALT4 mux port: FLEXSPI2_B_DATA05 of instance: FLEXSPI2
+ *  0b0101..Select mux mode: ALT5 mux port: GPIO_MUX2_IO11 of instance: GPIO_MUX2
+ *  0b0110..Select mux mode: ALT6 mux port: XBAR1_INOUT21 of instance: XBAR1
+ *  0b0111..Select mux mode: ALT7 mux port: ENET_QOS_1588_EVENT1_IN of instance: ENET_QOS
+ *  0b1000..Select mux mode: ALT8 mux port: LPSPI1_PCS0 of instance: LPSPI1
+ *  0b1001..Select mux mode: ALT9 mux port: LPI2C2_SDA of instance: LPI2C2
+ *  0b1010..Select mux mode: ALT10 mux port: GPIO8_IO11 of instance: GPIO8
+ *  0b1011..Select mux mode: ALT11 mux port: FLEXPWM3_PWM0_B of instance: FLEXPWM3
  */
 #define IOMUXC_SW_MUX_CTL_PAD_MUX_MODE(x)        (((uint32_t)(((uint32_t)(x)) << IOMUXC_SW_MUX_CTL_PAD_MUX_MODE_SHIFT)) & IOMUXC_SW_MUX_CTL_PAD_MUX_MODE_MASK)
 
@@ -726,10 +711,10 @@ typedef struct {
 #define IOMUXC_SW_PAD_CTL_PAD_DWP_MASK           (0x30000000U)
 #define IOMUXC_SW_PAD_CTL_PAD_DWP_SHIFT          (28U)
 /*! DWP - Domain write protection
- *  0b00..Both cores are allowed
+ *  0b00..CM7 is allowed
  *  0b01..CM7 is forbidden
- *  0b10..CM4 is forbidden
- *  0b11..Both cores are forbidden
+ *  0b10..Reserved
+ *  0b11..CM7 is forbidden
  */
 #define IOMUXC_SW_PAD_CTL_PAD_DWP(x)             (((uint32_t)(((uint32_t)(x)) << IOMUXC_SW_PAD_CTL_PAD_DWP_SHIFT)) & IOMUXC_SW_PAD_CTL_PAD_DWP_MASK)
 

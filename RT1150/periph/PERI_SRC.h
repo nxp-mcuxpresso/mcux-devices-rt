@@ -12,7 +12,7 @@
 **                          MIMXRT1152XVM8B
 **
 **     Version:             rev. 0.2, 2026-02-26
-**     Build:               b260622
+**     Build:               b260707
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SRC
@@ -123,37 +123,25 @@ typedef struct {
   __IO uint32_t SETPOINT_WAKEUP;                   /**< Slice Setpoint Config Register, offset: 0x248 */
   __IO uint32_t DOMAIN_WAKEUP;                     /**< Slice Domain Config Register, offset: 0x24C */
   __IO uint32_t STAT_WAKEUP;                       /**< Slice Status Register, offset: 0x250 */
-       uint8_t RESERVED_3[44];
-  __IO uint32_t AUTHEN_M4CORE;                     /**< Slice Authentication Register, offset: 0x280 */
-  __IO uint32_t CTRL_M4CORE;                       /**< Slice Control Register, offset: 0x284 */
-  __IO uint32_t SETPOINT_M4CORE;                   /**< Slice Setpoint Config Register, offset: 0x288 */
-  __IO uint32_t DOMAIN_M4CORE;                     /**< Slice Domain Config Register, offset: 0x28C */
-  __IO uint32_t STAT_M4CORE;                       /**< Slice Status Register, offset: 0x290 */
-       uint8_t RESERVED_4[12];
+       uint8_t RESERVED_3[76];
   __IO uint32_t AUTHEN_M7CORE;                     /**< Slice Authentication Register, offset: 0x2A0 */
   __IO uint32_t CTRL_M7CORE;                       /**< Slice Control Register, offset: 0x2A4 */
   __IO uint32_t SETPOINT_M7CORE;                   /**< Slice Setpoint Config Register, offset: 0x2A8 */
   __IO uint32_t DOMAIN_M7CORE;                     /**< Slice Domain Config Register, offset: 0x2AC */
   __IO uint32_t STAT_M7CORE;                       /**< Slice Status Register, offset: 0x2B0 */
-       uint8_t RESERVED_5[12];
-  __IO uint32_t AUTHEN_M4DEBUG;                    /**< Slice Authentication Register, offset: 0x2C0 */
-  __IO uint32_t CTRL_M4DEBUG;                      /**< Slice Control Register, offset: 0x2C4 */
-  __IO uint32_t SETPOINT_M4DEBUG;                  /**< Slice Setpoint Config Register, offset: 0x2C8 */
-  __IO uint32_t DOMAIN_M4DEBUG;                    /**< Slice Domain Config Register, offset: 0x2CC */
-  __IO uint32_t STAT_M4DEBUG;                      /**< Slice Status Register, offset: 0x2D0 */
-       uint8_t RESERVED_6[12];
+       uint8_t RESERVED_4[44];
   __IO uint32_t AUTHEN_M7DEBUG;                    /**< Slice Authentication Register, offset: 0x2E0 */
   __IO uint32_t CTRL_M7DEBUG;                      /**< Slice Control Register, offset: 0x2E4 */
   __IO uint32_t SETPOINT_M7DEBUG;                  /**< Slice Setpoint Config Register, offset: 0x2E8 */
   __IO uint32_t DOMAIN_M7DEBUG;                    /**< Slice Domain Config Register, offset: 0x2EC */
   __IO uint32_t STAT_M7DEBUG;                      /**< Slice Status Register, offset: 0x2F0 */
-       uint8_t RESERVED_7[12];
+       uint8_t RESERVED_5[12];
   __IO uint32_t AUTHEN_USBPHY1;                    /**< Slice Authentication Register, offset: 0x300 */
   __IO uint32_t CTRL_USBPHY1;                      /**< Slice Control Register, offset: 0x304 */
   __IO uint32_t SETPOINT_USBPHY1;                  /**< Slice Setpoint Config Register, offset: 0x308 */
   __IO uint32_t DOMAIN_USBPHY1;                    /**< Slice Domain Config Register, offset: 0x30C */
   __IO uint32_t STAT_USBPHY1;                      /**< Slice Status Register, offset: 0x310 */
-       uint8_t RESERVED_8[12];
+       uint8_t RESERVED_6[12];
   __IO uint32_t AUTHEN_USBPHY2;                    /**< Slice Authentication Register, offset: 0x320 */
   __IO uint32_t CTRL_USBPHY2;                      /**< Slice Control Register, offset: 0x324 */
   __IO uint32_t SETPOINT_USBPHY2;                  /**< Slice Setpoint Config Register, offset: 0x328 */
@@ -172,14 +160,6 @@ typedef struct {
 
 /*! @name SCR - SRC Control Register */
 /*! @{ */
-
-#define SRC_SCR_BT_RELEASE_M4_MASK               (0x1U)
-#define SRC_SCR_BT_RELEASE_M4_SHIFT              (0U)
-/*! BT_RELEASE_M4
- *  0b0..cm4 core reset is asserted
- *  0b1..cm4 core reset is released
- */
-#define SRC_SCR_BT_RELEASE_M4(x)                 (((uint32_t)(((uint32_t)(x)) << SRC_SCR_BT_RELEASE_M4_SHIFT)) & SRC_SCR_BT_RELEASE_M4_MASK)
 
 #define SRC_SCR_BT_RELEASE_M7_MASK               (0x2U)
 #define SRC_SCR_BT_RELEASE_M7_SHIFT              (1U)
@@ -213,26 +193,6 @@ typedef struct {
  */
 #define SRC_SRMR_WDOG3_RESET_MODE(x)             (((uint32_t)(((uint32_t)(x)) << SRC_SRMR_WDOG3_RESET_MODE_SHIFT)) & SRC_SRMR_WDOG3_RESET_MODE_MASK)
 
-#define SRC_SRMR_WDOG4_RESET_MODE_MASK           (0x30U)
-#define SRC_SRMR_WDOG4_RESET_MODE_SHIFT          (4U)
-/*! WDOG4_RESET_MODE - Wdog4 reset mode configuration
- *  0b00..reset system
- *  0b01..reserved
- *  0b10..reserved
- *  0b11..do not reset anything
- */
-#define SRC_SRMR_WDOG4_RESET_MODE(x)             (((uint32_t)(((uint32_t)(x)) << SRC_SRMR_WDOG4_RESET_MODE_SHIFT)) & SRC_SRMR_WDOG4_RESET_MODE_MASK)
-
-#define SRC_SRMR_M4LOCKUP_RESET_MODE_MASK        (0xC0U)
-#define SRC_SRMR_M4LOCKUP_RESET_MODE_SHIFT       (6U)
-/*! M4LOCKUP_RESET_MODE - M4 core lockup reset mode configuration
- *  0b00..reset system
- *  0b01..reserved
- *  0b10..reserved
- *  0b11..do not reset anything
- */
-#define SRC_SRMR_M4LOCKUP_RESET_MODE(x)          (((uint32_t)(((uint32_t)(x)) << SRC_SRMR_M4LOCKUP_RESET_MODE_SHIFT)) & SRC_SRMR_M4LOCKUP_RESET_MODE_MASK)
-
 #define SRC_SRMR_M7LOCKUP_RESET_MODE_MASK        (0x300U)
 #define SRC_SRMR_M7LOCKUP_RESET_MODE_SHIFT       (8U)
 /*! M7LOCKUP_RESET_MODE - M7 core lockup reset mode configuration
@@ -242,16 +202,6 @@ typedef struct {
  *  0b11..do not reset anything
  */
 #define SRC_SRMR_M7LOCKUP_RESET_MODE(x)          (((uint32_t)(((uint32_t)(x)) << SRC_SRMR_M7LOCKUP_RESET_MODE_SHIFT)) & SRC_SRMR_M7LOCKUP_RESET_MODE_MASK)
-
-#define SRC_SRMR_M4REQ_RESET_MODE_MASK           (0xC00U)
-#define SRC_SRMR_M4REQ_RESET_MODE_SHIFT          (10U)
-/*! M4REQ_RESET_MODE - M4 request reset configuration
- *  0b00..reset system
- *  0b01..reserved
- *  0b10..reserved
- *  0b11..do not reset anything
- */
-#define SRC_SRMR_M4REQ_RESET_MODE(x)             (((uint32_t)(((uint32_t)(x)) << SRC_SRMR_M4REQ_RESET_MODE_SHIFT)) & SRC_SRMR_M4REQ_RESET_MODE_MASK)
 
 #define SRC_SRMR_M7REQ_RESET_MODE_MASK           (0x3000U)
 #define SRC_SRMR_M7REQ_RESET_MODE_SHIFT          (12U)
@@ -415,14 +365,6 @@ typedef struct {
  */
 #define SRC_SRSR_WDOG3_RST_B_M7(x)               (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_WDOG3_RST_B_M7_SHIFT)) & SRC_SRSR_WDOG3_RST_B_M7_MASK)
 
-#define SRC_SRSR_WDOG4_RST_B_M7_MASK             (0x200U)
-#define SRC_SRSR_WDOG4_RST_B_M7_SHIFT            (9U)
-/*! WDOG4_RST_B_M7
- *  0b0..Reset is not a result of the watchdog4 time-out event.
- *  0b1..Reset is a result of the watchdog4 time-out event.
- */
-#define SRC_SRSR_WDOG4_RST_B_M7(x)               (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_WDOG4_RST_B_M7_SHIFT)) & SRC_SRSR_WDOG4_RST_B_M7_MASK)
-
 #define SRC_SRSR_TEMPSENSE_RST_B_M7_MASK         (0x400U)
 #define SRC_SRSR_TEMPSENSE_RST_B_M7_SHIFT        (10U)
 /*! TEMPSENSE_RST_B_M7
@@ -430,22 +372,6 @@ typedef struct {
  *  0b1..Reset is a result of software reset from Temperature Sensor.
  */
 #define SRC_SRSR_TEMPSENSE_RST_B_M7(x)           (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_TEMPSENSE_RST_B_M7_SHIFT)) & SRC_SRSR_TEMPSENSE_RST_B_M7_MASK)
-
-#define SRC_SRSR_M4_REQUEST_M7_MASK              (0x800U)
-#define SRC_SRSR_M4_REQUEST_M7_SHIFT             (11U)
-/*! M4_REQUEST_M7
- *  0b0..Reset is not a result of m4 reset request.
- *  0b1..Reset is a result of m4 reset request.
- */
-#define SRC_SRSR_M4_REQUEST_M7(x)                (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_M4_REQUEST_M7_SHIFT)) & SRC_SRSR_M4_REQUEST_M7_MASK)
-
-#define SRC_SRSR_M4_LOCKUP_M7_MASK               (0x1000U)
-#define SRC_SRSR_M4_LOCKUP_M7_SHIFT              (12U)
-/*! M4_LOCKUP_M7
- *  0b0..Reset is not a result of the mentioned case.
- *  0b1..Reset is a result of the mentioned case.
- */
-#define SRC_SRSR_M4_LOCKUP_M7(x)                 (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_M4_LOCKUP_M7_SHIFT)) & SRC_SRSR_M4_LOCKUP_M7_MASK)
 
 #define SRC_SRSR_OVERVOLT_RST_M7_MASK            (0x2000U)
 #define SRC_SRSR_OVERVOLT_RST_M7_SHIFT           (13U)
@@ -462,126 +388,6 @@ typedef struct {
  *  0b1..Reset is a result of the mentioned case.
  */
 #define SRC_SRSR_CDOG_RST_M7(x)                  (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_CDOG_RST_M7_SHIFT)) & SRC_SRSR_CDOG_RST_M7_MASK)
-
-#define SRC_SRSR_IPP_RESET_B_M4_MASK             (0x10000U)
-#define SRC_SRSR_IPP_RESET_B_M4_SHIFT            (16U)
-/*! IPP_RESET_B_M4
- *  0b0..Reset is not a result of ipp_reset_b pin.
- *  0b1..Reset is a result of ipp_reset_b pin.
- */
-#define SRC_SRSR_IPP_RESET_B_M4(x)               (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_IPP_RESET_B_M4_SHIFT)) & SRC_SRSR_IPP_RESET_B_M4_MASK)
-
-#define SRC_SRSR_M4_REQUEST_M4_MASK              (0x20000U)
-#define SRC_SRSR_M4_REQUEST_M4_SHIFT             (17U)
-/*! M4_REQUEST_M4
- *  0b0..Reset is not a result of m4 reset request.
- *  0b1..Reset is a result of m4 reset request.
- */
-#define SRC_SRSR_M4_REQUEST_M4(x)                (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_M4_REQUEST_M4_SHIFT)) & SRC_SRSR_M4_REQUEST_M4_MASK)
-
-#define SRC_SRSR_M4_LOCKUP_M4_MASK               (0x40000U)
-#define SRC_SRSR_M4_LOCKUP_M4_SHIFT              (18U)
-/*! M4_LOCKUP_M4
- *  0b0..Reset is not a result of the mentioned case.
- *  0b1..Reset is a result of the mentioned case.
- */
-#define SRC_SRSR_M4_LOCKUP_M4(x)                 (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_M4_LOCKUP_M4_SHIFT)) & SRC_SRSR_M4_LOCKUP_M4_MASK)
-
-#define SRC_SRSR_CSU_RESET_B_M4_MASK             (0x80000U)
-#define SRC_SRSR_CSU_RESET_B_M4_SHIFT            (19U)
-/*! CSU_RESET_B_M4
- *  0b0..Reset is not a result of the csu_reset_b event.
- *  0b1..Reset is a result of the csu_reset_b event.
- */
-#define SRC_SRSR_CSU_RESET_B_M4(x)               (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_CSU_RESET_B_M4_SHIFT)) & SRC_SRSR_CSU_RESET_B_M4_MASK)
-
-#define SRC_SRSR_IPP_USER_RESET_B_M4_MASK        (0x100000U)
-#define SRC_SRSR_IPP_USER_RESET_B_M4_SHIFT       (20U)
-/*! IPP_USER_RESET_B_M4
- *  0b0..Reset is not a result of the ipp_user_reset_b qualified as COLD reset event.
- *  0b1..Reset is a result of the ipp_user_reset_b qualified as COLD reset event.
- */
-#define SRC_SRSR_IPP_USER_RESET_B_M4(x)          (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_IPP_USER_RESET_B_M4_SHIFT)) & SRC_SRSR_IPP_USER_RESET_B_M4_MASK)
-
-#define SRC_SRSR_WDOG_RST_B_M4_MASK              (0x200000U)
-#define SRC_SRSR_WDOG_RST_B_M4_SHIFT             (21U)
-/*! WDOG_RST_B_M4
- *  0b0..Reset is not a result of the watchdog time-out event.
- *  0b1..Reset is a result of the watchdog time-out event.
- */
-#define SRC_SRSR_WDOG_RST_B_M4(x)                (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_WDOG_RST_B_M4_SHIFT)) & SRC_SRSR_WDOG_RST_B_M4_MASK)
-
-#define SRC_SRSR_JTAG_RST_B_M4_MASK              (0x400000U)
-#define SRC_SRSR_JTAG_RST_B_M4_SHIFT             (22U)
-/*! JTAG_RST_B_M4
- *  0b0..Reset is not a result of HIGH-Z reset from JTAG.
- *  0b1..Reset is a result of HIGH-Z reset from JTAG.
- */
-#define SRC_SRSR_JTAG_RST_B_M4(x)                (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_JTAG_RST_B_M4_SHIFT)) & SRC_SRSR_JTAG_RST_B_M4_MASK)
-
-#define SRC_SRSR_JTAG_SW_RST_M4_MASK             (0x800000U)
-#define SRC_SRSR_JTAG_SW_RST_M4_SHIFT            (23U)
-/*! JTAG_SW_RST_M4
- *  0b0..Reset is not a result of software reset from JTAG.
- *  0b1..Reset is a result of software reset from JTAG.
- */
-#define SRC_SRSR_JTAG_SW_RST_M4(x)               (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_JTAG_SW_RST_M4_SHIFT)) & SRC_SRSR_JTAG_SW_RST_M4_MASK)
-
-#define SRC_SRSR_WDOG3_RST_B_M4_MASK             (0x1000000U)
-#define SRC_SRSR_WDOG3_RST_B_M4_SHIFT            (24U)
-/*! WDOG3_RST_B_M4
- *  0b0..Reset is not a result of the watchdog3 time-out event.
- *  0b1..Reset is a result of the watchdog3 time-out event.
- */
-#define SRC_SRSR_WDOG3_RST_B_M4(x)               (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_WDOG3_RST_B_M4_SHIFT)) & SRC_SRSR_WDOG3_RST_B_M4_MASK)
-
-#define SRC_SRSR_WDOG4_RST_B_M4_MASK             (0x2000000U)
-#define SRC_SRSR_WDOG4_RST_B_M4_SHIFT            (25U)
-/*! WDOG4_RST_B_M4
- *  0b0..Reset is not a result of the watchdog4 time-out event.
- *  0b1..Reset is a result of the watchdog4 time-out event.
- */
-#define SRC_SRSR_WDOG4_RST_B_M4(x)               (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_WDOG4_RST_B_M4_SHIFT)) & SRC_SRSR_WDOG4_RST_B_M4_MASK)
-
-#define SRC_SRSR_TEMPSENSE_RST_B_M4_MASK         (0x4000000U)
-#define SRC_SRSR_TEMPSENSE_RST_B_M4_SHIFT        (26U)
-/*! TEMPSENSE_RST_B_M4
- *  0b0..Reset is not a result of software reset from Temperature Sensor.
- *  0b1..Reset is a result of software reset from Temperature Sensor.
- */
-#define SRC_SRSR_TEMPSENSE_RST_B_M4(x)           (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_TEMPSENSE_RST_B_M4_SHIFT)) & SRC_SRSR_TEMPSENSE_RST_B_M4_MASK)
-
-#define SRC_SRSR_M7_REQUEST_M4_MASK              (0x8000000U)
-#define SRC_SRSR_M7_REQUEST_M4_SHIFT             (27U)
-/*! M7_REQUEST_M4
- *  0b0..Reset is not a result of m7 reset request.
- *  0b1..Reset is a result of m7 reset request.
- */
-#define SRC_SRSR_M7_REQUEST_M4(x)                (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_M7_REQUEST_M4_SHIFT)) & SRC_SRSR_M7_REQUEST_M4_MASK)
-
-#define SRC_SRSR_M7_LOCKUP_M4_MASK               (0x10000000U)
-#define SRC_SRSR_M7_LOCKUP_M4_SHIFT              (28U)
-/*! M7_LOCKUP_M4
- *  0b0..Reset is not a result of the mentioned case.
- *  0b1..Reset is a result of the mentioned case.
- */
-#define SRC_SRSR_M7_LOCKUP_M4(x)                 (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_M7_LOCKUP_M4_SHIFT)) & SRC_SRSR_M7_LOCKUP_M4_MASK)
-
-#define SRC_SRSR_OVERVOLT_RST_M4_MASK            (0x20000000U)
-#define SRC_SRSR_OVERVOLT_RST_M4_SHIFT           (29U)
-/*! OVERVOLT_RST_M4
- *  0b0..Reset is not a result of the mentioned case.
- *  0b1..Reset is a result of the mentioned case.
- */
-#define SRC_SRSR_OVERVOLT_RST_M4(x)              (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_OVERVOLT_RST_M4_SHIFT)) & SRC_SRSR_OVERVOLT_RST_M4_MASK)
-
-#define SRC_SRSR_CDOG_RST_M4_MASK                (0x40000000U)
-#define SRC_SRSR_CDOG_RST_M4_SHIFT               (30U)
-/*! CDOG_RST_M4
- *  0b0..Reset is not a result of the mentioned case.
- *  0b1..Reset is a result of the mentioned case.
- */
-#define SRC_SRSR_CDOG_RST_M4(x)                  (((uint32_t)(((uint32_t)(x)) << SRC_SRSR_CDOG_RST_M4_SHIFT)) & SRC_SRSR_CDOG_RST_M4_MASK)
 /*! @} */
 
 /*! @name GPR - SRC General Purpose Register */
@@ -1490,305 +1296,6 @@ typedef struct {
 #define SRC_STAT_WAKEUP_RST_BY_SW(x)             (((uint32_t)(((uint32_t)(x)) << SRC_STAT_WAKEUP_RST_BY_SW_SHIFT)) & SRC_STAT_WAKEUP_RST_BY_SW_MASK)
 /*! @} */
 
-/*! @name AUTHEN_M4CORE - Slice Authentication Register */
-/*! @{ */
-
-#define SRC_AUTHEN_M4CORE_DOMAIN_MODE_MASK       (0x1U)
-#define SRC_AUTHEN_M4CORE_DOMAIN_MODE_SHIFT      (0U)
-/*! DOMAIN_MODE
- *  0b0..slice hardware reset will NOT be triggered by CPU power mode transition
- *  0b1..slice hardware reset will be triggered by CPU power mode transition. Do not set this bit and SETPOINT_MODE at the same time.
- */
-#define SRC_AUTHEN_M4CORE_DOMAIN_MODE(x)         (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4CORE_DOMAIN_MODE_SHIFT)) & SRC_AUTHEN_M4CORE_DOMAIN_MODE_MASK)
-
-#define SRC_AUTHEN_M4CORE_SETPOINT_MODE_MASK     (0x2U)
-#define SRC_AUTHEN_M4CORE_SETPOINT_MODE_SHIFT    (1U)
-/*! SETPOINT_MODE
- *  0b0..slice hardware reset will NOT be triggered by Setpoint transition
- *  0b1..slice hardware reset will be triggered by Setpoint transition. Do not set this bit and DOMAIN_MODE at the same time.
- */
-#define SRC_AUTHEN_M4CORE_SETPOINT_MODE(x)       (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4CORE_SETPOINT_MODE_SHIFT)) & SRC_AUTHEN_M4CORE_SETPOINT_MODE_MASK)
-
-#define SRC_AUTHEN_M4CORE_LOCK_MODE_MASK         (0x80U)
-#define SRC_AUTHEN_M4CORE_LOCK_MODE_SHIFT        (7U)
-/*! LOCK_MODE - Domain/Setpoint mode lock */
-#define SRC_AUTHEN_M4CORE_LOCK_MODE(x)           (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4CORE_LOCK_MODE_SHIFT)) & SRC_AUTHEN_M4CORE_LOCK_MODE_MASK)
-
-#define SRC_AUTHEN_M4CORE_ASSIGN_LIST_MASK       (0xF00U)
-#define SRC_AUTHEN_M4CORE_ASSIGN_LIST_SHIFT      (8U)
-#define SRC_AUTHEN_M4CORE_ASSIGN_LIST(x)         (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4CORE_ASSIGN_LIST_SHIFT)) & SRC_AUTHEN_M4CORE_ASSIGN_LIST_MASK)
-
-#define SRC_AUTHEN_M4CORE_LOCK_ASSIGN_MASK       (0x8000U)
-#define SRC_AUTHEN_M4CORE_LOCK_ASSIGN_SHIFT      (15U)
-/*! LOCK_ASSIGN - Assign list lock */
-#define SRC_AUTHEN_M4CORE_LOCK_ASSIGN(x)         (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4CORE_LOCK_ASSIGN_SHIFT)) & SRC_AUTHEN_M4CORE_LOCK_ASSIGN_MASK)
-
-#define SRC_AUTHEN_M4CORE_WHITE_LIST_MASK        (0xF0000U)
-#define SRC_AUTHEN_M4CORE_WHITE_LIST_SHIFT       (16U)
-/*! WHITE_LIST - Domain ID white list */
-#define SRC_AUTHEN_M4CORE_WHITE_LIST(x)          (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4CORE_WHITE_LIST_SHIFT)) & SRC_AUTHEN_M4CORE_WHITE_LIST_MASK)
-
-#define SRC_AUTHEN_M4CORE_LOCK_LIST_MASK         (0x800000U)
-#define SRC_AUTHEN_M4CORE_LOCK_LIST_SHIFT        (23U)
-/*! LOCK_LIST - White list lock */
-#define SRC_AUTHEN_M4CORE_LOCK_LIST(x)           (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4CORE_LOCK_LIST_SHIFT)) & SRC_AUTHEN_M4CORE_LOCK_LIST_MASK)
-
-#define SRC_AUTHEN_M4CORE_USER_MASK              (0x1000000U)
-#define SRC_AUTHEN_M4CORE_USER_SHIFT             (24U)
-/*! USER - Allow user mode access */
-#define SRC_AUTHEN_M4CORE_USER(x)                (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4CORE_USER_SHIFT)) & SRC_AUTHEN_M4CORE_USER_MASK)
-
-#define SRC_AUTHEN_M4CORE_NONSECURE_MASK         (0x2000000U)
-#define SRC_AUTHEN_M4CORE_NONSECURE_SHIFT        (25U)
-/*! NONSECURE - Allow non-secure mode access */
-#define SRC_AUTHEN_M4CORE_NONSECURE(x)           (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4CORE_NONSECURE_SHIFT)) & SRC_AUTHEN_M4CORE_NONSECURE_MASK)
-
-#define SRC_AUTHEN_M4CORE_LOCK_SETTING_MASK      (0x80000000U)
-#define SRC_AUTHEN_M4CORE_LOCK_SETTING_SHIFT     (31U)
-/*! LOCK_SETTING - Lock NONSECURE and USER */
-#define SRC_AUTHEN_M4CORE_LOCK_SETTING(x)        (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4CORE_LOCK_SETTING_SHIFT)) & SRC_AUTHEN_M4CORE_LOCK_SETTING_MASK)
-/*! @} */
-
-/*! @name CTRL_M4CORE - Slice Control Register */
-/*! @{ */
-
-#define SRC_CTRL_M4CORE_SW_RESET_MASK            (0x1U)
-#define SRC_CTRL_M4CORE_SW_RESET_SHIFT           (0U)
-/*! SW_RESET
- *  0b0..do not assert slice software reset
- *  0b1..assert slice software reset
- */
-#define SRC_CTRL_M4CORE_SW_RESET(x)              (((uint32_t)(((uint32_t)(x)) << SRC_CTRL_M4CORE_SW_RESET_SHIFT)) & SRC_CTRL_M4CORE_SW_RESET_MASK)
-/*! @} */
-
-/*! @name SETPOINT_M4CORE - Slice Setpoint Config Register */
-/*! @{ */
-
-#define SRC_SETPOINT_M4CORE_SETPOINT0_MASK       (0x1U)
-#define SRC_SETPOINT_M4CORE_SETPOINT0_SHIFT      (0U)
-/*! SETPOINT0 - SETPOINT0
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT0(x)         (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT0_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT0_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT1_MASK       (0x2U)
-#define SRC_SETPOINT_M4CORE_SETPOINT1_SHIFT      (1U)
-/*! SETPOINT1 - SETPOINT1
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT1(x)         (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT1_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT1_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT2_MASK       (0x4U)
-#define SRC_SETPOINT_M4CORE_SETPOINT2_SHIFT      (2U)
-/*! SETPOINT2 - SETPOINT2
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT2(x)         (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT2_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT2_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT3_MASK       (0x8U)
-#define SRC_SETPOINT_M4CORE_SETPOINT3_SHIFT      (3U)
-/*! SETPOINT3 - SETPOINT3
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT3(x)         (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT3_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT3_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT4_MASK       (0x10U)
-#define SRC_SETPOINT_M4CORE_SETPOINT4_SHIFT      (4U)
-/*! SETPOINT4 - SETPOINT4
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT4(x)         (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT4_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT4_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT5_MASK       (0x20U)
-#define SRC_SETPOINT_M4CORE_SETPOINT5_SHIFT      (5U)
-/*! SETPOINT5 - SETPOINT5
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT5(x)         (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT5_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT5_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT6_MASK       (0x40U)
-#define SRC_SETPOINT_M4CORE_SETPOINT6_SHIFT      (6U)
-/*! SETPOINT6 - SETPOINT6
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT6(x)         (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT6_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT6_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT7_MASK       (0x80U)
-#define SRC_SETPOINT_M4CORE_SETPOINT7_SHIFT      (7U)
-/*! SETPOINT7 - SETPOINT7
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT7(x)         (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT7_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT7_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT8_MASK       (0x100U)
-#define SRC_SETPOINT_M4CORE_SETPOINT8_SHIFT      (8U)
-/*! SETPOINT8 - SETPOINT8
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT8(x)         (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT8_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT8_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT9_MASK       (0x200U)
-#define SRC_SETPOINT_M4CORE_SETPOINT9_SHIFT      (9U)
-/*! SETPOINT9 - SETPOINT9
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT9(x)         (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT9_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT9_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT10_MASK      (0x400U)
-#define SRC_SETPOINT_M4CORE_SETPOINT10_SHIFT     (10U)
-/*! SETPOINT10 - SETPOINT10
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT10(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT10_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT10_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT11_MASK      (0x800U)
-#define SRC_SETPOINT_M4CORE_SETPOINT11_SHIFT     (11U)
-/*! SETPOINT11 - SETPOINT11
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT11(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT11_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT11_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT12_MASK      (0x1000U)
-#define SRC_SETPOINT_M4CORE_SETPOINT12_SHIFT     (12U)
-/*! SETPOINT12 - SETPOINT12
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT12(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT12_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT12_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT13_MASK      (0x2000U)
-#define SRC_SETPOINT_M4CORE_SETPOINT13_SHIFT     (13U)
-/*! SETPOINT13 - SETPOINT13
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT13(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT13_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT13_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT14_MASK      (0x4000U)
-#define SRC_SETPOINT_M4CORE_SETPOINT14_SHIFT     (14U)
-/*! SETPOINT14 - SETPOINT14
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT14(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT14_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT14_MASK)
-
-#define SRC_SETPOINT_M4CORE_SETPOINT15_MASK      (0x8000U)
-#define SRC_SETPOINT_M4CORE_SETPOINT15_SHIFT     (15U)
-/*! SETPOINT15 - SETPOINT15
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4CORE_SETPOINT15(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4CORE_SETPOINT15_SHIFT)) & SRC_SETPOINT_M4CORE_SETPOINT15_MASK)
-/*! @} */
-
-/*! @name DOMAIN_M4CORE - Slice Domain Config Register */
-/*! @{ */
-
-#define SRC_DOMAIN_M4CORE_CPU0_RUN_MASK          (0x1U)
-#define SRC_DOMAIN_M4CORE_CPU0_RUN_SHIFT         (0U)
-/*! CPU0_RUN - CPU mode setting for RUN
- *  0b0..Slice reset will be de-asserted when CPU0 in RUN mode
- *  0b1..Slice reset will be asserted when CPU0 in RUN mode
- */
-#define SRC_DOMAIN_M4CORE_CPU0_RUN(x)            (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4CORE_CPU0_RUN_SHIFT)) & SRC_DOMAIN_M4CORE_CPU0_RUN_MASK)
-
-#define SRC_DOMAIN_M4CORE_CPU0_WAIT_MASK         (0x2U)
-#define SRC_DOMAIN_M4CORE_CPU0_WAIT_SHIFT        (1U)
-/*! CPU0_WAIT - CPU mode setting for WAIT
- *  0b0..Slice reset will be de-asserted when CPU0 in WAIT mode
- *  0b1..Slice reset will be asserted when CPU0 in WAIT mode
- */
-#define SRC_DOMAIN_M4CORE_CPU0_WAIT(x)           (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4CORE_CPU0_WAIT_SHIFT)) & SRC_DOMAIN_M4CORE_CPU0_WAIT_MASK)
-
-#define SRC_DOMAIN_M4CORE_CPU0_STOP_MASK         (0x4U)
-#define SRC_DOMAIN_M4CORE_CPU0_STOP_SHIFT        (2U)
-/*! CPU0_STOP - CPU mode setting for STOP
- *  0b0..Slice reset will be de-asserted when CPU0 in STOP mode
- *  0b1..Slice reset will be asserted when CPU0 in STOP mode
- */
-#define SRC_DOMAIN_M4CORE_CPU0_STOP(x)           (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4CORE_CPU0_STOP_SHIFT)) & SRC_DOMAIN_M4CORE_CPU0_STOP_MASK)
-
-#define SRC_DOMAIN_M4CORE_CPU0_SUSP_MASK         (0x8U)
-#define SRC_DOMAIN_M4CORE_CPU0_SUSP_SHIFT        (3U)
-/*! CPU0_SUSP - CPU mode setting for SUSPEND
- *  0b0..Slice reset will be de-asserted when CPU0 in SUSPEND mode
- *  0b1..Slice reset will be asserted when CPU0 in SUSPEND mode
- */
-#define SRC_DOMAIN_M4CORE_CPU0_SUSP(x)           (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4CORE_CPU0_SUSP_SHIFT)) & SRC_DOMAIN_M4CORE_CPU0_SUSP_MASK)
-
-#define SRC_DOMAIN_M4CORE_CPU1_RUN_MASK          (0x10U)
-#define SRC_DOMAIN_M4CORE_CPU1_RUN_SHIFT         (4U)
-/*! CPU1_RUN - CPU mode setting for RUN
- *  0b0..Slice reset will be de-asserted when CPU1 in RUN mode
- *  0b1..Slice reset will be asserted when CPU1 in RUN mode
- */
-#define SRC_DOMAIN_M4CORE_CPU1_RUN(x)            (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4CORE_CPU1_RUN_SHIFT)) & SRC_DOMAIN_M4CORE_CPU1_RUN_MASK)
-
-#define SRC_DOMAIN_M4CORE_CPU1_WAIT_MASK         (0x20U)
-#define SRC_DOMAIN_M4CORE_CPU1_WAIT_SHIFT        (5U)
-/*! CPU1_WAIT - CPU mode setting for WAIT
- *  0b0..Slice reset will be de-asserted when CPU1 in WAIT mode
- *  0b1..Slice reset will be asserted when CPU1 in WAIT mode
- */
-#define SRC_DOMAIN_M4CORE_CPU1_WAIT(x)           (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4CORE_CPU1_WAIT_SHIFT)) & SRC_DOMAIN_M4CORE_CPU1_WAIT_MASK)
-
-#define SRC_DOMAIN_M4CORE_CPU1_STOP_MASK         (0x40U)
-#define SRC_DOMAIN_M4CORE_CPU1_STOP_SHIFT        (6U)
-/*! CPU1_STOP - CPU mode setting for STOP
- *  0b0..Slice reset will be de-asserted when CPU1 in STOP mode
- *  0b1..Slice reset will be asserted when CPU1 in STOP mode
- */
-#define SRC_DOMAIN_M4CORE_CPU1_STOP(x)           (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4CORE_CPU1_STOP_SHIFT)) & SRC_DOMAIN_M4CORE_CPU1_STOP_MASK)
-
-#define SRC_DOMAIN_M4CORE_CPU1_SUSP_MASK         (0x80U)
-#define SRC_DOMAIN_M4CORE_CPU1_SUSP_SHIFT        (7U)
-/*! CPU1_SUSP - CPU mode setting for SUSPEND
- *  0b0..Slice reset will be de-asserted when CPU1 in SUSPEND mode
- *  0b1..Slice reset will be asserted when CPU1 in SUSPEND mode
- */
-#define SRC_DOMAIN_M4CORE_CPU1_SUSP(x)           (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4CORE_CPU1_SUSP_SHIFT)) & SRC_DOMAIN_M4CORE_CPU1_SUSP_MASK)
-/*! @} */
-
-/*! @name STAT_M4CORE - Slice Status Register */
-/*! @{ */
-
-#define SRC_STAT_M4CORE_UNDER_RST_MASK           (0x1U)
-#define SRC_STAT_M4CORE_UNDER_RST_SHIFT          (0U)
-/*! UNDER_RST
- *  0b0..the reset is finished
- *  0b1..the reset is in process
- */
-#define SRC_STAT_M4CORE_UNDER_RST(x)             (((uint32_t)(((uint32_t)(x)) << SRC_STAT_M4CORE_UNDER_RST_SHIFT)) & SRC_STAT_M4CORE_UNDER_RST_MASK)
-
-#define SRC_STAT_M4CORE_RST_BY_HW_MASK           (0x4U)
-#define SRC_STAT_M4CORE_RST_BY_HW_SHIFT          (2U)
-/*! RST_BY_HW
- *  0b0..the reset is not caused by the power mode transfer
- *  0b1..the reset is caused by the power mode transfer
- */
-#define SRC_STAT_M4CORE_RST_BY_HW(x)             (((uint32_t)(((uint32_t)(x)) << SRC_STAT_M4CORE_RST_BY_HW_SHIFT)) & SRC_STAT_M4CORE_RST_BY_HW_MASK)
-
-#define SRC_STAT_M4CORE_RST_BY_SW_MASK           (0x8U)
-#define SRC_STAT_M4CORE_RST_BY_SW_SHIFT          (3U)
-/*! RST_BY_SW
- *  0b0..the reset is not caused by software setting
- *  0b1..the reset is caused by software setting
- */
-#define SRC_STAT_M4CORE_RST_BY_SW(x)             (((uint32_t)(((uint32_t)(x)) << SRC_STAT_M4CORE_RST_BY_SW_SHIFT)) & SRC_STAT_M4CORE_RST_BY_SW_MASK)
-/*! @} */
-
 /*! @name AUTHEN_M7CORE - Slice Authentication Register */
 /*! @{ */
 
@@ -2086,305 +1593,6 @@ typedef struct {
  *  0b1..the reset is caused by software setting
  */
 #define SRC_STAT_M7CORE_RST_BY_SW(x)             (((uint32_t)(((uint32_t)(x)) << SRC_STAT_M7CORE_RST_BY_SW_SHIFT)) & SRC_STAT_M7CORE_RST_BY_SW_MASK)
-/*! @} */
-
-/*! @name AUTHEN_M4DEBUG - Slice Authentication Register */
-/*! @{ */
-
-#define SRC_AUTHEN_M4DEBUG_DOMAIN_MODE_MASK      (0x1U)
-#define SRC_AUTHEN_M4DEBUG_DOMAIN_MODE_SHIFT     (0U)
-/*! DOMAIN_MODE
- *  0b0..slice hardware reset will NOT be triggered by CPU power mode transition
- *  0b1..slice hardware reset will be triggered by CPU power mode transition. Do not set this bit and SETPOINT_MODE at the same time.
- */
-#define SRC_AUTHEN_M4DEBUG_DOMAIN_MODE(x)        (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4DEBUG_DOMAIN_MODE_SHIFT)) & SRC_AUTHEN_M4DEBUG_DOMAIN_MODE_MASK)
-
-#define SRC_AUTHEN_M4DEBUG_SETPOINT_MODE_MASK    (0x2U)
-#define SRC_AUTHEN_M4DEBUG_SETPOINT_MODE_SHIFT   (1U)
-/*! SETPOINT_MODE
- *  0b0..slice hardware reset will NOT be triggered by Setpoint transition
- *  0b1..slice hardware reset will be triggered by Setpoint transition. Do not set this bit and DOMAIN_MODE at the same time.
- */
-#define SRC_AUTHEN_M4DEBUG_SETPOINT_MODE(x)      (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4DEBUG_SETPOINT_MODE_SHIFT)) & SRC_AUTHEN_M4DEBUG_SETPOINT_MODE_MASK)
-
-#define SRC_AUTHEN_M4DEBUG_LOCK_MODE_MASK        (0x80U)
-#define SRC_AUTHEN_M4DEBUG_LOCK_MODE_SHIFT       (7U)
-/*! LOCK_MODE - Domain/Setpoint mode lock */
-#define SRC_AUTHEN_M4DEBUG_LOCK_MODE(x)          (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4DEBUG_LOCK_MODE_SHIFT)) & SRC_AUTHEN_M4DEBUG_LOCK_MODE_MASK)
-
-#define SRC_AUTHEN_M4DEBUG_ASSIGN_LIST_MASK      (0xF00U)
-#define SRC_AUTHEN_M4DEBUG_ASSIGN_LIST_SHIFT     (8U)
-#define SRC_AUTHEN_M4DEBUG_ASSIGN_LIST(x)        (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4DEBUG_ASSIGN_LIST_SHIFT)) & SRC_AUTHEN_M4DEBUG_ASSIGN_LIST_MASK)
-
-#define SRC_AUTHEN_M4DEBUG_LOCK_ASSIGN_MASK      (0x8000U)
-#define SRC_AUTHEN_M4DEBUG_LOCK_ASSIGN_SHIFT     (15U)
-/*! LOCK_ASSIGN - Assign list lock */
-#define SRC_AUTHEN_M4DEBUG_LOCK_ASSIGN(x)        (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4DEBUG_LOCK_ASSIGN_SHIFT)) & SRC_AUTHEN_M4DEBUG_LOCK_ASSIGN_MASK)
-
-#define SRC_AUTHEN_M4DEBUG_WHITE_LIST_MASK       (0xF0000U)
-#define SRC_AUTHEN_M4DEBUG_WHITE_LIST_SHIFT      (16U)
-/*! WHITE_LIST - Domain ID white list */
-#define SRC_AUTHEN_M4DEBUG_WHITE_LIST(x)         (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4DEBUG_WHITE_LIST_SHIFT)) & SRC_AUTHEN_M4DEBUG_WHITE_LIST_MASK)
-
-#define SRC_AUTHEN_M4DEBUG_LOCK_LIST_MASK        (0x800000U)
-#define SRC_AUTHEN_M4DEBUG_LOCK_LIST_SHIFT       (23U)
-/*! LOCK_LIST - White list lock */
-#define SRC_AUTHEN_M4DEBUG_LOCK_LIST(x)          (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4DEBUG_LOCK_LIST_SHIFT)) & SRC_AUTHEN_M4DEBUG_LOCK_LIST_MASK)
-
-#define SRC_AUTHEN_M4DEBUG_USER_MASK             (0x1000000U)
-#define SRC_AUTHEN_M4DEBUG_USER_SHIFT            (24U)
-/*! USER - Allow user mode access */
-#define SRC_AUTHEN_M4DEBUG_USER(x)               (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4DEBUG_USER_SHIFT)) & SRC_AUTHEN_M4DEBUG_USER_MASK)
-
-#define SRC_AUTHEN_M4DEBUG_NONSECURE_MASK        (0x2000000U)
-#define SRC_AUTHEN_M4DEBUG_NONSECURE_SHIFT       (25U)
-/*! NONSECURE - Allow non-secure mode access */
-#define SRC_AUTHEN_M4DEBUG_NONSECURE(x)          (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4DEBUG_NONSECURE_SHIFT)) & SRC_AUTHEN_M4DEBUG_NONSECURE_MASK)
-
-#define SRC_AUTHEN_M4DEBUG_LOCK_SETTING_MASK     (0x80000000U)
-#define SRC_AUTHEN_M4DEBUG_LOCK_SETTING_SHIFT    (31U)
-/*! LOCK_SETTING - Lock NONSECURE and USER */
-#define SRC_AUTHEN_M4DEBUG_LOCK_SETTING(x)       (((uint32_t)(((uint32_t)(x)) << SRC_AUTHEN_M4DEBUG_LOCK_SETTING_SHIFT)) & SRC_AUTHEN_M4DEBUG_LOCK_SETTING_MASK)
-/*! @} */
-
-/*! @name CTRL_M4DEBUG - Slice Control Register */
-/*! @{ */
-
-#define SRC_CTRL_M4DEBUG_SW_RESET_MASK           (0x1U)
-#define SRC_CTRL_M4DEBUG_SW_RESET_SHIFT          (0U)
-/*! SW_RESET
- *  0b0..do not assert slice software reset
- *  0b1..assert slice software reset
- */
-#define SRC_CTRL_M4DEBUG_SW_RESET(x)             (((uint32_t)(((uint32_t)(x)) << SRC_CTRL_M4DEBUG_SW_RESET_SHIFT)) & SRC_CTRL_M4DEBUG_SW_RESET_MASK)
-/*! @} */
-
-/*! @name SETPOINT_M4DEBUG - Slice Setpoint Config Register */
-/*! @{ */
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT0_MASK      (0x1U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT0_SHIFT     (0U)
-/*! SETPOINT0 - SETPOINT0
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT0(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT0_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT0_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT1_MASK      (0x2U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT1_SHIFT     (1U)
-/*! SETPOINT1 - SETPOINT1
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT1(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT1_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT1_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT2_MASK      (0x4U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT2_SHIFT     (2U)
-/*! SETPOINT2 - SETPOINT2
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT2(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT2_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT2_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT3_MASK      (0x8U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT3_SHIFT     (3U)
-/*! SETPOINT3 - SETPOINT3
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT3(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT3_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT3_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT4_MASK      (0x10U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT4_SHIFT     (4U)
-/*! SETPOINT4 - SETPOINT4
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT4(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT4_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT4_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT5_MASK      (0x20U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT5_SHIFT     (5U)
-/*! SETPOINT5 - SETPOINT5
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT5(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT5_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT5_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT6_MASK      (0x40U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT6_SHIFT     (6U)
-/*! SETPOINT6 - SETPOINT6
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT6(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT6_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT6_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT7_MASK      (0x80U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT7_SHIFT     (7U)
-/*! SETPOINT7 - SETPOINT7
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT7(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT7_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT7_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT8_MASK      (0x100U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT8_SHIFT     (8U)
-/*! SETPOINT8 - SETPOINT8
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT8(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT8_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT8_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT9_MASK      (0x200U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT9_SHIFT     (9U)
-/*! SETPOINT9 - SETPOINT9
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT9(x)        (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT9_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT9_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT10_MASK     (0x400U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT10_SHIFT    (10U)
-/*! SETPOINT10 - SETPOINT10
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT10(x)       (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT10_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT10_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT11_MASK     (0x800U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT11_SHIFT    (11U)
-/*! SETPOINT11 - SETPOINT11
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT11(x)       (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT11_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT11_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT12_MASK     (0x1000U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT12_SHIFT    (12U)
-/*! SETPOINT12 - SETPOINT12
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT12(x)       (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT12_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT12_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT13_MASK     (0x2000U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT13_SHIFT    (13U)
-/*! SETPOINT13 - SETPOINT13
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT13(x)       (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT13_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT13_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT14_MASK     (0x4000U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT14_SHIFT    (14U)
-/*! SETPOINT14 - SETPOINT14
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT14(x)       (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT14_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT14_MASK)
-
-#define SRC_SETPOINT_M4DEBUG_SETPOINT15_MASK     (0x8000U)
-#define SRC_SETPOINT_M4DEBUG_SETPOINT15_SHIFT    (15U)
-/*! SETPOINT15 - SETPOINT15
- *  0b0..Slice reset will be de-asserted when system in Setpoint n
- *  0b1..Slice reset will be asserted when system in Setpoint n
- */
-#define SRC_SETPOINT_M4DEBUG_SETPOINT15(x)       (((uint32_t)(((uint32_t)(x)) << SRC_SETPOINT_M4DEBUG_SETPOINT15_SHIFT)) & SRC_SETPOINT_M4DEBUG_SETPOINT15_MASK)
-/*! @} */
-
-/*! @name DOMAIN_M4DEBUG - Slice Domain Config Register */
-/*! @{ */
-
-#define SRC_DOMAIN_M4DEBUG_CPU0_RUN_MASK         (0x1U)
-#define SRC_DOMAIN_M4DEBUG_CPU0_RUN_SHIFT        (0U)
-/*! CPU0_RUN - CPU mode setting for RUN
- *  0b0..Slice reset will be de-asserted when CPU0 in RUN mode
- *  0b1..Slice reset will be asserted when CPU0 in RUN mode
- */
-#define SRC_DOMAIN_M4DEBUG_CPU0_RUN(x)           (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4DEBUG_CPU0_RUN_SHIFT)) & SRC_DOMAIN_M4DEBUG_CPU0_RUN_MASK)
-
-#define SRC_DOMAIN_M4DEBUG_CPU0_WAIT_MASK        (0x2U)
-#define SRC_DOMAIN_M4DEBUG_CPU0_WAIT_SHIFT       (1U)
-/*! CPU0_WAIT - CPU mode setting for WAIT
- *  0b0..Slice reset will be de-asserted when CPU0 in WAIT mode
- *  0b1..Slice reset will be asserted when CPU0 in WAIT mode
- */
-#define SRC_DOMAIN_M4DEBUG_CPU0_WAIT(x)          (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4DEBUG_CPU0_WAIT_SHIFT)) & SRC_DOMAIN_M4DEBUG_CPU0_WAIT_MASK)
-
-#define SRC_DOMAIN_M4DEBUG_CPU0_STOP_MASK        (0x4U)
-#define SRC_DOMAIN_M4DEBUG_CPU0_STOP_SHIFT       (2U)
-/*! CPU0_STOP - CPU mode setting for STOP
- *  0b0..Slice reset will be de-asserted when CPU0 in STOP mode
- *  0b1..Slice reset will be asserted when CPU0 in STOP mode
- */
-#define SRC_DOMAIN_M4DEBUG_CPU0_STOP(x)          (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4DEBUG_CPU0_STOP_SHIFT)) & SRC_DOMAIN_M4DEBUG_CPU0_STOP_MASK)
-
-#define SRC_DOMAIN_M4DEBUG_CPU0_SUSP_MASK        (0x8U)
-#define SRC_DOMAIN_M4DEBUG_CPU0_SUSP_SHIFT       (3U)
-/*! CPU0_SUSP - CPU mode setting for SUSPEND
- *  0b0..Slice reset will be de-asserted when CPU0 in SUSPEND mode
- *  0b1..Slice reset will be asserted when CPU0 in SUSPEND mode
- */
-#define SRC_DOMAIN_M4DEBUG_CPU0_SUSP(x)          (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4DEBUG_CPU0_SUSP_SHIFT)) & SRC_DOMAIN_M4DEBUG_CPU0_SUSP_MASK)
-
-#define SRC_DOMAIN_M4DEBUG_CPU1_RUN_MASK         (0x10U)
-#define SRC_DOMAIN_M4DEBUG_CPU1_RUN_SHIFT        (4U)
-/*! CPU1_RUN - CPU mode setting for RUN
- *  0b0..Slice reset will be de-asserted when CPU1 in RUN mode
- *  0b1..Slice reset will be asserted when CPU1 in RUN mode
- */
-#define SRC_DOMAIN_M4DEBUG_CPU1_RUN(x)           (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4DEBUG_CPU1_RUN_SHIFT)) & SRC_DOMAIN_M4DEBUG_CPU1_RUN_MASK)
-
-#define SRC_DOMAIN_M4DEBUG_CPU1_WAIT_MASK        (0x20U)
-#define SRC_DOMAIN_M4DEBUG_CPU1_WAIT_SHIFT       (5U)
-/*! CPU1_WAIT - CPU mode setting for WAIT
- *  0b0..Slice reset will be de-asserted when CPU1 in WAIT mode
- *  0b1..Slice reset will be asserted when CPU1 in WAIT mode
- */
-#define SRC_DOMAIN_M4DEBUG_CPU1_WAIT(x)          (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4DEBUG_CPU1_WAIT_SHIFT)) & SRC_DOMAIN_M4DEBUG_CPU1_WAIT_MASK)
-
-#define SRC_DOMAIN_M4DEBUG_CPU1_STOP_MASK        (0x40U)
-#define SRC_DOMAIN_M4DEBUG_CPU1_STOP_SHIFT       (6U)
-/*! CPU1_STOP - CPU mode setting for STOP
- *  0b0..Slice reset will be de-asserted when CPU1 in STOP mode
- *  0b1..Slice reset will be asserted when CPU1 in STOP mode
- */
-#define SRC_DOMAIN_M4DEBUG_CPU1_STOP(x)          (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4DEBUG_CPU1_STOP_SHIFT)) & SRC_DOMAIN_M4DEBUG_CPU1_STOP_MASK)
-
-#define SRC_DOMAIN_M4DEBUG_CPU1_SUSP_MASK        (0x80U)
-#define SRC_DOMAIN_M4DEBUG_CPU1_SUSP_SHIFT       (7U)
-/*! CPU1_SUSP - CPU mode setting for SUSPEND
- *  0b0..Slice reset will be de-asserted when CPU1 in SUSPEND mode
- *  0b1..Slice reset will be asserted when CPU1 in SUSPEND mode
- */
-#define SRC_DOMAIN_M4DEBUG_CPU1_SUSP(x)          (((uint32_t)(((uint32_t)(x)) << SRC_DOMAIN_M4DEBUG_CPU1_SUSP_SHIFT)) & SRC_DOMAIN_M4DEBUG_CPU1_SUSP_MASK)
-/*! @} */
-
-/*! @name STAT_M4DEBUG - Slice Status Register */
-/*! @{ */
-
-#define SRC_STAT_M4DEBUG_UNDER_RST_MASK          (0x1U)
-#define SRC_STAT_M4DEBUG_UNDER_RST_SHIFT         (0U)
-/*! UNDER_RST
- *  0b0..the reset is finished
- *  0b1..the reset is in process
- */
-#define SRC_STAT_M4DEBUG_UNDER_RST(x)            (((uint32_t)(((uint32_t)(x)) << SRC_STAT_M4DEBUG_UNDER_RST_SHIFT)) & SRC_STAT_M4DEBUG_UNDER_RST_MASK)
-
-#define SRC_STAT_M4DEBUG_RST_BY_HW_MASK          (0x4U)
-#define SRC_STAT_M4DEBUG_RST_BY_HW_SHIFT         (2U)
-/*! RST_BY_HW
- *  0b0..the reset is not caused by the power mode transfer
- *  0b1..the reset is caused by the power mode transfer
- */
-#define SRC_STAT_M4DEBUG_RST_BY_HW(x)            (((uint32_t)(((uint32_t)(x)) << SRC_STAT_M4DEBUG_RST_BY_HW_SHIFT)) & SRC_STAT_M4DEBUG_RST_BY_HW_MASK)
-
-#define SRC_STAT_M4DEBUG_RST_BY_SW_MASK          (0x8U)
-#define SRC_STAT_M4DEBUG_RST_BY_SW_SHIFT         (3U)
-/*! RST_BY_SW
- *  0b0..the reset is not caused by software setting
- *  0b1..the reset is caused by software setting
- */
-#define SRC_STAT_M4DEBUG_RST_BY_SW(x)            (((uint32_t)(((uint32_t)(x)) << SRC_STAT_M4DEBUG_RST_BY_SW_SHIFT)) & SRC_STAT_M4DEBUG_RST_BY_SW_MASK)
 /*! @} */
 
 /*! @name AUTHEN_M7DEBUG - Slice Authentication Register */
