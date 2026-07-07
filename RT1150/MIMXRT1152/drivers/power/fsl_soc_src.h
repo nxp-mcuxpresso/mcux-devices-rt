@@ -18,8 +18,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief SRC driver version 2.1.1. */
-#define FSL_SRC_DRIVER_VERSION (MAKE_VERSION(2, 1, 1))
+/*! @brief SRC driver version 2.1.2. */
+#define FSL_SRC_DRIVER_VERSION (MAKE_VERSION(2, 1, 2))
 /*@}*/
 
 #define SRC_SLICE_ADDRESS_OFFSET (0x200U)
@@ -88,8 +88,7 @@
  */
 typedef enum _src_core_name
 {
-    kSRC_CM7Core = 0x1U, /*!< System Core CM4. */
-    kSRC_CM4Core = 0x2U, /*!< System Core CM7. */
+    kSRC_CM7Core = 0x1U, /*!< System Core CM7. */
 } src_core_name_t;
 
 /*!

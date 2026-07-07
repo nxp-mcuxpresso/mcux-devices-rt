@@ -43,7 +43,7 @@
  */
 void SRC_ReleaseCoreReset(SRC_Type *base, src_core_name_t coreName)
 {
-    uint32_t coreMaskArray[] = {SRC_SCR_BT_RELEASE_M7_MASK, SRC_SCR_BT_RELEASE_M4_MASK};
+    uint32_t coreMaskArray[] = {SRC_SCR_BT_RELEASE_M7_MASK};
     uint32_t regValue;
 
     regValue = base->SCR;

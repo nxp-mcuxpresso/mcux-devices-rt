@@ -56,7 +56,7 @@ if (CONFIG_MCUX_COMPONENT_driver.anadig_pmu)
 endif()
 
 if (CONFIG_MCUX_COMPONENT_driver.src_2)
-    mcux_component_version(2.1.1)
+    mcux_component_version(2.1.2)
 
     mcux_add_source(
         SOURCES fsl_soc_src.c

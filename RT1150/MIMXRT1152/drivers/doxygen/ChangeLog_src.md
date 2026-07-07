@@ -1,5 +1,10 @@
 # SRC
 
+## [2.1.2]
+
+- Improvements
+  - Remove SRC_SCR_BT_RELEASE_M4_MASK.
+
 ## [2.1.1]
 
 - Bug Fixes
