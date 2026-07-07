@@ -15,7 +15,7 @@
 **
 **     Reference manual:    IMXRT1150RM, Rev 1, 01/2026
 **     Version:             rev. 0.2, 2026-02-26
-**     Build:               b260701
+**     Build:               b260707
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1152
@@ -779,10 +779,6 @@ typedef enum _xrdc2_periph
     kXRDC2_Periph_XRDC2_MGR_M7_2    = XRDC2_MAKE_PERIPH(3, 58 ), /**< XRDC2_MGR_M7_2 */
     kXRDC2_Periph_XRDC2_MGR_M7_1    = XRDC2_MAKE_PERIPH(3, 57 ), /**< XRDC2_MGR_M7_1 */
     kXRDC2_Periph_XRDC2_MGR_M7_0    = XRDC2_MAKE_PERIPH(3, 56 ), /**< XRDC2_MGR_M7_0 */
-    kXRDC2_Periph_XRDC2_MGR_M4_3    = XRDC2_MAKE_PERIPH(3, 55 ), /**< XRDC2_MGR_M4_3 */
-    kXRDC2_Periph_XRDC2_MGR_M4_2    = XRDC2_MAKE_PERIPH(3, 54 ), /**< XRDC2_MGR_M4_2 */
-    kXRDC2_Periph_XRDC2_MGR_M4_1    = XRDC2_MAKE_PERIPH(3, 53 ), /**< XRDC2_MGR_M4_1 */
-    kXRDC2_Periph_XRDC2_MGR_M4_0    = XRDC2_MAKE_PERIPH(3, 52 ), /**< XRDC2_MGR_M4_0 */
     kXRDC2_Periph_CCM_1             = XRDC2_MAKE_PERIPH(3, 49 ), /**< CCM_1 */
     kXRDC2_Periph_CCM_0             = XRDC2_MAKE_PERIPH(3, 48 ), /**< CCM_0 */
     kXRDC2_Periph_SSARC_LP          = XRDC2_MAKE_PERIPH(3, 46 ), /**< SSARC_LP */
