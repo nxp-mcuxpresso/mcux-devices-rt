@@ -15,7 +15,7 @@
 **
 **     Reference manual:    IMXRT1150RM, Rev 1, 01/2026
 **     Version:             rev. 0.2, 2026-02-26
-**     Build:               b260707
+**     Build:               b260709
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1152
@@ -661,7 +661,6 @@ typedef enum _xrdc2_periph
     kXRDC2_Periph_QTIMER3           = XRDC2_MAKE_PERIPH(0, 89 ), /**< QTIMER3 */
     kXRDC2_Periph_QTIMER2           = XRDC2_MAKE_PERIPH(0, 88 ), /**< QTIMER2 */
     kXRDC2_Periph_QTIMER1           = XRDC2_MAKE_PERIPH(0, 87 ), /**< QTIMER1 */
-    kXRDC2_Periph_CCM_OBS           = XRDC2_MAKE_PERIPH(0, 84 ), /**< CCM_OBS */
     kXRDC2_Periph_GPIO6             = XRDC2_MAKE_PERIPH(0, 80 ), /**< GPIO6 */
     kXRDC2_Periph_GPIO5             = XRDC2_MAKE_PERIPH(0, 79 ), /**< GPIO5 */
     kXRDC2_Periph_GPIO4             = XRDC2_MAKE_PERIPH(0, 78 ), /**< GPIO4 */
@@ -706,6 +705,7 @@ typedef enum _xrdc2_periph
     kXRDC2_Periph_DMA_CH_MUX        = XRDC2_MAKE_PERIPH(0, 29 ), /**< DMA_CH_MUX */
     kXRDC2_Periph_EDMA              = XRDC2_MAKE_PERIPH(0, 28 ), /**< EDMA */
     kXRDC2_Periph_IEE               = XRDC2_MAKE_PERIPH(0, 27 ), /**< IEE */
+    kXRDC2_Periph_IEE_APC           = XRDC2_MAKE_PERIPH(0, 26 ), /**< IEE_APC */
     kXRDC2_Periph_DAC               = XRDC2_MAKE_PERIPH(0, 25 ), /**< DAC */
     kXRDC2_Periph_TSC_DIG           = XRDC2_MAKE_PERIPH(0, 23 ), /**< TSC_DIG */
     kXRDC2_Periph_ADC2              = XRDC2_MAKE_PERIPH(0, 21 ), /**< ADC2 */
@@ -724,8 +724,6 @@ typedef enum _xrdc2_periph
     kXRDC2_Periph_XECC_FLEXSPI1     = XRDC2_MAKE_PERIPH(0, 7  ), /**< XECC_FLEXSPI1 */
     kXRDC2_Periph_MECC2             = XRDC2_MAKE_PERIPH(0, 6  ), /**< MECC2 */
     kXRDC2_Periph_MECC1             = XRDC2_MAKE_PERIPH(0, 5  ), /**< MECC1 */
-    kXRDC2_Periph_MTR               = XRDC2_MAKE_PERIPH(0, 4  ), /**< MTR */
-    kXRDC2_Periph_SFA               = XRDC2_MAKE_PERIPH(0, 3  ), /**< SFA */
     kXRDC2_Periph_CAAM_DEBUG_3      = XRDC2_MAKE_PERIPH(1, 51 ), /**< CAAM_DEBUG_3 */
     kXRDC2_Periph_CAAM_DEBUG_2      = XRDC2_MAKE_PERIPH(1, 50 ), /**< CAAM_DEBUG_2 */
     kXRDC2_Periph_CAAM_DEBUG_1      = XRDC2_MAKE_PERIPH(1, 49 ), /**< CAAM_DEBUG_1 */
@@ -795,7 +793,6 @@ typedef enum _xrdc2_periph
     kXRDC2_Periph_PGMC              = XRDC2_MAKE_PERIPH(3, 34 ), /**< PGMC */
     kXRDC2_Periph_ANATOP            = XRDC2_MAKE_PERIPH(3, 33 ), /**< ANATOP */
     kXRDC2_Periph_KEY_MANAGER       = XRDC2_MAKE_PERIPH(3, 32 ), /**< KEY_MANAGER */
-    kXRDC2_Periph_RDC               = XRDC2_MAKE_PERIPH(3, 30 ), /**< RDC */
     kXRDC2_Periph_GPIO12            = XRDC2_MAKE_PERIPH(3, 28 ), /**< GPIO12 */
     kXRDC2_Periph_GPIO11            = XRDC2_MAKE_PERIPH(3, 27 ), /**< GPIO11 */
     kXRDC2_Periph_GPIO10            = XRDC2_MAKE_PERIPH(3, 26 ), /**< GPIO10 */
@@ -806,8 +803,6 @@ typedef enum _xrdc2_periph
     kXRDC2_Periph_LPSPI5            = XRDC2_MAKE_PERIPH(3, 11 ), /**< LPSPI5 */
     kXRDC2_Periph_LPUART12          = XRDC2_MAKE_PERIPH(3, 10 ), /**< LPUART12 */
     kXRDC2_Periph_MIC               = XRDC2_MAKE_PERIPH(3, 8  ), /**< MIC */
-    kXRDC2_Periph_DMA_CH_MUX_LPSR   = XRDC2_MAKE_PERIPH(3, 6  ), /**< DMA_CH_MUX_LPSR */
-    kXRDC2_Periph_EDMA_LPSR         = XRDC2_MAKE_PERIPH(3, 5  ), /**< EDMA_LPSR */
     kXRDC2_Periph_IOMUXC_LPSR_GPR   = XRDC2_MAKE_PERIPH(3, 3  ), /**< IOMUXC_LPSR_GPR */
     kXRDC2_Periph_IOMUXC_LPSR       = XRDC2_MAKE_PERIPH(3, 2  ), /**< IOMUXC_LPSR */
     kXRDC2_Periph_SRC               = XRDC2_MAKE_PERIPH(3, 1  ), /**< SRC */
