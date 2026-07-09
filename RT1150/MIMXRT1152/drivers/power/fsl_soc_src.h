@@ -18,8 +18,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief SRC driver version 2.1.2. */
-#define FSL_SRC_DRIVER_VERSION (MAKE_VERSION(2, 1, 2))
+/*! @brief SRC driver version 2.1.3. */
+#define FSL_SRC_DRIVER_VERSION (MAKE_VERSION(2, 1, 3))
 /*@}*/
 
 #define SRC_SLICE_ADDRESS_OFFSET (0x200U)
@@ -107,10 +107,7 @@ typedef enum _src_global_system_reset_source
 {
     kSRC_WdogReset         = 0U,  /*!< WDOG triggers the global system reset. */
     kSRC_Wdog3Reset        = 2U,  /*!< WDOG3 triggers the global system reset. */
-    kSRC_Wdog4Reset        = 4U,  /*!< WODG4 triggers the global system reset. */
-    kSRC_M4LockUpReset     = 6U,  /*!< M4 core lockup triggers the global system reset. */
     kSRC_M7LockUpReset     = 8U,  /*!< M7 core lockup triggers the global system reset. */
-    kSRC_M4RequestReset    = 10U, /*!< M4 core request triggers the global system reset. */
     kSRC_M7RequestReset    = 12U, /*!< M7 core request triggers the global system reset. */
     kSRC_TempsenseReset    = 14U, /*!< Tempsense trigggers the global system reset. */
     kSRC_CSUReset          = 16U, /*!< CSU triggers the global system reset. */
@@ -135,27 +132,8 @@ enum _src_global_system_reset_status_flags
     kSRC_M7CoreWdog3ResetFlag     = 1UL << 8UL,  /*!< The M7 Core reset is the result of watchdog3 time-out event. */
     kSRC_M7CoreWdog4ResetFlag     = 1UL << 9UL,  /*!< The M7 Core reset is the result of watchdog4 time-out event. */
     kSRC_M7CoreTempsenseResetFlag = 1UL << 10UL, /*!< The M7 Core reset is the result of on-chip temperature sensor. */
-    kSRC_M7CoreM4RequestResetFlag = 1UL << 11UL, /*!< The M7 Core reset is the result of M4 CPU reset request. */
-    kSRC_M7CoreM4LockUpResetFlag  = 1UL << 12UL, /*!< The M7 Core reset is the result of M4 CPU lock up. */
     kSRC_M7CoreOverVoltageResetFlag = 1UL << 13UL, /*!< The M7 Core reset is the result of over voltage. */
     kSRC_M7CoreCdogResetFlag        = 1UL << 14UL, /*!< The M7 Core reset is the result of Cdog. */
-
-    kSRC_M4CoreIppResetFlag       = 1UL << 16UL, /*!< The M4 Core reset is the result of ipp_reset_b pin. */
-    kSRC_M4CoreM4RequestResetFlag = 1UL << 17UL, /*!< The M4 Core reset is the result of M4 core reset request. */
-    kSRC_M4CoreM4LockUpResetFlag  = 1UL << 18UL, /*!< The M4 Core reset is the result of M4 core lock up. */
-    kSRC_M4CoreCSUResetFlag       = 1UL << 19UL, /*!< The M4 Core reset is the result of csu_reset_b input. */
-    kSRC_M4CoreIppUserResetFlag   = 1UL << 20UL, /*!< The M4 Core reset is the result of
-                                                    ipp_user_reset_b qualified reset. */
-    kSRC_M4CoreWdogResetFlag      = 1UL << 21UL, /*!< The M4 Core reset is the result of the watchdog time-out event. */
-    kSRC_M4CoreJtagResetFlag      = 1UL << 22UL, /*!< The M4 Core reset is the result of HIGH-Z reset from JTAG. */
-    kSRC_M4CoreJtagSWResetFlag    = 1UL << 23UL, /*!< The M4 Core reset is the result of software reset from JTAG. */
-    kSRC_M4CoreWdog3ResetFlag     = 1UL << 24UL, /*!< The M4 Core reset is the result of watchdog3 time-out event. */
-    kSRC_M4CoreWdog4ResetFlag     = 1UL << 25UL, /*!< The M4 Core reset is the result of watchdog4 time-out event. */
-    kSRC_M4CoreTempsenseResetFlag = 1UL << 26UL, /*!< The M4 Core reset is the result of on-chip temperature sensor. */
-    kSRC_M4CoreM7RequestResetFlag = 1UL << 27UL, /*!< The M4 Core reset is the result of M7 CPU reset request. */
-    kSRC_M4CoreM7LockUpResetFlag  = 1UL << 28UL, /*!< The M4 Core reset is the result of M7 CPU lock up. */
-    kSRC_M4CoreOverVoltageResetFlag = 1UL << 29UL, /*!< The M4 Core reset is the result of over voltage. */
-    kSRC_M4CoreCdogResetFlag        = 1UL << 30UL, /*!< The M4 Core reset is the result of Cdog. */
 };
 
 /*!
@@ -176,9 +154,7 @@ typedef enum _src_reset_slice_name
     kSRC_DisplaySlice = 0x1U, /*!< Displaymix reset slice. */
     kSRC_WakeUpSlice  = 0x2U, /*!< Wakeupmix reset slice. */
     kSRC_LpsrSlice    = 0x3U, /*!< Lpsrmix reset slice. */
-    kSRC_M4CoreSlice  = 0x4U, /*!< M4 core reset slice. */
     kSRC_M7CoreSlice  = 0x5U, /*!< M7 core reset slice. */
-    kSRC_M4DebugSlice = 0x6U, /*!< M4 debug reset slice. */
     kSRC_M7DebugSlice = 0x7U, /*!< M7 debug reset slice. */
     kSRC_Usbphy1Slice = 0x8U, /*!< USBPHY1 reset slice. */
     kSRC_Usbphy2Slice = 0x9U, /*!< USBPHY2 reset slice. */

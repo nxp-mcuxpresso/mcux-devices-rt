@@ -1,5 +1,10 @@
 # SRC
 
+## [2.1.3]
+
+- Improvements
+  - Removed M4 core reset sources, reset status flags, and reset slice enumerators since MIMXRT1152 is single core (CM7).
+
 ## [2.1.2]
 
 - Improvements

@@ -1,5 +1,10 @@
 # PGMC
 
+## [2.1.3]
+
+- Improvements
+  - Removed kPGMC_CM4Core from pgmc_bpc_assign_domain_t since MIMXRT1152 is single core (CM7).
+
 ## [2.1.2]
 
 - Bug Fixes

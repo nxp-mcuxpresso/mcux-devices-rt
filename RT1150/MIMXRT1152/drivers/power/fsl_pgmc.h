@@ -22,8 +22,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief PGMC driver version 2.1.2. */
-#define FSL_PGMC_RIVER_VERSION (MAKE_VERSION(2, 1, 2))
+/*! @brief PGMC driver version 2.1.3. */
+#define FSL_PGMC_RIVER_VERSION (MAKE_VERSION(2, 1, 3))
 /*@}*/
 
 /*! @brief The enumeration of setpoint.
@@ -72,8 +72,7 @@ enum _pgmc_mif_signal_behaviour
  */
 typedef enum _pgmc_bpc_assign_domain
 {
-    kPGMC_CM7Core = 0U, /*!< CM7 Core domain. */
-    kPGMC_CM4Core = 1U  /*!< CM4 Core domain. */
+    kPGMC_CM7Core = 0U /*!< CM7 Core domain. */
 } pgmc_bpc_assign_domain_t;
 
 /*! @brief CPU mode. */

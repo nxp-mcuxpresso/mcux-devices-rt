@@ -1,5 +1,10 @@
 # GPC
 
+## [2.5.1]
+
+- Improvements
+  - Removed kGPC_CM4Core from gpc_cpu_domain_name_t since MIMXRT1152 is single core (CM7).
+
 ## [2.5.0]
 
 - Improvements

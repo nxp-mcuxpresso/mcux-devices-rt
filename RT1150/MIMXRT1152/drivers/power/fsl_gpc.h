@@ -22,8 +22,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief GPC driver version 2.5.0. */
-#define FSL_GPC_RIVER_VERSION (MAKE_VERSION(2, 5, 0))
+/*! @brief GPC driver version 2.5.1. */
+#define FSL_GPC_RIVER_VERSION (MAKE_VERSION(2, 5, 1))
 /*! @}*/
 
 #define GPC_RESERVED_USE_MACRO 0xFFFFFFFFU
@@ -283,7 +283,6 @@ typedef enum _gpc_stby_tran_step
 typedef enum _gpc_cpu_domain_name
 {
     kGPC_CM7Core = 0U, /*!< CM7 core. */
-    kGPC_CM4Core = 1U, /*!< CM4 core. */
 } gpc_cpu_domain_name_t;
 
 /*! @brief Step counter work mode. */
