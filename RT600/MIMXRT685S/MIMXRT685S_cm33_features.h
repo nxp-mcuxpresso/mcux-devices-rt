@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 2.1, 2025-12-01
-**     Build:               b260205
+**     Build:               b260717
 **
 **     Abstract:
 **         Chip specific module features.
@@ -206,6 +206,8 @@
 #define FSL_FEATURE_LPADC_HAS_CTRL_CALHS (0)
 /* @brief Has Justified Left Enable (bitfield CFG2[JLEFT]). */
 #define FSL_FEATURE_LPADC_HAS_CFG2_JLEFT (0)
+/* @brief Trigger Control Count. */
+#define FSL_FEATURE_LPADC_TCTRL_COUNT (16)
 
 /* CACHE64_CTRL module features */
 
@@ -253,6 +255,8 @@
 #define FSL_FEATURE_ACMP_HAS_C3_RDIVE_BIT (1)
 /* @brief If has acmp sample signal */
 #define FSL_FEATURE_ACMP_HAS_NO_SAMPLE_SIGNAL (1)
+/* @brief Has C3 PCHCTEN Bit */
+#define FSL_FEATURE_ACMP_HAS_CONTINUOUS_MODE (1)
 
 /* CTIMER module features */
 
@@ -537,6 +541,11 @@
 #define FSL_FEATURE_MU_HAS_RESET_ASSERT_INT (1)
 /* @brief MU supports reset de-assert interrupt. CR[RDIE] or BCR[RDIE]. */
 #define FSL_FEATURE_MU_HAS_RESET_DEASSERT_INT (1)
+
+/* OSTIMER module features */
+
+/* @brief Has binary encoded value in counter register. */
+#define FSL_FEATURE_OSTIMER_HAS_BINARY_ENCODED_COUNTER (0)
 
 /* OTFAD module features */
 

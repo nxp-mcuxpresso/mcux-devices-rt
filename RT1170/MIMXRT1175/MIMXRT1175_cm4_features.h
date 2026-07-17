@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 2.1, 2025-12-01
-**     Build:               b260527
+**     Build:               b260717
 **
 **     Abstract:
 **         Chip specific module features.
@@ -309,6 +309,8 @@
 #define FSL_FEATURE_ACMP_HAS_NO_C0_SE_BIT (0)
 /* @brief Has C3 RDIVE Bit */
 #define FSL_FEATURE_ACMP_HAS_C3_RDIVE_BIT (1)
+/* @brief Has C3 PCHCTEN Bit */
+#define FSL_FEATURE_ACMP_HAS_CONTINUOUS_MODE (1)
 
 /* DAC12 module features */
 
@@ -676,6 +678,8 @@
 #define FSL_FEATURE_LPADC_HAS_CTRL_CALHS (0)
 /* @brief Has Justified Left Enable (bitfield CFG2[JLEFT]). */
 #define FSL_FEATURE_LPADC_HAS_CFG2_JLEFT (0)
+/* @brief Trigger Control Count. */
+#define FSL_FEATURE_LPADC_TCTRL_COUNT (8)
 
 /* LPI2C module features */
 
