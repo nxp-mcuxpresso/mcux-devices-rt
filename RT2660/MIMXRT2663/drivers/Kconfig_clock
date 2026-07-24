@@ -9,4 +9,23 @@
 
         if MCUX_COMPONENT_driver.clock
 
+        config FSL_CLOCK_FREQME_REF_SCALE
+            int "Reference clock scaling exponent used by CLOCK_Measure*Freq()"
+            range 0 24
+            default 16
+            help
+              One measurement counts target-clock edges during 2^REF_SCALE
+              reference cycles. With the 24 MHz crystal reference the default
+              16 gives ~2.73 ms per measurement and 366 Hz resolution. Values
+              above 24 could overflow the 31-bit result counter with a 2 GHz
+              target and 24 MHz reference.
+
+        config FSL_CLOCK_FREQME_TIMEOUT_LOOPS
+            int "Max polling loops for one FREQME measurement"
+            default 1000000
+            help
+              Bounded busy-wait loop count for one FREQME measurement, used by
+              CLOCK_Measure*Freq(). The bound is CPU-frequency independent; a
+              measurement never completes if the reference clock is dead.
+
         endif

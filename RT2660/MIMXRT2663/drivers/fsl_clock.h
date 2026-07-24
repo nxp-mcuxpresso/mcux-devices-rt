@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 NXP
+ * Copyright 2025-2026 NXP
  * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
@@ -42,9 +42,38 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief CLOCK driver version 2.5.3. */
-#define FSL_CLOCK_DRIVER_VERSION (MAKE_VERSION(1, 0, 0))
+/*! @brief CLOCK driver version 1.1.0. */
+#define FSL_CLOCK_DRIVER_VERSION (MAKE_VERSION(1, 1, 0))
 /*! @} */
+
+/*! @name FREQME-based frequency measurement configuration (set via Kconfig, or override before including this header) */
+/*@{*/
+/*! @brief Reference clock scaling exponent used by CLOCK_Measure*Freq().
+ *
+ * One measurement counts target-clock edges during 2^REF_SCALE reference
+ * cycles. With the 24 MHz crystal reference this gives ~2.73 ms per
+ * measurement and 24 MHz / 2^16 = 366 Hz resolution. Valid range 0..24
+ * (enforced at compile time); values above 24 could overflow the 31-bit
+ * result counter with a 2 GHz target and 24 MHz reference
+ * (2 GHz / 24 MHz * 2^25 > 2^31). */
+#ifndef FSL_CLOCK_FREQME_REF_SCALE
+#ifdef CONFIG_FSL_CLOCK_FREQME_REF_SCALE
+#define FSL_CLOCK_FREQME_REF_SCALE (CONFIG_FSL_CLOCK_FREQME_REF_SCALE)
+#else
+#define FSL_CLOCK_FREQME_REF_SCALE (16U)
+#endif
+#endif
+/*! @brief Bounded polling loop count for one FREQME measurement (CPU-frequency
+ * independent busy-wait bound; measurement never completes if the reference
+ * clock is dead). */
+#ifndef FSL_CLOCK_FREQME_TIMEOUT_LOOPS
+#ifdef CONFIG_FSL_CLOCK_FREQME_TIMEOUT_LOOPS
+#define FSL_CLOCK_FREQME_TIMEOUT_LOOPS (CONFIG_FSL_CLOCK_FREQME_TIMEOUT_LOOPS)
+#else
+#define FSL_CLOCK_FREQME_TIMEOUT_LOOPS (1000000U)
+#endif
+#endif
+/*@}*/
 
 /*! @name PLL frequency macros (project defaults; override before including this header) */
 /*@{*/
@@ -2142,6 +2171,80 @@ uint32_t CLOCK_GetClockSrcFreq(clock_name_t name);
  * @return External source frequency in hertz, or 0 if unknown.
  */
 uint32_t CLOCK_GetExternalSrcFreq(clock_name_t name);
+
+/*!
+ * @brief Measures the actual frequency of a clock root using the FREQME hardware.
+ *
+ * Unlike CLOCK_GetRootClockFreq(), which computes a theoretical value from the
+ * clock-tree configuration, this function measures the real signal with the
+ * FREQME instance of the subsystem the root belongs to. This matters while the
+ * internal FROs are untrimmed (e.g. FRO192M configured as 192 MHz may actually
+ * run near 220 MHz). INPUTMUX routing, FREQME instance selection, and the
+ * reference-clock chain are handled internally:
+ *   - CGU and WAKE roots measure against the 24 MHz crystal (SXOSC) directly.
+ *   - Roots in the CMPT/MAIN/COMM/AUDIO/MEDIA subsystems are measured by that
+ *     subsystem's FREQME; its reference clock is itself first measured against
+ *     SXOSC by the SYSCON FREQME, so accuracy always derives from the crystal.
+ *
+ * @note Preconditions: the clock under test must be enabled/running (this
+ *       function never enables the measured clock; a gated target reads as a
+ *       failure). The FREQME/INPUTMUX access clocks are enabled internally and
+ *       restored afterwards. OSC_24M must be sourced from the SXOSC crystal
+ *       (see CLOCK_SetOsc24mSource()); if it is sourced from the untrimmed
+ *       FRO_24M the returned values are only as accurate as that FRO.
+ * @note Blocking: one measurement takes 2^FSL_CLOCK_FREQME_REF_SCALE reference
+ *       cycles (~2.73 ms at the 24 MHz reference with the default scale of 16;
+ *       a two-level measurement roughly doubles that). If the target is too
+ *       slow (or gated) the measurement is automatically retried with a larger
+ *       scale, up to 2^24 cycles (~0.7 s) worst case before returning 0. A
+ *       dead *reference* clock is detected by a bounded polling loop whose
+ *       worst-case detection time at the maximum scale can reach several
+ *       seconds (CPU-speed dependent) -- this only occurs in the double-fault
+ *       case of an escalated retry with a dead reference.
+ * @note Not ISR-safe and not reentrant: the FREQME and INPUTMUX FREQMEAS
+ *       muxes of the involved subsystems are reprogrammed (those muxes serve
+ *       only the FREQME and are not restored), and the FREQME access gate
+ *       save/restore is a non-atomic read-modify-write.
+ *
+ * @param root Clock root defined in clock_root_t.
+ * @return Measured frequency in hertz, or 0 on failure: root out of range,
+ *         root without a FREQME target tap (exactly these four:
+ *         kCLOCK_Root_COMM_usb0_phyclk, kCLOCK_Root_COMM_usb0_fro48m,
+ *         kCLOCK_Root_COMM_usb1_fclk, kCLOCK_Root_COMM_usb0_wakeclk),
+ *         measurement timeout (reference dead), or result under/overflow
+ *         (target dead/gated, or outside the 2 GHz ceiling).
+ */
+uint32_t CLOCK_MeasureRootClockFreq(clock_root_t root);
+
+/*!
+ * @brief Measures the actual frequency of a clock source using the FREQME hardware.
+ *
+ * Companion of CLOCK_GetClockSrcFreq() that returns a measured value instead
+ * of a computed one; see CLOCK_MeasureRootClockFreq() for the measurement
+ * chain, preconditions, and blocking behavior.
+ *
+ * Supported are the in-map sources (below kCLOCK_SRC_BOUNDARY): each resolves
+ * to its owning clock root and is measured there, with the MODCON /2 of the
+ * six kCLOCK_SRC_*_DIV2 sources applied afterwards (the /2 is a deterministic
+ * divider, so halving the measured parent is exact). kCLOCK_SRC_CPU is
+ * measured at its dedicated hardware tap (SYSCON tar cpu_rootclk) rather than
+ * derived from the MAIN tap.
+ *
+ * @note Terminal analog sources (kCLOCK_SRC_FRO_192M, PLL taps, external SAI
+ *       MCLKs, ...) have no FREQME tap and return 0; measure the corresponding
+ *       root alias instead. Beware the one-underscore difference:
+ *       kCLOCK_SRC_FRO_192M (raw analog source, returns 0) vs
+ *       kCLOCK_SRC_FRO192M (CGU root alias, measurable) -- use the latter, or
+ *       kCLOCK_Root_CGU_FRO192M_ROOTCLK, for the FRO 192 MHz output. The same
+ *       applies to the FRO_96M/FRO_48M/FRO_24M vs FRO96M/FRO48M/FRO24M pairs.
+ * @note To measure the CPU clock, kCLOCK_SRC_CPU is the most direct choice
+ *       (dedicated hardware tap).
+ *
+ * @param name Source name, see clock_name_t.
+ * @return Measured frequency in hertz, or 0 if the source is not measurable,
+ *         the measurement times out, or the result is out of range.
+ */
+uint32_t CLOCK_MeasureClockSrcFreq(clock_name_t name);
 
 /*!
  * @brief Set the mux source for a clock root.

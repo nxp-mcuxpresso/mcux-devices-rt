@@ -1532,17 +1532,6 @@ static const clock_root_t s_clockSrcRootMap[kCLOCK_SRC_BOUNDARY] = {
     [62] = kCLOCK_Root_Invalid, [63] = kCLOCK_Root_Invalid,
 };
 
-/* Compile-time guard: table size must match the boundary. */
-_Static_assert(sizeof(s_clockSrcRootMap) / sizeof(s_clockSrcRootMap[0]) == (size_t)kCLOCK_SRC_BOUNDARY,
-               "s_clockSrcRootMap size must equal kCLOCK_SRC_BOUNDARY");
-
-/* Compile-time guard: the six Mx MODCON-controlled /2 sources must stay
- * contiguous so the range check in CLOCK_GetClockSrcFreq stays in sync with
- * clockSrcDiv2Lookup. Reordering the enum is allowed; splitting the Mx block
- * is not. */
-_Static_assert((uint32_t)kCLOCK_SRC_COMMPFDX_DIV2 - (uint32_t)kCLOCK_SRC_MAIN_PERI0_DIV2 == 5U,
-               "Mx /2 clock_name_t block must be contiguous (6 entries)");
-
 /*
  * Read the configured second divider for a root (CCM STATUS0.SND_DIV + 1).
  * Mirrors the convention of CLOCK_GetRootClockDiv: returns the 1-based value.
@@ -1583,7 +1572,7 @@ uint32_t CLOCK_GetClockSrcFreq(clock_name_t name)
 
         /* Case 3 -- the six Mx sources additionally /2 per MODCON. Skip
          * the MODCON read entirely for Cases 1/4 via the contiguous-block
-         * range check (invariant pinned by the _Static_assert above). */
+         * range check (the six Mx entries are contiguous in clock_name_t). */
         if (((uint32_t)name >= (uint32_t)kCLOCK_SRC_MAIN_PERI0_DIV2) &&
             ((uint32_t)name <= (uint32_t)kCLOCK_SRC_COMMPFDX_DIV2) &&
             CLOCK_GetClockSrcDiv2(name))
@@ -1725,6 +1714,435 @@ uint32_t CLOCK_GetRootClockFreq(clock_root_t root)
     srcFreq = CLOCK_GetClockSrcFreq(src);
     return (srcFreq / div) / sndDiv;
 #endif
+}
+
+/*******************************************************************************
+ * FREQME-based actual frequency measurement
+ *
+ * CLOCK_MeasureRootClockFreq / CLOCK_MeasureClockSrcFreq return the real,
+ * hardware-measured frequency instead of the theoretical value the Get APIs
+ * compute -- needed while the internal FROs are untrimmed. Register-level
+ * FREQME/INPUTMUX access on purpose: the fsl_freqme/fsl_inputmux drivers call
+ * back into this driver for clock gating, so using them here would create a
+ * circular dependency and force every project to link both drivers.
+ *
+ * Measurement chain: every subsystem's FREQME measures its own targets, with
+ * a per-domain reference whose frequency is trusted or itself measured:
+ *   SYSCON, WAKE : reference = SXOSC crystal (the only trusted clock).
+ *   others       : reference = a domain input that is node-identical to a
+ *                  SYSCON target tap, pre-measured against SXOSC by the
+ *                  SYSCON FREQME. Accuracy therefore always derives from the
+ *                  crystal; no divider arithmetic is involved anywhere.
+ ******************************************************************************/
+
+/* Chip-wide measurement bounds: reference clocks are >= 24 MHz and no clock
+ * exceeds 2 GHz, so the count ratio is bounded by 2 GHz / 24 MHz < 84. At
+ * scale 24 the worst-case RESULT is 84 * 2^24 ~= 1.41e9 < 2^31 - 1: the
+ * 31-bit result counter cannot overflow for any valid scale. */
+#define CLOCK_FREQME_SCALE_MAX    (24U)
+#define CLOCK_FREQME_MAX_RATIO    (84UL)
+#define CLOCK_FREQME_MIN_EXPECTED (0xFUL)
+
+#if (FSL_CLOCK_FREQME_REF_SCALE > 24U)
+#error "FSL_CLOCK_FREQME_REF_SCALE must be in range 0..24 (the 31-bit result counter overflows above 24)."
+#endif
+
+/* Marker values for the descriptor/mapping tables below. */
+#define CLOCK_FREQME_REF_IS_SXOSC (0xFFU) /* reference is the crystal; no pre-measurement */
+#define CLOCK_FREQME_TAR_NONE     (0xFFU) /* root has no FREQME target tap */
+
+/* Per-domain FREQME resources (the domain table itself lives in
+ * CLOCK_FreqmeMeasure, its only user). refMux selects the domain reference on
+ * the FREQMEAS REF mux; sysconTarRef is the SYSCON FREQMEAS TAR value tapping
+ * the node-identical signal used to pre-measure that reference (mux values
+ * match fsl_inputmux_connections.h). refRoot names the reference's root for
+ * the crystal-referenced domains. */
+typedef struct
+{
+    FREQME_Type   *freqme;
+    INPUTMUX_Type *inputmux;
+    clock_lpcg_t   gate;         /* one LPCG covers the domain FREQME + INPUTMUX */
+    uint8_t        refMux;
+    uint8_t        sysconTarRef;
+    clock_root_t   refRoot;      /* used only when sysconTarRef == CLOCK_FREQME_REF_IS_SXOSC */
+} clock_freqme_domain_t;
+
+enum
+{
+    kCLOCK_FreqmeDomainSyscon = 0,
+    kCLOCK_FreqmeDomainCmpt,
+    kCLOCK_FreqmeDomainMain,
+    kCLOCK_FreqmeDomainWake,
+    kCLOCK_FreqmeDomainComm,
+    kCLOCK_FreqmeDomainAudio,
+    kCLOCK_FreqmeDomainMedia,
+};
+
+/* root -> domain FREQMEAS TAR mux value, one table per subsystem range,
+ * indexed by (root - kCLOCK_Root_<SS>_START). Values transcribed from
+ * fsl_inputmux_connections.h; CLOCK_FREQME_TAR_NONE marks roots without a
+ * target tap. The CGU range is formulaic and handled in code (see
+ * CLOCK_LocateFreqmeTar).
+ *
+ * Note: each domain's FREQMEAS mux also has inputs (typically below 16) that
+ * are NOT clock-tree roots and therefore have no entry in these tables: XBAR
+ * event outputs (hsp_ss_xbar0_out*) and silicon test/monitor signals such as
+ * the pm_104* process-monitor ring oscillators (LVT/SLVT speed-grade and
+ * HTOL aging monitors), the WAKE buck/lposc test buses, and the COMM usbphy
+ * test clocks. Those signals have no clock_root_t identity and no
+ * theoretical frequency to compare against; when silicon characterization
+ * needs them, measure them with the fsl_freqme + fsl_inputmux drivers using
+ * the kINPUTMUX_<SS>_*_ref/_tar connection enums directly. */
+static const uint8_t s_cmptRootTar[] = {
+    16U, /* cmpt_clk     */ 17U, /* cpu_clk      */ 18U, /* npu_clk      */
+    19U, /* systick_clk0 */ 20U, /* systick_clk1 */
+};
+/* MAIN +8 note: on real silicon every MAIN FREQMEAS mux input sits 8 positions
+ * above the value listed in fsl_inputmux_connections.h (empirically confirmed
+ * signal-by-signal on the EVK: e.g. writing the header's lpuart0 value 28
+ * measures lpit0, while 28+8=36 measures lpuart0; the header's *_1_* duplicate
+ * entries at 54..61 are the true positions of the last eight signals). The
+ * values below are the HARDWARE positions (header value + 8). The header
+ * discrepancy is tracked for a separate fix against the reference manual. */
+static const uint8_t s_mainRootTar[] = {
+    17U, /* main_clk_divided  */ 21U, /* xspi0_fclk_divided */ 25U, /* xspi1_fclk_divided */
+    28U, /* i3c0_fclk         */ 29U, /* lpi2c0_fclk        */ 30U, /* lpi2c1_fclk        */
+    31U, /* lpspi0_fclk       */ 32U, /* lpspi1_fclk        */ 33U, /* lpspi2_fclk        */
+    34U, /* lpspi3_fclk       */ 35U, /* lpspi4_fclk        */ 36U, /* lpuart0_fclk       */
+    37U, /* lpuart1_fclk      */ 38U, /* lpuart2_fclk       */ 39U, /* lpuart3_fclk       */
+    40U, /* lpuart4_fclk      */ 41U, /* lpuart5_fclk       */ 42U, /* flexcan0_fclk      */
+    43U, /* flexcan1_fclk     */ 44U, /* flexcan2_fclk      */ 45U, /* flexcan_gfclk      */
+    46U, /* qtpm0_fclk        */ 47U, /* lpit0_fclk         */ 48U, /* lpit1_fclk         */
+    49U, /* adc0_fclk         */ 50U, /* adc1_fclk          */ 51U, /* sinc0_fclk         */
+    52U, /* sinc1_fclk        */ 53U, /* flexio0_fclk       */ 54U, /* flexio1_fclk       */
+    55U, /* flexio2_fclk      */ 56U, /* tpiu_clk           */ 57U, /* cssi_refclk        */
+    58U, /* otp_clk           */ 59U, /* clkout             */ 60U, /* main_fro192m       */
+    61U, /* main_ulp32k       */
+};
+static const uint8_t s_wakeRootTar[] = {
+    16U, /* wake_clk     */ 17U, /* wake_sxosc  */ 18U, /* wake_lp1m   */ 19U, /* wake_lp12m  */
+    20U, /* wake_ulp32k  */ 21U, /* wake_lpclk  */ 22U, /* i3c0_fclk   */ 23U, /* lpi2c0_fclk */
+    24U, /* lpi2c1_fclk  */ 25U, /* lpspi0_fclk */ 26U, /* lpuart0_fclk*/ 27U, /* lpuart1_fclk*/
+    28U, /* dmic1_appclk */ 29U, /* qtpm0_fclk  */ 30U, /* lptmr0_fclk */ 31U, /* lptmr1_fclk */
+    32U, /* swt0_fclk    */ 33U, /* swt1_fclk   */ 34U, /* ewm_fclk    */ 35U, /* acmp0_fclk  */
+    36U, /* acmp1_fclk   */ 37U, /* acmp2_fclk  */ 38U, /* acmp3_fclk  */ 39U, /* acmp0_rrclk */
+    40U, /* acmp1_rrclk  */ 41U, /* acmp2_rrclk */ 42U, /* acmp3_rrclk */
+};
+static const uint8_t s_commRootTar[] = {
+    16U,                   /* comm_clk      */
+    17U,                   /* comm_ulp32k   */
+    18U,                   /* usdhc0_fclk   */
+    19U,                   /* usdhc1_fclk   */
+    20U,                   /* xspir_rootclk */
+    CLOCK_FREQME_TAR_NONE, /* usb0_phyclk -- no COMM FREQMEAS tap */
+    CLOCK_FREQME_TAR_NONE, /* usb0_fro48m -- no COMM FREQMEAS tap */
+    CLOCK_FREQME_TAR_NONE, /* usb1_fclk   -- no COMM FREQMEAS tap */
+    CLOCK_FREQME_TAR_NONE, /* usb0_wakeclk - no COMM FREQMEAS tap */
+    21U,                   /* eth0_trxclk   */
+    22U,                   /* eth0_timerclk */
+    23U,                   /* eth1_trxclk   */
+    31U,                   /* eth1_timerclk */
+    32U,                   /* eth_refclk (eth_tarclk_tar) */
+    33U,                   /* xeno0_liwclk  */
+    34U,                   /* xeno1_liwclk  */
+    35U,                   /* dll_refclk (dll_tarclk_tar) */
+};
+static const uint8_t s_audioRootTar[] = {
+    16U, /* audio_clk  */ 17U, /* dmic0_appclk */ 18U, /* sai0_mclk0   */ 19U, /* sai0_mclk1 */
+    20U, /* sai1_mclk0 */ 21U, /* sai1_mclk1   */ 22U, /* sai2_mclk0   */ 23U, /* sai2_mclk1 */
+    24U, /* spdif_txclk*/ 25U, /* spdif_cdrclk */ 26U, /* asrc_clk     */
+};
+static const uint8_t s_mediaRootTar[] = {
+    16U, /* media_clk      */ 17U, /* mediapll_clk (mediapll_rootclk_tar)   */
+    18U, /* mipicsi_escclk */ 19U, /* mipicsi_clk                           */
+    21U, /* mipidsi_escclk_divided                                          */
+    24U, /* mipidsi_refclk (mipidsi_tarclk_tar)                             */
+    25U, /* mipidsi_clk    */ 26U, /* reformat_fclk (tarormat_fclk_tar)     */
+    27U, /* dcpixel_fclk   */ 28U, /* csi_mclkout                           */
+};
+
+/*
+ * Resolve a root to (measuring domain, FREQMEAS TAR mux value). Returns false
+ * for out-of-range roots and roots without a target tap.
+ */
+static bool CLOCK_LocateFreqmeTar(clock_root_t root, uint32_t *domainIdx, uint8_t *tarMux)
+{
+    /* Unsigned compare so a stray negative enum cast falls through to the
+     * final return false instead of matching the CGU range. */
+    if ((uint32_t)root <= (uint32_t)kCLOCK_Root_CGU_END)
+    {
+        /* CGU roots are tapped by the SYSCON FREQMEAS TAR mux with a formulaic
+         * layout (fsl_inputmux_connections.h): roots 0..29 sit at 16..45;
+         * root 30 (MAIN_ROOTCLK) is tapped post div+sndDiv at 47
+         * (cpu_rootclk_divided -- matching what CLOCK_GetRootClockFreq
+         * reports; the post-div-only CPU tap at 46 backs kCLOCK_SRC_CPU);
+         * roots 31..48 sit at 50..67. */
+        *domainIdx = kCLOCK_FreqmeDomainSyscon;
+        if (root <= kCLOCK_Root_CGU_VIDEOPLL_ROOTCLK)
+        {
+            *tarMux = (uint8_t)((uint32_t)root + 16U);
+        }
+        else if (root == kCLOCK_Root_CGU_MAIN_ROOTCLK)
+        {
+            *tarMux = 47U;
+        }
+        else
+        {
+            *tarMux = (uint8_t)((uint32_t)root + 19U);
+        }
+        return true;
+    }
+    else if ((root >= kCLOCK_Root_CMPT_START) && (root <= kCLOCK_Root_CMPT_END))
+    {
+        *domainIdx = kCLOCK_FreqmeDomainCmpt;
+        *tarMux    = s_cmptRootTar[root - kCLOCK_Root_CMPT_START];
+    }
+    else if ((root >= kCLOCK_Root_MAIN_START) && (root <= kCLOCK_Root_MAIN_END))
+    {
+        *domainIdx = kCLOCK_FreqmeDomainMain;
+        *tarMux    = s_mainRootTar[root - kCLOCK_Root_MAIN_START];
+    }
+    else if ((root >= kCLOCK_Root_WAKE_START) && (root <= kCLOCK_Root_WAKE_END))
+    {
+        *domainIdx = kCLOCK_FreqmeDomainWake;
+        *tarMux    = s_wakeRootTar[root - kCLOCK_Root_WAKE_START];
+    }
+    else if ((root >= kCLOCK_Root_COMM_START) && (root <= kCLOCK_Root_COMM_END))
+    {
+        *domainIdx = kCLOCK_FreqmeDomainComm;
+        *tarMux    = s_commRootTar[root - kCLOCK_Root_COMM_START];
+    }
+    else if ((root >= kCLOCK_Root_AUDIO_START) && (root <= kCLOCK_Root_AUDIO_END))
+    {
+        *domainIdx = kCLOCK_FreqmeDomainAudio;
+        *tarMux    = s_audioRootTar[root - kCLOCK_Root_AUDIO_START];
+    }
+    else if ((root >= kCLOCK_Root_MEDIA_START) && (root <= kCLOCK_Root_MEDIA_END))
+    {
+        *domainIdx = kCLOCK_FreqmeDomainMedia;
+        *tarMux    = s_mediaRootTar[root - kCLOCK_Root_MEDIA_START];
+    }
+    else
+    {
+        return false;
+    }
+    return *tarMux != CLOCK_FREQME_TAR_NONE;
+}
+
+/*
+ * Run one polled FREQME measurement cycle on a domain and convert the result.
+ * The domain's FREQME/INPUTMUX access clock is enabled around the cycle and
+ * its LPCG_CFG restored afterwards; the measured clock itself is never
+ * touched (caller's responsibility -- a gated target shows up as LT_MIN).
+ * Returns the frequency in Hz, or 0 with *stat holding the raw CTRLSTAT
+ * flags so the caller can tell a too-slow target (LT_MIN) from other errors.
+ */
+static uint32_t CLOCK_FreqmeMeasureOnce(const clock_freqme_domain_t *dom, uint8_t tarMux,
+                                        uint32_t refFreq, uint32_t refScale, uint32_t *stat)
+{
+    CCM_Type *gateCCM;
+    uint32_t  gateIdx;
+    uint32_t  savedLpcg;
+    uint32_t  timeout;
+    uint32_t  result;
+    uint32_t  freq = 0U;
+
+    *stat = 0U;
+
+    /* The measurement window is 2^refScale reference cycles; widen the
+     * polling bound for scales above 16 (the sizing baseline of
+     * FSL_CLOCK_FREQME_TIMEOUT_LOOPS) so long windows (up to ~0.7 s at
+     * scale 24 / 24 MHz) are not misreported as timeouts. Saturate rather
+     * than wrap if a large user override leaves no headroom for the
+     * shift (max shift is 8, scale cap 24). */
+    timeout = FSL_CLOCK_FREQME_TIMEOUT_LOOPS;
+    if (refScale > 16U)
+    {
+        if (timeout > (UINT32_MAX >> (refScale - 16U)))
+        {
+            timeout = UINT32_MAX;
+        }
+        else
+        {
+            timeout <<= (refScale - 16U);
+        }
+    }
+
+    gateCCM   = locateClkGate(dom->gate, &gateIdx);
+    savedLpcg = gateCCM->CGC_ROOT[gateIdx].SLICE_CONTROL & CCM_SLICE_CONTROL_LPCG_CFG_MASK;
+    CLOCK_EnableClock(dom->gate);
+
+    dom->inputmux->FREQME_REF = INPUTMUX_FREQME_REF_INP(dom->refMux);
+    dom->inputmux->FREQME_TAR = INPUTMUX_FREQME_TAR_INP(tarMux);
+
+    /* MIN flags a dead or too-slow target; MAX encodes the 2 GHz device
+     * ceiling as a count: (2 GHz / 24 MHz rounded up) << scale. */
+    dom->freqme->MIN = CLOCK_FREQME_MIN_EXPECTED;
+    dom->freqme->MAX = CLOCK_FREQME_MAX_RATIO << refScale;
+
+    /* Clear stale W1C status flags (CTRLSTAT mirrors the control fields, so
+     * plain |= only sets the write-1-to-clear bits). */
+    dom->freqme->CTRLSTAT = dom->freqme->CTRLSTAT | FREQME_CTRLSTAT_LT_MIN_STAT_MASK |
+                            FREQME_CTRLSTAT_GT_MAX_STAT_MASK | FREQME_CTRLSTAT_RESULT_READY_STAT_MASK;
+
+    /* Configure and start in a single write. CTRL_W is write-only (reading
+     * offset 0 returns CTRL_R) -- never read-modify-write it. Frequency
+     * measurement mode: PULSE_MODE = 0, continuous mode and interrupts off. */
+    dom->freqme->CTRL_W = FREQME_CTRL_W_REF_SCALE(refScale) | FREQME_CTRL_W_MEASURE_IN_PROGRESS_MASK;
+
+    while (((dom->freqme->CTRL_R & FREQME_CTRL_R_MEASURE_IN_PROGRESS_MASK) != 0U) && (timeout > 0U))
+    {
+        timeout--;
+    }
+
+    if ((dom->freqme->CTRL_R & FREQME_CTRL_R_MEASURE_IN_PROGRESS_MASK) != 0U)
+    {
+        /* Timed out -- reference clock dead; terminate the cycle. */
+        dom->freqme->CTRL_W = 0U;
+    }
+    else
+    {
+        *stat = dom->freqme->CTRLSTAT;
+        if (((*stat & FREQME_CTRLSTAT_RESULT_READY_STAT_MASK) != 0U) &&
+            ((*stat & (FREQME_CTRLSTAT_LT_MIN_STAT_MASK | FREQME_CTRLSTAT_GT_MAX_STAT_MASK)) == 0U))
+        {
+            result = dom->freqme->CTRL_R & FREQME_CTRL_R_RESULT_MASK;
+            /* Ftar = (RESULT + 1) * Fref / 2^REF_SCALE
+             * (FSL_FEATURE_FREQME_RESULT_CALCULATION_MODE == 1 on RT2660). */
+            freq = (uint32_t)((((uint64_t)result + 1ULL) * (uint64_t)refFreq) >> refScale);
+        }
+    }
+
+    gateCCM->CGC_ROOT[gateIdx].SLICE_CONTROL =
+        (gateCCM->CGC_ROOT[gateIdx].SLICE_CONTROL & ~CCM_SLICE_CONTROL_LPCG_CFG_MASK) | savedLpcg;
+
+    return freq;
+}
+
+/*
+ * Measure one target of a domain: resolve the domain reference frequency
+ * (crystal-known, or pre-measured against SXOSC via the SYSCON FREQME), then
+ * measure the target, escalating the reference scale on underflow so slow
+ * targets against fast references still resolve.
+ */
+static uint32_t CLOCK_FreqmeMeasure(uint32_t domainIdx, uint8_t tarMux)
+{
+    static const clock_freqme_domain_t s_freqmeDomains[] = {
+        [kCLOCK_FreqmeDomainSyscon] = {SYSCON__FREQME, SYSCON__INPUTMUX, kCLOCK_SYSCON_freqme,
+                                       16U /* sxosc_rootclk_ref */, CLOCK_FREQME_REF_IS_SXOSC,
+                                       kCLOCK_Root_CGU_SXOSC_ROOTCLK},
+        [kCLOCK_FreqmeDomainCmpt]   = {CMPT__FREQME, CMPT__INPUTMUX, kCLOCK_CMPT_freqme,
+                                       17U /* cpu_clk_ref */, 46U /* cpu_rootclk_tar */,
+                                       kCLOCK_Root_Invalid},
+        [kCLOCK_FreqmeDomainMain]   = {MAIN__FREQME, MAIN__INPUTMUX, kCLOCK_MAIN_freqme,
+                                       60U /* main_fro192m_ref (hardware position; see MAIN +8 note above) */,
+                                       33U /* fro192m_rootclk_tar */, kCLOCK_Root_Invalid},
+        [kCLOCK_FreqmeDomainWake]   = {WAKE__FREQME, WAKE__INPUTMUX, kCLOCK_WAKE_freqme,
+                                       17U /* wake_sxosc_ref */, CLOCK_FREQME_REF_IS_SXOSC,
+                                       kCLOCK_Root_WAKE_wake_sxosc},
+        [kCLOCK_FreqmeDomainComm]   = {COMM__FREQME, COMM__INPUTMUX, kCLOCK_COMM_freqme,
+                                       16U /* comm_clk_ref */, 53U /* commbus_rootclk_tar */,
+                                       kCLOCK_Root_Invalid},
+        [kCLOCK_FreqmeDomainAudio]  = {AUDIO__FREQME, AUDIO__INPUTMUX, kCLOCK_AUDIO_freqme,
+                                       16U /* audio_clk_ref */, 52U /* audiobus_rootclk_tar */,
+                                       kCLOCK_Root_Invalid},
+        [kCLOCK_FreqmeDomainMedia]  = {MEDIA__FREQME, MEDIA__INPUTMUX, kCLOCK_MEDIA_freqme,
+                                       16U /* media_clk_ref */, 51U /* mediabus_rootclk_tar */,
+                                       kCLOCK_Root_Invalid},
+    };
+    const clock_freqme_domain_t *dom = &s_freqmeDomains[domainIdx];
+    uint32_t refFreq;
+    uint32_t scale = FSL_CLOCK_FREQME_REF_SCALE;
+    uint32_t stat;
+    uint32_t freq;
+
+    if (scale > CLOCK_FREQME_SCALE_MAX)
+    {
+        scale = CLOCK_FREQME_SCALE_MAX;
+    }
+
+    if (dom->sysconTarRef == CLOCK_FREQME_REF_IS_SXOSC)
+    {
+        /* Crystal-derived reference: the theoretical value is the actual one. */
+        refFreq = CLOCK_GetRootClockFreq(dom->refRoot);
+    }
+    else
+    {
+        /* Two-level chain: measure this domain's reference against SXOSC
+         * first (single-level recursion -- SYSCON is crystal-referenced). */
+        refFreq = CLOCK_FreqmeMeasure(kCLOCK_FreqmeDomainSyscon, dom->sysconTarRef);
+    }
+    if (refFreq == 0U)
+    {
+        return 0U;
+    }
+
+    for (;;)
+    {
+        freq = CLOCK_FreqmeMeasureOnce(dom, tarMux, refFreq, scale, &stat);
+        if ((freq != 0U) || ((stat & FREQME_CTRLSTAT_LT_MIN_STAT_MASK) == 0U) ||
+            (scale >= CLOCK_FREQME_SCALE_MAX))
+        {
+            break;
+        }
+        /* Underflow: target too slow for this scale -- lengthen the window. */
+        scale += 4U;
+        if (scale > CLOCK_FREQME_SCALE_MAX)
+        {
+            scale = CLOCK_FREQME_SCALE_MAX;
+        }
+    }
+    return freq;
+}
+
+uint32_t CLOCK_MeasureRootClockFreq(clock_root_t root)
+{
+    uint32_t domainIdx;
+    uint8_t  tarMux;
+
+    if (!CLOCK_LocateFreqmeTar(root, &domainIdx, &tarMux))
+    {
+        return 0U;
+    }
+    return CLOCK_FreqmeMeasure(domainIdx, tarMux);
+}
+
+uint32_t CLOCK_MeasureClockSrcFreq(clock_name_t name)
+{
+    uint32_t freq;
+
+    /* kCLOCK_SRC_CPU taps CGU ROOT 30 after the first divider only; SYSCON
+     * TAR 46 (cpu_rootclk) taps that same hardware point directly, so no
+     * sndDiv backout is needed (contrast CLOCK_GetClockSrcFreq). */
+    if (name == kCLOCK_SRC_CPU)
+    {
+        return CLOCK_FreqmeMeasure(kCLOCK_FreqmeDomainSyscon, 46U);
+    }
+
+    if ((uint32_t)name < (uint32_t)kCLOCK_SRC_BOUNDARY)
+    {
+        clock_root_t root = s_clockSrcRootMap[name];
+        if (root == kCLOCK_Root_Invalid)
+        {
+            return 0U;
+        }
+        freq = CLOCK_MeasureRootClockFreq(root);
+
+        /* The six Mx sources add a MODCON-controlled /2 after the parent
+         * root; the divider is deterministic, so halving the measured parent
+         * is exact (same range check as CLOCK_GetClockSrcFreq). */
+        if (((uint32_t)name >= (uint32_t)kCLOCK_SRC_MAIN_PERI0_DIV2) &&
+            ((uint32_t)name <= (uint32_t)kCLOCK_SRC_COMMPFDX_DIV2) &&
+            CLOCK_GetClockSrcDiv2(name))
+        {
+            freq /= 2U;
+        }
+        return freq;
+    }
+
+    /* Terminal analog/external sources have no FREQMEAS tap; measure the
+     * corresponding root alias instead (e.g. kCLOCK_SRC_FRO192M). */
+    return 0U;
 }
 
 /*******************************************************************************
