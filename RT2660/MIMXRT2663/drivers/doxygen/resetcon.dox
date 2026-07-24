@@ -1,0 +1,23 @@
+/*!
+@defgroup resetcon RESETCON Driver
+@details The MCUXpresso SDK provides APIs for MCUXpresso SDK devices' Reset Controller operation.
+
+The Reset Controller (RESETCON) collates the different reset sources of the chip,
+generates the global reset for all power domains, and records the source of the
+latest and previous reset events.
+
+The RESETCON driver supports:
+  - Configuring access control (domain mask, user-mode, non-secure mode, lock)
+  - Triggering a global software warm reset via the SWRST magic value
+  - Reading and clearing latched and sticky reset-source status (RSTSTAT, RSTSTAT_STICKY)
+  - Reading and clearing per-power-domain reset status (PD_RSTSTAT, PD_RSTSTAT_STICKY)
+  - Triggering software-controlled NPU / Media / Communication power-domain resets
+  - Enabling warm-to-cold reset escalation per source (ESCAEN, sticky until cold reset)
+  - Routing warm-reset sources to interrupts with configurable timeout (RSTIE, RSTIS, ITO)
+  - Masking individual warm-reset sources and selecting level vs. edge trigger mode
+  - Configuring RESET_b and POR_b digital filters and enabling POR-triggered PMU restart
+  - Reading the latched boot-mode pins and overriding the boot mode for the next warm reset
+  - Reading and clearing the warm-reset count
+  - Reading and writing the 16-entry general-purpose retention register array, with per-entry locks
+
+*/

@@ -1,0 +1,19 @@
+# Copyright 2025 NXP
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+menu "Device specific drivers"
+    rsource "../../../RT2660/MIMXRT2663/drivers/Kconfig_clock"
+    rsource "../../../RT2660/MIMXRT2663/drivers/Kconfig_edma_soc"
+    rsource "../../../RT2660/MIMXRT2663/drivers/Kconfig_iomuxc"
+    rsource "../../../RT2660/MIMXRT2663/drivers/Kconfig_memory"
+    rsource "../../../RT2660/MIMXRT2663/drivers/Kconfig_modcon"
+    rsource "../../../RT2660/MIMXRT2663/drivers/Kconfig_power"
+    rsource "../../../RT2660/MIMXRT2663/drivers/Kconfig_trdc_soc"
+    rsource "../../../RT2660/MIMXRT2663/drivers/Kconfig_mipi_dsi_soc"
+    rsource "../../../RT2660/MIMXRT2663/drivers/Kconfig_inputmux_connections"
+    rsource "../../../RT2660/MIMXRT2663/drivers/Kconfig_vbatcon"
+    rsource "../../../RT2660/MIMXRT2663/drivers/Kconfig_memcon"
+    rsource "../../../RT2660/MIMXRT2663/drivers/Kconfig_resetcon"
+    rsource "../../../RT2660/MIMXRT2663/drivers/Kconfig_mcm"
+endmenu

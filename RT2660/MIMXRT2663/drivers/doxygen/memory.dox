@@ -1,0 +1,12 @@
+/*!
+@defgroup memory MEMORY Driver
+@details The MCUXpresso SDK provides device-specific memory map definitions
+for MCUXpresso SDK devices.
+
+This driver supplies the address-range macros used throughout the SDK to
+translate between primary and aliased views of on-chip memories, including:
+  - ITCM / DTCM start, end and alias-offset definitions
+  - Cached and uncached aliases for the XSPI LLC ranges
+  - Helper macros for converting between alias and physical addresses
+
+*/

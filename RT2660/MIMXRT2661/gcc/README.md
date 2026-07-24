@@ -1,0 +1,1 @@
+- The `psram...alt.md` can be used if you want to avoid using OCRAM and put all stuffs in PSRAM

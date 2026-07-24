@@ -1,0 +1,15 @@
+/*!
+@defgroup trdc_soc TRDC SOC Driver
+@details The MCUXpresso SDK provides SoC-specific definitions for the Trusted
+Resource Domain Controller (TRDC) driver on MCUXpresso SDK devices.
+
+This component supplies device-level definitions used by the generic TRDC
+driver, including:
+  - The `trdc_master_t` enumeration mapping TRDC master IDs to their on-chip
+    bus initiators (eDMA channels, CPU, debug masters, etc.)
+  - The `TRDC_MBC_BLK()` packing macro and the `TRDC_MBC_GetTRDCInst() /
+    GetMBCIdx() / GetSlvIdx() / GetBlkIdx()` accessor macros for addressing
+    Memory Block Controller (MBC) entries
+  - Driver-version macro
+
+*/

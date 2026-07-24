@@ -1,0 +1,12 @@
+/*!
+@defgroup clock Clock Driver
+@details The MCUXpresso SDK provides APIs for MCUXpresso SDK devices' clock operation.
+
+The clock driver supports:
+  - CGUANA oscillators (SXOSC, FRO192M, FRO12M) initialization and de-initialization
+  - PLL configuration (Core PLL, Main PLL, System PLL, Audio PLL, Video PLL) and frequency query
+  - Clock source selection and divider programming for all CCM clock roots
+  - Per-IP clock gate enable / disable
+  - Getting clock frequency for a given clock root or IP
+
+*/

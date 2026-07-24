@@ -1,0 +1,104 @@
+#!armclang --target=arm-arm-none-eabi -mcpu=cortex-m85 -E -x c
+/*
+** ###################################################################
+**     Processors:          MIMXRT2663CVJ5A
+**                          MIMXRT2663CVJ5B
+**                          MIMXRT2663CVL5A
+**                          MIMXRT2663CVL5B
+**                          MIMXRT2663DVJ6A
+**                          MIMXRT2663DVJ6B
+**                          MIMXRT2663DVL6A
+**                          MIMXRT2663DVL6B
+**                          MIMXRT2663DVN6B
+**                          MIMXRT2663XVN5B
+**
+**     Compiler:            Keil ARM C/C++ Compiler
+**     Reference manual:    IMXRT2660RM Rev.3, 07/2021 | IMXRT266XSRM Rev.0
+**     Version:             rev. 0.2, 2022-03-25
+**     Build:               b241024
+**
+**     Abstract:
+**         Linker file for the Keil ARM C/C++ Compiler
+**
+**     Copyright 2016 Freescale Semiconductor, Inc.
+**     Copyright 2016-2026 NXP
+**     SPDX-License-Identifier: BSD-3-Clause
+**
+**     http:                 www.nxp.com
+**     mail:                 support@nxp.com
+**
+** ###################################################################
+*/
+
+
+/* Sizes */
+#if (defined(__stack_size__))
+  #define Stack_Size                   __stack_size__
+#else
+  #define Stack_Size                   0x0400
+#endif
+
+#if (defined(__heap_size__))
+  #define Heap_Size                    __heap_size__
+#else
+  #define Heap_Size                    0x0400
+#endif
+
+/* CTCM (128 KB): vector table + code */
+#define m_interrupts_start             0x00000000
+#define m_interrupts_size              0x00000800
+
+#define m_text_start                   0x00000800
+#define m_text_size                    0x0001FC00
+
+/* STCM (128 KB): RW/ZI data + heap + stack */
+#define m_data_start                   0x20000000
+#define m_data_size                    0x00020000
+
+/* SRAM0 (768 KB) — reserved for optional NonCacheable placement.
+ * The armgcc reference (MIMXRT2663xxxxx_ram.ld) declares this region but
+ * places NonCacheable* sections in m_data by default (NCACHE size = 0).
+ * Kept as a defined symbol for parity; not used by any execution region. */
+#define m_data2_start                  0x22000000
+#define m_data2_size                   0x000C0000
+
+; CTCM load region — holds the vector table, .text/.rodata, and the RW
+; initialization image that is copied to STCM by __main at startup.
+LR_m_text  m_interrupts_start  m_interrupts_size+m_text_size
+{
+  ; Interrupt vector table at CTCM origin (execution address = load address).
+  VECTOR_ROM  m_interrupts_start  FIXED  m_interrupts_size
+  {
+    * (.isr_vector,+FIRST)
+  }
+
+  ; Code, read-only data, and quick-access code.
+  ER_m_text  m_text_start  FIXED  m_text_size
+  {
+    * (InRoot$$Sections)
+    .ANY (+RO)
+    .ANY (CodeQuickAccess)
+  }
+
+  ; STCM RW+ZI. Storage (LMA) is inline in this LR (CTCM); execution
+  ; (VMA) is at m_data_start. NonCacheable* and DataQuickAccess placed
+  ; alongside +RW/+ZI to mirror the .ld/.icf layout.
+  RW_m_data  m_data_start  m_data_size-Stack_Size-Heap_Size
+  {
+    .ANY (+RW +ZI)
+    .ANY (DataQuickAccess)
+    .ANY (NonCacheable)
+    .ANY (NonCacheable.init)
+    .ANY (.bss.NonCacheable)
+  }
+
+  ; Heap growing up.
+  ARM_LIB_HEAP  +0  ALIGN 8  EMPTY  Heap_Size
+  {
+  }
+
+  ; Stack growing down from top of STCM.
+  ARM_LIB_STACK  m_data_start+m_data_size  EMPTY  -Stack_Size
+  {
+  }
+}

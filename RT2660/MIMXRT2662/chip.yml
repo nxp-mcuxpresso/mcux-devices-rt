@@ -1,0 +1,151 @@
+---
+#####################################################################################
+# This file is placed under devices/<device>
+#
+# The following components(manifest_content) are translated from the devices/<device>.meta
+# and devices/<device>_device.meta
+#
+# They are used contained the information for manifest generation usage. Currently, they are
+# not related to SW components actions
+#
+# The naming for this component must be consistent in all devices. Generator can get the contents
+# of them directly from the name.
+#
+#####################################################################################
+
+# automatically, from fromChipModel
+device.hardware_data:
+  section-type: "manifest_content"
+  belong_to: set.device.MIMXRT2662
+  contents:
+    generated_from_chip_model: "yes"
+    devices:
+      - id: "MIMXRT2662xxxxx"
+        full_name: "MIMXRT2662xxxxx"
+        name: "MIMXRT2662"
+        platform: "i.MX"
+        series: "RT"
+        family: "MIMXRT2660"
+        subfamily: "iMXRT2662"
+        core:
+          - name: "Cortex-M85"
+            type: "cm85"
+            id: "cm85"
+            description: ""
+            fpu: "DP_FPU"
+            dsp: true
+            mpu: true
+            sau: true
+            frequency_mhz: 700
+        memory:
+          memoryBlock:
+            - id: "SRAM_OC"
+              name: "SRAM_OC"
+              addr: 0x20360000
+              size: 0x20000
+              type: "RAM"
+              access: "RW"
+              default: true
+        total_memory:
+          ram_size_kb: 128
+          flash_size_kb: 0
+        part:
+          - name: "MIMXRT2662DHPAA"
+          - name: "MIMXRT2662DVVAA"
+          - name: "MIMXRT2662CHPAA"
+          - name: "MIMXRT2662CVVAA"
+          - name: "MIMXRT2662XHP8A"
+          - name: "MIMXRT2662XVV8A"
+          - name: "MIMXRT2662AHP8A"
+        ips:
+          - "DriverFeature_FLEXCAN_DMA"
+          - "DriverFeature_KHCI_HOST"
+          - "DriverFeature_RTC_IRTC"
+          - "DriverType_ACMP"
+          - "DriverType_ASRC"
+          - "DriverType_AUDIO_XCVR"
+          - "DriverType_AXBS"
+          - "DriverType_CACHE"
+          - "DriverType_CAN_MB"
+          - "DriverType_CCM"
+          - "DriverType_CGUANA"
+          - "DriverType_CRC"
+          - "DriverType_CSI"
+          - "DriverType_DBGMB"
+          - "DriverType_DCIF_1"
+          - "DriverType_DIGTMP"
+          - "DriverType_EDMA3"
+          - "DriverType_EDMA5"
+          - "DriverType_ENET"
+          - "DriverType_ENET_QOS"
+          - "DriverType_EQDC"
+          - "DriverType_EVTG"
+          - "DriverType_EWM"
+          - "DriverType_FLEXCAN"
+          - "DriverType_FLEXIO"
+          - "DriverType_FLEXSPI_SLV"
+          - "DriverType_FREQME"
+          - "DriverType_FSB"
+          - "DriverType_GPIO"
+          - "DriverType_I3C"
+          - "DriverType_INPUTMUX"
+          - "DriverType_IOMUXC"
+          - "DriverType_ISI"
+          - "DriverType_JPEGDEC"
+          - "DriverType_JPGDECWRP"
+          - "DriverType_JTAGC"
+          - "DriverType_LLC"
+          - "DriverType_LPADC"
+          - "DriverType_LPDAC"
+          - "DriverType_LPI2C"
+          - "DriverType_LPIT"
+          - "DriverType_LPSPI"
+          - "DriverType_LPTMR"
+          - "DriverType_LPUART"
+          - "DriverType_MCM"
+          - "DriverType_MEMCON"
+          - "DriverType_MEMORY"
+          - "DriverType_MIPI_CSI"
+          - "DriverType_MIPI_DSI_SPLIT_1"
+          - "DriverType_MMU"
+          - "DriverType_MODCON"
+          - "DriverType_MQS"
+          - "DriverType_NIC"
+          - "DriverType_NPU"
+          - "DriverType_PDCON"
+          - "DriverType_PDM"
+          - "DriverType_POWERCON"
+          - "DriverType_PWM"
+          - "DriverType_REFORMATTER"
+          - "DriverType_RESETCON"
+          - "DriverType_ROMC"
+          - "DriverType_RT2K_PMU"
+          - "DriverType_RTC_V2"
+          - "DriverType_S3MU"
+          - "DriverType_SAI"
+          - "DriverType_SINC"
+          - "DriverType_SRAM"
+          - "DriverType_SRAMCTL"
+          - "DriverType_SRAMC_1"
+          - "DriverType_STM"
+          - "DriverType_SWT"
+          - "DriverType_TENBASET_PHY"
+          - "DriverType_TINGPU"
+          - "DriverType_TMR_1"
+          - "DriverType_TPM"
+          - "DriverType_TRDC_1"
+          - "DriverType_TRGSYNC"
+          - "DriverType_USBNC"
+          - "DriverType_USB_HOST_DEVICE_EHCI"
+          - "DriverType_USB_HOST_DEVICE_KHCI"
+          - "DriverType_USB_HSDCD"
+          - "DriverType_USB_PHY"
+          - "DriverType_USDHC"
+          - "DriverType_VBATCON"
+          - "DriverType_XBAR_DSC"
+          - "DriverType_XSPI"
+        modules:
+          - name: "USB"
+            feature: "KHCI_COUNT"
+            value: "1"
+...

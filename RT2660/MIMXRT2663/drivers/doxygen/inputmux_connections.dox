@@ -1,0 +1,14 @@
+/*!
+@defgroup inputmux_driver INPUTMUX Connections
+@details The MCUXpresso SDK provides device-specific INPUTMUX connection
+identifiers for MCUXpresso SDK devices.
+
+This component supplies the inputmux_index_t enumeration used by the generic
+INPUTMUX driver. Each entry encodes a register/field tuple that selects the
+trigger source for a target peripheral, including:
+  - Frequency-measurement reference and target clock selectors per subsystem
+    (AUDIO, CMPT, COMM, MAIN, MEDIA, SYSCON, WAKE)
+  - Cross-bar (XBAR), DMA, and other inter-module trigger connections defined
+    in the chip's INPUTMUX register map
+
+*/

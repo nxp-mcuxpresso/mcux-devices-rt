@@ -1,0 +1,23 @@
+/*!
+@defgroup memcon MEMCON Driver
+@details The MCUXpresso SDK provides APIs for MCUXpresso SDK devices' Memory Controller operation.
+
+The Memory Controller (MEMCON) is the centralized memory power controller. It
+accepts hardware power-sequence commands from PDCON when a power domain enters
+or exits low-power mode, and also lets software directly update the memory power
+state per slice. MEMCON is split into one global block plus twelve per-domain
+slice blocks (S0 through S11), each owning up to twelve memory blocks.
+
+The MEMCON driver supports:
+  - Configuring global access control (16-bit domain ID, user-mode, non-secure
+    mode, lock)
+  - Enabling and disabling the MEMCON function clock gate
+  - Configuring per-slice access control (4-bit domain ID + UM/NSM/LOCK)
+  - Selecting the slice trigger mode: hardware only, software only, or both
+  - Issuing a software trigger and waiting for the self-clearing SWTRG bit
+  - Setting and reading the per-block low-power power mode (Active / Retention /
+    Power-down) for each of the up to twelve memory blocks per slice
+  - Setting and reading the per-block active power mode for each block
+  - Bulk read / write of the MEM_SLPCFG0/1 and MEM_RUNCFG0/1 register pairs
+
+*/

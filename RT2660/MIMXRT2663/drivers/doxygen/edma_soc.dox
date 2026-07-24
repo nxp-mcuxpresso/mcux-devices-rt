@@ -1,0 +1,15 @@
+/*!
+@defgroup edma_soc EDMA SOC Driver
+@details The MCUXpresso SDK provides SoC-specific definitions for the eDMA driver
+on MCUXpresso SDK devices.
+
+The eDMA SOC layer supplies the device-level glue used by the generic eDMA
+driver, including:
+  - eDMA3 / eDMA5 IP version flags (FSL_EDMA_SOC_IP_DMA3, FSL_EDMA_SOC_IP_DMA5)
+  - The EDMA_BASE_PTRS table covering MAIN_EDMA3, MAIN_EDMA5, AUDIO_EDMA3 and
+    WAKE_EDMA3
+  - Per-channel IRQ tables (EDMA_CHN_IRQS) for each eDMA instance
+  - Helper inline functions used by the generic eDMA driver to translate
+    channel/instance numbers into base addresses and IRQ numbers
+
+*/

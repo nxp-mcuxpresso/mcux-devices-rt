@@ -1,0 +1,12 @@
+/*!
+@defgroup soc_mipi_dsi MIPI DSI SOC Driver
+@details The MCUXpresso SDK provides SoC-specific definitions for the MIPI DSI
+driver on MCUXpresso SDK devices.
+
+This component supplies the device-level glue used by the generic MIPI DSI
+driver, including:
+  - D-PHY PLL VCO output frequency limits (DSI_DPHY_PLL_VCO_MIN /
+    DSI_DPHY_PLL_VCO_MAX)
+  - Driver-version macro and component-ID definition
+
+*/

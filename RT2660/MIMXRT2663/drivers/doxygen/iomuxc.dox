@@ -1,0 +1,13 @@
+/*!
+@defgroup iomuxc_driver IOMUXC: IOMUX Controller
+
+@details IOMUXC driver provides APIs for pin configuration. It also supports the
+miscellaneous functions integrated in IOMUXC.
+
+The IOMUXC driver supports:
+  - Per-pin function-ID tuples (`mux register`, `mux mode`, `input register`,
+    `input daisy`, `config register`) covering all multiplexed pin alternates
+  - APIs to set the pin mux, the input daisy chain, and the pin pad
+    configuration in a single call
+
+*/

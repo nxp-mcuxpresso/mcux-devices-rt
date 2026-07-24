@@ -1,0 +1,20 @@
+/*!
+@defgroup vbatcon VBATCON Driver
+@details The MCUXpresso SDK provides APIs for MCUXpresso SDK devices' VBAT Controller operation.
+
+The VBAT Controller (VBATCON) manages the power and reset signals of the VBAT power
+mode, and includes the switching logic of the ULP32K clock domain. It also exposes
+on/off button control and a small bank of general-purpose retention registers that
+remain powered from the VBAT supply.
+
+The VBATCON driver supports:
+  - Configuring on/off-button behavior: long-press timeout, debounce time, turn-on
+    time, PMU no-acknowledge timeout, abnormal-entry deadlock protection
+  - Enabling, disabling and clearing the four event sources: emergency power-off,
+    power-off, power-on and OSC32K error
+  - Gating the BBSM and VBAT_LPTIMER functional clocks
+  - Selecting the ULP32K clock source (FRO32K vs OSC32K) under software control
+  - Reading clock-readiness status flags (OSC ready, FRO ready, OSC SCXO/TCXO stable)
+  - Reading and writing the VBATCON general-purpose retention registers
+
+*/

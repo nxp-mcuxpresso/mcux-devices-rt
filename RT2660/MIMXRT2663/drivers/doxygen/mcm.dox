@@ -1,0 +1,21 @@
+/*!
+@defgroup mcm MCM Driver
+@details The MCUXpresso SDK provides APIs for MCUXpresso SDK devices' Cortex-M85 MCM operation.
+
+The Cortex-M85 MCM (CM85_MCM) is a miscellaneous control module connected onto
+the Cortex-M85 PPB bus. It exposes the FPU exception interrupt enables and
+status flags, the TCM write-abort detection, and a debugger-readable view of
+the CM85 fault registers and the current program counter.
+
+The MCM driver supports:
+  - Enabling and disabling the per-source interrupts in ISCR: TCM write abort
+    plus the six FPU exceptions (invalid operation, divide-by-zero, overflow,
+    underflow, inexact, input denormal)
+  - Reading the asserted ISCR status flags
+  - Clearing the TCM write-abort status (the FPU status bits mirror FPSCR and
+    must be cleared via FPSCR)
+  - Reading the raw and decoded process-fault state from PFSHR + PFSLR (MMFSR,
+    BFSR, UFSR, SFSR and the three HFSR bits)
+  - Reading the current program counter (CURRPC)
+
+*/

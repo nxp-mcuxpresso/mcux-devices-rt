@@ -1,0 +1,22 @@
+# Copyright 2026 NXP
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+config MCUX_COMPONENT_driver.power
+    bool "power"
+    select MCUX_COMPONENT_driver.powercon
+    select MCUX_COMPONENT_driver.pdcon
+    select MCUX_COMPONENT_driver.rt2k_pmu
+    select MCUX_COMPONENT_driver.memcon
+    select MCUX_COMPONENT_driver.vbatcon
+
+config MCUX_POWER_PF9453_SUPPLY
+    bool "Supply VDD_CORE from the external PF9453 PMIC (BUCK2) instead of the on-chip DCDC"
+    depends on MCUX_COMPONENT_driver.power
+    default n
+    select MCUX_COMPONENT_driver.pf9453
+    help
+      Compile-time selection of the VDD_CORE supply. When set, fsl_power drives the PF9453
+      BUCK2 regulator over I2C for run-mode DVS and low-power standby, and the on-chip DCDC
+      path is compiled out. The board hands the I2C transport to POWER_Init(). When unset
+      (default), VDD_CORE is supplied by the on-chip DCDC and there is no fsl_pf9453 dependency.

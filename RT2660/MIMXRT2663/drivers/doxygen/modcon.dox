@@ -1,0 +1,26 @@
+/*!
+@defgroup modcon MODCON Driver
+@details The MCUXpresso SDK provides APIs for MCUXpresso SDK devices' Module
+Controller (MODCON) operation.
+
+MODCON manages per-IP access control (trust mask, domain mask, locks),
+peripheral reset, and per-IP configuration / status registers. It also
+implements the device-side `RESET_PeripheralReset()` entry point used by
+the generic SDK reset interface.
+
+The MODCON driver supports:
+  - Reading the MODCON version register and trust mask
+  - Setting the MODCON trust mask with optional lock
+  - Per-IP domain-access mask programming with optional lock
+  - Issuing and clearing per-IP reset requests, plus a one-shot peripheral
+    reset (assert + de-assert) sequence used by the SDK reset interface
+  - Per-IP CFG[idx] read / write and per-IP STATUS[idx] read
+
+This component also exposes IP enumerations for ASRC, SPDIF, SAI, PDM,
+FREQME, EDMA3 / EDMA5, NPU, SRAMCTL, NIC, ROMCP, ENET, ENET_QOS, USDHC,
+XSPI / XSPIR, I3C, LPSPI, LPI2C, LPUART, FlexCAN, EQDC, GPIO, LPIT, FlexIO,
+FlexPWM, SINC, CRC, IOMUXC, CGUA / CGUANA, STM, DAC, QTMR, ADC, MIPI_CSI /
+MIPI_DSI, ISI, DCIF, JPEG, GPU, REFORMATTER, CSI, LPTMR, EWM, SWT, ACMP,
+PMUANA and CGU.
+
+*/
