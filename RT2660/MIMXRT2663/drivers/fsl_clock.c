@@ -620,7 +620,13 @@ bool CLOCK_GetClockSrcDiv2(clock_name_t src)
 static CCM_Type* locateClkGate(clock_ip_name_t target, uint32_t* index)
 {
     CCM_Type* targetCCM = MAIN__CCM;
-    *index = target - kCLOCK_MAIN_START;
+    /* Safe default: 0 sits inside every CCM's CGC_ROOT[] array. All valid
+     * subsystem branches below reassign *index; for out-of-range targets
+     * (e.g. kCLOCK_IpInvalid) the value stays bounded. Setting an
+     * unconditional default of (target - kCLOCK_MAIN_START) at entry
+     * confuses -Werror=array-bounds analysis, which then reports 172 as a
+     * reachable subscript when no branch matches. */
+    *index = 0U;
 
     // Determine which SS the clock node belongs to and its inner index
     if (target <= kCLOCK_SYSCON_END) {
