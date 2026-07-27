@@ -1803,13 +1803,6 @@ static const uint8_t s_cmptRootTar[] = {
     16U, /* cmpt_clk     */ 17U, /* cpu_clk      */ 18U, /* npu_clk      */
     19U, /* systick_clk0 */ 20U, /* systick_clk1 */
 };
-/* MAIN +8 note: on real silicon every MAIN FREQMEAS mux input sits 8 positions
- * above the value listed in fsl_inputmux_connections.h (empirically confirmed
- * signal-by-signal on the EVK: e.g. writing the header's lpuart0 value 28
- * measures lpit0, while 28+8=36 measures lpuart0; the header's *_1_* duplicate
- * entries at 54..61 are the true positions of the last eight signals). The
- * values below are the HARDWARE positions (header value + 8). The header
- * discrepancy is tracked for a separate fix against the reference manual. */
 static const uint8_t s_mainRootTar[] = {
     17U, /* main_clk_divided  */ 21U, /* xspi0_fclk_divided */ 25U, /* xspi1_fclk_divided */
     28U, /* i3c0_fclk         */ 29U, /* lpi2c0_fclk        */ 30U, /* lpi2c1_fclk        */
@@ -1840,13 +1833,13 @@ static const uint8_t s_commRootTar[] = {
     18U,                   /* usdhc0_fclk   */
     19U,                   /* usdhc1_fclk   */
     20U,                   /* xspir_rootclk */
-    CLOCK_FREQME_TAR_NONE, /* usb0_phyclk -- no COMM FREQMEAS tap */
-    CLOCK_FREQME_TAR_NONE, /* usb0_fro48m -- no COMM FREQMEAS tap */
-    CLOCK_FREQME_TAR_NONE, /* usb1_fclk   -- no COMM FREQMEAS tap */
-    CLOCK_FREQME_TAR_NONE, /* usb0_wakeclk - no COMM FREQMEAS tap */
-    21U,                   /* eth0_trxclk   */
-    22U,                   /* eth0_timerclk */
-    23U,                   /* eth1_trxclk   */
+    21U,                   /* usb0_phyclk   */
+    22U,                   /* usb0_fro48m   */
+    23U,                   /* usb1_fclk     */
+    24U,                   /* usb0_wakeclk  */
+    25U,                   /* eth0_trxclk   */
+    26U,                   /* eth0_timerclk */
+    27U,                   /* eth1_trxclk   */
     31U,                   /* eth1_timerclk */
     32U,                   /* eth_refclk (eth_tarclk_tar) */
     33U,                   /* xeno0_liwclk  */
@@ -2041,7 +2034,7 @@ static uint32_t CLOCK_FreqmeMeasure(uint32_t domainIdx, uint8_t tarMux)
                                        17U /* cpu_clk_ref */, 46U /* cpu_rootclk_tar */,
                                        kCLOCK_Root_Invalid},
         [kCLOCK_FreqmeDomainMain]   = {MAIN__FREQME, MAIN__INPUTMUX, kCLOCK_MAIN_freqme,
-                                       60U /* main_fro192m_ref (hardware position; see MAIN +8 note above) */,
+                                       60U /* main_fro192m_ref */,
                                        33U /* fro192m_rootclk_tar */, kCLOCK_Root_Invalid},
         [kCLOCK_FreqmeDomainWake]   = {WAKE__FREQME, WAKE__INPUTMUX, kCLOCK_WAKE_freqme,
                                        17U /* wake_sxosc_ref */, CLOCK_FREQME_REF_IS_SXOSC,

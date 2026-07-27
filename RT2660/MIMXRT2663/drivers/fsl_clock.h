@@ -2208,9 +2208,6 @@ uint32_t CLOCK_GetExternalSrcFreq(clock_name_t name);
  *
  * @param root Clock root defined in clock_root_t.
  * @return Measured frequency in hertz, or 0 on failure: root out of range,
- *         root without a FREQME target tap (exactly these four:
- *         kCLOCK_Root_COMM_usb0_phyclk, kCLOCK_Root_COMM_usb0_fro48m,
- *         kCLOCK_Root_COMM_usb1_fclk, kCLOCK_Root_COMM_usb0_wakeclk),
  *         measurement timeout (reference dead), or result under/overflow
  *         (target dead/gated, or outside the 2 GHz ceiling).
  */
