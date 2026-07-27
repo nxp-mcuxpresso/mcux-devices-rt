@@ -452,7 +452,7 @@
 /* USBPHY module features */
 
 /* @brief USBPHY contain DCD analog module */
-#define FSL_FEATURE_USBPHY_HAS_DCD_ANALOG (0)
+#define FSL_FEATURE_USBPHY_HAS_DCD_ANALOG (1)
 /* @brief USBPHY has register TRIM_OVERRIDE_EN */
 #define FSL_FEATURE_USBPHY_HAS_TRIM_OVERRIDE_EN (1)
 /* @brief USBPHY is 28FDSOI */
