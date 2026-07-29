@@ -1254,14 +1254,6 @@ void CLOCK_UpdateVideoPllDnum(uint32_t dnum)
  */
 bool CLOCK_EnableUsbfsClock(void)
 {
-    clock_root_config_t config = {
-        .clockShutdown = true,
-        .mux = kCLOCK_USB1_ClockRoot_USBPLL_48M,
-        .div = 1,
-    };
-
-    CLOCK_SetRootClock(kCLOCK_Root_COMM_usb1_fclk, &config);
-    CLOCK_PowerOnRootClock(kCLOCK_Root_COMM_usb1_fclk);
     CLOCK_EnableClock(kCLOCK_COMM_usb1);
 
     return true;
@@ -1393,7 +1385,7 @@ bool CLOCK_EnableUsbhsPhyPllClock(clock_usb_phy_src_t src, uint32_t freq)
  */
 void CLOCK_DisableUsbhsPhyPllClock(void)
 {
-    CLOCK_PowerOffRootClock(kCLOCK_Root_COMM_usb0_phyclk);
+    CLOCK_DisableClock(kCLOCK_COMM_usb0);
 
     COMM__USBPHY->CTRL |= USBPHY_CTRL_CLKGATE_MASK; /* Set to 1U to gate clocks */
 }
