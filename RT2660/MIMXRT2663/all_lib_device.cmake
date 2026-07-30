@@ -1,3 +1,7 @@
+# Copyright 2026 NXP
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
 # Copy variable into project config.cmake to use software component
 #set.board.mimxrt2660evk
 #  # description: Utility mimxrt2660evk_jlinkscript
