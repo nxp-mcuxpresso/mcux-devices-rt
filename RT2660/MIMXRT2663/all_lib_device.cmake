@@ -450,7 +450,7 @@
 #  set(CONFIG_USE_driver_enet true)
 
 #  # description: EDMA Driver
-#  set(CONFIG_USE_driver_edma4 true)
+#  set(CONFIG_USE_driver_edma_unified true)
 
 #  # description: DCIF Driver
 #  set(CONFIG_USE_driver_dcif_1 true)
@@ -2341,7 +2341,7 @@ list(APPEND CMAKE_MODULE_PATH
   ${CMAKE_CURRENT_LIST_DIR}/../../../../drivers/csi
   ${CMAKE_CURRENT_LIST_DIR}/../../../../drivers/dac_1
   ${CMAKE_CURRENT_LIST_DIR}/../../../../drivers/dcif_1
-  ${CMAKE_CURRENT_LIST_DIR}/../../../../drivers/edma4
+  ${CMAKE_CURRENT_LIST_DIR}/../../../../drivers/edma_unified
   ${CMAKE_CURRENT_LIST_DIR}/../../../../drivers/enet
   ${CMAKE_CURRENT_LIST_DIR}/../../../../drivers/enet_qos
   ${CMAKE_CURRENT_LIST_DIR}/../../../../drivers/eqdc

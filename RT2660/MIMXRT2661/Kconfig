@@ -16,3 +16,17 @@ config MCUX_HW_DEVICE_MIMXRT2661
 
     imply MCUX_COMPONENT_driver.cache_llc if MCUX_PRJSEG_module.device.suite
     imply MCUX_COMPONENT_driver.cache_armv7_m7 if MCUX_PRJSEG_module.device.suite
+
+    # eDMA component dependency
+    select MCUX_COMPONENT_driver.edma_soc if MCUX_COMPONENT_driver.edma_unified
+    select MCUX_COMPONENT_driver.edma_unified if MCUX_COMPONENT_driver.sai_edma
+    select MCUX_COMPONENT_driver.edma_unified if MCUX_COMPONENT_driver.lpuart_edma
+    select MCUX_COMPONENT_driver.edma_unified if MCUX_COMPONENT_driver.lpspi_edma
+    select MCUX_COMPONENT_driver.edma_unified if MCUX_COMPONENT_driver.lpi2c_edma
+    select MCUX_COMPONENT_driver.edma_unified if MCUX_COMPONENT_driver.i3c_edma
+    select MCUX_COMPONENT_driver.edma_unified if MCUX_COMPONENT_driver.xspi_edma
+    select MCUX_COMPONENT_driver.edma_unified if MCUX_COMPONENT_driver.flexio_uart_edma
+    select MCUX_COMPONENT_driver.edma_unified if MCUX_COMPONENT_driver.flexio_spi_edma
+    select MCUX_COMPONENT_driver.edma_unified if MCUX_COMPONENT_driver.flexio_i2s_edma
+    select MCUX_COMPONENT_driver.edma_unified if MCUX_COMPONENT_driver.flexcan_edma
+    select MCUX_COMPONENT_driver.edma_unified if MCUX_COMPONENT_driver.asrc_edma
