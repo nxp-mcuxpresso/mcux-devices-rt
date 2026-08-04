@@ -239,7 +239,9 @@ static void POWER_ApplyCmcStepConfig(POWERCON_CMC_CTRL_Type *base, const power_c
     }
 }
 
-/*
+/*!
+ * brief Flushes the accumulated SW wakeup masks to the CMC0/1/2 hardware registers.
+ *
  * Writes accumulated wakeup masks to the three CMC instances according to the
  * RT2660-specific CMC-to-domain routing:
  *   CMC0 <- s_irqWakeupMask     (CPU / M85 core, any NVIC interrupt)
@@ -249,10 +251,12 @@ static void POWER_ApplyCmcStepConfig(POWERCON_CMC_CTRL_Type *base, const power_c
  * Each CMC receives only its relevant wakeup type; the other register array is
  * written as all-masked so it cannot generate spurious wakeups.
  *
- * Called before every POWER_Enter*() including Power Down (PD_WAKE remains
- * powered in Power Down, so CMC2 DMA mask is always relevant).
+ * Called automatically before every POWER_Enter*() including Power Down (PD_WAKE
+ * remains powered in Power Down, so the CMC2 DMA mask is always relevant).  Also
+ * public so an application can apply the masks ahead of a bare __WFI() or inspect
+ * the CMC registers; the function is idempotent.
  */
-static void POWER_ApplyWakeupSources(void)
+void POWER_ApplyWakeupSources(void)
 {
     uint32_t allMasked[POWER_IRQ_WAKEUP_MASK_COUNT]; /* large enough for both arrays */
     uint32_t enableMask[POWER_IRQ_WAKEUP_MASK_COUNT];
@@ -488,9 +492,15 @@ void POWER_Init(const power_init_config_t *config)
         POWERCON_SetSysSleepCtrlCountValue(SYSCON__POWERCON_SYS_SLEEP_CTRL, sscCountValue);
     }
 
-    /* 7. Clear XMC_STBY_MASK so all CMC/DMC instances can trigger SSC.
-     *    Reset value is 0x0F (all excluded); 0x00 enables all. */
+    /* 7. Standby gating baseline: XMC_STBY_MASK = 0x07 disables all CMC internal
+     *    standby flows while active, so a bare application WFI stays a simple
+     *    core WFI. Each POWER_Enter*() programs the mode-specific mask before
+     *    its WFI. TRIGGER_SS is set explicitly on all CMCs (silicon default
+     *    made deterministic); Sleep entry clears it on CMC0. */
     POWERCON_SetXmcStandbyMask(SYSCON__POWERCON_GLOBAL, 0x07U);
+    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC0_CTRL);
+    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC1_CTRL);
+    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC2_CTRL);
 
     /* 8. Configure PDCON trigger mode for the four SW-controllable domains.
      *    Default: HW trigger enabled (CMC drives standby transitions).
@@ -1249,21 +1259,27 @@ status_t POWER_EnterSleep(const power_sleep_config_t *config)
     socCfg.pmiccfgStby = 0U;
     POWERCON_SetSocStandbyConfig(SYSCON__POWERCON_SOC_CTRL, &socCfg);
 
-    /* Do not allow trigger system sleep mode. */
-    POWERCON_SetXmcStandbyMask(SYSCON__POWERCON_GLOBAL, 0x7U);
+    /* Sleep = CMC0-only internal standby flow, SSC not triggered:
+     *  - XMC_STBY_MASK = 0x6: enable CMC0's flow, keep CMC1/CMC2 flows disabled.
+     *  - CMC0 TRIGGER_SS = 0: CMC0's standby entry must not trigger the SSC. */
+    POWERCON_SetXmcStandbyMask(SYSCON__POWERCON_GLOBAL, 0x6U);
+    POWERCON_DisableSystemSleepTrigger(SYSCON__POWERCON_CMC0_CTRL);
 
     /* 5. Apply accumulated wakeup sources. */
     POWER_ApplyWakeupSources();
 
     /* 6. Execute WFI. WFI is the hardware-triggered low-power entry request. */
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
-    __DSB();
-    __WFI();
-    __ISB();
 
     /* 7. Clear PDCON sleep event flags (W1C).
      *    Prevents stale flags from persisting into the next LP entry. */
     POWER_ClearPdsef();
+    __DSB();
+    __WFI();
+    __ISB();
+
+    /* Restore the active-mode baseline so a later bare WFI stays a bare WFI. */
+    POWERCON_SetXmcStandbyMask(SYSCON__POWERCON_GLOBAL, 0x07U);
 
     return kStatus_Success;
 }
@@ -1352,8 +1368,13 @@ status_t POWER_EnterDeepSleep(const power_deep_sleep_config_t *config)
     socCfg.pmucfgStby  = pmucfgStby.word;
     socCfg.pmiccfgStby = 0U;
     POWERCON_SetSocStandbyConfig(SYSCON__POWERCON_SOC_CTRL, &socCfg);
-    /* Clear XMC_STBY_MASK */
+    /* Deep Sleep: enable all CMC internal standby flows (XMC_STBY_MASK = 0) and
+     * have every CMC trigger the SSC (explicit; also repairs the CMC0 TRIGGER_SS
+     * clear left by a previous POWER_EnterSleep). */
     POWERCON_SetXmcStandbyMask(SYSCON__POWERCON_GLOBAL, 0x00U);
+    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC0_CTRL);
+    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC1_CTRL);
+    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC2_CTRL);
 
     /* 6. Apply accumulated wakeup sources. */
     POWER_ApplyWakeupSources();
@@ -1390,15 +1411,15 @@ status_t POWER_EnterDeepSleep(const power_deep_sleep_config_t *config)
      *    this function returns.  COREPLL frequency is preserved without a reset;
      *    if the CPU was running from COREPLL before entry no clock restoration
      *    is needed for the core. */
+    /* Restore the active-mode baseline so a later bare WFI stays a bare WFI. */
+    POWERCON_SetXmcStandbyMask(SYSCON__POWERCON_GLOBAL, 0x07U);
+
     /* 8b. Deep Sleep wake resumes in place (no reset) and hardware restores PD_MEDIA,
      *     so restore the MIPI PHY supply if it was powered off on entry. */
     if (restoreMediaMipiPhy)
     {
         POWER_MediaMipiPhyPowerOn();
     }
-    /* 9. Clear PDCON sleep event flags (W1C).
-     *    Prevents stale flags from persisting into the next LP entry. */
-    POWER_ClearPdsef();
 
     return kStatus_Success;
 }
@@ -1480,8 +1501,7 @@ status_t POWER_EnterPowerDown(const power_down_config_t *config)
     }
     /* PD_MAIN (fixed): powered off in Power Down via its PDSLPCFG event. */
     (void)PDCON_SetEventInLowPowerModes(SYSCON__PDCON, kPOWER_DomainMain, kPDCON_EventPowerOff);
-    /* PD_WAKE stays powered in Power Down. */
-    PDCON_SetEventInLowPowerModes(SYSCON__PDCON, kPOWER_DomainWake, kPDCON_EventNoneOrActive);
+
 
     /* 3. Configure SoC standby: retain the clocks required by the Power Down reset flow.
      * MAIN domain is powered off directly in Power Down, and CGU is inside MAIN domain,
@@ -1495,8 +1515,13 @@ status_t POWER_EnterPowerDown(const power_down_config_t *config)
     socCfg.pmiccfgStby = 0U;
     POWERCON_SetSocStandbyConfig(SYSCON__POWERCON_SOC_CTRL, &socCfg);
 
-    /* Clear XMC_STBY_MASK */
+    /* Power Down: enable all CMC internal standby flows (XMC_STBY_MASK = 0) and
+     * have every CMC trigger the SSC (explicit; also repairs the CMC0 TRIGGER_SS
+     * clear left by a previous POWER_EnterSleep). No restore - wakeup is PoR. */
     POWERCON_SetXmcStandbyMask(SYSCON__POWERCON_GLOBAL, 0x00U);
+    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC0_CTRL);
+    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC1_CTRL);
+    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC2_CTRL);
 
     /* 4. Apply wakeup sources: CMC0 IRQ, CMC1 MAIN DMA, CMC2 WAKE DMA. */
     POWER_ApplyWakeupSources();
@@ -1611,8 +1636,14 @@ status_t POWER_EnterDeepPowerDown(const power_deep_power_down_config_t *config)
      *     supply before WFI. No restore - wakeup triggers PoR. */
     POWER_MediaMipiPhyPowerOff();
 
-    /* 5. Clear XMC_STBY_MASK and execute WFI. */
+    /* 5. Deep Power Down: enable all CMC internal standby flows (XMC_STBY_MASK = 0)
+     *    and have every CMC trigger the SSC (explicit; also repairs the CMC0
+     *    TRIGGER_SS clear left by a previous POWER_EnterSleep). No restore -
+     *    wakeup is PoR. Then execute WFI. */
     POWERCON_SetXmcStandbyMask(SYSCON__POWERCON_GLOBAL, 0x00U);
+    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC0_CTRL);
+    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC1_CTRL);
+    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC2_CTRL);
     SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
     __DSB();
     __WFI();

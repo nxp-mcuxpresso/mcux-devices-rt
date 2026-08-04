@@ -973,6 +973,25 @@ void POWER_DisableWakeupSource(power_wakeup_source_t source);
  */
 void POWER_ClearAllWakeupSources(void);
 
+/*!
+ * @brief Flushes the accumulated SW wakeup masks to the CMC0/1/2 hardware registers.
+ *
+ * Writes each driver-private shadow mask to the CMC that owns it on RT2660:
+ *   - CMC0 IRQ_WAKEUP_MASK  <- IRQ wakeup shadow (CPU / M85 core)
+ *   - CMC1 DMA_WAKEUP_MASK  <- MAIN-domain DMA wakeup shadow
+ *   - CMC2 DMA_WAKEUP_MASK  <- WAKE-domain DMA wakeup shadow
+ *
+ * This is called automatically inside every POWER_Enter*() before WFI, so an
+ * application that always enters low power through those APIs does not need to
+ * call it.  It is exposed for callers that arm wakeup sources ahead of a bare
+ * @c __WFI() outside the POWER_Enter*() paths, or that want the CMC mask
+ * registers written immediately after POWER_EnableWakeupSource() /
+ * POWER_DisableWakeupSource() (e.g. for inspection).  The function is idempotent
+ * — it rewrites all CMC masks from the shadow arrays — so an extra call before a
+ * POWER_Enter*() is harmless.
+ */
+void POWER_ApplyWakeupSources(void);
+
 /*! @} */
 
 /*!
