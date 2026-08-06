@@ -280,7 +280,7 @@ SECTIONS
   } > m_data AT > m_text
   __DATA_ROM = LOADADDR(.data);
 
-  /* ---- Cache-line-aligned data (64B aligned, for D-cache-safe DMA) ----- */
+  /* ---- Cache-line-aligned data (32B aligned, for D-cache-safe DMA) ----- */
   .cacheline_data : ALIGN(32)
   {
     __cacheline_data_start__ = .;
