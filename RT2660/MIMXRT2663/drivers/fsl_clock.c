@@ -9,6 +9,9 @@
 #include "PERI_CGUANA.h"
 #include "fsl_modcon.h"
 #include "PERI_MODCON.h"
+#if defined(CLOCK_ENABLE_INFO_DUMP) && CLOCK_ENABLE_INFO_DUMP
+#include "fsl_debug_console.h"
+#endif
 /* Component ID definition, used by tools. */
 #ifndef FSL_COMPONENT_ID
 #define FSL_COMPONENT_ID "platform.drivers.clock"
@@ -257,41 +260,41 @@ const clock_name_t s_clockSourceNameMEDIA[][4] = {
  ******************************************************************************/
 static CCM_Type* locateClkRoot(clock_root_t target, uint32_t* index)
 {
-    CCM_Type* targetCCM = MAIN__CCM;
+    CCM_Type* targetCCM = (CCM_Type*)NULL;
     *index = 0;
 
     // Determine which SS the clock node belongs to and its inner index
     if (target <= kCLOCK_Root_CGU_END) {
-        // CGUDIG
+        // CGU
         targetCCM = SYSCON__CCM;
-        *index = target; 
+        *index = target - kCLOCK_Root_CGU_START;
     }
-    else if (target <= kCLOCK_Root_CMPT_END) {
-        // AUDIO
+    else if (target >= kCLOCK_Root_CMPT_START && target <= kCLOCK_Root_CMPT_END) {
+        // CMPT
         targetCCM = CMPT__CCM;
         *index = target - kCLOCK_Root_CMPT_START;
     }
-    else if (target <= kCLOCK_Root_MAIN_END) {
+    else if (target >= kCLOCK_Root_MAIN_START && target <= kCLOCK_Root_MAIN_END) {
         // MAIN
         targetCCM = MAIN__CCM;
         *index = target - kCLOCK_Root_MAIN_START;
     }
-    else if (target <= kCLOCK_Root_WAKE_END) {
+    else if (target >= kCLOCK_Root_WAKE_START && target <= kCLOCK_Root_WAKE_END) {
         // WAKE
         targetCCM = WAKE__CCM;
         *index = target - kCLOCK_Root_WAKE_START;
     }
-    else if (target <= kCLOCK_Root_COMM_END) {
+    else if (target >= kCLOCK_Root_COMM_START && target <= kCLOCK_Root_COMM_END) {
         // COMM
         targetCCM = COMM__CCM;
         *index = target - kCLOCK_Root_COMM_START;
     }
-    else if (target <= kCLOCK_Root_AUDIO_END) {
-        // CMPT
+    else if (target >= kCLOCK_Root_AUDIO_START && target <= kCLOCK_Root_AUDIO_END) {
+        // AUDIO
         targetCCM = AUDIO__CCM;
         *index = target - kCLOCK_Root_AUDIO_START;
     }
-    else if (target <= kCLOCK_Root_MEDIA_END) {
+    else if (target >= kCLOCK_Root_MEDIA_START && target <= kCLOCK_Root_MEDIA_END) {
         // MEDIA
         targetCCM = MEDIA__CCM;
         *index = target - kCLOCK_Root_MEDIA_START;
@@ -312,14 +315,16 @@ void CLOCK_SetRootClockMux(clock_root_t root, clock_root_mux_source_t src)
     uint32_t index;
     assert(src < 4U);
     targetCCM = locateClkRoot(root, &index);
-    targetCCM->CLOCK_ROOT[index].SLICE_CONTROL =
-        (targetCCM->CLOCK_ROOT[index].SLICE_CONTROL & ~(CCM_SLICE_CONTROL_MUX_MASK)) | CCM_SLICE_CONTROL_MUX(src);
-    __DSB();
-    __ISB();
-
+    if (targetCCM != NULL)
+    {
+        targetCCM->CLOCK_ROOT[index].SLICE_CONTROL =
+            (targetCCM->CLOCK_ROOT[index].SLICE_CONTROL & ~(CCM_SLICE_CONTROL_MUX_MASK)) | CCM_SLICE_CONTROL_MUX(src);
+        __DSB();
+        __ISB();
 #if __CORTEX_M == 85
-    (void)targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
+        (void)targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
 #endif
+    }
 }
 
 /*!
@@ -333,6 +338,7 @@ uint32_t CLOCK_GetRootClockMux(clock_root_t root)
     CCM_Type* targetCCM;
     uint32_t index;
     targetCCM = locateClkRoot(root, &index);
+    if (NULL == targetCCM) { return 0U; }
     return (targetCCM->CLOCK_ROOT[index].STATUS0 & CCM_STATUS0_MUX_MASK) >> CCM_STATUS0_MUX_SHIFT;
 }
 
@@ -379,13 +385,17 @@ void CLOCK_SetRootClockDiv(clock_root_t root, uint32_t div)
 
     assert(div);
     targetCCM = locateClkRoot(root, &index);
-    targetCCM->CLOCK_ROOT[index].SLICE_CONTROL = (targetCCM->CLOCK_ROOT[index].SLICE_CONTROL & ~CCM_SLICE_CONTROL_DIV_MASK) |
-                                    CCM_SLICE_CONTROL_DIV((uint32_t)div - 1UL);
-    __DSB();
-    __ISB();
+    if (targetCCM != NULL)
+    {
+        targetCCM->CLOCK_ROOT[index].SLICE_CONTROL =
+            (targetCCM->CLOCK_ROOT[index].SLICE_CONTROL & ~CCM_SLICE_CONTROL_DIV_MASK) |
+            CCM_SLICE_CONTROL_DIV((uint32_t)div - 1UL);
+        __DSB();
+        __ISB();
 #if __CORTEX_M == 85
-    (void)targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
+        (void)targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
 #endif
+    }
 }
 
 /*!
@@ -399,7 +409,7 @@ uint32_t CLOCK_GetRootClockDiv(clock_root_t root)
     CCM_Type* targetCCM;
     uint32_t index;
     targetCCM = locateClkRoot(root, &index);
-
+    if (NULL == targetCCM) { return 0U; }
     return ((targetCCM->CLOCK_ROOT[index].STATUS0 & CCM_STATUS0_DIV_MASK) >> CCM_STATUS0_DIV_SHIFT) + 1UL;
 }
 
@@ -413,15 +423,17 @@ void CLOCK_PowerOffRootClock(clock_root_t root)
     CCM_Type* targetCCM;
     uint32_t index;
     targetCCM = locateClkRoot(root, &index);
-
-    if (0UL == (targetCCM->CLOCK_ROOT[index].STATUS0 & CCM_STATUS0_OFF_MASK))
+    if (targetCCM != NULL)
     {
-        targetCCM->CLOCK_ROOT[index].SLICE_CONTROL |= CCM_SLICE_CONTROL_SHUTDOWN_MASK;
-        __DSB();
-        __ISB();
+        if (0UL == (targetCCM->CLOCK_ROOT[index].STATUS0 & CCM_STATUS0_OFF_MASK))
+        {
+            targetCCM->CLOCK_ROOT[index].SLICE_CONTROL |= CCM_SLICE_CONTROL_SHUTDOWN_MASK;
+            __DSB();
+            __ISB();
 #if __CORTEX_M == 85
-        (void)targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
+            (void)targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
 #endif
+        }
     }
 }
 
@@ -435,13 +447,15 @@ void CLOCK_PowerOnRootClock(clock_root_t root)
     CCM_Type* targetCCM;
     uint32_t index;
     targetCCM = locateClkRoot(root, &index);
-
-    targetCCM->CLOCK_ROOT[index].SLICE_CONTROL &= ~CCM_SLICE_CONTROL_SHUTDOWN_MASK;
-    __DSB();
-    __ISB();
+    if (targetCCM != NULL)
+    {
+        targetCCM->CLOCK_ROOT[index].SLICE_CONTROL &= ~CCM_SLICE_CONTROL_SHUTDOWN_MASK;
+        __DSB();
+        __ISB();
 #if __CORTEX_M == 85
-    (void)targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
+        (void)targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
 #endif
+    }
 }
 
 /*!
@@ -456,77 +470,100 @@ void CLOCK_SetRootClock(clock_root_t root, const clock_root_config_t *config)
     uint32_t index;
 
     bool secondDivPresent;
+    bool glitchFree;
+    bool curPowerState;
     uint32_t status0, status1, curDiv, curSndDiv, newDiv, newSndDiv;
     uint32_t sliceCtrl;
 
-    // TODO : More stable algorithm is needed for which clock gate need to turn off
-    //        before a specific clock root is configured. A table is needed from
-    //        documentation
-
     assert(config);
     targetCCM = locateClkRoot(root, &index);
-
-    /* Divider fields in SLICE_CONTROL and STATUS0 are (actual - 1); compare raw
-     * register values so the sequencing below is straightforward. */
-    status0          = targetCCM->CLOCK_ROOT[index].STATUS0;
-    status1          = targetCCM->CLOCK_ROOT[index].STATUS1;
-    curDiv           = (status0 & CCM_STATUS0_DIV_MASK)     >> CCM_STATUS0_DIV_SHIFT;
-    curSndDiv        = (status0 & CCM_STATUS0_SND_DIV_MASK) >> CCM_STATUS0_SND_DIV_SHIFT;
-    secondDivPresent = (status1 & CCM_STATUS1_SECOND_DIVIDER_PRESENT_MASK) != 0UL;
-    newDiv           = (uint32_t)config->div    - 1UL;
-    newSndDiv        = (config->sndDiv == 0) ? 0 : (uint32_t)config->sndDiv - 1UL;
-
-    /* Grow dividers BEFORE the mux change; shrink AFTER. This keeps the output
-     * frequency at or below the target across the mux transition and prevents
-     * the surge that a single-write mux+div update can cause. */
-    if (secondDivPresent && (newSndDiv > curSndDiv))
+    if (targetCCM != NULL)
     {
+        /* Divider fields in SLICE_CONTROL and STATUS0 are (actual - 1); compare raw
+         * register values so the sequencing below is straightforward. */
+        status0          = targetCCM->CLOCK_ROOT[index].STATUS0;
+        status1          = targetCCM->CLOCK_ROOT[index].STATUS1;
+        curDiv           = (status0 & CCM_STATUS0_DIV_MASK)     >> CCM_STATUS0_DIV_SHIFT;
+        curSndDiv        = (status0 & CCM_STATUS0_SND_DIV_MASK) >> CCM_STATUS0_SND_DIV_SHIFT;
+        secondDivPresent = (status1 & CCM_STATUS1_SECOND_DIVIDER_PRESENT_MASK) != 0UL;
+        glitchFree       = (status1 & CCM_STATUS1_GLITCH_FREE_MASK) != 0UL;
+        curPowerState    = (status0 & CCM_STATUS0_OFF_MASK) == 0UL;
+        newDiv           = (uint32_t)config->div    - 1UL;
+        newSndDiv        = (config->sndDiv == 0) ? 0 : (uint32_t)config->sndDiv - 1UL;
+
+        /* For non-glitch-free roots that are currently running, gate the clock before
+         * touching MUX/DIV to avoid glitches on the output.  Skip this when the root
+         * is already shut down (curPowerState == 0) since gating an already-off clock
+         * achieves nothing.  Update curPowerState to reflect the gated state so the
+         * final SHUTDOWN step can use it to decide whether to open or keep closed. */
+        if (!glitchFree && curPowerState)
+        {
+            sliceCtrl = targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
+            targetCCM->CLOCK_ROOT[index].SLICE_CONTROL = sliceCtrl | CCM_SLICE_CONTROL_SHUTDOWN_MASK;
+            curPowerState = false;
+        }
+
+        /* Grow dividers BEFORE the mux change; shrink AFTER. This keeps the output
+         * frequency at or below the target across the mux transition and prevents
+         * the surge that a single-write mux+div update can cause. */
+        if (secondDivPresent && (newSndDiv > curSndDiv))
+        {
+            sliceCtrl = targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
+            targetCCM->CLOCK_ROOT[index].SLICE_CONTROL =
+                (sliceCtrl & ~CCM_SLICE_CONTROL_SND_DIV_MASK) | CCM_SLICE_CONTROL_SND_DIV(newSndDiv);
+        }
+
+        if (newDiv > curDiv)
+        {
+            sliceCtrl = targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
+            targetCCM->CLOCK_ROOT[index].SLICE_CONTROL =
+                (sliceCtrl & ~CCM_SLICE_CONTROL_DIV_MASK) | CCM_SLICE_CONTROL_DIV(newDiv);
+        }
+
         sliceCtrl = targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
         targetCCM->CLOCK_ROOT[index].SLICE_CONTROL =
-            (sliceCtrl & ~CCM_SLICE_CONTROL_SND_DIV_MASK) | CCM_SLICE_CONTROL_SND_DIV(newSndDiv);
-    }
+            (sliceCtrl & ~CCM_SLICE_CONTROL_MUX_MASK) | CCM_SLICE_CONTROL_MUX(config->mux);
 
-    if (newDiv > curDiv)
-    {
+        if (newDiv < curDiv)
+        {
+            sliceCtrl = targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
+            targetCCM->CLOCK_ROOT[index].SLICE_CONTROL =
+                (sliceCtrl & ~CCM_SLICE_CONTROL_DIV_MASK) | CCM_SLICE_CONTROL_DIV(newDiv);
+        }
+
+        if (secondDivPresent && (newSndDiv < curSndDiv))
+        {
+            sliceCtrl = targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
+            targetCCM->CLOCK_ROOT[index].SLICE_CONTROL =
+                (sliceCtrl & ~CCM_SLICE_CONTROL_SND_DIV_MASK) | CCM_SLICE_CONTROL_SND_DIV(newSndDiv);
+        }
+
         sliceCtrl = targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
-        targetCCM->CLOCK_ROOT[index].SLICE_CONTROL =
-            (sliceCtrl & ~CCM_SLICE_CONTROL_DIV_MASK) | CCM_SLICE_CONTROL_DIV(newDiv);
-    }
+        /* Use config->clockShutdown and curPowerState (which reflects the gated
+         * state after the pre-MUX/DIV step above) to decide the final SHUTDOWN:
+         *   - clockShutdown=1, curPowerState=1: want off, currently on  -> assert SHUTDOWN.
+         *   - clockShutdown=0, curPowerState=0: want on,  currently off -> clear SHUTDOWN.
+         *   - clockShutdown=1, curPowerState=0: already off, stay off   -> no action.
+         *   - clockShutdown=0, curPowerState=1: already on, stay on     -> no action. */
+        if (config->clockShutdown == curPowerState)
+        {
+            if (config->clockShutdown)
+            {
+                sliceCtrl |= CCM_SLICE_CONTROL_SHUTDOWN_MASK;
+            }
+            else
+            {
+                sliceCtrl &= ~CCM_SLICE_CONTROL_SHUTDOWN_MASK;
+            }
+        }
+        targetCCM->CLOCK_ROOT[index].SLICE_CONTROL = sliceCtrl;
 
-    sliceCtrl = targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
-    targetCCM->CLOCK_ROOT[index].SLICE_CONTROL =
-        (sliceCtrl & ~CCM_SLICE_CONTROL_MUX_MASK) | CCM_SLICE_CONTROL_MUX(config->mux);
-
-    if (newDiv < curDiv)
-    {
-        sliceCtrl = targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
-        targetCCM->CLOCK_ROOT[index].SLICE_CONTROL =
-            (sliceCtrl & ~CCM_SLICE_CONTROL_DIV_MASK) | CCM_SLICE_CONTROL_DIV(newDiv);
-    }
-
-    if (secondDivPresent && (newSndDiv < curSndDiv))
-    {
-        sliceCtrl = targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
-        targetCCM->CLOCK_ROOT[index].SLICE_CONTROL =
-            (sliceCtrl & ~CCM_SLICE_CONTROL_SND_DIV_MASK) | CCM_SLICE_CONTROL_SND_DIV(newSndDiv);
-    }
-
-    sliceCtrl = targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
-    if (config->clockShutdown)
-    {
-        sliceCtrl |= CCM_SLICE_CONTROL_SHUTDOWN_MASK;
-    }
-    else
-    {
-        sliceCtrl &= ~CCM_SLICE_CONTROL_SHUTDOWN_MASK;
-    }
-    targetCCM->CLOCK_ROOT[index].SLICE_CONTROL = sliceCtrl;
-
-    __DSB();
-    __ISB();
+        __DSB();
+        __ISB();
 #if __CORTEX_M == 85
-    (void)targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
+        (void)targetCCM->CLOCK_ROOT[index].SLICE_CONTROL;
 #endif
+    }
 }
 
 /*******************************************************************************
@@ -619,7 +656,7 @@ bool CLOCK_GetClockSrcDiv2(clock_name_t src)
 
 static CCM_Type* locateClkGate(clock_ip_name_t target, uint32_t* index)
 {
-    CCM_Type* targetCCM = MAIN__CCM;
+    CCM_Type* targetCCM = (CCM_Type*)NULL;
     /* Safe default: 0 sits inside every CCM's CGC_ROOT[] array. All valid
      * subsystem branches below reassign *index; for out-of-range targets
      * (e.g. kCLOCK_IpInvalid) the value stays bounded. Setting an
@@ -630,36 +667,36 @@ static CCM_Type* locateClkGate(clock_ip_name_t target, uint32_t* index)
 
     // Determine which SS the clock node belongs to and its inner index
     if (target <= kCLOCK_SYSCON_END) {
-        // CGUDIG
+        // SYSCON
         targetCCM = SYSCON__CCM;
-        *index = target; 
+        *index = target - kCLOCK_SYSCON_START;
     }
-    else if (target <= kCLOCK_CMPT_END) {
-        // AUDIO
+    else if (target >= kCLOCK_CMPT_START && target <= kCLOCK_CMPT_END) {
+        // CMPT
         targetCCM = CMPT__CCM;
         *index = target - kCLOCK_CMPT_START;
     }
-    else if (target <= kCLOCK_MAIN_END) {
+    else if (target >= kCLOCK_MAIN_START && target <= kCLOCK_MAIN_END) {
         // MAIN
         targetCCM = MAIN__CCM;
         *index = target - kCLOCK_MAIN_START;
     }
-    else if (target <= kCLOCK_WAKE_END) {
+    else if (target >= kCLOCK_WAKE_START && target <= kCLOCK_WAKE_END) {
         // WAKE
         targetCCM = WAKE__CCM;
         *index = target - kCLOCK_WAKE_START;
     }
-    else if (target <= kCLOCK_COMM_END) {
+    else if (target >= kCLOCK_COMM_START && target <= kCLOCK_COMM_END) {
         // COMM
         targetCCM = COMM__CCM;
         *index = target - kCLOCK_COMM_START;
     }
-    else if (target <= kCLOCK_AUDIO_END) {
-        // CMPT
+    else if (target >= kCLOCK_AUDIO_START && target <= kCLOCK_AUDIO_END) {
+        // AUDIO
         targetCCM = AUDIO__CCM;
         *index = target - kCLOCK_AUDIO_START;
     }
-    else if (target <= kCLOCK_MEDIA_END) {
+    else if (target >= kCLOCK_MEDIA_START && target <= kCLOCK_MEDIA_END) {
         // MEDIA
         targetCCM = MEDIA__CCM;
         *index = target - kCLOCK_MEDIA_START;
@@ -684,7 +721,10 @@ void CLOCK_EnableClock(clock_ip_name_t name)
         return;
     }
     targetCCM = locateClkGate(name, &index);
-    targetCCM->CGC_ROOT[index].SLICE_CONTROL |= CCM_SLICE_CONTROL_LPCG_CFG_MASK;
+    if (targetCCM != NULL)
+    {
+        targetCCM->CGC_ROOT[index].SLICE_CONTROL |= CCM_SLICE_CONTROL_LPCG_CFG_MASK;
+    }
 }
 
 /*!
@@ -701,7 +741,10 @@ void CLOCK_DisableClock(clock_ip_name_t name)
         return;
     }
     targetCCM = locateClkGate(name, &index);
-    targetCCM->CGC_ROOT[index].SLICE_CONTROL &= ~CCM_SLICE_CONTROL_LPCG_CFG_MASK;
+    if (targetCCM != NULL)
+    {
+        targetCCM->CGC_ROOT[index].SLICE_CONTROL &= ~CCM_SLICE_CONTROL_LPCG_CFG_MASK;
+    }
 }
 
 /*!
@@ -720,16 +763,18 @@ void CLOCK_SetClockGateMode(clock_ip_name_t name, clock_gate_value_t mode, uint8
         return;
     }
     targetCCM = locateClkGate(name, &index);
+    if (targetCCM != NULL)
+    {
+        clearMask = CCM_SLICE_CONTROL_LPCG_CFG_MASK |
+                    CCM_SLICE_CONTROL_HSK_SEL_MASK  |
+                    CCM_SLICE_CONTROL_HSK_BYPASS_MASK;
+        setMask   = CCM_SLICE_CONTROL_LPCG_CFG((uint32_t)mode) |
+                    CCM_SLICE_CONTROL_HSK_SEL((uint32_t)hskSel) |
+                    (bypassHandshake ? CCM_SLICE_CONTROL_HSK_BYPASS(1U) : 0U);
 
-    clearMask = CCM_SLICE_CONTROL_LPCG_CFG_MASK |
-                CCM_SLICE_CONTROL_HSK_SEL_MASK  |
-                CCM_SLICE_CONTROL_HSK_BYPASS_MASK;
-    setMask   = CCM_SLICE_CONTROL_LPCG_CFG((uint32_t)mode) |
-                CCM_SLICE_CONTROL_HSK_SEL((uint32_t)hskSel) |
-                (bypassHandshake ? CCM_SLICE_CONTROL_HSK_BYPASS(1U) : 0U);
-
-    targetCCM->CGC_ROOT[index].SLICE_CONTROL =
-        (targetCCM->CGC_ROOT[index].SLICE_CONTROL & ~clearMask) | setMask;
+        targetCCM->CGC_ROOT[index].SLICE_CONTROL =
+            (targetCCM->CGC_ROOT[index].SLICE_CONTROL & ~clearMask) | setMask;
+    }
 }
 
 /*******************************************************************************
@@ -1539,6 +1584,7 @@ static uint32_t CLOCK_GetRootClockSndDiv(clock_root_t root)
     CCM_Type *targetCCM;
     uint32_t  index;
     targetCCM = locateClkRoot(root, &index);
+    if (NULL == targetCCM) { return 0U; }
     return ((targetCCM->CLOCK_ROOT[index].STATUS0 & CCM_STATUS0_SND_DIV_MASK) >> CCM_STATUS0_SND_DIV_SHIFT) + 1UL;
 }
 
@@ -1955,6 +2001,7 @@ static uint32_t CLOCK_FreqmeMeasureOnce(const clock_freqme_domain_t *dom, uint8_
     }
 
     gateCCM   = locateClkGate(dom->gate, &gateIdx);
+    if (NULL == gateCCM) { return 0U; }
     savedLpcg = gateCCM->CGC_ROOT[gateIdx].SLICE_CONTROL & CCM_SLICE_CONTROL_LPCG_CFG_MASK;
     CLOCK_EnableClock(dom->gate);
 
@@ -2303,3 +2350,231 @@ bool CLOCK_IsAvPllClkoutEnabled(clock_av_pll_t pll)
     }
     return (*av_pll_pll1_reg(pll) & CLOCK_AV_PLL_CLKOUT_EN_MASK) != 0U;
 }
+
+#if defined(CLOCK_ENABLE_INFO_DUMP) && CLOCK_ENABLE_INFO_DUMP
+/*!
+ * @brief Dump a clock-root capability table to the debug console.
+ *
+ * See fsl_clock.h for the full API contract.
+ */
+void CLOCK_InfoDump(void)
+{
+    /* Flat lookup table: index == clock_root_t enum value, NULL for gaps.
+     * Max enum value is kCLOCK_Root_MEDIA_csi_mclkout = 217. */
+    static const char * const s_rootNames[218] = {
+        /* CGU  0-52 */
+        [0]   = "CGU_SXOSC_ROOTCLK",
+        [1]   = "CGU_BASE_CLK",
+        [2]   = "CGU_LOW_CLK",
+        [3]   = "CGU_MAINPLL_DIVX",
+        [4]   = "CGU_SYSPLL_DIVX",
+        [5]   = "CGU_PLL_PFDX",
+        [6]   = "CGU_MEDIA_PFDX",
+        [7]   = "CGU_MAINPFDX_ROOTCLK",
+        [8]   = "CGU_COMMPFDX_ROOTCLK",
+        [9]   = "CGU_MAINDIVX_ROOTCLK",
+        [10]  = "CGU_SAIMCLK_ROOTCLK",
+        [11]  = "CGU_SAIMCLK0_ROOTCLK",
+        [12]  = "CGU_SAIMCLK1_ROOTCLK",
+        [13]  = "CGU_SAIMCLK2_ROOTCLK",
+        [14]  = "CGU_LP12M_CORE_ROOTCLK",
+        [15]  = "CGU_LP1M_CORE_ROOTCLK",
+        [16]  = "CGU_ULP32K_ROOTCLK",
+        [17]  = "CGU_FRO192M_ROOTCLK",
+        [18]  = "CGU_FRO96M_ROOTCLK",
+        [19]  = "CGU_FRO48M_ROOTCLK",
+        [20]  = "CGU_FRO24M_ROOTCLK",
+        [21]  = "CGU_SYSPLLDIV4_ROOTCLK",
+        [22]  = "CGU_SYSPLLDIV5_ROOTCLK",
+        [23]  = "CGU_SYSPLLDIVX_ROOTCLK",
+        [24]  = "CGU_MAINPLLDIVX_ROOTCLK",
+        [25]  = "CGU_MAINPLLDIV8_ROOTCLK",
+        [26]  = "CGU_MAINPLLDIV10_ROOTCLK",
+        [27]  = "CGU_MAINPLLDIV20_ROOTCLK",
+        [28]  = "CGU_AUDIOPLL_ROOTCLK",
+        [29]  = "CGU_VIDEOPLL_ROOTCLK",
+        [30]  = "CGU_MAIN_ROOTCLK",
+        [31]  = "CGU_NPU_ROOTCLK",
+        [32]  = "CGU_MEDIABUS_ROOTCLK",
+        [33]  = "CGU_AUDIOBUS_ROOTCLK",
+        [34]  = "CGU_COMMBUS_ROOTCLK",
+        [35]  = "CGU_WAKEBUS_ROOTCLK",
+        [36]  = "CGU_SYSCON_PDMAIN_CLK",
+        [37]  = "CGU_PERI_ROOTCLK0",
+        [38]  = "CGU_PERI_ROOTCLK1",
+        [39]  = "CGU_PERI_ROOTCLK2",
+        [40]  = "CGU_PERI_ROOTCLK3",
+        [41]  = "CGU_PERI_ROOTCLK4",
+        [42]  = "CGU_PERI_ROOTCLK5",
+        [43]  = "CGU_PERI_ROOTCLK6",
+        [44]  = "CGU_PERI_ROOTCLK7",
+        [45]  = "CGU_AUDIO_ROOTCLK",
+        [46]  = "CGU_VIDEO_ROOTCLK",
+        [47]  = "CGU_USB1_ROOTCLK",
+        [48]  = "CGU_ETH_ROOTCLK",
+        [49]  = "CGU_TEST_ROOTCLK",
+        [50]  = "CGU_CLKOUT",
+        [51]  = "CGU_MAIN_FRO192M",
+        [52]  = "CGU_MAIN_ULP32K",
+        /* 53-63 gap */
+        /* CMPT 64-68 */
+        [64]  = "CMPT_cmpt_clk",
+        [65]  = "CMPT_cpu_clk",
+        [66]  = "CMPT_npu_clk",
+        [67]  = "CMPT_systick_clk0",
+        [68]  = "CMPT_systick_clk1",
+        /* 69-79 gap */
+        /* MAIN 80-116 */
+        [80]  = "MAIN_main_clk_divided",
+        [81]  = "MAIN_xspi0_fclk_divided",
+        [82]  = "MAIN_xspi1_fclk_divided",
+        [83]  = "MAIN_i3c0_fclk",
+        [84]  = "MAIN_lpi2c0_fclk",
+        [85]  = "MAIN_lpi2c1_fclk",
+        [86]  = "MAIN_lpspi0_fclk",
+        [87]  = "MAIN_lpspi1_fclk",
+        [88]  = "MAIN_lpspi2_fclk",
+        [89]  = "MAIN_lpspi3_fclk",
+        [90]  = "MAIN_lpspi4_fclk",
+        [91]  = "MAIN_lpuart0_fclk",
+        [92]  = "MAIN_lpuart1_fclk",
+        [93]  = "MAIN_lpuart2_fclk",
+        [94]  = "MAIN_lpuart3_fclk",
+        [95]  = "MAIN_lpuart4_fclk",
+        [96]  = "MAIN_lpuart5_fclk",
+        [97]  = "MAIN_flexcan0_fclk",
+        [98]  = "MAIN_flexcan1_fclk",
+        [99]  = "MAIN_flexcan2_fclk",
+        [100] = "MAIN_flexcan_gfclk",
+        [101] = "MAIN_qtpm0_fclk",
+        [102] = "MAIN_lpit0_fclk",
+        [103] = "MAIN_lpit1_fclk",
+        [104] = "MAIN_adc0_fclk",
+        [105] = "MAIN_adc1_fclk",
+        [106] = "MAIN_sinc0_fclk",
+        [107] = "MAIN_sinc1_fclk",
+        [108] = "MAIN_flexio0_fclk",
+        [109] = "MAIN_flexio1_fclk",
+        [110] = "MAIN_flexio2_fclk",
+        [111] = "MAIN_tpiu_clk",
+        [112] = "MAIN_cssi_refclk",
+        [113] = "MAIN_otp_clk",
+        [114] = "MAIN_clkout",
+        [115] = "MAIN_fro192m",
+        [116] = "MAIN_ulp32k",
+        /* 117-127 gap */
+        /* WAKE 128-154 */
+        [128] = "WAKE_wake_clk",
+        [129] = "WAKE_wake_sxosc",
+        [130] = "WAKE_wake_lp1m",
+        [131] = "WAKE_wake_lp12m",
+        [132] = "WAKE_wake_ulp32k",
+        [133] = "WAKE_wake_lpclk",
+        [134] = "WAKE_i3c0_fclk",
+        [135] = "WAKE_lpi2c0_fclk",
+        [136] = "WAKE_lpi2c1_fclk",
+        [137] = "WAKE_lpspi0_fclk",
+        [138] = "WAKE_lpuart0_fclk",
+        [139] = "WAKE_lpuart1_fclk",
+        [140] = "WAKE_dmic1_appclk",
+        [141] = "WAKE_qtpm0_fclk",
+        [142] = "WAKE_lptmr0_fclk",
+        [143] = "WAKE_lptmr1_fclk",
+        [144] = "WAKE_swt0_fclk",
+        [145] = "WAKE_swt1_fclk",
+        [146] = "WAKE_ewm_fclk",
+        [147] = "WAKE_acmp0_fclk",
+        [148] = "WAKE_acmp1_fclk",
+        [149] = "WAKE_acmp2_fclk",
+        [150] = "WAKE_acmp3_fclk",
+        [151] = "WAKE_acmp0_rrclk",
+        [152] = "WAKE_acmp1_rrclk",
+        [153] = "WAKE_acmp2_rrclk",
+        [154] = "WAKE_acmp3_rrclk",
+        /* 155-159 gap */
+        /* COMM 160-176 */
+        [160] = "COMM_comm_clk",
+        [161] = "COMM_comm_ulp32k",
+        [162] = "COMM_usdhc0_fclk",
+        [163] = "COMM_usdhc1_fclk",
+        [164] = "COMM_xspir_rootclk",
+        [165] = "COMM_usb0_phyclk",
+        [166] = "COMM_usb0_fro48m",
+        [167] = "COMM_usb1_fclk",
+        [168] = "COMM_usb0_wakeclk",
+        [169] = "COMM_eth0_trxclk",
+        [170] = "COMM_eth0_timerclk",
+        [171] = "COMM_eth1_trxclk",
+        [172] = "COMM_eth1_timerclk",
+        [173] = "COMM_eth_refclk",
+        [174] = "COMM_xeno0_liwclk",
+        [175] = "COMM_xeno1_liwclk",
+        [176] = "COMM_dll_refclk",
+        /* 177-191 gap */
+        /* AUDIO 192-202 */
+        [192] = "AUDIO_audio_clk",
+        [193] = "AUDIO_dmic0_appclk",
+        [194] = "AUDIO_sai0_mclk0",
+        [195] = "AUDIO_sai0_mclk1",
+        [196] = "AUDIO_sai1_mclk0",
+        [197] = "AUDIO_sai1_mclk1",
+        [198] = "AUDIO_sai2_mclk0",
+        [199] = "AUDIO_sai2_mclk1",
+        [200] = "AUDIO_spdif_txclk",
+        [201] = "AUDIO_spdif_cdrclk",
+        [202] = "AUDIO_asrc_clk",
+        /* 203-207 gap */
+        /* MEDIA 208-217 */
+        [208] = "MEDIA_media_clk",
+        [209] = "MEDIA_mediapll_clk",
+        [210] = "MEDIA_mipicsi_escclk",
+        [211] = "MEDIA_mipicsi_clk",
+        [212] = "MEDIA_mipidsi_escclk_divided",
+        [213] = "MEDIA_mipidsi_refclk",
+        [214] = "MEDIA_mipidsi_clk",
+        [215] = "MEDIA_reformat_fclk",
+        [216] = "MEDIA_dcpixel_fclk",
+        [217] = "MEDIA_csi_mclkout",
+    };
+
+    clock_root_t root;
+    uint32_t     index;
+    CCM_Type    *targetCCM;
+    uint32_t     status1;
+
+    /* Table header */
+    PRINTF("%-4s  %-32s  %-11s  %-10s  %-8s  %-13s  %-11s\r\n",
+           "id", "name", "glitch_free", "divPresent", "divWidth",
+           "sndDivPresent", "sndDivWidth");
+    PRINTF("----  --------------------------------  -----------  ----------  --------  -------------  -----------\r\n");
+
+    for (root = kCLOCK_Root_CGU_START; root <= kCLOCK_Root_MEDIA_END; root++)
+    {
+        targetCCM = locateClkRoot(root, &index);
+        if (targetCCM == NULL)
+        {
+            continue;
+        }
+        status1 = targetCCM->CLOCK_ROOT[index].STATUS1;
+
+        bool     glitchFree = (status1 & CCM_STATUS1_GLITCH_FREE_MASK)            != 0UL;
+        bool     divPresent = (status1 & CCM_STATUS1_DIVIDER_PRESENT_MASK)        != 0UL;
+        uint32_t divWidth   = (status1 & CCM_STATUS1_DIV_WIDTH_MASK)
+                              >> CCM_STATUS1_DIV_WIDTH_SHIFT;
+        bool     sndPresent = (status1 & CCM_STATUS1_SECOND_DIVIDER_PRESENT_MASK) != 0UL;
+        uint32_t sndWidth   = (status1 & CCM_STATUS1_SECOND_DIV_WIDTH_MASK)
+                              >> CCM_STATUS1_SECOND_DIV_WIDTH_SHIFT;
+
+        const char *name = ((uint32_t)root < 218U && s_rootNames[(uint32_t)root] != NULL)
+                           ? s_rootNames[(uint32_t)root] : "?";
+
+        PRINTF("%-4u  %-4u  %-32s  %-11s  %-10s  %-8u  %-13s  %-11u\r\n",
+               (unsigned)root, index, name,
+               glitchFree ? "yes" : "no",
+               divPresent ? "yes" : "no",
+               (unsigned)divWidth,
+               sndPresent ? "yes" : "no",
+               (unsigned)sndWidth);
+    }
+}
+#endif

@@ -2768,6 +2768,27 @@ bool CLOCK_EnableUsbhsClock(clock_usb_src_t src, uint32_t freq);
  */
 bool CLOCK_EnableUsbhsPhyPllClock(clock_usb_phy_src_t src, uint32_t freq);
 
+/*!
+ * @brief Dump a clock-root capability table to the debug console.
+ *
+ * Iterates every CCM clock root from kCLOCK_Root_CGU_START to
+ * kCLOCK_Root_MEDIA_END, reads STATUS1, and prints a formatted table with
+ * one row per valid root.  Each row contains:
+ *   - id            : numeric clock_root_t value
+ *   - name          : human-readable root name string
+ *   - glitch_free   : 1 if the root supports glitch-free mux switching (STATUS1.GLITCH_FREE)
+ *   - divPresent    : 1 if a primary post-divider field is present (STATUS1.DIV_PRESENT)
+ *   - divWidth      : bit width of the primary divider field
+ *   - sndDivPresent : 1 if a secondary post-divider is available (STATUS1.SECOND_DIVIDER_PRESENT)
+ *   - sndDivWidth   : bit width of the secondary divider field
+ *
+ * @note Compiled only when BOARD_ENABLE_CLOCK_INFO_DUMP is defined and non-zero.
+ *       Requires the debug console (PRINTF) to be initialized before calling.
+ */
+#if defined(CLOCK_ENABLE_INFO_DUMP) && CLOCK_ENABLE_INFO_DUMP
+void CLOCK_InfoDump(void);
+#endif
+
 #if defined(__cplusplus)
 }
 #endif /* __cplusplus */
