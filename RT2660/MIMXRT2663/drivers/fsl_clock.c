@@ -1689,10 +1689,6 @@ uint32_t CLOCK_GetClockSrcFreq(clock_name_t name)
 
 uint32_t CLOCK_GetRootClockFreq(clock_root_t root)
 {
-#if (RT2660_PRESILICON_DEVELOPMENT == 1)
-    (void)CLOCK_GetRootClockSndDiv;
-    return 12000000U;
-#else
     uint32_t      mux;
     uint32_t      div;
     uint32_t      sndDiv;
@@ -1711,7 +1707,6 @@ uint32_t CLOCK_GetRootClockFreq(clock_root_t root)
 
     srcFreq = CLOCK_GetClockSrcFreq(src);
     return (srcFreq / div) / sndDiv;
-#endif
 }
 
 /*******************************************************************************
