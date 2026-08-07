@@ -3611,20 +3611,24 @@ typedef enum _xbar_output_signal
 #endif
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
   /** LLC physical memory base address */
-  #define LLC_PHYMEM_BASES                { 0x78000000u, 0x98000000u }
+  #define LLC_PHYMEM_BASES                { { 0x78000000u, 0x98000000u } }
   /** LLC physical memory size */
-  #define LLC_PHYMEM_SIZES                { 0x8000000u, 0x8000000u }
+  #define LLC_PHYMEM_SIZES                { { 0x8000000u, 0x8000000u } }
   /** LLC physical memory base address */
-  #define LLC_PHYMEM_BASES_NS             { 0x68000000u, 0x88000000u }
+  #define LLC_PHYMEM_BASES_NS             { { 0x68000000u, 0x88000000u } }
   /** LLC physical memory size */
-  #define LLC_PHYMEM_SIZES_NS             { 0x8000000u, 0x8000000u }
+  #define LLC_PHYMEM_SIZES_NS             { { 0x8000000u, 0x8000000u } }
 #else
   /** LLC physical memory base address */
-  #define LLC_PHYMEM_BASES                { 0x68000000u, 0x88000000u }
+  #define LLC_PHYMEM_BASES                { { 0x68000000u, 0x88000000u } }
   /** LLC physical memory size */
-  #define LLC_PHYMEM_SIZES                { 0x8000000u, 0x8000000u }
+  #define LLC_PHYMEM_SIZES                { { 0x8000000u, 0x8000000u } }
 #endif
-
+/** Number of physical memory base-address aliases per LLC instance.
+    Each LLC instance is reachable through a direct (bypass) alias and a
+    cached alias, so the LLC_PHYMEM_BASES/SIZES tables carry two columns per
+    instance. */
+#define LLC_PHYMEM_BASE_ALIAS_COUNT     (2)
 
 /* LPDAC - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))

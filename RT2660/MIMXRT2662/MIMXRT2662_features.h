@@ -122,6 +122,15 @@
 /* @brief XBAR_DSC availability on the SoC. */
 #define FSL_FEATURE_SOC_XBAR_DSC_COUNT (5)
 
+/* LLC module features */
+
+/* @brief Number of ways in each LLC instance. */
+#define FSL_FEATURE_LLC_WAY_COUNT (8)
+/* @brief Number of sets in each LLC instance. */
+#define FSL_FEATURE_LLC_SET_COUNT (256)
+/* @brief Number of way partition register sets in each LLC instance. */
+#define FSL_FEATURE_LLC_WAY_PARTITION_COUNT (8)
+
 /* ASRC module features */
 
 /* @brief Register name is ASRPM or ASRPMn */
