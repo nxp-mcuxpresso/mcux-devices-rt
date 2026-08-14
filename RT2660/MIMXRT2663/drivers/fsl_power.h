@@ -104,20 +104,20 @@ typedef struct _power_cmc_step_config
 } power_cmc_step_config_t;
 
 /*!
- * @brief Init-time SoC topology configuration.
+ * @brief Init-time SoC handshake routing configuration.
  *
  * Configures the routing of root clocks and clock sources to CMC handshake
  * partners (POWERCON HSK_SEL registers) and PDCON per-domain handshake masks.
- * Pass via @ref power_init_config_t::topology (or NULL for POR defaults), or
- * pass directly to POWER_SetTopology() for post-init reconfiguration.
+ * Pass via @ref power_init_config_t::handshakeRouting (or NULL for POR defaults),
+ * or pass directly to POWER_SetHandshakeRouting() for post-init reconfiguration.
  */
-typedef struct _power_topology_config
+typedef struct _power_handshake_routing_config
 {
     uint32_t rcgcfgHskSel;               /*!< POWERCON RCGCFG_HSK_SEL: root clock -> CMC routing. */
     uint32_t csrccfgHskSel;              /*!< POWERCON CSRCCFG_HSK_SEL: clock source -> CMC routing, word 0. */
     uint32_t csrccfgHskSel1;             /*!< POWERCON CSRCCFG_HSK_SEL1: clock source -> CMC routing, word 1. */
     pdcon_handshake_mask_t domainHsk[6]; /*!< PDCON HSKCTRL per-domain handshake mask, indexed by domain (0-5). */
-} power_topology_config_t;
+} power_handshake_routing_config_t;
 
 #if MCUX_POWER_PF9453_SUPPLY
 /*!
@@ -148,10 +148,10 @@ typedef struct _power_init_config
     power_step_config_t sscPmu;  /*!< SSC STEP1: PMU standby/exit via P-Channel */
     power_step_config_t sscPmic; /*!< SSC STEP2: PMIC standby/exit */
 
-    /*!< Init-time SoC topology (HSK_SEL routing and PDCON HSKCTRL).
+    /*!< Init-time SoC handshake routing (HSK_SEL routing and PDCON HSKCTRL).
      *   NULL = apply POR-default values (hardware reset defaults).
-     *   Non-NULL = apply *topology directly (skips internal default lookup). */
-    const power_topology_config_t *topology;
+     *   Non-NULL = apply *handshakeRouting directly (skips internal default lookup). */
+    const power_handshake_routing_config_t *handshakeRouting;
 } power_init_config_t;
 
 /*!
@@ -880,7 +880,7 @@ extern "C" {
  * @brief Fill power_init_config_t with hardware reset defaults.
  *
  * All CMC and SSC steps set to Handshake mode; CSSI enabled and unlocked;
- * topology set to NULL (POWER_Init will apply POR-default topology).
+ * handshakeRouting set to NULL (POWER_Init will apply POR-default routing).
  *
  * @param config  Pointer to config struct to populate.  Must not be NULL.
  */
@@ -889,9 +889,9 @@ void POWER_GetDefaultInitConfig(power_init_config_t *config);
 /*!
  * @brief Initialises the power management framework.
  *
- * Enables POWERCON, PDCON, and MEMCON function clocks; applies SoC topology
- * (NULL = POR defaults, non-NULL = *config->topology); configures CMC/SSC step
- * modes and CSSI; clears XMC_STBY_MASK; initialises PDCON domains and all
+ * Enables POWERCON, PDCON, and MEMCON function clocks; applies SoC handshake
+ * routing (NULL = POR defaults, non-NULL = *config->handshakeRouting); configures
+ * CMC/SSC step modes and CSSI; clears XMC_STBY_MASK; initialises PDCON domains and all
  * MEMCON slices to their default active states; initialises SW wakeup masks.
  * Must be called once at startup before any other POWER_* API.
  *
@@ -919,26 +919,26 @@ void POWER_InitExtSupply(const power_ext_supply_config_t *config);
 #endif
 
 /*!
- * @brief Fill power_topology_config_t with POR-default topology values.
+ * @brief Fill power_handshake_routing_config_t with POR-default routing values.
  *
  * All HSK_SEL fields are set to 0 (hardware reset default).
  * All domainHsk entries are set to 0 (no explicit handshake units).
  *
  * @param config  Pointer to config struct to populate.  Must not be NULL.
  */
-void POWER_GetDefaultTopologyConfig(power_topology_config_t *config);
+void POWER_GetDefaultHandshakeRoutingConfig(power_handshake_routing_config_t *config);
 
 /*!
- * @brief Apply the init-time SoC topology configuration.
+ * @brief Apply the init-time SoC handshake routing configuration.
  *
  * Writes POWERCON HSK_SEL registers and PDCON HSKCTRL for all six domains.
  * Must be called after POWER_InitStepCtrl() and before the first standby entry.
- * Call with POR-default config (from POWER_GetDefaultTopologyConfig()) for the
- * standard topology, or customize fields for non-default routing.
+ * Call with POR-default config (from POWER_GetDefaultHandshakeRoutingConfig()) for the
+ * standard routing, or customize fields for non-default routing.
  *
- * @param config  Pointer to topology config.  Must not be NULL.
+ * @param config  Pointer to handshake routing config.  Must not be NULL.
  */
-void POWER_SetTopology(const power_topology_config_t *config);
+void POWER_SetHandshakeRouting(const power_handshake_routing_config_t *config);
 
 /*! @} */
 

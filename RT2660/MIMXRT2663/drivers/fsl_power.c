@@ -377,7 +377,7 @@ static void POWER_SetMemSlicesSleepMode(memcon_power_mode_t mode, const power_me
  * brief Fills power_init_config_t with hardware reset defaults.
  *
  * All CMC and SSC steps set to Handshake mode; CSSI enabled and unlocked;
- * topology set to NULL (POWER_Init will apply POR-default topology).
+ * handshakeRouting set to NULL (POWER_Init will apply POR-default routing).
  */
 void POWER_GetDefaultInitConfig(power_init_config_t *config)
 {
@@ -403,14 +403,14 @@ void POWER_GetDefaultInitConfig(power_init_config_t *config)
     config->sscPmu  = kStepDefault;
     config->sscPmic = kStepDefault;
 
-    /* topology == NULL: POWER_Init will apply POR-default HSK_SEL and HSKCTRL. */
-    config->topology = NULL;
+    /* handshakeRouting == NULL: POWER_Init will apply POR-default HSK_SEL and HSKCTRL. */
+    config->handshakeRouting = NULL;
 }
 
 /*!
- * brief Fill power_topology_config_t with POR-default topology values.
+ * brief Fill power_handshake_routing_config_t with POR-default routing values.
  */
-void POWER_GetDefaultTopologyConfig(power_topology_config_t *config)
+void POWER_GetDefaultHandshakeRoutingConfig(power_handshake_routing_config_t *config)
 {
     assert(config != NULL);
 
@@ -424,9 +424,9 @@ void POWER_GetDefaultTopologyConfig(power_topology_config_t *config)
 }
 
 /*!
- * brief Apply or override the SoC topology configuration.
+ * brief Apply or override the SoC handshake routing configuration.
  */
-void POWER_SetTopology(const power_topology_config_t *config)
+void POWER_SetHandshakeRouting(const power_handshake_routing_config_t *config)
 {
     assert(config != NULL);
 
@@ -456,11 +456,11 @@ void POWER_Init(const power_init_config_t *config)
     /* 2. Enable PDCON function clock. */
     PDCON_EnableFunctionClock(SYSCON__PDCON, true);
 
-    /* 3. Apply SoC topology (HSK_SEL routing and PDCON HSKCTRL).
+    /* 3. Apply SoC handshake routing (HSK_SEL routing and PDCON HSKCTRL).
      *    NULL -> apply POR-default values; non-NULL -> apply caller-supplied config. */
-    if (config->topology != NULL)
+    if (config->handshakeRouting != NULL)
     {
-        POWER_SetTopology(config->topology);
+        POWER_SetHandshakeRouting(config->handshakeRouting);
     }
 
     /* 4. Apply per-CMC step-mode configuration. */
@@ -486,9 +486,11 @@ void POWER_Init(const power_init_config_t *config)
             sscCountValue = sscSteps[i]->countValue;
         }
     }
-    POWERCON_SetSysSleepCtrlStepModeMask(SYSCON__POWERCON_SYS_SLEEP_CTRL, sscSleepMask, sscWakeupMask);
+    POWERCON_EnableSysSleepCtrlStepMode(SYSCON__POWERCON_SYS_SLEEP_CTRL, sscSleepMask, sscWakeupMask);
+
     if ((sscSleepMask | sscWakeupMask) != 0U)
     {
+        /* In case of step-mode count being used, set the SSC count value. */
         POWERCON_SetSysSleepCtrlCountValue(SYSCON__POWERCON_SYS_SLEEP_CTRL, sscCountValue);
     }
 
@@ -498,9 +500,6 @@ void POWER_Init(const power_init_config_t *config)
      *    its WFI. TRIGGER_SS is set explicitly on all CMCs (silicon default
      *    made deterministic); Sleep entry clears it on CMC0. */
     POWERCON_SetXmcStandbyMask(SYSCON__POWERCON_GLOBAL, 0x07U);
-    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC0_CTRL);
-    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC1_CTRL);
-    POWERCON_EnableSystemSleepTrigger(SYSCON__POWERCON_CMC2_CTRL);
 
     /* 8. Configure PDCON trigger mode for the four SW-controllable domains.
      *    Default: HW trigger enabled (CMC drives standby transitions).
