@@ -9,6 +9,7 @@
 #include "PERI_CGUANA.h"
 #include "fsl_modcon.h"
 #include "PERI_MODCON.h"
+#include "fsl_reset.h"
 #if defined(CLOCK_ENABLE_INFO_DUMP) && CLOCK_ENABLE_INFO_DUMP
 #include "fsl_debug_console.h"
 #endif
@@ -1293,146 +1294,265 @@ void CLOCK_UpdateVideoPllDnum(uint32_t dnum)
         CGUANA_CGUA_VIDEOPLL_DNUM_REG_VIDEOPLL_DNUM(dnum);
 }
 
-/*! @brief Enable USB FS clock.
- *
- * Enable USB Full Speed clock.
- */
-bool CLOCK_EnableUsbfsClock(void)
+bool CLOCK_EnableUsbFsClock(clock_usb_fs_src_t src)
 {
+    clock_root_config_t config = {0};
+    const uint32_t targetFreq  = 48000000U;
+    bool useUsbPhyPllClk       = false;
+    uint32_t srcFreq;
+
+    switch (src)
+    {
+        case kCLOCK_UsbFsSrcUsb1Root:
+            srcFreq = CLOCK_GetRootClockFreq(kCLOCK_Root_CGU_USB1_ROOTCLK);
+            break;
+        case kCLOCK_UsbFsSrcUsbPllOut:
+            srcFreq         = CLOCK_GetClockSrcFreq(kCLOCK_SRC_USBPLL_OUT);
+            useUsbPhyPllClk = true;
+            break;
+        case kCLOCK_UsbFsSrcUsbPll48M:
+            srcFreq         = CLOCK_GetClockSrcFreq(kCLOCK_SRC_USBPLL_48M);
+            useUsbPhyPllClk = true;
+            break;
+        case kCLOCK_UsbFsSrcFro48M:
+            srcFreq = CLOCK_GetClockSrcFreq(kCLOCK_SRC_FRO_48M);
+            break;
+        default:
+            return false;
+    }
+
+    if ((srcFreq == 0U) || (srcFreq % targetFreq != 0U))
+    {
+        return false;
+    }
+
+    /* USBPLL_OUT/USBPLL_48M come from the shared USB PHY PLL. This also
+     * ungates kCLOCK_COMM_usb0 internally. */
+    if (useUsbPhyPllClk)
+    {
+        if (!CLOCK_EnableUsbPhyPllClock())
+        {
+            return false;
+        }
+    }
+
+    config.clockShutdown = false;
+    config.mux           = (uint8_t)src;
+    config.div           = srcFreq / targetFreq;
+    CLOCK_SetRootClock(kCLOCK_Root_COMM_usb1_fclk, &config);
+
     CLOCK_EnableClock(kCLOCK_COMM_usb1);
 
+    RESET_PeripheralReset(kModCon_COMM_USB1);
+
     return true;
 }
 
-/*! @brief Enable USB HS clock.
- *
- * This function only enables the access to USB HS prepheral, upper layer
- * should first call the ref CLOCK_EnableUsbhsPhyPllClock to enable the PHY
- * clock to use USB HS.
- *
- * @param src  USB HS does not care about the clock source, here must be ref kCLOCK_UsbSrcUnused.
- * @param freq USB HS does not care about the clock source, so this parameter is ignored.
- * @retval true The clock is set successfully.
- * @retval false The clock source is invalid to get proper USB HS clock.
- */
-bool CLOCK_EnableUsbhsClock(clock_usb_src_t src, uint32_t freq)
+void CLOCK_DisableUsbFsClock(void)
 {
-    COMM__USBC->USBCMD |= USBHS_USBCMD_RST_MASK;
+    uint32_t mux = CLOCK_GetRootClockMux(kCLOCK_Root_COMM_usb1_fclk);
 
-    /* Add a delay between RST and RS so make sure there is a DP pullup sequence*/
-    for (uint32_t i = 0; i < 400000U; i++)
+    if ((mux == kCLOCK_USB1_ClockRoot_USBPLL_OUT) || (mux == kCLOCK_USB1_ClockRoot_USBPLL_48M))
     {
-        __NOP();
+        /* Also gates kCLOCK_COMM_usb0 internally. */
+        CLOCK_DisableUsbPhyPllClock();
     }
 
+    CLOCK_DisableClock(kCLOCK_COMM_usb1);
+
+    CLOCK_PowerOffRootClock(kCLOCK_Root_COMM_usb1_fclk);
+}
+
+bool CLOCK_EnableUsbHsClock(void)
+{
+    clock_root_config_t config = {0};
+
+    /* USB HS (EHCI) 48 MHz reference: usb0_fro48m root <- FRO48M, /1. */
+    config.clockShutdown = false;
+    config.mux           = (uint8_t)kCLOCK_USB0_FRO48M_ClockRoot_FRO48M;
+    config.div           = 1U;
+    CLOCK_SetRootClock(kCLOCK_Root_COMM_usb0_fro48m, &config);
+
+    /* Power up the shared USB PHY PLL (480 MHz). NOTE: this also ungates
+     * kCLOCK_COMM_usb0 internally. Propagate failure so the controller is not
+     * released from reset on an unlocked PLL. */
+    if (!CLOCK_EnableUsbPhyPllClock())
+    {
+        return false;
+    }
+
+    RESET_PeripheralReset(kModCon_COMM_USB0);
+
+    /* Issue the controller-level soft reset (USBCMD.RST). */
+    COMM__USBC->USBCMD |= USBHS_USBCMD_RST(1U);
+
+    /* Wait out the mandatory reset-recovery time before the controller is used. */
+    SDK_DelayAtLeastUs(15U, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
+
     return true;
 }
 
-/*! @brief Enable USB HS PHY PLL clock.
- *
- * This function enables the internal 480MHz USB PHY PLL clock.
- *
- * @param src  USB HS PHY PLL clock source.
- * @param freq The frequency specified by src.
- * @retval true The clock is set successfully.
- * @retval false The clock source is invalid to get proper USB HS clock.
- */
-bool CLOCK_EnableUsbhsPhyPllClock(clock_usb_phy_src_t src, uint32_t freq)
+void CLOCK_DisableUsbHsClock(void)
 {
-    uint32_t phyPllDiv  = 0U;
-    uint16_t multiplier = 0U;
-    bool err            = false;
+    CLOCK_DisableUsbPhyPllClock();
 
+    CLOCK_PowerOffRootClock(kCLOCK_Root_COMM_usb0_fro48m);
+}
+
+bool CLOCK_EnableUsbPhyPllClock(void)
+{
+    const uint32_t targetFreq = 480000000UL;
+    uint32_t srcFreq;
+    uint32_t phyPllDiv;
+
+    /* PHY reference from usb0_phyclk root (SRC0 = SXOSC = 24 MHz). */
+    srcFreq = CLOCK_GetRootClockFreq(kCLOCK_Root_COMM_usb0_phyclk);
+
+    if ((srcFreq == 0U) || ((targetFreq % srcFreq) != 0UL))
+    {
+        return false;
+    }
+
+    switch (targetFreq / srcFreq)
+    {
+        case 15U:
+            phyPllDiv = 0U;
+            break;
+        case 16U:
+            phyPllDiv = 1U;
+            break;
+        case 20U:
+            phyPllDiv = 2U;
+            break;
+        case 22U:
+            phyPllDiv = 3U;
+            break;
+        case 24U:
+            phyPllDiv = 4U;
+            break;
+        case 25U:
+            phyPllDiv = 5U;
+            break;
+        case 30U:
+            phyPllDiv = 6U;
+            break;
+        case 40U:
+            phyPllDiv = 7U;
+            break;
+        default:
+            return false;
+    }
+
+    /* Ungate the USB PHY (COMM usb0) so the PLL_SIC/CTRL registers are accessible. */
     CLOCK_EnableClock(kCLOCK_COMM_usb0);
 
-    COMM__USBPHY->CTRL_CLR = USBPHY_CTRL_SFTRST_MASK;
-    COMM__USBPHY->PLL_SIC_SET = USBPHY_PLL_SIC_PLL_REG_ENABLE_MASK;
+    RESET_PeripheralReset(kModCon_COMM_USBPHY0);
+
+    /* Release the PHY soft reset and enable the PLL regulator, then power the PLL. */
+    COMM__USBPHY->CTRL_CLR    = USBPHY_CTRL_SFTRST(1U);
+    COMM__USBPHY->PLL_SIC_SET = USBPHY_PLL_SIC_PLL_REG_ENABLE(1U);
     SDK_DelayAtLeastUs(15U, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
-    COMM__USBPHY->PLL_SIC_SET = USBPHY_PLL_SIC_PLL_POWER(1);
+    COMM__USBPHY->PLL_SIC_SET = USBPHY_PLL_SIC_PLL_POWER(1U);
 
-    if ((480000000UL % freq) != 0UL)
-    {
-        return false;
-    }
-    multiplier = (uint16_t)(480000000UL / freq);
+    /* Program the multiplier (PLL_DIV_SEL). */
+    COMM__USBPHY->PLL_SIC_CLR = USBPHY_PLL_SIC_PLL_DIV_SEL_MASK;
+    COMM__USBPHY->PLL_SIC_SET = USBPHY_PLL_SIC_PLL_DIV_SEL(phyPllDiv);
 
-    switch (multiplier)
-    {
-        case 15:
-        {
-            phyPllDiv = USBPHY_PLL_SIC_PLL_DIV_SEL(0U);
-            break;
-        }
-        case 16:
-        {
-            phyPllDiv = USBPHY_PLL_SIC_PLL_DIV_SEL(1U);
-            break;
-        }
-        case 20:
-        {
-            phyPllDiv = USBPHY_PLL_SIC_PLL_DIV_SEL(2U);
-            break;
-        }
-        case 22:
-        {
-            phyPllDiv = USBPHY_PLL_SIC_PLL_DIV_SEL(3U);
-            break;
-        }
-        case 24:
-        {
-            phyPllDiv = USBPHY_PLL_SIC_PLL_DIV_SEL(4U);
-            break;
-        }
-        case 25:
-        {
-            phyPllDiv = USBPHY_PLL_SIC_PLL_DIV_SEL(5U);
-            break;
-        }
-        case 30:
-        {
-            phyPllDiv = USBPHY_PLL_SIC_PLL_DIV_SEL(6U);
-            break;
-        }
-        case 40:
-        {
-            phyPllDiv = USBPHY_PLL_SIC_PLL_DIV_SEL(7U);
-            break;
-        }
-        default:
-        {
-            err = true;
-            break;
-        }
-    }
+    /* Program the PLL post-divider that generates usbpll_out.
+     * PLL_POSTDIV is a 3-bit field: a value of 0b0xx disables the post-divider
+     * output (usbpll_out stays gated / has no clock), while 0b1xx enables it
+     * and selects the divide ratio (0b100 = /1 ... 0b111 = /4). Writing 4U
+     * (0b100) enables the post-divider at divide-by-1 so usbpll_out actually
+     * produces a clock. Clear the field first, then set the new value. */
+    COMM__USBPHY->PLL_SIC_CLR = USBPHY_PLL_SIC_PLL_POSTDIV_MASK;
+    COMM__USBPHY->PLL_SIC_SET = USBPHY_PLL_SIC_PLL_POSTDIV(4U);
 
-    if (err)
-    {
-        return false;
-    }
+    /* Leave bypass, enable the USB clock taps (480 MHz / 48 MHz), ungate PHY clocks. */
+    COMM__USBPHY->PLL_SIC_CLR = USBPHY_PLL_SIC_PLL_BYPASS(1U);
+    COMM__USBPHY->PLL_SIC_SET = USBPHY_PLL_SIC_PLL_EN_USB_CLKS(1U);
+    COMM__USBPHY->CTRL_CLR    = USBPHY_CTRL_CLR_CLKGATE(1U);
 
-    COMM__USBPHY->PLL_SIC = (COMM__USBPHY->PLL_SIC & ~(USBPHY_PLL_SIC_PLL_DIV_SEL_MASK)) | phyPllDiv;
-
-    COMM__USBPHY->PLL_SIC_CLR = USBPHY_PLL_SIC_PLL_BYPASS_MASK;
-    COMM__USBPHY->PLL_SIC_SET = (USBPHY_PLL_SIC_PLL_EN_USB_CLKS_MASK);
-
-    COMM__USBPHY->CTRL_CLR = USBPHY_CTRL_CLR_CLKGATE_MASK;
-
-    while (0UL == (COMM__USBPHY->PLL_SIC & USBPHY_PLL_SIC_PLL_LOCK_MASK))
+    /* Wait for the PLL to lock before it is used as a clock source. */
+    while (USBPHY_PLL_SIC_PLL_LOCK(1U) != (COMM__USBPHY->PLL_SIC & USBPHY_PLL_SIC_PLL_LOCK_MASK))
     {
     }
 
     return true;
 }
 
-/*! @brief Disable USB HS PHY PLL clock.
- *
- * This function disables USB HS PHY PLL clock.
- */
-void CLOCK_DisableUsbhsPhyPllClock(void)
+void CLOCK_DisableUsbPhyPllClock(void)
 {
-    CLOCK_DisableClock(kCLOCK_COMM_usb0);
+    /* Reverse of CLOCK_EnableUsbPhyPllClock: gate the PHY clocks, stop the USB
+     * clock taps (480 MHz / 48 MHz), then power down the PLL and its regulator. */
+    COMM__USBPHY->CTRL_SET    = USBPHY_CTRL_CLKGATE(1U);
+    COMM__USBPHY->PLL_SIC_CLR = USBPHY_PLL_SIC_PLL_EN_USB_CLKS(1U);
+    COMM__USBPHY->PLL_SIC_CLR = USBPHY_PLL_SIC_PLL_POWER(1U);
+    COMM__USBPHY->PLL_SIC_CLR = USBPHY_PLL_SIC_PLL_REG_ENABLE(1U);
 
-    COMM__USBPHY->CTRL |= USBPHY_CTRL_CLKGATE_MASK; /* Set to 1U to gate clocks */
+    CLOCK_DisableClock(kCLOCK_COMM_usb0);
+}
+
+void CLOCK_TrimUsbFroClock(clock_usb_fro_trim_sel_t sel)
+{
+    /* Per-mode tuner parameters. FS references the USB SOF frame (1 ms), so the
+     * FRO192M cycle target is 192000; HS references a microframe (125 us), so the
+     * target is 24000. The integration gain is lowered for HS because its shorter
+     * reference window updates the loop more frequently. */
+    uint32_t kiGain;
+    uint32_t cycleTarget;
+    uint32_t ckrefSel;
+
+    if (kCLOCK_UsbFroTrimHs == sel)
+    {
+        kiGain      = 6U;
+        cycleTarget = 24000U;
+        ckrefSel    = 3U;
+    }
+    else
+    {
+        kiGain      = 9U;
+        cycleTarget = 192000U;
+        ckrefSel    = 2U;
+    }
+
+    /* Crystal-less trim: route the selected USB controller frame timing to the
+     * shared USB MISC MODCON selector, configure the CGUANA FRO192M tuner, then
+     * enable it so FRO192M is tuned against the accurate reference window. */
+    MODCON_SetCFG((uint32_t)kModCon_COMM_USB_MISC, 0U, MODCON_CFG_USB_CRYSTAL_LESS_SEL(sel));
+
+    /* Clear the tuner control fields (and keep the tuner disabled) before writing the new configuration. */
+    SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG &=
+        ~(CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_LOCK_CRITERIA_MASK |
+          CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_KI_GAIN_MASK |
+          CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_CKREF_SOURCE_SEL_MASK |
+          CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_TUNE_EN_MASK);
+
+    /* Program the lock criteria, integration gain, and accurate reference source. */
+    SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG |=
+        CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_LOCK_CRITERIA(2U) |
+        CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_KI_GAIN(kiGain) |
+        CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_CKREF_SOURCE_SEL(ckrefSel);
+
+    /* Clear the reference window length and cycle target before programming them. */
+    SYSCON__CGUANA->CGUAD_FROTUNER_FRO192M_COUNT_REG &=
+        ~(CGUANA_CGUAD_FROTUNER_FRO192M_COUNT_REG_CGUAD_FROTUNER_FRO192M_CYCLE_TARGET_MASK |
+          CGUANA_CGUAD_FROTUNER_FRO192M_COUNT_REG_CGUAD_FROTUNER_FRO192M_FREF_WIN_LGTH_MASK);
+
+    /* Program the FRO192M cycle target for the selected mode over a reference window of length 1. */
+    SYSCON__CGUANA->CGUAD_FROTUNER_FRO192M_COUNT_REG |=
+        CGUANA_CGUAD_FROTUNER_FRO192M_COUNT_REG_CGUAD_FROTUNER_FRO192M_CYCLE_TARGET(cycleTarget) |
+        CGUANA_CGUAD_FROTUNER_FRO192M_COUNT_REG_CGUAD_FROTUNER_FRO192M_FREF_WIN_LGTH(1U);
+
+    /* Enable the FRO192M tuner last, once its configuration is in place. */
+    SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG |= CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_TUNE_EN(1U);
+}
+
+bool CLOCK_GetUsbFroTrimFlag(void)
+{
+    /* Return true once the FRO192M tuner reports its frequency-locked-loop is locked. */
+    return (
+        CGUANA_CGUAD_FROTUNER_CTRL_STS_CGUAD_FROTUNER_FRO192M_LOCKED(1U) ==
+        (SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_STS & CGUANA_CGUAD_FROTUNER_CTRL_STS_CGUAD_FROTUNER_FRO192M_LOCKED_MASK));
 }
 
 /*******************************************************************************

@@ -2072,19 +2072,21 @@ typedef struct _clock_cguana_avpll_config
     const                         clock_cguana_sscg_config_t *sscg;   /*!< SSCG config (may be NULL when sscgEn is false) */
 } clock_cguana_avpll_config_t;
 
-/*! @brief USB clock source definition. */
-typedef enum _clock_usb_src
+/*! @brief USB FS (USBFS/KHCI) functional clock source (COMM usb1_fclk root mux). */
+typedef enum _clock_usb_fs_src
 {
-    kCLOCK_Usb480M      = 0,                /*!< Use 480M.      */
-    kCLOCK_UsbSrcUnused = (int)0xFFFFFFFFU, /*!< Used when the function does not
-                                            care the clock source. */
-} clock_usb_src_t;
+    kCLOCK_UsbFsSrcUsb1Root  = kCLOCK_USB1_ClockRoot_USB1,       /*!< usb1_rootclk (root47 output, configured in clock_config) */
+    kCLOCK_UsbFsSrcUsbPllOut = kCLOCK_USB1_ClockRoot_USBPLL_OUT, /*!< USB PHY PLL 480M direct out (needs /10 in root -> 48M) */
+    kCLOCK_UsbFsSrcUsbPll48M = kCLOCK_USB1_ClockRoot_USBPLL_48M, /*!< USB PHY PLL 480M/10 = 48M (recommended, exact) */
+    kCLOCK_UsbFsSrcFro48M    = kCLOCK_USB1_ClockRoot_FRO48M,     /*!< Free-running FRO 48M (RC accuracy, may not meet USB FS) */
+} clock_usb_fs_src_t;
 
-/*! @brief Source of the USB HS PHY. */
-typedef enum _clock_usb_phy_src
+/*! @brief USB FRO clock-recovery (crystal-less) trim controller selection. */
+typedef enum _clock_usb_fro_trim_sel
 {
-    kCLOCK_Usbphy480M = 0, /*!< Use 480M.      */
-} clock_usb_phy_src_t;
+    kCLOCK_UsbFroTrimHs = 0U, /*!< Trim the FRO from USB HS (USBHS/EHCI, non-core wrapper) frame timing. */
+    kCLOCK_UsbFroTrimFs = 1U, /*!< Trim the FRO from USB FS (USBFS/KHCI) frame timing. */
+} clock_usb_fro_trim_sel_t;
 
 /*******************************************************************************
  * API
@@ -2738,35 +2740,106 @@ void CLOCK_DisableAvPllClkout(clock_av_pll_t pll);
  */
 bool CLOCK_IsAvPllClkoutEnabled(clock_av_pll_t pll);
 
-/*! @brief Enable USB FS clock.
+/*!
+ * @brief Enable and select the USB FS (USBFS/KHCI) functional clock source.
  *
- * Enable USB Full Speed clock.
+ * Configures the USB FS SIE clock from the requested source. For PLL-based
+ * sources this powers up and locks the shared USB PHY PLL (480 MHz), which also
+ * ungates the USB PHY (COMM usb0) internally. The usb1_fclk clock root is
+ * expected to be pre-configured in clock_config.
+ *
+ * For crystal-less operation (trimming the FRO from the USB frame timing),
+ * call CLOCK_TrimUsbFroClock with ::kCLOCK_UsbFroTrimFs after this function.
+ *
+ * @param src One of ::clock_usb_fs_src_t selecting the USB FS clocking path.
+ * @retval true  USB FS clock configured (PHY PLL locked for PLL-based sources).
+ * @retval false The USB PHY PLL failed to lock (invalid reference/multiplier).
  */
-bool CLOCK_EnableUsbfsClock(void);
+bool CLOCK_EnableUsbFsClock(clock_usb_fs_src_t src);
 
-/*! @brief Enable USB HS clock.
+/*!
+ * @brief Disable the USB FS (USBFS/KHCI) functional clock.
  *
- * This function only enables the access to USB HS prepheral, upper layer
- * should first call the ref CLOCK_EnableUsbhsPhyPllClock to enable the PHY
- * clock to use USB HS.
- *
- * @param src  USB HS does not care about the clock source, here must be ref kCLOCK_UsbSrcUnused.
- * @param freq USB HS does not care about the clock source, so this parameter is ignored.
- * @retval true The clock is set successfully.
- * @retval false The clock source is invalid to get proper USB HS clock.
+ * Powers down the shared USB PHY PLL (which also gates the USB PHY, COMM usb0)
+ * and powers off the usb1_fclk clock root. Call this only after all USB HS
+ * consumers of the shared PHY PLL have been disabled.
  */
-bool CLOCK_EnableUsbhsClock(clock_usb_src_t src, uint32_t freq);
+void CLOCK_DisableUsbFsClock(void);
 
-/*! @brief Enable USB HS PHY PLL clock.
+/*!
+ * @brief Enable and configure the USB HS (USBHS/EHCI) clocks.
  *
- * This function enables the internal 480MHz USB PHY PLL clock.
+ * Selects FRO48M on the usb0_fro48m root as the HS reference, powers up and
+ * locks the shared USB PHY PLL (480 MHz), then releases the USB HS controller
+ * from reset and issues the controller-level soft reset. The USB PHY (COMM
+ * usb0) is ungated inside CLOCK_EnableUsbPhyPllClock.
  *
- * @param src  USB HS PHY PLL clock source.
- * @param freq The frequency specified by src.
- * @retval true The clock is set successfully.
- * @retval false The clock source is invalid to get proper USB HS clock.
+ * For crystal-less operation (trimming the FRO from the USB frame timing),
+ * call CLOCK_TrimUsbFroClock with ::kCLOCK_UsbFroTrimHs after this function.
+ *
+ * @retval true  USB HS clocks configured and the PHY PLL locked.
+ * @retval false The USB PHY PLL failed to lock; the controller is left in reset.
  */
-bool CLOCK_EnableUsbhsPhyPllClock(clock_usb_phy_src_t src, uint32_t freq);
+bool CLOCK_EnableUsbHsClock(void);
+
+/*!
+ * @brief Disable the USB HS (USBHS/EHCI) clocks.
+ *
+ * Reverses CLOCK_EnableUsbHsClock: powers down the shared USB PHY PLL (which
+ * also gates the USB PHY, COMM usb0) and powers off the usb0_fro48m clock root.
+ */
+void CLOCK_DisableUsbHsClock(void);
+
+/*!
+ * @brief Power up and lock the USB PHY PLL (shared by USB FS and USB HS).
+ *
+ * The single COMM USB PHY PLL produces the 480MHz output (and its /10 = 48MHz
+ * tap) that feeds both the USB HS PHY and the USB FS SIE (via the USBPLL_OUT /
+ * USBPLL_48M clock roots). The reference frequency is read internally from the
+ * usb0_phyclk clock root; the multiplier (480MHz / reference) must be one of the
+ * hardware-supported values (15, 16, 20, 22, 24, 25, 30, 40). This function
+ * blocks until the PLL reports lock.
+ *
+ * @retval true  USB PHY PLL powered up and locked.
+ * @retval false The reference is zero or yields an unsupported multiplier.
+ */
+bool CLOCK_EnableUsbPhyPllClock(void);
+
+/*!
+ * @brief Power down the USB PHY PLL (shared by USB FS and USB HS).
+ *
+ * Reverses CLOCK_EnableUsbPhyPllClock: gates the PHY clocks, stops the USB
+ * clock taps (the 480MHz output and its /10 = 48MHz tap), then powers down the
+ * PLL and its regulator. Call this only after all USB FS / USB HS consumers of
+ * the PLL have been disabled, as the PLL is shared between them.
+ */
+void CLOCK_DisableUsbPhyPllClock(void);
+
+/*!
+ * @brief Enable crystal-less trimming of the USB FRO clock.
+ *
+ * Routes the selected USB controller's frame timing (USB HS or USB FS) to the
+ * shared USB MISC MODCON selector, configures the CGUANA FRO192M tuner (lock
+ * criteria, integration gain, accurate reference source, and the FRO192M cycle
+ * target / reference window), then enables the tuner so FRO192M is tuned
+ * against the accurate reference window. This lets the FRO serve as the USB
+ * reference without an external crystal. Poll ::CLOCK_GetUsbFroTrimFlag to wait
+ * for the tuner to report lock.
+ *
+ * @param sel Which USB controller frame timing trims the FRO, see \ref clock_usb_fro_trim_sel_t.
+ */
+void CLOCK_TrimUsbFroClock(clock_usb_fro_trim_sel_t sel);
+
+/*!
+ * @brief Get the USB FRO (FRO192M) tuner lock status.
+ *
+ * Reads the CGUANA FRO192M tuner status to report whether its frequency-locked
+ * loop has locked after ::CLOCK_TrimUsbFroClock enabled crystal-less trimming.
+ *
+ * @retval true  The FRO192M tuner frequency-locked loop is locked.
+ * @retval false The FRO192M tuner has not yet locked.
+ */
+bool CLOCK_GetUsbFroTrimFlag(void);
 
 /*!
  * @brief Dump a clock-root capability table to the debug console.

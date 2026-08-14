@@ -164,6 +164,7 @@ typedef enum _comm_modcon_ip
     kModCon_COMM_ETH1               = 1|0x200U,    /**< modcon2 ip index */
     kModCon_COMM_XENOPHY0           = 2|0x200U,    /**< modcon2 ip index */
     kModCon_COMM_XENOPHY1           = 3|0x200U,    /**< modcon2 ip index */
+    kModCon_COMM_USB_MISC           = 4|0x200U,    /**< modcon2 ip index */
     kModCon_COMM_USB0               = 5|0x200U,    /**< modcon2 ip index */
     kModCon_COMM_USBPHY0            = 6|0x200U,    /**< modcon2 ip index */
     kModCon_COMM_USB1               = 7|0x200U,    /**< modcon2 ip index */
