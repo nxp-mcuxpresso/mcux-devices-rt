@@ -29,7 +29,6 @@
 ** ###################################################################
 */
 
-
 ENTRY(Reset_Handler)
 
 /* ========================== Hardware addresses ========================== */
@@ -420,3 +419,4 @@ __CONTAINER_IMG_OFFSET        = m_app_image_offset - m_container_offset;
 __CONTAINER_IMG_LOAD_ADDR     = ORIGIN(m_interrupts);
 __CONTAINER_IMG_ENTRY_ADDR    = ORIGIN(m_interrupts);
 __CONTAINER_IMG_SIZE          = text_data_end - __VECTOR_TABLE;
+

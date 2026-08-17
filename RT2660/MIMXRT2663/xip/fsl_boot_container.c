@@ -5,14 +5,15 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#include "fsl_xspi_nor_boot.h"
+#include "fsl_boot_container.h"
 
 /* Component ID definition, used by tools. */
 #ifndef FSL_COMPONENT_ID
 #define FSL_COMPONENT_ID "platform.drivers.xip_device"
 #endif
 
-#if defined(XIP_BOOT_HEADER_ENABLE) && (XIP_BOOT_HEADER_ENABLE == 1)
+#if (defined(XIP_BOOT_HEADER_ENABLE) && (XIP_BOOT_HEADER_ENABLE == 1)) || \
+    (defined(USDHC_BOOT_HEADER_ENABLE) && (USDHC_BOOT_HEADER_ENABLE == 1))
 
 #if defined(__ARMCC_VERSION) || defined(__GNUC__)
 __attribute__((section(".boot_hdr.container"), used))

@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#ifndef __XSPI_NOR_BOOT_H__
-#define __XSPI_NOR_BOOT_H__
+#ifndef __FSL_BOOT_CONTAINER_H__
+#define __FSL_BOOT_CONTAINER_H__
 
 #include <stdint.h>
 
@@ -109,4 +109,4 @@ extern uint32_t __VECTOR_TABLE[];
 #define IMAGE_ENTRY_ADDRESS ((uint32_t)__VECTOR_TABLE)
 #endif
 
-#endif /* __XSPI_NOR_BOOT_H__ */
+#endif /* __FSL_BOOT_CONTAINER_H__ */
