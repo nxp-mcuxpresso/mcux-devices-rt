@@ -1,6 +1,7 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -14,9 +15,9 @@
 **                          Keil ARM C/C++ Compiler
 **                          MCUXpresso Compiler
 **
-**     Reference manual:    iMXRT2660RM Rev.2 DraftA, 05/2024
+**     Reference manual:    iMXRT2660RM Rev.1 DraftN, 08/2026
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT2662
@@ -100,7 +101,6 @@
 #include "PERI_MMU.h"
 #include "PERI_MODCON.h"
 #include "PERI_NIC.h"
-#include "PERI_NPU.h"
 #include "PERI_PDCON.h"
 #include "PERI_PDM.h"
 #include "PERI_PMU.h"

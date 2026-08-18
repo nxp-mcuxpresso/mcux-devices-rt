@@ -366,6 +366,7 @@
 #define IOMUXC_PIO2_27_COMM_CCM_CLKREF_25M                                                    0x421C006CU, 0x3U, 0x00000000U, 0x0U
 #define IOMUXC_PIO2_27_HSP_eFlexPWM1_PWM_B0                                                   0x421C006CU, 0x4U, 0x421C8160U, 0x0U
 #define IOMUXC_PIO2_27_AUDIO_MQS_MQS_RIGHT                                                    0x421C006CU, 0x5U, 0x00000000U, 0x0U
+#define IOMUXC_PIO2_27_COMM_USB1_VBUS_GPIO                                                    0x421C006CU, 0x6U, 0x421C80B0U, 0x0U
 #define IOMUXC_PIO2_27_MEDIA_DCIF_PIXEL_CLK                                                   0x421C006CU, 0x7U, 0x00000000U, 0x0U
 #define IOMUXC_PIO2_27_HSP_LPSPI1_SOUT                                                        0x421C006CU, 0x9U, 0x421C8210U, 0x0U
 #define IOMUXC_PIO2_27_HSP_XBAR0_INOUT27                                                      0x421C006CU, 0xAU, 0x421C8354U, 0x0U
@@ -379,7 +380,7 @@
 #define IOMUXC_PIO3_0_MEDIA_DCIF_DATA00                                                       0x421C0080U, 0x6U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_0_MEDIA_DCIF_DBI_AB_DATA00                                                0x421C0080U, 0x7U, 0x421C8460U, 0x0U
 #define IOMUXC_PIO3_0_HSP_eFlexPWM1_PWM_A0                                                    0x421C0080U, 0x8U, 0x421C8150U, 0x1U
-#define IOMUXC_PIO3_0_COMM_ENET_QOS_REF_CLK1                                                  0x421C0080U, 0x9U, 0x421C8048U, 0x0U
+#define IOMUXC_PIO3_0_COMM_ENET_QOS_REF_CLK                                                   0x421C0080U, 0x9U, 0x421C8048U, 0x0U
 #define IOMUXC_PIO3_0_HSP_XBAR0_INOUT00                                                       0x421C0080U, 0xAU, 0x421C82E8U, 0x1U
 #define IOMUXC_PIO3_0_HSP_XBAR1_INOUT00                                                       0x421C0080U, 0xBU, 0x421C8358U, 0x1U
 
@@ -460,7 +461,7 @@
 #define IOMUXC_PIO3_6_HSP_XBAR1_INOUT06                                                       0x421C0098U, 0xBU, 0x421C8370U, 0x1U
 
 #define IOMUXC_PIO3_7_HSP_GPIO1_GPIO7                                                         0x421C009CU, 0x0U, 0x00000000U, 0x0U
-#define IOMUXC_PIO3_7_COMM_ENET_QOS_RX_ER                                                     0x421C009CU, 0x1U, 0x421C8074U, 0x0U
+#define IOMUXC_PIO3_7_COMM_ENET_QOS_RXER                                                      0x421C009CU, 0x1U, 0x421C8074U, 0x0U
 #define IOMUXC_PIO3_7_HSP_FLEXIO1_FXIO_D07                                                    0x421C009CU, 0x2U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_7_AUDIO_MICFIL_PDM_DATA01                                                 0x421C009CU, 0x3U, 0x421C8000U, 0x1U
 #define IOMUXC_PIO3_7_MEDIA_CSI_DATA07                                                        0x421C009CU, 0x4U, 0x421C8430U, 0x0U
@@ -583,13 +584,13 @@
 #define IOMUXC_PIO3_15_HSP_XBAR1_INOUT15                                                      0x421C00BCU, 0xBU, 0x421C8394U, 0x1U
 
 #define IOMUXC_PIO3_16_HSP_GPIO1_GPIO16                                                       0x421C00C0U, 0x0U, 0x00000000U, 0x0U
-#define IOMUXC_PIO3_16_COMM_ENET_QOS_RX_EN                                                    0x421C00C0U, 0x1U, 0x421C8070U, 0x0U
+#define IOMUXC_PIO3_16_COMM_ENET_QOS_RXEN                                                     0x421C00C0U, 0x1U, 0x421C8070U, 0x0U
 #define IOMUXC_PIO3_16_HSP_FLEXIO1_FXIO_D16                                                   0x421C00C0U, 0x2U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_16_AUDIO_SAI1_RX_SYNC                                                     0x421C00C0U, 0x3U, 0x421C801CU, 0x1U
 #define IOMUXC_PIO3_16_MEDIA_CSI_MCLK                                                         0x421C00C0U, 0x4U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_16_MAIN_AHB_SRAMC_SRAMC_ADDR16                                            0x421C00C0U, 0x5U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_16_MEDIA_DCIF_DATA16                                                      0x421C00C0U, 0x6U, 0x00000000U, 0x0U
-#define IOMUXC_PIO3_16_MEDIA_DCIF_DBI_AB_CSX                                                  0x421C00C0U, 0x7U, 0x00000000U, 0x0U
+#define IOMUXC_PIO3_16_MEDIA_DCIF_DBI_CSX_AB                                                  0x421C00C0U, 0x7U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_16_HSP_LPSPI1_SIN                                                         0x421C00C0U, 0x8U, 0x421C820CU, 0x1U
 #define IOMUXC_PIO3_16_HSP_LPUART3_TXD                                                        0x421C00C0U, 0x9U, 0x421C828CU, 0x1U
 #define IOMUXC_PIO3_16_HSP_XBAR0_INOUT16                                                      0x421C00C0U, 0xAU, 0x421C8328U, 0x1U
@@ -629,7 +630,7 @@
 #define IOMUXC_PIO3_19_MEDIA_CSI_PIXCLK                                                       0x421C00CCU, 0x4U, 0x421C8458U, 0x0U
 #define IOMUXC_PIO3_19_MAIN_AHB_SRAMC_SRAMC_CS1                                               0x421C00CCU, 0x5U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_19_MEDIA_DCIF_DATA19                                                      0x421C00CCU, 0x6U, 0x00000000U, 0x0U
-#define IOMUXC_PIO3_19_MEDIA_DCIF_DBI_A_RWX_OR_B_WRX                                            0x421C00CCU, 0x7U, 0x00000000U, 0x0U
+#define IOMUXC_PIO3_19_MEDIA_DCIF_DBI_A_RWX_OR_B_WRX                                          0x421C00CCU, 0x7U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_19_HSP_LPSPI0_PCS1                                                        0x421C00CCU, 0x8U, 0x421C81E0U, 0x1U
 #define IOMUXC_PIO3_19_AUDIO_MICFIL_PDM_DATA45                                                0x421C00CCU, 0x9U, 0x421C8008U, 0x2U
 #define IOMUXC_PIO3_19_HSP_XBAR0_INOUT19                                                      0x421C00CCU, 0xAU, 0x421C8334U, 0x1U
@@ -698,6 +699,7 @@
 #define IOMUXC_PIO3_25_HSP_GPIO1_GPIO25                                                       0x421C00E4U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_25_HSP_FLEXIO1_FXIO_D25                                                   0x421C00E4U, 0x2U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_25_HSP_I3C_SDA                                                            0x421C00E4U, 0x3U, 0x421C81C8U, 0x1U
+#define IOMUXC_PIO3_25_COMM_uSDHC1_VSELECT                                                    0x421C00E4U, 0x5U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_25_MEDIA_DCIF_PIXEL_CLK                                                   0x421C00E4U, 0x6U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_25_HSP_LPI2C0_SCL                                                         0x421C00E4U, 0x8U, 0x421C81CCU, 0x3U
 #define IOMUXC_PIO3_25_HSP_XBAR0_INOUT25                                                      0x421C00E4U, 0xAU, 0x421C834CU, 0x1U
@@ -742,6 +744,7 @@
 #define IOMUXC_PIO3_30_HSP_GPIO1_GPIO30                                                       0x421C00F8U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_30_HSP_LPUART0_TXD                                                        0x421C00F8U, 0x1U, 0x421C8268U, 0x2U
 #define IOMUXC_PIO3_30_HSP_FLEXIO1_FXIO_D30                                                   0x421C00F8U, 0x2U, 0x00000000U, 0x0U
+#define IOMUXC_PIO3_30_AUDIO_FREQME_CLK_OUT                                                   0x421C00F8U, 0x3U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_30_HSP_eFlexPWM1_PWM_X3                                                   0x421C00F8U, 0x4U, 0x00000000U, 0x0U
 #define IOMUXC_PIO3_30_COMM_ENET_CRS                                                          0x421C00F8U, 0x5U, 0x421C8080U, 0x0U
 #define IOMUXC_PIO3_30_COMM_uSDHC0_WP                                                         0x421C00F8U, 0x6U, 0x421C80B8U, 0x0U
@@ -885,6 +888,7 @@
 #define IOMUXC_PIO4_9_HSP_GPIO2_GPIO9                                                         0x421C0124U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_9_COMM_ENET_TXD3                                                          0x421C0124U, 0x1U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_9_HSP_FLEXIO2_FXIO_D09                                                    0x421C0124U, 0x2U, 0x00000000U, 0x0U
+#define IOMUXC_PIO4_9_AUDIO_FREQME_CLK_OUT                                                    0x421C0124U, 0x3U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_9_MEDIA_CSI_DATA14                                                        0x421C0124U, 0x4U, 0x421C844CU, 0x1U
 #define IOMUXC_PIO4_9_MEDIA_DCIF_DATA09                                                       0x421C0124U, 0x6U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_9_MEDIA_DCIF_DBI_AB_DATA09                                                0x421C0124U, 0x7U, 0x421C8484U, 0x1U
@@ -928,7 +932,7 @@
 #define IOMUXC_PIO4_12_HSP_eFlexPWM3_PWM_B1                                                   0x421C0130U, 0x8U, 0x421C81B8U, 0x0U
 #define IOMUXC_PIO4_12_HSP_LPUART5_CTS_B                                                      0x421C0130U, 0x9U, 0x421C829CU, 0x1U
 #define IOMUXC_PIO4_12_HSP_XBAR1_INOUT12                                                      0x421C0130U, 0xBU, 0x421C8388U, 0x2U
-#define IOMUXC_PIO4_12_COMM_ENET_QOS_RX_ER                                                    0x421C0130U, 0xCU, 0x421C8074U, 0x1U
+#define IOMUXC_PIO4_12_COMM_ENET_QOS_RXER                                                     0x421C0130U, 0xCU, 0x421C8074U, 0x1U
 
 #define IOMUXC_PIO4_13_HSP_GPIO2_GPIO13                                                       0x421C0134U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_13_COMM_ENET_RX_EN                                                        0x421C0134U, 0x1U, 0x421C809CU, 0x0U
@@ -945,7 +949,7 @@
 #define IOMUXC_PIO4_14_HSP_GPIO2_GPIO14                                                       0x421C0138U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_14_COMM_ENET_QOS_TX_CLK_IO                                                0x421C0138U, 0x1U, 0x421C8050U, 0x1U
 #define IOMUXC_PIO4_14_HSP_FLEXIO2_FXIO_D14                                                   0x421C0138U, 0x2U, 0x00000000U, 0x0U
-#define IOMUXC_PIO4_14_COMM_ENET_QOS_REF_CLK1                                                 0x421C0138U, 0x3U, 0x421C8048U, 0x1U
+#define IOMUXC_PIO4_14_COMM_ENET_QOS_REF_CLK                                                  0x421C0138U, 0x3U, 0x421C8048U, 0x1U
 #define IOMUXC_PIO4_14_MEDIA_CSI_DATA09                                                       0x421C0138U, 0x4U, 0x421C8438U, 0x1U
 #define IOMUXC_PIO4_14_HSP_LPSPI2_PCS0                                                        0x421C0138U, 0x5U, 0x421C8214U, 0x0U
 #define IOMUXC_PIO4_14_MEDIA_DCIF_DATA14                                                      0x421C0138U, 0x6U, 0x00000000U, 0x0U
@@ -969,7 +973,7 @@
 #define IOMUXC_PIO4_16_MEDIA_CSI_DATA07                                                       0x421C0140U, 0x4U, 0x421C8430U, 0x1U
 #define IOMUXC_PIO4_16_HSP_LPSPI2_SOUT                                                        0x421C0140U, 0x5U, 0x421C822CU, 0x0U
 #define IOMUXC_PIO4_16_MEDIA_DCIF_DATA16                                                      0x421C0140U, 0x6U, 0x00000000U, 0x0U
-#define IOMUXC_PIO4_16_MEDIA_DCIF_DBI_AB_CSX                                                  0x421C0140U, 0x7U, 0x00000000U, 0x0U
+#define IOMUXC_PIO4_16_MEDIA_DCIF_DBI_CSX_AB                                                  0x421C0140U, 0x7U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_16_HSP_eFlexPWM3_PWM_B3                                                   0x421C0140U, 0x8U, 0x421C81C0U, 0x0U
 #define IOMUXC_PIO4_16_HSP_XBAR1_INOUT16                                                      0x421C0140U, 0xBU, 0x421C8398U, 0x2U
 
@@ -992,7 +996,7 @@
 #define IOMUXC_PIO4_18_MEDIA_CSI_DATA05                                                       0x421C0148U, 0x4U, 0x421C8428U, 0x1U
 #define IOMUXC_PIO4_18_HSP_LPSPI2_PCS1                                                        0x421C0148U, 0x5U, 0x421C8218U, 0x0U
 #define IOMUXC_PIO4_18_MEDIA_DCIF_DATA18                                                      0x421C0148U, 0x6U, 0x00000000U, 0x0U
-#define IOMUXC_PIO4_18_MEDIA_DCIF_DBI_A_RWX_OR_B_WRX                                            0x421C0148U, 0x7U, 0x00000000U, 0x0U
+#define IOMUXC_PIO4_18_MEDIA_DCIF_DBI_A_RWX_OR_B_WRX                                          0x421C0148U, 0x7U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_18_HSP_eFlexPWM3_PWM_X1                                                   0x421C0148U, 0x8U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_18_HSP_FlexCAN2_CAN_RX                                                    0x421C0148U, 0x9U, 0x421C8114U, 0x1U
 #define IOMUXC_PIO4_18_WAKE_EWM_OUT_B                                                         0x421C0148U, 0xAU, 0x00000000U, 0x0U
@@ -1015,6 +1019,7 @@
 #define IOMUXC_PIO4_20_HSP_FLEXIO2_FXIO_D20                                                   0x421C0150U, 0x2U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_20_AUDIO_SAI2_RX_DATA0                                                    0x421C0150U, 0x3U, 0x421C8030U, 0x1U
 #define IOMUXC_PIO4_20_MEDIA_CSI_DATA03                                                       0x421C0150U, 0x4U, 0x421C8420U, 0x1U
+#define IOMUXC_PIO4_20_COMM_USB1_VBUS_GPIO                                                    0x421C0150U, 0x5U, 0x421C80B0U, 0x1U
 #define IOMUXC_PIO4_20_MEDIA_DCIF_DATA20                                                      0x421C0150U, 0x6U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_20_HSP_eFlexPWM3_PWM_X3                                                   0x421C0150U, 0x8U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_20_HSP_LPUART4_RTS_B                                                      0x421C0150U, 0x9U, 0x00000000U, 0x0U
@@ -1101,7 +1106,7 @@
 #define IOMUXC_PIO4_26_COMM_ENET_COL                                                          0x421C0168U, 0xCU, 0x421C807CU, 0x1U
 
 #define IOMUXC_PIO4_27_HSP_GPIO2_GPIO27                                                       0x421C016CU, 0x0U, 0x00000000U, 0x0U
-#define IOMUXC_PIO4_27_COMM_ENET_QOS_RX_EN                                                    0x421C016CU, 0x1U, 0x421C8070U, 0x1U
+#define IOMUXC_PIO4_27_COMM_ENET_QOS_RXEN                                                     0x421C016CU, 0x1U, 0x421C8070U, 0x1U
 #define IOMUXC_PIO4_27_HSP_FLEXIO2_FXIO_D27                                                   0x421C016CU, 0x2U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_27_MAIN_TRACE_SWO                                                         0x421C016CU, 0x3U, 0x00000000U, 0x0U
 #define IOMUXC_PIO4_27_MEDIA_CSI_PIXCLK                                                       0x421C016CU, 0x4U, 0x421C8458U, 0x1U
@@ -1183,21 +1188,21 @@
 
 #define IOMUXC_PIO5_10_HSP_GPIO3_GPIO10                                                       0x421C01A8U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_10_MAIN_XSPI1_DQS0                                                        0x421C01A8U, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO5_10_COMM_FlexSPI_FLR_XSPI_FLR_CS                                            0x421C01A8U, 0x3U, 0x421C80E4U, 0x0U
+#define IOMUXC_PIO5_10_COMM_FlexSPI_FLR_XSPI_FLR_CS                                           0x421C01A8U, 0x3U, 0x421C80E4U, 0x0U
 #define IOMUXC_PIO5_10_MAIN_AHB_SRAMC_SRAMC_DA09                                              0x421C01A8U, 0x5U, 0x421C83ECU, 0x1U
 #define IOMUXC_PIO5_10_HSP_LPSPI3_PCS0                                                        0x421C01A8U, 0x8U, 0x421C8230U, 0x0U
 
 #define IOMUXC_PIO5_11_HSP_GPIO3_GPIO11                                                       0x421C01ACU, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_11_MAIN_XSPI1_SCLK0_N                                                     0x421C01ACU, 0x1U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_11_MAIN_XSPI1_SS1_N                                                       0x421C01ACU, 0x2U, 0x00000000U, 0x0U
-#define IOMUXC_PIO5_11_COMM_FlexSPI_FLR_XSPI_FLR_CLK                                            0x421C01ACU, 0x3U, 0x421C810CU, 0x0U
+#define IOMUXC_PIO5_11_COMM_FlexSPI_FLR_XSPI_FLR_CLK                                          0x421C01ACU, 0x3U, 0x421C810CU, 0x0U
 #define IOMUXC_PIO5_11_COMM_ENET_TXD2                                                         0x421C01ACU, 0x4U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_11_MAIN_AHB_SRAMC_SRAMC_DA10                                              0x421C01ACU, 0x5U, 0x421C83F0U, 0x1U
 #define IOMUXC_PIO5_11_HSP_LPSPI3_PCS1                                                        0x421C01ACU, 0x8U, 0x00000000U, 0x0U
 
 #define IOMUXC_PIO5_12_HSP_GPIO3_GPIO12                                                       0x421C01B0U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_12_MAIN_XSPI1_DATA8                                                       0x421C01B0U, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO5_12_COMM_FlexSPI_FLR_XSPI_FLR_DATA0                                            0x421C01B0U, 0x3U, 0x421C80ECU, 0x0U
+#define IOMUXC_PIO5_12_COMM_FlexSPI_FLR_XSPI_FLR_DATA0                                        0x421C01B0U, 0x3U, 0x421C80ECU, 0x0U
 #define IOMUXC_PIO5_12_COMM_ENET_TXD3                                                         0x421C01B0U, 0x4U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_12_MAIN_AHB_SRAMC_SRAMC_DA11                                              0x421C01B0U, 0x5U, 0x421C83F4U, 0x1U
 #define IOMUXC_PIO5_12_HSP_SINC0_MCLK_OUT0                                                    0x421C01B0U, 0x6U, 0x00000000U, 0x0U
@@ -1207,7 +1212,7 @@
 
 #define IOMUXC_PIO5_13_HSP_GPIO3_GPIO13                                                       0x421C01B4U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_13_MAIN_XSPI1_DATA9                                                       0x421C01B4U, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO5_13_COMM_FlexSPI_FLR_XSPI_FLR_DATA1                                            0x421C01B4U, 0x3U, 0x421C80F0U, 0x0U
+#define IOMUXC_PIO5_13_COMM_FlexSPI_FLR_XSPI_FLR_DATA1                                        0x421C01B4U, 0x3U, 0x421C80F0U, 0x0U
 #define IOMUXC_PIO5_13_MAIN_AHB_SRAMC_SRAMC_DA12                                              0x421C01B4U, 0x5U, 0x421C83F8U, 0x1U
 #define IOMUXC_PIO5_13_HSP_SINC0_MCLK_OUT1                                                    0x421C01B4U, 0x6U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_13_HSP_SINC0_MCLK1                                                        0x421C01B4U, 0x7U, 0x421C82BCU, 0x1U
@@ -1216,7 +1221,7 @@
 
 #define IOMUXC_PIO5_14_HSP_GPIO3_GPIO14                                                       0x421C01B8U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_14_MAIN_XSPI1_DATA10                                                      0x421C01B8U, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO5_14_COMM_FlexSPI_FLR_XSPI_FLR_DATA2                                            0x421C01B8U, 0x3U, 0x421C80F4U, 0x0U
+#define IOMUXC_PIO5_14_COMM_FlexSPI_FLR_XSPI_FLR_DATA2                                        0x421C01B8U, 0x3U, 0x421C80F4U, 0x0U
 #define IOMUXC_PIO5_14_COMM_ENET_RX_CLK                                                       0x421C01B8U, 0x4U, 0x421C8088U, 0x1U
 #define IOMUXC_PIO5_14_MAIN_AHB_SRAMC_SRAMC_DA13                                              0x421C01B8U, 0x5U, 0x421C83FCU, 0x1U
 #define IOMUXC_PIO5_14_HSP_SINC0_MCLK_OUT2                                                    0x421C01B8U, 0x6U, 0x00000000U, 0x0U
@@ -1227,7 +1232,7 @@
 #define IOMUXC_PIO5_15_HSP_GPIO3_GPIO15                                                       0x421C01BCU, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_15_MAIN_XSPI1_DATA11                                                      0x421C01BCU, 0x1U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_15_COMM_uSDHC1_CLK                                                        0x421C01BCU, 0x2U, 0x421C80BCU, 0x0U
-#define IOMUXC_PIO5_15_COMM_FlexSPI_FLR_XSPI_FLR_DATA3                                            0x421C01BCU, 0x3U, 0x421C80F8U, 0x0U
+#define IOMUXC_PIO5_15_COMM_FlexSPI_FLR_XSPI_FLR_DATA3                                        0x421C01BCU, 0x3U, 0x421C80F8U, 0x0U
 #define IOMUXC_PIO5_15_COMM_ENET_RXD2                                                         0x421C01BCU, 0x4U, 0x421C8094U, 0x1U
 #define IOMUXC_PIO5_15_MAIN_AHB_SRAMC_SRAMC_DA14                                              0x421C01BCU, 0x5U, 0x421C8400U, 0x1U
 #define IOMUXC_PIO5_15_HSP_SINC0_MCLK3                                                        0x421C01BCU, 0x7U, 0x421C82C4U, 0x1U
@@ -1237,7 +1242,7 @@
 #define IOMUXC_PIO5_16_HSP_GPIO3_GPIO16                                                       0x421C01C0U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_16_MAIN_XSPI1_DQS1                                                        0x421C01C0U, 0x1U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_16_COMM_uSDHC1_CMD                                                        0x421C01C0U, 0x2U, 0x421C80C0U, 0x0U
-#define IOMUXC_PIO5_16_COMM_FlexSPI_FLR_XSPI_FLR_DQS                                            0x421C01C0U, 0x3U, 0x421C80E8U, 0x0U
+#define IOMUXC_PIO5_16_COMM_FlexSPI_FLR_XSPI_FLR_DQS                                          0x421C01C0U, 0x3U, 0x421C80E8U, 0x0U
 #define IOMUXC_PIO5_16_COMM_ENET_RXD3                                                         0x421C01C0U, 0x4U, 0x421C8098U, 0x1U
 #define IOMUXC_PIO5_16_MAIN_AHB_SRAMC_SRAMC_DA15                                              0x421C01C0U, 0x5U, 0x421C8404U, 0x1U
 #define IOMUXC_PIO5_16_HSP_SINC0_MBIT0                                                        0x421C01C0U, 0x7U, 0x421C82A8U, 0x1U
@@ -1246,7 +1251,7 @@
 #define IOMUXC_PIO5_17_HSP_GPIO3_GPIO17                                                       0x421C01C4U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_17_MAIN_XSPI1_DATA12                                                      0x421C01C4U, 0x1U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_17_COMM_uSDHC1_DAT0                                                       0x421C01C4U, 0x2U, 0x421C80C4U, 0x0U
-#define IOMUXC_PIO5_17_COMM_FlexSPI_FLR_XSPI_FLR_DATA4                                            0x421C01C4U, 0x3U, 0x421C80FCU, 0x0U
+#define IOMUXC_PIO5_17_COMM_FlexSPI_FLR_XSPI_FLR_DATA4                                        0x421C01C4U, 0x3U, 0x421C80FCU, 0x0U
 #define IOMUXC_PIO5_17_COMM_ENET_RX_EN                                                        0x421C01C4U, 0x4U, 0x421C809CU, 0x1U
 #define IOMUXC_PIO5_17_MAIN_AHB_SRAMC_SRAMC_WEB                                               0x421C01C4U, 0x5U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_17_HSP_SINC0_MBIT1                                                        0x421C01C4U, 0x7U, 0x421C82ACU, 0x1U
@@ -1256,7 +1261,7 @@
 #define IOMUXC_PIO5_18_HSP_GPIO3_GPIO18                                                       0x421C01C8U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_18_MAIN_XSPI1_DATA13                                                      0x421C01C8U, 0x1U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_18_COMM_uSDHC1_DAT1                                                       0x421C01C8U, 0x2U, 0x421C80C8U, 0x0U
-#define IOMUXC_PIO5_18_COMM_FlexSPI_FLR_XSPI_FLR_DATA5                                            0x421C01C8U, 0x3U, 0x421C8100U, 0x0U
+#define IOMUXC_PIO5_18_COMM_FlexSPI_FLR_XSPI_FLR_DATA5                                        0x421C01C8U, 0x3U, 0x421C8100U, 0x0U
 #define IOMUXC_PIO5_18_COMM_ENET_TX_ER                                                        0x421C01C8U, 0x4U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_18_MAIN_AHB_SRAMC_SRAMC_OEB                                               0x421C01C8U, 0x5U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_18_HSP_SINC0_MBIT2                                                        0x421C01C8U, 0x7U, 0x421C82B0U, 0x1U
@@ -1266,7 +1271,7 @@
 #define IOMUXC_PIO5_19_HSP_GPIO3_GPIO19                                                       0x421C01CCU, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_19_MAIN_XSPI1_DATA14                                                      0x421C01CCU, 0x1U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_19_COMM_uSDHC1_DAT2                                                       0x421C01CCU, 0x2U, 0x421C80CCU, 0x0U
-#define IOMUXC_PIO5_19_COMM_FlexSPI_FLR_XSPI_FLR_DATA6                                            0x421C01CCU, 0x3U, 0x421C8104U, 0x0U
+#define IOMUXC_PIO5_19_COMM_FlexSPI_FLR_XSPI_FLR_DATA6                                        0x421C01CCU, 0x3U, 0x421C8104U, 0x0U
 #define IOMUXC_PIO5_19_COMM_ENET_COL                                                          0x421C01CCU, 0x4U, 0x421C807CU, 0x2U
 #define IOMUXC_PIO5_19_MAIN_AHB_SRAMC_SRAMC_ADVB                                              0x421C01CCU, 0x5U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_19_HSP_SINC0_MBIT3                                                        0x421C01CCU, 0x7U, 0x421C82B4U, 0x1U
@@ -1276,7 +1281,7 @@
 #define IOMUXC_PIO5_20_HSP_GPIO3_GPIO20                                                       0x421C01D0U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_20_MAIN_XSPI1_DATA15                                                      0x421C01D0U, 0x1U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_20_COMM_uSDHC1_DAT3                                                       0x421C01D0U, 0x2U, 0x421C80D0U, 0x0U
-#define IOMUXC_PIO5_20_COMM_FlexSPI_FLR_XSPI_FLR_DATA7                                            0x421C01D0U, 0x3U, 0x421C8108U, 0x0U
+#define IOMUXC_PIO5_20_COMM_FlexSPI_FLR_XSPI_FLR_DATA7                                        0x421C01D0U, 0x3U, 0x421C8108U, 0x0U
 #define IOMUXC_PIO5_20_MAIN_AHB_SRAMC_SRAMC_WP0                                               0x421C01D0U, 0x5U, 0x421C8408U, 0x2U
 #define IOMUXC_PIO5_20_HSP_SINC0_BREAK                                                        0x421C01D0U, 0x7U, 0x00000000U, 0x0U
 #define IOMUXC_PIO5_20_HSP_LPSPI4_PCS3                                                        0x421C01D0U, 0x8U, 0x421C8250U, 0x0U
@@ -1352,7 +1357,7 @@
 
 #define IOMUXC_PIO7_0_HSP_GPIO4_GPIO13                                                        0x421C0280U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO7_0_COMM_uSDHC0_DAT4                                                        0x421C0280U, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO7_0_COMM_FlexSPI_FLR_XSPI_FLR_DATA0                                            0x421C0280U, 0x2U, 0x421C80ECU, 0x1U
+#define IOMUXC_PIO7_0_COMM_FlexSPI_FLR_XSPI_FLR_DATA0                                         0x421C0280U, 0x2U, 0x421C80ECU, 0x1U
 #define IOMUXC_PIO7_0_COMM_uSDHC1_DAT0                                                        0x421C0280U, 0x3U, 0x421C80C4U, 0x1U
 #define IOMUXC_PIO7_0_HSP_FLEXIO0_FXIO_D28                                                    0x421C0280U, 0x4U, 0x421C8118U, 0x1U
 #define IOMUXC_PIO7_0_HSP_eFlexPWM3_PWM_A0                                                    0x421C0280U, 0x5U, 0x421C81A4U, 0x2U
@@ -1360,7 +1365,7 @@
 
 #define IOMUXC_PIO7_1_HSP_GPIO4_GPIO14                                                        0x421C0284U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO7_1_COMM_uSDHC0_DAT5                                                        0x421C0284U, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO7_1_COMM_FlexSPI_FLR_XSPI_FLR_DATA1                                            0x421C0284U, 0x2U, 0x421C80F0U, 0x1U
+#define IOMUXC_PIO7_1_COMM_FlexSPI_FLR_XSPI_FLR_DATA1                                         0x421C0284U, 0x2U, 0x421C80F0U, 0x1U
 #define IOMUXC_PIO7_1_COMM_uSDHC1_DAT1                                                        0x421C0284U, 0x3U, 0x421C80C8U, 0x1U
 #define IOMUXC_PIO7_1_HSP_FLEXIO0_FXIO_D29                                                    0x421C0284U, 0x4U, 0x421C811CU, 0x1U
 #define IOMUXC_PIO7_1_HSP_eFlexPWM3_PWM_B0                                                    0x421C0284U, 0x5U, 0x421C81B4U, 0x2U
@@ -1369,7 +1374,7 @@
 
 #define IOMUXC_PIO7_2_HSP_GPIO4_GPIO15                                                        0x421C0288U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO7_2_COMM_uSDHC0_DAT6                                                        0x421C0288U, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO7_2_COMM_FlexSPI_FLR_XSPI_FLR_DATA2                                            0x421C0288U, 0x2U, 0x421C80F4U, 0x1U
+#define IOMUXC_PIO7_2_COMM_FlexSPI_FLR_XSPI_FLR_DATA2                                         0x421C0288U, 0x2U, 0x421C80F4U, 0x1U
 #define IOMUXC_PIO7_2_COMM_uSDHC1_DAT2                                                        0x421C0288U, 0x3U, 0x421C80CCU, 0x1U
 #define IOMUXC_PIO7_2_HSP_FLEXIO0_FXIO_D30                                                    0x421C0288U, 0x4U, 0x421C8120U, 0x1U
 #define IOMUXC_PIO7_2_HSP_eFlexPWM3_PWM_A1                                                    0x421C0288U, 0x5U, 0x421C81A8U, 0x2U
@@ -1378,7 +1383,7 @@
 
 #define IOMUXC_PIO7_3_HSP_GPIO4_GPIO16                                                        0x421C028CU, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO7_3_COMM_uSDHC0_DAT7                                                        0x421C028CU, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO7_3_COMM_FlexSPI_FLR_XSPI_FLR_DATA3                                            0x421C028CU, 0x2U, 0x421C80F8U, 0x1U
+#define IOMUXC_PIO7_3_COMM_FlexSPI_FLR_XSPI_FLR_DATA3                                         0x421C028CU, 0x2U, 0x421C80F8U, 0x1U
 #define IOMUXC_PIO7_3_COMM_uSDHC1_DAT3                                                        0x421C028CU, 0x3U, 0x421C80D0U, 0x1U
 #define IOMUXC_PIO7_3_HSP_FLEXIO0_FXIO_D31                                                    0x421C028CU, 0x4U, 0x421C8124U, 0x1U
 #define IOMUXC_PIO7_3_HSP_eFlexPWM3_PWM_B1                                                    0x421C028CU, 0x5U, 0x421C81B8U, 0x2U
@@ -1387,14 +1392,14 @@
 
 #define IOMUXC_PIO7_4_HSP_GPIO4_GPIO17                                                        0x421C0290U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO7_4_COMM_uSDHC0_DS                                                          0x421C0290U, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO7_4_COMM_FlexSPI_FLR_XSPI_FLR_DQS                                            0x421C0290U, 0x2U, 0x421C80E8U, 0x1U
+#define IOMUXC_PIO7_4_COMM_FlexSPI_FLR_XSPI_FLR_DQS                                           0x421C0290U, 0x2U, 0x421C80E8U, 0x1U
 #define IOMUXC_PIO7_4_COMM_uSDHC1_CMD                                                         0x421C0290U, 0x3U, 0x421C80C0U, 0x1U
 #define IOMUXC_PIO7_4_HSP_eFlexPWM3_PWM_A2                                                    0x421C0290U, 0x5U, 0x421C81ACU, 0x2U
 #define IOMUXC_PIO7_4_HSP_LPSPI1_SOUT                                                         0x421C0290U, 0x8U, 0x421C8210U, 0x2U
 #define IOMUXC_PIO7_4_HSP_LPUART3_RTS_B                                                       0x421C0290U, 0x9U, 0x00000000U, 0x0U
 
 #define IOMUXC_PIO7_5_HSP_GPIO4_GPIO18                                                        0x421C0294U, 0x0U, 0x00000000U, 0x0U
-#define IOMUXC_PIO7_5_COMM_FlexSPI_FLR_XSPI_FLR_CLK                                            0x421C0294U, 0x2U, 0x421C810CU, 0x1U
+#define IOMUXC_PIO7_5_COMM_FlexSPI_FLR_XSPI_FLR_CLK                                           0x421C0294U, 0x2U, 0x421C810CU, 0x1U
 #define IOMUXC_PIO7_5_COMM_uSDHC1_CLK                                                         0x421C0294U, 0x3U, 0x421C80BCU, 0x1U
 #define IOMUXC_PIO7_5_HSP_eFlexPWM3_PWM_B2                                                    0x421C0294U, 0x5U, 0x421C81BCU, 0x2U
 #define IOMUXC_PIO7_5_HSP_LPSPI1_SCK                                                          0x421C0294U, 0x8U, 0x421C8208U, 0x2U
@@ -1412,7 +1417,7 @@
 
 #define IOMUXC_PIO7_8_HSP_GPIO4_GPIO21                                                        0x421C02A0U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO7_8_COMM_uSDHC0_DAT0                                                        0x421C02A0U, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO7_8_COMM_FlexSPI_FLR_XSPI_FLR_DATA4                                            0x421C02A0U, 0x2U, 0x421C80FCU, 0x1U
+#define IOMUXC_PIO7_8_COMM_FlexSPI_FLR_XSPI_FLR_DATA4                                         0x421C02A0U, 0x2U, 0x421C80FCU, 0x1U
 #define IOMUXC_PIO7_8_HSP_FLEXIO2_FXIO_D28                                                    0x421C02A0U, 0x4U, 0x421C8128U, 0x1U
 #define IOMUXC_PIO7_8_HSP_eFlexPWM0_PWM_A1                                                    0x421C02A0U, 0x5U, 0x421C813CU, 0x1U
 #define IOMUXC_PIO7_8_HSP_LPSPI2_SIN                                                          0x421C02A0U, 0x8U, 0x421C8228U, 0x2U
@@ -1420,7 +1425,7 @@
 
 #define IOMUXC_PIO7_9_HSP_GPIO4_GPIO22                                                        0x421C02A4U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO7_9_COMM_uSDHC0_DAT1                                                        0x421C02A4U, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO7_9_COMM_FlexSPI_FLR_XSPI_FLR_DATA5                                            0x421C02A4U, 0x2U, 0x421C8100U, 0x1U
+#define IOMUXC_PIO7_9_COMM_FlexSPI_FLR_XSPI_FLR_DATA5                                         0x421C02A4U, 0x2U, 0x421C8100U, 0x1U
 #define IOMUXC_PIO7_9_HSP_FLEXIO2_FXIO_D29                                                    0x421C02A4U, 0x4U, 0x421C812CU, 0x1U
 #define IOMUXC_PIO7_9_HSP_eFlexPWM0_PWM_B1                                                    0x421C02A4U, 0x5U, 0x421C8148U, 0x1U
 #define IOMUXC_PIO7_9_HSP_LPSPI2_PCS0                                                         0x421C02A4U, 0x8U, 0x421C8214U, 0x2U
@@ -1428,23 +1433,23 @@
 
 #define IOMUXC_PIO7_10_HSP_GPIO4_GPIO23                                                       0x421C02A8U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO7_10_COMM_uSDHC0_DAT2                                                       0x421C02A8U, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO7_10_COMM_FlexSPI_FLR_XSPI_FLR_DATA6                                            0x421C02A8U, 0x2U, 0x421C8104U, 0x1U
+#define IOMUXC_PIO7_10_COMM_FlexSPI_FLR_XSPI_FLR_DATA6                                        0x421C02A8U, 0x2U, 0x421C8104U, 0x1U
 #define IOMUXC_PIO7_10_HSP_FLEXIO2_FXIO_D30                                                   0x421C02A8U, 0x4U, 0x421C8130U, 0x1U
 #define IOMUXC_PIO7_10_HSP_eFlexPWM0_PWM_A2                                                   0x421C02A8U, 0x5U, 0x421C8140U, 0x1U
 #define IOMUXC_PIO7_10_HSP_LPSPI2_PCS1                                                        0x421C02A8U, 0x8U, 0x421C8218U, 0x2U
-#define IOMUXC_PIO7_10_HSP_LPUART4_TXD                                                        0x421C02A8U, 0x9U, 0x00000000U, 0x0U
+#define IOMUXC_PIO7_10_HSP_LPUART4_TXD                                                        0x421C02A8U, 0x9U, 0x421C8298U, 0x4U
 
 #define IOMUXC_PIO7_11_HSP_GPIO4_GPIO24                                                       0x421C02ACU, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO7_11_COMM_uSDHC0_DAT3                                                       0x421C02ACU, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO7_11_COMM_FlexSPI_FLR_XSPI_FLR_DATA7                                            0x421C02ACU, 0x2U, 0x421C8108U, 0x1U
+#define IOMUXC_PIO7_11_COMM_FlexSPI_FLR_XSPI_FLR_DATA7                                        0x421C02ACU, 0x2U, 0x421C8108U, 0x1U
 #define IOMUXC_PIO7_11_HSP_FLEXIO2_FXIO_D31                                                   0x421C02ACU, 0x4U, 0x421C8134U, 0x1U
 #define IOMUXC_PIO7_11_HSP_eFlexPWM0_PWM_B2                                                   0x421C02ACU, 0x5U, 0x421C814CU, 0x1U
 #define IOMUXC_PIO7_11_HSP_LPSPI2_PCS2                                                        0x421C02ACU, 0x8U, 0x421C821CU, 0x2U
-#define IOMUXC_PIO7_11_HSP_LPUART4_RXD                                                        0x421C02ACU, 0x9U, 0x00000000U, 0x0U
+#define IOMUXC_PIO7_11_HSP_LPUART4_RXD                                                        0x421C02ACU, 0x9U, 0x421C8294U, 0x4U
 
 #define IOMUXC_PIO1_0_WAKE_GPIO0_GPIO0                                                        0x46220000U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO1_0_WAKE_CMP3_OUT                                                           0x46220000U, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO1_0_WAKE_LPI2C0_SDA                                                         0x46220000U, 0x2U, 0x00000000U, 0x0U
+#define IOMUXC_PIO1_0_WAKE_LPI2C0_SDA                                                         0x46220000U, 0x2U, 0x46228004U, 0x0U
 #define IOMUXC_PIO1_0_WAKE_LPSPI0_SIN                                                         0x46220000U, 0x3U, 0x00000000U, 0x0U
 #define IOMUXC_PIO1_0_WAKE_LPUART1_CTS_B                                                      0x46220000U, 0x5U, 0x00000000U, 0x0U
 #define IOMUXC_PIO1_0_WAKE_LPTMR0_ALT0                                                        0x46220000U, 0x7U, 0x00000000U, 0x0U
@@ -1452,7 +1457,7 @@
 
 #define IOMUXC_PIO1_1_WAKE_GPIO0_GPIO1                                                        0x46220004U, 0x0U, 0x00000000U, 0x0U
 #define IOMUXC_PIO1_1_WAKE_CMP2_OUT                                                           0x46220004U, 0x1U, 0x00000000U, 0x0U
-#define IOMUXC_PIO1_1_WAKE_LPI2C0_SCL                                                         0x46220004U, 0x2U, 0x00000000U, 0x0U
+#define IOMUXC_PIO1_1_WAKE_LPI2C0_SCL                                                         0x46220004U, 0x2U, 0x46228000U, 0x0U
 #define IOMUXC_PIO1_1_WAKE_LPSPI0_PCS0                                                        0x46220004U, 0x3U, 0x00000000U, 0x0U
 #define IOMUXC_PIO1_1_WAKE_LPUART1_RTS_B                                                      0x46220004U, 0x5U, 0x00000000U, 0x0U
 #define IOMUXC_PIO1_1_WAKE_LPTMR0_ALT1                                                        0x46220004U, 0x7U, 0x00000000U, 0x0U
@@ -1492,16 +1497,16 @@
 #define IOMUXC_PIO1_5_WAKE_QTPM0_CH5                                                          0x46220014U, 0x8U, 0x00000000U, 0x0U
 
 #define IOMUXC_PIO1_6_WAKE_GPIO0_GPIO6                                                        0x46220018U, 0x0U, 0x00000000U, 0x0U
-#define IOMUXC_PIO1_6_WAKE_LPI2C0_SDA                                                         0x46220018U, 0x2U, 0x00000000U, 0x0U
+#define IOMUXC_PIO1_6_WAKE_LPI2C0_SDA                                                         0x46220018U, 0x2U, 0x46228004U, 0x1U
 #define IOMUXC_PIO1_6_WAKE_XBAR_INOUT3                                                        0x46220018U, 0x4U, 0x00000000U, 0x0U
 #define IOMUXC_PIO1_6_WAKE_LPUART0_CTS_B                                                      0x46220018U, 0x5U, 0x00000000U, 0x0U
-#define IOMUXC_PIO1_6_WAKE_MICFIL_PDM_DATA01                                                  0x46220018U, 0x6U, 0x00000000U, 0x0U
+#define IOMUXC_PIO1_6_WAKE_MICFIL_PDM_DATA01                                                  0x46220018U, 0x6U, 0x46228008U, 0x0U
 #define IOMUXC_PIO1_6_WAKE_LPTMR1_ALT2                                                        0x46220018U, 0x7U, 0x00000000U, 0x0U
 #define IOMUXC_PIO1_6_WAKE_QTPM0_CH6                                                          0x46220018U, 0x8U, 0x00000000U, 0x0U
 #define IOMUXC_PIO1_6_JTAGC_TCK                                                               0x46220018U, 0xFU, 0x00000000U, 0x0U
 
 #define IOMUXC_PIO1_7_WAKE_GPIO0_GPIO7                                                        0x4622001CU, 0x0U, 0x00000000U, 0x0U
-#define IOMUXC_PIO1_7_WAKE_LPI2C0_SCL                                                         0x4622001CU, 0x2U, 0x00000000U, 0x0U
+#define IOMUXC_PIO1_7_WAKE_LPI2C0_SCL                                                         0x4622001CU, 0x2U, 0x46228000U, 0x1U
 #define IOMUXC_PIO1_7_WAKE_XBAR_INOUT4                                                        0x4622001CU, 0x4U, 0x00000000U, 0x0U
 #define IOMUXC_PIO1_7_WAKE_LPUART0_RTS_B                                                      0x4622001CU, 0x5U, 0x00000000U, 0x0U
 #define IOMUXC_PIO1_7_WAKE_MICFIL_PDM_CLK                                                     0x4622001CU, 0x6U, 0x00000000U, 0x0U
@@ -1514,7 +1519,7 @@
 #define IOMUXC_PIO1_8_WAKE_LPI2C1_SDA                                                         0x46220020U, 0x2U, 0x00000000U, 0x0U
 #define IOMUXC_PIO1_8_WAKE_LPSPI0_PCS2                                                        0x46220020U, 0x3U, 0x00000000U, 0x0U
 #define IOMUXC_PIO1_8_WAKE_XBAR_INOUT5                                                        0x46220020U, 0x4U, 0x00000000U, 0x0U
-#define IOMUXC_PIO1_8_WAKE_MICFIL_PDM_DATA01                                                  0x46220020U, 0x6U, 0x00000000U, 0x0U
+#define IOMUXC_PIO1_8_WAKE_MICFIL_PDM_DATA01                                                  0x46220020U, 0x6U, 0x46228008U, 0x1U
 #define IOMUXC_PIO1_8_JTAGC_TDI                                                               0x46220020U, 0xFU, 0x00000000U, 0x0U
 
 #define IOMUXC_PIO1_9_WAKE_GPIO0_GPIO9                                                        0x46220024U, 0x0U, 0x00000000U, 0x0U
@@ -1543,13 +1548,10 @@
 #define IOMUXC_PIO0_3_RTC_TAMPER1                                                             0x4636000CU, 0x1U, 0x00000000U, 0x0U
 
 #define IOMUXC_PIO0_4_VBAT_GPIO0_GPIO4                                                        0x46360010U, 0x0U, 0x00000000U, 0x0U
+#define IOMUXC_PIO0_4_ON_OFF                                                                  0x46360010U, 0x1U, 0x00000000U, 0x0U
 
-#define IOMUXC_WAKE_LPI2C0_SCL                                        0x46220088U, 0x0U, 0x00000000U, 0x0U, 0x46220088U
-
-#define IOMUXC_WAKE_LPI2C0_SDA                                        0x4622008CU, 0x0U, 0x00000000U, 0x0U, 0x4622008CU
-
-#define IOMUXC_WAKE_MIC_DATA01                                        0x46220090U, 0x0U, 0x00000000U, 0x0U, 0x46220090U
-
+#define IOMUXC_PIO0_5_VBAT_GPIO0_GPIO5                                                        0x46360014U, 0x0U, 0x00000000U, 0x0U
+#define IOMUXC_PIO0_5_PMIC_ON_REQ                                                             0x46360014U, 0x1U, 0x00000000U, 0x0U
 /*@}*/
 
 #define IOMUXC_GPR_SAIMCLK_LOWBITMASK (0x7U)

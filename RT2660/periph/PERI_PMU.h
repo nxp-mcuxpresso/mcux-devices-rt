@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for PMU
@@ -61,13 +63,13 @@
 #if !defined(PERI_PMU_H_)
 #define PERI_PMU_H_                              /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -117,13 +119,11 @@ typedef struct {
   __IO uint32_t PMU_TEMP_SENSOR;                   /**< Temperature Sensor, offset: 0x4 */
        uint8_t RESERVED_1[12];
   __IO uint32_t PMU_LDO_CTRL_REG;                  /**< Regulator Control, offset: 0x14 */
-       uint8_t RESERVED_2[12];
-  __IO uint32_t PMU_CLK_REG;                       /**< Clock, offset: 0x24 */
-       uint8_t RESERVED_3[4];
+       uint8_t RESERVED_2[20];
   __IO uint32_t PMU_SENSOR_CTRL0_REG;              /**< Sensor Control 0, offset: 0x2C */
-       uint8_t RESERVED_4[8];
+       uint8_t RESERVED_3[8];
   __IO uint32_t PMU_SENSOR_CTRL1_REG;              /**< Sensor Control 1, offset: 0x38 */
-       uint8_t RESERVED_5[16];
+       uint8_t RESERVED_4[16];
   __I  uint32_t PMU_STS;                           /**< Status, offset: 0x4C */
   __I  uint32_t PMU_BODYBIAS_VERID_REG;            /**< Body Biasing Version ID, offset: 0x50 */
   __IO uint32_t PMU_BODYBIAS_CONFIG_REG;           /**< Body Biasing Configuration, offset: 0x54 */
@@ -132,9 +132,9 @@ typedef struct {
   __I  uint32_t PMU_BODYBIAS_INTSTATUS_STS;        /**< Body Biasing Interrupt Status, offset: 0x60 */
   __IO uint32_t PMU_BODYBIAS_INTENABLE_REG;        /**< Body Biasing Interrupt Enable, offset: 0x64 */
   __O  uint32_t PMU_BODYBIAS_INTCLEAR_REG;         /**< Body Biasing Interrupt Clear, offset: 0x68 */
-       uint8_t RESERVED_6[8];
+       uint8_t RESERVED_5[8];
   __IO uint32_t PMU_BODYBIAS_PWPSCFG;              /**< Body Biasing P-Well Power Stage Configuration, offset: 0x74 */
-       uint8_t RESERVED_7[8];
+       uint8_t RESERVED_6[8];
   __IO uint32_t PMU_RESETCON_WARM_CTRL;            /**< IRQ Enable for Warm Reset, offset: 0x80 */
   __IO uint32_t PMU_RESETCON_COLD_CTRL;            /**< IRQ Enable for Cold Reset, offset: 0x84 */
   __O  uint32_t PMU_DIG_IRQ_FLAG_CLEAR_REG;        /**< IRQ Flag Clear, offset: 0x88 */
@@ -142,11 +142,11 @@ typedef struct {
   __I  uint32_t PMU_DIG_IRQ_STATUS_STS;            /**< IRQ Status, offset: 0x90 */
   __IO uint32_t PMU_DIG_IRQ_EN_REG;                /**< IRQ Enable, offset: 0x94 */
   __IO uint32_t PMU_XOSC32KNP_CTRL_REG;            /**< XOSC32KNP Control, offset: 0x98 */
-       uint8_t RESERVED_8[8];
+       uint8_t RESERVED_7[8];
   __I  uint32_t PMU_XOSC32KNP_STS;                 /**< XOSC32KNP Status, offset: 0xA4 */
-       uint8_t RESERVED_9[4];
+       uint8_t RESERVED_8[4];
   __IO uint32_t PMU_BUCK_VDDCORE_ANACTRL_SETTING_REG; /**< BUCK_VDD_CORE Analog Control, offset: 0xAC */
-       uint8_t RESERVED_10[8];
+       uint8_t RESERVED_9[8];
   __IO uint32_t PMU_BUCK_VDDCORE_CTRL_PWM_REG;     /**< BUCK_VDD_CORE PWM Control, offset: 0xB8 */
 } PMU_Type;
 
@@ -289,18 +289,6 @@ typedef struct {
  *  0b11..Nominal value + 20%
  */
 #define PMU_PMU_LDO_CTRL_REG_PMU_LPVDDREG_0V8_SEL(x) (((uint32_t)(((uint32_t)(x)) << PMU_PMU_LDO_CTRL_REG_PMU_LPVDDREG_0V8_SEL_SHIFT)) & PMU_PMU_LDO_CTRL_REG_PMU_LPVDDREG_0V8_SEL_MASK)
-/*! @} */
-
-/*! @name PMU_CLK_REG - Clock */
-/*! @{ */
-
-#define PMU_PMU_CLK_REG_PMU_LFRO1M_FROM_CGU_MASK (0x2U)
-#define PMU_PMU_CLK_REG_PMU_LFRO1M_FROM_CGU_SHIFT (1U)
-/*! PMU_LFRO1M_FROM_CGU - LFRO_1M from CGU
- *  0b0..From PMU FRO_1M
- *  0b1..From CGU 1M
- */
-#define PMU_PMU_CLK_REG_PMU_LFRO1M_FROM_CGU(x)   (((uint32_t)(((uint32_t)(x)) << PMU_PMU_CLK_REG_PMU_LFRO1M_FROM_CGU_SHIFT)) & PMU_PMU_CLK_REG_PMU_LFRO1M_FROM_CGU_MASK)
 /*! @} */
 
 /*! @name PMU_SENSOR_CTRL0_REG - Sensor Control 0 */
@@ -579,7 +567,7 @@ typedef struct {
  *  0b001..N-well enabled, P-well enabled
  *  0b010..N-well disabled, P-well enabled
  *  0b011..N-well enabled, P-well disabled
- *  0b100..High-Z (high impedance) mode
+ *  0b100..
  *  0b101..Standby
  */
 #define PMU_PMU_BODYBIAS_CONFIG_REG_PMU_BB_MODE_SEL(x) (((uint32_t)(((uint32_t)(x)) << PMU_PMU_BODYBIAS_CONFIG_REG_PMU_BB_MODE_SEL_SHIFT)) & PMU_PMU_BODYBIAS_CONFIG_REG_PMU_BB_MODE_SEL_MASK)
@@ -614,12 +602,24 @@ typedef struct {
 
 #define PMU_PMU_BODYBIAS_CONFIG_REG_PMU_BB_NWELL_V_SEL_MASK (0x7F0000U)
 #define PMU_PMU_BODYBIAS_CONFIG_REG_PMU_BB_NWELL_V_SEL_SHIFT (16U)
-/*! PMU_BB_NWELL_V_SEL - N-Well Voltage Select */
+/*! PMU_BB_NWELL_V_SEL - N-Well Voltage Select
+ *  0b0000000-0b0000110..Vnwell = 0.150 V
+ *  0b0000111..Vnwell = 0.175 V
+ *  0b0001000..Vnwell = 0.200 V
+ *  0b0001001-0b0111110.....
+ *  0b0111111..Vnwell = 1.575 V
+ */
 #define PMU_PMU_BODYBIAS_CONFIG_REG_PMU_BB_NWELL_V_SEL(x) (((uint32_t)(((uint32_t)(x)) << PMU_PMU_BODYBIAS_CONFIG_REG_PMU_BB_NWELL_V_SEL_SHIFT)) & PMU_PMU_BODYBIAS_CONFIG_REG_PMU_BB_NWELL_V_SEL_MASK)
 
 #define PMU_PMU_BODYBIAS_CONFIG_REG_PMU_BB_PWELL_V_SEL_MASK (0x7F000000U)
 #define PMU_PMU_BODYBIAS_CONFIG_REG_PMU_BB_PWELL_V_SEL_SHIFT (24U)
-/*! PMU_BB_PWELL_V_SEL - P-Well Voltage Select */
+/*! PMU_BB_PWELL_V_SEL - P-Well Voltage Select
+ *  0b0000000-0b0000100..Vpwell = -0.100 V
+ *  0b0000101..Vpwell = -0.125 V
+ *  0b0000110..Vpwell = -0.150 V
+ *  0b0000111-0b1001010.....
+ *  0b1001011..Vpwell = -1.875 V
+ */
 #define PMU_PMU_BODYBIAS_CONFIG_REG_PMU_BB_PWELL_V_SEL(x) (((uint32_t)(((uint32_t)(x)) << PMU_PMU_BODYBIAS_CONFIG_REG_PMU_BB_PWELL_V_SEL_SHIFT)) & PMU_PMU_BODYBIAS_CONFIG_REG_PMU_BB_PWELL_V_SEL_MASK)
 /*! @} */
 

@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for USBPHY
@@ -61,13 +63,13 @@
 #if !defined(PERI_USBPHY_H_)
 #define PERI_USBPHY_H_                           /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -420,30 +422,8 @@ typedef struct {
  */
 #define USBPHY_TX_D_CAL(x)                       (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_D_CAL_SHIFT)) & USBPHY_TX_D_CAL_MASK)
 
-#define USBPHY_TX_TXCAL45DN_MASK                 (0xF00U)
-#define USBPHY_TX_TXCAL45DN_SHIFT                (8U)
-/*! TXCAL45DN - Transmit Calculation 45 ohm DN
- *  0b0000..+19.95%
- *  0b0001..+17.35%
- *  0b0010..+14.85%
- *  0b0011..+12.46%
- *  0b0100..+9.07%
- *  0b0101..+5.87%
- *  0b0110..+2.85%
- *  0b0111..0%
- *  0b1000..-2.70%
- *  0b1001..-5.25%
- *  0b1010..-7.67%
- *  0b1011..-9.98%
- *  0b1100..-12.17%
- *  0b1101..-14.25%
- *  0b1110..-18.14%
- *  0b1111..-21.68%
- */
-#define USBPHY_TX_TXCAL45DN(x)                   (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_TXCAL45DN_SHIFT)) & USBPHY_TX_TXCAL45DN_MASK)
-
-#define USBPHY_TX_TXCAL45DP_MASK                 (0xF0000U)
-#define USBPHY_TX_TXCAL45DP_SHIFT                (16U)
+#define USBPHY_TX_TXCAL45DP_MASK                 (0xF00U)
+#define USBPHY_TX_TXCAL45DP_SHIFT                (8U)
 /*! TXCAL45DP - Transmit Calculation 45 ohm DP
  *  0b0000..+19.95%
  *  0b0001..+17.35%
@@ -463,6 +443,28 @@ typedef struct {
  *  0b1111..-21.68%
  */
 #define USBPHY_TX_TXCAL45DP(x)                   (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_TXCAL45DP_SHIFT)) & USBPHY_TX_TXCAL45DP_MASK)
+
+#define USBPHY_TX_TXCAL45DN_MASK                 (0xF0000U)
+#define USBPHY_TX_TXCAL45DN_SHIFT                (16U)
+/*! TXCAL45DN - Transmit Calculation 45 ohm DN
+ *  0b0000..+19.95%
+ *  0b0001..+17.35%
+ *  0b0010..+14.85%
+ *  0b0011..+12.46%
+ *  0b0100..+9.07%
+ *  0b0101..+5.87%
+ *  0b0110..+2.85%
+ *  0b0111..0%
+ *  0b1000..-2.70%
+ *  0b1001..-5.25%
+ *  0b1010..-7.67%
+ *  0b1011..-9.98%
+ *  0b1100..-12.17%
+ *  0b1101..-14.25%
+ *  0b1110..-18.14%
+ *  0b1111..-21.68%
+ */
+#define USBPHY_TX_TXCAL45DN(x)                   (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_TXCAL45DN_SHIFT)) & USBPHY_TX_TXCAL45DN_MASK)
 /*! @} */
 
 /*! @name TX_SET - USBPHY Transmitter Control */
@@ -473,15 +475,15 @@ typedef struct {
 /*! D_CAL - Reference Ibias Output Current Trim. */
 #define USBPHY_TX_SET_D_CAL(x)                   (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_SET_D_CAL_SHIFT)) & USBPHY_TX_SET_D_CAL_MASK)
 
-#define USBPHY_TX_SET_TXCAL45DN_MASK             (0xF00U)
-#define USBPHY_TX_SET_TXCAL45DN_SHIFT            (8U)
-/*! TXCAL45DN - Transmit Calculation 45 ohm DN */
-#define USBPHY_TX_SET_TXCAL45DN(x)               (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_SET_TXCAL45DN_SHIFT)) & USBPHY_TX_SET_TXCAL45DN_MASK)
-
-#define USBPHY_TX_SET_TXCAL45DP_MASK             (0xF0000U)
-#define USBPHY_TX_SET_TXCAL45DP_SHIFT            (16U)
+#define USBPHY_TX_SET_TXCAL45DP_MASK             (0xF00U)
+#define USBPHY_TX_SET_TXCAL45DP_SHIFT            (8U)
 /*! TXCAL45DP - Transmit Calculation 45 ohm DP */
 #define USBPHY_TX_SET_TXCAL45DP(x)               (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_SET_TXCAL45DP_SHIFT)) & USBPHY_TX_SET_TXCAL45DP_MASK)
+
+#define USBPHY_TX_SET_TXCAL45DN_MASK             (0xF0000U)
+#define USBPHY_TX_SET_TXCAL45DN_SHIFT            (16U)
+/*! TXCAL45DN - Transmit Calculation 45 ohm DN */
+#define USBPHY_TX_SET_TXCAL45DN(x)               (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_SET_TXCAL45DN_SHIFT)) & USBPHY_TX_SET_TXCAL45DN_MASK)
 /*! @} */
 
 /*! @name TX_CLR - USBPHY Transmitter Control */
@@ -492,15 +494,15 @@ typedef struct {
 /*! D_CAL - Reference Ibias Output Current Trim. */
 #define USBPHY_TX_CLR_D_CAL(x)                   (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_CLR_D_CAL_SHIFT)) & USBPHY_TX_CLR_D_CAL_MASK)
 
-#define USBPHY_TX_CLR_TXCAL45DN_MASK             (0xF00U)
-#define USBPHY_TX_CLR_TXCAL45DN_SHIFT            (8U)
-/*! TXCAL45DN - Transmit Calculation 45 ohm DN */
-#define USBPHY_TX_CLR_TXCAL45DN(x)               (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_CLR_TXCAL45DN_SHIFT)) & USBPHY_TX_CLR_TXCAL45DN_MASK)
-
-#define USBPHY_TX_CLR_TXCAL45DP_MASK             (0xF0000U)
-#define USBPHY_TX_CLR_TXCAL45DP_SHIFT            (16U)
+#define USBPHY_TX_CLR_TXCAL45DP_MASK             (0xF00U)
+#define USBPHY_TX_CLR_TXCAL45DP_SHIFT            (8U)
 /*! TXCAL45DP - Transmit Calculation 45 ohm DP */
 #define USBPHY_TX_CLR_TXCAL45DP(x)               (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_CLR_TXCAL45DP_SHIFT)) & USBPHY_TX_CLR_TXCAL45DP_MASK)
+
+#define USBPHY_TX_CLR_TXCAL45DN_MASK             (0xF0000U)
+#define USBPHY_TX_CLR_TXCAL45DN_SHIFT            (16U)
+/*! TXCAL45DN - Transmit Calculation 45 ohm DN */
+#define USBPHY_TX_CLR_TXCAL45DN(x)               (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_CLR_TXCAL45DN_SHIFT)) & USBPHY_TX_CLR_TXCAL45DN_MASK)
 /*! @} */
 
 /*! @name TX_TOG - USBPHY Transmitter Control */
@@ -511,15 +513,15 @@ typedef struct {
 /*! D_CAL - Reference Ibias Output Current Trim. */
 #define USBPHY_TX_TOG_D_CAL(x)                   (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_TOG_D_CAL_SHIFT)) & USBPHY_TX_TOG_D_CAL_MASK)
 
-#define USBPHY_TX_TOG_TXCAL45DN_MASK             (0xF00U)
-#define USBPHY_TX_TOG_TXCAL45DN_SHIFT            (8U)
-/*! TXCAL45DN - Transmit Calculation 45 ohm DN */
-#define USBPHY_TX_TOG_TXCAL45DN(x)               (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_TOG_TXCAL45DN_SHIFT)) & USBPHY_TX_TOG_TXCAL45DN_MASK)
-
-#define USBPHY_TX_TOG_TXCAL45DP_MASK             (0xF0000U)
-#define USBPHY_TX_TOG_TXCAL45DP_SHIFT            (16U)
+#define USBPHY_TX_TOG_TXCAL45DP_MASK             (0xF00U)
+#define USBPHY_TX_TOG_TXCAL45DP_SHIFT            (8U)
 /*! TXCAL45DP - Transmit Calculation 45 ohm DP */
 #define USBPHY_TX_TOG_TXCAL45DP(x)               (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_TOG_TXCAL45DP_SHIFT)) & USBPHY_TX_TOG_TXCAL45DP_MASK)
+
+#define USBPHY_TX_TOG_TXCAL45DN_MASK             (0xF0000U)
+#define USBPHY_TX_TOG_TXCAL45DN_SHIFT            (16U)
+/*! TXCAL45DN - Transmit Calculation 45 ohm DN */
+#define USBPHY_TX_TOG_TXCAL45DN(x)               (((uint32_t)(((uint32_t)(x)) << USBPHY_TX_TOG_TXCAL45DN_SHIFT)) & USBPHY_TX_TOG_TXCAL45DN_MASK)
 /*! @} */
 
 /*! @name RX - USBPHY Receiver Control */
@@ -643,14 +645,6 @@ typedef struct {
  */
 #define USBPHY_CTRL_HOSTDISCONDETECT_IRQ(x)      (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_HOSTDISCONDETECT_IRQ_SHIFT)) & USBPHY_CTRL_HOSTDISCONDETECT_IRQ_MASK)
 
-#define USBPHY_CTRL_DEVPLUGIN_POLARITY_MASK      (0x20U)
-#define USBPHY_CTRL_DEVPLUGIN_POLARITY_SHIFT     (5U)
-/*! DEVPLUGIN_POLARITY - Device Plug-In Polarity
- *  0b0..Plugged in
- *  0b1..Unplugged
- */
-#define USBPHY_CTRL_DEVPLUGIN_POLARITY(x)        (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_DEVPLUGIN_POLARITY_SHIFT)) & USBPHY_CTRL_DEVPLUGIN_POLARITY_MASK)
-
 #define USBPHY_CTRL_RESUMEIRQSTICKY_MASK         (0x100U)
 #define USBPHY_CTRL_RESUMEIRQSTICKY_SHIFT        (8U)
 /*! RESUMEIRQSTICKY - RESUME_IRQ Sticky
@@ -674,22 +668,6 @@ typedef struct {
  *  0b1..Resume interrupt
  */
 #define USBPHY_CTRL_RESUME_IRQ(x)                (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_RESUME_IRQ_SHIFT)) & USBPHY_CTRL_RESUME_IRQ_MASK)
-
-#define USBPHY_CTRL_ENIRQDEVPLUGIN_MASK          (0x800U)
-#define USBPHY_CTRL_ENIRQDEVPLUGIN_SHIFT         (11U)
-/*! ENIRQDEVPLUGIN - Device Plug-In Interrupt Enable
- *  0b0..Disables
- *  0b1..Enables
- */
-#define USBPHY_CTRL_ENIRQDEVPLUGIN(x)            (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_ENIRQDEVPLUGIN_SHIFT)) & USBPHY_CTRL_ENIRQDEVPLUGIN_MASK)
-
-#define USBPHY_CTRL_DEVPLUGIN_IRQ_MASK           (0x1000U)
-#define USBPHY_CTRL_DEVPLUGIN_IRQ_SHIFT          (12U)
-/*! DEVPLUGIN_IRQ - Device Plug-In Interrupt
- *  0b0..Not connected
- *  0b1..Connected
- */
-#define USBPHY_CTRL_DEVPLUGIN_IRQ(x)             (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_DEVPLUGIN_IRQ_SHIFT)) & USBPHY_CTRL_DEVPLUGIN_IRQ_MASK)
 
 #define USBPHY_CTRL_ENUTMILEVEL2_MASK            (0x4000U)
 #define USBPHY_CTRL_ENUTMILEVEL2_SHIFT           (14U)
@@ -806,11 +784,6 @@ typedef struct {
 /*! HOSTDISCONDETECT_IRQ - Host Disconnect Detection Interrupt */
 #define USBPHY_CTRL_SET_HOSTDISCONDETECT_IRQ(x)  (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_SET_HOSTDISCONDETECT_IRQ_SHIFT)) & USBPHY_CTRL_SET_HOSTDISCONDETECT_IRQ_MASK)
 
-#define USBPHY_CTRL_SET_DEVPLUGIN_POLARITY_MASK  (0x20U)
-#define USBPHY_CTRL_SET_DEVPLUGIN_POLARITY_SHIFT (5U)
-/*! DEVPLUGIN_POLARITY - Device Plug-In Polarity */
-#define USBPHY_CTRL_SET_DEVPLUGIN_POLARITY(x)    (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_SET_DEVPLUGIN_POLARITY_SHIFT)) & USBPHY_CTRL_SET_DEVPLUGIN_POLARITY_MASK)
-
 #define USBPHY_CTRL_SET_RESUMEIRQSTICKY_MASK     (0x100U)
 #define USBPHY_CTRL_SET_RESUMEIRQSTICKY_SHIFT    (8U)
 /*! RESUMEIRQSTICKY - RESUME_IRQ Sticky */
@@ -825,16 +798,6 @@ typedef struct {
 #define USBPHY_CTRL_SET_RESUME_IRQ_SHIFT         (10U)
 /*! RESUME_IRQ - Interrupt Resume */
 #define USBPHY_CTRL_SET_RESUME_IRQ(x)            (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_SET_RESUME_IRQ_SHIFT)) & USBPHY_CTRL_SET_RESUME_IRQ_MASK)
-
-#define USBPHY_CTRL_SET_ENIRQDEVPLUGIN_MASK      (0x800U)
-#define USBPHY_CTRL_SET_ENIRQDEVPLUGIN_SHIFT     (11U)
-/*! ENIRQDEVPLUGIN - Device Plug-In Interrupt Enable */
-#define USBPHY_CTRL_SET_ENIRQDEVPLUGIN(x)        (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_SET_ENIRQDEVPLUGIN_SHIFT)) & USBPHY_CTRL_SET_ENIRQDEVPLUGIN_MASK)
-
-#define USBPHY_CTRL_SET_DEVPLUGIN_IRQ_MASK       (0x1000U)
-#define USBPHY_CTRL_SET_DEVPLUGIN_IRQ_SHIFT      (12U)
-/*! DEVPLUGIN_IRQ - Device Plug-In Interrupt */
-#define USBPHY_CTRL_SET_DEVPLUGIN_IRQ(x)         (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_SET_DEVPLUGIN_IRQ_SHIFT)) & USBPHY_CTRL_SET_DEVPLUGIN_IRQ_MASK)
 
 #define USBPHY_CTRL_SET_ENUTMILEVEL2_MASK        (0x4000U)
 #define USBPHY_CTRL_SET_ENUTMILEVEL2_SHIFT       (14U)
@@ -915,11 +878,6 @@ typedef struct {
 /*! HOSTDISCONDETECT_IRQ - Host Disconnect Detection Interrupt */
 #define USBPHY_CTRL_CLR_HOSTDISCONDETECT_IRQ(x)  (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_CLR_HOSTDISCONDETECT_IRQ_SHIFT)) & USBPHY_CTRL_CLR_HOSTDISCONDETECT_IRQ_MASK)
 
-#define USBPHY_CTRL_CLR_DEVPLUGIN_POLARITY_MASK  (0x20U)
-#define USBPHY_CTRL_CLR_DEVPLUGIN_POLARITY_SHIFT (5U)
-/*! DEVPLUGIN_POLARITY - Device Plug-In Polarity */
-#define USBPHY_CTRL_CLR_DEVPLUGIN_POLARITY(x)    (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_CLR_DEVPLUGIN_POLARITY_SHIFT)) & USBPHY_CTRL_CLR_DEVPLUGIN_POLARITY_MASK)
-
 #define USBPHY_CTRL_CLR_RESUMEIRQSTICKY_MASK     (0x100U)
 #define USBPHY_CTRL_CLR_RESUMEIRQSTICKY_SHIFT    (8U)
 /*! RESUMEIRQSTICKY - RESUME_IRQ Sticky */
@@ -934,16 +892,6 @@ typedef struct {
 #define USBPHY_CTRL_CLR_RESUME_IRQ_SHIFT         (10U)
 /*! RESUME_IRQ - Interrupt Resume */
 #define USBPHY_CTRL_CLR_RESUME_IRQ(x)            (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_CLR_RESUME_IRQ_SHIFT)) & USBPHY_CTRL_CLR_RESUME_IRQ_MASK)
-
-#define USBPHY_CTRL_CLR_ENIRQDEVPLUGIN_MASK      (0x800U)
-#define USBPHY_CTRL_CLR_ENIRQDEVPLUGIN_SHIFT     (11U)
-/*! ENIRQDEVPLUGIN - Device Plug-In Interrupt Enable */
-#define USBPHY_CTRL_CLR_ENIRQDEVPLUGIN(x)        (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_CLR_ENIRQDEVPLUGIN_SHIFT)) & USBPHY_CTRL_CLR_ENIRQDEVPLUGIN_MASK)
-
-#define USBPHY_CTRL_CLR_DEVPLUGIN_IRQ_MASK       (0x1000U)
-#define USBPHY_CTRL_CLR_DEVPLUGIN_IRQ_SHIFT      (12U)
-/*! DEVPLUGIN_IRQ - Device Plug-In Interrupt */
-#define USBPHY_CTRL_CLR_DEVPLUGIN_IRQ(x)         (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_CLR_DEVPLUGIN_IRQ_SHIFT)) & USBPHY_CTRL_CLR_DEVPLUGIN_IRQ_MASK)
 
 #define USBPHY_CTRL_CLR_ENUTMILEVEL2_MASK        (0x4000U)
 #define USBPHY_CTRL_CLR_ENUTMILEVEL2_SHIFT       (14U)
@@ -1024,11 +972,6 @@ typedef struct {
 /*! HOSTDISCONDETECT_IRQ - Host Disconnect Detection Interrupt */
 #define USBPHY_CTRL_TOG_HOSTDISCONDETECT_IRQ(x)  (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_TOG_HOSTDISCONDETECT_IRQ_SHIFT)) & USBPHY_CTRL_TOG_HOSTDISCONDETECT_IRQ_MASK)
 
-#define USBPHY_CTRL_TOG_DEVPLUGIN_POLARITY_MASK  (0x20U)
-#define USBPHY_CTRL_TOG_DEVPLUGIN_POLARITY_SHIFT (5U)
-/*! DEVPLUGIN_POLARITY - Device Plug-In Polarity */
-#define USBPHY_CTRL_TOG_DEVPLUGIN_POLARITY(x)    (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_TOG_DEVPLUGIN_POLARITY_SHIFT)) & USBPHY_CTRL_TOG_DEVPLUGIN_POLARITY_MASK)
-
 #define USBPHY_CTRL_TOG_RESUMEIRQSTICKY_MASK     (0x100U)
 #define USBPHY_CTRL_TOG_RESUMEIRQSTICKY_SHIFT    (8U)
 /*! RESUMEIRQSTICKY - RESUME_IRQ Sticky */
@@ -1043,16 +986,6 @@ typedef struct {
 #define USBPHY_CTRL_TOG_RESUME_IRQ_SHIFT         (10U)
 /*! RESUME_IRQ - Interrupt Resume */
 #define USBPHY_CTRL_TOG_RESUME_IRQ(x)            (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_TOG_RESUME_IRQ_SHIFT)) & USBPHY_CTRL_TOG_RESUME_IRQ_MASK)
-
-#define USBPHY_CTRL_TOG_ENIRQDEVPLUGIN_MASK      (0x800U)
-#define USBPHY_CTRL_TOG_ENIRQDEVPLUGIN_SHIFT     (11U)
-/*! ENIRQDEVPLUGIN - Device Plug-In Interrupt Enable */
-#define USBPHY_CTRL_TOG_ENIRQDEVPLUGIN(x)        (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_TOG_ENIRQDEVPLUGIN_SHIFT)) & USBPHY_CTRL_TOG_ENIRQDEVPLUGIN_MASK)
-
-#define USBPHY_CTRL_TOG_DEVPLUGIN_IRQ_MASK       (0x1000U)
-#define USBPHY_CTRL_TOG_DEVPLUGIN_IRQ_SHIFT      (12U)
-/*! DEVPLUGIN_IRQ - Device Plug-In Interrupt */
-#define USBPHY_CTRL_TOG_DEVPLUGIN_IRQ(x)         (((uint32_t)(((uint32_t)(x)) << USBPHY_CTRL_TOG_DEVPLUGIN_IRQ_SHIFT)) & USBPHY_CTRL_TOG_DEVPLUGIN_IRQ_MASK)
 
 #define USBPHY_CTRL_TOG_ENUTMILEVEL2_MASK        (0x4000U)
 #define USBPHY_CTRL_TOG_ENUTMILEVEL2_SHIFT       (14U)

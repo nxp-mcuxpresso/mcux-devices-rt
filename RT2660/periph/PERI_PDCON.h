@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for PDCON
@@ -61,13 +63,13 @@
 #if !defined(PERI_PDCON_H_)
 #define PERI_PDCON_H_                            /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -249,9 +251,7 @@ typedef struct {
 #define PDCON_PDRUNCFG_PDCFG3_SHIFT              (6U)
 /*! PDCFG3 - Power Domain Configuration 3
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDRUNCFG_PDCFG3(x)                 (((uint32_t)(((uint32_t)(x)) << PDCON_PDRUNCFG_PDCFG3_SHIFT)) & PDCON_PDRUNCFG_PDCFG3_MASK)
 
@@ -259,9 +259,7 @@ typedef struct {
 #define PDCON_PDRUNCFG_PDCFG4_SHIFT              (8U)
 /*! PDCFG4 - Power Domain Configuration 4
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDRUNCFG_PDCFG4(x)                 (((uint32_t)(((uint32_t)(x)) << PDCON_PDRUNCFG_PDCFG4_SHIFT)) & PDCON_PDRUNCFG_PDCFG4_MASK)
 
@@ -269,9 +267,7 @@ typedef struct {
 #define PDCON_PDRUNCFG_PDCFG5_SHIFT              (10U)
 /*! PDCFG5 - Power Domain Configuration 5
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDRUNCFG_PDCFG5(x)                 (((uint32_t)(((uint32_t)(x)) << PDCON_PDRUNCFG_PDCFG5_SHIFT)) & PDCON_PDRUNCFG_PDCFG5_MASK)
 /*! @} */
@@ -283,9 +279,7 @@ typedef struct {
 #define PDCON_PDSLPCFG_PDCFG1_SHIFT              (2U)
 /*! PDCFG1 - Power Domain Configuration 1
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDSLPCFG_PDCFG1(x)                 (((uint32_t)(((uint32_t)(x)) << PDCON_PDSLPCFG_PDCFG1_SHIFT)) & PDCON_PDSLPCFG_PDCFG1_MASK)
 
@@ -293,9 +287,7 @@ typedef struct {
 #define PDCON_PDSLPCFG_PDCFG2_SHIFT              (4U)
 /*! PDCFG2 - Power Domain Configuration 2
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDSLPCFG_PDCFG2(x)                 (((uint32_t)(((uint32_t)(x)) << PDCON_PDSLPCFG_PDCFG2_SHIFT)) & PDCON_PDSLPCFG_PDCFG2_MASK)
 
@@ -303,9 +295,7 @@ typedef struct {
 #define PDCON_PDSLPCFG_PDCFG3_SHIFT              (6U)
 /*! PDCFG3 - Power Domain Configuration 3
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDSLPCFG_PDCFG3(x)                 (((uint32_t)(((uint32_t)(x)) << PDCON_PDSLPCFG_PDCFG3_SHIFT)) & PDCON_PDSLPCFG_PDCFG3_MASK)
 
@@ -313,9 +303,7 @@ typedef struct {
 #define PDCON_PDSLPCFG_PDCFG4_SHIFT              (8U)
 /*! PDCFG4 - Power Domain Configuration 4
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDSLPCFG_PDCFG4(x)                 (((uint32_t)(((uint32_t)(x)) << PDCON_PDSLPCFG_PDCFG4_SHIFT)) & PDCON_PDSLPCFG_PDCFG4_MASK)
 
@@ -323,9 +311,7 @@ typedef struct {
 #define PDCON_PDSLPCFG_PDCFG5_SHIFT              (10U)
 /*! PDCFG5 - Power Domain Configuration 5
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDSLPCFG_PDCFG5(x)                 (((uint32_t)(((uint32_t)(x)) << PDCON_PDSLPCFG_PDCFG5_SHIFT)) & PDCON_PDSLPCFG_PDCFG5_MASK)
 /*! @} */
@@ -337,9 +323,7 @@ typedef struct {
 #define PDCON_PDST_PDS0_SHIFT                    (0U)
 /*! PDS0 - Power Domain State 0
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDST_PDS0(x)                       (((uint32_t)(((uint32_t)(x)) << PDCON_PDST_PDS0_SHIFT)) & PDCON_PDST_PDS0_MASK)
 
@@ -347,9 +331,7 @@ typedef struct {
 #define PDCON_PDST_PDS1_SHIFT                    (2U)
 /*! PDS1 - Power Domain State 1
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDST_PDS1(x)                       (((uint32_t)(((uint32_t)(x)) << PDCON_PDST_PDS1_SHIFT)) & PDCON_PDST_PDS1_MASK)
 
@@ -357,9 +339,7 @@ typedef struct {
 #define PDCON_PDST_PDS2_SHIFT                    (4U)
 /*! PDS2 - Power Domain State 2
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDST_PDS2(x)                       (((uint32_t)(((uint32_t)(x)) << PDCON_PDST_PDS2_SHIFT)) & PDCON_PDST_PDS2_MASK)
 
@@ -367,9 +347,7 @@ typedef struct {
 #define PDCON_PDST_PDS3_SHIFT                    (6U)
 /*! PDS3 - Power Domain State 3
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDST_PDS3(x)                       (((uint32_t)(((uint32_t)(x)) << PDCON_PDST_PDS3_SHIFT)) & PDCON_PDST_PDS3_MASK)
 
@@ -377,9 +355,7 @@ typedef struct {
 #define PDCON_PDST_PDS4_SHIFT                    (8U)
 /*! PDS4 - Power Domain State 4
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDST_PDS4(x)                       (((uint32_t)(((uint32_t)(x)) << PDCON_PDST_PDS4_SHIFT)) & PDCON_PDST_PDS4_MASK)
 
@@ -387,9 +363,7 @@ typedef struct {
 #define PDCON_PDST_PDS5_SHIFT                    (10U)
 /*! PDS5 - Power Domain State 5
  *  0b00..Active or Power-on mode
- *  0b01..Retention mode
  *  0b10..Power-off mode
- *  0b11..
  */
 #define PDCON_PDST_PDS5(x)                       (((uint32_t)(((uint32_t)(x)) << PDCON_PDST_PDS5_SHIFT)) & PDCON_PDST_PDS5_MASK)
 
@@ -449,9 +423,7 @@ typedef struct {
 #define PDCON_PDSEF_PEF0_SHIFT                   (0U)
 /*! PEF0 - Low-Power Event Flag of Power Domain 0
  *  0b00..No low-power event
- *  0b01..Retention event occurred
  *  0b10..Power-off event occurred
- *  0b11..Retention and power-off event occurred
  */
 #define PDCON_PDSEF_PEF0(x)                      (((uint32_t)(((uint32_t)(x)) << PDCON_PDSEF_PEF0_SHIFT)) & PDCON_PDSEF_PEF0_MASK)
 
@@ -459,9 +431,7 @@ typedef struct {
 #define PDCON_PDSEF_PEF1_SHIFT                   (2U)
 /*! PEF1 - Low-Power Event Flag of Power Domain 1
  *  0b00..No low-power event
- *  0b01..Retention event occurred
  *  0b10..Power-off event occurred
- *  0b11..Retention and power-off event occurred
  */
 #define PDCON_PDSEF_PEF1(x)                      (((uint32_t)(((uint32_t)(x)) << PDCON_PDSEF_PEF1_SHIFT)) & PDCON_PDSEF_PEF1_MASK)
 
@@ -469,9 +439,7 @@ typedef struct {
 #define PDCON_PDSEF_PEF2_SHIFT                   (4U)
 /*! PEF2 - Low-Power Event Flag of Power Domain 2
  *  0b00..No low-power event
- *  0b01..Retention event occurred
  *  0b10..Power-off event occurred
- *  0b11..Retention and power-off event occurred
  */
 #define PDCON_PDSEF_PEF2(x)                      (((uint32_t)(((uint32_t)(x)) << PDCON_PDSEF_PEF2_SHIFT)) & PDCON_PDSEF_PEF2_MASK)
 
@@ -479,9 +447,7 @@ typedef struct {
 #define PDCON_PDSEF_PEF3_SHIFT                   (6U)
 /*! PEF3 - Low-Power Event Flag of Power Domain 3
  *  0b00..No low-power event
- *  0b01..Retention event occurred
  *  0b10..Power-off event occurred
- *  0b11..Retention and power-off event occurred
  */
 #define PDCON_PDSEF_PEF3(x)                      (((uint32_t)(((uint32_t)(x)) << PDCON_PDSEF_PEF3_SHIFT)) & PDCON_PDSEF_PEF3_MASK)
 
@@ -489,9 +455,7 @@ typedef struct {
 #define PDCON_PDSEF_PEF4_SHIFT                   (8U)
 /*! PEF4 - Low-Power Event Flag of Power Domain 4
  *  0b00..No low-power event
- *  0b01..Retention event occurred
  *  0b10..Power-off event occurred
- *  0b11..Retention and power-off event occurred
  */
 #define PDCON_PDSEF_PEF4(x)                      (((uint32_t)(((uint32_t)(x)) << PDCON_PDSEF_PEF4_SHIFT)) & PDCON_PDSEF_PEF4_MASK)
 
@@ -499,9 +463,7 @@ typedef struct {
 #define PDCON_PDSEF_PEF5_SHIFT                   (10U)
 /*! PEF5 - Low-Power Event Flag of Power Domain 5
  *  0b00..No low-power event
- *  0b01..Retention event occurred
  *  0b10..Power-off event occurred
- *  0b11..Retention and power-off event occurred
  */
 #define PDCON_PDSEF_PEF5(x)                      (((uint32_t)(((uint32_t)(x)) << PDCON_PDSEF_PEF5_SHIFT)) & PDCON_PDSEF_PEF5_MASK)
 /*! @} */

@@ -1,22 +1,25 @@
 /*
 ** ###################################################################
-**     Processors:          MIMXRT2663AHP8A
-**                          MIMXRT2663CHPAA
-**                          MIMXRT2663CVVAA
-**                          MIMXRT2663DHPAA
-**                          MIMXRT2663DVVAA
-**                          MIMXRT2663XHP8A
-**                          MIMXRT2663XVV8A
+**     Processors:          MIMXRT2663AHP8A_cm85
+**                          MIMXRT2663AVV8A_cm85
+**                          MIMXRT2663CHPAA_cm85
+**                          MIMXRT2663CVVAA_cm85
+**                          MIMXRT2663DHPAA_cm85
+**                          MIMXRT2663DVVAA_cm85
+**                          MIMXRT2663XHP8A_cm85
+**                          MIMXRT2663XHPAA_cm85
+**                          MIMXRT2663XVV8A_cm85
+**                          MIMXRT2663XVVAA_cm85
 **
 **     Compiler:            GNU C Compiler
-**     Reference manual:    iMXRT2660RM Rev.2 DraftA, 05/2024
-**     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Reference manual:    iMXRT2660RM Rev.1 DraftN, 08/2026
+**     Version:             rev. 1.0, 2026-08-18
+**     Build:               b260818
 **
 **     Abstract:
 **         Linker file for the GNU C Compiler
 **
-**     Copyright 1997-2016 Freescale Semiconductor, Inc.
+**     Copyright 2016 Freescale Semiconductor, Inc.
 **     Copyright 2016-2026 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
@@ -25,6 +28,7 @@
 **
 ** ###################################################################
 */
+
 
 ENTRY(Reset_Handler)
 
@@ -420,4 +424,3 @@ __CONTAINER_IMG_OFFSET        = m_app_image_offset - m_container_offset;
 __CONTAINER_IMG_LOAD_ADDR     = ORIGIN(m_interrupts);
 __CONTAINER_IMG_ENTRY_ADDR    = ORIGIN(m_interrupts);
 __CONTAINER_IMG_SIZE          = text_data_end - __VECTOR_TABLE;
-

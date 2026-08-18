@@ -1,21 +1,21 @@
 #!armclang --target=arm-arm-none-eabi -mcpu=cortex-m85 -E -x c
 /*
 ** ###################################################################
-**     Processors:          MIMXRT2663CVJ5A
-**                          MIMXRT2663CVJ5B
-**                          MIMXRT2663CVL5A
-**                          MIMXRT2663CVL5B
-**                          MIMXRT2663DVJ6A
-**                          MIMXRT2663DVJ6B
-**                          MIMXRT2663DVL6A
-**                          MIMXRT2663DVL6B
-**                          MIMXRT2663DVN6B
-**                          MIMXRT2663XVN5B
+**     Processors:          MIMXRT2663AHP8A_cm85
+**                          MIMXRT2663AVV8A_cm85
+**                          MIMXRT2663CHPAA_cm85
+**                          MIMXRT2663CVVAA_cm85
+**                          MIMXRT2663DHPAA_cm85
+**                          MIMXRT2663DVVAA_cm85
+**                          MIMXRT2663XHP8A_cm85
+**                          MIMXRT2663XHPAA_cm85
+**                          MIMXRT2663XVV8A_cm85
+**                          MIMXRT2663XVVAA_cm85
 **
 **     Compiler:            Keil ARM C/C++ Compiler
-**     Reference manual:    IMXRT2660RM Rev.3, 07/2021 | IMXRT266XSRM Rev.0
-**     Version:             rev. 0.2, 2022-03-25
-**     Build:               b241024
+**     Reference manual:    iMXRT2660RM Rev.1 DraftN, 08/2026
+**     Version:             rev. 1.0, 2026-08-18
+**     Build:               b260818
 **
 **     Abstract:
 **         Linker file for the Keil ARM C/C++ Compiler
@@ -29,6 +29,7 @@
 **
 ** ###################################################################
 */
+
 
 
 /* Sizes */

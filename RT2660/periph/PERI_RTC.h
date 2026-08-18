@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for RTC
@@ -61,13 +63,13 @@
 #if !defined(PERI_RTC_H_)
 #define PERI_RTC_H_                              /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -125,11 +127,10 @@ typedef struct {
   __IO uint16_t STATUS;                            /**< Status, offset: 0x12 */
   __IO uint16_t ISR;                               /**< Interrupt Status, offset: 0x14 */
   __IO uint16_t IER;                               /**< Interrupt Enable, offset: 0x16 */
-  __IO uint16_t CNTDWN_TIMER;                      /**< Minutes Count Down Timer, offset: 0x18 */
-       uint8_t RESERVED_0[2];
+       uint8_t RESERVED_0[4];
   __I  uint16_t RTC_TEST2;                         /**< Sub Second Counter, offset: 0x1C */
   __IO uint16_t ALM_SUBSECONDS;                    /**< Sub Second Alarm, offset: 0x1E */
-  __IO uint16_t GP_DATA_REG;                       /**< General Purpose Data, offset: 0x20 */
+       uint8_t RESERVED_1[2];
   __IO uint16_t DST_HOUR;                          /**< Daylight Saving Hour, offset: 0x22 */
   __IO uint16_t DST_MONTH;                         /**< Daylight Saving Month, offset: 0x24 */
   __IO uint16_t DST_DAY;                           /**< Daylight Saving Day, offset: 0x26 */
@@ -325,14 +326,6 @@ typedef struct {
  */
 #define RTC_CTRL_DST_EN(x)                       (((uint16_t)(((uint16_t)(x)) << RTC_CTRL_DST_EN_SHIFT)) & RTC_CTRL_DST_EN_MASK)
 
-#define RTC_CTRL_BCD_EN_MASK                     (0x80U)
-#define RTC_CTRL_BCD_EN_SHIFT                    (7U)
-/*! BCD_EN - BCD Mode Enable
- *  0b0..Binary mode
- *  0b1..BCD mode
- */
-#define RTC_CTRL_BCD_EN(x)                       (((uint16_t)(((uint16_t)(x)) << RTC_CTRL_BCD_EN_SHIFT)) & RTC_CTRL_BCD_EN_MASK)
-
 #define RTC_CTRL_SWR_MASK                        (0x100U)
 #define RTC_CTRL_SWR_SHIFT                       (8U)
 /*! SWR - Software Reset
@@ -370,14 +363,6 @@ typedef struct {
  *  0b1..Registers are locked and in read-only mode.
  */
 #define RTC_STATUS_WRITE_PROT_EN(x)              (((uint16_t)(((uint16_t)(x)) << RTC_STATUS_WRITE_PROT_EN_SHIFT)) & RTC_STATUS_WRITE_PROT_EN_MASK)
-
-#define RTC_STATUS_DWN_CNTR_INVAL_BIT_MASK       (0x10U)
-#define RTC_STATUS_DWN_CNTR_INVAL_BIT_SHIFT      (4U)
-/*! DWN_CNTR_INVAL_BIT - Down Counter Invalidate Read/Write Access
- *  0b0..Count down timer can be changed or read.
- *  0b1..Count down timer (if running) is changing value and cannot be read or written.
- */
-#define RTC_STATUS_DWN_CNTR_INVAL_BIT(x)         (((uint16_t)(((uint16_t)(x)) << RTC_STATUS_DWN_CNTR_INVAL_BIT_SHIFT)) & RTC_STATUS_DWN_CNTR_INVAL_BIT_MASK)
 
 #define RTC_STATUS_CMP_INT_MASK                  (0x20U)
 #define RTC_STATUS_CMP_INT_SHIFT                 (5U)
@@ -418,14 +403,6 @@ typedef struct {
 
 /*! @name ISR - Interrupt Status */
 /*! @{ */
-
-#define RTC_ISR_CNT_DN_TIMEOUT_IS_MASK           (0x2U)
-#define RTC_ISR_CNT_DN_TIMEOUT_IS_SHIFT          (1U)
-/*! CNT_DN_TIMEOUT_IS - Count Down Timer Timeout Interrupt Status
- *  0b0..Interrupt is de-asserted.
- *  0b1..Interrupt is asserted.
- */
-#define RTC_ISR_CNT_DN_TIMEOUT_IS(x)             (((uint16_t)(((uint16_t)(x)) << RTC_ISR_CNT_DN_TIMEOUT_IS_SHIFT)) & RTC_ISR_CNT_DN_TIMEOUT_IS_MASK)
 
 #define RTC_ISR_ALM_IS_MASK                      (0x4U)
 #define RTC_ISR_ALM_IS_SHIFT                     (2U)
@@ -543,14 +520,6 @@ typedef struct {
 /*! @name IER - Interrupt Enable */
 /*! @{ */
 
-#define RTC_IER_CNT_DN_TIMEOUT_IE_MASK           (0x2U)
-#define RTC_IER_CNT_DN_TIMEOUT_IE_SHIFT          (1U)
-/*! CNT_DN_TIMEOUT_IE - Count Down Timer Timeout Interrupt Enable
- *  0b0..Interrupt is disabled.
- *  0b1..Interrupt is enabled.
- */
-#define RTC_IER_CNT_DN_TIMEOUT_IE(x)             (((uint16_t)(((uint16_t)(x)) << RTC_IER_CNT_DN_TIMEOUT_IE_SHIFT)) & RTC_IER_CNT_DN_TIMEOUT_IE_MASK)
-
 #define RTC_IER_ALM_IE_MASK                      (0x4U)
 #define RTC_IER_ALM_IE_SHIFT                     (2U)
 /*! ALM_IE - Alarm Interrupt Enable
@@ -664,15 +633,6 @@ typedef struct {
 #define RTC_IER_IE_512HZ(x)                      (((uint16_t)(((uint16_t)(x)) << RTC_IER_IE_512HZ_SHIFT)) & RTC_IER_IE_512HZ_MASK)
 /*! @} */
 
-/*! @name CNTDWN_TIMER - Minutes Count Down Timer */
-/*! @{ */
-
-#define RTC_CNTDWN_TIMER_COUNT_DOWN_TIMER_MASK   (0xFFU)
-#define RTC_CNTDWN_TIMER_COUNT_DOWN_TIMER_SHIFT  (0U)
-/*! COUNT_DOWN_TIMER - Count Down Timer Value */
-#define RTC_CNTDWN_TIMER_COUNT_DOWN_TIMER(x)     (((uint16_t)(((uint16_t)(x)) << RTC_CNTDWN_TIMER_COUNT_DOWN_TIMER_SHIFT)) & RTC_CNTDWN_TIMER_COUNT_DOWN_TIMER_MASK)
-/*! @} */
-
 /*! @name RTC_TEST2 - Sub Second Counter */
 /*! @{ */
 
@@ -689,90 +649,6 @@ typedef struct {
 #define RTC_ALM_SUBSECONDS_ALM_SUBSECS_SHIFT     (0U)
 /*! ALM_SUBSECS - Alarm Sub Second Counter Value */
 #define RTC_ALM_SUBSECONDS_ALM_SUBSECS(x)        (((uint16_t)(((uint16_t)(x)) << RTC_ALM_SUBSECONDS_ALM_SUBSECS_SHIFT)) & RTC_ALM_SUBSECONDS_ALM_SUBSECS_MASK)
-/*! @} */
-
-/*! @name GP_DATA_REG - General Purpose Data */
-/*! @{ */
-
-#define RTC_GP_DATA_REG_CFG0_MASK                (0x1U)
-#define RTC_GP_DATA_REG_CFG0_SHIFT               (0U)
-/*! CFG0 - CFGn */
-#define RTC_GP_DATA_REG_CFG0(x)                  (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG0_SHIFT)) & RTC_GP_DATA_REG_CFG0_MASK)
-
-#define RTC_GP_DATA_REG_CFG1_MASK                (0x2U)
-#define RTC_GP_DATA_REG_CFG1_SHIFT               (1U)
-/*! CFG1 - CFGn */
-#define RTC_GP_DATA_REG_CFG1(x)                  (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG1_SHIFT)) & RTC_GP_DATA_REG_CFG1_MASK)
-
-#define RTC_GP_DATA_REG_CFG2_MASK                (0x4U)
-#define RTC_GP_DATA_REG_CFG2_SHIFT               (2U)
-/*! CFG2 - CFGn */
-#define RTC_GP_DATA_REG_CFG2(x)                  (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG2_SHIFT)) & RTC_GP_DATA_REG_CFG2_MASK)
-
-#define RTC_GP_DATA_REG_CFG3_MASK                (0x8U)
-#define RTC_GP_DATA_REG_CFG3_SHIFT               (3U)
-/*! CFG3 - CFGn */
-#define RTC_GP_DATA_REG_CFG3(x)                  (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG3_SHIFT)) & RTC_GP_DATA_REG_CFG3_MASK)
-
-#define RTC_GP_DATA_REG_CFG4_MASK                (0x10U)
-#define RTC_GP_DATA_REG_CFG4_SHIFT               (4U)
-/*! CFG4 - CFGn */
-#define RTC_GP_DATA_REG_CFG4(x)                  (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG4_SHIFT)) & RTC_GP_DATA_REG_CFG4_MASK)
-
-#define RTC_GP_DATA_REG_CFG5_MASK                (0x20U)
-#define RTC_GP_DATA_REG_CFG5_SHIFT               (5U)
-/*! CFG5 - CFGn */
-#define RTC_GP_DATA_REG_CFG5(x)                  (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG5_SHIFT)) & RTC_GP_DATA_REG_CFG5_MASK)
-
-#define RTC_GP_DATA_REG_CFG6_MASK                (0x40U)
-#define RTC_GP_DATA_REG_CFG6_SHIFT               (6U)
-/*! CFG6 - CFGn */
-#define RTC_GP_DATA_REG_CFG6(x)                  (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG6_SHIFT)) & RTC_GP_DATA_REG_CFG6_MASK)
-
-#define RTC_GP_DATA_REG_CFG7_MASK                (0x80U)
-#define RTC_GP_DATA_REG_CFG7_SHIFT               (7U)
-/*! CFG7 - CFGn */
-#define RTC_GP_DATA_REG_CFG7(x)                  (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG7_SHIFT)) & RTC_GP_DATA_REG_CFG7_MASK)
-
-#define RTC_GP_DATA_REG_CFG8_MASK                (0x100U)
-#define RTC_GP_DATA_REG_CFG8_SHIFT               (8U)
-/*! CFG8 - CFGn */
-#define RTC_GP_DATA_REG_CFG8(x)                  (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG8_SHIFT)) & RTC_GP_DATA_REG_CFG8_MASK)
-
-#define RTC_GP_DATA_REG_CFG9_MASK                (0x200U)
-#define RTC_GP_DATA_REG_CFG9_SHIFT               (9U)
-/*! CFG9 - CFGn */
-#define RTC_GP_DATA_REG_CFG9(x)                  (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG9_SHIFT)) & RTC_GP_DATA_REG_CFG9_MASK)
-
-#define RTC_GP_DATA_REG_CFG10_MASK               (0x400U)
-#define RTC_GP_DATA_REG_CFG10_SHIFT              (10U)
-/*! CFG10 - CFGn */
-#define RTC_GP_DATA_REG_CFG10(x)                 (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG10_SHIFT)) & RTC_GP_DATA_REG_CFG10_MASK)
-
-#define RTC_GP_DATA_REG_CFG11_MASK               (0x800U)
-#define RTC_GP_DATA_REG_CFG11_SHIFT              (11U)
-/*! CFG11 - CFGn */
-#define RTC_GP_DATA_REG_CFG11(x)                 (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG11_SHIFT)) & RTC_GP_DATA_REG_CFG11_MASK)
-
-#define RTC_GP_DATA_REG_CFG12_MASK               (0x1000U)
-#define RTC_GP_DATA_REG_CFG12_SHIFT              (12U)
-/*! CFG12 - CFGn */
-#define RTC_GP_DATA_REG_CFG12(x)                 (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG12_SHIFT)) & RTC_GP_DATA_REG_CFG12_MASK)
-
-#define RTC_GP_DATA_REG_CFG13_MASK               (0x2000U)
-#define RTC_GP_DATA_REG_CFG13_SHIFT              (13U)
-/*! CFG13 - CFGn */
-#define RTC_GP_DATA_REG_CFG13(x)                 (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG13_SHIFT)) & RTC_GP_DATA_REG_CFG13_MASK)
-
-#define RTC_GP_DATA_REG_CFG14_MASK               (0x4000U)
-#define RTC_GP_DATA_REG_CFG14_SHIFT              (14U)
-/*! CFG14 - CFGn */
-#define RTC_GP_DATA_REG_CFG14(x)                 (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG14_SHIFT)) & RTC_GP_DATA_REG_CFG14_MASK)
-
-#define RTC_GP_DATA_REG_CFG15_MASK               (0x8000U)
-#define RTC_GP_DATA_REG_CFG15_SHIFT              (15U)
-/*! CFG15 - CFGn */
-#define RTC_GP_DATA_REG_CFG15(x)                 (((uint16_t)(((uint16_t)(x)) << RTC_GP_DATA_REG_CFG15_SHIFT)) & RTC_GP_DATA_REG_CFG15_MASK)
 /*! @} */
 
 /*! @name DST_HOUR - Daylight Saving Hour */

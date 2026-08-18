@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for PDM
@@ -61,13 +63,13 @@
 #if !defined(PERI_PDM_H_)
 #define PERI_PDM_H_                              /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -135,13 +137,13 @@ typedef struct {
   __I  uint32_t VERID;                             /**< Version ID, offset: 0x84 */
   __I  uint32_t PARAM;                             /**< Parameter, offset: 0x88 */
        uint8_t RESERVED_5[4];
-  __IO uint32_t VAD0_CTRL_1;                       /**< Voice Activity Detector 0 Control, offset: 0x90, available only on: WAKE_MICFIL/WAKE__MICFIL (missing on AUDIO_MICFIL/AUDIO__MICFIL) */
-  __IO uint32_t VAD0_CTRL_2;                       /**< Voice Activity Detector 0 Control, offset: 0x94, available only on: WAKE_MICFIL/WAKE__MICFIL (missing on AUDIO_MICFIL/AUDIO__MICFIL) */
-  __IO uint32_t VAD0_STAT;                         /**< Voice Activity Detector 0 Status, offset: 0x98, available only on: WAKE_MICFIL/WAKE__MICFIL (missing on AUDIO_MICFIL/AUDIO__MICFIL) */
-  __IO uint32_t VAD0_SCONFIG;                      /**< Voice Activity Detector 0 Signal Configuration, offset: 0x9C, available only on: WAKE_MICFIL/WAKE__MICFIL (missing on AUDIO_MICFIL/AUDIO__MICFIL) */
-  __IO uint32_t VAD0_NCONFIG;                      /**< Voice Activity Detector 0 Noise Configuration, offset: 0xA0, available only on: WAKE_MICFIL/WAKE__MICFIL (missing on AUDIO_MICFIL/AUDIO__MICFIL) */
-  __I  uint32_t VAD0_NDATA;                        /**< Voice Activity Detector 0 Noise Data, offset: 0xA4, available only on: WAKE_MICFIL/WAKE__MICFIL (missing on AUDIO_MICFIL/AUDIO__MICFIL) */
-  __IO uint32_t VAD0_ZCD;                          /**< Voice Activity Detector 0 Zero-Crossing Detector, offset: 0xA8, available only on: WAKE_MICFIL/WAKE__MICFIL (missing on AUDIO_MICFIL/AUDIO__MICFIL) */
+  __IO uint32_t VAD0_CTRL_1;                       /**< Voice Activity Detector 0 Control, offset: 0x90, available only on: WAKE__MICFIL (missing on AUDIO__MICFIL) */
+  __IO uint32_t VAD0_CTRL_2;                       /**< Voice Activity Detector 0 Control, offset: 0x94, available only on: WAKE__MICFIL (missing on AUDIO__MICFIL) */
+  __IO uint32_t VAD0_STAT;                         /**< Voice Activity Detector 0 Status, offset: 0x98, available only on: WAKE__MICFIL (missing on AUDIO__MICFIL) */
+  __IO uint32_t VAD0_SCONFIG;                      /**< Voice Activity Detector 0 Signal Configuration, offset: 0x9C, available only on: WAKE__MICFIL (missing on AUDIO__MICFIL) */
+  __IO uint32_t VAD0_NCONFIG;                      /**< Voice Activity Detector 0 Noise Configuration, offset: 0xA0, available only on: WAKE__MICFIL (missing on AUDIO__MICFIL) */
+  __I  uint32_t VAD0_NDATA;                        /**< Voice Activity Detector 0 Noise Data, offset: 0xA4, available only on: WAKE__MICFIL (missing on AUDIO__MICFIL) */
+  __IO uint32_t VAD0_ZCD;                          /**< Voice Activity Detector 0 Zero-Crossing Detector, offset: 0xA8, available only on: WAKE__MICFIL (missing on AUDIO__MICFIL) */
 } PDM_Type;
 
 /* ----------------------------------------------------------------------------
@@ -536,8 +538,8 @@ typedef struct {
 #define PDM_DC_CTRL_DCCONFIG0_MASK               (0x3U)
 #define PDM_DC_CTRL_DCCONFIG0_SHIFT              (0U)
 /*! DCCONFIG0 - Channel 0 DC Remover Configuration
- *  0b00..20 Hz (PDM_CLK = 3.072 MHz)
- *  0b01..13.3 Hz (PDM_CLK = 3.072 MHz)
+ *  0b00..13.3 Hz (PDM_CLK = 3.072 MHz)
+ *  0b01..20 Hz (PDM_CLK = 3.072 MHz)
  *  0b10..40 Hz (PDM_CLK = 3.072 MHz)
  *  0b11..DC remover is bypassed
  */
@@ -546,8 +548,8 @@ typedef struct {
 #define PDM_DC_CTRL_DCCONFIG1_MASK               (0xCU)
 #define PDM_DC_CTRL_DCCONFIG1_SHIFT              (2U)
 /*! DCCONFIG1 - Channel 1 DC Remover Configuration
- *  0b00..20 Hz (PDM_CLK = 3.072 MHz)
- *  0b01..13.3 Hz (PDM_CLK = 3.072 MHz)
+ *  0b00..13.3 Hz (PDM_CLK = 3.072 MHz)
+ *  0b01..20 Hz (PDM_CLK = 3.072 MHz)
  *  0b10..40 Hz (PDM_CLK = 3.072 MHz)
  *  0b11..DC remover is bypassed
  */
@@ -556,8 +558,8 @@ typedef struct {
 #define PDM_DC_CTRL_DCCONFIG2_MASK               (0x30U)
 #define PDM_DC_CTRL_DCCONFIG2_SHIFT              (4U)
 /*! DCCONFIG2 - Channel 2 DC Remover Configuration
- *  0b00..20 Hz (PDM_CLK = 3.072 MHz)
- *  0b01..13.3 Hz (PDM_CLK = 3.072 MHz)
+ *  0b00..13.3 Hz (PDM_CLK = 3.072 MHz)
+ *  0b01..20 Hz (PDM_CLK = 3.072 MHz)
  *  0b10..40 Hz (PDM_CLK = 3.072 MHz)
  *  0b11..DC remover is bypassed
  */
@@ -566,8 +568,8 @@ typedef struct {
 #define PDM_DC_CTRL_DCCONFIG3_MASK               (0xC0U)
 #define PDM_DC_CTRL_DCCONFIG3_SHIFT              (6U)
 /*! DCCONFIG3 - Channel 3 DC Remover Configuration
- *  0b00..20 Hz (PDM_CLK = 3.072 MHz)
- *  0b01..13.3 Hz (PDM_CLK = 3.072 MHz)
+ *  0b00..13.3 Hz (PDM_CLK = 3.072 MHz)
+ *  0b01..20 Hz (PDM_CLK = 3.072 MHz)
  *  0b10..40 Hz (PDM_CLK = 3.072 MHz)
  *  0b11..DC remover is bypassed
  */
@@ -576,8 +578,8 @@ typedef struct {
 #define PDM_DC_CTRL_DCCONFIG4_MASK               (0x300U)
 #define PDM_DC_CTRL_DCCONFIG4_SHIFT              (8U)
 /*! DCCONFIG4 - Channel 4 DC Remover Configuration
- *  0b00..20 Hz (PDM_CLK = 3.072 MHz)
- *  0b01..13.3 Hz (PDM_CLK = 3.072 MHz)
+ *  0b00..13.3 Hz (PDM_CLK = 3.072 MHz)
+ *  0b01..20 Hz (PDM_CLK = 3.072 MHz)
  *  0b10..40 Hz (PDM_CLK = 3.072 MHz)
  *  0b11..DC remover is bypassed
  */
@@ -586,8 +588,8 @@ typedef struct {
 #define PDM_DC_CTRL_DCCONFIG5_MASK               (0xC00U)
 #define PDM_DC_CTRL_DCCONFIG5_SHIFT              (10U)
 /*! DCCONFIG5 - Channel 5 DC Remover Configuration
- *  0b00..20 Hz (PDM_CLK = 3.072 MHz)
- *  0b01..13.3 Hz (PDM_CLK = 3.072 MHz)
+ *  0b00..13.3 Hz (PDM_CLK = 3.072 MHz)
+ *  0b01..20 Hz (PDM_CLK = 3.072 MHz)
  *  0b10..40 Hz (PDM_CLK = 3.072 MHz)
  *  0b11..DC remover is bypassed
  */
@@ -600,9 +602,9 @@ typedef struct {
 #define PDM_DC_OUT_CTRL_DCCONFIG0_MASK           (0x3U)
 #define PDM_DC_OUT_CTRL_DCCONFIG0_SHIFT          (0U)
 /*! DCCONFIG0 - Channel 0 DC Remover Configuration
- *  0b00..20 Hz (FS = 48 kHz)
- *  0b01..13.3 Hz (FS = 48 kHz)
- *  0b10..40 Hz (FS = 48 kHz)
+ *  0b00..Cut-off frequency: 13.3 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 159 mFS
+ *  0b01..Cut-off frequency: 20 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 318 mFS
+ *  0b10..Cut-off frequency: 40 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 477 mFS
  *  0b11..DC remover is bypassed
  */
 #define PDM_DC_OUT_CTRL_DCCONFIG0(x)             (((uint32_t)(((uint32_t)(x)) << PDM_DC_OUT_CTRL_DCCONFIG0_SHIFT)) & PDM_DC_OUT_CTRL_DCCONFIG0_MASK)
@@ -610,9 +612,9 @@ typedef struct {
 #define PDM_DC_OUT_CTRL_DCCONFIG1_MASK           (0xCU)
 #define PDM_DC_OUT_CTRL_DCCONFIG1_SHIFT          (2U)
 /*! DCCONFIG1 - Channel 1 DC Remover Configuration
- *  0b00..20 Hz (FS = 48 kHz)
- *  0b01..13.3 Hz (FS = 48 kHz)
- *  0b10..40 Hz (FS = 48 kHz)
+ *  0b00..Cut-off frequency: 13.3 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 159 mFS
+ *  0b01..Cut-off frequency: 20 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 318 mFS
+ *  0b10..Cut-off frequency: 40 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 477 mFS
  *  0b11..DC remover is bypassed
  */
 #define PDM_DC_OUT_CTRL_DCCONFIG1(x)             (((uint32_t)(((uint32_t)(x)) << PDM_DC_OUT_CTRL_DCCONFIG1_SHIFT)) & PDM_DC_OUT_CTRL_DCCONFIG1_MASK)
@@ -620,9 +622,9 @@ typedef struct {
 #define PDM_DC_OUT_CTRL_DCCONFIG2_MASK           (0x30U)
 #define PDM_DC_OUT_CTRL_DCCONFIG2_SHIFT          (4U)
 /*! DCCONFIG2 - Channel 2 DC Remover Configuration
- *  0b00..20 Hz (FS = 48 kHz)
- *  0b01..13.3 Hz (FS = 48 kHz)
- *  0b10..40 Hz (FS = 48 kHz)
+ *  0b00..Cut-off frequency: 13.3 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 159 mFS
+ *  0b01..Cut-off frequency: 20 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 318 mFS
+ *  0b10..Cut-off frequency: 40 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 477 mFS
  *  0b11..DC remover is bypassed
  */
 #define PDM_DC_OUT_CTRL_DCCONFIG2(x)             (((uint32_t)(((uint32_t)(x)) << PDM_DC_OUT_CTRL_DCCONFIG2_SHIFT)) & PDM_DC_OUT_CTRL_DCCONFIG2_MASK)
@@ -630,9 +632,9 @@ typedef struct {
 #define PDM_DC_OUT_CTRL_DCCONFIG3_MASK           (0xC0U)
 #define PDM_DC_OUT_CTRL_DCCONFIG3_SHIFT          (6U)
 /*! DCCONFIG3 - Channel 3 DC Remover Configuration
- *  0b00..20 Hz (FS = 48 kHz)
- *  0b01..13.3 Hz (FS = 48 kHz)
- *  0b10..40 Hz (FS = 48 kHz)
+ *  0b00..Cut-off frequency: 13.3 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 159 mFS
+ *  0b01..Cut-off frequency: 20 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 318 mFS
+ *  0b10..Cut-off frequency: 40 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 477 mFS
  *  0b11..DC remover is bypassed
  */
 #define PDM_DC_OUT_CTRL_DCCONFIG3(x)             (((uint32_t)(((uint32_t)(x)) << PDM_DC_OUT_CTRL_DCCONFIG3_SHIFT)) & PDM_DC_OUT_CTRL_DCCONFIG3_MASK)
@@ -640,9 +642,9 @@ typedef struct {
 #define PDM_DC_OUT_CTRL_DCCONFIG4_MASK           (0x300U)
 #define PDM_DC_OUT_CTRL_DCCONFIG4_SHIFT          (8U)
 /*! DCCONFIG4 - Channel 4 DC Remover Configuration
- *  0b00..20 Hz (FS = 48 kHz)
- *  0b01..13.3 Hz (FS = 48 kHz)
- *  0b10..40 Hz (FS = 48 kHz)
+ *  0b00..Cut-off frequency: 13.3 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 159 mFS
+ *  0b01..Cut-off frequency: 20 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 318 mFS
+ *  0b10..Cut-off frequency: 40 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 477 mFS
  *  0b11..DC remover is bypassed
  */
 #define PDM_DC_OUT_CTRL_DCCONFIG4(x)             (((uint32_t)(((uint32_t)(x)) << PDM_DC_OUT_CTRL_DCCONFIG4_SHIFT)) & PDM_DC_OUT_CTRL_DCCONFIG4_MASK)
@@ -650,9 +652,9 @@ typedef struct {
 #define PDM_DC_OUT_CTRL_DCCONFIG5_MASK           (0xC00U)
 #define PDM_DC_OUT_CTRL_DCCONFIG5_SHIFT          (10U)
 /*! DCCONFIG5 - Channel 5 DC Remover Configuration
- *  0b00..20 Hz (FS = 48 kHz)
- *  0b01..13.3 Hz (FS = 48 kHz)
- *  0b10..40 Hz (FS = 48 kHz)
+ *  0b00..Cut-off frequency: 13.3 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 159 mFS
+ *  0b01..Cut-off frequency: 20 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 318 mFS
+ *  0b10..Cut-off frequency: 40 Hz (PDM_CLK = 3.072 MHz), DC offset threshold: 477 mFS
  *  0b11..DC remover is bypassed
  */
 #define PDM_DC_OUT_CTRL_DCCONFIG5(x)             (((uint32_t)(((uint32_t)(x)) << PDM_DC_OUT_CTRL_DCCONFIG5_SHIFT)) & PDM_DC_OUT_CTRL_DCCONFIG5_MASK)

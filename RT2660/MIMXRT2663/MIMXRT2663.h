@@ -1,12 +1,15 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Compilers:
 **                          GNU C Compiler
@@ -14,9 +17,9 @@
 **                          Keil ARM C/C++ Compiler
 **                          MCUXpresso Compiler
 **
-**     Reference manual:    iMXRT2660RM Rev.2 DraftA, 05/2024
+**     Reference manual:    iMXRT2660RM Rev.1 DraftN, 08/2026
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT2663

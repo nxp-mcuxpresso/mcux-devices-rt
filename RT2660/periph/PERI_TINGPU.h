@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for TINGPU
@@ -61,13 +63,13 @@
 #if !defined(PERI_TINGPU_H_)
 #define PERI_TINGPU_H_                           /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -199,22 +201,6 @@ typedef struct {
   __IO uint32_t S2_CSC1;                           /**< S2 Color Space Conversion 1, offset: 0x680 */
   __IO uint32_t S2_CSC2;                           /**< S2 Color Space Conversion 2, offset: 0x684 */
   __IO uint32_t AXI_CACHE_CTRL;                    /**< AXI Cache Control, offset: 0x688 */
-       uint8_t RESERVED_2[116];
-  __IO uint32_t VG_CTRL;                           /**< Vector Graphic Control, offset: 0x700 */
-  __IO uint32_t VG_RENDER_CTRL;                    /**< Vector Graphic Render Control, offset: 0x704 */
-  __IO uint32_t VG_INTEN;                          /**< Vector Graphic Interrupt Enable, offset: 0x708 */
-  __IO uint32_t VG_INTR;                           /**< Vector Graphic Interrupt, offset: 0x70C */
-  __IO uint32_t VG_RENDER_ULC;                     /**< Vector Graphic Render Upper Left Coordinates, offset: 0x710 */
-  __IO uint32_t VG_RENDER_LRC;                     /**< Vector Graphic Render Lower Right Coordinates, offset: 0x714 */
-  __IO uint32_t VG_SPAN_TABLE;                     /**< Vector Graphic Span Table, offset: 0x718 */
-  __IO uint32_t VG_COLOR_TABLE;                    /**< Vector Graphic Color Table, offset: 0x71C */
-  __IO uint32_t VG_PIXBUF_ADDR;                    /**< Vector Graphic Pixel Buffer Address, offset: 0x720 */
-  __IO uint32_t VG_PIXBUF_STRIDE;                  /**< Vector Graphic Pixel Buffer Stride, offset: 0x724 */
-  __IO uint32_t VG_PIXBUF_NUM;                     /**< Vector Graphic Pixel Buffer Number, offset: 0x728 */
-  __IO uint32_t VG_SCANLINE_DONE;                  /**< Vector Graphic Scanline Done, offset: 0x72C */
-  __IO uint32_t HOST2VG_EVENT;                     /**< Host to VG Event, offset: 0x730 */
-  __IO uint32_t VG2HOST_EVENT;                     /**< VG to Host Event, offset: 0x734 */
-  __IO uint32_t VG_EDGE_TABLE;                     /**< Vector Graphic Edge Table, offset: 0x738 */
 } TINGPU_Type;
 
 /* ----------------------------------------------------------------------------
@@ -306,14 +292,6 @@ typedef struct {
  *  0b1..Interrupt is enabled.
  */
 #define TINGPU_INTEN_CCDMA_CMD_ERR_EN(x)         (((uint32_t)(((uint32_t)(x)) << TINGPU_INTEN_CCDMA_CMD_ERR_EN_SHIFT)) & TINGPU_INTEN_CCDMA_CMD_ERR_EN_MASK)
-
-#define TINGPU_INTEN_VG_EVENT_EN_MASK            (0x8U)
-#define TINGPU_INTEN_VG_EVENT_EN_SHIFT           (3U)
-/*! VG_EVENT_EN - VG Event Interrupt Enable
- *  0b0..Interrupt is disabled.
- *  0b1..Interrupt is enabled.
- */
-#define TINGPU_INTEN_VG_EVENT_EN(x)              (((uint32_t)(((uint32_t)(x)) << TINGPU_INTEN_VG_EVENT_EN_SHIFT)) & TINGPU_INTEN_VG_EVENT_EN_MASK)
 
 #define TINGPU_INTEN_AXI_ERR_EN_MASK             (0x10U)
 #define TINGPU_INTEN_AXI_ERR_EN_SHIFT            (4U)
@@ -494,14 +472,6 @@ typedef struct {
  */
 #define TINGPU_LPR_AXI_CG_DIS(x)                 (((uint32_t)(((uint32_t)(x)) << TINGPU_LPR_AXI_CG_DIS_SHIFT)) & TINGPU_LPR_AXI_CG_DIS_MASK)
 
-#define TINGPU_LPR_VG_CG_DIS_MASK                (0x8000U)
-#define TINGPU_LPR_VG_CG_DIS_SHIFT               (15U)
-/*! VG_CG_DIS - VG Clock Gating Disable
- *  0b0..The clock gating is controlled by CLK_GATE_EN.
- *  0b1..The clock gating is disabled, which means clock is always on.
- */
-#define TINGPU_LPR_VG_CG_DIS(x)                  (((uint32_t)(((uint32_t)(x)) << TINGPU_LPR_VG_CG_DIS_SHIFT)) & TINGPU_LPR_VG_CG_DIS_MASK)
-
 #define TINGPU_LPR_IBCRAM_CG_DIS_MASK            (0x10000U)
 #define TINGPU_LPR_IBCRAM_CG_DIS_SHIFT           (16U)
 /*! IBCRAM_CG_DIS - IBCRAM Clock Gating Disable
@@ -541,62 +511,6 @@ typedef struct {
  *  0b1..The clock gating is disabled, which means clock is always on.
  */
 #define TINGPU_LPR_DSTRAM_CG_DIS(x)              (((uint32_t)(((uint32_t)(x)) << TINGPU_LPR_DSTRAM_CG_DIS_SHIFT)) & TINGPU_LPR_DSTRAM_CG_DIS_MASK)
-
-#define TINGPU_LPR_VGCBRAM_CG_DIS_MASK           (0x200000U)
-#define TINGPU_LPR_VGCBRAM_CG_DIS_SHIFT          (21U)
-/*! VGCBRAM_CG_DIS - VGCBRAM Clock Gating Disable
- *  0b0..The clock gating is controlled by CLK_GATE_EN.
- *  0b1..The clock gating is disabled, which means clock is always on.
- */
-#define TINGPU_LPR_VGCBRAM_CG_DIS(x)             (((uint32_t)(((uint32_t)(x)) << TINGPU_LPR_VGCBRAM_CG_DIS_SHIFT)) & TINGPU_LPR_VGCBRAM_CG_DIS_MASK)
-
-#define TINGPU_LPR_VGMBRAM_CG_DIS_MASK           (0x400000U)
-#define TINGPU_LPR_VGMBRAM_CG_DIS_SHIFT          (22U)
-/*! VGMBRAM_CG_DIS - VGMBRAM Clock Gating Disable
- *  0b0..The clock gating is controlled by CLK_GATE_EN.
- *  0b1..The clock gating is disabled, which means clock is always on.
- */
-#define TINGPU_LPR_VGMBRAM_CG_DIS(x)             (((uint32_t)(((uint32_t)(x)) << TINGPU_LPR_VGMBRAM_CG_DIS_SHIFT)) & TINGPU_LPR_VGMBRAM_CG_DIS_MASK)
-
-#define TINGPU_LPR_VGRAM0_CG_DIS_MASK            (0x800000U)
-#define TINGPU_LPR_VGRAM0_CG_DIS_SHIFT           (23U)
-/*! VGRAM0_CG_DIS - VGRAM0 Clock Gating Disable
- *  0b0..The clock gating is controlled by CLK_GATE_EN.
- *  0b1..The clock gating is disabled, which means clock is always on.
- */
-#define TINGPU_LPR_VGRAM0_CG_DIS(x)              (((uint32_t)(((uint32_t)(x)) << TINGPU_LPR_VGRAM0_CG_DIS_SHIFT)) & TINGPU_LPR_VGRAM0_CG_DIS_MASK)
-
-#define TINGPU_LPR_VGRAM1_CG_DIS_MASK            (0x1000000U)
-#define TINGPU_LPR_VGRAM1_CG_DIS_SHIFT           (24U)
-/*! VGRAM1_CG_DIS - VGRAM1 Clock Gating Disable
- *  0b0..The clock gating is controlled by CLK_GATE_EN.
- *  0b1..The clock gating is disabled, which means clock is always on.
- */
-#define TINGPU_LPR_VGRAM1_CG_DIS(x)              (((uint32_t)(((uint32_t)(x)) << TINGPU_LPR_VGRAM1_CG_DIS_SHIFT)) & TINGPU_LPR_VGRAM1_CG_DIS_MASK)
-
-#define TINGPU_LPR_WAITING_MASK                  (0x20000000U)
-#define TINGPU_LPR_WAITING_SHIFT                 (29U)
-/*! WAITING - VG Core Waiting
- *  0b0..Not in waiting state.
- *  0b1..In waiting state.
- */
-#define TINGPU_LPR_WAITING(x)                    (((uint32_t)(((uint32_t)(x)) << TINGPU_LPR_WAITING_SHIFT)) & TINGPU_LPR_WAITING_MASK)
-
-#define TINGPU_LPR_HALTED_MASK                   (0x40000000U)
-#define TINGPU_LPR_HALTED_SHIFT                  (30U)
-/*! HALTED - VG Core Halted
- *  0b0..Not in halted state.
- *  0b1..In halted state.
- */
-#define TINGPU_LPR_HALTED(x)                     (((uint32_t)(((uint32_t)(x)) << TINGPU_LPR_HALTED_SHIFT)) & TINGPU_LPR_HALTED_MASK)
-
-#define TINGPU_LPR_STOPPED_MASK                  (0x80000000U)
-#define TINGPU_LPR_STOPPED_SHIFT                 (31U)
-/*! STOPPED - VG Core Stopped
- *  0b0..Not in stopped state.
- *  0b1..In stopped state.
- */
-#define TINGPU_LPR_STOPPED(x)                    (((uint32_t)(((uint32_t)(x)) << TINGPU_LPR_STOPPED_SHIFT)) & TINGPU_LPR_STOPPED_MASK)
 /*! @} */
 
 /*! @name INTR - Interrupt */
@@ -625,14 +539,6 @@ typedef struct {
  *  0b1..Error occurs
  */
 #define TINGPU_INTR_CCDMA_CMD_ERR(x)             (((uint32_t)(((uint32_t)(x)) << TINGPU_INTR_CCDMA_CMD_ERR_SHIFT)) & TINGPU_INTR_CCDMA_CMD_ERR_MASK)
-
-#define TINGPU_INTR_VG_EVENT_MASK                (0x8U)
-#define TINGPU_INTR_VG_EVENT_SHIFT               (3U)
-/*! VG_EVENT - VG Event Interrupt
- *  0b0..No event
- *  0b1..Event occurs
- */
-#define TINGPU_INTR_VG_EVENT(x)                  (((uint32_t)(((uint32_t)(x)) << TINGPU_INTR_VG_EVENT_SHIFT)) & TINGPU_INTR_VG_EVENT_MASK)
 
 #define TINGPU_INTR_AXI_ERR_MASK                 (0x10U)
 #define TINGPU_INTR_AXI_ERR_SHIFT                (4U)
@@ -751,7 +657,7 @@ typedef struct {
  */
 #define TINGPU_STS0_DST_WRITE_ERR(x)             (((uint32_t)(((uint32_t)(x)) << TINGPU_STS0_DST_WRITE_ERR_SHIFT)) & TINGPU_STS0_DST_WRITE_ERR_MASK)
 
-#define TINGPU_STS0_WRITE_PENDING_MASK           (0x3F0000U)
+#define TINGPU_STS0_WRITE_PENDING_MASK           (0x1F0000U)
 #define TINGPU_STS0_WRITE_PENDING_SHIFT          (16U)
 /*! WRITE_PENDING - Write Pending */
 #define TINGPU_STS0_WRITE_PENDING(x)             (((uint32_t)(((uint32_t)(x)) << TINGPU_STS0_WRITE_PENDING_SHIFT)) & TINGPU_STS0_WRITE_PENDING_MASK)
@@ -1880,301 +1786,6 @@ typedef struct {
 #define TINGPU_AXI_CACHE_CTRL_CCDMA_AWCACHE_SHIFT (20U)
 /*! CCDMA_AWCACHE - CCDMA Awcache */
 #define TINGPU_AXI_CACHE_CTRL_CCDMA_AWCACHE(x)   (((uint32_t)(((uint32_t)(x)) << TINGPU_AXI_CACHE_CTRL_CCDMA_AWCACHE_SHIFT)) & TINGPU_AXI_CACHE_CTRL_CCDMA_AWCACHE_MASK)
-
-#define TINGPU_AXI_CACHE_CTRL_VG_AWCACHE_MASK    (0xF000000U)
-#define TINGPU_AXI_CACHE_CTRL_VG_AWCACHE_SHIFT   (24U)
-/*! VG_AWCACHE - VG Awcache */
-#define TINGPU_AXI_CACHE_CTRL_VG_AWCACHE(x)      (((uint32_t)(((uint32_t)(x)) << TINGPU_AXI_CACHE_CTRL_VG_AWCACHE_SHIFT)) & TINGPU_AXI_CACHE_CTRL_VG_AWCACHE_MASK)
-
-#define TINGPU_AXI_CACHE_CTRL_VG_ARCACHE_MASK    (0xF0000000U)
-#define TINGPU_AXI_CACHE_CTRL_VG_ARCACHE_SHIFT   (28U)
-/*! VG_ARCACHE - VG Arcache */
-#define TINGPU_AXI_CACHE_CTRL_VG_ARCACHE(x)      (((uint32_t)(((uint32_t)(x)) << TINGPU_AXI_CACHE_CTRL_VG_ARCACHE_SHIFT)) & TINGPU_AXI_CACHE_CTRL_VG_ARCACHE_MASK)
-/*! @} */
-
-/*! @name VG_CTRL - Vector Graphic Control */
-/*! @{ */
-
-#define TINGPU_VG_CTRL_EN_MASK                   (0x1U)
-#define TINGPU_VG_CTRL_EN_SHIFT                  (0U)
-/*! EN - Enable Vector Graphic channel
- *  0b0..Disable
- *  0b1..Enable
- */
-#define TINGPU_VG_CTRL_EN(x)                     (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_CTRL_EN_SHIFT)) & TINGPU_VG_CTRL_EN_MASK)
-
-#define TINGPU_VG_CTRL_DRAW_IMAGE_MODE_MASK      (0x6U)
-#define TINGPU_VG_CTRL_DRAW_IMAGE_MODE_SHIFT     (1U)
-/*! DRAW_IMAGE_MODE - Draw Image Mode
- *  0b00..Normal mode
- *  0b01..Multiply mode
- *  0b10..Stencil mode
- *  0b11..reserved
- */
-#define TINGPU_VG_CTRL_DRAW_IMAGE_MODE(x)        (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_CTRL_DRAW_IMAGE_MODE_SHIFT)) & TINGPU_VG_CTRL_DRAW_IMAGE_MODE_MASK)
-
-#define TINGPU_VG_CTRL_CORE_RST_B_MASK           (0x10U)
-#define TINGPU_VG_CTRL_CORE_RST_B_SHIFT          (4U)
-/*! CORE_RST_B - VG Core Reset
- *  0b0..VG core is in reset state.
- *  0b1..VG core is out of reset.
- */
-#define TINGPU_VG_CTRL_CORE_RST_B(x)             (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_CTRL_CORE_RST_B_SHIFT)) & TINGPU_VG_CTRL_CORE_RST_B_MASK)
-/*! @} */
-
-/*! @name VG_RENDER_CTRL - Vector Graphic Render Control */
-/*! @{ */
-
-#define TINGPU_VG_RENDER_CTRL_RUN_MASK           (0x1U)
-#define TINGPU_VG_RENDER_CTRL_RUN_SHIFT          (0U)
-/*! RUN - Run
- *  0b0..Render operation is not started
- *  0b1..Render operation is started
- */
-#define TINGPU_VG_RENDER_CTRL_RUN(x)             (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_RENDER_CTRL_RUN_SHIFT)) & TINGPU_VG_RENDER_CTRL_RUN_MASK)
-
-#define TINGPU_VG_RENDER_CTRL_PD_FF_MODE_MASK    (0x30U)
-#define TINGPU_VG_RENDER_CTRL_PD_FF_MODE_SHIFT   (4U)
-/*! PD_FF_MODE - Porter-Duff Front Factor Mode
- *  0b00..using 1.
- *  0b01..using 0.
- *  0b10..using straight alpha.
- *  0b11..using inverse alpha.
- */
-#define TINGPU_VG_RENDER_CTRL_PD_FF_MODE(x)      (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_RENDER_CTRL_PD_FF_MODE_SHIFT)) & TINGPU_VG_RENDER_CTRL_PD_FF_MODE_MASK)
-
-#define TINGPU_VG_RENDER_CTRL_PD_BF_MODE_MASK    (0xC0U)
-#define TINGPU_VG_RENDER_CTRL_PD_BF_MODE_SHIFT   (6U)
-/*! PD_BF_MODE - Porter-Duff Back Factor Mode
- *  0b00..using 1.
- *  0b01..using 0.
- *  0b10..using straight alpha.
- *  0b11..using inverse alpha.
- */
-#define TINGPU_VG_RENDER_CTRL_PD_BF_MODE(x)      (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_RENDER_CTRL_PD_BF_MODE_SHIFT)) & TINGPU_VG_RENDER_CTRL_PD_BF_MODE_MASK)
-
-#define TINGPU_VG_RENDER_CTRL_RENDER_QUAL_MASK   (0x1F00U)
-#define TINGPU_VG_RENDER_CTRL_RENDER_QUAL_SHIFT  (8U)
-/*! RENDER_QUAL - Render Quality
- *  0b00000..no antialiasing using
- *  0b00100..CSAA equivalent to MSAA of 4
- *  0b01000..CSAA equivalent to MSAA of 8
- *  0b10000..CSAA equivalent to MSAA of 16
- */
-#define TINGPU_VG_RENDER_CTRL_RENDER_QUAL(x)     (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_RENDER_CTRL_RENDER_QUAL_SHIFT)) & TINGPU_VG_RENDER_CTRL_RENDER_QUAL_MASK)
-/*! @} */
-
-/*! @name VG_INTEN - Vector Graphic Interrupt Enable */
-/*! @{ */
-
-#define TINGPU_VG_INTEN_SP_LAST_LINE_DONE_EN_MASK (0x1U)
-#define TINGPU_VG_INTEN_SP_LAST_LINE_DONE_EN_SHIFT (0U)
-/*! SP_LAST_LINE_DONE_EN - Span Table Last Line Done Interrupt Enable
- *  0b0..Disable
- *  0b1..Enable
- */
-#define TINGPU_VG_INTEN_SP_LAST_LINE_DONE_EN(x)  (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_INTEN_SP_LAST_LINE_DONE_EN_SHIFT)) & TINGPU_VG_INTEN_SP_LAST_LINE_DONE_EN_MASK)
-
-#define TINGPU_VG_INTEN_SCANLINE_DONE_EN_MASK    (0x2U)
-#define TINGPU_VG_INTEN_SCANLINE_DONE_EN_SHIFT   (1U)
-/*! SCANLINE_DONE_EN - VGDevice Scanline Done Interrupt Enable
- *  0b0..Disable
- *  0b1..Enable
- */
-#define TINGPU_VG_INTEN_SCANLINE_DONE_EN(x)      (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_INTEN_SCANLINE_DONE_EN_SHIFT)) & TINGPU_VG_INTEN_SCANLINE_DONE_EN_MASK)
-
-#define TINGPU_VG_INTEN_CCDMA_EVENT_EN_MASK      (0x4U)
-#define TINGPU_VG_INTEN_CCDMA_EVENT_EN_SHIFT     (2U)
-/*! CCDMA_EVENT_EN - CCDMA Event Interrupt Enable
- *  0b0..Disable
- *  0b1..Enable
- */
-#define TINGPU_VG_INTEN_CCDMA_EVENT_EN(x)        (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_INTEN_CCDMA_EVENT_EN_SHIFT)) & TINGPU_VG_INTEN_CCDMA_EVENT_EN_MASK)
-
-#define TINGPU_VG_INTEN_IMP_OP_START_EN_MASK     (0x8U)
-#define TINGPU_VG_INTEN_IMP_OP_START_EN_SHIFT    (3U)
-/*! IMP_OP_START_EN - Image Pipeline Operation Start Interrupt Enable
- *  0b0..Disable
- *  0b1..Enable
- */
-#define TINGPU_VG_INTEN_IMP_OP_START_EN(x)       (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_INTEN_IMP_OP_START_EN_SHIFT)) & TINGPU_VG_INTEN_IMP_OP_START_EN_MASK)
-
-#define TINGPU_VG_INTEN_IMP_OP_DONE_EN_MASK      (0x10U)
-#define TINGPU_VG_INTEN_IMP_OP_DONE_EN_SHIFT     (4U)
-/*! IMP_OP_DONE_EN - Image Pipeline Operation Done Interrupt Enable
- *  0b0..Disable
- *  0b1..Enabled
- */
-#define TINGPU_VG_INTEN_IMP_OP_DONE_EN(x)        (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_INTEN_IMP_OP_DONE_EN_SHIFT)) & TINGPU_VG_INTEN_IMP_OP_DONE_EN_MASK)
-
-#define TINGPU_VG_INTEN_HOST_EVENT_EN_MASK       (0x20U)
-#define TINGPU_VG_INTEN_HOST_EVENT_EN_SHIFT      (5U)
-/*! HOST_EVENT_EN - Host to VG Event Interrupt Enable
- *  0b0..Disable
- *  0b1..Enable
- */
-#define TINGPU_VG_INTEN_HOST_EVENT_EN(x)         (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_INTEN_HOST_EVENT_EN_SHIFT)) & TINGPU_VG_INTEN_HOST_EVENT_EN_MASK)
-/*! @} */
-
-/*! @name VG_INTR - Vector Graphic Interrupt */
-/*! @{ */
-
-#define TINGPU_VG_INTR_SP_LAST_LINE_DONE_MASK    (0x1U)
-#define TINGPU_VG_INTR_SP_LAST_LINE_DONE_SHIFT   (0U)
-/*! SP_LAST_LINE_DONE - Span Table Last Line Done Interrupt
- *  0b0..No interrupt
- *  0b1..Interrupt is detected
- */
-#define TINGPU_VG_INTR_SP_LAST_LINE_DONE(x)      (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_INTR_SP_LAST_LINE_DONE_SHIFT)) & TINGPU_VG_INTR_SP_LAST_LINE_DONE_MASK)
-
-#define TINGPU_VG_INTR_SCANLINE_DONE_MASK        (0x2U)
-#define TINGPU_VG_INTR_SCANLINE_DONE_SHIFT       (1U)
-/*! SCANLINE_DONE - VGDevice Scanline Done Interrupt
- *  0b0..No interrupt
- *  0b1..Interrupt is detected
- */
-#define TINGPU_VG_INTR_SCANLINE_DONE(x)          (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_INTR_SCANLINE_DONE_SHIFT)) & TINGPU_VG_INTR_SCANLINE_DONE_MASK)
-
-#define TINGPU_VG_INTR_CCDMA_EVENT_MASK          (0x4U)
-#define TINGPU_VG_INTR_CCDMA_EVENT_SHIFT         (2U)
-/*! CCDMA_EVENT - CCDMA Event Interrupt
- *  0b0..No interrupt
- *  0b1..Interrupt is detected.
- */
-#define TINGPU_VG_INTR_CCDMA_EVENT(x)            (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_INTR_CCDMA_EVENT_SHIFT)) & TINGPU_VG_INTR_CCDMA_EVENT_MASK)
-
-#define TINGPU_VG_INTR_IMP_OP_START_MASK         (0x8U)
-#define TINGPU_VG_INTR_IMP_OP_START_SHIFT        (3U)
-/*! IMP_OP_START - Image Pipeline Operation Start Interrupt
- *  0b0..No interrupt
- *  0b1..Interrupt is detected
- */
-#define TINGPU_VG_INTR_IMP_OP_START(x)           (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_INTR_IMP_OP_START_SHIFT)) & TINGPU_VG_INTR_IMP_OP_START_MASK)
-
-#define TINGPU_VG_INTR_IMP_OP_DONE_MASK          (0x10U)
-#define TINGPU_VG_INTR_IMP_OP_DONE_SHIFT         (4U)
-/*! IMP_OP_DONE - Image Pipeline Operation Done Interrupt
- *  0b0..No interrupt
- *  0b1..Interrupt is detected
- */
-#define TINGPU_VG_INTR_IMP_OP_DONE(x)            (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_INTR_IMP_OP_DONE_SHIFT)) & TINGPU_VG_INTR_IMP_OP_DONE_MASK)
-
-#define TINGPU_VG_INTR_HOST_EVENT_MASK           (0x20U)
-#define TINGPU_VG_INTR_HOST_EVENT_SHIFT          (5U)
-/*! HOST_EVENT - Host to VG Event Interrupt
- *  0b0..No interrupt
- *  0b1..Interrupt is detected
- */
-#define TINGPU_VG_INTR_HOST_EVENT(x)             (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_INTR_HOST_EVENT_SHIFT)) & TINGPU_VG_INTR_HOST_EVENT_MASK)
-/*! @} */
-
-/*! @name VG_RENDER_ULC - Vector Graphic Render Upper Left Coordinates */
-/*! @{ */
-
-#define TINGPU_VG_RENDER_ULC_X_MASK              (0x1FFFU)
-#define TINGPU_VG_RENDER_ULC_X_SHIFT             (0U)
-/*! X - X Coordinate */
-#define TINGPU_VG_RENDER_ULC_X(x)                (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_RENDER_ULC_X_SHIFT)) & TINGPU_VG_RENDER_ULC_X_MASK)
-
-#define TINGPU_VG_RENDER_ULC_Y_MASK              (0x1FFF0000U)
-#define TINGPU_VG_RENDER_ULC_Y_SHIFT             (16U)
-/*! Y - Y Coordinate */
-#define TINGPU_VG_RENDER_ULC_Y(x)                (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_RENDER_ULC_Y_SHIFT)) & TINGPU_VG_RENDER_ULC_Y_MASK)
-/*! @} */
-
-/*! @name VG_RENDER_LRC - Vector Graphic Render Lower Right Coordinates */
-/*! @{ */
-
-#define TINGPU_VG_RENDER_LRC_X_MASK              (0x1FFFU)
-#define TINGPU_VG_RENDER_LRC_X_SHIFT             (0U)
-/*! X - X Coordinate */
-#define TINGPU_VG_RENDER_LRC_X(x)                (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_RENDER_LRC_X_SHIFT)) & TINGPU_VG_RENDER_LRC_X_MASK)
-
-#define TINGPU_VG_RENDER_LRC_Y_MASK              (0x1FFF0000U)
-#define TINGPU_VG_RENDER_LRC_Y_SHIFT             (16U)
-/*! Y - Y Coordinate */
-#define TINGPU_VG_RENDER_LRC_Y(x)                (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_RENDER_LRC_Y_SHIFT)) & TINGPU_VG_RENDER_LRC_Y_MASK)
-/*! @} */
-
-/*! @name VG_SPAN_TABLE - Vector Graphic Span Table */
-/*! @{ */
-
-#define TINGPU_VG_SPAN_TABLE_ADDR_MASK           (0xFFFFFFFFU)
-#define TINGPU_VG_SPAN_TABLE_ADDR_SHIFT          (0U)
-/*! ADDR - Address */
-#define TINGPU_VG_SPAN_TABLE_ADDR(x)             (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_SPAN_TABLE_ADDR_SHIFT)) & TINGPU_VG_SPAN_TABLE_ADDR_MASK)
-/*! @} */
-
-/*! @name VG_COLOR_TABLE - Vector Graphic Color Table */
-/*! @{ */
-
-#define TINGPU_VG_COLOR_TABLE_ADDR_MASK          (0xFFFFFFFFU)
-#define TINGPU_VG_COLOR_TABLE_ADDR_SHIFT         (0U)
-/*! ADDR - Address */
-#define TINGPU_VG_COLOR_TABLE_ADDR(x)            (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_COLOR_TABLE_ADDR_SHIFT)) & TINGPU_VG_COLOR_TABLE_ADDR_MASK)
-/*! @} */
-
-/*! @name VG_PIXBUF_ADDR - Vector Graphic Pixel Buffer Address */
-/*! @{ */
-
-#define TINGPU_VG_PIXBUF_ADDR_ADDR_MASK          (0xFFFFFFFFU)
-#define TINGPU_VG_PIXBUF_ADDR_ADDR_SHIFT         (0U)
-/*! ADDR - Address */
-#define TINGPU_VG_PIXBUF_ADDR_ADDR(x)            (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_PIXBUF_ADDR_ADDR_SHIFT)) & TINGPU_VG_PIXBUF_ADDR_ADDR_MASK)
-/*! @} */
-
-/*! @name VG_PIXBUF_STRIDE - Vector Graphic Pixel Buffer Stride */
-/*! @{ */
-
-#define TINGPU_VG_PIXBUF_STRIDE_STRIDE_MASK      (0xFFFFU)
-#define TINGPU_VG_PIXBUF_STRIDE_STRIDE_SHIFT     (0U)
-/*! STRIDE - Stride */
-#define TINGPU_VG_PIXBUF_STRIDE_STRIDE(x)        (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_PIXBUF_STRIDE_STRIDE_SHIFT)) & TINGPU_VG_PIXBUF_STRIDE_STRIDE_MASK)
-/*! @} */
-
-/*! @name VG_PIXBUF_NUM - Vector Graphic Pixel Buffer Number */
-/*! @{ */
-
-#define TINGPU_VG_PIXBUF_NUM_NUM_MASK            (0x1FU)
-#define TINGPU_VG_PIXBUF_NUM_NUM_SHIFT           (0U)
-/*! NUM - Number */
-#define TINGPU_VG_PIXBUF_NUM_NUM(x)              (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_PIXBUF_NUM_NUM_SHIFT)) & TINGPU_VG_PIXBUF_NUM_NUM_MASK)
-/*! @} */
-
-/*! @name VG_SCANLINE_DONE - Vector Graphic Scanline Done */
-/*! @{ */
-
-#define TINGPU_VG_SCANLINE_DONE_LINE_MASK        (0x1FFFU)
-#define TINGPU_VG_SCANLINE_DONE_LINE_SHIFT       (0U)
-/*! LINE - Line */
-#define TINGPU_VG_SCANLINE_DONE_LINE(x)          (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_SCANLINE_DONE_LINE_SHIFT)) & TINGPU_VG_SCANLINE_DONE_LINE_MASK)
-/*! @} */
-
-/*! @name HOST2VG_EVENT - Host to VG Event */
-/*! @{ */
-
-#define TINGPU_HOST2VG_EVENT_EVENT_MASK          (0xFFFFFFFFU)
-#define TINGPU_HOST2VG_EVENT_EVENT_SHIFT         (0U)
-/*! EVENT - Event */
-#define TINGPU_HOST2VG_EVENT_EVENT(x)            (((uint32_t)(((uint32_t)(x)) << TINGPU_HOST2VG_EVENT_EVENT_SHIFT)) & TINGPU_HOST2VG_EVENT_EVENT_MASK)
-/*! @} */
-
-/*! @name VG2HOST_EVENT - VG to Host Event */
-/*! @{ */
-
-#define TINGPU_VG2HOST_EVENT_EVENT_MASK          (0xFFFFFFFFU)
-#define TINGPU_VG2HOST_EVENT_EVENT_SHIFT         (0U)
-/*! EVENT - Event */
-#define TINGPU_VG2HOST_EVENT_EVENT(x)            (((uint32_t)(((uint32_t)(x)) << TINGPU_VG2HOST_EVENT_EVENT_SHIFT)) & TINGPU_VG2HOST_EVENT_EVENT_MASK)
-/*! @} */
-
-/*! @name VG_EDGE_TABLE - Vector Graphic Edge Table */
-/*! @{ */
-
-#define TINGPU_VG_EDGE_TABLE_ADDR_MASK           (0xFFFFFFFFU)
-#define TINGPU_VG_EDGE_TABLE_ADDR_SHIFT          (0U)
-/*! ADDR - Address */
-#define TINGPU_VG_EDGE_TABLE_ADDR(x)             (((uint32_t)(((uint32_t)(x)) << TINGPU_VG_EDGE_TABLE_ADDR_SHIFT)) & TINGPU_VG_EDGE_TABLE_ADDR_MASK)
 /*! @} */
 
 

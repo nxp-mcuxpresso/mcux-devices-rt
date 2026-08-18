@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CAN
@@ -61,13 +63,13 @@
 #if !defined(PERI_CAN_H_)
 #define PERI_CAN_H_                              /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -420,15 +422,15 @@ typedef struct {
 
 #define CAN_MCR_NOTRDY_MASK                      (0x8000000U)
 #define CAN_MCR_NOTRDY_SHIFT                     (27U)
-/*! NOTRDY - FlexCAN Not Ready
- *  0b0..FlexCAN is in Normal mode, Listen-Only mode, or Loopback mode.
- *  0b1..FlexCAN is in Disable mode, Stop mode, or Freeze mode.
+/*! NOTRDY - FLEXCAN Not Ready
+ *  0b0..FLEXCAN is in Normal mode, Listen-Only mode, or Loopback mode.
+ *  0b1..FLEXCAN is in Disable mode, Stop mode, or Freeze mode.
  */
 #define CAN_MCR_NOTRDY(x)                        (((uint32_t)(((uint32_t)(x)) << CAN_MCR_NOTRDY_SHIFT)) & CAN_MCR_NOTRDY_MASK)
 
 #define CAN_MCR_HALT_MASK                        (0x10000000U)
 #define CAN_MCR_HALT_SHIFT                       (28U)
-/*! HALT - Halt FlexCAN
+/*! HALT - Halt FLEXCAN
  *  0b0..No request
  *  0b1..Enter Freeze mode, if MCR[FRZ] = 1.
  */
@@ -471,7 +473,7 @@ typedef struct {
 #define CAN_CTRL1_LOM_SHIFT                      (3U)
 /*! LOM - Listen-Only Mode
  *  0b0..Listen-Only mode is deactivated.
- *  0b1..FlexCAN module operates in Listen-Only mode.
+ *  0b1..FLEXCAN module operates in Listen-Only mode.
  */
 #define CAN_CTRL1_LOM(x)                         (((uint32_t)(((uint32_t)(x)) << CAN_CTRL1_LOM_SHIFT)) & CAN_CTRL1_LOM_MASK)
 
@@ -668,13 +670,13 @@ typedef struct {
 #define CAN_ESR1_BOFFINT_SHIFT                   (2U)
 /*! BOFFINT - Bus Off Interrupt Flag
  *  0b0..No such occurrence.
- *  0b1..FlexCAN module entered Bus Off state.
+ *  0b1..FLEXCAN module entered Bus Off state.
  */
 #define CAN_ESR1_BOFFINT(x)                      (((uint32_t)(((uint32_t)(x)) << CAN_ESR1_BOFFINT_SHIFT)) & CAN_ESR1_BOFFINT_MASK)
 
 #define CAN_ESR1_RX_MASK                         (0x8U)
 #define CAN_ESR1_RX_SHIFT                        (3U)
-/*! RX - FlexCAN in Reception Flag
+/*! RX - FLEXCAN in Reception Flag
  *  0b0..Not receiving
  *  0b1..Receiving
  */
@@ -691,7 +693,7 @@ typedef struct {
 
 #define CAN_ESR1_TX_MASK                         (0x40U)
 #define CAN_ESR1_TX_SHIFT                        (6U)
-/*! TX - FlexCAN In Transmission
+/*! TX - FLEXCAN In Transmission
  *  0b0..Not transmitting
  *  0b1..Transmitting
  */
@@ -797,7 +799,7 @@ typedef struct {
 #define CAN_ESR1_BOFFDONEINT_SHIFT               (19U)
 /*! BOFFDONEINT - Bus Off Done Interrupt Flag
  *  0b0..No such occurrence
- *  0b1..FlexCAN module has completed Bus Off process.
+ *  0b1..FLEXCAN module has completed Bus Off process.
  */
 #define CAN_ESR1_BOFFDONEINT(x)                  (((uint32_t)(((uint32_t)(x)) << CAN_ESR1_BOFFDONEINT_SHIFT)) & CAN_ESR1_BOFFDONEINT_MASK)
 
@@ -2648,7 +2650,7 @@ typedef struct {
 
 #define CAN_MECR_NCEFAFRZ_MASK                   (0x80U)
 #define CAN_MECR_NCEFAFRZ_SHIFT                  (7U)
-/*! NCEFAFRZ - Noncorrectable Errors in FlexCAN Access Put Chip in Freeze Mode
+/*! NCEFAFRZ - Noncorrectable Errors in FLEXCAN Access Put Chip in Freeze Mode
  *  0b0..Normal operation
  *  0b1..Freeze mode
  */
@@ -2680,7 +2682,7 @@ typedef struct {
 
 #define CAN_MECR_FAERRIE_MASK                    (0x4000U)
 #define CAN_MECR_FAERRIE_SHIFT                   (14U)
-/*! FAERRIE - FlexCAN Access Error Injection Enable
+/*! FAERRIE - FLEXCAN Access Error Injection Enable
  *  0b0..Disable
  *  0b1..Enable
  */
@@ -2704,7 +2706,7 @@ typedef struct {
 
 #define CAN_MECR_FANCEI_MSK_MASK                 (0x40000U)
 #define CAN_MECR_FANCEI_MSK_SHIFT                (18U)
-/*! FANCEI_MSK - FlexCAN Access with Noncorrectable Errors Interrupt Mask
+/*! FANCEI_MSK - FLEXCAN Access with Noncorrectable Errors Interrupt Mask
  *  0b0..Disable
  *  0b1..Enable
  */
@@ -2874,7 +2876,7 @@ typedef struct {
 
 #define CAN_ERRSR_FANCEIOF_MASK                  (0x4U)
 #define CAN_ERRSR_FANCEIOF_SHIFT                 (2U)
-/*! FANCEIOF - FlexCAN Access with Noncorrectable Error Interrupt Overrun Flag
+/*! FANCEIOF - FLEXCAN Access with Noncorrectable Error Interrupt Overrun Flag
  *  0b0..No errors detected
  *  0b1..Error detected
  */
@@ -2898,7 +2900,7 @@ typedef struct {
 
 #define CAN_ERRSR_FANCEIF_MASK                   (0x40000U)
 #define CAN_ERRSR_FANCEIF_SHIFT                  (18U)
-/*! FANCEIF - FlexCAN Access with Noncorrectable Error Interrupt Flag
+/*! FANCEIF - FLEXCAN Access with Noncorrectable Error Interrupt Flag
  *  0b0..No errors detected
  *  0b1..Error detected
  */

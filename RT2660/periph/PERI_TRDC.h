@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for TRDC
@@ -61,13 +63,13 @@
 #if !defined(PERI_TRDC_H_)
 #define PERI_TRDC_H_                             /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -197,10 +199,10 @@ typedef struct {
   } MBC_DERR[TRDC_MBC_DERR_COUNT];
        uint8_t RESERVED_7[96];
   struct {                                         /* offset: 0x480, array step: 0x10 */
-    __I  uint32_t W0;                                /**< MRC Domain Error Word0 Register, array offset: 0x480, array step: 0x10, not available in all instances (available on 28 out of 140) */
-    __I  uint32_t W1;                                /**< MRC Domain Error Word1 Register, array offset: 0x484, array step: 0x10, not available in all instances (available on 28 out of 140) */
+    __I  uint32_t W0;                                /**< MRC Domain Error Word0 Register, array offset: 0x480, array step: 0x10, not available in all instances (available on 30 out of 150) */
+    __I  uint32_t W1;                                /**< MRC Domain Error Word1 Register, array offset: 0x484, array step: 0x10, not available in all instances (available on 30 out of 150) */
          uint8_t RESERVED_0[4];
-    __IO uint32_t W3;                                /**< MRC Domain Error Word3 Register, array offset: 0x48C, array step: 0x10, not available in all instances (available on 28 out of 140) */
+    __IO uint32_t W3;                                /**< MRC Domain Error Word3 Register, array offset: 0x48C, array step: 0x10, not available in all instances (available on 30 out of 150) */
   } MRC_DERR[TRDC_MRC_DERR_COUNT];
        uint8_t RESERVED_8[848];
   struct {                                         /* offset: 0x800, array step: 0x20 */
@@ -227,9 +229,9 @@ typedef struct {
          uint8_t RESERVED_4[28];
     __IO uint32_t MBC_DOM0_MEM2_BLK_NSE_W[TRDC_MBC_INDEX_MBC_INDEX_DOM0_MEM2_BLK_NSE_W_COUNT];   /**< MBC Memory Block NonSecure Enable Word, array offset: 0x101C8, array step: index*0x1000, index2*0x4, irregular array, not all indices are valid */
          uint8_t RESERVED_5[4];
-    __IO uint32_t MBC_DOM0_MEM3_BLK_CFG_W[TRDC_MBC_INDEX_MBC_INDEX_DOM0_MEM3_BLK_CFG_W_COUNT];   /**< MBC Memory Block Configuration Word, array offset: 0x101D0, array step: index*0x1000, index2*0x4, not available in all instances (available on 28 out of 140), valid indices: [0][0] */
+    __IO uint32_t MBC_DOM0_MEM3_BLK_CFG_W[TRDC_MBC_INDEX_MBC_INDEX_DOM0_MEM3_BLK_CFG_W_COUNT];   /**< MBC Memory Block Configuration Word, array offset: 0x101D0, array step: index*0x1000, index2*0x4, not available in all instances (available on 30 out of 150), valid indices: [0][0] */
          uint8_t RESERVED_6[28];
-    __IO uint32_t MBC_DOM0_MEM3_BLK_NSE_W[TRDC_MBC_INDEX_MBC_INDEX_DOM0_MEM3_BLK_NSE_W_COUNT];   /**< MBC Memory Block NonSecure Enable Word, array offset: 0x101F0, array step: index*0x1000, index2*0x4, not available in all instances (available on 28 out of 140), valid indices: [0][0] */
+    __IO uint32_t MBC_DOM0_MEM3_BLK_NSE_W[TRDC_MBC_INDEX_MBC_INDEX_DOM0_MEM3_BLK_NSE_W_COUNT];   /**< MBC Memory Block NonSecure Enable Word, array offset: 0x101F0, array step: index*0x1000, index2*0x4, not available in all instances (available on 30 out of 150), valid indices: [0][0] */
          uint8_t RESERVED_7[76];
     __IO uint32_t MBC_DOM1_MEM0_BLK_CFG_W[TRDC_MBC_INDEX_MBC_INDEX_DOM1_MEM0_BLK_CFG_W_COUNT];   /**< MBC Memory Block Configuration Word, array offset: 0x10240, array step: index*0x1000, index2*0x4, irregular array, not all indices are valid */
          uint8_t RESERVED_8[204];
@@ -243,9 +245,9 @@ typedef struct {
          uint8_t RESERVED_12[28];
     __IO uint32_t MBC_DOM1_MEM2_BLK_NSE_W[TRDC_MBC_INDEX_MBC_INDEX_DOM1_MEM2_BLK_NSE_W_COUNT];   /**< MBC Memory Block NonSecure Enable Word, array offset: 0x103C8, array step: index*0x1000, index2*0x4, irregular array, not all indices are valid */
          uint8_t RESERVED_13[4];
-    __IO uint32_t MBC_DOM1_MEM3_BLK_CFG_W[TRDC_MBC_INDEX_MBC_INDEX_DOM1_MEM3_BLK_CFG_W_COUNT];   /**< MBC Memory Block Configuration Word, array offset: 0x103D0, array step: index*0x1000, index2*0x4, not available in all instances (available on 28 out of 140), valid indices: [0][0] */
+    __IO uint32_t MBC_DOM1_MEM3_BLK_CFG_W[TRDC_MBC_INDEX_MBC_INDEX_DOM1_MEM3_BLK_CFG_W_COUNT];   /**< MBC Memory Block Configuration Word, array offset: 0x103D0, array step: index*0x1000, index2*0x4, not available in all instances (available on 30 out of 150), valid indices: [0][0] */
          uint8_t RESERVED_14[28];
-    __IO uint32_t MBC_DOM1_MEM3_BLK_NSE_W[TRDC_MBC_INDEX_MBC_INDEX_DOM1_MEM3_BLK_NSE_W_COUNT];   /**< MBC Memory Block NonSecure Enable Word, array offset: 0x103F0, array step: index*0x1000, index2*0x4, not available in all instances (available on 28 out of 140), valid indices: [0][0] */
+    __IO uint32_t MBC_DOM1_MEM3_BLK_NSE_W[TRDC_MBC_INDEX_MBC_INDEX_DOM1_MEM3_BLK_NSE_W_COUNT];   /**< MBC Memory Block NonSecure Enable Word, array offset: 0x103F0, array step: index*0x1000, index2*0x4, not available in all instances (available on 30 out of 150), valid indices: [0][0] */
          uint8_t RESERVED_15[76];
     __IO uint32_t MBC_DOM2_MEM0_BLK_CFG_W[TRDC_MBC_INDEX_MBC_INDEX_DOM2_MEM0_BLK_CFG_W_COUNT];   /**< MBC Memory Block Configuration Word, array offset: 0x10440, array step: index*0x1000, index2*0x4, irregular array, not all indices are valid */
          uint8_t RESERVED_16[204];
@@ -259,9 +261,9 @@ typedef struct {
          uint8_t RESERVED_20[28];
     __IO uint32_t MBC_DOM2_MEM2_BLK_NSE_W[TRDC_MBC_INDEX_MBC_INDEX_DOM2_MEM2_BLK_NSE_W_COUNT];   /**< MBC Memory Block NonSecure Enable Word, array offset: 0x105C8, array step: index*0x1000, index2*0x4, irregular array, not all indices are valid */
          uint8_t RESERVED_21[4];
-    __IO uint32_t MBC_DOM2_MEM3_BLK_CFG_W[TRDC_MBC_INDEX_MBC_INDEX_DOM2_MEM3_BLK_CFG_W_COUNT];   /**< MBC Memory Block Configuration Word, array offset: 0x105D0, array step: index*0x1000, index2*0x4, not available in all instances (available on 28 out of 140), valid indices: [0][0] */
+    __IO uint32_t MBC_DOM2_MEM3_BLK_CFG_W[TRDC_MBC_INDEX_MBC_INDEX_DOM2_MEM3_BLK_CFG_W_COUNT];   /**< MBC Memory Block Configuration Word, array offset: 0x105D0, array step: index*0x1000, index2*0x4, not available in all instances (available on 30 out of 150), valid indices: [0][0] */
          uint8_t RESERVED_22[28];
-    __IO uint32_t MBC_DOM2_MEM3_BLK_NSE_W[TRDC_MBC_INDEX_MBC_INDEX_DOM2_MEM3_BLK_NSE_W_COUNT];   /**< MBC Memory Block NonSecure Enable Word, array offset: 0x105F0, array step: index*0x1000, index2*0x4, not available in all instances (available on 28 out of 140), valid indices: [0][0] */
+    __IO uint32_t MBC_DOM2_MEM3_BLK_NSE_W[TRDC_MBC_INDEX_MBC_INDEX_DOM2_MEM3_BLK_NSE_W_COUNT];   /**< MBC Memory Block NonSecure Enable Word, array offset: 0x105F0, array step: index*0x1000, index2*0x4, not available in all instances (available on 30 out of 150), valid indices: [0][0] */
          uint8_t RESERVED_23[76];
     __IO uint32_t MBC_DOM3_MEM0_BLK_CFG_W[TRDC_MBC_INDEX_MBC_INDEX_DOM3_MEM0_BLK_CFG_W_COUNT];   /**< MBC Memory Block Configuration Word, array offset: 0x10640, array step: index*0x1000, index2*0x4, irregular array, not all indices are valid */
          uint8_t RESERVED_24[204];
@@ -275,34 +277,34 @@ typedef struct {
          uint8_t RESERVED_28[28];
     __IO uint32_t MBC_DOM3_MEM2_BLK_NSE_W[TRDC_MBC_INDEX_MBC_INDEX_DOM3_MEM2_BLK_NSE_W_COUNT];   /**< MBC Memory Block NonSecure Enable Word, array offset: 0x107C8, array step: index*0x1000, index2*0x4, irregular array, not all indices are valid */
          uint8_t RESERVED_29[4];
-    __IO uint32_t MBC_DOM3_MEM3_BLK_CFG_W[TRDC_MBC_INDEX_MBC_INDEX_DOM3_MEM3_BLK_CFG_W_COUNT];   /**< MBC Memory Block Configuration Word, array offset: 0x107D0, array step: index*0x1000, index2*0x4, not available in all instances (available on 28 out of 140), valid indices: [0][0] */
+    __IO uint32_t MBC_DOM3_MEM3_BLK_CFG_W[TRDC_MBC_INDEX_MBC_INDEX_DOM3_MEM3_BLK_CFG_W_COUNT];   /**< MBC Memory Block Configuration Word, array offset: 0x107D0, array step: index*0x1000, index2*0x4, not available in all instances (available on 30 out of 150), valid indices: [0][0] */
          uint8_t RESERVED_30[28];
-    __IO uint32_t MBC_DOM3_MEM3_BLK_NSE_W[TRDC_MBC_INDEX_MBC_INDEX_DOM3_MEM3_BLK_NSE_W_COUNT];   /**< MBC Memory Block NonSecure Enable Word, array offset: 0x107F0, array step: index*0x1000, index2*0x4, not available in all instances (available on 28 out of 140), valid indices: [0][0] */
+    __IO uint32_t MBC_DOM3_MEM3_BLK_NSE_W[TRDC_MBC_INDEX_MBC_INDEX_DOM3_MEM3_BLK_NSE_W_COUNT];   /**< MBC Memory Block NonSecure Enable Word, array offset: 0x107F0, array step: index*0x1000, index2*0x4, not available in all instances (available on 30 out of 150), valid indices: [0][0] */
          uint8_t RESERVED_31[2060];
   } MBC_INDEX[TRDC_MBC_INDEX_COUNT];
   struct {                                         /* offset: 0x12000, array step: 0x800 */
-    __I  uint32_t MRC_GLBCFG;                        /**< MRC Global Configuration Register, array offset: 0x12000, array step: 0x800, not available in all instances (available on 28 out of 140) */
+    __I  uint32_t MRC_GLBCFG;                        /**< MRC Global Configuration Register, array offset: 0x12000, array step: 0x800, not available in all instances (available on 30 out of 150) */
          uint8_t RESERVED_0[12];
-    __IO uint32_t MRC_NSE_RGN_INDIRECT;              /**< MRC NonSecure Enable Region Indirect, array offset: 0x12010, array step: 0x800, not available in all instances (available on 28 out of 140) */
-    __IO uint32_t MRC_NSE_RGN_SET;                   /**< MRC NonSecure Enable Region Set, array offset: 0x12014, array step: 0x800, not available in all instances (available on 28 out of 140) */
-    __IO uint32_t MRC_NSE_RGN_CLR;                   /**< MRC NonSecure Enable Region Clear, array offset: 0x12018, array step: 0x800, not available in all instances (available on 28 out of 140) */
-    __IO uint32_t MRC_NSE_RGN_CLR_ALL;               /**< MRC NonSecure Enable Region Clear All, array offset: 0x1201C, array step: 0x800, not available in all instances (available on 28 out of 140) */
-    __IO uint32_t MRC_GLBAC[TRDC_MRC_INDEX_MRC_GLBAC_COUNT];   /**< MRC Global Access Control, array offset: 0x12020, array step: index*0x800, index2*0x4, not available in all instances (available on 28 out of 140) */
-    __IO uint32_t MRC_DOM0_RGD_W[TRDC_MRC_INDEX_MRC_INDEX_DOM0_RGD_COUNT][TRDC_MRC_INDEX_MRC_INDEX_DOM0_RGD_MRC_INDEX_DOM0_RGD_W_COUNT];   /**< MRC Region Descriptor Word 0..MRC Region Descriptor Word 1, array offset: 0x12040, array step: index*0x800, index2*0x8, index3*0x4, not available in all instances (available on 28 out of 140), valid indices: [0][0-7][0], [0][0-7][1], [1][0-7][0], [1][0-7][1], [2][0-3][0], [2][0-3][1] */
+    __IO uint32_t MRC_NSE_RGN_INDIRECT;              /**< MRC NonSecure Enable Region Indirect, array offset: 0x12010, array step: 0x800, not available in all instances (available on 30 out of 150) */
+    __IO uint32_t MRC_NSE_RGN_SET;                   /**< MRC NonSecure Enable Region Set, array offset: 0x12014, array step: 0x800, not available in all instances (available on 30 out of 150) */
+    __IO uint32_t MRC_NSE_RGN_CLR;                   /**< MRC NonSecure Enable Region Clear, array offset: 0x12018, array step: 0x800, not available in all instances (available on 30 out of 150) */
+    __IO uint32_t MRC_NSE_RGN_CLR_ALL;               /**< MRC NonSecure Enable Region Clear All, array offset: 0x1201C, array step: 0x800, not available in all instances (available on 30 out of 150) */
+    __IO uint32_t MRC_GLBAC[TRDC_MRC_INDEX_MRC_GLBAC_COUNT];   /**< MRC Global Access Control, array offset: 0x12020, array step: index*0x800, index2*0x4, not available in all instances (available on 30 out of 150) */
+    __IO uint32_t MRC_DOM0_RGD_W[TRDC_MRC_INDEX_MRC_INDEX_DOM0_RGD_COUNT][TRDC_MRC_INDEX_MRC_INDEX_DOM0_RGD_MRC_INDEX_DOM0_RGD_W_COUNT];   /**< MRC Region Descriptor Word 0..MRC Region Descriptor Word 1, array offset: 0x12040, array step: index*0x800, index2*0x8, index3*0x4, not available in all instances (available on 30 out of 150), valid indices: [0][0-7][0], [0][0-7][1], [1][0-7][0], [1][0-7][1], [2][0-3][0], [2][0-3][1] */
          uint8_t RESERVED_1[64];
-    __IO uint32_t MRC_DOM0_RGD_NSE;                  /**< MRC Region Descriptor NonSecure Enable, array offset: 0x120C0, array step: 0x800, not available in all instances (available on 28 out of 140) */
+    __IO uint32_t MRC_DOM0_RGD_NSE;                  /**< MRC Region Descriptor NonSecure Enable, array offset: 0x120C0, array step: 0x800, not available in all instances (available on 30 out of 150) */
          uint8_t RESERVED_2[124];
-    __IO uint32_t MRC_DOM1_RGD_W[TRDC_MRC_INDEX_MRC_INDEX_DOM1_RGD_COUNT][TRDC_MRC_INDEX_MRC_INDEX_DOM1_RGD_MRC_INDEX_DOM1_RGD_W_COUNT];   /**< MRC Region Descriptor Word 0..MRC Region Descriptor Word 1, array offset: 0x12140, array step: index*0x800, index2*0x8, index3*0x4, not available in all instances (available on 28 out of 140), valid indices: [0][0-7][0], [0][0-7][1], [1][0-7][0], [1][0-7][1], [2][0-3][0], [2][0-3][1] */
+    __IO uint32_t MRC_DOM1_RGD_W[TRDC_MRC_INDEX_MRC_INDEX_DOM1_RGD_COUNT][TRDC_MRC_INDEX_MRC_INDEX_DOM1_RGD_MRC_INDEX_DOM1_RGD_W_COUNT];   /**< MRC Region Descriptor Word 0..MRC Region Descriptor Word 1, array offset: 0x12140, array step: index*0x800, index2*0x8, index3*0x4, not available in all instances (available on 30 out of 150), valid indices: [0][0-7][0], [0][0-7][1], [1][0-7][0], [1][0-7][1], [2][0-3][0], [2][0-3][1] */
          uint8_t RESERVED_3[64];
-    __IO uint32_t MRC_DOM1_RGD_NSE;                  /**< MRC Region Descriptor NonSecure Enable, array offset: 0x121C0, array step: 0x800, not available in all instances (available on 28 out of 140) */
+    __IO uint32_t MRC_DOM1_RGD_NSE;                  /**< MRC Region Descriptor NonSecure Enable, array offset: 0x121C0, array step: 0x800, not available in all instances (available on 30 out of 150) */
          uint8_t RESERVED_4[124];
-    __IO uint32_t MRC_DOM2_RGD_W[TRDC_MRC_INDEX_MRC_INDEX_DOM2_RGD_COUNT][TRDC_MRC_INDEX_MRC_INDEX_DOM2_RGD_MRC_INDEX_DOM2_RGD_W_COUNT];   /**< MRC Region Descriptor Word 0..MRC Region Descriptor Word 1, array offset: 0x12240, array step: index*0x800, index2*0x8, index3*0x4, not available in all instances (available on 28 out of 140), valid indices: [0][0-7][0], [0][0-7][1], [1][0-7][0], [1][0-7][1], [2][0-3][0], [2][0-3][1] */
+    __IO uint32_t MRC_DOM2_RGD_W[TRDC_MRC_INDEX_MRC_INDEX_DOM2_RGD_COUNT][TRDC_MRC_INDEX_MRC_INDEX_DOM2_RGD_MRC_INDEX_DOM2_RGD_W_COUNT];   /**< MRC Region Descriptor Word 0..MRC Region Descriptor Word 1, array offset: 0x12240, array step: index*0x800, index2*0x8, index3*0x4, not available in all instances (available on 30 out of 150), valid indices: [0][0-7][0], [0][0-7][1], [1][0-7][0], [1][0-7][1], [2][0-3][0], [2][0-3][1] */
          uint8_t RESERVED_5[64];
-    __IO uint32_t MRC_DOM2_RGD_NSE;                  /**< MRC Region Descriptor NonSecure Enable, array offset: 0x122C0, array step: 0x800, not available in all instances (available on 28 out of 140) */
+    __IO uint32_t MRC_DOM2_RGD_NSE;                  /**< MRC Region Descriptor NonSecure Enable, array offset: 0x122C0, array step: 0x800, not available in all instances (available on 30 out of 150) */
          uint8_t RESERVED_6[124];
-    __IO uint32_t MRC_DOM3_RGD_W[TRDC_MRC_INDEX_MRC_INDEX_DOM3_RGD_COUNT][TRDC_MRC_INDEX_MRC_INDEX_DOM3_RGD_MRC_INDEX_DOM3_RGD_W_COUNT];   /**< MRC Region Descriptor Word 0..MRC Region Descriptor Word 1, array offset: 0x12340, array step: index*0x800, index2*0x8, index3*0x4, not available in all instances (available on 28 out of 140), valid indices: [0][0-7][0], [0][0-7][1], [1][0-7][0], [1][0-7][1], [2][0-3][0], [2][0-3][1] */
+    __IO uint32_t MRC_DOM3_RGD_W[TRDC_MRC_INDEX_MRC_INDEX_DOM3_RGD_COUNT][TRDC_MRC_INDEX_MRC_INDEX_DOM3_RGD_MRC_INDEX_DOM3_RGD_W_COUNT];   /**< MRC Region Descriptor Word 0..MRC Region Descriptor Word 1, array offset: 0x12340, array step: index*0x800, index2*0x8, index3*0x4, not available in all instances (available on 30 out of 150), valid indices: [0][0-7][0], [0][0-7][1], [1][0-7][0], [1][0-7][1], [2][0-3][0], [2][0-3][1] */
          uint8_t RESERVED_7[64];
-    __IO uint32_t MRC_DOM3_RGD_NSE;                  /**< MRC Region Descriptor NonSecure Enable, array offset: 0x123C0, array step: 0x800, not available in all instances (available on 28 out of 140) */
+    __IO uint32_t MRC_DOM3_RGD_NSE;                  /**< MRC Region Descriptor NonSecure Enable, array offset: 0x123C0, array step: 0x800, not available in all instances (available on 30 out of 150) */
          uint8_t RESERVED_8[1084];
   } MRC_INDEX[TRDC_MRC_INDEX_COUNT];
 } TRDC_Type;
@@ -903,14 +905,6 @@ typedef struct {
  */
 #define TRDC_MDA_W_DFMT1_LK1(x)                  (((uint32_t)(((uint32_t)(x)) << TRDC_MDA_W_DFMT1_LK1_SHIFT)) & TRDC_MDA_W_DFMT1_LK1_MASK)
 
-#define TRDC_MDA_W_DFMT0_LK1_MASK                (0x40000000U)
-#define TRDC_MDA_W_DFMT0_LK1_SHIFT               (30U)
-/*! LK1 - 1-bit Lock
- *  0b0..Register can be written by any secure privileged write.
- *  0b1..Register is locked (read-only) until the next reset.
- */
-#define TRDC_MDA_W_DFMT0_LK1(x)                  (((uint32_t)(((uint32_t)(x)) << TRDC_MDA_W_DFMT1_LK1_SHIFT)) & TRDC_MDA_W_DFMT1_LK1_MASK)
-
 #define TRDC_MDA_W_DFMT1_VLD_MASK                (0x80000000U)
 #define TRDC_MDA_W_DFMT1_VLD_SHIFT               (31U)
 /*! VLD - Valid
@@ -918,14 +912,6 @@ typedef struct {
  *  0b1..The Wr domain assignment is valid.
  */
 #define TRDC_MDA_W_DFMT1_VLD(x)                  (((uint32_t)(((uint32_t)(x)) << TRDC_MDA_W_DFMT1_VLD_SHIFT)) & TRDC_MDA_W_DFMT1_VLD_MASK)
-
-#define TRDC_MDA_W_DFMT0_VLD_MASK                (0x80000000U)
-#define TRDC_MDA_W_DFMT0_VLD_SHIFT               (31U)
-/*! VLD - Valid
- *  0b0..The Wr domain assignment is invalid.
- *  0b1..The Wr domain assignment is valid.
- */
-#define TRDC_MDA_W_DFMT0_VLD(x)                  (((uint32_t)(((uint32_t)(x)) << TRDC_MDA_W_DFMT1_VLD_SHIFT)) & TRDC_MDA_W_DFMT1_VLD_MASK)
 /*! @} */
 
 /* The count of TRDC_MDA_W_DFMT1 */

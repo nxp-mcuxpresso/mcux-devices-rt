@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for POWERCON_SOC_CTRL
@@ -61,13 +63,13 @@
 #if !defined(PERI_POWERCON_SOC_CTRL_H_)
 #define PERI_POWERCON_SOC_CTRL_H_                /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -409,17 +411,8 @@ typedef struct {
  *  0b00..Disables
  *  0b01..High-power mode
  *  0b10..Low-power mode
- *  0b11..Ultra low-power mode
  */
 #define POWERCON_SOC_CTRL_PMUCFG_ACTIVE_LDO_VDDA_1V8(x) (((uint32_t)(((uint32_t)(x)) << POWERCON_SOC_CTRL_PMUCFG_ACTIVE_LDO_VDDA_1V8_SHIFT)) & POWERCON_SOC_CTRL_PMUCFG_ACTIVE_LDO_VDDA_1V8_MASK)
-
-#define POWERCON_SOC_CTRL_PMUCFG_ACTIVE_DCDC_OFF_PMU_RET_MASK (0x4000U)
-#define POWERCON_SOC_CTRL_PMUCFG_ACTIVE_DCDC_OFF_PMU_RET_SHIFT (14U)
-/*! DCDC_OFF_PMU_RET - DCDC Turnoff Control in Chip Power Down Mode
- *  0b0..Disables
- *  0b1..Enables
- */
-#define POWERCON_SOC_CTRL_PMUCFG_ACTIVE_DCDC_OFF_PMU_RET(x) (((uint32_t)(((uint32_t)(x)) << POWERCON_SOC_CTRL_PMUCFG_ACTIVE_DCDC_OFF_PMU_RET_SHIFT)) & POWERCON_SOC_CTRL_PMUCFG_ACTIVE_DCDC_OFF_PMU_RET_MASK)
 
 #define POWERCON_SOC_CTRL_PMUCFG_ACTIVE_CORE_LVL_MASK (0xF8000U)
 #define POWERCON_SOC_CTRL_PMUCFG_ACTIVE_CORE_LVL_SHIFT (15U)
@@ -431,11 +424,10 @@ typedef struct {
 #define POWERCON_SOC_CTRL_PMUCFG_ACTIVE_PMU_MODE_MASK (0x700000U)
 #define POWERCON_SOC_CTRL_PMUCFG_ACTIVE_PMU_MODE_SHIFT (20U)
 /*! PMU_MODE - PMU Mode Control
- *  0b000..High-power mode
- *  0b001..High-power programming mode
- *  0b010..Low-power mode
- *  0b011..Retention mode
- *  0b100..Body biasing mode
+ *  0b000..High-power (HP) mode
+ *  0b010..Low-power (LP) mode
+ *  0b011..Retention (RET) mode
+ *  0b100..Battery backed (BB) mode
  */
 #define POWERCON_SOC_CTRL_PMUCFG_ACTIVE_PMU_MODE(x) (((uint32_t)(((uint32_t)(x)) << POWERCON_SOC_CTRL_PMUCFG_ACTIVE_PMU_MODE_SHIFT)) & POWERCON_SOC_CTRL_PMUCFG_ACTIVE_PMU_MODE_MASK)
 /*! @} */
@@ -533,7 +525,6 @@ typedef struct {
  *  0b00..Disables
  *  0b01..High-power mode
  *  0b10..Low-power mode
- *  0b11..Ultra low-power mode
  */
 #define POWERCON_SOC_CTRL_PMUCFG_STBY_LDO_VDDA_1V8(x) (((uint32_t)(((uint32_t)(x)) << POWERCON_SOC_CTRL_PMUCFG_STBY_LDO_VDDA_1V8_SHIFT)) & POWERCON_SOC_CTRL_PMUCFG_STBY_LDO_VDDA_1V8_MASK)
 
@@ -555,11 +546,10 @@ typedef struct {
 #define POWERCON_SOC_CTRL_PMUCFG_STBY_PMU_MODE_MASK (0x700000U)
 #define POWERCON_SOC_CTRL_PMUCFG_STBY_PMU_MODE_SHIFT (20U)
 /*! PMU_MODE - PMU Mode Control
- *  0b000..High-power mode
- *  0b001..High-power programming mode
- *  0b010..Low-power mode
- *  0b011..Retention mode
- *  0b100..Body biasing mode
+ *  0b000..High-power (HP) mode
+ *  0b010..Low-power (LP) mode
+ *  0b011..Retention (RET) mode
+ *  0b100..Battery backed (BB) mode
  */
 #define POWERCON_SOC_CTRL_PMUCFG_STBY_PMU_MODE(x) (((uint32_t)(((uint32_t)(x)) << POWERCON_SOC_CTRL_PMUCFG_STBY_PMU_MODE_SHIFT)) & POWERCON_SOC_CTRL_PMUCFG_STBY_PMU_MODE_MASK)
 /*! @} */
@@ -600,7 +590,7 @@ typedef struct {
 #define POWERCON_SOC_CTRL_SOC_CTRL_STATUS_P_OVER_MASK (0x20000U)
 #define POWERCON_SOC_CTRL_SOC_CTRL_STATUS_P_OVER_SHIFT (17U)
 /*! P_OVER - P-Channel Update Complete
- *  0b0..P-channle is busy
+ *  0b0..P-channel is busy
  *  0b1..Previous P-channel update is complete
  */
 #define POWERCON_SOC_CTRL_SOC_CTRL_STATUS_P_OVER(x) (((uint32_t)(((uint32_t)(x)) << POWERCON_SOC_CTRL_SOC_CTRL_STATUS_P_OVER_SHIFT)) & POWERCON_SOC_CTRL_SOC_CTRL_STATUS_P_OVER_MASK)

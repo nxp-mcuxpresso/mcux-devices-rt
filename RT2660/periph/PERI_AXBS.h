@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for AXBS
@@ -61,13 +63,13 @@
 #if !defined(PERI_AXBS_H_)
 #define PERI_AXBS_H_                             /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -112,7 +114,7 @@
  */
 
 /** AXBS - Size of Registers Arrays */
-#define AXBS_SLAVE_COUNT                          8u
+#define AXBS_SLAVE_COUNT                          6u
 
 /** AXBS - Register Layout Typedef */
 typedef struct {
@@ -174,7 +176,7 @@ typedef struct {
  *  0b100..This initiator has level 5 priority when accessing the target port.
  *  0b101..This initiator has level 6 priority when accessing the target port.
  *  0b110..This initiator has level 7 priority when accessing the target port.
- *  0b111..This initiator has level 8the or lowest priority when accessing the target port.
+ *  0b111..This initiator has level 8 or the lowest priority when accessing the target port.
  */
 #define AXBS_PRS_M2(x)                           (((uint32_t)(((uint32_t)(x)) << AXBS_PRS_M2_SHIFT)) & AXBS_PRS_M2_MASK)
 
@@ -188,7 +190,7 @@ typedef struct {
  *  0b100..This initiator has level 5 priority when accessing the target port.
  *  0b101..This initiator has level 6 priority when accessing the target port.
  *  0b110..This initiator has level 7 priority when accessing the target port.
- *  0b111..This initiator has level 8the or lowest priority when accessing the target port.
+ *  0b111..This initiator has level 8 or the lowest priority when accessing the target port.
  */
 #define AXBS_PRS_M3(x)                           (((uint32_t)(((uint32_t)(x)) << AXBS_PRS_M3_SHIFT)) & AXBS_PRS_M3_MASK)
 
@@ -202,7 +204,7 @@ typedef struct {
  *  0b100..This initiator has level 5 priority when accessing the target port.
  *  0b101..This initiator has level 6 priority when accessing the target port.
  *  0b110..This initiator has level 7 priority when accessing the target port.
- *  0b111..This initiator has level 8 or lowest priority when accessing the target port.
+ *  0b111..This initiator has level 8 or the lowest priority when accessing the target port.
  */
 #define AXBS_PRS_M4(x)                           (((uint32_t)(((uint32_t)(x)) << AXBS_PRS_M4_SHIFT)) & AXBS_PRS_M4_MASK)
 
@@ -216,7 +218,7 @@ typedef struct {
  *  0b100..This initiator has level 5 priority when accessing the target port.
  *  0b101..This initiator has level 6 priority when accessing the target port.
  *  0b110..This initiator has level 7 priority when accessing the target port.
- *  0b111..This initiator has level 8 or lowest priority when accessing the target port.
+ *  0b111..This initiator has level 8 or the lowest priority when accessing the target port.
  */
 #define AXBS_PRS_M5(x)                           (((uint32_t)(((uint32_t)(x)) << AXBS_PRS_M5_SHIFT)) & AXBS_PRS_M5_MASK)
 
@@ -230,13 +232,13 @@ typedef struct {
  *  0b100..This initiator has level 5 priority when accessing the target port.
  *  0b101..This initiator has level 6 priority when accessing the target port.
  *  0b110..This initiator has level 7 priority when accessing the target port.
- *  0b111..This initiator has level 8the or lowest priority when accessing the target port.
+ *  0b111..This initiator has level 8 or the lowest priority when accessing the target port.
  */
 #define AXBS_PRS_M6(x)                           (((uint32_t)(((uint32_t)(x)) << AXBS_PRS_M6_SHIFT)) & AXBS_PRS_M6_MASK)
 /*! @} */
 
 /* The count of AXBS_PRS */
-#define AXBS_PRS_COUNT                           (8U)
+#define AXBS_PRS_COUNT                           (6U)
 
 /*! @name CRS - Control Register */
 /*! @{ */
@@ -343,7 +345,7 @@ typedef struct {
 /*! @} */
 
 /* The count of AXBS_CRS */
-#define AXBS_CRS_COUNT                           (8U)
+#define AXBS_CRS_COUNT                           (6U)
 
 
 /*!

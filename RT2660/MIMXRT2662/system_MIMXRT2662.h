@@ -1,6 +1,7 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -14,9 +15,9 @@
 **                          Keil ARM C/C++ Compiler
 **                          MCUXpresso Compiler
 **
-**     Reference manual:    iMXRT2660RM Rev.2 DraftA, 05/2024
+**     Reference manual:    iMXRT2660RM Rev.1 DraftN, 08/2026
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -40,7 +41,7 @@
 /*!
  * @file MIMXRT2662_cm85
  * @version 1.0
- * @date 2026-06-03
+ * @date 2026-08-18
  * @brief Device specific configuration file for MIMXRT2662_cm85 (header file)
  *
  * Provides a system configuration function and a global variable that contains
@@ -112,5 +113,6 @@ void BOARD_EarlyInit(void);
 #ifdef __cplusplus
 }
 #endif
+
 
 #endif /* _SYSTEM_MIMXRT2662_cm85_H_ */

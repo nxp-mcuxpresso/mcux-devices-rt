@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for XSPI
@@ -61,13 +63,13 @@
 #if !defined(PERI_XSPI_H_)
 #define PERI_XSPI_H_                             /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -150,7 +152,7 @@ typedef struct {
   __IO uint32_t FSR_ADDR;                          /**< Flash Status Register Address, offset: 0x5C */
   __IO uint32_t DLLCR[XSPI_DLLCR_COUNT];           /**< DLL Flash Memory A Configuration, array offset: 0x60, array step: 0x4 */
        uint8_t RESERVED_3[8];
-  __IO uint32_t PARITYCR;                          /**< Parity Configuration, offset: 0x6C, available only on: MAIN_XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN_XSPI_1.XSPI/MAIN__XSPI_1) */
+  __IO uint32_t PARITYCR;                          /**< Parity Configuration, offset: 0x6C, available only on: MAIN__XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN__XSPI_1.XSPI/MAIN__XSPI_1) */
        uint8_t RESERVED_4[16];
   __IO uint32_t INBAND_CFG;                        /**< In-band Configuration, offset: 0x80 */
   __IO uint32_t INBAND_RRT;                        /**< In-band Reset Recovery Time, offset: 0x84 */
@@ -204,15 +206,15 @@ typedef struct {
   __IO uint32_t PPW_RDSR;                          /**< Page Program Wait Read Status, offset: 0x4F8 */
        uint8_t RESERVED_14[36];
   struct {                                         /* offset: 0x520, array step: 0x20 */
-    __IO uint32_t IPEDCTXIV[XSPI_IPEDCTXXIV_IPEDCTXXIVY_COUNT];   /**< IPED Context Initial Vector, array offset: 0x520, array step: index*0x20, index2*0x4, available only on: MAIN_XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN_XSPI_1.XSPI/MAIN__XSPI_1) */
-    __IO uint32_t IPEDCTXSTART;                      /**< IPED Start Address Region, array offset: 0x528, array step: 0x20, available only on: MAIN_XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN_XSPI_1.XSPI/MAIN__XSPI_1) */
-    __IO uint32_t IPEDCTXEND;                        /**< IPED End Address Region, array offset: 0x52C, array step: 0x20, available only on: MAIN_XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN_XSPI_1.XSPI/MAIN__XSPI_1) */
-    __IO uint32_t IPEDCTXAAD[XSPI_IPEDCTXXIV_IPEDCTXXAADY_COUNT];   /**< IPED Context Additional Authentication Data, array offset: 0x530, array step: index*0x20, index2*0x4, available only on: MAIN_XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN_XSPI_1.XSPI/MAIN__XSPI_1) */
+    __IO uint32_t IPEDCTXIV[XSPI_IPEDCTXXIV_IPEDCTXXIVY_COUNT];   /**< IPED Context Initial Vector, array offset: 0x520, array step: index*0x20, index2*0x4, available only on: MAIN__XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN__XSPI_1.XSPI/MAIN__XSPI_1) */
+    __IO uint32_t IPEDCTXSTART;                      /**< IPED Start Address Region, array offset: 0x528, array step: 0x20, available only on: MAIN__XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN__XSPI_1.XSPI/MAIN__XSPI_1) */
+    __IO uint32_t IPEDCTXEND;                        /**< IPED End Address Region, array offset: 0x52C, array step: 0x20, available only on: MAIN__XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN__XSPI_1.XSPI/MAIN__XSPI_1) */
+    __IO uint32_t IPEDCTXAAD[XSPI_IPEDCTXXIV_IPEDCTXXAADY_COUNT];   /**< IPED Context Additional Authentication Data, array offset: 0x530, array step: index*0x20, index2*0x4, available only on: MAIN__XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN__XSPI_1.XSPI/MAIN__XSPI_1) */
          uint8_t RESERVED_0[8];
   } IPEDCTXXIV[XSPI_IPEDCTXXIV_COUNT];
-  __IO uint32_t IPEDCTRL;                          /**< IPED Function Control, offset: 0x720, available only on: MAIN_XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN_XSPI_1.XSPI/MAIN__XSPI_1) */
+  __IO uint32_t IPEDCTRL;                          /**< IPED Function Control, offset: 0x720, available only on: MAIN__XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN__XSPI_1.XSPI/MAIN__XSPI_1) */
        uint8_t RESERVED_15[4];
-  __IO uint32_t IPEDCTXCTRL[XSPI_IPEDCTXCTRLX_COUNT]; /**< IPED Context Control 0..IPED Context Control 1, array offset: 0x728, array step: 0x4, available only on: MAIN_XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN_XSPI_1.XSPI/MAIN__XSPI_1) */
+  __IO uint32_t IPEDCTXCTRL[XSPI_IPEDCTXCTRLX_COUNT]; /**< IPED Context Control 0..IPED Context Control 1, array offset: 0x728, array step: 0x4, available only on: MAIN__XSPI_0.XSPI/MAIN__XSPI_0 (missing on MAIN__XSPI_1.XSPI/MAIN__XSPI_1) */
        uint8_t RESERVED_16[80];
   __I  uint32_t AWR_WRAP_STATUS;                   /**< AHB Write Wrap Status, offset: 0x780 */
   __I  uint32_t AHB_WW_ERR_ADDR_EBT;               /**< Write Wrap Burst Error Address due to Early Termination, offset: 0x784 */

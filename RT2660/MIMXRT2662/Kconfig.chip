@@ -91,6 +91,9 @@ choice MCUX_HW_DEVICE_PART_MIMXRT2662
     config MCUX_HW_DEVICE_PART_MIMXRT2662AHP8A
     bool "MIMXRT2662AHP8A"
     select MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
+    config MCUX_HW_DEVICE_PART_MIMXRT2662AVV8A
+    bool "MIMXRT2662AVV8A"
+    select MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
 endchoice
 
 config MCUX_HW_DEVICE_ID
@@ -106,6 +109,7 @@ config MCUX_HW_DEVICE_PART
     default "MIMXRT2662XHP8A" if MCUX_HW_DEVICE_PART_MIMXRT2662XHP8A
     default "MIMXRT2662XVV8A" if MCUX_HW_DEVICE_PART_MIMXRT2662XVV8A
     default "MIMXRT2662AHP8A" if MCUX_HW_DEVICE_PART_MIMXRT2662AHP8A
+    default "MIMXRT2662AVV8A" if MCUX_HW_DEVICE_PART_MIMXRT2662AVV8A
 
 # For chipmodel generated files
 
@@ -121,11 +125,12 @@ config MCUX_TOOLCHAIN_MCUX_STARTUP
 
 config MCUX_TOOLCHAIN_IAR_CPU_IDENTIFIER
     string
-    default "MIMXRT2662_M85" if MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
+    default "MIMXRT2662xxxxx_M85" if MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
 
 config MCUX_TOOLCHAIN_MDK_CPU_IDENTIFIER
     string
     default "MIMXRT2662AHP8A:cm85" if MCUX_HW_DEVICE_PART_MIMXRT2662AHP8A
+    default "MIMXRT2662AVV8A:cm85" if MCUX_HW_DEVICE_PART_MIMXRT2662AVV8A
     default "MIMXRT2662CHPAA:cm85" if MCUX_HW_DEVICE_PART_MIMXRT2662CHPAA
     default "MIMXRT2662CVVAA:cm85" if MCUX_HW_DEVICE_PART_MIMXRT2662CVVAA
     default "MIMXRT2662DHPAA:cm85" if MCUX_HW_DEVICE_PART_MIMXRT2662DHPAA
@@ -135,7 +140,7 @@ config MCUX_TOOLCHAIN_MDK_CPU_IDENTIFIER
 
 config MCUX_TOOLCHAIN_JLINK_CPU_IDENTIFIER
     string
-    default "MIMXRT2662xxxxx_M85" if MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
+    default "MIMXRT2662_M85" if MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
 
 # ip information
 
@@ -145,11 +150,6 @@ config MCUX_HW_IP_DriverType_ACMP
     depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
 
 config MCUX_HW_IP_DriverType_ASRC
-    bool
-    default y
-    depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
-
-config MCUX_HW_IP_DriverType_AUDIO_XCVR
     bool
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
@@ -199,10 +199,10 @@ config MCUX_HW_IP_DriverType_DCIF_1
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
 
-# config MCUX_HW_IP_DriverType_DIGTMP
-#     bool
-#     default y
-#     depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
+config MCUX_HW_IP_DriverType_DIGTMP
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
 
 config MCUX_HW_IP_DriverType_EDMA3
     bool
@@ -389,11 +389,6 @@ config MCUX_HW_IP_DriverType_NIC
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
 
-config MCUX_HW_IP_DriverType_NPU
-    bool
-    default y
-    depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
-
 config MCUX_HW_IP_DriverType_PDCON
     bool
     default y
@@ -409,17 +404,7 @@ config MCUX_HW_IP_DriverType_POWERCON
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
 
-config MCUX_HW_IP_DriverType_RT2K_PMU
-    bool
-    default y
-    depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
-
 config MCUX_HW_IP_DriverType_PWM
-    bool
-    default y
-    depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
-
-config MCUX_HW_IP_DriverType_RTC_V2
     bool
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
@@ -435,6 +420,11 @@ config MCUX_HW_IP_DriverType_RESETCON
     depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
 
 config MCUX_HW_IP_DriverType_ROMC
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
+
+config MCUX_HW_IP_DriverType_RT2K_PMU
     bool
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
@@ -455,6 +445,11 @@ config MCUX_HW_IP_DriverType_SAI
     depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
 
 config MCUX_HW_IP_DriverType_SINC
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
+
+config MCUX_HW_IP_DriverType_SPDIF_XCVR
     bool
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
@@ -558,3 +553,4 @@ config MCUX_HW_IP_DriverType_XSPI
     bool
     default y
     depends on MCUX_HW_DEVICE_ID_MIMXRT2662xxxxx
+

@@ -1,12 +1,12 @@
 //*****************************************************************************
+// MIMXRT2663_cm85 startup code
+//
+// Version : 180826
+//*****************************************************************************
+//
 // Copyright 2016-2026 NXP
 //
 // SPDX-License-Identifier: BSD-3-Clause
-//*****************************************************************************
-//
-// MIMXRT2663_cm85 startup code
-// Version : 030626
-//
 //*****************************************************************************
 
 #include <stdint.h>
@@ -389,10 +389,10 @@ WEAK void HSP_EFLEXPWM3_CH1_IRQHandler(void);
 WEAK void HSP_EFLEXPWM3_CH2_IRQHandler(void);
 WEAK void HSP_EFLEXPWM3_CH3_IRQHandler(void);
 WEAK void HSP_EFLEXPWM3_ERROR_IRQHandler(void);
-WEAK void HSP_QTPM0_CH0_IRQHandler(void);
-WEAK void HSP_QTPM0_CH1_IRQHandler(void);
-WEAK void HSP_QTPM0_CH2_IRQHandler(void);
-WEAK void HSP_QTPM0_CH3_IRQHandler(void);
+WEAK void HSP_QTPM0_IRQHandler(void);
+WEAK void HSP_QTPM1_IRQHandler(void);
+WEAK void HSP_QTPM2_IRQHandler(void);
+WEAK void HSP_QTPM3_IRQHandler(void);
 WEAK void Reserved157_IRQHandler(void);
 WEAK void Reserved158_IRQHandler(void);
 WEAK void Reserved159_IRQHandler(void);
@@ -476,10 +476,10 @@ WEAK void WAKE_EWM_IRQHandler(void);
 WEAK void WAKE_FREQME_IRQHandler(void);
 WEAK void WAKE_LPTMR0_IRQHandler(void);
 WEAK void WAKE_LPTMR1_IRQHandler(void);
-WEAK void WAKE_QTPM_CH0_IRQHandler(void);
-WEAK void WAKE_QTPM_CH1_IRQHandler(void);
-WEAK void WAKE_QTPM_CH2_IRQHandler(void);
-WEAK void WAKE_QTPM_CH3_IRQHandler(void);
+WEAK void WAKE_QTPM0_IRQHandler(void);
+WEAK void WAKE_QTPM1_IRQHandler(void);
+WEAK void WAKE_QTPM2_IRQHandler(void);
+WEAK void WAKE_QTPM3_IRQHandler(void);
 WEAK void WAKE_SWT0_IRQHandler(void);
 WEAK void WAKE_SWT1_IRQHandler(void);
 WEAK void Reserved246_IRQHandler(void);
@@ -500,7 +500,7 @@ WEAK void WAKE_PDM_HWVAD_EVENT_IRQHandler(void);
 WEAK void WAKE_PDM_HWVAD_ERROR_IRQHandler(void);
 WEAK void Reserved262_IRQHandler(void);
 WEAK void VBAT_BBSM_INT0_IRQHandler(void);
-WEAK void VBAT_BBSM_INT1_IRQHandler(void);
+WEAK void Reserved264_IRQHandler(void);
 WEAK void VBAT_TDET_IRQHandler(void);
 WEAK void VBAT_LPTMR_IRQHandler(void);
 WEAK void VBAT_RTC_IRQHandler(void);
@@ -679,10 +679,7 @@ void HSP_EFLEXPWM3_CH1_DriverIRQHandler(void) ALIAS(DefaultISR);
 void HSP_EFLEXPWM3_CH2_DriverIRQHandler(void) ALIAS(DefaultISR);
 void HSP_EFLEXPWM3_CH3_DriverIRQHandler(void) ALIAS(DefaultISR);
 void HSP_EFLEXPWM3_ERROR_DriverIRQHandler(void) ALIAS(DefaultISR);
-void HSP_QTPM0_CH0_DriverIRQHandler(void) ALIAS(DefaultISR);
-void HSP_QTPM0_CH1_DriverIRQHandler(void) ALIAS(DefaultISR);
-void HSP_QTPM0_CH2_DriverIRQHandler(void) ALIAS(DefaultISR);
-void HSP_QTPM0_CH3_DriverIRQHandler(void) ALIAS(DefaultISR);
+void TPM_DriverIRQHandler(uint32_t instance) ALIAS(DefaultISR1);
 void Reserved157_DriverIRQHandler(void) ALIAS(DefaultISR);
 void Reserved158_DriverIRQHandler(void) ALIAS(DefaultISR);
 void Reserved159_DriverIRQHandler(void) ALIAS(DefaultISR);
@@ -744,10 +741,6 @@ void WAKE_EWM_DriverIRQHandler(void) ALIAS(DefaultISR);
 void WAKE_FREQME_DriverIRQHandler(void) ALIAS(DefaultISR);
 void WAKE_LPTMR0_DriverIRQHandler(void) ALIAS(DefaultISR);
 void WAKE_LPTMR1_DriverIRQHandler(void) ALIAS(DefaultISR);
-void WAKE_QTPM_CH0_DriverIRQHandler(void) ALIAS(DefaultISR);
-void WAKE_QTPM_CH1_DriverIRQHandler(void) ALIAS(DefaultISR);
-void WAKE_QTPM_CH2_DriverIRQHandler(void) ALIAS(DefaultISR);
-void WAKE_QTPM_CH3_DriverIRQHandler(void) ALIAS(DefaultISR);
 void WAKE_SWT0_DriverIRQHandler(void) ALIAS(DefaultISR);
 void WAKE_SWT1_DriverIRQHandler(void) ALIAS(DefaultISR);
 void Reserved246_DriverIRQHandler(void) ALIAS(DefaultISR);
@@ -762,7 +755,7 @@ void PDM_HwvadEventHandleIRQ(uint32_t instance) ALIAS(DefaultISR1);
 void PDM_HwvadErrorHandleIRQ(uint32_t instance) ALIAS(DefaultISR1);
 void Reserved262_DriverIRQHandler(void) ALIAS(DefaultISR);
 void VBAT_BBSM_INT0_DriverIRQHandler(void) ALIAS(DefaultISR);
-void VBAT_BBSM_INT1_DriverIRQHandler(void) ALIAS(DefaultISR);
+void Reserved264_DriverIRQHandler(void) ALIAS(DefaultISR);
 void VBAT_TDET_DriverIRQHandler(void) ALIAS(DefaultISR);
 void VBAT_LPTMR_DriverIRQHandler(void) ALIAS(DefaultISR);
 void VBAT_RTC_DriverIRQHandler(void) ALIAS(DefaultISR);
@@ -1607,24 +1600,24 @@ WEAK void HSP_EFLEXPWM3_ERROR_IRQHandler(void)
     HSP_EFLEXPWM3_ERROR_DriverIRQHandler();
 }
 
-WEAK void HSP_QTPM0_CH0_IRQHandler(void)
+WEAK void HSP_QTPM0_IRQHandler(void)
 {
-    HSP_QTPM0_CH0_DriverIRQHandler();
+    TPM_DriverIRQHandler(0U);
 }
 
-WEAK void HSP_QTPM0_CH1_IRQHandler(void)
+WEAK void HSP_QTPM1_IRQHandler(void)
 {
-    HSP_QTPM0_CH1_DriverIRQHandler();
+    TPM_DriverIRQHandler(1U);
 }
 
-WEAK void HSP_QTPM0_CH2_IRQHandler(void)
+WEAK void HSP_QTPM2_IRQHandler(void)
 {
-    HSP_QTPM0_CH2_DriverIRQHandler();
+    TPM_DriverIRQHandler(2U);
 }
 
-WEAK void HSP_QTPM0_CH3_IRQHandler(void)
+WEAK void HSP_QTPM3_IRQHandler(void)
 {
-    HSP_QTPM0_CH3_DriverIRQHandler();
+    TPM_DriverIRQHandler(3U);
 }
 
 WEAK void Reserved157_IRQHandler(void)
@@ -1752,21 +1745,14 @@ WEAK void HSP_FLEXCAN0_IRQHandler(void)
     FLEXCAN_DriverIRQHandler(0U);
 }
 
+WEAK void HSP_FLEXCAN0_ERROR_IRQHandler(void)
+{
+    HSP_FLEXCAN0_ERROR_DriverIRQHandler();
+}
 
 WEAK void HSP_FLEXCAN1_IRQHandler(void)
 {
     FLEXCAN_DriverIRQHandler(1U);
-}
-
-
-WEAK void HSP_FLEXCAN2_IRQHandler(void)
-{
-    FLEXCAN_DriverIRQHandler(2U);
-}
-
-WEAK void HSP_FLEXCAN0_ERROR_IRQHandler(void)
-{
-    HSP_FLEXCAN0_ERROR_DriverIRQHandler();
 }
 
 WEAK void HSP_FLEXCAN1_ERROR_IRQHandler(void)
@@ -1774,11 +1760,15 @@ WEAK void HSP_FLEXCAN1_ERROR_IRQHandler(void)
     HSP_FLEXCAN1_ERROR_DriverIRQHandler();
 }
 
+WEAK void HSP_FLEXCAN2_IRQHandler(void)
+{
+    FLEXCAN_DriverIRQHandler(2U);
+}
+
 WEAK void HSP_FLEXCAN2_ERROR_IRQHandler(void)
 {
     HSP_FLEXCAN2_ERROR_DriverIRQHandler();
 }
-
 
 WEAK void HSP_FLEXIO0_IRQHandler(void)
 {
@@ -2045,24 +2035,24 @@ WEAK void WAKE_LPTMR1_IRQHandler(void)
     WAKE_LPTMR1_DriverIRQHandler();
 }
 
-WEAK void WAKE_QTPM_CH0_IRQHandler(void)
+WEAK void WAKE_QTPM0_IRQHandler(void)
 {
-    WAKE_QTPM_CH0_DriverIRQHandler();
+    TPM_DriverIRQHandler(4U);
 }
 
-WEAK void WAKE_QTPM_CH1_IRQHandler(void)
+WEAK void WAKE_QTPM1_IRQHandler(void)
 {
-    WAKE_QTPM_CH1_DriverIRQHandler();
+    TPM_DriverIRQHandler(5U);
 }
 
-WEAK void WAKE_QTPM_CH2_IRQHandler(void)
+WEAK void WAKE_QTPM2_IRQHandler(void)
 {
-    WAKE_QTPM_CH2_DriverIRQHandler();
+    TPM_DriverIRQHandler(6U);
 }
 
-WEAK void WAKE_QTPM_CH3_IRQHandler(void)
+WEAK void WAKE_QTPM3_IRQHandler(void)
 {
-    WAKE_QTPM_CH3_DriverIRQHandler();
+    TPM_DriverIRQHandler(7U);
 }
 
 WEAK void WAKE_SWT0_IRQHandler(void)
@@ -2165,9 +2155,9 @@ WEAK void VBAT_BBSM_INT0_IRQHandler(void)
     VBAT_BBSM_INT0_DriverIRQHandler();
 }
 
-WEAK void VBAT_BBSM_INT1_IRQHandler(void)
+WEAK void Reserved264_IRQHandler(void)
 {
-    VBAT_BBSM_INT1_DriverIRQHandler();
+    Reserved264_DriverIRQHandler();
 }
 
 WEAK void VBAT_TDET_IRQHandler(void)
@@ -2754,10 +2744,10 @@ void (*const STARTUP_VT_SYMBOL[])(void) = {
     HSP_EFLEXPWM3_CH2_IRQHandler,    // 150: HSP EFLEXPWM3 channel 2 interrupt
     HSP_EFLEXPWM3_CH3_IRQHandler,    // 151: HSP EFLEXPWM3 channel 3 interrupt
     HSP_EFLEXPWM3_ERROR_IRQHandler,  // 152: HSP EFLEXPWM3 fault interrupt
-    HSP_QTPM0_CH0_IRQHandler,        // 153: HSP QUADTPM0 channel 0 interrupt
-    HSP_QTPM0_CH1_IRQHandler,        // 154: HSP QUADTPM0 channel 1 interrupt
-    HSP_QTPM0_CH2_IRQHandler,        // 155: HSP QUADTPM0 channel 2 interrupt
-    HSP_QTPM0_CH3_IRQHandler,        // 156: HSP QUADTPM0 channel 3 interrupt
+    HSP_QTPM0_IRQHandler,            // 153: HSP QUADTPM0 interrupt
+    HSP_QTPM1_IRQHandler,            // 154: HSP QUADTPM1 interrupt
+    HSP_QTPM2_IRQHandler,            // 155: HSP QUADTPM2 interrupt
+    HSP_QTPM3_IRQHandler,            // 156: HSP QUADTPM3 interrupt
     Reserved157_IRQHandler,          // 157: Reserved interrupt
     Reserved158_IRQHandler,          // 158: Reserved interrupt
     Reserved159_IRQHandler,          // 159: Reserved interrupt
@@ -2841,10 +2831,10 @@ void (*const STARTUP_VT_SYMBOL[])(void) = {
     WAKE_FREQME_IRQHandler,          // 237: WAKE FREQME interrupt
     WAKE_LPTMR0_IRQHandler,          // 238: WAKE LPTMR0 interrupt
     WAKE_LPTMR1_IRQHandler,          // 239: WAKE LPTMR1 interrupt
-    WAKE_QTPM_CH0_IRQHandler,        // 240: WAKE QTPM channel 0 interrupt
-    WAKE_QTPM_CH1_IRQHandler,        // 241: WAKE QTPM channel 1 interrupt
-    WAKE_QTPM_CH2_IRQHandler,        // 242: WAKE QTPM channel 2 interrupt
-    WAKE_QTPM_CH3_IRQHandler,        // 243: WAKE QTPM channel 3 interrupt
+    WAKE_QTPM0_IRQHandler,           // 240: WAKE QTPM0 interrupt
+    WAKE_QTPM1_IRQHandler,           // 241: WAKE QTPM1 interrupt
+    WAKE_QTPM2_IRQHandler,           // 242: WAKE QTPM2 interrupt
+    WAKE_QTPM3_IRQHandler,           // 243: WAKE QTPM3 interrupt
     WAKE_SWT0_IRQHandler,            // 244: WAKE SWT0 interrupt
     WAKE_SWT1_IRQHandler,            // 245: WAKE SWT1 interrupt
     Reserved246_IRQHandler,          // 246: Reserved interrupt
@@ -2865,13 +2855,13 @@ void (*const STARTUP_VT_SYMBOL[])(void) = {
     WAKE_PDM_HWVAD_ERROR_IRQHandler, // 261: WAKE MICIFL Hwvad Exception Interrupt
     Reserved262_IRQHandler,          // 262: Reserved interrupt
     VBAT_BBSM_INT0_IRQHandler,       // 263: BBSM: Alarm interrupt0
-    VBAT_BBSM_INT1_IRQHandler,       // 264: BBSM: Alarm interrupt1
+    Reserved264_IRQHandler,          // 264: Reserved interrupt
     VBAT_TDET_IRQHandler,            // 265: VBAT TDET interrupt
     VBAT_LPTMR_IRQHandler,           // 266: VBAT LPTMR interrupt
     VBAT_RTC_IRQHandler,             // 267: VBAT RTC interrupt
     VBAT_GPIO_CH0_IRQHandler,        // 268: VBAT GPIO channel 0 interrupt
     VBAT_GPIO_CH1_IRQHandler,        // 269: VBAT GPIO channel 1 interrupt
-    VBAT_VBATCON_IRQHandler,         // 270: vabtcon Interrupt Request
+    VBAT_VBATCON_IRQHandler,         // 270: vbatcon Interrupt Request
     AUDIO_TRDC_IRQHandler,           // 271: AUDIO TRDC interrupt
     AUDIO_SAI0_IRQHandler,           // 272: AUDIO SAI0 interrupt
     AUDIO_SAI1_IRQHandler,           // 273: AUDIO SAI1 interrupt
@@ -2916,14 +2906,14 @@ void (*const STARTUP_VT_SYMBOL[])(void) = {
     COMM_ENET_QOS_IRQHandler,        // 312: COMM ENET_QOS interrupt
     COMM_ENET_QOS_TX_IRQHandler,     // 313: ENET_QOS: Per Channel Transmit Interrupt Signal To Host System
     COMM_ENET_QOS_RX_IRQHandler,     // 314: ENET_QOS: Per Channel Receive Interrupt Signal To Host System
-    COMM_ENET_TX_IRQHandler,         // 315: COMM ENET RX interrupt
-    COMM_ENET_RX_IRQHandler,         // 316: COMM ENET TX interrupt
+    COMM_ENET_TX_IRQHandler,         // 315: COMM ENET TX interrupt
+    COMM_ENET_RX_IRQHandler,         // 316: COMM ENET RX interrupt
     COMM_ENET_OTHER_IRQHandler,      // 317: ENET_1G_MAC: ETH OTHER_INT0_17
     COMM_ENET_1588_IRQHandler,       // 318: ENET_1G_MAC: IEEE-1588 Timer Interrupt
     COMM_FLEXSPI_SLV_IRQHandler,     // 319: COMM FlexSPI follower interrupt
-    COMM_USB0_IRQHandler,            // 320: COMM USB0 interrupt
+    COMM_USB0_IRQHandler,            // 320: COMM USBHS interrupt
     COMM_USBPHY_IRQHandler,          // 321: COMM USBPHY interrupt
-    COMM_USB1_IRQHandler,            // 322: COMM USB1 interrupt
+    COMM_USB1_IRQHandler,            // 322: COMM USBFS interrupt
     COMM_USDHC0_IRQHandler,          // 323: COMM USDHC0 interrupt
     COMM_USDHC1_IRQHandler,          // 324: COMM USDHC1 interrupt
     Reserved325_IRQHandler,          // 325: Reserved interrupt

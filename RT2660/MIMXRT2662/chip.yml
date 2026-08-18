@@ -39,15 +39,39 @@ device.hardware_data:
             frequency_mhz: 700
         memory:
           memoryBlock:
-            - id: "SRAM_OC"
-              name: "SRAM_OC"
-              addr: 0x20360000
-              size: 0x20000
+            - id: "SRAM2"
+              name: "SRAM2"
+              addr: 0x22080000
+              size: 0x40000
+              type: "RAM"
+              access: "RW"
+            - id: "SRAM1"
+              name: "SRAM1"
+              addr: 0x22040000
+              size: 0x40000
+              type: "RAM"
+              access: "RW"
+            - id: "SRAM0"
+              name: "SRAM0"
+              addr: 0x22000000
+              size: 0x40000
               type: "RAM"
               access: "RW"
               default: true
+            - id: "ITCM"
+              name: "ITCM"
+              addr: 0x0
+              size: 0x40000
+              type: "RAM"
+              access: "RW"
+            - id: "DTCM"
+              name: "DTCM"
+              addr: 0x20000000
+              size: 0x40000
+              type: "RAM"
+              access: "RW"
         total_memory:
-          ram_size_kb: 128
+          ram_size_kb: 1280
           flash_size_kb: 0
         part:
           - name: "MIMXRT2662DHPAA"
@@ -57,13 +81,13 @@ device.hardware_data:
           - name: "MIMXRT2662XHP8A"
           - name: "MIMXRT2662XVV8A"
           - name: "MIMXRT2662AHP8A"
+          - name: "MIMXRT2662AVV8A"
         ips:
           - "DriverFeature_FLEXCAN_DMA"
           - "DriverFeature_KHCI_HOST"
           - "DriverFeature_RTC_IRTC"
           - "DriverType_ACMP"
           - "DriverType_ASRC"
-          - "DriverType_AUDIO_XCVR"
           - "DriverType_AXBS"
           - "DriverType_CACHE"
           - "DriverType_CAN_MB"
@@ -105,13 +129,12 @@ device.hardware_data:
           - "DriverType_MCM"
           - "DriverType_MEMCON"
           - "DriverType_MEMORY"
-          - "DriverType_MIPI_CSI"
+          - "DriverType_MIPI_CSI2RX_RAMBUS"
           - "DriverType_MIPI_DSI_SPLIT_1"
           - "DriverType_MMU"
           - "DriverType_MODCON"
           - "DriverType_MQS"
           - "DriverType_NIC"
-          - "DriverType_NPU"
           - "DriverType_PDCON"
           - "DriverType_PDM"
           - "DriverType_POWERCON"
@@ -124,6 +147,7 @@ device.hardware_data:
           - "DriverType_S3MU"
           - "DriverType_SAI"
           - "DriverType_SINC"
+          - "DriverType_SPDIF_XCVR"
           - "DriverType_SRAM"
           - "DriverType_SRAMCTL"
           - "DriverType_SRAMC_1"

@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for I3C
@@ -61,13 +63,13 @@
 #if !defined(PERI_I3C_H_)
 #define PERI_I3C_H_                              /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -132,7 +134,10 @@ typedef struct {
        uint8_t RESERVED_1[4];
   __I  uint32_t SRDATAH;                           /**< Target Read Data Halfword, offset: 0x48 */
        uint8_t RESERVED_2[8];
-  __O  uint32_t SWDATAB1;                          /**< Target Write Data Byte, offset: 0x54 */
+  union {                                          /* offset: 0x54 */
+    __O  uint32_t SWDATAB1;                          /**< Target Write Data Byte, offset: 0x54 */
+    __O  uint32_t SWDATAH1;                          /**< Target Write Data Halfword, offset: 0x54 */
+  };
        uint8_t RESERVED_3[4];
   __I  uint32_t SCAPABILITIES2;                    /**< Target Capabilities 2, offset: 0x5C */
   __I  uint32_t SCAPABILITIES;                     /**< Target Capabilities, offset: 0x60 */
@@ -161,7 +166,10 @@ typedef struct {
   __I  uint32_t MRDATAB;                           /**< Controller Read Data Byte, offset: 0xC0 */
        uint8_t RESERVED_7[4];
   __I  uint32_t MRDATAH;                           /**< Controller Read Data Halfword, offset: 0xC8 */
-  __O  uint32_t MWDATAB1;                          /**< Controller Write Byte Data 1 (to Bus), offset: 0xCC */
+  union {                                          /* offset: 0xCC */
+    __O  uint32_t MWDATAB1;                          /**< Controller Write Byte Data 1 (to Bus), offset: 0xCC */
+    __O  uint32_t MWDATAH1;                          /**< Controller Write Halfword Data (to Bus), offset: 0xCC */
+  };
   union {                                          /* offset: 0xD0 */
     __O  uint32_t MWMSG_SDR_CONTROL;                 /**< Controller Write Message Control in SDR mode, offset: 0xD0 */
     __O  uint32_t MWMSG_SDR_DATA;                    /**< Controller Write Message Data in SDR mode, offset: 0xD0 */
@@ -303,13 +311,13 @@ typedef struct {
  */
 #define I3C_SCONFIG_S0IGNORE(x)                  (((uint32_t)(((uint32_t)(x)) << I3C_SCONFIG_S0IGNORE_SHIFT)) & I3C_SCONFIG_S0IGNORE_MASK)
 
-#define I3C_SCONFIG_DDROK_MASK                   (0x10U)
-#define I3C_SCONFIG_DDROK_SHIFT                  (4U)
-/*! DDROK - Double Data Rate OK
- *  0b0..Do not allow HDR-DDR messaging
- *  0b1..Allow HDR-DDR messaging
+#define I3C_SCONFIG_HDROK_MASK                   (0x10U)
+#define I3C_SCONFIG_HDROK_SHIFT                  (4U)
+/*! HDROK - HDR OK
+ *  0b0..Disable HDR OK
+ *  0b1..Enable HDR OK
  */
-#define I3C_SCONFIG_DDROK(x)                     (((uint32_t)(((uint32_t)(x)) << I3C_SCONFIG_DDROK_SHIFT)) & I3C_SCONFIG_DDROK_MASK)
+#define I3C_SCONFIG_HDROK(x)                     (((uint32_t)(((uint32_t)(x)) << I3C_SCONFIG_HDROK_SHIFT)) & I3C_SCONFIG_HDROK_MASK)
 
 #define I3C_SCONFIG_OFFLINE_MASK                 (0x200U)
 #define I3C_SCONFIG_OFFLINE_SHIFT                (9U)
@@ -1120,6 +1128,15 @@ typedef struct {
 #define I3C_SWDATAB1_DATA(x)                     (((uint32_t)(((uint32_t)(x)) << I3C_SWDATAB1_DATA_SHIFT)) & I3C_SWDATAB1_DATA_MASK)
 /*! @} */
 
+/*! @name SWDATAH1 - Target Write Data Halfword */
+/*! @{ */
+
+#define I3C_SWDATAH1_DATA_MASK                   (0xFFFFU)
+#define I3C_SWDATAH1_DATA_SHIFT                  (0U)
+/*! DATA - Data */
+#define I3C_SWDATAH1_DATA(x)                     (((uint32_t)(((uint32_t)(x)) << I3C_SWDATAH1_DATA_SHIFT)) & I3C_SWDATAH1_DATA_MASK)
+/*! @} */
+
 /*! @name SCAPABILITIES2 - Target Capabilities 2 */
 /*! @{ */
 
@@ -1135,6 +1152,14 @@ typedef struct {
  *  0b1..Supported
  */
 #define I3C_SCAPABILITIES2_I2C10B(x)             (((uint32_t)(((uint32_t)(x)) << I3C_SCAPABILITIES2_I2C10B_SHIFT)) & I3C_SCAPABILITIES2_I2C10B_MASK)
+
+#define I3C_SCAPABILITIES2_I2CRST_MASK           (0x20U)
+#define I3C_SCAPABILITIES2_I2CRST_SHIFT          (5U)
+/*! I2CRST - I2C Software Reset
+ *  0b0..Not supported
+ *  0b1..Supported
+ */
+#define I3C_SCAPABILITIES2_I2CRST(x)             (((uint32_t)(((uint32_t)(x)) << I3C_SCAPABILITIES2_I2CRST_SHIFT)) & I3C_SCAPABILITIES2_I2CRST_MASK)
 
 #define I3C_SCAPABILITIES2_I2CDEVID_MASK         (0x40U)
 #define I3C_SCAPABILITIES2_I2CDEVID_SHIFT        (6U)
@@ -1475,7 +1500,7 @@ typedef struct {
 /*! ADDR - Address */
 #define I3C_MCTRL_ADDR(x)                        (((uint32_t)(((uint32_t)(x)) << I3C_MCTRL_ADDR_SHIFT)) & I3C_MCTRL_ADDR_MASK)
 
-#define I3C_MCTRL_RDTERM_MASK                    (0xFF0000U)
+#define I3C_MCTRL_RDTERM_MASK                    (0x7FF0000U)
 #define I3C_MCTRL_RDTERM_SHIFT                   (16U)
 /*! RDTERM - Read Terminate Counter */
 #define I3C_MCTRL_RDTERM(x)                      (((uint32_t)(((uint32_t)(x)) << I3C_MCTRL_RDTERM_SHIFT)) & I3C_MCTRL_RDTERM_MASK)
@@ -1866,6 +1891,16 @@ typedef struct {
 /*! @name MERRWARN - Controller Errors and Warnings */
 /*! @{ */
 
+#define I3C_MERRWARN_URUN_MASK                   (0x2U)
+#define I3C_MERRWARN_URUN_SHIFT                  (1U)
+/*! URUN - Underrun Error Flag
+ *  0b0..No effect
+ *  0b0..No error
+ *  0b1..Clear the flag
+ *  0b1..Error
+ */
+#define I3C_MERRWARN_URUN(x)                     (((uint32_t)(((uint32_t)(x)) << I3C_MERRWARN_URUN_SHIFT)) & I3C_MERRWARN_URUN_MASK)
+
 #define I3C_MERRWARN_NACK_MASK                   (0x4U)
 #define I3C_MERRWARN_NACK_SHIFT                  (2U)
 /*! NACK - Not Acknowledge Error Flag
@@ -1885,6 +1920,16 @@ typedef struct {
  *  0b1..Error
  */
 #define I3C_MERRWARN_WRABT(x)                    (((uint32_t)(((uint32_t)(x)) << I3C_MERRWARN_WRABT_SHIFT)) & I3C_MERRWARN_WRABT_MASK)
+
+#define I3C_MERRWARN_TERM_MASK                   (0x10U)
+#define I3C_MERRWARN_TERM_SHIFT                  (4U)
+/*! TERM - Terminate Error Flag
+ *  0b0..No effect
+ *  0b0..No error
+ *  0b1..Clear the flag
+ *  0b1..Error
+ */
+#define I3C_MERRWARN_TERM(x)                     (((uint32_t)(((uint32_t)(x)) << I3C_MERRWARN_TERM_SHIFT)) & I3C_MERRWARN_TERM_MASK)
 
 #define I3C_MERRWARN_HPAR_MASK                   (0x200U)
 #define I3C_MERRWARN_HPAR_SHIFT                  (9U)
@@ -2166,6 +2211,15 @@ typedef struct {
 #define I3C_MWDATAB1_VALUE(x)                    (((uint32_t)(((uint32_t)(x)) << I3C_MWDATAB1_VALUE_SHIFT)) & I3C_MWDATAB1_VALUE_MASK)
 /*! @} */
 
+/*! @name MWDATAH1 - Controller Write Halfword Data (to Bus) */
+/*! @{ */
+
+#define I3C_MWDATAH1_VALUE_MASK                  (0xFFFFU)
+#define I3C_MWDATAH1_VALUE_SHIFT                 (0U)
+/*! VALUE - Value */
+#define I3C_MWDATAH1_VALUE(x)                    (((uint32_t)(((uint32_t)(x)) << I3C_MWDATAH1_VALUE_SHIFT)) & I3C_MWDATAH1_VALUE_MASK)
+/*! @} */
+
 /*! @name MWMSG_SDR_CONTROL - Controller Write Message Control in SDR mode */
 /*! @{ */
 
@@ -2234,7 +2288,7 @@ typedef struct {
 /*! @name MWMSG_DDR_CONTROL2 - Controller Write Message in DDR Mode Control 2 */
 /*! @{ */
 
-#define I3C_MWMSG_DDR_CONTROL2_LEN_MASK          (0x3FFU)
+#define I3C_MWMSG_DDR_CONTROL2_LEN_MASK          (0x7FFU)
 #define I3C_MWMSG_DDR_CONTROL2_LEN_SHIFT         (0U)
 /*! LEN - Length of Message */
 #define I3C_MWMSG_DDR_CONTROL2_LEN(x)            (((uint32_t)(((uint32_t)(x)) << I3C_MWMSG_DDR_CONTROL2_LEN_SHIFT)) & I3C_MWMSG_DDR_CONTROL2_LEN_MASK)

@@ -3,7 +3,6 @@
 **     Processors:          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
@@ -14,9 +13,9 @@
 **                          Keil ARM C/C++ Compiler
 **                          MCUXpresso Compiler
 **
-**     Reference manual:    iMXRT2660RM Rev.2 DraftA, 05/2024
+**     Reference manual:    iMXRT2660RM Rev.1 DraftN, 08/2026
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT2661
@@ -58,17 +57,11 @@
 #include "PERI_CGUANA.h"
 #include "PERI_CMP.h"
 #include "PERI_CRC.h"
-#include "PERI_CSI.h"
 #include "PERI_DCIF.h"
 #include "PERI_DEBUGMAILBOX.h"
 #include "PERI_DIGTMP.h"
 #include "PERI_DMA.h"
 #include "PERI_DMA5.h"
-#include "PERI_DSI2_HOST.h"
-#include "PERI_DSI2_HOST_APB_PKT_IF.h"
-#include "PERI_DSI2_HOST_DBI_IF.h"
-#include "PERI_DSI2_HOST_VID_IF.h"
-#include "PERI_DSI2_TX_PHY.h"
 #include "PERI_ENET.h"
 #include "PERI_ENET_QOS.h"
 #include "PERI_EQDC.h"
@@ -96,7 +89,6 @@
 #include "PERI_MCM.h"
 #include "PERI_MEMCON_GLOBAL.h"
 #include "PERI_MEMCON_SLICE.h"
-#include "PERI_MIPI_CSI2RX.h"
 #include "PERI_MMU.h"
 #include "PERI_MODCON.h"
 #include "PERI_NIC.h"

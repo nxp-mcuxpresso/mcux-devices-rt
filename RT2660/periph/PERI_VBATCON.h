@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for VBATCON
@@ -61,13 +63,13 @@
 #if !defined(PERI_VBATCON_H_)
 #define PERI_VBATCON_H_                          /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -124,7 +126,7 @@ typedef struct {
        uint8_t RESERVED_1[76];
   __IO uint32_t CLOCK_CTRL;                        /**< Clock Control, offset: 0x64 */
        uint8_t RESERVED_2[664];
-       uint32_t GPR[VBATCON_GPR_COUNT];            /**< General Purpose Register, array offset: 0x300, array step: 0x4 */
+  __IO uint32_t GPR[VBATCON_GPR_COUNT];            /**< General Purpose Register, array offset: 0x300, array step: 0x4 */
 } VBATCON_Type;
 
 /* ----------------------------------------------------------------------------
@@ -205,6 +207,14 @@ typedef struct {
  *  0b1..Enables
  */
 #define VBATCON_CTRL_LONG_PRESS_EN(x)            (((uint32_t)(((uint32_t)(x)) << VBATCON_CTRL_LONG_PRESS_EN_SHIFT)) & VBATCON_CTRL_LONG_PRESS_EN_MASK)
+
+#define VBATCON_CTRL_TOSP_MASK                   (0x2000000U)
+#define VBATCON_CTRL_TOSP_SHIFT                  (25U)
+/*! TOSP - Turn Off System Power
+ *  0b0..Leaves the system power on.
+ *  0b1..Turns off the system power.
+ */
+#define VBATCON_CTRL_TOSP(x)                     (((uint32_t)(((uint32_t)(x)) << VBATCON_CTRL_TOSP_SHIFT)) & VBATCON_CTRL_TOSP_MASK)
 
 #define VBATCON_CTRL_AEC_MASK                    (0x4000000U)
 #define VBATCON_CTRL_AEC_SHIFT                   (26U)
@@ -357,6 +367,15 @@ typedef struct {
  *  0b1..Stable
  */
 #define VBATCON_CLOCK_CTRL_OTS(x)                (((uint32_t)(((uint32_t)(x)) << VBATCON_CLOCK_CTRL_OTS_SHIFT)) & VBATCON_CLOCK_CTRL_OTS_MASK)
+/*! @} */
+
+/*! @name GPR - General Purpose Register */
+/*! @{ */
+
+#define VBATCON_GPR_GPR_MASK                     (0xFFFFFFFFU)
+#define VBATCON_GPR_GPR_SHIFT                    (0U)
+/*! GPR - 32 bits of the GPR. */
+#define VBATCON_GPR_GPR(x)                       (((uint32_t)(((uint32_t)(x)) << VBATCON_GPR_GPR_SHIFT)) & VBATCON_GPR_GPR_MASK)
 /*! @} */
 
 

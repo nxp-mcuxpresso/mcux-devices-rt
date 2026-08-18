@@ -1,26 +1,24 @@
 /*
 ** ###################################################################
-**     Processors:          MIMXRT2662CVJ5A
-**                          MIMXRT2662CVJ5B
-**                          MIMXRT2662CVL5A
-**                          MIMXRT2662CVL5B
-**                          MIMXRT2662DVJ6A
-**                          MIMXRT2662DVJ6B
-**                          MIMXRT2662DVL6A
-**                          MIMXRT2662DVL6B
-**                          MIMXRT2662DVN6B
-**                          MIMXRT2662XVN5B
+**     Processors:          MIMXRT2662AHP8A_cm85
+**                          MIMXRT2662AVV8A_cm85
+**                          MIMXRT2662CHPAA_cm85
+**                          MIMXRT2662CVVAA_cm85
+**                          MIMXRT2662DHPAA_cm85
+**                          MIMXRT2662DVVAA_cm85
+**                          MIMXRT2662XHP8A_cm85
+**                          MIMXRT2662XVV8A_cm85
 **
 **     Compiler:            GNU C Compiler
-**     Reference manual:    IMXRT2660RM Rev.3, 07/2021 | IMXRT266XSRM Rev.0
-**     Version:             rev. 0.2, 2022-03-25
-**     Build:               b241024
+**     Reference manual:    iMXRT2660RM Rev.1 DraftN, 08/2026
+**     Version:             rev. 1.0, 2026-08-18
+**     Build:               b260818
 **
 **     Abstract:
 **         Linker file for the GNU C Compiler
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2026 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -29,267 +27,394 @@
 ** ###################################################################
 */
 
-/* Entry Point */
+
 ENTRY(Reset_Handler)
 
-/*
- * RAM Macros
- */
-PSRAM_SIZE             = 0x2000000;   /*32MB*/
-PSRAM_CACHE_SPLIT_SIZE = 0x1800000;   /*24MB*/
-PSRAM_START            = 0x88000000;  /*PSRAM LLC Address*/
-CTCM_START             = 0x0;
-CTCM_SIZE              = 0x40000;
-VTABLE_SIZE            = 0x800;
-DTCM_START             = 0x20000000;
-DTCM_SIZE              = 0x40000;
-OCRAM_START            = 0x22000000;
-OCRAM_CACHE_SPLIT_SIZE = 0x80000;    /*512KB*/
-OCRAM_SIZE             = 0xC0000;    /*768KB*/
+/* ========================== Hardware addresses ========================== */
+/* ======================================================================== */
+m_flash_start          = 0x60000000;
+m_flash_size           = 0x04000000;
+m_itcm_start           = 0x00000000;
+m_itcm_size            = 0x00040000;
+m_dtcm_start           = 0x20000000;
+m_dtcm_size            = 0x00040000;
+m_sram0_start          = 0x22000000;
+m_sram0_size           = 0x00040000;
+m_sram1_start          = 0x22040000;
+m_sram1_size           = 0x00040000;
+m_sram2_start          = 0x22080000;
+m_sram2_size           = 0x00040000;
+m_psram_start          = 0x88000000;
+m_psram_size           = 0x02000000;
 
-/*
- * Deduced Macros
- */
-HEAP_SIZE        = DEFINED(__heap_size__)  ? __heap_size__  : 0x0400;
-STACK_SIZE       = DEFINED(__stack_size__) ? __stack_size__ : 0x0400;
+/* ========================== Offsets and sizes =========================== */
+/* ======================================================================== */
+m_fcb_offset           = 0x400;
+m_fcb_size             = 0x300;
+m_xmcd_offset          = 0xA00;
+m_xmcd_size            = 0x300;
+m_container_offset     = 0x1000;
+m_container_size       = 0x9000;
+m_vector_table_size    = 0x600;
+m_app_image_offset     = 0xC000;
+m_ncache_alloc_size    = 0x01000000;  /* PSRAM last 16M reserved for NCACHE */
 
-/* cache data is in PSRAM */
-DATA_START       = PSRAM_START;
-CACHE_DATA_SIZE  = DEFINED(__heap_noncacheable__) ? PSRAM_CACHE_SPLIT_SIZE : PSRAM_CACHE_SPLIT_SIZE - HEAP_SIZE;
+/* ====================== Region start/end addresses ====================== */
+/* ======================================================================== */
+m_fcb_start            = m_flash_start + m_fcb_offset;
+m_xmcd_start           = m_flash_start + m_xmcd_offset;
+m_container_start      = m_flash_start + m_container_offset;
+m_text_start           = m_flash_start + m_app_image_offset;
+m_text_size            = m_flash_size - m_app_image_offset;
+m_ncache_start         = m_psram_start + m_psram_size - m_ncache_alloc_size;
+m_dataext_start        = m_sram0_start;
+m_dataext_size         = m_sram0_size + m_sram1_size;
 
-/* Option 1, NCACHE in PSRAM*/
-/* NCACHE_DATA_START = PSRAM_START + PSRAM_CACHE_SPLIT_SIZE*/
-/* NCACHE_DATA_SIZE  = DEFINED(__heap_noncacheable__) ? PSRAM_SIZE - PSRAM_CACHE_SPLIT_SIZE - HEAP_SIZE : PSRAM_SIZE - PSRAM_CACHE_SPLIT_SIZE;*/
-/* HEAP_START        = DEFINED(__heap_noncacheable__) ? PSRAM_START + PSRAM_SIZE - HEAP_SIZE : PSRAM_START + PSRAM_CACHE_SPLIT_SIZE - HEAP_SIZE;*/
+_size_cstack_          = DEFINED(__stack_size__) ? __stack_size__ : 0x1000;
+_size_heap_            = DEFINED(__heap_size__)  ? __heap_size__  : 0x1000;
+m_rvt_offset           = DEFINED(__ram_vector_table__) ? m_vector_table_size : 0;
 
-/* Option 2, NCACHE to OCRAM*/
-NCACHE_DATA_START = OCRAM_START + OCRAM_CACHE_SPLIT_SIZE;
-NCACHE_DATA_SIZE  = DEFINED(__heap_noncacheable__) ? OCRAM_SIZE - OCRAM_CACHE_SPLIT_SIZE - HEAP_SIZE : OCRAM_SIZE - OCRAM_CACHE_SPLIT_SIZE;
-HEAP_START        = DEFINED(__heap_noncacheable__) ? OCRAM_START + OCRAM_SIZE - HEAP_SIZE : PSRAM_START + PSRAM_CACHE_SPLIT_SIZE - HEAP_SIZE;
+m_stack_start          = m_dtcm_start + m_dtcm_size - _size_cstack_;
+m_stack_size           = _size_cstack_;
+m_heap_size            = _size_heap_;
+m_heap_start           = DEFINED(__heap_noncacheable__)
+                         ? (m_ncache_start + m_ncache_alloc_size - _size_heap_)
+                         : m_sram2_start;
+m_ncache_size          = m_ncache_alloc_size
+                         - (DEFINED(__heap_noncacheable__) ? _size_heap_ : 0);
 
+m_qacode_start         = m_itcm_start + m_rvt_offset;
+m_qacode_size          = m_itcm_size - m_rvt_offset;
+m_qadata_start         = m_dtcm_start;
+m_qadata_size          = m_dtcm_size - _size_cstack_;
 
-/*
- * Sceneario 1 (heap non-cacheable, put to PSRAM noncacheable):
- *
- *  +------------------------------------------------------------------------------------------------+----------------------------+--------------+
- *  | CTCM (interrupt + text) | DTCM (DATA2) | OCRAM (DATA3) | PSRAM (data)                          | PSRAM (ncache)             | PSRAM (heap) |
- *  +------------------------------------------------------------------------------------------------+----------------------------+--------------+
- *                                                                                                   \___________________________________________/
- *                                                                                                   
- *
- * Sceneario 2 (heap cacheable, put to PSRAM cacheable):
- *
- *  +---------------------------------------------------------------------------------+--------------+-------------------------------------------+
- *  | CTCM (interrupt + text) | DTCM (DATA2) | OCRAM (DATA3) | PSRAM (data)           | PSRAM (heap) | PSRAM (ncache)                            |
- *  +---------------------------------------------------------------------------------+--------------+-------------------------------------------+
- *                                                                                                   \___________________________________________/
- *
- */
+/* ================ Target specific CODE / DATA addresses ================= */
+/* ======================================================================== */
+m_code_start           = m_itcm_start + m_rvt_offset;
+m_code_size            = m_itcm_size - m_rvt_offset;
+m_data_start           = m_psram_start;
+m_data_size            = m_psram_size - m_ncache_alloc_size;  /* PSRAM first 16M */
 
-/* Specify the memory areas */
+/* ====================== Provided symbol fallbacks ======================= */
+/* ======================================================================== */
+PROVIDE(__text_root_start__ = 0);
+PROVIDE(__text_root_end__   = 0);
+PROVIDE(__TEXT_ROM          = 0);
+PROVIDE(__text_start__      = 0);
+PROVIDE(__text_end__        = 0);
+
+/* ============================ Memory regions ============================ */
+/* ======================================================================== */
 MEMORY
 {
-  m_interrupts          (RX)  : ORIGIN = CTCM_START,                           LENGTH = VTABLE_SIZE
-  m_text                (RX)  : ORIGIN = CTCM_START + VTABLE_SIZE,             LENGTH = CTCM_SIZE - VTABLE_SIZE
-  m_data                (RW)  : ORIGIN = DATA_START,                           LENGTH = CACHE_DATA_SIZE
-  m_data2               (RW)  : ORIGIN = DTCM_START,                           LENGTH = DTCM_SIZE
-  m_data3               (RW)  : ORIGIN = OCRAM_START,                          LENGTH = OCRAM_SIZE
-  m_ncache              (RW)  : ORIGIN = NCACHE_DATA_START,                    LENGTH = NCACHE_DATA_SIZE
-  m_heap                (RW)  : ORIGIN = HEAP_START,                           LENGTH = HEAP_SIZE
+  m_fcb_data       (RX) : ORIGIN = m_fcb_start,        LENGTH = m_fcb_size
+  m_xmcd_data      (RX) : ORIGIN = m_xmcd_start,       LENGTH = m_xmcd_size
+  m_container_data (RX) : ORIGIN = m_container_start,  LENGTH = m_container_size
+  m_interrupts     (RX) : ORIGIN = m_text_start,                       LENGTH = m_vector_table_size
+  m_text           (RX) : ORIGIN = m_text_start + m_vector_table_size, LENGTH = m_text_size - m_vector_table_size
+  m_rvt            (RX) : ORIGIN = m_itcm_start,                       LENGTH = m_rvt_offset
+  m_code           (RWX): ORIGIN = m_code_start,                       LENGTH = m_code_size
+  m_data           (RW) : ORIGIN = m_data_start,                       LENGTH = m_data_size
+  m_qadata         (RW) : ORIGIN = m_qadata_start,                     LENGTH = m_qadata_size
+  m_ncache         (RW) : ORIGIN = m_ncache_start,                     LENGTH = m_ncache_size
+  m_heap           (RW) : ORIGIN = m_heap_start,                       LENGTH = m_heap_size
+  m_stack          (RW) : ORIGIN = m_stack_start,                      LENGTH = m_stack_size
+  m_dataext        (RW) : ORIGIN = m_dataext_start,                    LENGTH = m_dataext_size
 }
 
-/* Define output sections */
+REGION_ALIAS("m_qacode", m_code)
+
+/* =============================== Sections =============================== */
+/* ======================================================================== */
 SECTIONS
 {
-  __NCACHE_REGION_START = ORIGIN(m_ncache);
-  __NCACHE_REGION_SIZE  = NCACHE_DATA_SIZE;
+  /* ------------ Boot headers (Flash: FCB / XMCD / Container) ------------ */
+  .fcb       : { KEEP(*(.boot_hdr.fcb)) }        > m_fcb_data
+  .xmcd      : { KEEP(*(.boot_hdr.xmcd_data)) }  > m_xmcd_data
+  .container : { KEEP(*(.boot_hdr.container)) }  > m_container_data
 
-  /* The startup code goes first into internal RAM */
+  /* ------------------------ Vector table (Flash) ------------------------ */
   .interrupts :
   {
-    __VECTOR_TABLE = .;
-    __Vectors = .;
     . = ALIGN(4);
-    KEEP(*(.isr_vector))     /* Startup code */
+    __Vectors = .;
+    KEEP(*(.isr_vector))
     . = ALIGN(4);
   } > m_interrupts
 
-  /* The program code and other data goes into internal RAM */
-  .text :
+  /*  RAM vector table (ITCM[0..0x5FF], reserved when __ram_vector_table__)  */
+  .ram_vector_table (NOLOAD) :
   {
     . = ALIGN(4);
-    *(.text)                 /* .text sections (code) */
-    *(.text*)                /* .text* sections (code) */
-    *(.rodata)               /* .rodata sections (constants, strings, etc.) */
-    *(.rodata*)              /* .rodata* sections (constants, strings, etc.) */
-    *(CodeQuickAccess)       /* quick access code section */
-    *(.glue_7)               /* glue arm to thumb code */
-    *(.glue_7t)              /* glue thumb to arm code */
-    *(.eh_frame)
-    KEEP (*(.init))
-    KEEP (*(.fini))
+  } > m_rvt
+
+  /* ---- Pre-scatter startup (Flash-resident, RO-copied targets only) ---- */
+  /* SCOPE: .text_root bounds ONLY pre-scatter startup CODE.
+   * It does NOT cover .ctors / .dtors / .preinit_array / .init_array /
+   * .fini_array -- those are also Flash-resident but are function-pointer
+   * ARRAYS (data, not code), placed as separate output sections below.
+   * Data arrays are read by __libc_init_array *after* scatter completes,
+   * so they don't need to be inside this bounded startup-code region.
+   *
+   * What lives here:
+   *   Every function reachable from Reset_Handler_C before
+   *   toolchain_manual_init() completes must be attributed
+   *   section(".text.startup") -- Reset_Handler (naked ASM) is
+   *   included via its STARTUP_RESET_ATTR macro. libc
+   *   __libc_init_array / __libc_fini_array + .init / .fini are
+   *   pinned here to save ITCM (one-time-use code).
+   *
+   * __text_root_start__ / __text_root_end__ bracket THIS region only
+   * (code), not the entire Flash-resident footprint. */
+  .text_root :
+  {
     . = ALIGN(4);
+    __text_root_start__ = .;
+    KEEP(*(.text.startup))
+    KEEP(*(.text.startup.*))
+    KEEP(*(.text.__libc_init_array))
+    KEEP(*(.text.__libc_fini_array))
+    KEEP(*(.init))
+    KEEP(*(.fini))
+    . = ALIGN(4);
+    __text_root_end__ = .;
   } > m_text
 
-  .ARM.extab :
+  /* --------------- Main code (.text + ARM unwind tables) ---------------- */
+  .text : ALIGN(4)
   {
+    __text_start__ = .;
+    *(.text)
+    *(.text*)
+    *(.rodata)
+    *(.rodata*)
+    *(.glue_7) *(.glue_7t) *(.eh_frame)
     *(.ARM.extab* .gnu.linkonce.armextab.*)
-  } > m_text
-
-  .ARM :
-  {
     __exidx_start = .;
     *(.ARM.exidx*)
     __exidx_end = .;
-  } > m_text
+    . = ALIGN(4);
+    __text_end__ = .;
+  } > m_code AT > m_text
+  __TEXT_ROM = LOADADDR(.text);
 
- .ctors :
+  /* ---- C runtime init/fini (Flash-resident function-pointer arrays) ---- */
+  .ctors :
   {
     __CTOR_LIST__ = .;
-    /* gcc uses crtbegin.o to find the start of
-       the constructors, so we make sure it is
-       first.  Because this is a wildcard, it
-       doesn't matter if the user does not
-       actually link against crtbegin.o; the
-       linker won't look for a file to match a
-       wildcard.  The wildcard also means that it
-       doesn't matter which directory crtbegin.o
-       is in.  */
-    KEEP (*crtbegin.o(.ctors))
-    KEEP (*crtbegin?.o(.ctors))
-    /* We don't want to include the .ctor section from
-       from the crtend.o file until after the sorted ctors.
-       The .ctor section from the crtend file contains the
-       end of ctors marker and it must be last */
-    KEEP (*(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors))
-    KEEP (*(SORT(.ctors.*)))
-    KEEP (*(.ctors))
+    KEEP(*crtbegin.o(.ctors))
+    KEEP(*crtbegin?.o(.ctors))
+    KEEP(*(EXCLUDE_FILE(*crtend?.o *crtend.o) .ctors))
+    KEEP(*(SORT(.ctors.*)))
+    KEEP(*(.ctors))
     __CTOR_END__ = .;
   } > m_text
-
   .dtors :
   {
     __DTOR_LIST__ = .;
-    KEEP (*crtbegin.o(.dtors))
-    KEEP (*crtbegin?.o(.dtors))
-    KEEP (*(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors))
-    KEEP (*(SORT(.dtors.*)))
-    KEEP (*(.dtors))
+    KEEP(*crtbegin.o(.dtors))
+    KEEP(*crtbegin?.o(.dtors))
+    KEEP(*(EXCLUDE_FILE(*crtend?.o *crtend.o) .dtors))
+    KEEP(*(SORT(.dtors.*)))
+    KEEP(*(.dtors))
     __DTOR_END__ = .;
   } > m_text
-
   .preinit_array :
   {
     PROVIDE_HIDDEN (__preinit_array_start = .);
-    KEEP (*(.preinit_array*))
+    KEEP(*(.preinit_array*))
     PROVIDE_HIDDEN (__preinit_array_end = .);
   } > m_text
-
   .init_array :
   {
     PROVIDE_HIDDEN (__init_array_start = .);
-    KEEP (*(SORT(.init_array.*)))
-    KEEP (*(.init_array*))
+    KEEP(*(SORT(.init_array.*)))
+    KEEP(*(.init_array*))
     PROVIDE_HIDDEN (__init_array_end = .);
   } > m_text
-
   .fini_array :
   {
     PROVIDE_HIDDEN (__fini_array_start = .);
-    KEEP (*(SORT(.fini_array.*)))
-    KEEP (*(.fini_array*))
+    KEEP(*(SORT(.fini_array.*)))
+    KEEP(*(.fini_array*))
     PROVIDE_HIDDEN (__fini_array_end = .);
   } > m_text
+  __etext = .;
 
-  __etext = .;    /* define a global symbol at end of code */
-
-  __VECTOR_RAM = ORIGIN(m_interrupts);
-  __RAM_VECTOR_TABLE_SIZE_BYTES = 0x0;
-
-  __data_flash_start = .; /* Symbol is used by startup for data initialization */
-  .data : AT(__data_flash_start)
+  /* -------- QuickAccess: fast-execute code (VMA=ITCM, LMA=Flash) -------- */
+  .qacode : ALIGN(4)
   {
+    __qacode_start__ = .;
+    *(CodeQuickAccess)
     . = ALIGN(4);
-    __data_start__ = .;      /* create a global symbol at data start */
-    *(CacheLineData.init)
-    . = ALIGN(32);           /* cache line size = 32 bytes */
-    *(.data)                 /* .data sections */
-    *(.data*)                /* .data* sections */
-    KEEP(*(.jcr*))
-    . = ALIGN(4);
-    __data_end__ = .;        /* define a global symbol at data end */
-  } > m_data
+    __qacode_end__ = .;
+  } > m_qacode AT > m_text
+  __QACODE_ROM = LOADADDR(.qacode);
 
-  __NDATA_ROM = __data_flash_start + (__data_end__ - __data_start__);
-  .ncache.init : AT(__NDATA_ROM)
+  .app_qacode : ALIGN(4)
   {
-    __noncachedata_start__ = .;   /* create a global symbol at ncache data start */
-    *(NonCacheable.init)
+    __app_qacode_start__ = .;
+    /* *libfoo.a:flash.o(.text .text*) */
     . = ALIGN(4);
-    __noncachedata_init_end__ = .;   /* create a global symbol at initialized ncache data end */
-  } > m_ncache
+    __app_qacode_end__ = .;
+  } > m_qacode AT > m_text
+  __APP_QACODE_ROM = LOADADDR(.app_qacode);
 
-  .ncache :
+  /* -------- QuickAccess: fast-access data (VMA=DTCM, LMA=Flash) --------- */
+  .qadata : ALIGN(4)
   {
-    . = ALIGN(4);
-    *(NonCacheable)
-    . = ALIGN(4);
-    __noncachedata_end__ = .;     /* define a global symbol at ncache data end */
-  } > m_ncache
-
-  __qadata_flash_start = __NDATA_ROM + (__noncachedata_init_end__ - __noncachedata_start__);
-  .qadata : AT(__qadata_flash_start)
-  {
-    . = ALIGN(4);
     __qadata_start__ = .;
-    *(DataQuickAccess)       /* quick access data section */
+    *(DataQuickAccess)
     . = ALIGN(4);
     __qadata_end__ = .;
-  } > m_data2
+  } > m_qadata AT > m_text
+  __QADATA_ROM = LOADADDR(.qadata);
 
-  text_data_end = __qadata_flash_start + (__qadata_end__ - __qadata_start__);
-  text_end = ORIGIN(m_text) + LENGTH(m_text);
-  ASSERT(text_data_end <= text_end, "region m_text overflowed with text and data")
+  /* ---- Standard RW data (VMA=DTCM/PSRAM, LMA=Flash, scatter-copied) ---- */
+  .data : ALIGN(4)
+  {
+    __data_start__ = .;
+    *(.data)
+    *(.data*)
+    KEEP(*(.jcr*))
+    . = ALIGN(4);
+    __data_end__ = .;
+  } > m_data AT > m_text
+  __DATA_ROM = LOADADDR(.data);
 
+  /* ---- Cache-line-aligned data (32B aligned, for D-cache-safe DMA) ----- */
+  .cacheline_data : ALIGN(32)
+  {
+    __cacheline_data_start__ = .;
+    *(CacheLineData.init)
+    . = ALIGN(32);
+    __cacheline_data_end__ = .;
+  } > m_data AT > m_text
+  __CACHELINE_ROM = LOADADDR(.cacheline_data);
 
-  /* Uninitialized data section */
+  .cacheline_bss (NOLOAD) : ALIGN(32)
+  {
+    __cacheline_bss_start__ = .;
+    *(CacheLineData)
+    . = ALIGN(32);
+    __cacheline_bss_end__ = .;
+  } > m_data
+
+  /* -- Non-cacheable data (framebuffer / DMA / shared with peripherals) -- */
+  .ncache.init : ALIGN(4)
+  {
+    __noncache_data_start__ = .;
+    *(NonCacheable.init)
+    . = ALIGN(4);
+    __noncache_data_end__ = .;
+  } > m_ncache AT > m_text
+  __NDATA_ROM = LOADADDR(.ncache.init);
+
+  .ncache (NOLOAD) :
+  {
+    . = ALIGN(4);
+    __noncache_bss_start__ = .;
+    *(NonCacheable)
+    . = ALIGN(4);
+    __noncache_bss_end__ = .;
+  } > m_ncache
+
+  /* -------- BSS (zero-init) and no-init (retained across reset) --------- */
   .bss :
   {
-    /* This is used by the startup in order to initialize the .bss section */
     . = ALIGN(4);
-    __START_BSS = .;
     __bss_start__ = .;
-    *(CacheLineData)
-    . = ALIGN(32);           /* cache line size = 32 bytes */
     *(.bss)
     *(.bss*)
     *(COMMON)
     . = ALIGN(4);
     __bss_end__ = .;
-    __END_BSS = .;
   } > m_data
 
-  .heap :
+  .noinit (NOLOAD) :
+  {
+    . = ALIGN(4);
+    __noinit_start__ = .;
+    *(.noinit)
+    *(.noinit*)
+    . = ALIGN(4);
+    __noinit_end__ = .;
+  } > m_data
+
+  /* --------- Heap and Stack (both in dedicated MEMORY regions) ---------- */
+  .heap (NOLOAD) :
   {
     . = ALIGN(8);
-    __end__ = .;
+    __HeapBase  = .;
     PROVIDE(end = .);
-    __HeapBase = .;
-    . += HEAP_SIZE;
+    . += _size_heap_;
     __HeapLimit = .;
-    __heap_limit = .; /* Add for _sbrk */
   } > m_heap
 
-  .stack :
+  .stack (NOLOAD) :
   {
     . = ALIGN(8);
-    . += STACK_SIZE;
-  } > m_data
+    __StackLimit = .;
+    . += _size_cstack_;
+    __StackTop   = .;
+  } > m_stack
+  PROVIDE(__stack      = __StackTop);
+  PROVIDE(__stack_size = _size_cstack_);
 
-  /* Initializes stack on the end of block */
-  __StackTop   = ORIGIN(m_data) + LENGTH(m_data);
-  __StackLimit = __StackTop - STACK_SIZE;
-  PROVIDE(__stack = __StackTop);
+  /* ---- DATAEXT: user overflow region (SRAM0+SRAM1, 512 KB, opt-in) ----- */
+  .dataext.init : ALIGN(4)
+  {
+    __dataext_data_start__ = .;
+    /* user: add wildcards for initialized data going to m_dataext */
+    . = ALIGN(4);
+    __dataext_data_end__ = .;
+  } > m_dataext AT > m_text
+  __DATAEXT_ROM = LOADADDR(.dataext.init);
 
+  .dataext (NOLOAD) :
+  {
+    . = ALIGN(4);
+    __dataext_bss_start__ = .;
+    /* user: add wildcards for zero-init data going to m_dataext */
+    . = ALIGN(4);
+    __dataext_bss_end__ = .;
+  } > m_dataext
+
+  /* ----------------- Image sentinel + overflow ASSERTs ------------------ */
+  .image_end :
+  {
+    __image_end = .;
+  } > m_text
+
+  text_data_end = __image_end;
+  text_end      = ORIGIN(m_text) + LENGTH(m_text);
+  ASSERT(text_data_end <= text_end, "region m_text overflowed with text and data")
+
+  ASSERT(_size_cstack_ > 0,
+         "__stack_size__ must be > 0")
+  ASSERT(_size_cstack_ < m_dtcm_size,
+         "__stack_size__ must be less than DTCM size")
+  ASSERT((_size_cstack_ & 7) == 0,
+         "__stack_size__ must be 8-byte aligned")
+  ASSERT(m_data_size > 0,
+         "m_data region has no room (check __stack_size__ or PSRAM partition sizes)")
+  ASSERT((_size_heap_ & 7) == 0,
+         "__heap_size__ must be 8-byte aligned")
+  ASSERT(!DEFINED(__heap_noncacheable__) || _size_heap_ < m_ncache_alloc_size,
+         "__heap_size__ too large; heap carve-out would exhaust m_ncache")
+
+  /* -------------------- ELF metadata (non-loadable) --------------------- */
   .ARM.attributes 0 : { *(.ARM.attributes) }
 }
+
+/* =========================== Exported symbols =========================== */
+/* ======================================================================== */
+__VECTOR_TABLE                = ORIGIN(m_interrupts);
+__VECTOR_RAM                  = DEFINED(__ram_vector_table__) ? ORIGIN(m_rvt) : ORIGIN(m_interrupts);
+__RAM_VECTOR_TABLE_SIZE_BYTES = LENGTH(m_rvt);
+__NCACHE_REGION_START         = ORIGIN(m_ncache);
+__NCACHE_REGION_SIZE          = m_ncache_alloc_size;
+__CONTAINER_IMG_OFFSET        = m_app_image_offset - m_container_offset;
+__CONTAINER_IMG_LOAD_ADDR     = ORIGIN(m_interrupts);
+__CONTAINER_IMG_ENTRY_ADDR    = ORIGIN(m_interrupts);
+__CONTAINER_IMG_SIZE          = text_data_end - __VECTOR_TABLE;

@@ -9,12 +9,11 @@
 **                          MIMXRT2661CHPAA
 **                          MIMXRT2661CVVAA
 **                          MIMXRT2661DHPAA
-**                          MIMXRT2661DVJ8A
-**                          MIMXRT2661DVM8A
 **                          MIMXRT2661DVVAA
 **                          MIMXRT2661XHP8A
 **                          MIMXRT2661XVV8A
 **                          MIMXRT2662AHP8A
+**                          MIMXRT2662AVV8A
 **                          MIMXRT2662CHPAA
 **                          MIMXRT2662CVVAA
 **                          MIMXRT2662DHPAA
@@ -22,15 +21,18 @@
 **                          MIMXRT2662XHP8A
 **                          MIMXRT2662XVV8A
 **                          MIMXRT2663AHP8A
+**                          MIMXRT2663AVV8A
 **                          MIMXRT2663CHPAA
 **                          MIMXRT2663CVVAA
 **                          MIMXRT2663DHPAA
 **                          MIMXRT2663DVVAA
 **                          MIMXRT2663XHP8A
+**                          MIMXRT2663XHPAA
 **                          MIMXRT2663XVV8A
+**                          MIMXRT2663XVVAA
 **
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260603
+**     Build:               b260818
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for NPU
@@ -61,13 +63,13 @@
 #if !defined(PERI_NPU_H_)
 #define PERI_NPU_H_                              /**< Symbol preventing repeated inclusion */
 
-#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A) || defined(CPU_MIMXRT2661DVM8A))
+#if (defined(CPU_MIMXRT2660CHPAA) || defined(CPU_MIMXRT2660CVVAA) || defined(CPU_MIMXRT2660DHPAA) || defined(CPU_MIMXRT2660DVVAA) || defined(CPU_MIMXRT2660XHP8A) || defined(CPU_MIMXRT2660XVV8A))
 #include "MIMXRT2660_COMMON.h"
-#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVJ8A) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
+#elif (defined(CPU_MIMXRT2661CHPAA) || defined(CPU_MIMXRT2661CVVAA) || defined(CPU_MIMXRT2661DHPAA) || defined(CPU_MIMXRT2661DVVAA) || defined(CPU_MIMXRT2661XHP8A) || defined(CPU_MIMXRT2661XVV8A))
 #include "MIMXRT2661_COMMON.h"
-#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
+#elif (defined(CPU_MIMXRT2662AHP8A) || defined(CPU_MIMXRT2662AVV8A) || defined(CPU_MIMXRT2662CHPAA) || defined(CPU_MIMXRT2662CVVAA) || defined(CPU_MIMXRT2662DHPAA) || defined(CPU_MIMXRT2662DVVAA) || defined(CPU_MIMXRT2662XHP8A) || defined(CPU_MIMXRT2662XVV8A))
 #include "MIMXRT2662_COMMON.h"
-#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XVV8A))
+#elif (defined(CPU_MIMXRT2663AHP8A) || defined(CPU_MIMXRT2663AVV8A) || defined(CPU_MIMXRT2663CHPAA) || defined(CPU_MIMXRT2663CVVAA) || defined(CPU_MIMXRT2663DHPAA) || defined(CPU_MIMXRT2663DVVAA) || defined(CPU_MIMXRT2663XHP8A) || defined(CPU_MIMXRT2663XHPAA) || defined(CPU_MIMXRT2663XVV8A) || defined(CPU_MIMXRT2663XVVAA))
 #include "MIMXRT2663_COMMON.h"
 #else
   #error "No valid CPU defined!"
@@ -204,22 +206,12 @@ typedef struct {
   __IO uint32_t BASESPILLH;                        /**< Base physical address for Spill fetch/push, offset: 0x28C */
        uint8_t RESERVED_8[112];
   __IO uint32_t DECOMPCTRL;                        /**< Control For Weight Decompressor, offset: 0x300 */
-  __IO uint32_t DECOMPSTAT;                        /**< state for Weight Decompressor, offset: 0x304 */
+  __IO uint32_t DECOMPSTAT;                        /**< Weight Decompressor Status, offset: 0x304 */
   __IO uint32_t GROUP_BASE;                        /**< DDR offset from base for Weight Decompressor, offset: 0x308 */
        uint8_t RESERVED_9[4];
   __IO uint32_t GROUP_LEN;                         /**< Weight Decompressor Group Length, offset: 0x310 */
        uint8_t RESERVED_10[44];
-/* The CRYPTO identifier is also used as a build-time feature flag by the
- * PSA-Arch tests (`-DCRYPTO` injected from
- * middleware/tfm/tf-m/mcux/CMakeLists.txt). Save/clear the macro around this
- * register-field declaration so a defined-as-empty `-DCRYPTO` does not collapse
- * `__IO uint32_t CRYPTO;` to `__IO uint32_t ;`. The macro is restored
- * immediately after so any code that follows still sees the build-flag value.
- */
-#pragma push_macro("CRYPTO")
-#undef CRYPTO
-  __IO uint32_t CRYPTO;                            /**< Control for Cryptographic protection of models by SoC security, offset: 0x340 */
-#pragma pop_macro("CRYPTO")
+  __IO uint32_t CRYPTO;                            /**< Cryptographic Protection Control, offset: 0x340 */
   __IO uint32_t PRIVDDRL;                          /**< Physical address in DDR of model when secure, offset: 0x344 */
   __IO uint32_t PRIVDDRH;                          /**< Physical address in DDR of model when secure, offset: 0x348 */
   __IO uint32_t SESSIONIV;                         /**< Unique IV for Protected models, offset: 0x34C */
@@ -293,12 +285,44 @@ typedef struct {
 /*! NGANGDIS - NGANGDIS */
 #define NPU_RESETCTRL_NGANGDIS(x)                (((uint32_t)(((uint32_t)(x)) << NPU_RESETCTRL_NGANGDIS_SHIFT)) & NPU_RESETCTRL_NGANGDIS_MASK)
 
+#define NPU_RESETCTRL_ITCM_INIT_MASK             (0x1000000U)
+#define NPU_RESETCTRL_ITCM_INIT_SHIFT            (24U)
+/*! ITCM_INIT - Initialization of ITCM memory. Initialization can only be run once.
+ *  0b0..Write: No action. Read: ITCM memory is not initialized.
+ *  0b1..Write: Initialize ITCM. Read: ITCM memory is initialized.
+ */
+#define NPU_RESETCTRL_ITCM_INIT(x)               (((uint32_t)(((uint32_t)(x)) << NPU_RESETCTRL_ITCM_INIT_SHIFT)) & NPU_RESETCTRL_ITCM_INIT_MASK)
+
+#define NPU_RESETCTRL_DTCM_INIT_MASK             (0x2000000U)
+#define NPU_RESETCTRL_DTCM_INIT_SHIFT            (25U)
+/*! DTCM_INIT - Initialization of DTCM memory. Initialization can only be run once.
+ *  0b0..Write: No action. Read: DTCM memory is not initialized.
+ *  0b1..Write: Initialize DTCM. Read: DTCM memory is initialized.
+ */
+#define NPU_RESETCTRL_DTCM_INIT(x)               (((uint32_t)(((uint32_t)(x)) << NPU_RESETCTRL_DTCM_INIT_SHIFT)) & NPU_RESETCTRL_DTCM_INIT_MASK)
+
+#define NPU_RESETCTRL_NTCM_INIT_MASK             (0x4000000U)
+#define NPU_RESETCTRL_NTCM_INIT_SHIFT            (26U)
+/*! NTCM_INIT - Initialization of NTCM memory. Initialization can only be run once.
+ *  0b0..Write: No action. Read: NTCM memory is not initialized.
+ *  0b1..Write: Initialize NTCM. Read: NTCM memory is initialized.
+ */
+#define NPU_RESETCTRL_NTCM_INIT(x)               (((uint32_t)(((uint32_t)(x)) << NPU_RESETCTRL_NTCM_INIT_SHIFT)) & NPU_RESETCTRL_NTCM_INIT_MASK)
+
+#define NPU_RESETCTRL_VTCM_INIT_MASK             (0x8000000U)
+#define NPU_RESETCTRL_VTCM_INIT_SHIFT            (27U)
+/*! VTCM_INIT - Initialization of VTCM memory. Initialization can only be run once.
+ *  0b0..Write: No action. Read: VTCM memory is not initialized.
+ *  0b1..Write: Initialize VTCM. Read: VTCM memory is initialized.
+ */
+#define NPU_RESETCTRL_VTCM_INIT(x)               (((uint32_t)(((uint32_t)(x)) << NPU_RESETCTRL_VTCM_INIT_SHIFT)) & NPU_RESETCTRL_VTCM_INIT_MASK)
+
 #define NPU_RESETCTRL_OCMEN_MASK                 (0x40000000U)
 #define NPU_RESETCTRL_OCMEN_SHIFT                (30U)
 /*! OCMEN - OCM enable
- *  0b0..If 0,then OCM_CNT bit field determines the no. of OCMs. Also, for crypto models hardware forces this field to 0.
- *  0b1..If 1, then all neutron's TCM are available as OCM w/o scrubbing TCM contents. The field must only be set
- *       to 1 when Neutrons are idle otherwise operation is not gauranteed.
+ *  0b0..OCMCNT bit field determines the number of zones used as OCMs. AXI_S access to other zones are blocked and error terminated.
+ *  0b1..OCMCNT bit field determines the number of zones used as OCMs. Other zones are accessible via AXI_S. None
+ *       OCM zone accesses using result V2P configuration for read and data V2P configuration for write.
  */
 #define NPU_RESETCTRL_OCMEN(x)                   (((uint32_t)(((uint32_t)(x)) << NPU_RESETCTRL_OCMEN_SHIFT)) & NPU_RESETCTRL_OCMEN_MASK)
 
@@ -1985,7 +2009,7 @@ typedef struct {
 #define NPU_DECOMPCTRL_SKIP_LEN(x)               (((uint32_t)(((uint32_t)(x)) << NPU_DECOMPCTRL_SKIP_LEN_SHIFT)) & NPU_DECOMPCTRL_SKIP_LEN_MASK)
 /*! @} */
 
-/*! @name DECOMPSTAT - state for Weight Decompressor */
+/*! @name DECOMPSTAT - Weight Decompressor Status */
 /*! @{ */
 
 #define NPU_DECOMPSTAT_DONE_MASK                 (0x1U)
@@ -2037,12 +2061,15 @@ typedef struct {
 #define NPU_GROUP_LEN_LEN(x)                     (((uint32_t)(((uint32_t)(x)) << NPU_GROUP_LEN_LEN_SHIFT)) & NPU_GROUP_LEN_LEN_MASK)
 /*! @} */
 
-/*! @name CRYPTO - Control for Cryptographic protection of models by SoC security */
+/*! @name CRYPTO - Cryptographic Protection Control */
 /*! @{ */
 
 #define NPU_CRYPTO_CRYPTOLOCK_MASK               (0x1U)
 #define NPU_CRYPTO_CRYPTOLOCK_SHIFT              (0U)
-/*! CRYPTOLOCK - CRYPTOLOCK */
+/*! CRYPTOLOCK - CRYPTOLOCK
+ *  0b0..Access to ITCM, DTCM, and NTCM is allowed.
+ *  0b1..Access to ITCM, DTCM, and NTCM is prohibited.
+ */
 #define NPU_CRYPTO_CRYPTOLOCK(x)                 (((uint32_t)(((uint32_t)(x)) << NPU_CRYPTO_CRYPTOLOCK_SHIFT)) & NPU_CRYPTO_CRYPTOLOCK_MASK)
 
 #define NPU_CRYPTO_DBGLOCK_MASK                  (0x2U)
