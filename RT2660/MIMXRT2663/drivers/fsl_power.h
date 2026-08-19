@@ -108,7 +108,7 @@ typedef struct _power_cmc_step_config
  *
  * Configures the routing of root clocks and clock sources to CMC handshake
  * partners (POWERCON HSK_SEL registers) and PDCON per-domain handshake masks.
- * Pass via @ref power_init_config_t::handshakeRouting (or NULL for POR defaults),
+ * Pass via @ref power_policy_config_t::handshakeRouting (or NULL for POR defaults),
  * or pass directly to POWER_SetHandshakeRouting() for post-init reconfiguration.
  */
 typedef struct _power_handshake_routing_config
@@ -121,7 +121,7 @@ typedef struct _power_handshake_routing_config
 
 #if MCUX_POWER_PF9453_SUPPLY
 /*!
- * @brief External-supply (PF9453 PMIC) I2C access, handed to POWER_Init() so fsl_power can drive
+ * @brief External-supply (PF9453 PMIC) I2C access, handed to POWER_InitExtSupply() so fsl_power can drive
  *        VDD_CORE (BUCK2) directly. Present only when MCUX_POWER_PF9453_SUPPLY is set. These are
  *        runtime function-pointer data (the board's I2C transport), NOT a mode switch — the compile
  *        macro is the only switch. Signatures match the PF9453 driver's I2C callback contract.
@@ -136,8 +136,8 @@ typedef struct _power_ext_supply_config
 } power_ext_supply_config_t;
 #endif /* MCUX_POWER_PF9453_SUPPLY */
 
-/*! @brief Configuration passed to POWER_Init(). */
-typedef struct _power_init_config
+/*! @brief Configuration passed to POWER_SetPolicy(). */
+typedef struct _power_policy_config
 {
     /* Per-CMC instance step configuration (RT2660-specific mapping) */
     power_cmc_step_config_t cmcCpu;  /*!< CMC0 - CPU / M85 core (COMPUTE_SS domain) */
@@ -152,7 +152,7 @@ typedef struct _power_init_config
      *   NULL = apply POR-default values (hardware reset defaults).
      *   Non-NULL = apply *handshakeRouting directly (skips internal default lookup). */
     const power_handshake_routing_config_t *handshakeRouting;
-} power_init_config_t;
+} power_policy_config_t;
 
 /*!
  * @brief Encoded wakeup source for POWER_EnableWakeupSource() / POWER_DisableWakeupSource().
@@ -878,29 +878,38 @@ extern "C" {
  */
 
 /*!
- * @brief Fill power_init_config_t with hardware reset defaults.
+ * @brief Fill power_policy_config_t with hardware reset defaults.
  *
  * All CMC and SSC steps set to Handshake mode; CSSI enabled and unlocked;
- * handshakeRouting set to NULL (POWER_Init will apply POR-default routing).
+ * handshakeRouting set to NULL (POWER_SetPolicy will apply POR-default routing).
  *
  * @param config  Pointer to config struct to populate.  Must not be NULL.
  */
-void POWER_GetDefaultInitConfig(power_init_config_t *config);
+void POWER_GetDefaultPolicyConfig(power_policy_config_t *config);
 
 /*!
- * @brief Initialises the power management framework.
+ * @brief Applies the power management policy: active/low-power baseline for
+ *        POWERCON, PDCON, and MEMCON, plus the NPU/Media/Comm domain and
+ *        active-mode clock source state.
  *
  * Enables POWERCON, PDCON, and MEMCON function clocks; applies SoC handshake
  * routing (NULL = POR defaults, non-NULL = *config->handshakeRouting); configures
- * CMC/SSC step modes and CSSI; clears XMC_STBY_MASK; initialises PDCON domains and all
- * MEMCON slices to their default active states; initialises SW wakeup masks.
- * Must be called once at startup before any other POWER_* API.
+ * CMC/SSC step modes and CSSI; sets the standby-gating baseline (XMC_STBY_MASK);
+ * initialises PDCON domain trigger config; enables active-mode clock sources 0-8;
+ * brings the NPU/Media/Comm domains to kPDCON_EventNoneOrActive if not already
+ * there (idempotent); initialises all MEMCON slices to their default active
+ * states; initialises SW wakeup masks to all-masked.
  *
- * @param config  Pointer to init configuration. Must not be NULL.
- *                Call POWER_GetDefaultInitConfig() first to populate defaults,
+ * Safe to call more than once (e.g. to apply a different handshakeRouting later).
+ * No ordering constraint relative to BOARD_InitBootClocks() -- the domain-enable
+ * step runs before the MEMCON slice writes internally, so a MEMCON slice is
+ * never touched before its hosting domain (NPU/Media/Comm) is powered active.
+ *
+ * @param config  Pointer to policy configuration. Must not be NULL.
+ *                Call POWER_GetDefaultPolicyConfig() first to populate defaults,
  *                then adjust fields as needed before passing to this function.
  */
-void POWER_Init(const power_init_config_t *config);
+void POWER_SetPolicy(const power_policy_config_t *config);
 
 #if MCUX_POWER_PF9453_SUPPLY
 /*!
