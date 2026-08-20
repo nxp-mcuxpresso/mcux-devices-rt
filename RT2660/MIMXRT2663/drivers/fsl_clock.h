@@ -2081,12 +2081,33 @@ typedef enum _clock_usb_fs_src
     kCLOCK_UsbFsSrcFro48M    = kCLOCK_USB1_ClockRoot_FRO48M,     /*!< Free-running FRO 48M (RC accuracy, may not meet USB FS) */
 } clock_usb_fs_src_t;
 
-/*! @brief USB FRO clock-recovery (crystal-less) trim controller selection. */
-typedef enum _clock_usb_fro_trim_sel
+/*!
+ * @brief FRO tuner (FLL) reference-clock source.
+ *
+ * Selects the reference against which the tuner locks an FRO. The first five
+ * values use the SXOSC crystal path (CKREF_SOURCE_SEL == 0) and differ only by
+ * the SXOSC frequency; the last two use a USB Start-Of-Frame pulse as the
+ * reference. The enumerators are ordered to match the reference manual
+ * FRO_TUNER settings tables and are used to index the internal parameter
+ * tables in fsl_clock.c, so do not reorder them.
+ */
+typedef enum _clock_fro_tuner_src
 {
-    kCLOCK_UsbFroTrimHs = 0U, /*!< Trim the FRO from USB HS (USBHS/EHCI, non-core wrapper) frame timing. */
-    kCLOCK_UsbFroTrimFs = 1U, /*!< Trim the FRO from USB FS (USBFS/KHCI) frame timing. */
-} clock_usb_fro_trim_sel_t;
+    kCLOCK_FroTunerRefSxosc19M2 = 0U, /*!< SXOSC crystal at 19.2 MHz. */
+    kCLOCK_FroTunerRefSxosc24M,       /*!< SXOSC crystal at 24 MHz. */
+    kCLOCK_FroTunerRefSxosc32M,       /*!< SXOSC crystal at 32 MHz. */
+    kCLOCK_FroTunerRefSxosc40M,       /*!< SXOSC crystal at 40 MHz. */
+    kCLOCK_FroTunerRefSxosc32768Hz,   /*!< SXOSC crystal at 32.768 kHz. */
+    kCLOCK_FroTunerRefUsbFsSof1kHz,   /*!< USB Full-/Low-Speed 1 kHz Start-Of-Frame. */
+    kCLOCK_FroTunerRefUsbHsSof8kHz,   /*!< USB High-Speed 8 kHz Start-Of-Frame. */
+} clock_fro_tuner_src_t;
+
+/*! @brief Which FRO the tuner (FLL) locks. */
+typedef enum _clock_fro_tuner_target
+{
+    kCLOCK_FroTuner12M = 0U, /*!< Tune the 12 MHz FRO. */
+    kCLOCK_FroTuner192M,     /*!< Tune the 192 MHz FRO. */
+} clock_fro_tuner_target_t;
 
 /*******************************************************************************
  * API
@@ -2748,8 +2769,9 @@ bool CLOCK_IsAvPllClkoutEnabled(clock_av_pll_t pll);
  * ungates the USB PHY (COMM usb0) internally. The usb1_fclk clock root is
  * expected to be pre-configured in clock_config.
  *
- * For crystal-less operation (trimming the FRO from the USB frame timing),
- * call CLOCK_TrimUsbFroClock with ::kCLOCK_UsbFroTrimFs after this function.
+ * For crystal-less operation (trimming an FRO from the USB frame timing), call
+ * CLOCK_EnableFroTuner with ::kCLOCK_FroTunerRefUsbFsSof1kHz as the reference
+ * source after this function.
  *
  * @param src One of ::clock_usb_fs_src_t selecting the USB FS clocking path.
  * @retval true  USB FS clock configured (PHY PLL locked for PLL-based sources).
@@ -2774,8 +2796,9 @@ void CLOCK_DisableUsbFsClock(void);
  * from reset and issues the controller-level soft reset. The USB PHY (COMM
  * usb0) is ungated inside CLOCK_EnableUsbPhyPllClock.
  *
- * For crystal-less operation (trimming the FRO from the USB frame timing),
- * call CLOCK_TrimUsbFroClock with ::kCLOCK_UsbFroTrimHs after this function.
+ * For crystal-less operation (trimming an FRO from the USB frame timing), call
+ * CLOCK_EnableFroTuner with ::kCLOCK_FroTunerRefUsbHsSof8kHz as the reference
+ * source after this function.
  *
  * @retval true  USB HS clocks configured and the PHY PLL locked.
  * @retval false The USB PHY PLL failed to lock; the controller is left in reset.
@@ -2816,30 +2839,38 @@ bool CLOCK_EnableUsbPhyPllClock(void);
 void CLOCK_DisableUsbPhyPllClock(void);
 
 /*!
- * @brief Enable crystal-less trimming of the USB FRO clock.
+ * @brief Enable the FRO tuner (FLL) of the selected FRO against a reference source.
  *
- * Routes the selected USB controller's frame timing (USB HS or USB FS) to the
- * shared USB MISC MODCON selector, configures the CGUANA FRO192M tuner (lock
- * criteria, integration gain, accurate reference source, and the FRO192M cycle
- * target / reference window), then enables the tuner so FRO192M is tuned
- * against the accurate reference window. This lets the FRO serve as the USB
- * reference without an external crystal. Poll ::CLOCK_GetUsbFroTrimFlag to wait
- * for the tuner to report lock.
+ * Configures and enables the CGUANA FLL that tunes either the 12 MHz FRO or the
+ * 192 MHz FRO (selected by @p target ) against the chosen reference window.
  *
- * @param sel Which USB controller frame timing trims the FRO, see \ref clock_usb_fro_trim_sel_t.
+ * @param target Which FRO to tune, see \ref clock_fro_tuner_target_t.
+ * @param src Which reference source tunes the FRO, see \ref clock_fro_tuner_src_t.
+ * @param lockCriteria Number of consecutive in-window results required to declare
+ *                     lock (FROxxM_LOCK_CRITERIA field, 2 bits, range 0..3). A
+ *                     larger value is more robust to jitter but slower to lock; 2
+ *                     is the typical default.
+ *
+ * @note The selected reference source must already be running before the tuner
+ *       is enabled. TUNE_EN is asserted last, after all configuration fields are
+ *       programmed. Call ::CLOCK_DisableFroTuner to stop tuning.
+ * @note The FRO12M and FRO192M tuners share the reference-source selection
+ *       (CKREF_SOURCE_SEL and SXOSC_FREF_SEL are common fields), so enabling one
+ *       reprograms the reference selection for both. The two FROs can therefore
+ *       only be tuned against the same reference source at the same time.
  */
-void CLOCK_TrimUsbFroClock(clock_usb_fro_trim_sel_t sel);
+void CLOCK_EnableFroTuner(clock_fro_tuner_target_t target, clock_fro_tuner_src_t src, uint16_t lockCriteria);
 
 /*!
- * @brief Get the USB FRO (FRO192M) tuner lock status.
+ * @brief Disable the FRO tuner (FLL) of the selected FRO.
  *
- * Reads the CGUANA FRO192M tuner status to report whether its frequency-locked
- * loop has locked after ::CLOCK_TrimUsbFroClock enabled crystal-less trimming.
+ * Clears the selected FRO's TUNE_EN to stop tuning; the other tuner
+ * configuration fields are left untouched so a subsequent ::CLOCK_EnableFroTuner
+ * can re-enable with the same or a new reference source.
  *
- * @retval true  The FRO192M tuner frequency-locked loop is locked.
- * @retval false The FRO192M tuner has not yet locked.
+ * @param target Which FRO tuner to disable, see \ref clock_fro_tuner_target_t.
  */
-bool CLOCK_GetUsbFroTrimFlag(void);
+void CLOCK_DisableFroTuner(clock_fro_tuner_target_t target);
 
 /*!
  * @brief Dump a clock-root capability table to the debug console.

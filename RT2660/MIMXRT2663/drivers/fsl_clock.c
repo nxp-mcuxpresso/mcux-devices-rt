@@ -1488,67 +1488,152 @@ void CLOCK_DisableUsbPhyPllClock(void)
     CLOCK_DisableClock(kCLOCK_COMM_usb0);
 }
 
-void CLOCK_TrimUsbFroClock(clock_usb_fro_trim_sel_t sel)
+/*! @brief One row of tuner (FLL) reference parameters for a given reference source.
+ *
+ * The values are transcribed literally from the reference manual FRO_TUNER settings
+ * tables. ckrefSrcSel and sxoscFrefSel select the reference (CKREF_SOURCE_SEL and
+ * SXOSC_FREF_SEL in CTRL_REG); frefWinLgth and cycleTarget are the reference window
+ * length and expected FRO cycle count for that window (COUNT_REG); kiGain is the loop
+ * integration gain (KI_GAIN in CTRL_REG). The cycle target is NOT derived at runtime
+ * because it does not follow a single clean formula across all references. */
+typedef struct _clock_fro_tuner_param
 {
-    /* Per-mode tuner parameters. FS references the USB SOF frame (1 ms), so the
-     * FRO192M cycle target is 192000; HS references a microframe (125 us), so the
-     * target is 24000. The integration gain is lowered for HS because its shorter
-     * reference window updates the loop more frequently. */
-    uint32_t kiGain;
+    uint16_t ckrefSrcSel;
+    uint16_t sxoscFrefSel;
+    uint16_t frefWinLgth;
     uint32_t cycleTarget;
-    uint32_t ckrefSel;
+    uint16_t kiGain;
+} clock_fro_tuner_param_t;
 
-    if (kCLOCK_UsbFroTrimHs == sel)
+/* FRO192M tuner settings (reference manual Table 814 FRO_192M FRO_TUNER settings).
+ * Indexed by clock_fro_tuner_src_t. */
+static const clock_fro_tuner_param_t s_froTuner192mParam[] = {
+    /* {ckrefSrcSel, sxoscFrefSel, frefWinLgth, cycleTarget, kiGain} */
+    [kCLOCK_FroTunerRefSxosc19M2]   = {0U, 0U, 480U, 4800U, 3U},
+    [kCLOCK_FroTunerRefSxosc24M]    = {0U, 1U, 600U, 4800U, 3U},
+    [kCLOCK_FroTunerRefSxosc32M]    = {0U, 2U, 800U, 4800U, 3U},
+    [kCLOCK_FroTunerRefSxosc40M]    = {0U, 3U, 1000U, 4800U, 3U},
+    /* SXOSC_FREF_SEL is not applicable for the non-SXOSC references (blank in the
+     * datasheet); it only matters when CKREF_SOURCE_SEL is 0, so leave it 0. */
+    [kCLOCK_FroTunerRefSxosc32768Hz] = {1U, 0U, 1U, 5859U, 4U},
+    [kCLOCK_FroTunerRefUsbFsSof1kHz] = {2U, 0U, 1U, 192000U, 9U},
+    [kCLOCK_FroTunerRefUsbHsSof8kHz] = {3U, 0U, 1U, 24000U, 6U},
+};
+
+/* FRO12M tuner settings (reference manual Table 815 FRO_12M FRO_TUNER settings).
+ * Indexed by clock_fro_tuner_src_t. */
+static const clock_fro_tuner_param_t s_froTuner12mParam[] = {
+    /* {ckrefSrcSel, sxoscFrefSel, frefWinLgth, cycleTarget, kiGain} */
+    [kCLOCK_FroTunerRefSxosc19M2]     = {0U, 0U, 7680U, 4800U, 3U},
+    [kCLOCK_FroTunerRefSxosc24M]      = {0U, 1U, 9600U, 4800U, 3U},
+    [kCLOCK_FroTunerRefSxosc32M]      = {0U, 2U, 12800U, 4800U, 3U},
+    [kCLOCK_FroTunerRefSxosc40M]      = {0U, 3U, 16000U, 4800U, 3U},
+    [kCLOCK_FroTunerRefSxosc32768Hz]  = {1U, 0U, 14U, 5126U, 4U},
+    [kCLOCK_FroTunerRefUsbFsSof1kHz]  = {2U, 0U, 1U, 12000U, 5U},
+    [kCLOCK_FroTunerRefUsbHsSof8kHz]  = {3U, 0U, 4U, 600U, 4U},
+};
+
+void CLOCK_EnableFroTuner(clock_fro_tuner_target_t target, clock_fro_tuner_src_t src, uint16_t lockCriteria)
+{
+    const clock_fro_tuner_param_t *param;
+    uint32_t clearMask;
+    uint32_t setBits;
+
+    if ((uint32_t)src >= ARRAY_SIZE(s_froTuner192mParam))
     {
-        kiGain      = 6U;
-        cycleTarget = 24000U;
-        ckrefSel    = 3U;
+        return;
+    }
+
+    /* Note: CKREF_SOURCE_SEL and SXOSC_FREF_SEL are shared by both tuners, so the
+     * FRO12M and FRO192M tuners can only lock to the same reference source at once.
+     * Enabling one tuner reprograms the reference-source selection for both.
+     * SXOSC_FREF_SEL only applies when CKREF_SOURCE_SEL == 0 (SXOSC reference); for
+     * any other reference it is left untouched so a concurrent SXOSC tuner setting
+     * is not disturbed. */
+    if (target == kCLOCK_FroTuner12M)
+    {
+        param = &s_froTuner12mParam[src];
+
+        /* Program the control fields in one read-modify-write, keeping TUNE_EN cleared
+         * until the count register is set. */
+        clearMask = CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO12M_LOCK_CRITERIA_MASK |
+                    CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO12M_KI_GAIN_MASK |
+                    CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_CKREF_SOURCE_SEL_MASK |
+                    CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO12M_TUNE_EN_MASK;
+        setBits = CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO12M_LOCK_CRITERIA(lockCriteria) |
+                  CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO12M_KI_GAIN(param->kiGain) |
+                  CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_CKREF_SOURCE_SEL(param->ckrefSrcSel);
+
+        /* Only configure SXOSC_FREF_SEL when the reference is SXOSC. */
+        if (param->ckrefSrcSel == 0U)
+        {
+            clearMask |= CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_SXOSC_FREF_SEL_MASK;
+            setBits |= CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_SXOSC_FREF_SEL(param->sxoscFrefSel);
+        }
+
+        SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG =
+            (SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG & ~clearMask) | setBits;
+
+        /* Program the cycle target and reference window length in one read-modify-write. */
+        SYSCON__CGUANA->CGUAD_FROTUNER_FRO12M_COUNT_REG =
+            (SYSCON__CGUANA->CGUAD_FROTUNER_FRO12M_COUNT_REG &
+             ~(CGUANA_CGUAD_FROTUNER_FRO12M_COUNT_REG_CGUAD_FROTUNER_FRO12M_CYCLE_TARGET_MASK |
+               CGUANA_CGUAD_FROTUNER_FRO12M_COUNT_REG_CGUAD_FROTUNER_FRO12M_FREF_WIN_LGTH_MASK)) |
+            CGUANA_CGUAD_FROTUNER_FRO12M_COUNT_REG_CGUAD_FROTUNER_FRO12M_CYCLE_TARGET(param->cycleTarget) |
+            CGUANA_CGUAD_FROTUNER_FRO12M_COUNT_REG_CGUAD_FROTUNER_FRO12M_FREF_WIN_LGTH(param->frefWinLgth);
+
+        /* Enable the FRO12M tuner last, once its configuration is in place. */
+        SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG |= CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO12M_TUNE_EN(1U);
     }
     else
     {
-        kiGain      = 9U;
-        cycleTarget = 192000U;
-        ckrefSel    = 2U;
+        param = &s_froTuner192mParam[src];
+
+        /* Program the control fields in one read-modify-write, keeping TUNE_EN cleared
+         * until the count register is set. */
+        clearMask = CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_LOCK_CRITERIA_MASK |
+                    CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_KI_GAIN_MASK |
+                    CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_CKREF_SOURCE_SEL_MASK |
+                    CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_TUNE_EN_MASK;
+        setBits = CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_LOCK_CRITERIA(lockCriteria) |
+                  CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_KI_GAIN(param->kiGain) |
+                  CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_CKREF_SOURCE_SEL(param->ckrefSrcSel);
+
+        /* Only configure SXOSC_FREF_SEL when the reference is SXOSC. */
+        if (param->ckrefSrcSel == 0U)
+        {
+            clearMask |= CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_SXOSC_FREF_SEL_MASK;
+            setBits |= CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_SXOSC_FREF_SEL(param->sxoscFrefSel);
+        }
+
+        SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG =
+            (SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG & ~clearMask) | setBits;
+
+        /* Program the cycle target and reference window length in one read-modify-write. */
+        SYSCON__CGUANA->CGUAD_FROTUNER_FRO192M_COUNT_REG =
+            (SYSCON__CGUANA->CGUAD_FROTUNER_FRO192M_COUNT_REG &
+             ~(CGUANA_CGUAD_FROTUNER_FRO192M_COUNT_REG_CGUAD_FROTUNER_FRO192M_CYCLE_TARGET_MASK |
+               CGUANA_CGUAD_FROTUNER_FRO192M_COUNT_REG_CGUAD_FROTUNER_FRO192M_FREF_WIN_LGTH_MASK)) |
+            CGUANA_CGUAD_FROTUNER_FRO192M_COUNT_REG_CGUAD_FROTUNER_FRO192M_CYCLE_TARGET(param->cycleTarget) |
+            CGUANA_CGUAD_FROTUNER_FRO192M_COUNT_REG_CGUAD_FROTUNER_FRO192M_FREF_WIN_LGTH(param->frefWinLgth);
+
+        /* Enable the FRO192M tuner last, once its configuration is in place. */
+        SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG |= CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_TUNE_EN(1U);
     }
-
-    /* Crystal-less trim: route the selected USB controller frame timing to the
-     * shared USB MISC MODCON selector, configure the CGUANA FRO192M tuner, then
-     * enable it so FRO192M is tuned against the accurate reference window. */
-    MODCON_SetCFG((uint32_t)kModCon_COMM_USB_MISC, 0U, MODCON_CFG_USB_CRYSTAL_LESS_SEL(sel));
-
-    /* Clear the tuner control fields (and keep the tuner disabled) before writing the new configuration. */
-    SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG &=
-        ~(CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_LOCK_CRITERIA_MASK |
-          CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_KI_GAIN_MASK |
-          CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_CKREF_SOURCE_SEL_MASK |
-          CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_TUNE_EN_MASK);
-
-    /* Program the lock criteria, integration gain, and accurate reference source. */
-    SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG |=
-        CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_LOCK_CRITERIA(2U) |
-        CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_KI_GAIN(kiGain) |
-        CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_CKREF_SOURCE_SEL(ckrefSel);
-
-    /* Clear the reference window length and cycle target before programming them. */
-    SYSCON__CGUANA->CGUAD_FROTUNER_FRO192M_COUNT_REG &=
-        ~(CGUANA_CGUAD_FROTUNER_FRO192M_COUNT_REG_CGUAD_FROTUNER_FRO192M_CYCLE_TARGET_MASK |
-          CGUANA_CGUAD_FROTUNER_FRO192M_COUNT_REG_CGUAD_FROTUNER_FRO192M_FREF_WIN_LGTH_MASK);
-
-    /* Program the FRO192M cycle target for the selected mode over a reference window of length 1. */
-    SYSCON__CGUANA->CGUAD_FROTUNER_FRO192M_COUNT_REG |=
-        CGUANA_CGUAD_FROTUNER_FRO192M_COUNT_REG_CGUAD_FROTUNER_FRO192M_CYCLE_TARGET(cycleTarget) |
-        CGUANA_CGUAD_FROTUNER_FRO192M_COUNT_REG_CGUAD_FROTUNER_FRO192M_FREF_WIN_LGTH(1U);
-
-    /* Enable the FRO192M tuner last, once its configuration is in place. */
-    SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG |= CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_TUNE_EN(1U);
 }
 
-bool CLOCK_GetUsbFroTrimFlag(void)
+void CLOCK_DisableFroTuner(clock_fro_tuner_target_t target)
 {
-    /* Return true once the FRO192M tuner reports its frequency-locked-loop is locked. */
-    return (
-        CGUANA_CGUAD_FROTUNER_CTRL_STS_CGUAD_FROTUNER_FRO192M_LOCKED(1U) ==
-        (SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_STS & CGUANA_CGUAD_FROTUNER_CTRL_STS_CGUAD_FROTUNER_FRO192M_LOCKED_MASK));
+    /* Clear TUNE_EN only; leave the other tuner configuration fields intact so the
+     * FRO keeps its last tuned value and can be re-enabled as-is. */
+    if (target == kCLOCK_FroTuner12M)
+    {
+        SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG &= ~CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO12M_TUNE_EN_MASK;
+    }
+    else
+    {
+        SYSCON__CGUANA->CGUAD_FROTUNER_CTRL_REG &= ~CGUANA_CGUAD_FROTUNER_CTRL_REG_CGUAD_FROTUNER_FRO192M_TUNE_EN_MASK;
+    }
 }
 
 /*******************************************************************************
