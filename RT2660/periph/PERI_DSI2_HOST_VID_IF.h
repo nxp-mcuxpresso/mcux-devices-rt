@@ -130,6 +130,10 @@ typedef struct {
        uint8_t RESERVED_0[4];
   __IO uint32_t VID_IRQ_STATUS;                    /**< Video Interrupt Request Status, offset: 0x34 */
   __IO uint32_t VID_IRQ_MASK;                      /**< Video Interrupt Request Mask, offset: 0x38 */
+#if 1 /*Header File Update Workaround*/
+       uint8_t RESERVED_1[4];
+  __IO uint32_t CFG_VID_SAFE_MODE;                 /**< Video Safe Mode, offset: 0x40 */
+#endif
 } DSI2_HOST_VID_IF_Type;
 
 /* ----------------------------------------------------------------------------

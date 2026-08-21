@@ -871,7 +871,6 @@ static void CGUANA_ConfigFracPllRegs(
     const clock_cguana_frac_pll_config_t *config)
 {
     *pll1Reg =
-        CGUANA_CGUA_MAINPLL_PLL1_REG_MAINPLL_PLL_STARTING_MODE((uint32_t)config->startMode) |
         (config->div5En  ? CGUANA_CGUA_MAINPLL_PLL1_REG_MAINPLL_DIV5_EN_MASK  : 0U) |
         (config->div8En  ? CGUANA_CGUA_MAINPLL_PLL1_REG_MAINPLL_DIV8_EN_MASK  : 0U) |
         (config->div10En ? CGUANA_CGUA_MAINPLL_PLL1_REG_MAINPLL_DIV10_EN_MASK : 0U) |
@@ -1022,8 +1021,6 @@ void CLOCK_DeinitFro12M(void)
 void CLOCK_InitCorePll(const clock_cguana_core_pll_config_t *config)
 {
     assert(config != NULL);
-    SYSCON__CGUANA->CGUA_COREPLL_PLL1_REG =
-        CGUANA_CGUA_COREPLL_PLL1_REG_COREPLL_PLL_STARTING_MODE((uint32_t)config->startMode);
 
     SYSCON__CGUANA->CGUA_COREPLL_PLL2_REG =
         (config->vcoSelHf ? CGUANA_CGUA_COREPLL_PLL2_REG_COREPLL_VCO_SEL_MASK : 0U) |
@@ -1127,7 +1124,6 @@ static void CGUANA_InitAvPll(
 
     /* Configure PLL parameters */
     *pll1Reg |=
-        CGUANA_CGUA_AUDIOPLL_PLL1_REG_AUDIOPLL_PLL_STARTING_MODE((uint32_t)config->startMode) |
         CGUANA_CGUA_AUDIOPLL_PLL1_REG_AUDIOPLL_FREF_SET((uint32_t)config->refFreq)             |
         CGUANA_CGUA_AUDIOPLL_PLL1_REG_AUDIOPLL_CCO_FREQ_BAND_SEL(config->ccoBandSel);
 

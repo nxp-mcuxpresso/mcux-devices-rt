@@ -513,6 +513,27 @@ typedef enum _trdc_mbc_block {
 #define TRDC_MRC_OFFSET(x)            (((x) == (void *)CMPT__TRDC) ? (0x11000UL) : (((x) == (void *)MAIN__TRDC) ? (0x12000UL) : 0U))
 #define TRDC_MRC_ARRAY_STEP           0x800UL
 
+/*!@brief Some macros are only defined for TRDC_SOC*/
+#define TRDC_MDA_W_DFMT1_LK1(x)                  (((uint32_t)(((uint32_t)(x)) << TRDC_MDA_W_DFMT1_LK1_SHIFT)) & TRDC_MDA_W_DFMT1_LK1_MASK)
+
+#define TRDC_MDA_W_DFMT0_LK1_MASK                (0x40000000U)
+#define TRDC_MDA_W_DFMT0_LK1_SHIFT               (30U)
+/*! LK1 - 1-bit Lock
+ *  0b0..Register can be written by any secure privileged write.
+ *  0b1..Register is locked (read-only) until the next reset.
+ */
+#define TRDC_MDA_W_DFMT0_LK1(x)                  (((uint32_t)(((uint32_t)(x)) << TRDC_MDA_W_DFMT1_LK1_SHIFT)) & TRDC_MDA_W_DFMT1_LK1_MASK)
+
+
+
+#define TRDC_MDA_W_DFMT0_VLD_MASK                (0x80000000U)
+#define TRDC_MDA_W_DFMT0_VLD_SHIFT               (31U)
+/*! VLD - Valid
+ *  0b0..The Wr domain assignment is invalid.
+ *  0b1..The Wr domain assignment is valid.
+ */
+#define TRDC_MDA_W_DFMT0_VLD(x)                  (((uint32_t)(((uint32_t)(x)) << TRDC_MDA_W_DFMT1_VLD_SHIFT)) & TRDC_MDA_W_DFMT1_VLD_MASK)
+
 /*******************************************************************************
  * API
  ******************************************************************************/

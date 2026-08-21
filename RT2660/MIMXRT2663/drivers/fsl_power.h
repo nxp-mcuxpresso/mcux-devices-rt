@@ -192,7 +192,9 @@ typedef enum _power_wakeup_source
     kPOWER_WakeupIrq_CmptCm85EccError = CMPT_CM85_ECC_ERROR_IRQn, /*!< CMPT CM85 ECC error (3) */
     kPOWER_WakeupIrq_CmptCm85Mcm      = CMPT_CM85_MCM_IRQn,       /*!< CMPT CM85 MCM (6) */
     kPOWER_WakeupIrq_CmptTrdc         = CMPT_TRDC_IRQn,           /*!< CMPT TRDC (7) */
+#if defined(MIMXRT2663_SERIES) || defined(MIMXRT2661_SERIES)
     kPOWER_WakeupIrq_CmptNpu          = CMPT_NPU_IRQn,            /*!< CMPT NPU (8) */
+#endif
     kPOWER_WakeupIrq_CmptSramctl0     = CMPT_SRAMCTL_0_IRQn,      /*!< CMPT SRAMCTL0 (9) */
     kPOWER_WakeupIrq_CmptSramctl1     = CMPT_SRAMCTL_1_IRQn,      /*!< CMPT SRAMCTL1 (10) */
     kPOWER_WakeupIrq_CmptSramctl2     = CMPT_SRAMCTL_2_IRQn,      /*!< CMPT SRAMCTL2 (11) */
@@ -307,10 +309,10 @@ typedef enum _power_wakeup_source
     kPOWER_WakeupIrq_HspEflexPwm3Ch2  = HSP_EFLEXPWM3_CH2_IRQn,   /*!< HSP EFLEXPWM3 ch 2 (134) */
     kPOWER_WakeupIrq_HspEflexPwm3Ch3  = HSP_EFLEXPWM3_CH3_IRQn,   /*!< HSP EFLEXPWM3 ch 3 (135) */
     kPOWER_WakeupIrq_HspEflexPwm3Err  = HSP_EFLEXPWM3_ERROR_IRQn, /*!< HSP EFLEXPWM3 fault (136) */
-    kPOWER_WakeupIrq_HspQtpm0Ch0      = HSP_QTPM0_CH0_IRQn,       /*!< HSP QTPM0 ch 0 (137) */
-    kPOWER_WakeupIrq_HspQtpm0Ch1      = HSP_QTPM0_CH1_IRQn,       /*!< HSP QTPM0 ch 1 (138) */
-    kPOWER_WakeupIrq_HspQtpm0Ch2      = HSP_QTPM0_CH2_IRQn,       /*!< HSP QTPM0 ch 2 (139) */
-    kPOWER_WakeupIrq_HspQtpm0Ch3      = HSP_QTPM0_CH3_IRQn,       /*!< HSP QTPM0 ch 3 (140) */
+    kPOWER_WakeupIrq_HspQtpm0Ch0      = HSP_QTPM0_IRQn,           /*!< HSP QTPM0 (137) */
+    kPOWER_WakeupIrq_HspQtpm0Ch1      = HSP_QTPM1_IRQn,           /*!< HSP QTPM1 (138) */
+    kPOWER_WakeupIrq_HspQtpm0Ch2      = HSP_QTPM2_IRQn,           /*!< HSP QTPM2 (139) */
+    kPOWER_WakeupIrq_HspQtpm0Ch3      = HSP_QTPM3_IRQn,           /*!< HSP QTPM3 (140) */
     kPOWER_WakeupIrq_HspQtmr0         = HSP_QTMR0_IRQn,           /*!< HSP QTMR0 (149) */
     kPOWER_WakeupIrq_HspQtmr1         = HSP_QTMR1_IRQn,           /*!< HSP QTMR1 (150) */
     kPOWER_WakeupIrq_HspQtmr2         = HSP_QTMR2_IRQn,           /*!< HSP QTMR2 (151) */
@@ -385,10 +387,10 @@ typedef enum _power_wakeup_source
     kPOWER_WakeupIrq_WakeFreqme        = WAKE_FREQME_IRQn,          /*!< WAKE FREQME (221) */
     kPOWER_WakeupIrq_WakeLptmr0        = WAKE_LPTMR0_IRQn,          /*!< WAKE LPTMR0 (222) */
     kPOWER_WakeupIrq_WakeLptmr1        = WAKE_LPTMR1_IRQn,          /*!< WAKE LPTMR1 (223) */
-    kPOWER_WakeupIrq_WakeQtpmCh0       = WAKE_QTPM_CH0_IRQn,        /*!< WAKE QTPM ch 0 (224) */
-    kPOWER_WakeupIrq_WakeQtpmCh1       = WAKE_QTPM_CH1_IRQn,        /*!< WAKE QTPM ch 1 (225) */
-    kPOWER_WakeupIrq_WakeQtpmCh2       = WAKE_QTPM_CH2_IRQn,        /*!< WAKE QTPM ch 2 (226) */
-    kPOWER_WakeupIrq_WakeQtpmCh3       = WAKE_QTPM_CH3_IRQn,        /*!< WAKE QTPM ch 3 (227) */
+    kPOWER_WakeupIrq_WakeQtpmCh0       = WAKE_QTPM0_IRQn,           /*!< WAKE QTPM0 (224) */
+    kPOWER_WakeupIrq_WakeQtpmCh1       = WAKE_QTPM1_IRQn,           /*!< WAKE QTPM1 (225) */
+    kPOWER_WakeupIrq_WakeQtpmCh2       = WAKE_QTPM2_IRQn,           /*!< WAKE QTPM2 (226) */
+    kPOWER_WakeupIrq_WakeQtpmCh3       = WAKE_QTPM3_IRQn,           /*!< WAKE QTPM3 (227) */
     kPOWER_WakeupIrq_WakeSwt0          = WAKE_SWT0_IRQn,            /*!< WAKE SWT0 (228) */
     kPOWER_WakeupIrq_WakeSwt1          = WAKE_SWT1_IRQn,            /*!< WAKE SWT1 (229) */
     kPOWER_WakeupIrq_WakeI3c           = WAKE_I3C_IRQn,             /*!< WAKE I3C (234) */
@@ -409,7 +411,6 @@ typedef enum _power_wakeup_source
      * PD_BAT/VBAT stays powered in all modes including Deep Power Down.
      * ---------------------------------------------------------------- */
     kPOWER_WakeupIrq_VbatBbsmInt0 = VBAT_BBSM_INT0_IRQn, /*!< VBAT BBSM alarm 0 (247) */
-    kPOWER_WakeupIrq_VbatBbsmInt1 = VBAT_BBSM_INT1_IRQn, /*!< VBAT BBSM alarm 1 (248) */
     kPOWER_WakeupIrq_VbatTdet     = VBAT_TDET_IRQn,      /*!< VBAT tamper detect (249) */
     kPOWER_WakeupIrq_VbatLptmr    = VBAT_LPTMR_IRQn,     /*!< VBAT LPTMR (250) */
     kPOWER_WakeupIrq_VbatRtc      = VBAT_RTC_IRQn,       /*!< VBAT RTC (251) */

@@ -235,6 +235,16 @@ typedef struct {
  */
 #define SINC_MCR_STRIG3(x)                       (((uint32_t)(((uint32_t)(x)) << SINC_MCR_STRIG3_SHIFT)) & SINC_MCR_STRIG3_MASK)
 
+#if 1 /*Header File Update Workaround*/
+#define SINC_MCR_DOZEN_MASK                      (0x400U)
+#define SINC_MCR_DOZEN_SHIFT                     (10U)
+/*! DOZEN - Doze Enable
+ *  0b0..Enables
+ *  0b1..Disables
+ */
+#define SINC_MCR_DOZEN(x)                        (((uint32_t)(((uint32_t)(x)) << SINC_MCR_DOZEN_SHIFT)) & SINC_MCR_DOZEN_MASK)
+#endif
+
 #define SINC_MCR_RST_MASK                        (0x2000U)
 #define SINC_MCR_RST_SHIFT                       (13U)
 /*! RST - Software Reset
