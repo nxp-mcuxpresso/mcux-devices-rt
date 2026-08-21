@@ -211,7 +211,10 @@ typedef struct {
        uint8_t RESERVED_9[4];
   __IO uint32_t GROUP_LEN;                         /**< Weight Decompressor Group Length, offset: 0x310 */
        uint8_t RESERVED_10[44];
+#pragma push_macro("CRYPTO")
+#undef CRYPTO
   __IO uint32_t CRYPTO;                            /**< Cryptographic Protection Control, offset: 0x340 */
+#pragma pop_macro("CRYPTO")
   __IO uint32_t PRIVDDRL;                          /**< Physical address in DDR of model when secure, offset: 0x344 */
   __IO uint32_t PRIVDDRH;                          /**< Physical address in DDR of model when secure, offset: 0x348 */
   __IO uint32_t SESSIONIV;                         /**< Unique IV for Protected models, offset: 0x34C */
