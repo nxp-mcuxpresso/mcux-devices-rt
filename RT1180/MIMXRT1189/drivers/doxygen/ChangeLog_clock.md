@@ -1,5 +1,11 @@
 # CLOCK
 
+## [2.2.5]
+
+- Bug Fixes
+  - Fixed ARM PLL post-divider calculation in CLOCK_GetPllFreq returning wrong frequency when
+    POST_DIV_SEL=0b11 (should be divide-by-1 per RM, but formula produced divide-by-16).
+
 ## [2.2.4]
 
 - Bug Fixes
