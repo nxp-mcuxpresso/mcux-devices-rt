@@ -41,8 +41,8 @@
 **                          MIMXRT118CXVJ8C_cm33
 **                          MIMXRT118CXVJ8C_cm7
 **
-**     Version:             rev. 3.0, 2024-10-29
-**     Build:               b260206
+**     Version:             rev. 4.0, 2026-08-14
+**     Build:               b260824
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CCM
@@ -62,14 +62,16 @@
 **     - rev. 3.0 (2024-10-29)
 **         Change the device header file from single flat file to multiple files based on peripherals,
 **         each peripheral with dedicated header file located in periphN folder.
+**     - rev. 4.0 (2026-08-14)
+**         Based on RM Rev 10.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_CCM.h
- * @version 3.0
- * @date 2024-10-29
+ * @version 4.0
+ * @date 2026-08-14
  * @brief CMSIS Peripheral Access Layer for CCM
  *
  * CMSIS Peripheral Access Layer for CCM
@@ -196,18 +198,18 @@ typedef struct {
          uint8_t RESERVED_5[4];
   } OBSERVE[CCM_OBSERVE_COUNT];
        uint8_t RESERVED_1[768];
-       uint32_t GPR_SHARED0;                       /**< General Purpose Register, offset: 0x4800 */
-       uint32_t GPR_SHARED0_SET;                   /**< General Purpose Register, offset: 0x4804 */
-       uint32_t GPR_SHARED0_CLR;                   /**< General Purpose Register, offset: 0x4808 */
-       uint32_t GPR_SHARED0_TOG;                   /**< General Purpose Register, offset: 0x480C */
+  __I  uint32_t GPR_SHARED0;                       /**< General Purpose Register, offset: 0x4800 */
+  __I  uint32_t GPR_SHARED0_SET;                   /**< General Purpose Register, offset: 0x4804 */
+  __I  uint32_t GPR_SHARED0_CLR;                   /**< General Purpose Register, offset: 0x4808 */
+  __I  uint32_t GPR_SHARED0_TOG;                   /**< General Purpose Register, offset: 0x480C */
   __IO uint32_t GPR_SHARED0_AUTHEN;                /**< GPR access control, offset: 0x4810 */
   __IO uint32_t GPR_SHARED0_AUTHEN_SET;            /**< GPR access control, offset: 0x4814 */
   __IO uint32_t GPR_SHARED0_AUTHEN_CLR;            /**< GPR access control, offset: 0x4818 */
   __IO uint32_t GPR_SHARED0_AUTHEN_TOG;            /**< GPR access control, offset: 0x481C */
-       uint32_t GPR_SHARED1;                       /**< General Purpose Register, offset: 0x4820 */
-       uint32_t GPR_SHARED1_SET;                   /**< General Purpose Register, offset: 0x4824 */
-       uint32_t GPR_SHARED1_CLR;                   /**< General Purpose Register, offset: 0x4828 */
-       uint32_t GPR_SHARED1_TOG;                   /**< General Purpose Register, offset: 0x482C */
+  __I  uint32_t GPR_SHARED1;                       /**< General Purpose Register, offset: 0x4820 */
+  __I  uint32_t GPR_SHARED1_SET;                   /**< General Purpose Register, offset: 0x4824 */
+  __I  uint32_t GPR_SHARED1_CLR;                   /**< General Purpose Register, offset: 0x4828 */
+  __I  uint32_t GPR_SHARED1_TOG;                   /**< General Purpose Register, offset: 0x482C */
   __IO uint32_t GPR_SHARED1_AUTHEN;                /**< GPR access control, offset: 0x4830 */
   __IO uint32_t GPR_SHARED1_AUTHEN_SET;            /**< GPR access control, offset: 0x4834 */
   __IO uint32_t GPR_SHARED1_AUTHEN_CLR;            /**< GPR access control, offset: 0x4838 */

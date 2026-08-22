@@ -41,8 +41,8 @@
 **                          MIMXRT118CXVJ8C_cm33
 **                          MIMXRT118CXVJ8C_cm7
 **
-**     Version:             rev. 3.0, 2024-10-29
-**     Build:               b260206
+**     Version:             rev. 4.0, 2026-08-14
+**     Build:               b260824
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for BLK_CTRL_WAKEUPMIX
@@ -62,14 +62,16 @@
 **     - rev. 3.0 (2024-10-29)
 **         Change the device header file from single flat file to multiple files based on peripherals,
 **         each peripheral with dedicated header file located in periphN folder.
+**     - rev. 4.0 (2026-08-14)
+**         Based on RM Rev 10.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_BLK_CTRL_WAKEUPMIX.h
- * @version 3.0
- * @date 2024-10-29
+ * @version 4.0
+ * @date 2026-08-14
  * @brief CMSIS Peripheral Access Layer for BLK_CTRL_WAKEUPMIX
  *
  * CMSIS Peripheral Access Layer for BLK_CTRL_WAKEUPMIX
@@ -2300,7 +2302,7 @@ typedef struct {
 #define BLK_CTRL_WAKEUPMIX_SAFETY_CLK_MON_CS_FAST_RST_EN_SHIFT (2U)
 /*! FAST_RST_EN - Reset out enable
  *  0b0..Clock failure will not assert EWM_OUT
- *  0b1..Clock failure will assert EWM_OUT_b immediately regardless EWM state
+ *  0b1..Clock failure will assert EWM_OUT_B immediately regardless EWM state
  */
 #define BLK_CTRL_WAKEUPMIX_SAFETY_CLK_MON_CS_FAST_RST_EN(x) (((uint32_t)(((uint32_t)(x)) << BLK_CTRL_WAKEUPMIX_SAFETY_CLK_MON_CS_FAST_RST_EN_SHIFT)) & BLK_CTRL_WAKEUPMIX_SAFETY_CLK_MON_CS_FAST_RST_EN_MASK)
 
@@ -2776,15 +2778,15 @@ typedef struct {
 /*! SUPLYDET_GPIO_B2_SLEEP - GPIO_GPIO_B1 IO bank supply voltage detector sleep mode enable */
 #define BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_SUPLYDET_GPIO_B2_SLEEP(x) (((uint32_t)(((uint32_t)(x)) << BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_SUPLYDET_GPIO_B2_SLEEP_SHIFT)) & BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_SUPLYDET_GPIO_B2_SLEEP_MASK)
 
-#define BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_ACT0_POL_MASK (0x10000U)
-#define BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_ACT0_POL_SHIFT (16U)
-/*! ECAT_LINK_ACT0_POL - ECAT_LINK_ACT[0] polarity control */
-#define BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_ACT0_POL(x) (((uint32_t)(((uint32_t)(x)) << BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_ACT0_POL_SHIFT)) & BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_ACT0_POL_MASK)
+#define BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_0_POL_MASK (0x10000U)
+#define BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_0_POL_SHIFT (16U)
+/*! ECAT_LINK_0_POL - ECAT_LINK_0 polarity control */
+#define BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_0_POL(x) (((uint32_t)(((uint32_t)(x)) << BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_0_POL_SHIFT)) & BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_0_POL_MASK)
 
-#define BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_ACT1_POL_MASK (0x20000U)
-#define BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_ACT1_POL_SHIFT (17U)
-/*! ECAT_LINK_ACT1_POL - ECAT_LINK_ACT[1] polarity control */
-#define BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_ACT1_POL(x) (((uint32_t)(((uint32_t)(x)) << BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_ACT1_POL_SHIFT)) & BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_ACT1_POL_MASK)
+#define BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_1_POL_MASK (0x20000U)
+#define BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_1_POL_SHIFT (17U)
+/*! ECAT_LINK_1_POL - ECAT_LINK_1 polarity control */
+#define BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_1_POL(x) (((uint32_t)(((uint32_t)(x)) << BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_1_POL_SHIFT)) & BLK_CTRL_WAKEUPMIX_MISC_IO_CTRL_ECAT_LINK_1_POL_MASK)
 /*! @} */
 
 

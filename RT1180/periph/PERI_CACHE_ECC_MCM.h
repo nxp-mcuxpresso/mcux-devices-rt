@@ -41,8 +41,8 @@
 **                          MIMXRT118CXVJ8C_cm33
 **                          MIMXRT118CXVJ8C_cm7
 **
-**     Version:             rev. 3.0, 2024-10-29
-**     Build:               b260206
+**     Version:             rev. 4.0, 2026-08-14
+**     Build:               b260824
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CACHE_ECC_MCM
@@ -62,14 +62,16 @@
 **     - rev. 3.0 (2024-10-29)
 **         Change the device header file from single flat file to multiple files based on peripherals,
 **         each peripheral with dedicated header file located in periphN folder.
+**     - rev. 4.0 (2026-08-14)
+**         Based on RM Rev 10.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_CACHE_ECC_MCM.h
- * @version 3.0
- * @date 2024-10-29
+ * @version 4.0
+ * @date 2026-08-14
  * @brief CMSIS Peripheral Access Layer for CACHE_ECC_MCM
  *
  * CMSIS Peripheral Access Layer for CACHE_ECC_MCM
@@ -443,7 +445,7 @@ typedef struct {
 
 #define CACHE_ECC_MCM_CODE_CACHE_ECC_SINGLE_ERROR_INFO_CODE_CACHE_ECCS_EFMST_MASK (0xF0U)
 #define CACHE_ECC_MCM_CODE_CACHE_ECC_SINGLE_ERROR_INFO_CODE_CACHE_ECCS_EFMST_SHIFT (4U)
-/*! CODE_CACHE_ECCS_EFMST - Code Cache Single-Bit ECC Error Master Number */
+/*! CODE_CACHE_ECCS_EFMST - Code Cache Single-Bit ECC Error initiator Number */
 #define CACHE_ECC_MCM_CODE_CACHE_ECC_SINGLE_ERROR_INFO_CODE_CACHE_ECCS_EFMST(x) (((uint32_t)(((uint32_t)(x)) << CACHE_ECC_MCM_CODE_CACHE_ECC_SINGLE_ERROR_INFO_CODE_CACHE_ECCS_EFMST_SHIFT)) & CACHE_ECC_MCM_CODE_CACHE_ECC_SINGLE_ERROR_INFO_CODE_CACHE_ECCS_EFMST_MASK)
 
 #define CACHE_ECC_MCM_CODE_CACHE_ECC_SINGLE_ERROR_INFO_CODE_CACHE_ECCS_EFPRT_MASK (0x3F00U)
@@ -487,7 +489,7 @@ typedef struct {
 
 #define CACHE_ECC_MCM_CODE_CACHE_ECC_MULTI_ERROR_INFO_CODE_CACHE_ECCM_EFMST_MASK (0xF0U)
 #define CACHE_ECC_MCM_CODE_CACHE_ECC_MULTI_ERROR_INFO_CODE_CACHE_ECCM_EFMST_SHIFT (4U)
-/*! CODE_CACHE_ECCM_EFMST - Code Cache Multibit ECC Error Master Number */
+/*! CODE_CACHE_ECCM_EFMST - Code Cache Multibit ECC Error initiator Number */
 #define CACHE_ECC_MCM_CODE_CACHE_ECC_MULTI_ERROR_INFO_CODE_CACHE_ECCM_EFMST(x) (((uint32_t)(((uint32_t)(x)) << CACHE_ECC_MCM_CODE_CACHE_ECC_MULTI_ERROR_INFO_CODE_CACHE_ECCM_EFMST_SHIFT)) & CACHE_ECC_MCM_CODE_CACHE_ECC_MULTI_ERROR_INFO_CODE_CACHE_ECCM_EFMST_MASK)
 
 #define CACHE_ECC_MCM_CODE_CACHE_ECC_MULTI_ERROR_INFO_CODE_CACHE_ECCM_EFPRT_MASK (0x3F00U)
@@ -522,7 +524,7 @@ typedef struct {
 
 #define CACHE_ECC_MCM_SYSTEM_CACHE_ECC_SINGLE_ERROR_INFO_SYSTEM_CACHE_ECCS_EFMST_MASK (0xF0U)
 #define CACHE_ECC_MCM_SYSTEM_CACHE_ECC_SINGLE_ERROR_INFO_SYSTEM_CACHE_ECCS_EFMST_SHIFT (4U)
-/*! SYSTEM_CACHE_ECCS_EFMST - System Cache Single-Bit ECC Error Master Number */
+/*! SYSTEM_CACHE_ECCS_EFMST - System Cache Single-Bit ECC Error initiator Number */
 #define CACHE_ECC_MCM_SYSTEM_CACHE_ECC_SINGLE_ERROR_INFO_SYSTEM_CACHE_ECCS_EFMST(x) (((uint32_t)(((uint32_t)(x)) << CACHE_ECC_MCM_SYSTEM_CACHE_ECC_SINGLE_ERROR_INFO_SYSTEM_CACHE_ECCS_EFMST_SHIFT)) & CACHE_ECC_MCM_SYSTEM_CACHE_ECC_SINGLE_ERROR_INFO_SYSTEM_CACHE_ECCS_EFMST_MASK)
 
 #define CACHE_ECC_MCM_SYSTEM_CACHE_ECC_SINGLE_ERROR_INFO_SYSTEM_CACHE_ECCS_EFPRT_MASK (0x3F00U)
@@ -566,7 +568,7 @@ typedef struct {
 
 #define CACHE_ECC_MCM_SYSTEM_CACHE_ECC_MULTI_ERROR_INFO_SYSTEM_CACHE_ECCM_EFMST_MASK (0xF0U)
 #define CACHE_ECC_MCM_SYSTEM_CACHE_ECC_MULTI_ERROR_INFO_SYSTEM_CACHE_ECCM_EFMST_SHIFT (4U)
-/*! SYSTEM_CACHE_ECCM_EFMST - System Cache Multibit ECC Error Master Number */
+/*! SYSTEM_CACHE_ECCM_EFMST - System Cache Multibit ECC Error initiator Number */
 #define CACHE_ECC_MCM_SYSTEM_CACHE_ECC_MULTI_ERROR_INFO_SYSTEM_CACHE_ECCM_EFMST(x) (((uint32_t)(((uint32_t)(x)) << CACHE_ECC_MCM_SYSTEM_CACHE_ECC_MULTI_ERROR_INFO_SYSTEM_CACHE_ECCM_EFMST_SHIFT)) & CACHE_ECC_MCM_SYSTEM_CACHE_ECC_MULTI_ERROR_INFO_SYSTEM_CACHE_ECCM_EFMST_MASK)
 
 #define CACHE_ECC_MCM_SYSTEM_CACHE_ECC_MULTI_ERROR_INFO_SYSTEM_CACHE_ECCM_EFPRT_MASK (0x3F00U)

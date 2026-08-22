@@ -41,8 +41,8 @@
 **                          MIMXRT118CXVJ8C_cm33
 **                          MIMXRT118CXVJ8C_cm7
 **
-**     Version:             rev. 3.0, 2024-10-29
-**     Build:               b260206
+**     Version:             rev. 4.0, 2026-08-14
+**     Build:               b260824
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for ANADIG_LDO_BBSM
@@ -62,14 +62,16 @@
 **     - rev. 3.0 (2024-10-29)
 **         Change the device header file from single flat file to multiple files based on peripherals,
 **         each peripheral with dedicated header file located in periphN folder.
+**     - rev. 4.0 (2026-08-14)
+**         Based on RM Rev 10.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_ANADIG_LDO_BBSM.h
- * @version 3.0
- * @date 2024-10-29
+ * @version 4.0
+ * @date 2026-08-14
  * @brief CMSIS Peripheral Access Layer for ANADIG_LDO_BBSM
  *
  * CMSIS Peripheral Access Layer for ANADIG_LDO_BBSM
@@ -167,8 +169,8 @@ typedef struct {
 #define ANADIG_LDO_BBSM_PMU_LDO_AON_ANA_REG_LP_EN_MASK (0x1U)
 #define ANADIG_LDO_BBSM_PMU_LDO_AON_ANA_REG_LP_EN_SHIFT (0U)
 /*! REG_LP_EN - reg_lp_en
- *  0b0..Enable
- *  0b1..Disable
+ *  0b0..Disable
+ *  0b1..Enable
  */
 #define ANADIG_LDO_BBSM_PMU_LDO_AON_ANA_REG_LP_EN(x) (((uint32_t)(((uint32_t)(x)) << ANADIG_LDO_BBSM_PMU_LDO_AON_ANA_REG_LP_EN_SHIFT)) & ANADIG_LDO_BBSM_PMU_LDO_AON_ANA_REG_LP_EN_MASK)
 

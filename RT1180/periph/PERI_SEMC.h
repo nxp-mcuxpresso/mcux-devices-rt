@@ -41,8 +41,8 @@
 **                          MIMXRT118CXVJ8C_cm33
 **                          MIMXRT118CXVJ8C_cm7
 **
-**     Version:             rev. 3.0, 2024-10-29
-**     Build:               b260206
+**     Version:             rev. 4.0, 2026-08-14
+**     Build:               b260824
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SEMC
@@ -62,14 +62,16 @@
 **     - rev. 3.0 (2024-10-29)
 **         Change the device header file from single flat file to multiple files based on peripherals,
 **         each peripheral with dedicated header file located in periphN folder.
+**     - rev. 4.0 (2026-08-14)
+**         Based on RM Rev 10.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_SEMC.h
- * @version 3.0
- * @date 2024-10-29
+ * @version 4.0
+ * @date 2026-08-14
  * @brief CMSIS Peripheral Access Layer for SEMC
  *
  * CMSIS Peripheral Access Layer for SEMC
@@ -172,7 +174,7 @@ typedef struct {
   __IO uint32_t SRAMCR0;                           /**< SRAM Control Register 0, offset: 0x70 */
   __IO uint32_t SRAMCR1;                           /**< SRAM Control Register 1, offset: 0x74 */
   __IO uint32_t SRAMCR2;                           /**< SRAM Control Register 2, offset: 0x78 */
-       uint32_t SRAMCR3;                           /**< SRAM Control Register 3, offset: 0x7C */
+  __I  uint32_t SRAMCR3;                           /**< SRAM Control Register 3, offset: 0x7C */
   __IO uint32_t DBICR0;                            /**< DBI-B Control Register 0, offset: 0x80 */
   __IO uint32_t DBICR1;                            /**< DBI-B Control Register 1, offset: 0x84 */
   __IO uint32_t DBICR2;                            /**< DBI-B Control Register 2, offset: 0x88 */
@@ -186,21 +188,21 @@ typedef struct {
   __I  uint32_t IPRXDAT;                           /**< RX DATA Register, offset: 0xB0 */
        uint8_t RESERVED_2[12];
   __I  uint32_t STS0;                              /**< Status Register 0, offset: 0xC0 */
-       uint32_t STS1;                              /**< Status Register 1, offset: 0xC4 */
+  __I  uint32_t STS1;                              /**< Status Register 1, offset: 0xC4 */
   __I  uint32_t STS2;                              /**< Status Register 2, offset: 0xC8 */
-       uint32_t STS3;                              /**< Status Register 3, offset: 0xCC */
-       uint32_t STS4;                              /**< Status Register 4, offset: 0xD0 */
-       uint32_t STS5;                              /**< Status Register 5, offset: 0xD4 */
-       uint32_t STS6;                              /**< Status Register 6, offset: 0xD8 */
-       uint32_t STS7;                              /**< Status Register 7, offset: 0xDC */
-       uint32_t STS8;                              /**< Status Register 8, offset: 0xE0 */
-       uint32_t STS9;                              /**< Status Register 9, offset: 0xE4 */
-       uint32_t STS10;                             /**< Status Register 10, offset: 0xE8 */
-       uint32_t STS11;                             /**< Status Register 11, offset: 0xEC */
+  __I  uint32_t STS3;                              /**< Status Register 3, offset: 0xCC */
+  __I  uint32_t STS4;                              /**< Status Register 4, offset: 0xD0 */
+  __I  uint32_t STS5;                              /**< Status Register 5, offset: 0xD4 */
+  __I  uint32_t STS6;                              /**< Status Register 6, offset: 0xD8 */
+  __I  uint32_t STS7;                              /**< Status Register 7, offset: 0xDC */
+  __I  uint32_t STS8;                              /**< Status Register 8, offset: 0xE0 */
+  __I  uint32_t STS9;                              /**< Status Register 9, offset: 0xE4 */
+  __I  uint32_t STS10;                             /**< Status Register 10, offset: 0xE8 */
+  __I  uint32_t STS11;                             /**< Status Register 11, offset: 0xEC */
   __I  uint32_t STS12;                             /**< Status Register 12, offset: 0xF0 */
   __I  uint32_t STS13;                             /**< Status Register 13, offset: 0xF4 */
-       uint32_t STS14;                             /**< Status Register 14, offset: 0xF8 */
-       uint32_t STS15;                             /**< Status Register 15, offset: 0xFC */
+  __I  uint32_t STS14;                             /**< Status Register 14, offset: 0xF8 */
+  __I  uint32_t STS15;                             /**< Status Register 15, offset: 0xFC */
   __IO uint32_t BR9;                               /**< Base Register 9, offset: 0x100 */
   __IO uint32_t BR10;                              /**< Base Register 10, offset: 0x104 */
   __IO uint32_t BR11;                              /**< Base Register 11, offset: 0x108 */

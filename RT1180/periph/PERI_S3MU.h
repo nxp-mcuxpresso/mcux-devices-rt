@@ -41,8 +41,8 @@
 **                          MIMXRT118CXVJ8C_cm33
 **                          MIMXRT118CXVJ8C_cm7
 **
-**     Version:             rev. 3.0, 2024-10-29
-**     Build:               b260206
+**     Version:             rev. 4.0, 2026-08-14
+**     Build:               b260824
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for S3MU
@@ -62,14 +62,16 @@
 **     - rev. 3.0 (2024-10-29)
 **         Change the device header file from single flat file to multiple files based on peripherals,
 **         each peripheral with dedicated header file located in periphN folder.
+**     - rev. 4.0 (2026-08-14)
+**         Based on RM Rev 10.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_S3MU.h
- * @version 3.0
- * @date 2024-10-29
+ * @version 4.0
+ * @date 2026-08-14
  * @brief CMSIS Peripheral Access Layer for S3MU
  *
  * CMSIS Peripheral Access Layer for S3MU
@@ -152,7 +154,7 @@
 typedef struct {
   __I  uint32_t VER;                               /**< Version ID Register, offset: 0x0 */
   __I  uint32_t PAR;                               /**< Parameter Register, offset: 0x4 */
-       uint32_t UNUSED0;                           /**< Unused Register 0, offset: 0x8 */
+  __I  uint32_t UNUSED0;                           /**< Unused Register 0, offset: 0x8 */
   __I  uint32_t SR;                                /**< Status Register, offset: 0xC */
        uint8_t RESERVED_0[272];
   __IO uint32_t TCR;                               /**< Transmit Control Register, offset: 0x120 */

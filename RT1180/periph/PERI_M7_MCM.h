@@ -41,8 +41,8 @@
 **                          MIMXRT118CXVJ8C_cm33
 **                          MIMXRT118CXVJ8C_cm7
 **
-**     Version:             rev. 3.0, 2024-10-29
-**     Build:               b260206
+**     Version:             rev. 4.0, 2026-08-14
+**     Build:               b260824
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for M7_MCM
@@ -62,14 +62,16 @@
 **     - rev. 3.0 (2024-10-29)
 **         Change the device header file from single flat file to multiple files based on peripherals,
 **         each peripheral with dedicated header file located in periphN folder.
+**     - rev. 4.0 (2026-08-14)
+**         Based on RM Rev 10.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_M7_MCM.h
- * @version 3.0
- * @date 2024-10-29
+ * @version 4.0
+ * @date 2026-08-14
  * @brief CMSIS Peripheral Access Layer for M7_MCM
  *
  * CMSIS Peripheral Access Layer for M7_MCM
@@ -227,22 +229,6 @@ typedef struct {
  *  0b1..Interrupt occurred
  */
 #define M7_MCM_ISCR_FIDC(x)                      (((uint32_t)(((uint32_t)(x)) << M7_MCM_ISCR_FIDC_SHIFT)) & M7_MCM_ISCR_FIDC_MASK)
-
-#define M7_MCM_ISCR_WABE_MASK                    (0x200000U)
-#define M7_MCM_ISCR_WABE_SHIFT                   (21U)
-/*! WABE - TCM Write Abort Interrupt Enable
- *  0b0..Disable interrupt
- *  0b1..Enable interrupt
- */
-#define M7_MCM_ISCR_WABE(x)                      (((uint32_t)(((uint32_t)(x)) << M7_MCM_ISCR_WABE_SHIFT)) & M7_MCM_ISCR_WABE_MASK)
-
-#define M7_MCM_ISCR_FIOCE_MASK                   (0x1000000U)
-#define M7_MCM_ISCR_FIOCE_SHIFT                  (24U)
-/*! FIOCE - FPU Invalid Operation Interrupt Enable
- *  0b0..Disable interrupt
- *  0b1..Enable interrupt
- */
-#define M7_MCM_ISCR_FIOCE(x)                     (((uint32_t)(((uint32_t)(x)) << M7_MCM_ISCR_FIOCE_SHIFT)) & M7_MCM_ISCR_FIOCE_MASK)
 
 #define M7_MCM_ISCR_FDZCE_MASK                   (0x2000000U)
 #define M7_MCM_ISCR_FDZCE_SHIFT                  (25U)

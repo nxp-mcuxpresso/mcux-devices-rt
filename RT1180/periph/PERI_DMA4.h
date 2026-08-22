@@ -41,8 +41,8 @@
 **                          MIMXRT118CXVJ8C_cm33
 **                          MIMXRT118CXVJ8C_cm7
 **
-**     Version:             rev. 3.0, 2024-10-29
-**     Build:               b260206
+**     Version:             rev. 4.0, 2026-08-14
+**     Build:               b260824
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for DMA4
@@ -62,14 +62,16 @@
 **     - rev. 3.0 (2024-10-29)
 **         Change the device header file from single flat file to multiple files based on peripherals,
 **         each peripheral with dedicated header file located in periphN folder.
+**     - rev. 4.0 (2026-08-14)
+**         Based on RM Rev 10.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_DMA4.h
- * @version 3.0
- * @date 2024-10-29
+ * @version 4.0
+ * @date 2026-08-14
  * @brief CMSIS Peripheral Access Layer for DMA4
  *
  * CMSIS Peripheral Access Layer for DMA4
@@ -180,8 +182,6 @@ typedef enum _dma_request_source
     kDma4RequestMuxI3C2FromBusRequest = 7|0x200U,  /**< I3C2 From-bus Request */
     kDma4RequestMuxLPI2C3Tx         = 8|0x200U,    /**< LPI2C3 TX */
     kDma4RequestMuxLPI2C3Rx         = 9|0x200U,    /**< LPI2C3 RX */
-    kDma4RequestMuxReserved10       = 10|0x200U,   /**< Reserved 10 */
-    kDma4RequestMuxReserved11       = 11|0x200U,   /**< Reserved 11 */
     kDma4RequestMuxLPSPI3Tx         = 12|0x200U,   /**< LPSPI3 TX */
     kDma4RequestMuxLPSPI3Rx         = 13|0x200U,   /**< LPSPI3 RX */
     kDma4RequestMuxLPSPI4Tx         = 14|0x200U,   /**< LPSPI4 TX */
@@ -275,8 +275,6 @@ typedef enum _dma_request_source
     kDma4RequestMuxEQDC2            = 160|0x200U,  /**< EQDC2 */
     kDma4RequestMuxEQDC3            = 161|0x200U,  /**< EQDC3 */
     kDma4RequestMuxEQDC4            = 162|0x200U,  /**< EQDC4 */
-    kDma4RequestMuxReserved163      = 163|0x200U,  /**< Reserved 163 */
-    kDma4RequestMuxReserved164      = 164|0x200U,  /**< Reserved 164 */
     kDma4RequestMuxLPSPI5Tx         = 167|0x200U,  /**< LPSPI5 TX */
     kDma4RequestMuxLPSPI5Rx         = 168|0x200U,  /**< LPSPI5 RX */
     kDma4RequestMuxLPSPI6Tx         = 169|0x200U,  /**< LPSPI6 TX */
@@ -378,12 +376,16 @@ typedef enum _dma_request_source
     kDma3RequestMuxLPUART12Tx       = 31|0x100U,   /**< LPUART12 TX */
     kDma3RequestMuxLPUART12Rx       = 32|0x100U,   /**< LPUART12 RX */
     kDma4RequestMuxCAN2             = 1|0x200U,    /**< CAN2 */
+    kDma4RequestMuxLPI2C4Tx         = 10|0x200U,   /**< LPI2C4 TX */
+    kDma4RequestMuxLPI2C4Rx         = 11|0x200U,   /**< LPI2C4 RX */
     kDma4RequestMuxTPM5Request0Request2 = 31|0x200U, /**< TPM5 request 0 and request 2 */
     kDma4RequestMuxTPM5Request1Request3 = 32|0x200U, /**< TPM5 request 1 and request 3 */
     kDma4RequestMuxTPM5OverflowRequest = 33|0x200U, /**< TPM5 Overflow request */
     kDma4RequestMuxTPM6Request0Request2 = 34|0x200U, /**< TPM6 request 0 and request 2 */
     kDma4RequestMuxTPM6Request1Request3 = 35|0x200U, /**< TPM6 request 1 and request 3 */
     kDma4RequestMuxTPM6OverflowRequest = 36|0x200U, /**< TPM6 Overflow request */
+    kDma4RequestMuxLPI2C5Tx         = 163|0x200U,  /**< LPI2C5 TX */
+    kDma4RequestMuxLPI2C5Rx         = 164|0x200U,  /**< LPI2C5 RX */
     kDma4RequestMuxLPUART9Tx        = 172|0x200U,  /**< LPUART9 TX */
     kDma4RequestMuxLPUART9Rx        = 173|0x200U,  /**< LPUART9 RX */
     kDma4RequestMuxLPUART10Tx       = 174|0x200U,  /**< LPUART10 TX */

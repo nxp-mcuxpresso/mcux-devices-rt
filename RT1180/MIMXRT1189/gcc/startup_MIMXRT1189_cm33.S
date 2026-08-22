@@ -2,9 +2,9 @@
 /*  @file:    startup_MIMXRT1189_cm33.s                                      */
 /*  @purpose: CMSIS Cortex-M33 Core Device Startup File                      */
 /*            MIMXRT1189_cm33                                                */
-/*  @version: 3.0                                                            */
-/*  @date:    2024-10-29                                                     */
-/*  @build:   b260206                                                        */
+/*  @version: 4.0                                                            */
+/*  @date:    2026-8-14                                                      */
+/*  @build:   b260821                                                        */
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /* Copyright 1997-2016 Freescale Semiconductor, Inc.                         */
@@ -277,7 +277,7 @@ __isr_vector:
     .long   GPIO6_IRQHandler                                /* GPIO6 interrupt*/
     .long   DBG_TRACE_IRQHandler                            /* JTAGSW DAP MDM-AP SRC reset source*/
     .long   ECAT_RST_OUT_IRQHandler                         /* ECAT reset out interrupt*/
-    .long   DefaultISR                                      /* 255*/
+    .long   EDGELOCK_IRQHandler                             /* Edgelock interrupt*/
 
     .size   __isr_vector, . - __isr_vector
 
@@ -1687,5 +1687,6 @@ ASRC_IRQHandler:
     def_irq_handler    GPIO6_IRQHandler
     def_irq_handler    DBG_TRACE_IRQHandler
     def_irq_handler    ECAT_RST_OUT_IRQHandler
+    def_irq_handler    EDGELOCK_IRQHandler
 
     .end

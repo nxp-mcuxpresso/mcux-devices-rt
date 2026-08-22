@@ -4,9 +4,9 @@
 **                          MIMXRT1185XVJ8C_cm7
 **
 **     Compiler:            GNU C Compiler
-**     Reference manual:    IMXRT1180RM, Rev 5, 01/2024
+**     Reference manual:    IMXRT1180RM, Rev 10, 05/2026
 **     Version:             rev. 2.0, 2024-01-18
-**     Build:               b260206
+**     Build:               b260820
 **
 **     Abstract:
 **         Linker file for the GNU C Compiler

@@ -2,9 +2,9 @@
 ;  @file:    startup_MIMXRT1187_cm7.s
 ;  @purpose: CMSIS Cortex-M7 Core Device Startup File
 ;            MIMXRT1187_cm7
-;  @version: 3.0
-;  @date:    2024-10-29
-;  @build:   b260206
+;  @version: 4.0
+;  @date:    2026-8-14
+;  @build:   b260821
 ; -------------------------------------------------------------------------
 ;
 ; Copyright 1997-2016 Freescale Semiconductor, Inc.
@@ -307,7 +307,7 @@ __vector_table_0x1c
         DCD     GPIO6_IRQHandler                              ;GPIO6 interrupt
         DCD     DBG_TRACE_IRQHandler                          ;JTAGSW DAP MDM-AP SRC reset source
         DCD     Reserved254_IRQHandler                        ;Reserved interrupt
-        DCD     0xFFFFFFFF                                    ; Reserved for user TRIM value
+        DCD     EDGELOCK_IRQHandler                           ;Edgelock interrupt
 __Vectors_End
 
 __Vectors       EQU   __vector_table
@@ -1234,6 +1234,7 @@ ASRC_IRQHandler
         PUBWEAK GPIO6_IRQHandler
         PUBWEAK DBG_TRACE_IRQHandler
         PUBWEAK Reserved254_IRQHandler
+        PUBWEAK EDGELOCK_IRQHandler
         PUBWEAK DefaultISR
         SECTION .text:CODE:REORDER:NOROOT(1)
 TMR1_IRQHandler
@@ -1475,6 +1476,7 @@ ASRC_DriverIRQHandler
 GPIO6_IRQHandler
 DBG_TRACE_IRQHandler
 Reserved254_IRQHandler
+EDGELOCK_IRQHandler
 DefaultISR
         B DefaultISR
 

@@ -41,8 +41,8 @@
 **                          MIMXRT118CXVJ8C_cm33
 **                          MIMXRT118CXVJ8C_cm7
 **
-**     Version:             rev. 3.0, 2024-10-29
-**     Build:               b260206
+**     Version:             rev. 4.0, 2026-08-14
+**     Build:               b260824
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for TCM_ECC_MCM
@@ -62,14 +62,16 @@
 **     - rev. 3.0 (2024-10-29)
 **         Change the device header file from single flat file to multiple files based on peripherals,
 **         each peripheral with dedicated header file located in periphN folder.
+**     - rev. 4.0 (2026-08-14)
+**         Based on RM Rev 10.
 **
 ** ###################################################################
 */
 
 /*!
  * @file PERI_TCM_ECC_MCM.h
- * @version 3.0
- * @date 2024-10-29
+ * @version 4.0
+ * @date 2026-08-14
  * @brief CMSIS Peripheral Access Layer for TCM_ECC_MCM
  *
  * CMSIS Peripheral Access Layer for TCM_ECC_MCM
@@ -324,7 +326,7 @@ typedef struct {
 
 #define TCM_ECC_MCM_CODE_TCM_ECC_SINGLE_ERROR_INFO_CODE_TCM_ECCS_EFMST_MASK (0xF0U)
 #define TCM_ECC_MCM_CODE_TCM_ECC_SINGLE_ERROR_INFO_CODE_TCM_ECCS_EFMST_SHIFT (4U)
-/*! CODE_TCM_ECCS_EFMST - Code TCM Single-Bit ECC Error for Corresponding TCM Master */
+/*! CODE_TCM_ECCS_EFMST - Code TCM Single-Bit ECC Error for Corresponding TCM initiator */
 #define TCM_ECC_MCM_CODE_TCM_ECC_SINGLE_ERROR_INFO_CODE_TCM_ECCS_EFMST(x) (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_CODE_TCM_ECC_SINGLE_ERROR_INFO_CODE_TCM_ECCS_EFMST_SHIFT)) & TCM_ECC_MCM_CODE_TCM_ECC_SINGLE_ERROR_INFO_CODE_TCM_ECCS_EFMST_MASK)
 
 #define TCM_ECC_MCM_CODE_TCM_ECC_SINGLE_ERROR_INFO_CODE_TCM_ECCS_EFPRT_MASK (0xF00U)
@@ -357,7 +359,7 @@ typedef struct {
 
 #define TCM_ECC_MCM_CODE_TCM_ECC_MULTI_ERROR_INFO_CODE_TCM_ECCM_EFMST_MASK (0xF0U)
 #define TCM_ECC_MCM_CODE_TCM_ECC_MULTI_ERROR_INFO_CODE_TCM_ECCM_EFMST_SHIFT (4U)
-/*! CODE_TCM_ECCM_EFMST - Code TCM Multibit ECC Error for Corresponding TCM Master */
+/*! CODE_TCM_ECCM_EFMST - Code TCM Multibit ECC Error for Corresponding TCM initiator */
 #define TCM_ECC_MCM_CODE_TCM_ECC_MULTI_ERROR_INFO_CODE_TCM_ECCM_EFMST(x) (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_CODE_TCM_ECC_MULTI_ERROR_INFO_CODE_TCM_ECCM_EFMST_SHIFT)) & TCM_ECC_MCM_CODE_TCM_ECC_MULTI_ERROR_INFO_CODE_TCM_ECCM_EFMST_MASK)
 
 #define TCM_ECC_MCM_CODE_TCM_ECC_MULTI_ERROR_INFO_CODE_TCM_ECCM_EFPRT_MASK (0xF00U)
@@ -390,7 +392,7 @@ typedef struct {
 
 #define TCM_ECC_MCM_SYS_TCM_ECC_SINGLE_ERROR_INFO_SYS_TCM_ECCS_EFMST_MASK (0xF0U)
 #define TCM_ECC_MCM_SYS_TCM_ECC_SINGLE_ERROR_INFO_SYS_TCM_ECCS_EFMST_SHIFT (4U)
-/*! SYS_TCM_ECCS_EFMST - System TCM Single-Bit ECC Error for Corresponding TCM Master */
+/*! SYS_TCM_ECCS_EFMST - System TCM Single-Bit ECC Error for Corresponding TCM initiator */
 #define TCM_ECC_MCM_SYS_TCM_ECC_SINGLE_ERROR_INFO_SYS_TCM_ECCS_EFMST(x) (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_SYS_TCM_ECC_SINGLE_ERROR_INFO_SYS_TCM_ECCS_EFMST_SHIFT)) & TCM_ECC_MCM_SYS_TCM_ECC_SINGLE_ERROR_INFO_SYS_TCM_ECCS_EFMST_MASK)
 
 #define TCM_ECC_MCM_SYS_TCM_ECC_SINGLE_ERROR_INFO_SYS_TCM_ECCS_EFPRT_MASK (0xF00U)
@@ -423,7 +425,7 @@ typedef struct {
 
 #define TCM_ECC_MCM_SYS_TCM_ECC_MULTI_ERROR_INFO_SYS_TCM_ECCM_EFMST_MASK (0xF0U)
 #define TCM_ECC_MCM_SYS_TCM_ECC_MULTI_ERROR_INFO_SYS_TCM_ECCM_EFMST_SHIFT (4U)
-/*! SYS_TCM_ECCM_EFMST - System TCM Multibit ECC Error for Corresponding TCM Master */
+/*! SYS_TCM_ECCM_EFMST - System TCM Multibit ECC Error for Corresponding TCM initiator */
 #define TCM_ECC_MCM_SYS_TCM_ECC_MULTI_ERROR_INFO_SYS_TCM_ECCM_EFMST(x) (((uint32_t)(((uint32_t)(x)) << TCM_ECC_MCM_SYS_TCM_ECC_MULTI_ERROR_INFO_SYS_TCM_ECCM_EFMST_SHIFT)) & TCM_ECC_MCM_SYS_TCM_ECC_MULTI_ERROR_INFO_SYS_TCM_ECCM_EFMST_MASK)
 
 #define TCM_ECC_MCM_SYS_TCM_ECC_MULTI_ERROR_INFO_SYS_TCM_ECCM_EFPRT_MASK (0xF00U)

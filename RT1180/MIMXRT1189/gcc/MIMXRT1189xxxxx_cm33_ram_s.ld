@@ -1,18 +1,20 @@
 /*
 ** ###################################################################
 **     Processors:          MIMXRT1189CVM8B_cm33
+**                          MIMXRT1189CVM8C_cm33
 **                          MIMXRT1189XVM8B_cm33
+**                          MIMXRT1189XVM8C_cm33
 **
 **     Compiler:            GNU C Compiler
-**     Reference manual:    IMXRT1180RM, Rev 2, 12/2022
-**     Version:             rev. 0.1, 2021-03-09
-**     Build:               b240109
+**     Reference manual:    IMXRT1180RM, Rev 10, 05/2026
+**     Version:             rev. 2.0, 2024-01-18
+**     Build:               b260820
 **
 **     Abstract:
 **         Linker file for the GNU C Compiler
 **
 **     Copyright 2016 Freescale Semiconductor, Inc.
-**     Copyright 2016-2024 NXP
+**     Copyright 2016-2026 NXP
 **     SPDX-License-Identifier: BSD-3-Clause
 **
 **     http:                 www.nxp.com
@@ -20,6 +22,7 @@
 **
 ** ###################################################################
 */
+
 
 /* Entry Point */
 ENTRY(Reset_Handler)
@@ -181,7 +184,7 @@ SECTIONS
      . = ALIGN(32);
      _end_sg = .;
   } > m_veneer_table
-  
+
   .ctors :
   {
     __CTOR_LIST__ = .;
