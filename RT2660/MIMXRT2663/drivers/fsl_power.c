@@ -79,16 +79,46 @@
 #define POWER_LDO_MODE_LP 2U /*!< LDO Low Power mode */
 
 /*
- * Body-bias reference values from the verification-team sequence
- * (rt2660_bodybias_configuration.drawio).
+ * Body-bias FBB voltage codes.
  *
- * IMPORTANT: these are temporary reference trim values until OTP/PMU
- * characterization data is available through the production trim flow.
- * fsl_power only uses ZBB and full FBB (N-well + P-well); it does not use
- * P-well-only, N-well-only, Hi-Z, standby, or VDD-tracking body-bias modes.
+ * Primary source: OTP fuse ANA_CFG12 (FSB shadow word 50, RamAccessFSB=Public per
+ * the RT2660 fusemap OTP_CONFIG_OCOTP_V2 sheet). Layout:
+ *   [2:0]   PMU_OTP_WB_MODE_SEL_PRIMARY   (cached for future PMU driver use)
+ *   [22:16] PMU_OTP_WB_NWELL_V_SEL_PRIMARY (7-bit) -> pmu_body_bias_config_t.nwellVolSel
+ *   [30:24] PMU_OTP_WB_PWELL_V_SEL_PRIMARY (7-bit) -> pmu_body_bias_config_t.pwellVolSel
+ *
+ * Backup source: OTP fuse ANA_CFG13 (FSB shadow word 51). Same layout as CFG12 for
+ * bits [2:0] / [22:16] / [30:24], plus a select bit at [31]:
+ *   [31]    PMU_OTP_WB_TRIM_SEL
+ * When TRIM_SEL=1, the BACKUP fields from CFG13 override the PRIMARY fields from
+ * CFG12 (per field: BACKUP is used only if non-zero, otherwise fall back to PRIMARY).
+ * This is the OTP-level hook for a re-trim after silicon characterization when the
+ * PRIMARY word cannot be re-burned.
+ *
+ * Both reads run once inside POWER_SetPolicy() and cache into s_fbbTrim. FBB
+ * transitions reuse the cache without re-reading the FSB.
+ *
+ * Fallback (blank fuse, FSB error, or selected field reads back as zero): the
+ * verification-team reference codes below from rt2660_bodybias_configuration.drawio.
+ * This keeps un-fused silicon and pre-characterization parts running through the FBB
+ * flow instead of faulting into 0 mV body bias.
  */
-#define POWER_BODYBIAS_FBB_NWELL_VOL_SEL (0x18U) // 1200mV
-#define POWER_BODYBIAS_FBB_PWELL_VOL_SEL (0x24U) // 1800mV
+#define POWER_BODYBIAS_FUSE_WORD_ANA_CFG12 (50U)
+#define POWER_BODYBIAS_FUSE_WORD_ANA_CFG13 (51U)
+
+/* CFG12 PRIMARY and CFG13 BACKUP share the same bit layout for the three trim fields. */
+#define POWER_ANA_CFG_MODE_SEL_MASK      (0x00000007U) /* [2:0]   */
+#define POWER_ANA_CFG_MODE_SEL_SHIFT     (0U)
+#define POWER_ANA_CFG_NWELL_V_SEL_MASK   (0x007F0000U) /* [22:16] */
+#define POWER_ANA_CFG_NWELL_V_SEL_SHIFT  (16U)
+#define POWER_ANA_CFG_PWELL_V_SEL_MASK   (0x7F000000U) /* [30:24] */
+#define POWER_ANA_CFG_PWELL_V_SEL_SHIFT  (24U)
+
+/* CFG13-only select bit. */
+#define POWER_ANA_CFG13_TRIM_SEL_MASK    (0x80000000U) /* [31] */
+
+#define POWER_BODYBIAS_FBB_NWELL_VOL_SEL (0x18U) /* fallback: ~1200 mV per verification ref */
+#define POWER_BODYBIAS_FBB_PWELL_VOL_SEL (0x24U) /* fallback: ~1800 mV per verification ref */
 
 /* OCRAM0 block granularity used for retention sizing. */
 #define POWER_OCRAM0_BLOCK_SIZE_KB 8U /*!< Each MEMCON OCRAM0 block covers 8 KB */
@@ -167,6 +197,42 @@ static uint32_t s_irqWakeupMask[POWER_IRQ_WAKEUP_MASK_COUNT];
 static uint32_t s_mainDmaWakeupMask[POWER_DMA_WAKEUP_MASK_COUNT];
 static uint32_t s_wakeDmaWakeupMask[POWER_DMA_WAKEUP_MASK_COUNT];
 
+/*
+ * Cached FBB trim values from OTP fuses ANA_CFG12 / ANA_CFG13. Loaded by
+ * POWER_LoadBodyBiasFuse() on the first POWER_SetPolicy() call. `s_fbbTrim` keeps the
+ * three primitive fields (nwell / pwell / modeSel) mainly for diagnostics; the mode-run
+ * paths consume the pre-built `s_fbbCfg` directly.
+ *
+ * Initialized to the reference fallback so any pre-POWER_SetPolicy() body-bias apply
+ * (should not happen in normal flow) still uses safe values.
+ */
+static struct
+{
+    uint8_t nwell;   /*!< 7-bit N-well voltage selection code. */
+    uint8_t pwell;   /*!< 7-bit P-well voltage selection code. */
+    uint8_t modeSel; /*!< 3-bit PMU_OTP_WB_MODE_SEL from CFG12 or CFG13 (per TRIM_SEL). Not applied
+                          to s_fbbCfg.mode: fsl_power's HP/NP run modes always request FBBFull. */
+} s_fbbTrim = {
+    .nwell   = POWER_BODYBIAS_FBB_NWELL_VOL_SEL,
+    .pwell   = POWER_BODYBIAS_FBB_PWELL_VOL_SEL,
+    .modeSel = 0U,
+};
+
+/*
+ * Pre-built FBB body-bias config used by every POWER_Enter*Run() FBB apply. Populated
+ * by POWER_LoadBodyBiasFuse() (called from POWER_SetPolicy()) as:
+ *   PMU_GetDefaultBodyBiasConfig(&s_fbbCfg);
+ *   s_fbbCfg.mode        = kPMU_BodyBiasFBBFull;
+ *   s_fbbCfg.nwellVolSel = s_fbbTrim.nwell;
+ *   s_fbbCfg.pwellVolSel = s_fbbTrim.pwell;
+ *
+ * Zero-initialized here so a body-bias apply before POWER_SetPolicy() would come out as
+ * pmu_body_bias_mode_t=kPMU_BodyBiasZBB (0) — the safe default that PMU_ApplyBodyBias
+ * accepts without N-well/P-well OK gating. In normal flow, s_fbbCfg is always populated
+ * before any FBB apply.
+ */
+static pmu_body_bias_config_t s_fbbCfg;
+
 /* Four RT2660 SW-controllable power domains (PD_CPU/NPU/COMM/MEDIA). */
 static const uint8_t s_powerDomains[] = {
     (uint8_t)kPOWER_DomainCpu,
@@ -200,7 +266,7 @@ static bool s_pmicReady = false;
  * Private helpers
  ******************************************************************************/
 
-static void POWER_SetBodyBiasFbbFullConfig(pmu_body_bias_config_t *config);
+static void POWER_LoadBodyBiasFuse(void);
 
 /*
  * Builds step-mode masks from a power_cmc_step_config_t and applies them to
@@ -319,15 +385,91 @@ static void POWER_ApplyZbb(void)
     (void)PMU_ApplyBodyBiasBlocking(SYSCON__PMU);
 }
 
-/* Full FBB used by fsl_power: N-well + P-well only. */
-static void POWER_SetBodyBiasFbbFullConfig(pmu_body_bias_config_t *config)
+/*
+ * Reads OTP fuses ANA_CFG12 (PRIMARY) and ANA_CFG13 (BACKUP + TRIM_SEL) once via the
+ * FSB shadow and caches the resolved Well-Bias trim codes in s_fbbTrim. Called from
+ * POWER_SetPolicy().
+ *
+ * Per-field selection order (independent for nwell / pwell / modeSel):
+ *   1. If CFG13.TRIM_SEL == 1 and the BACKUP field is non-zero, use BACKUP.
+ *   2. Otherwise, if the PRIMARY field is non-zero, use PRIMARY.
+ *   3. Otherwise, leave s_fbbTrim at its initialized fallback (reference macros for
+ *      nwell / pwell, zero for modeSel).
+ *
+ * Failure modes that leave s_fbbTrim at its initialized fallback (bring-up safety):
+ *   - All fuses not yet valid (FSB_STATUS.VALL == 0) — skip both reads
+ *   - FSB reports RD_ERR / RLD_ERR / FUSE_ERR / ADDR_ERR on the CFG12 read — skip both
+ *   - FSB reports error on the CFG13 read only — CFG12 PRIMARY path still applies
+ */
+static void POWER_LoadBodyBiasFuse(void)
 {
-    assert(config != NULL);
+    const uint32_t errMask = FSB_FUSE_STAT_RD_ERR_MASK | FSB_FUSE_STAT_RLD_ERR_MASK |
+                             FSB_FUSE_STAT_FUSE_ERR_MASK | FSB_FUSE_STAT_ADDR_ERR_MASK;
 
-    PMU_GetDefaultBodyBiasConfig(config);
-    config->mode        = kPMU_BodyBiasFBBFull;
-    config->nwellVolSel = POWER_BODYBIAS_FBB_NWELL_VOL_SEL;
-    config->pwellVolSel = POWER_BODYBIAS_FBB_PWELL_VOL_SEL;
+    /* Populate s_fbbCfg with defaults up-front so any early-return path leaves a valid
+     * FBBFull config behind (built from s_fbbTrim, which holds the fallback macros
+     * until the fuse read below overrides them). */
+    PMU_GetDefaultBodyBiasConfig(&s_fbbCfg);
+    s_fbbCfg.mode        = kPMU_BodyBiasFBBFull;
+    s_fbbCfg.nwellVolSel = s_fbbTrim.nwell;
+    s_fbbCfg.pwellVolSel = s_fbbTrim.pwell;
+
+    /* Skip the FSB access entirely if fuse shadow load has not completed;
+     * s_fbbTrim / s_fbbCfg keep their initialized fallback values. */
+    if ((MAIN__FSB->FSB_STATUS & FSB_FSB_STATUS_VALL_MASK) == 0U)
+    {
+        return;
+    }
+
+    /* Read PRIMARY (CFG12). Clear sticky FUSE_STAT bits, read, then check. */
+    MAIN__FSB->FUSE_STAT = MAIN__FSB->FUSE_STAT;
+    uint32_t primary     = MAIN__FSB->FUSE[POWER_BODYBIAS_FUSE_WORD_ANA_CFG12];
+    if ((MAIN__FSB->FUSE_STAT & errMask) != 0U)
+    {
+        return;
+    }
+
+    uint8_t priNwell = (uint8_t)((primary & POWER_ANA_CFG_NWELL_V_SEL_MASK) >> POWER_ANA_CFG_NWELL_V_SEL_SHIFT);
+    uint8_t priPwell = (uint8_t)((primary & POWER_ANA_CFG_PWELL_V_SEL_MASK) >> POWER_ANA_CFG_PWELL_V_SEL_SHIFT);
+    uint8_t priMode  = (uint8_t)((primary & POWER_ANA_CFG_MODE_SEL_MASK) >> POWER_ANA_CFG_MODE_SEL_SHIFT);
+
+    /* Read BACKUP (CFG13). If this read fails, keep PRIMARY-only path. */
+    MAIN__FSB->FUSE_STAT = MAIN__FSB->FUSE_STAT;
+    uint32_t backup      = MAIN__FSB->FUSE[POWER_BODYBIAS_FUSE_WORD_ANA_CFG13];
+    bool     backupValid = ((MAIN__FSB->FUSE_STAT & errMask) == 0U);
+
+    uint8_t bakNwell = 0U;
+    uint8_t bakPwell = 0U;
+    uint8_t bakMode  = 0U;
+    bool    useBackup = false;
+    if (backupValid)
+    {
+        useBackup = ((backup & POWER_ANA_CFG13_TRIM_SEL_MASK) != 0U);
+        bakNwell  = (uint8_t)((backup & POWER_ANA_CFG_NWELL_V_SEL_MASK) >> POWER_ANA_CFG_NWELL_V_SEL_SHIFT);
+        bakPwell  = (uint8_t)((backup & POWER_ANA_CFG_PWELL_V_SEL_MASK) >> POWER_ANA_CFG_PWELL_V_SEL_SHIFT);
+        bakMode   = (uint8_t)((backup & POWER_ANA_CFG_MODE_SEL_MASK) >> POWER_ANA_CFG_MODE_SEL_SHIFT);
+    }
+
+    /* Per-field select: BACKUP if TRIM_SEL and BACKUP non-zero, else PRIMARY if non-zero,
+     * else leave the initialized fallback (reference macros for nwell/pwell, 0 for mode). */
+    uint8_t nwell = (useBackup && bakNwell != 0U) ? bakNwell : priNwell;
+    uint8_t pwell = (useBackup && bakPwell != 0U) ? bakPwell : priPwell;
+    uint8_t mode  = (useBackup && bakMode  != 0U) ? bakMode  : priMode;
+
+    if (nwell != 0U)
+    {
+        s_fbbTrim.nwell = nwell;
+    }
+    if (pwell != 0U)
+    {
+        s_fbbTrim.pwell = pwell;
+    }
+    s_fbbTrim.modeSel = mode;
+
+    /* Reflect the resolved trim into the pre-built FBB config so POWER_Enter*Run()
+     * FBB paths can hand s_fbbCfg to PMU_ConfigBodyBias directly. */
+    s_fbbCfg.nwellVolSel = s_fbbTrim.nwell;
+    s_fbbCfg.pwellVolSel = s_fbbTrim.pwell;
 }
 
 /*
@@ -456,6 +598,9 @@ void POWER_SetPolicy(const power_policy_config_t *config)
 
     /* 2. Enable PDCON function clock. */
     PDCON_EnableFunctionClock(SYSCON__PDCON, true);
+
+    /* Load OTP body-bias trim once here; FBB apply paths read from s_fbbTrim. */
+    POWER_LoadBodyBiasFuse();
 
     /* 3. Apply SoC handshake routing (HSK_SEL routing and PDCON HSKCTRL).
      *    NULL -> apply POR-default values; non-NULL -> apply caller-supplied config. */
@@ -981,8 +1126,8 @@ static void POWER_ApplyRunCoreVoltage(uint8_t voutAdj)
  */
 void POWER_EnterHpRun(power_clock_cb_t clockCb)
 {
-    pmu_body_bias_config_t bbCfg;
     power_pmu_state_t pmuState;
+    bool fromLp = (POWER_GetCurrentRunMode() == kPOWER_RunModeLp);
 
     /* Read-modify-write: preserve all fields except the three that change per run mode. */
     pmuState.word     = SYSCON__POWERCON_SOC_CTRL->PMUCFG_ACTIVE;
@@ -990,43 +1135,27 @@ void POWER_EnterHpRun(power_clock_cb_t clockCb)
     pmuState.dcdcMode = 1U; /* PWM */
     pmuState.coreLvl  = POWER_PMUCFG_CORELEVEL_090V;
 
-    if (POWER_GetCurrentRunMode() == kPOWER_RunModeLp) /* LP (ZBB) -> HP */
+    /* Increase into HP: raise the DCDC voltage before the core clock speeds up. */
+    POWER_ApplyRunCoreVoltage(POWER_PMUCFG_CORELEVEL_090V);
+    POWERCON_SetPmucfgActive(SYSCON__POWERCON_SOC_CTRL, pmuState.word);
+    POWERCON_TriggerSocUpdate(SYSCON__POWERCON_SOC_CTRL);
+    while (!POWERCON_IsSocUpdateDone(SYSCON__POWERCON_SOC_CTRL))
     {
-        /* LP -> HP: raise voltage first (DCDC + consistent coreLvl), then switch clocks. */
-        POWER_ApplyRunCoreVoltage(POWER_PMUCFG_CORELEVEL_090V);
-        POWERCON_SetPmucfgActive(SYSCON__POWERCON_SOC_CTRL, pmuState.word);
-        POWERCON_TriggerSocUpdate(SYSCON__POWERCON_SOC_CTRL);
-        while (!POWERCON_IsSocUpdateDone(SYSCON__POWERCON_SOC_CTRL))
-        {
-        }
-        POWER_SetBodyBiasFbbFullConfig(&bbCfg);
-        PMU_ConfigBodyBias(SYSCON__PMU, &bbCfg);
-        (void)PMU_ApplyBodyBiasBlocking(SYSCON__PMU);
-        if (clockCb != NULL)
-        {
-            clockCb();
-        }
     }
-    else
+
+    /* Body bias: only switch when leaving LP (ZBB) — HP/NP already share s_fbbCfg,
+     * so HP/NP -> HP is a no-op at the PMU_BODYBIAS_CONFIG_REG level. Apply FBB
+     * before clockCb so the target frequency (may be higher than the current one)
+     * is entered with the intended body-bias state already in place. */
+    if (fromLp)
     {
-        /* HP/NP -> HP: must transition through ZBB before switching FBB target. */
-        PMU_GetDefaultBodyBiasConfig(&bbCfg);
-        PMU_ConfigBodyBias(SYSCON__PMU, &bbCfg);
+        PMU_ConfigBodyBias(SYSCON__PMU, &s_fbbCfg);
         (void)PMU_ApplyBodyBiasBlocking(SYSCON__PMU);
-        /* Increase into HP: raise the DCDC voltage before the core clock speeds up. */
-        POWER_ApplyRunCoreVoltage(POWER_PMUCFG_CORELEVEL_090V);
-        POWERCON_SetPmucfgActive(SYSCON__POWERCON_SOC_CTRL, pmuState.word);
-        POWERCON_TriggerSocUpdate(SYSCON__POWERCON_SOC_CTRL);
-        while (!POWERCON_IsSocUpdateDone(SYSCON__POWERCON_SOC_CTRL))
-        {
-        }
-        if (clockCb != NULL)
-        {
-            clockCb();
-        }
-        POWER_SetBodyBiasFbbFullConfig(&bbCfg);
-        PMU_ConfigBodyBias(SYSCON__PMU, &bbCfg);
-        (void)PMU_ApplyBodyBiasBlocking(SYSCON__PMU);
+    }
+
+    if (clockCb != NULL)
+    {
+        clockCb();
     }
 }
 
@@ -1035,8 +1164,8 @@ void POWER_EnterHpRun(power_clock_cb_t clockCb)
  */
 void POWER_EnterNormalRun(power_clock_cb_t clockCb)
 {
-    pmu_body_bias_config_t bbCfg;
     power_pmu_state_t pmuState;
+    bool fromLp = (POWER_GetCurrentRunMode() == kPOWER_RunModeLp);
 
     /* Read-modify-write: preserve all fields except the three that change per run mode. */
     pmuState.word     = SYSCON__POWERCON_SOC_CTRL->PMUCFG_ACTIVE;
@@ -1044,18 +1173,17 @@ void POWER_EnterNormalRun(power_clock_cb_t clockCb)
     pmuState.dcdcMode = 1U; /* PWM */
     pmuState.coreLvl  = POWER_PMUCFG_CORELEVEL_080V;
 
-    if (POWER_GetCurrentRunMode() == kPOWER_RunModeLp) /* LP (ZBB) -> NP */
+    if (fromLp)
     {
-        /* LP -> NP: VDD_CORE is unchanged (both 0.8 V); apply the DCDC level for
-         * consistency, then switch body bias and clocks. */
+        /* LP -> NP: VDD_CORE unchanged (both 0.8 V). Apply the DCDC level for consistency,
+         * switch body bias to FBB, then run clockCb. */
         POWER_ApplyRunCoreVoltage(POWER_PMUCFG_CORELEVEL_080V);
         POWERCON_SetPmucfgActive(SYSCON__POWERCON_SOC_CTRL, pmuState.word);
         POWERCON_TriggerSocUpdate(SYSCON__POWERCON_SOC_CTRL);
         while (!POWERCON_IsSocUpdateDone(SYSCON__POWERCON_SOC_CTRL))
         {
         }
-        POWER_SetBodyBiasFbbFullConfig(&bbCfg);
-        PMU_ConfigBodyBias(SYSCON__PMU, &bbCfg);
+        PMU_ConfigBodyBias(SYSCON__PMU, &s_fbbCfg);
         (void)PMU_ApplyBodyBiasBlocking(SYSCON__PMU);
         if (clockCb != NULL)
         {
@@ -1064,13 +1192,10 @@ void POWER_EnterNormalRun(power_clock_cb_t clockCb)
     }
     else
     {
-        /* HP/NP -> NP: must transition through ZBB before switching FBB target. */
-        PMU_GetDefaultBodyBiasConfig(&bbCfg);
-        PMU_ConfigBodyBias(SYSCON__PMU, &bbCfg);
-        (void)PMU_ApplyBodyBiasBlocking(SYSCON__PMU);
-        /* Decrease from HP (0.9 V) into NP (0.8 V): reduce the core clock first, then
-         * lower the DCDC voltage. Applying 0.8 V while still at HP frequency would
-         * undervolt the core. */
+        /* HP/NP -> NP: body bias already FBB (HP and NP share s_fbbCfg) — no PMU write.
+         * For HP -> NP the DCDC voltage drops from 0.9 V to 0.8 V; the core clock must
+         * be reduced first so it is not left running at HP frequency at 0.8 V. For
+         * NP -> NP the voltage is unchanged but clockCb is still called for consistency. */
         if (clockCb != NULL)
         {
             clockCb();
@@ -1081,10 +1206,6 @@ void POWER_EnterNormalRun(power_clock_cb_t clockCb)
         while (!POWERCON_IsSocUpdateDone(SYSCON__POWERCON_SOC_CTRL))
         {
         }
-        /* Switch body bias to FBB after clocks are settled at the new voltage. */
-        POWER_SetBodyBiasFbbFullConfig(&bbCfg);
-        PMU_ConfigBodyBias(SYSCON__PMU, &bbCfg);
-        (void)PMU_ApplyBodyBiasBlocking(SYSCON__PMU);
     }
 }
 
@@ -1093,7 +1214,6 @@ void POWER_EnterNormalRun(power_clock_cb_t clockCb)
  */
 void POWER_EnterLpRun(power_clock_cb_t clockCb)
 {
-    pmu_body_bias_config_t bbCfg;
     power_pmu_state_t pmuState;
 
     /* Read-modify-write: preserve all fields except the three that change per run mode. */
@@ -1102,16 +1222,12 @@ void POWER_EnterLpRun(power_clock_cb_t clockCb)
     pmuState.dcdcMode = 1U; /* PWM (V0.9: all active run modes use PWM; PFM is a DS2/DS3-only standby choice) */
     pmuState.coreLvl  = POWER_PMUCFG_CORELEVEL_080V;
 
-    PMU_GetDefaultBodyBiasConfig(&bbCfg);
-
     /* HP/NP -> LP: reduce clocks first, then lower voltage. */
     if (clockCb != NULL)
     {
         clockCb();
     }
-    PMU_GetDefaultBodyBiasConfig(&bbCfg);
-    PMU_ConfigBodyBias(SYSCON__PMU, &bbCfg);
-    (void)PMU_ApplyBodyBiasBlocking(SYSCON__PMU);
+    POWER_ApplyZbb();
     /* Clocks are already reduced, so it is safe to lower the DCDC voltage (0.8 V). From HP
      * this is a decrease; from NP the level is unchanged. */
     POWER_ApplyRunCoreVoltage(POWER_PMUCFG_CORELEVEL_080V);
