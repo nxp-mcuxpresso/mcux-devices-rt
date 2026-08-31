@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 1.0, 2025-11-13
-**     Build:               b260820
+**     Build:               b260831
 **
 **     Abstract:
 **         Chip specific module features.
@@ -1040,6 +1040,8 @@
 #define FSL_FEATURE_SINC_CACFR_HAS_ADMASEL (0)
 /* @brief SINC CACFR register has no bitfield PTMUX. */
 #define FSL_FEATURE_SINC_CACFR_HAS_NO_PTMUX (0)
+/* @brief SINC MCR register has no bitfield DOZEN. */
+#define FSL_FEATURE_SINC_MCR_HAS_NO_DOZEN (0)
 
 /* SPDIF module features */
 

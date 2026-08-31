@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 1.0, 2025-11-13
-**     Build:               b260820
+**     Build:               b260831
 **
 **     Abstract:
 **         Chip specific module features.
@@ -30,7 +30,7 @@
 /* SOC module features */
 
 /* @brief ACMP availability on the SoC. */
-#define FSL_FEATURE_SOC_ACMP_COUNT (4)
+#define FSL_FEATURE_SOC_ACMP_COUNT (3)
 /* @brief AOI availability on the SoC. */
 #define FSL_FEATURE_SOC_AOI_COUNT (4)
 /* @brief ASRC availability on the SoC. */
@@ -110,19 +110,19 @@
 /* @brief TMR availability on the SoC. */
 #define FSL_FEATURE_SOC_TMR_COUNT (8)
 /* @brief TPM availability on the SoC. */
-#define FSL_FEATURE_SOC_TPM_COUNT (6)
+#define FSL_FEATURE_SOC_TPM_COUNT (4)
 /* @brief TSTMR availability on the SoC. */
 #define FSL_FEATURE_SOC_TSTMR_COUNT (2)
 /* @brief USBHS availability on the SoC. */
-#define FSL_FEATURE_SOC_USBHS_COUNT (2)
+#define FSL_FEATURE_SOC_USBHS_COUNT (1)
 /* @brief USBHSDCD availability on the SoC. */
 #define FSL_FEATURE_SOC_USBHSDCD_COUNT (2)
 /* @brief USBNC availability on the SoC. */
-#define FSL_FEATURE_SOC_USBNC_COUNT (2)
+#define FSL_FEATURE_SOC_USBNC_COUNT (1)
 /* @brief USBPHY availability on the SoC. */
-#define FSL_FEATURE_SOC_USBPHY_COUNT (2)
+#define FSL_FEATURE_SOC_USBPHY_COUNT (1)
 /* @brief USDHC availability on the SoC. */
-#define FSL_FEATURE_SOC_USDHC_COUNT (2)
+#define FSL_FEATURE_SOC_USDHC_COUNT (1)
 /* @brief VREF availability on the SoC. */
 #define FSL_FEATURE_SOC_VREF_COUNT (1)
 /* @brief XBAR_DSC availability on the SoC. */
@@ -1105,6 +1105,8 @@
 #define FSL_FEATURE_SINC_CACFR_HAS_ADMASEL (0)
 /* @brief SINC CACFR register has no bitfield PTMUX. */
 #define FSL_FEATURE_SINC_CACFR_HAS_NO_PTMUX (0)
+/* @brief SINC MCR register has no bitfield DOZEN. */
+#define FSL_FEATURE_SINC_MCR_HAS_NO_DOZEN (0)
 
 /* SPDIF module features */
 
@@ -1212,7 +1214,7 @@
 /* USBHS module features */
 
 /* @brief EHCI module instance count */
-#define FSL_FEATURE_USBHS_EHCI_COUNT (2)
+#define FSL_FEATURE_USBHS_EHCI_COUNT (1)
 /* @brief Number of endpoints supported */
 #define FSL_FEATURE_USBHS_ENDPT_COUNT (8)
 /* @brief If the USB controller support eUSB PHY */
@@ -1233,9 +1235,7 @@
 /* @brief USDHC has no bitfield WTMK_LVL[WR_BRST_LEN] and WTMK_LVL[RD_BRST_LEN] */
 #define FSL_FEATURE_USDHC_HAS_NO_RW_BURST_LEN (1)
 /* @brief If USDHC instance support 8 bit width */
-#define FSL_FEATURE_USDHC_INSTANCE_SUPPORT_8_BIT_WIDTHn(x) \
-    (((x) == USDHC1) ? (0) : \
-    (((x) == USDHC2) ? (1) : (-1)))
+#define FSL_FEATURE_USDHC_INSTANCE_SUPPORT_8_BIT_WIDTHn(x) (1)
 /* @brief If USDHC instance support HS400 mode */
 #define FSL_FEATURE_USDHC_INSTANCE_SUPPORT_HS400_MODEn(x) (1)
 /* @brief If USDHC instance support 1v8 signal */

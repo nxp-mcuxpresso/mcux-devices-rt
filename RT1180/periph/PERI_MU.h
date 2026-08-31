@@ -185,7 +185,7 @@ typedef struct {
   __IO uint32_t CR;                                /**< Control, offset: 0x8 */
   __IO uint32_t SR;                                /**< Status, offset: 0xC */
   __I  uint32_t CCR0;                              /**< Core Control 0, offset: 0x10 */
-  __I  uint32_t CIER0;                             /**< Core Interrupt Enable 0, offset: 0x14 */
+       uint32_t CIER0;                             /**< Core Interrupt Enable 0, offset: 0x14 */
        uint8_t RESERVED_0[232];
   __IO uint32_t FCR;                               /**< Flag Control, offset: 0x100 */
   __I  uint32_t FSR;                               /**< Flag Status, offset: 0x104 */
