@@ -63,12 +63,6 @@
 
 /* RT2660 MEMCON layout constants. */
 #define POWER_MEMCON_MAX_BLOCKS_PER_SLICE     12U /*!< Maximum blocks configurable per MEMCON slice */
-#define POWER_MEMCON_OCRAM0_SLICE_IDX         2U  /*!< OCRAM0 resides in MEMCON slice 2 */
-#define POWER_MEMCON_OCRAM0_DS_BLOCK_COUNT    9U  /*!< OCRAM0 blocks configured for Deep Sleep retention */
-#define POWER_MEMCON_OCRAM0_MAX_RETAIN_BLOCKS 8U  /*!< Max blocks for PD retention (64 KB / 8 KB each) */
-#define POWER_MEMCON_OCRAM0_PKC_BLOCK_IDX     11U /*!< PKC RAM block index within OCRAM0 slice */
-#define POWER_MEMCON_OCRAM0_LLC_BLOCK_IDX     8U  /*!< LLC cache block index within OCRAM0 slice (S2 B8) */
-#define POWER_MEMCON_AUDIO8KB_BLOCK_IDX       10U /*!< Audio SRAM 8KB block index within OCRAM0 slice (S2 B10) */
 
 /* PMUCFG.pmuMode bitfield values (RT2660 PMU mode encoding). */
 #define POWER_PMU_MODE_LP  2U /*!< Low Power (ZBB, 0.8 V DCDC) */
@@ -120,9 +114,6 @@
 #define POWER_BODYBIAS_FBB_NWELL_VOL_SEL (0x18U) /* fallback: ~1200 mV per verification ref */
 #define POWER_BODYBIAS_FBB_PWELL_VOL_SEL (0x24U) /* fallback: ~1800 mV per verification ref */
 
-/* OCRAM0 block granularity used for retention sizing. */
-#define POWER_OCRAM0_BLOCK_SIZE_KB 8U /*!< Each MEMCON OCRAM0 block covers 8 KB */
-
 /* POWERCON GPR_COLD_0 bit 0 is a force-alive override for MAIN-domain TCM.
  * 1 = keep the MAIN-domain TCM powered; 0 = allow the configured low-power
  * sequence to power the TCM down.  Clear before deep low-power entry so the
@@ -166,6 +157,28 @@
 #define POWER_NPU_TCM_SLICES   {kPOWER_Mem_NpuWeightCache, kPOWER_Mem_NpuResultBuffers}
 #define POWER_COMM_TCM_SLICES  {kPOWER_Mem_CommShared, kPOWER_Mem_CommType2}
 #define POWER_MEDIA_TCM_SLICES {kPOWER_Mem_MediaShared}
+
+/* Slice 2 SRAM: OCRAM per-block plus LLC/Audio/WakeSram are 1-block writes issued via
+ * POWER_SetMemBlockSleepMode() with the enum constant directly (no macro/array needed).
+ * S2 B0 (kPOWER_Mem_ComputeSram01) is hardcoded to Retention in the driver — see
+ * POWER_EnterDeepSleep(). */
+
+/* All fsl_power-managed memcon-controllable blocks. Used by POWER_EnterSleep to write
+ * MEM_SLPCFG=Active explicitly for state hygiene (Sleep does not physically transition
+ * memories, but this clears stale Retention/PowerDown values left by a prior Deep-Sleep
+ * or Power-Down entry). Keep this list in sync with the per-group macros above +
+ * POWER_{CPU,NPU,COMM,MEDIA}_TCM_SLICES. */
+#define POWER_ALL_MEMORY_SLICES                                                                    \
+    {kPOWER_Mem_WakeSram,                                                                          \
+     kPOWER_Mem_ComputeSram01, kPOWER_Mem_ComputeSram23, kPOWER_Mem_ComputeSram4,                  \
+     kPOWER_Mem_ComputeSram5,  kPOWER_Mem_ComputeSram6,  kPOWER_Mem_ComputeSram7,                  \
+     kPOWER_Mem_ComputeSram8,  kPOWER_Mem_ComputeSram9,                                            \
+     kPOWER_Mem_LlcCacheBuffer, kPOWER_Mem_Audio8Kb,                                               \
+     kPOWER_Mem_CpuICache, kPOWER_Mem_CpuDCacheData, kPOWER_Mem_CpuITCM,                           \
+     kPOWER_Mem_CpuDTCM,   kPOWER_Mem_CpuDCacheTag,                                                \
+     kPOWER_Mem_NpuWeightCache, kPOWER_Mem_NpuResultBuffers,                                       \
+     kPOWER_Mem_MediaShared,                                                                       \
+     kPOWER_Mem_CommShared, kPOWER_Mem_CommType2}
 
 /* PMU standby word for Power Down: pmuMode=RET, DCDC off, all LDOs off. */
 #define POWER_PMU_STATE_PD_WORD                          \
@@ -498,7 +511,21 @@ static void POWER_ClearMainTcmForceAlive(void)
 }
 
 /*
- * Configures MEMCON sleep-mode power state for a list of memory identifiers.
+ * Configures MEMCON sleep-mode power state for a single memory identifier.
+ * Convenience wrapper for the common 1-block case (OCRAM per-block, LLC, Audio, WakeSram)
+ * that avoids the 1-element array boilerplate of POWER_SetMemSlicesSleepMode().
+ */
+static void POWER_SetMemBlockSleepMode(power_memory_t mem, memcon_power_mode_t mode)
+{
+    MEMCON_SLICE_Type *const sliceBases[] = MEMCON_SLICE_BASE_PTRS;
+    uint8_t sliceIdx = (uint8_t)((uint32_t)mem >> 8U);
+    uint8_t blockIdx = (uint8_t)((uint32_t)mem & 0xFFU);
+    MEMCON_SLICE_SetSleepBlockMode(sliceBases[sliceIdx], blockIdx, mode);
+}
+
+/*
+ * Configures MEMCON sleep-mode power state for a list of memory identifiers that share
+ * the same mode. Use POWER_SetMemBlockSleepMode() for the 1-block case.
  */
 static void POWER_SetMemSlicesSleepMode(memcon_power_mode_t mode, const power_memory_t *mems, uint32_t count)
 {
@@ -1315,29 +1342,16 @@ status_t POWER_EnterSleep(const power_sleep_config_t *config)
         return kStatus_Fail;
     }
 
-    MEMCON_SLICE_Type *const sliceBases[] = MEMCON_SLICE_BASE_PTRS;
-
-    /* 1. Configure MEMCON SLPCFG from config memory fields. */
-    /* Slice 0: Wake SRAM (B0). */
-    MEMCON_SLICE_SetSleepBlockMode(sliceBases[0U], 0U, config->setWakeSramMode);
-    /* Slice 2: OCRAM0 (B0-B7), LLC cache (B8), Audio 8KB (B10). */
-    for (uint8_t blk = 0U; blk < POWER_MEMCON_OCRAM0_MAX_RETAIN_BLOCKS; blk++)
-    {
-        MEMCON_SLICE_SetSleepBlockMode(sliceBases[POWER_MEMCON_OCRAM0_SLICE_IDX], blk, config->setOcramMode);
-    }
-    MEMCON_SLICE_SetSleepBlockMode(sliceBases[POWER_MEMCON_OCRAM0_SLICE_IDX], POWER_MEMCON_OCRAM0_LLC_BLOCK_IDX,
-                                   config->setLlcCacheMode);
-    MEMCON_SLICE_SetSleepBlockMode(sliceBases[POWER_MEMCON_OCRAM0_SLICE_IDX], POWER_MEMCON_AUDIO8KB_BLOCK_IDX,
-                                   config->setAudio8KbMode);
-    /* TCM slices from config. */
-    const power_memory_t cpuMems[]   = POWER_CPU_TCM_SLICES;
-    const power_memory_t npuMems[]   = POWER_NPU_TCM_SLICES;
-    const power_memory_t commMems[]  = POWER_COMM_TCM_SLICES;
-    const power_memory_t mediaMems[] = POWER_MEDIA_TCM_SLICES;
-    POWER_SetMemSlicesSleepMode(config->setM85TcmMode, cpuMems, ARRAY_SIZE(cpuMems));
-    POWER_SetMemSlicesSleepMode(config->setNpuTcmMode, npuMems, ARRAY_SIZE(npuMems));
-    POWER_SetMemSlicesSleepMode(config->setCommTcmMode, commMems, ARRAY_SIZE(commMems));
-    POWER_SetMemSlicesSleepMode(config->setMediaTcmMode, mediaMems, ARRAY_SIZE(mediaMems));
+    /* 1. Explicitly set every fsl_power-managed MEMCON block to Active for state hygiene.
+     *
+     *    Sleep does not physically transition the memories (SSC P-Channel is not triggered
+     *    and the supply rails are unchanged), but MEMCON MEM_SLPCFG retains the value the
+     *    previous Deep-Sleep / Power-Down entry wrote. Leaving those bits as Retention or
+     *    PowerDown while resuming active operation makes the register state inconsistent
+     *    with the physical memory state - a debugging trap. Writing Active here clears any
+     *    stale entry-mode value from a previous cycle. */
+    const power_memory_t allMems[] = POWER_ALL_MEMORY_SLICES;
+    POWER_SetMemSlicesSleepMode(kMEMCON_PowerModeActive, allMems, ARRAY_SIZE(allMems));
 
     /* 2. Ensure all SW-controllable domains use HW trigger (CMC drives standby sequence). */
     for (uint32_t i = 0U; i < ARRAY_SIZE(s_powerDomains); i++)
@@ -1425,28 +1439,36 @@ status_t POWER_EnterDeepSleep(const power_deep_sleep_config_t *config)
     POWER_ClearMainTcmForceAlive();
     POWER_ApplyZbb();
 
-    MEMCON_SLICE_Type *const sliceBases[] = MEMCON_SLICE_BASE_PTRS;
-
-    /* 1. Configure MEMCON SLPCFG from config memory fields. */
-    /* Slice 0: Wake SRAM (B0). */
-    MEMCON_SLICE_SetSleepBlockMode(sliceBases[0U], 0U, config->setWakeSramMode);
-    /* Slice 2: OCRAM0 (B0-B7), LLC cache (B8), Audio 8KB (B10). */
-    for (uint8_t blk = 0U; blk < POWER_MEMCON_OCRAM0_MAX_RETAIN_BLOCKS; blk++)
-    {
-        MEMCON_SLICE_SetSleepBlockMode(sliceBases[POWER_MEMCON_OCRAM0_SLICE_IDX], blk, config->setOcramMode);
-    }
-    MEMCON_SLICE_SetSleepBlockMode(sliceBases[POWER_MEMCON_OCRAM0_SLICE_IDX], POWER_MEMCON_OCRAM0_LLC_BLOCK_IDX,
-                                   config->setLlcCacheMode);
-    MEMCON_SLICE_SetSleepBlockMode(sliceBases[POWER_MEMCON_OCRAM0_SLICE_IDX], POWER_MEMCON_AUDIO8KB_BLOCK_IDX,
-                                   config->setAudio8KbMode);
-    /* TCM slices from config. */
+    /* 1. Configure MEMCON SLPCFG.
+     *
+     *    Every fsl_power-managed memcon block is driven from `config`. Two blocks
+     *    have hardware retention paths that make Active a valid choice in DS:
+     *      - S0 B0 (WakeSram): WAKE_SS is always-on across Sleep/DS/PD, so Active
+     *        is safe (and is the recommended default).
+     *      - S2 B0 (OCRAM0 M0/1): first-class always-retained slot; Retention is
+     *        the recommended default. Callers may set PowerDown, but this block
+     *        holds the first 64 KB of OCRAM0 (commonly stack/heap) — the driver
+     *        does not police the value.
+     *    S2 B1-B7 and the other rows come from per-field config. */
+    POWER_SetMemBlockSleepMode(kPOWER_Mem_WakeSram,        config->setWakeSramMode);
+    POWER_SetMemBlockSleepMode(kPOWER_Mem_ComputeSram01,   config->setComputeSram01Mode);
+    POWER_SetMemBlockSleepMode(kPOWER_Mem_ComputeSram23,   config->setOcram0M23Mode);
+    POWER_SetMemBlockSleepMode(kPOWER_Mem_ComputeSram4,    config->setOcram0M4Mode);
+    POWER_SetMemBlockSleepMode(kPOWER_Mem_ComputeSram5,    config->setOcram0M5Mode);
+    POWER_SetMemBlockSleepMode(kPOWER_Mem_ComputeSram6,    config->setOcram1M0Mode);
+    POWER_SetMemBlockSleepMode(kPOWER_Mem_ComputeSram7,    config->setOcram1M1Mode);
+    POWER_SetMemBlockSleepMode(kPOWER_Mem_ComputeSram8,    config->setOcram2M0Mode);
+    POWER_SetMemBlockSleepMode(kPOWER_Mem_ComputeSram9,    config->setOcram2M1Mode);
+    POWER_SetMemBlockSleepMode(kPOWER_Mem_LlcCacheBuffer,  config->setLlcCacheMode);
+    POWER_SetMemBlockSleepMode(kPOWER_Mem_Audio8Kb,        config->setAudio8KbMode);
+    /* Multi-block groups: one mode across every block in the group. */
     const power_memory_t cpuMems[]   = POWER_CPU_TCM_SLICES;
     const power_memory_t npuMems[]   = POWER_NPU_TCM_SLICES;
     const power_memory_t commMems[]  = POWER_COMM_TCM_SLICES;
     const power_memory_t mediaMems[] = POWER_MEDIA_TCM_SLICES;
-    POWER_SetMemSlicesSleepMode(config->setM85TcmMode, cpuMems, ARRAY_SIZE(cpuMems));
-    POWER_SetMemSlicesSleepMode(config->setNpuTcmMode, npuMems, ARRAY_SIZE(npuMems));
-    POWER_SetMemSlicesSleepMode(config->setCommTcmMode, commMems, ARRAY_SIZE(commMems));
+    POWER_SetMemSlicesSleepMode(config->setM85TcmMode,   cpuMems,   ARRAY_SIZE(cpuMems));
+    POWER_SetMemSlicesSleepMode(config->setNpuTcmMode,   npuMems,   ARRAY_SIZE(npuMems));
+    POWER_SetMemSlicesSleepMode(config->setCommTcmMode,  commMems,  ARRAY_SIZE(commMems));
     POWER_SetMemSlicesSleepMode(config->setMediaTcmMode, mediaMems, ARRAY_SIZE(mediaMems));
 
     /* 2. Ensure HW trigger for all domains (CMC drives standby sequence). */
@@ -1564,57 +1586,23 @@ status_t POWER_EnterPowerDown(const power_down_config_t *config)
     POWER_ClearMainTcmForceAlive();
     POWER_ApplyZbb();
 
-    MEMCON_SLICE_Type *const sliceBases[] = MEMCON_SLICE_BASE_PTRS;
-
-    /* 1. Configure MEMCON for OCRAM0/PKC retention per RM Table 793.
-     *    OCRAM0 = SRAMCTL_0 (Slice 2, Blocks 0-3) + SRAMCTL_1 (Slice 2, B4-5)
-     *           + SRAMCTL_2 (Slice 2, B6-7).  Total: 8 blocks = 64 KB max.
-     *    retainOcram0KB selects how many 8 KB blocks to retain (0-64 in 8 KB units).
-     *    PKC RAM = Slice 2, Block 11 (RM Table 793: ELE PKC RAM). */
-    /* Round up retainOcram0KB to 8 KB blocks, clamped to 8 blocks max before cast. */
-    uint32_t retainBlocksRaw =
-        (config->retainOcram0KB + (POWER_OCRAM0_BLOCK_SIZE_KB - 1U)) / POWER_OCRAM0_BLOCK_SIZE_KB;
-    uint8_t retainBlocks = (retainBlocksRaw > POWER_MEMCON_OCRAM0_MAX_RETAIN_BLOCKS) ?
-                               (uint8_t)POWER_MEMCON_OCRAM0_MAX_RETAIN_BLOCKS :
-                               (uint8_t)retainBlocksRaw;
-    for (uint8_t blk = 0U; blk < POWER_MEMCON_MAX_BLOCKS_PER_SLICE; blk++)
-    {
-        memcon_power_mode_t mode;
-        if (blk < retainBlocks)
-        {
-            mode = kMEMCON_PowerModeRetention; /* OCRAM0 retention */
-        }
-        else if ((blk == POWER_MEMCON_OCRAM0_LLC_BLOCK_IDX) && config->retainLlcCache)
-        {
-            mode = kMEMCON_PowerModeRetention; /* LLC cache retention */
-        }
-        else if ((blk == POWER_MEMCON_AUDIO8KB_BLOCK_IDX) && config->retainAudio8Kb)
-        {
-            mode = kMEMCON_PowerModeRetention; /* Audio SRAM 8KB retention */
-        }
-        else if ((blk == POWER_MEMCON_OCRAM0_PKC_BLOCK_IDX) && config->retainPkcMem)
-        {
-            mode = kMEMCON_PowerModeRetention; /* PKC RAM retention */
-        }
-        else
-        {
-            mode = kMEMCON_PowerModePowerDown;
-        }
-        MEMCON_SLICE_SetSleepBlockMode(sliceBases[POWER_MEMCON_OCRAM0_SLICE_IDX], blk, mode);
-    }
-
-    /* All other SRAM slices: power-off in Power Down. */
-    for (uint32_t s = 0U; s < ARRAY_SIZE(sliceBases); s++)
-    {
-        if (s == POWER_MEMCON_OCRAM0_SLICE_IDX)
-        {
-            continue;
-        } /* slice handled above */
-        for (uint8_t blk = 0U; blk < POWER_MEMCON_MAX_BLOCKS_PER_SLICE; blk++)
-        {
-            MEMCON_SLICE_SetSleepBlockMode(sliceBases[s], blk, kMEMCON_PowerModePowerDown);
-        }
-    }
+    /* 1. Configure MEMCON for Power Down.
+     *
+     *    In Power Down the DCDC that supplies VDD_CORE is off. Only two blocks
+     *    have retention supplies that survive PD, both driven from `config`:
+     *      - S0 B0 (WakeSram):    WAKE_SS is always-on so contents survive
+     *                             regardless of the SLPCFG bit; caller selects
+     *                             Retention or PowerDown (Active is not offered
+     *                             as a valid caller choice — see the field
+     *                             docstring in power_down_config_t).
+     *      - S2 B0 (OCRAM0 M0/1): hardware retention supply routes the array to
+     *                             an always-on rail when MEM_SLPCFG=Retention.
+     *                             Select Retention to preserve contents across
+     *                             the PoR wakeup boot; PowerDown to drop them.
+     *    Every other memcon block loses its supply regardless of SLPCFG value,
+     *    so those writes would be no-ops — not issued. */
+    POWER_SetMemBlockSleepMode(kPOWER_Mem_WakeSram,      config->setWakeSramMode);
+    POWER_SetMemBlockSleepMode(kPOWER_Mem_ComputeSram01, config->setComputeSram01Mode);
 
     /* 2. Ensure HW trigger; configure all domains to power-off in standby. */
     for (uint32_t i = 0U; i < ARRAY_SIZE(s_powerDomains); i++)
@@ -1709,21 +1697,12 @@ status_t POWER_EnterDeepPowerDown(const power_deep_power_down_config_t *config)
     POWER_ClearMainTcmForceAlive();
     POWER_ApplyZbb();
 
-    MEMCON_SLICE_Type *const sliceBases[] = MEMCON_SLICE_BASE_PTRS;
-
-    /* 1. Configure MEMCON: VBAT SRAM follows retainVbatSram. */
-    /* VBAT SRAM is in the VBAT domain (not controlled by MEMCON_SLICE here).
-     * For MEMCON slices under VDD_MAIN: power down all. */
-    for (uint32_t s = 0U; s < ARRAY_SIZE(sliceBases); s++)
-    {
-        for (uint8_t blk = 0U; blk < POWER_MEMCON_MAX_BLOCKS_PER_SLICE; blk++)
-        {
-            MEMCON_SLICE_SetSleepBlockMode(sliceBases[s], blk, kMEMCON_PowerModePowerDown);
-        }
-    }
-    /* VBAT retention SRAM: DPD1 (retainVbatSram) leaves it ACTIVE - the always-on
-     * VBAT domain holds the contents while VDD_PMU stays on.  DPD2 does not retain,
-     * so power the SRAM down (ACT -> INT -> SD) before the PMIC removes VDD_PMU. */
+    /* 1. MEMCON: Deep Power Down removes VDD_PMU and every memcon-controlled memory
+     *    array loses its supply, so MEM_SLPCFG bits have no effect on retention.
+     *    No memcon writes are issued here — same reasoning as POWER_EnterPowerDown.
+     *    VBAT SRAM lives in the always-on VBAT domain (not MEMCON) and follows
+     *    retainVbatSram: DPD1 leaves it powered by VBAT; DPD2 shuts it down (ACT
+     *    -> INT -> SD) before the PMIC removes VDD_PMU. */
     if (config->retainVbatSram == false)
     {
         POWER_ShutdownVbatSram();

@@ -567,40 +567,56 @@ typedef struct _power_run_regulators_config
 typedef enum _power_memory
 {
     /* WAKE_SS */
-    kPOWER_Mem_WakeSram        = (0U << 8U) | 0U, /*!< WAKE_SS SRAM (S0 B0) */
-    kPOWER_Mem_WakeEdma3TcdRam = (1U << 8U) | 0U, /*!< WAKE eDMA3 TCD / MICFIL FIR (S1 B0) */
+    kPOWER_Mem_WakeSram        = (0U << 8U) | 0U, /*!< WAKE_SS SRAM 8KB (S0 B0, 0x2600_0000-0x2600_1FFF, 8 KB) */
+    kPOWER_Mem_WakeEdma3TcdRam = (1U << 8U) | 0U, /*!< WAKE eDMA3 TCD / MICFIL FIR (S1 B0, no CPU-view range) */
 
     /* COMPUTE_SS */
-    kPOWER_Mem_ComputeSram01  = (2U << 8U) | 0U, /*!< SRAMCTL_0 Mem 0/1 (S2 B0) */
-    kPOWER_Mem_ComputeSram23  = (2U << 8U) | 1U, /*!< SRAMCTL_0 Mem 2/3 (S2 B1) */
-    kPOWER_Mem_ComputeSram4   = (2U << 8U) | 2U, /*!< SRAMCTL_0 Mem 4   (S2 B2) */
-    kPOWER_Mem_ComputeSram5   = (2U << 8U) | 3U, /*!< SRAMCTL_0 Mem 5   (S2 B3) */
-    kPOWER_Mem_ComputeSram6   = (2U << 8U) | 4U, /*!< SRAMCTL_1 Mem 0   (S2 B4) */
-    kPOWER_Mem_ComputeSram7   = (2U << 8U) | 5U, /*!< SRAMCTL_1 Mem 1   (S2 B5) */
-    kPOWER_Mem_ComputeSram8   = (2U << 8U) | 6U, /*!< SRAMCTL_2 Mem 0   (S2 B6) */
-    kPOWER_Mem_ComputeSram9   = (2U << 8U) | 7U, /*!< SRAMCTL_2 Mem 1   (S2 B7) */
-    kPOWER_Mem_LlcCacheBuffer = (2U << 8U) | 8U, /*!< LLC Cache buffer  (S2 B8) */
-    /* S2 B9 - unused/reserved */
-    kPOWER_Mem_Audio8Kb = (2U << 8U) | 10U, /*!< Audio SRAM 8KB    (S2 B10) */
-    /* S2 B11 = PKC MEM, accessed via power_down_config_t.retainPkcMem only */
+    kPOWER_Mem_ComputeSram01  = (2U << 8U) | 0U, /*!< SRAMCTL_0 Mem 0/1 (S2 B0, block 0x2200_0000-0x2201_1FFF = 72 KB with ECC;
+                                                     usable 0x2200_0000-0x2200_FFFF = 64 KB, 8 KB ECC).
+                                                     Unique: in Power Down, MEM_SLPCFG=01 routes this block to an always-on
+                                                     retention supply so contents survive. It is the only block that retains
+                                                     content across Power Down. */
+    kPOWER_Mem_ComputeSram23  = (2U << 8U) | 1U, /*!< SRAMCTL_0 Mem 2/3 (S2 B1, block 0x2201_2000-0x2202_3FFF = 72 KB with ECC;
+                                                     usable 0x2201_2000-0x2202_1FFF = 64 KB, 8 KB ECC) */
+    kPOWER_Mem_ComputeSram4   = (2U << 8U) | 2U, /*!< SRAMCTL_0 Mem 4   (S2 B2, block 0x2202_4000-0x2203_3FFF = 64 KB with ECC;
+                                                     usable size pending vendor confirmation, est. ~56 KB) */
+    kPOWER_Mem_ComputeSram5   = (2U << 8U) | 3U, /*!< SRAMCTL_0 Mem 5   (S2 B3, block 0x2203_4000-0x2203_FFFF = 48 KB with ECC;
+                                                     usable size pending vendor confirmation, est. ~42 KB) */
+    kPOWER_Mem_ComputeSram6   = (2U << 8U) | 4U, /*!< SRAMCTL_1 Mem 0   (S2 B4, block 0x2204_0000-0x2206_3FFF = 144 KB with ECC;
+                                                     usable 0x2204_0000-0x2205_FFFF = 128 KB, 16 KB ECC) */
+    kPOWER_Mem_ComputeSram7   = (2U << 8U) | 5U, /*!< SRAMCTL_1 Mem 1   (S2 B5, block 0x2206_4000-0x2207_FFFF = 112 KB with ECC;
+                                                     usable size pending vendor confirmation, est. ~99 KB) */
+    kPOWER_Mem_ComputeSram8   = (2U << 8U) | 6U, /*!< SRAMCTL_2 Mem 0   (S2 B6, block 0x2208_0000-0x220A_3FFF = 144 KB with ECC;
+                                                     usable 0x2208_0000-0x2209_FFFF = 128 KB, 16 KB ECC) */
+    kPOWER_Mem_ComputeSram9   = (2U << 8U) | 7U, /*!< SRAMCTL_2 Mem 1   (S2 B7, block 0x220A_4000-0x220B_FFFF = 112 KB with ECC;
+                                                     usable size pending vendor confirmation, est. ~99 KB) */
+    kPOWER_Mem_LlcCacheBuffer = (2U << 8U) | 8U, /*!< LLC Cache buffer  (S2 B8, block 0x220C_0000-0x220F_7FFF = 224 KB with ECC;
+                                                     usable size pending vendor confirmation, est. ~199 KB) */
+    kPOWER_Mem_Audio8Kb = (2U << 8U) | 10U, /*!< Audio SRAM 8KB (S2 B10, 0x2800_0000-0x2800_1FFF, 8 KB audio).
+                                              Note: MEMCON block B10 is shared with MMU lookup table,
+                                              ELE Instr&Data, MICFIL FIR, and ASRC RAM - retention here
+                                              affects all five modules. */
 
     /* M85 CPU (PD_CPU) */
-    kPOWER_Mem_CpuICache     = (4U << 8U) | 0U, /*!< M85 I-Cache (S4 B0) */
-    kPOWER_Mem_CpuDCacheData = (4U << 8U) | 1U, /*!< M85 D-Cache data (S4 B1) */
-    kPOWER_Mem_CpuITCM       = (4U << 8U) | 2U, /*!< M85 ITCM (S4 B2) */
-    kPOWER_Mem_CpuDTCM       = (4U << 8U) | 3U, /*!< M85 DTCM (S4 B3) */
-    kPOWER_Mem_CpuDCacheTag  = (5U << 8U) | 0U, /*!< M85 D-Cache tag (S5 B0) */
+    kPOWER_Mem_CpuICache     = (4U << 8U) | 0U, /*!< M85 I-Cache (S4 B0, no CPU-view range) */
+    kPOWER_Mem_CpuDCacheData = (4U << 8U) | 1U, /*!< M85 D-Cache data (S4 B1, no CPU-view range) */
+    kPOWER_Mem_CpuITCM       = (4U << 8U) | 2U, /*!< M85 I-TCM (S4 B2, 0x0000_0000-0x0003_FFFF, 256 KB) */
+    kPOWER_Mem_CpuDTCM       = (4U << 8U) | 3U, /*!< M85 D-TCM (S4 B3, 0x2000_0000-0x2003_FFFF, 256 KB) */
+    kPOWER_Mem_CpuDCacheTag  = (5U << 8U) | 0U, /*!< M85 D-Cache tag (S5 B0, no CPU-view range) */
 
     /* NPU (PD_NPU) */
-    kPOWER_Mem_NpuWeightCache   = (6U << 8U) | 0U, /*!< NPU weight cache (S6 B0) */
-    kPOWER_Mem_NpuResultBuffers = (7U << 8U) | 0U, /*!< NPU result buffers (S7 B0) */
+    kPOWER_Mem_NpuWeightCache   = (6U << 8U) | 0U, /*!< NPU Zen-V I-TCM/D-TCM/Zone TCM/Weight cache
+                                                       (S6 B0, 0x0010_8000-0x0011_FFFF, 96 KB) */
+    kPOWER_Mem_NpuResultBuffers = (7U << 8U) | 0U, /*!< NPU result buffers (S7 B0, no CPU-view range) */
 
     /* MEDIA_SS (PD_MEDIA) */
-    kPOWER_Mem_MediaShared = (9U << 8U) | 0U, /*!< MEDIA_SS shared (S9 B0) */
+    kPOWER_Mem_MediaShared = (9U << 8U) | 0U, /*!< MEDIA_SS shared block (S9 B0, no CPU-view range).
+                                                   Shared: DCIF / JPEGDEC / MIPI_DSI / ISI / CSI / TinGPU. */
 
     /* COMM_SS (PD_COMM) */
-    kPOWER_Mem_CommShared = (10U << 8U) | 0U, /*!< COMM_SS ENET/ENET_QOS (S10 B0) */
-    kPOWER_Mem_CommType2  = (11U << 8U) | 0U, /*!< COMM_SS uSDHC/USBHS/ENET (S11 B0) */
+    kPOWER_Mem_CommShared = (10U << 8U) | 0U, /*!< COMM_SS ENET_QOS EST/RX/TX (S10 B0, no CPU-view range) */
+    kPOWER_Mem_CommType2  = (11U << 8U) | 0U, /*!< COMM_SS shared block (S11 B0, no CPU-view range).
+                                                   Shared: ENET_1G / uSDHC0/1 / USBHS / FlexSPI FLR / ENET RXP. */
 } power_memory_t;
 
 /*!
@@ -740,16 +756,13 @@ typedef struct _power_sleep_config
     bool enableWake1MRootClock;  /*!< [EXPERIMENTAL] WAKE_1M root clock (bit 6) */
     bool enableWake2MRootClock;  /*!< [EXPERIMENTAL] WAKE_2M root clock (bit 7) */
 
-    /* [EXPERIMENTAL] Memory standby modes (MEMCON_SLICE.MEM_SLPCFG).
-     * Active/Retention/PowerDown all valid in Sleep. */
-    memcon_power_mode_t setWakeSramMode; /*!< [EXPERIMENTAL] Wake SRAM 8KB (S0 B0) */
-    memcon_power_mode_t setOcramMode;    /*!< [EXPERIMENTAL] OCRAM0 64KB (S2 B0–B7); all blocks set together */
-    memcon_power_mode_t setLlcCacheMode; /*!< [EXPERIMENTAL] LLC cache 8KB (S2 B8) */
-    memcon_power_mode_t setAudio8KbMode; /*!< [EXPERIMENTAL] Audio SRAM 8KB (S2 B10) */
-    memcon_power_mode_t setM85TcmMode;   /*!< [EXPERIMENTAL] M85 CPU TCM + cache (S4 B0–B3, S5 B0) */
-    memcon_power_mode_t setNpuTcmMode;   /*!< [EXPERIMENTAL] NPU TCM (S6 B0, S7 B0) */
-    memcon_power_mode_t setCommTcmMode;  /*!< [EXPERIMENTAL] COMM SRAM (S10 B0, S11 B0) */
-    memcon_power_mode_t setMediaTcmMode; /*!< [EXPERIMENTAL] Media SRAM (S9 B0) */
+    /* Sleep does not physically transition memories (no supply is removed). But for state
+     * hygiene, POWER_EnterSleep() explicitly writes MEM_SLPCFG=Active to every fsl_power-
+     * managed block so stale Retention/PowerDown values left by a prior Deep-Sleep or
+     * Power-Down entry are cleared. That Active mode is hard-coded in the driver — this
+     * struct exposes no per-block memcon fields because Active is the only meaningful
+     * value in Sleep. Per-block memory configuration is exposed by power_deep_sleep_config_t
+     * (Deep Sleep is where MEM_SLPCFG per-block choice actually drives hardware). */
 } power_sleep_config_t;
 
 /*!
@@ -767,8 +780,12 @@ typedef struct _power_sleep_config
  *
  * Fields marked [EXPERIMENTAL] may be removed or renamed in a future release.
  *
- * @note Active mode (@ref kMEMCON_PowerModeNormal) is NOT valid for memory
- *       fields in Deep Sleep.  Only Retention and PowerDown are allowed.
+ * @note Active mode (@ref kMEMCON_PowerModeNormal) is NOT valid for most memory
+ *       fields in Deep Sleep — only Retention and PowerDown are allowed. The two
+ *       exceptions are @ref setWakeSramMode (WAKE_SS is always-on, so Active is
+ *       safe and is the default) and @ref setComputeSram01Mode (the block has a
+ *       hardware retention supply that makes Active valid, though Retention is
+ *       the default). See each field's own docstring.
  */
 typedef struct _power_deep_sleep_config
 {
@@ -822,11 +839,32 @@ typedef struct _power_deep_sleep_config
     bool enableWake2MRootClock;  /*!< [EXPERIMENTAL] WAKE_2M root clock (bit 7); keep true for wakeup logic */
 
     /* [EXPERIMENTAL] Memory standby modes (MEMCON_SLICE.MEM_SLPCFG).
-     * Active (kMEMCON_PowerModeNormal) is NOT valid in Deep Sleep. */
-    memcon_power_mode_t setWakeSramMode; /*!< [EXPERIMENTAL] Wake SRAM 8KB (S0 B0) */
-    memcon_power_mode_t setOcramMode;    /*!< [EXPERIMENTAL] OCRAM0 64KB (S2 B0–B7); all blocks set together */
-    memcon_power_mode_t setLlcCacheMode; /*!< [EXPERIMENTAL] LLC cache 8KB (S2 B8) */
-    memcon_power_mode_t setAudio8KbMode; /*!< [EXPERIMENTAL] Audio SRAM 8KB (S2 B10) */
+     * Two blocks have hardware retention paths and are handled specially:
+     *   - setWakeSramMode (S0 B0, Wake SRAM 8 KB): WAKE_SS is always-on across
+     *     Sleep/DS/PD, so Active is a safe and valid choice in DS (and the
+     *     recommended default). Retention and PowerDown are also valid; on this
+     *     block they are effectively hygiene — the block cannot lose contents
+     *     regardless of the SLPCFG bit value because its supply is not gated.
+     *   - setComputeSram01Mode (S2 B0, OCRAM0 Memory 0/1, 72 KB / 64 KB usable):
+     *     first-class always-retained slot; Retention keeps it alive across DS
+     *     and PD via a hardware retention supply. Active is valid in DS but the
+     *     block is on the standby voltage rail — see the field docstring.
+     *     PowerDown in DS is a foot-gun (the front 64 KB of OCRAM0 commonly
+     *     holds stack/heap); the driver does NOT police the value.
+     * The other 7 SRAMCTL memory blocks (S2 B1-B7), the LLC cache buffer, the
+     * Audio 8 KB block, and the domain TCM groups accept Retention or PowerDown
+     * only (Active is not valid on those blocks in DS). */
+    memcon_power_mode_t setWakeSramMode;      /*!< [EXPERIMENTAL] Wake SRAM (S0 B0, 8 KB). Valid in DS: {Active, Retention, PowerDown}. */
+    memcon_power_mode_t setComputeSram01Mode; /*!< [EXPERIMENTAL] OCRAM0 Memory 0/1 (S2 B0, 72 KB total, 64 KB usable). Valid in DS: {Active, Retention, PowerDown}. Recommended: Retention. WARNING: PowerDown in DS loses the front 64 KB of OCRAM0 — do not select unless caller guarantees no live data in this block. */
+    memcon_power_mode_t setOcram0M23Mode; /*!< [EXPERIMENTAL] OCRAM0 Memory 2/3 (S2 B1, 72 KB total, ~64 KB usable est.) */
+    memcon_power_mode_t setOcram0M4Mode;  /*!< [EXPERIMENTAL] OCRAM0 Memory 4   (S2 B2, 64 KB total, ~56 KB usable est.) */
+    memcon_power_mode_t setOcram0M5Mode;  /*!< [EXPERIMENTAL] OCRAM0 Memory 5   (S2 B3, 48 KB total, ~42 KB usable est.) */
+    memcon_power_mode_t setOcram1M0Mode;  /*!< [EXPERIMENTAL] OCRAM1 Memory 0   (S2 B4, 144 KB total, 128 KB usable) */
+    memcon_power_mode_t setOcram1M1Mode;  /*!< [EXPERIMENTAL] OCRAM1 Memory 1   (S2 B5, 112 KB total, ~99 KB usable est.) */
+    memcon_power_mode_t setOcram2M0Mode;  /*!< [EXPERIMENTAL] OCRAM2 Memory 0   (S2 B6, 144 KB total, 128 KB usable) */
+    memcon_power_mode_t setOcram2M1Mode;  /*!< [EXPERIMENTAL] OCRAM2 Memory 1   (S2 B7, 112 KB total, ~99 KB usable est.) */
+    memcon_power_mode_t setLlcCacheMode; /*!< [EXPERIMENTAL] LLC cache 224KB (S2 B8) */
+    memcon_power_mode_t setAudio8KbMode; /*!< [EXPERIMENTAL] Audio SRAM 8KB (S2 B10; block is shared with MMU LUT / ELE Instr&Data / MICFIL FIR / ASRC RAM) */
     memcon_power_mode_t setM85TcmMode;   /*!< [EXPERIMENTAL] M85 CPU TCM + cache (S4 B0–B3, S5 B0) */
     memcon_power_mode_t setNpuTcmMode;   /*!< [EXPERIMENTAL] NPU TCM (S6 B0, S7 B0) */
     memcon_power_mode_t setCommTcmMode;  /*!< [EXPERIMENTAL] COMM SRAM (S10 B0, S11 B0) */
@@ -836,19 +874,29 @@ typedef struct _power_deep_sleep_config
 /*!
  * @brief Power Down config.
  *
- * Domain events and PMU state are fixed (all SW-controllable domains power-off;
- * pmuMode=RET, DCDC off).
+ * Two memcon fields — one per block whose retention supply survives Power Down.
+ * All other memcon blocks lose their supply and their contents in Power Down
+ * regardless of `MEM_SLPCFG` value, so no field is exposed for them and the
+ * driver issues no writes for them.
  *
- * Fields marked [EXPERIMENTAL] may be removed or renamed in a future release.
+ * Domain events and PMU state are fixed by the driver (all SW-controllable
+ * domains power off; PMU→RET; DCDC off).
+ *
+ * @note Valid values for both memory fields in Power Down:
+ *       @ref kMEMCON_PowerModeRetention and @ref kMEMCON_PowerModePowerDown.
+ *       @ref kMEMCON_PowerModeNormal (Active) is semantically null in PD
+ *       (VDD_CORE is off, no bus clock) and is not offered as a valid caller
+ *       choice by the demo `g_powerModeTable`; the driver does not reject it if
+ *       written but treats it functionally as Retention on both blocks (they
+ *       are on always-on retention paths that do not depend on the SLPCFG bit
+ *       being 0 vs 1).
  *
  * @note POWER_EnterPowerDown() does NOT return.  Wakeup triggers a fast PoR.
  */
 typedef struct _power_down_config
 {
-    uint32_t retainOcram0KB; /*!< OCRAM0 kilobytes to retain (0-64).  0 = no retention. */
-    bool retainPkcMem;       /*!< Retain PKC MEM 4KB (S2 B11). */
-    bool retainLlcCache;     /*!< [EXPERIMENTAL] Retain LLC cache 8KB (S2 B8). */
-    bool retainAudio8Kb;     /*!< [EXPERIMENTAL] Retain Audio SRAM 8KB (S2 B10). */
+    memcon_power_mode_t setWakeSramMode;      /*!< Wake SRAM (S0 B0, 8 KB). Valid in PD: {Retention, PowerDown}. */
+    memcon_power_mode_t setComputeSram01Mode; /*!< OCRAM0 Memory 0/1 (S2 B0, 64 KB usable). Valid in PD: {Retention, PowerDown}. This is the only block whose contents can survive Power Down; select Retention when the application needs OCRAM0 M0/1 contents preserved across the PoR wakeup boot. */
 } power_down_config_t;
 
 /*!
