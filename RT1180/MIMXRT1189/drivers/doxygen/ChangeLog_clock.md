@@ -1,5 +1,11 @@
 # CLOCK
 
+## [2.2.6]
+
+- Bug Fixes
+  - Extended USBPHY2-related USB clock function guards to exclude new
+    parts MIMXRT1183, MIMXRT1184, MIMXRT118D, and MIMXRT118E.
+
 ## [2.2.5]
 
 - Bug Fixes
