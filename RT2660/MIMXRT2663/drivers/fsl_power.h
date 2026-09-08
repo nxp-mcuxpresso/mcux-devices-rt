@@ -14,14 +14,6 @@
 #include "fsl_vbatcon.h"
 #include "fsl_powercon.h"
 
-/*! @brief When set, VDD_CORE is supplied by an external PF9453 PMIC (BUCK2) instead of the on-chip
- *  DCDC. This is a pure compile-time choice: with the macro set, all VDD_CORE handling is compiled to
- *  go through the PF9453; unset, the on-chip DCDC path is compiled and there is no fsl_pf9453
- *  dependency. There is no runtime enable flag. */
-#ifndef MCUX_POWER_PF9453_SUPPLY
-#define MCUX_POWER_PF9453_SUPPLY 0
-#endif
-
 /*!
  * @addtogroup power
  * @{
@@ -119,22 +111,55 @@ typedef struct _power_handshake_routing_config
     pdcon_handshake_mask_t domainHsk[6]; /*!< PDCON HSKCTRL per-domain handshake mask, indexed by domain (0-5). */
 } power_handshake_routing_config_t;
 
-#if MCUX_POWER_PF9453_SUPPLY
-/*!
- * @brief External-supply (PF9453 PMIC) I2C access, handed to POWER_InitExtSupply() so fsl_power can drive
- *        VDD_CORE (BUCK2) directly. Present only when MCUX_POWER_PF9453_SUPPLY is set. These are
- *        runtime function-pointer data (the board's I2C transport), NOT a mode switch — the compile
- *        macro is the only switch. Signatures match the PF9453 driver's I2C callback contract.
+/*! @name Run-mode VDD_CORE DCDC set-point codes.
+ *
+ * These are on-chip DCDC VOUT_ADJ codes (VOUT = 0.225 V + N x 0.025 V). `POWER_EnterHpRun`/
+ * `EnterNormalRun`/`EnterLpRun` pass one of these to `power_ext_regulator_hooks_t::setCoreVoltage`
+ * when a board has registered external-regulator hooks, so a board-owned translation function can
+ * map the code to whatever units its PMIC API needs (e.g. millivolts). Public so board code can
+ * reference the codes by name instead of hardcoding raw values.
+ * @{
  */
-typedef struct _power_ext_supply_config
+#define POWER_PMUCFG_CORELEVEL_090V 0x1BU /*!< 0.9 V (VOUT_ADJ=27) - HP run mode. */
+#define POWER_PMUCFG_CORELEVEL_080V 0U    /*!< 0.8 V (VOUT_ADJ=0) - NP / LP run mode. */
+/*! @} */
+
+/*!
+ * @brief The four low-power modes `fsl_power` supports, matching `POWER_EnterSleep`/
+ *        `EnterDeepSleep`/`EnterPowerDown`/`EnterDeepPowerDown`. Passed to
+ *        `power_ext_regulator_hooks_t::setStandbyTarget` so a board-registered hook can tell
+ *        which entry point is in progress. Not a raw PF9453 (or other PMIC) register value.
+ */
+typedef enum _power_low_power_mode
 {
-    status_t (*I2C_SendFunc)(uint8_t deviceAddress, uint32_t subAddress, uint8_t subAddressSize,
-                             uint8_t *txBuff, uint8_t txBuffSize); /*!< I2C write callback (board). */
-    status_t (*I2C_ReceiveFunc)(uint8_t deviceAddress, uint32_t subAddress, uint8_t subAddressSize,
-                                uint8_t *rxBuff, uint8_t rxBuffSize); /*!< I2C read callback (board). */
-    uint8_t slaveAddress; /*!< PF9453 7-bit I2C address (OTP-dependent; default 0x32). */
-} power_ext_supply_config_t;
-#endif /* MCUX_POWER_PF9453_SUPPLY */
+    kPOWER_Sleep         = 0U, /*!< POWER_EnterSleep() - hook is not called for this mode. */
+    kPOWER_DeepSleep     = 1U, /*!< POWER_EnterDeepSleep(). */
+    kPOWER_PowerDown     = 2U, /*!< POWER_EnterPowerDown(). */
+    kPOWER_DeepPowerDown = 3U, /*!< POWER_EnterDeepPowerDown(). */
+} power_low_power_mode_t;
+
+/*!
+ * @brief Board-supplied hooks that let an external PMIC supply VDD_CORE (and other rails the
+ *        board wires to that PMIC) instead of the on-chip DCDC/LDOs. Registered via
+ *        `POWER_SetExtRegulatorHooks()`. `fsl_power` has no PMIC-specific knowledge; both
+ *        members are generic and board/PMIC-specific translation lives entirely in board code.
+ */
+typedef struct _power_ext_regulator_hooks
+{
+    /*!< Run-mode VDD_CORE voltage set. `voutAdjCode` is one of the `POWER_PMUCFG_CORELEVEL_*`
+     *   codes above, NOT a millivolt value - the board's implementation must translate it (e.g.
+     *   to whatever units its PMIC's voltage-set API expects) rather than assign a PMIC driver
+     *   function directly. Return `kStatus_Success`, or a failure status that `fsl_power` can
+     *   assert on. */
+    status_t (*setCoreVoltage)(uint8_t voutAdjCode);
+    /*!< Low-power entry. `mode` identifies which `POWER_Enter*()` call is in progress. The
+     *   board's implementation is responsible for whatever its PMIC needs at this transition
+     *   (e.g. selecting a PMIC standby profile, reconfiguring other rails), and must write a
+     *   board/PMIC-specific code into `*pmicModeCode` for `fsl_power` to forward to
+     *   `POWERCON_SOC_CTRL->PMICCFG_STBY`'s `PMIC_MODE[1:0]` field. Return `kStatus_Success`, or
+     *   a failure status that `fsl_power` treats as fatal for this transition. */
+    status_t (*setStandbyTarget)(power_low_power_mode_t mode, uint8_t *pmicModeCode);
+} power_ext_regulator_hooks_t;
 
 /*! @brief Configuration passed to POWER_SetPolicy(). */
 typedef struct _power_policy_config
@@ -959,22 +984,21 @@ void POWER_GetDefaultPolicyConfig(power_policy_config_t *config);
  */
 void POWER_SetPolicy(const power_policy_config_t *config);
 
-#if MCUX_POWER_PF9453_SUPPLY
 /*!
- * @brief Brings up the external PF9453 PMIC that supplies VDD_CORE (BUCK2). PMIC build only.
+ * @brief Register (or clear) board-supplied external-regulator hooks.
  *
- * Creates the internal PF9453 handle from the board-supplied I2C transport and performs a one-shot
- * BUCK2 bring-up (enable in ACTIVE/STANDBY, run 0.9 V, standby 0.65 V, DVS ramp), then arms the
- * internal ready flag so subsequent run-mode DVS / standby-target changes drive the PMIC.
+ * When a non-NULL @p hooks is registered, `POWER_EnterHpRun`/`EnterNormalRun`/`EnterLpRun` call
+ * `hooks->setCoreVoltage()` instead of programming the on-chip DCDC, and `POWER_EnterDeepSleep`/
+ * `EnterPowerDown`/`EnterDeepPowerDown` call `hooks->setStandbyTarget()` for their low-power entry.
+ * Pass NULL to fall back to the on-chip DCDC path (the default). Call before the first
+ * `POWER_Enter*()` call if the board wants the external-regulator path from the very first
+ * transition — in particular, before the boot-clock ramp to HP run, which needs VDD_CORE already
+ * at its HP set point.
  *
- * MUST be called before the board's boot-clock setup (which ramps the core to HP and needs BUCK2
- * already at 0.9 V) — i.e. as the first step of board bring-up, before the clock tree is programmed.
- * The I2C send/receive callbacks in @p config must be non-NULL (asserted).
- *
- * @param config  Pointer to the external-supply I2C transport config. Must not be NULL.
+ * @param hooks  Pointer to a board-owned, statically-allocated `power_ext_regulator_hooks_t`
+ *               (the driver stores the pointer, not a copy), or NULL to clear.
  */
-void POWER_InitExtSupply(const power_ext_supply_config_t *config);
-#endif
+void POWER_SetExtRegulatorHooks(const power_ext_regulator_hooks_t *hooks);
 
 /*!
  * @brief Fill power_handshake_routing_config_t with POR-default routing values.

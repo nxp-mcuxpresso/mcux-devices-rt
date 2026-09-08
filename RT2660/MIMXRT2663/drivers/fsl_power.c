@@ -7,9 +7,6 @@
 #include "fsl_power.h"
 #include "fsl_modcon.h"
 #include "fsl_clock.h"
-#if MCUX_POWER_PF9453_SUPPLY
-#include "fsl_pf9453.h" /* External VDD_CORE supply (Option D). fsl_power never includes fsl_lpi2c. */
-#endif
 
 /*******************************************************************************
  * Definitions
@@ -17,13 +14,6 @@
 
 #ifndef FSL_COMPONENT_ID
 #define FSL_COMPONENT_ID "platform.drivers.power"
-#endif
-
-#if MCUX_POWER_PF9453_SUPPLY
-/* PF9453 BUCK2 (VDD_CORE) millivolt set-points, mapped from the DCDC VOUT_ADJ codes below. */
-#define POWER_PF9453_BUCK2_RUN_HP_MV  (900U) /*!< HP run: 0.9 V. */
-#define POWER_PF9453_BUCK2_RUN_LP_MV  (800U) /*!< NP / LP run: 0.8 V. */
-#define POWER_PF9453_BUCK2_STANDBY_MV (650U) /*!< Deep-sleep standby: 0.65 V (matches SoC DAC). */
 #endif
 
 /* Number of 32-bit words covering all 384 NVIC IRQs and 64 DMA sources. */
@@ -136,10 +126,10 @@
 /* VDD_CORE set-point codes. These are DCDC VOUT_ADJ codes (VOUT = 0.225 V + N x 0.025 V,
  * with N=0 a special case = 0.8 V). In active run modes the voltage is applied through the
  * DCDC via PMU_ConfigDcdc(); PMUCFG_ACTIVE.coreLvl alone does not move the rail and is only
- * kept consistent with the applied VOUT_ADJ. In standby the same codes drive the PMU DAC. */
-#define POWER_PMUCFG_CORELEVEL_090V 0x1BU /*!< 0.9 V (VOUT_ADJ=27) - HP run mode. */
-#define POWER_PMUCFG_CORELEVEL_080V 0U    /*!< 0.8 V (VOUT_ADJ=0) - NP / LP run mode. */
-#define POWER_PMUCFG_CORELEVEL_065V 17U   /*!< 0.65 V - Deep Sleep standby (0.225 + 17 x 0.025). */
+ * kept consistent with the applied VOUT_ADJ. In standby the same codes drive the PMU DAC.
+ * POWER_PMUCFG_CORELEVEL_090V / _080V are declared in fsl_power.h (public) since they are also
+ * part of power_ext_regulator_hooks_t::setCoreVoltage's documented contract. */
+#define POWER_PMUCFG_CORELEVEL_065V 17U /*!< 0.65 V - Deep Sleep standby (0.225 + 17 x 0.025). */
 
 /* Core-frequency classification thresholds (Hz) for POWER_GetCurrentRunMode(). Margins are
  * deliberate: Normal Run cannot always be divided to exactly 800 MHz (typically ~792 MHz),
@@ -269,15 +259,9 @@ static const uint8_t s_swPowerDomains[] = {
  */
 static bool s_cssiBypass = true;
 
-#if MCUX_POWER_PF9453_SUPPLY
-/* Internal PF9453 handle, created in POWER_InitExtSupply() from the board-supplied I2C transport. In
- * Option D fsl_power owns the PMIC and drives BUCK2 (VDD_CORE) directly at the run-mode/standby points. */
-static pf9453_handle_t s_pmic;
-/* Set by POWER_InitExtSupply(). Until then the PMIC handle/transport is not ready, so the run-mode and
- * standby paths skip the BUCK2 write (a run-mode DVS legitimately runs during boot-clock setup, before
- * POWER_InitExtSupply, when the board is ordered per the reference; the PMIC keeps its power-on voltage). */
-static bool s_pmicReady = false;
-#endif
+/* Board-registered external-regulator hooks (NULL = use the on-chip DCDC/LDOs, the default).
+ * fsl_power stores only the pointer; the board owns the pointed-to struct's lifetime. */
+static const power_ext_regulator_hooks_t *s_extRegHooks = NULL;
 
 /*******************************************************************************
  * Private helpers
@@ -621,46 +605,43 @@ static bool POWER_RequestCssiLpEntry(void)
  */
 static void POWER_ApplyRunCoreVoltage(uint8_t voutAdj)
 {
-#if MCUX_POWER_PF9453_SUPPLY
-    /* PMIC path: VDD_CORE is BUCK2. Map the VOUT_ADJ code to millivolts and DVS BUCK2 directly.
-     * PF9453_SetBuck2RunVoltage re-issues the regulator unlock and RMW-writes BUCK2OUT internally.
-     * The on-chip DCDC is not touched (its VOUT_ADJ path is compiled out below).
-     * Skip until POWER_InitExtSupply has created the handle: the boot-clock setup may call a run-mode
-     * DVS before the PMIC transport is up, and the PF9453 already holds its power-on voltage then. */
-    if (s_pmicReady)
+    if ((s_extRegHooks != NULL) && (s_extRegHooks->setCoreVoltage != NULL))
     {
-        uint16_t millivolt =
-            (voutAdj == POWER_PMUCFG_CORELEVEL_090V) ? POWER_PF9453_BUCK2_RUN_HP_MV : POWER_PF9453_BUCK2_RUN_LP_MV;
-        (void)PF9453_SetBuck2RunVoltage(&s_pmic, millivolt);
+        /* Board-registered external regulator (e.g. a PMIC) supplies VDD_CORE; the on-chip DCDC
+         * is not touched. The hook returns status_t so an I2C (or other) failure is observable;
+         * this function stays void (see REQ-002's noted limitation), so assert is the only
+         * failure signal available here. */
+        assert(s_extRegHooks->setCoreVoltage(voutAdj) == kStatus_Success);
     }
-#else
-    pmu_dcdc_config_t dcdcConfig = {
-        .mode                 = kPMU_DcdcModePWM,
-        .voutAdj              = voutAdj,
-        .voutFineAdj          = 0U,
-        .ovlVthAdj            = 0U,
-        .vsensorVoutAdjEn     = false,
-        .bypassEn             = false,
-        .ovlPdEn              = false,
-        .sensorEnable         = false, /* DCDC output monitor off during bring-up ([hw-defer]). */
-        .irqOnVmaxError       = false,
-        .irqOnVminError       = false,
-        .irqOnClkLost         = false,
-        .irqOnUvlo            = false,
-        .irqOnOclWarn         = false,
-        .warmResetOnVmaxError = false,
-        .warmResetOnVminError = false,
-        .warmResetOnClkLost   = false,
-        .warmResetOnUvlo      = false,
-        .warmResetOnOclWarn   = false,
-        .coldResetOnVmaxError = false,
-        .coldResetOnVminError = false,
-        .coldResetOnClkLost   = false,
-        .coldResetOnUvlo      = false,
-        .coldResetOnOclWarn   = false,
-    };
-    PMU_ConfigDcdc(SYSCON__PMU, &dcdcConfig);
-#endif /* MCUX_POWER_PF9453_SUPPLY */
+    else
+    {
+        pmu_dcdc_config_t dcdcConfig = {
+            .mode                 = kPMU_DcdcModePWM,
+            .voutAdj              = voutAdj,
+            .voutFineAdj          = 0U,
+            .ovlVthAdj            = 0U,
+            .vsensorVoutAdjEn     = false,
+            .bypassEn             = false,
+            .ovlPdEn              = false,
+            .sensorEnable         = false, /* DCDC output monitor off during bring-up ([hw-defer]). */
+            .irqOnVmaxError       = false,
+            .irqOnVminError       = false,
+            .irqOnClkLost         = false,
+            .irqOnUvlo            = false,
+            .irqOnOclWarn         = false,
+            .warmResetOnVmaxError = false,
+            .warmResetOnVminError = false,
+            .warmResetOnClkLost   = false,
+            .warmResetOnUvlo      = false,
+            .warmResetOnOclWarn   = false,
+            .coldResetOnVmaxError = false,
+            .coldResetOnVminError = false,
+            .coldResetOnClkLost   = false,
+            .coldResetOnUvlo      = false,
+            .coldResetOnOclWarn   = false,
+        };
+        PMU_ConfigDcdc(SYSCON__PMU, &dcdcConfig);
+    }
 }
 
 static status_t POWER_StandbyPrologue(void)
@@ -1072,37 +1053,10 @@ void POWER_SetPolicy(const power_policy_config_t *config)
     (void)memset(s_wakeDmaWakeupMask, 0xFF, sizeof(s_wakeDmaWakeupMask));
 }
 
-#if MCUX_POWER_PF9453_SUPPLY
-void POWER_InitExtSupply(const power_ext_supply_config_t *config)
+void POWER_SetExtRegulatorHooks(const power_ext_regulator_hooks_t *hooks)
 {
-    assert(config != NULL);
-    assert(config->I2C_SendFunc != NULL);
-    assert(config->I2C_ReceiveFunc != NULL);
-
-    pf9453_config_t pmicConfig;
-    pf9453_buck2_config_t buck2Config;
-
-    /* Create the PMIC handle from the board-supplied I2C transport. */
-    pmicConfig.I2C_SendFunc    = config->I2C_SendFunc;
-    pmicConfig.I2C_ReceiveFunc = config->I2C_ReceiveFunc;
-    pmicConfig.slaveAddress    = config->slaveAddress;
-    PF9453_CreateHandle(&s_pmic, &pmicConfig);
-
-    /* One-shot BUCK2 bring-up: enable in ACTIVE/STANDBY, initial run voltage (HP 0.9 V so the boot
-     * ramp to HP has adequate VDD_CORE), standby voltage, DVS ramp. Run-mode DVS and standby-target
-     * changes are then handled at the transition points. */
-    buck2Config.runMillivolt     = POWER_PF9453_BUCK2_RUN_HP_MV;
-    buck2Config.standbyMillivolt = POWER_PF9453_BUCK2_STANDBY_MV;
-    buck2Config.enableMode       = kPF9453_EnableOnActiveStandby; /* B2_ENMODE = 10. */
-    buck2Config.forcePwm         = false;
-    buck2Config.activeDischarge  = false;
-    buck2Config.dvsRamp          = kPF9453_Buck2Ramp_25mVPer2us; /* reset default. */
-    (void)PF9453_ConfigBuck2(&s_pmic, &buck2Config);
-
-    /* Arm the ready flag: subsequent run-mode DVS / standby-target changes now drive the PMIC. */
-    s_pmicReady = true;
+    s_extRegHooks = hooks;
 }
-#endif /* MCUX_POWER_PF9453_SUPPLY */
 
 /*!
  * brief Accumulates a wakeup source into SW state.
@@ -1541,6 +1495,15 @@ status_t POWER_EnterDeepSleep(const power_deep_sleep_config_t *config)
     socCfg.csrccfgStby = POWER_BUILD_CSRCCFG_STBY(config);
     socCfg.pmucfgStby  = pmucfgStby;
     socCfg.pmiccfgStby = 0U;
+    if ((s_extRegHooks != NULL) && (s_extRegHooks->setStandbyTarget != NULL))
+    {
+        /* Board hook selects the external regulator's STANDBY profile via I2C
+         * and reports the PMICCFG_STBY.PMIC_MODE code fsl_power forwards to hardware below. */
+        if (s_extRegHooks->setStandbyTarget(kPOWER_DeepSleep, &socCfg.pmiccfgStby) != kStatus_Success)
+        {
+            return kStatus_Fail;
+        }
+    }
     POWERCON_SetSocStandbyConfig(SYSCON__POWERCON_SOC_CTRL, &socCfg);
     /* Deep Sleep: enable all CMC internal standby flows (XMC_STBY_MASK = 0) and
      * have every CMC trigger the SSC (explicit; also repairs the CMC0 TRIGGER_SS
@@ -1561,16 +1524,6 @@ status_t POWER_EnterDeepSleep(const power_deep_sleep_config_t *config)
     {
         POWER_MediaMipiPhyPowerOff();
     }
-
-#if MCUX_POWER_PF9453_SUPPLY
-    /* 6c. Select the PMIC STANDBY (not DPSTANDBY) target so BUCK2 stays on and drops to its standby
-     *     voltage when POWERCON's sscPmic step asserts PMIC_STBY_REQ. Enable-mode and standby voltage
-     *     were already programmed by POWER_InitExtSupply (skip if the PMIC transport is not up). */
-    if (s_pmicReady)
-    {
-        (void)PF9453_SetStandbyTarget(&s_pmic, kPF9453_StandbySbyt);
-    }
-#endif
 
     /* 7. Execute WFI. WFI is the hardware-triggered low-power entry request. */
     POWER_ExecuteWfi();
@@ -1643,6 +1596,17 @@ status_t POWER_EnterPowerDown(const power_down_config_t *config)
     socCfg.csrccfgStby = POWER_CSRCCFG_STBY_ALL_ON;
     socCfg.pmucfgStby  = POWER_PMU_STATE_PD_WORD;
     socCfg.pmiccfgStby = 0U;
+    if ((s_extRegHooks != NULL) && (s_extRegHooks->setStandbyTarget != NULL))
+    {
+        /* Board hook selects the external regulator's STANDBY profile via I2C
+         * (the same profile Deep Sleep selects — Power Down is distinguished from Deep Sleep by
+         * the board's I2C enableMode rewrite inside the hook, not by the profile) and
+         * reports the PMICCFG_STBY.PMIC_MODE code fsl_power forwards to hardware below. */
+        if (s_extRegHooks->setStandbyTarget(kPOWER_PowerDown, &socCfg.pmiccfgStby) != kStatus_Success)
+        {
+            return kStatus_Fail;
+        }
+    }
     POWERCON_SetSocStandbyConfig(SYSCON__POWERCON_SOC_CTRL, &socCfg);
 
     /* Power Down: enable all CMC internal standby flows (XMC_STBY_MASK = 0) and
@@ -1661,16 +1625,6 @@ status_t POWER_EnterPowerDown(const power_down_config_t *config)
      *     before WFI. No restore here - wakeup triggers PoR; the post-reset app re-runs the
      *     power-on sequence. */
     POWER_MediaMipiPhyPowerOff();
-
-#if MCUX_POWER_PF9453_SUPPLY
-    /* 4c. Select the PMIC DPSTANDBY target so BUCK2 turns OFF when POWERCON's sscPmic step asserts
-     *     PMIC_STBY_REQ (Power Down wakeup is a PoR; the PF9453 stays alive on VSYS). Skip if the PMIC
-     *     transport is not up (POWER_InitExtSupply not called). */
-    if (s_pmicReady)
-    {
-        (void)PF9453_SetStandbyTarget(&s_pmic, kPF9453_StandbyDeepStby);
-    }
-#endif
 
     /* 5. Execute WFI - wakeup triggers PoR; no return. */
     POWER_ExecuteWfi();
@@ -1718,6 +1672,19 @@ status_t POWER_EnterDeepPowerDown(const power_deep_power_down_config_t *config)
      * regardless of CSRCCFG_STBY. Main clock sources are turned off in DPD. */
     socCfg.csrccfgStby = POWER_CSRCCFG_STBY_ALL_OFF;
     socCfg.pmucfgStby  = dpd_pmucfg.word;
+    socCfg.pmiccfgStby = 0U;
+    if ((s_extRegHooks != NULL) && (s_extRegHooks->setStandbyTarget != NULL))
+    {
+        /* Board hook selects the external regulator's DPSTANDBY profile via I2C
+         * - the one profile distinct from Deep Sleep/Power Down's STANDBY - and reports the
+         * PMICCFG_STBY.PMIC_MODE code fsl_power forwards to hardware below. This call did not
+         * exist before this change; POWER_EnterDeepPowerDown() had no external-regulator-related code, and
+         * `socCfg.pmiccfgStby` was left uninitialized (a pre-existing bug, now fixed). */
+        if (s_extRegHooks->setStandbyTarget(kPOWER_DeepPowerDown, &socCfg.pmiccfgStby) != kStatus_Success)
+        {
+            return kStatus_Fail;
+        }
+    }
 
     POWERCON_SetSocStandbyConfig(SYSCON__POWERCON_SOC_CTRL, &socCfg);
 
