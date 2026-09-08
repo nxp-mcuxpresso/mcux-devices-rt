@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 1.0, 2024-11-13
-**     Build:               b260825
+**     Build:               b260908
 **
 **     Abstract:
 **         Chip specific module features.
@@ -1062,6 +1062,11 @@
 #define FSL_FEATURE_DCIF_GAMMA_RAM_OFFSET (0x01400UL)
 /* @brief CULT RAM OFFSET. */
 #define FSL_FEATURE_DCIF_CLUT_RAM_OFFSET (0x01000UL)
+
+/* ISI module features */
+
+/* @brief Indicate whether ISI supports destination selection (bitfield CTRL[DEST]). */
+#define FSL_FEATURE_ISI_SUPPORT_DEST (1)
 
 /* MEMORY module features */
 
