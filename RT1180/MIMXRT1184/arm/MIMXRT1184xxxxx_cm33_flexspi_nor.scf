@@ -49,7 +49,7 @@
 #endif
 
 #define m_flash_start                  0x28000000
-#define m_flash_size                   0x00800000
+#define m_flash_size                   0x00200000
 #define m_core1_image_maximum_size     0x00040000
 
 /* General definition */
