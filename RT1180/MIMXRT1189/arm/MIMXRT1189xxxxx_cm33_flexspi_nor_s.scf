@@ -102,10 +102,10 @@
 #define m_text_size                    m_flash_s_size - app_image_offset
 #define m_data_size                    m_system_tcm_s_size
 #if defined(__multicore__)
-#define m_ncache_size                  0x20000         /* m_ncache_size must be 2^N */
+#define m_ncache_size                  0x10000         /* m_ncache_size must be 2^N */
 #define m_ocram1_size_for_cm7          0x40000
 #else
-#define m_ncache_size                  0x40000         /* m_ncache_size must be 2^N */
+#define m_ncache_size                  0x20000         /* m_ncache_size must be 2^N */
 #define m_ocram1_size_for_cm7          0
 #endif
 #define m_shmem_size                   m_ocram2_s_size   /* m_shmem_size must be 2^N */

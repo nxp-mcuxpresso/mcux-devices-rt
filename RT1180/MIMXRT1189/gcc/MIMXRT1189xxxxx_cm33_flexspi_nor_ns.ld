@@ -80,7 +80,7 @@ m_heap_size              = DEFINED(__heap_size__)  ? __heap_size__  : 0x400;
 /* Target specific definition, code & data allocation */
 m_code_size              = m_flash_ns_size - app_image_offset - vector_table_size;
 m_data_size              = m_system_tcm_ns_size;
-m_ncache_size            = DEFINED(__multicore__) ? 0x20000 : 0x40000;   /* m_ncache_size must be 2^N */
+m_ncache_size            = DEFINED(__multicore__) ? 0x10000 : 0x20000;   /* m_ncache_size must be 2^N */
 m_shmem_size             = m_ocram2_ns_size;  /* m_shmem_size must be 2^N */
 
 m_ocram1_size_for_cm7    = DEFINED(__multicore__) ? 0x40000 : 0;
