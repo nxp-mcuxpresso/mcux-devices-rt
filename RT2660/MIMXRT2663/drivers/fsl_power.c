@@ -200,9 +200,10 @@ static uint32_t s_irqWakeupMask[POWER_IRQ_WAKEUP_MASK_COUNT];
 static uint32_t s_mainDmaWakeupMask[POWER_DMA_WAKEUP_MASK_COUNT];
 static uint32_t s_wakeDmaWakeupMask[POWER_DMA_WAKEUP_MASK_COUNT];
 
+#if PMU_DRIVER_UPDATE_TRIM_VALUE
 /*
  * Cached FBB trim values from OTP fuses ANA_CFG12 / ANA_CFG13. Loaded by
- * POWER_LoadBodyBiasFuse() on the first POWER_SetPolicy() call. `s_fbbTrim` keeps the
+ * POWER_InitBodyBiasConfig() on the first POWER_SetPolicy() call. `s_fbbTrim` keeps the
  * three primitive fields (nwell / pwell / modeSel) mainly for diagnostics; the mode-run
  * paths consume the pre-built `s_fbbCfg` directly.
  *
@@ -220,14 +221,23 @@ static struct
     .pwell   = POWER_BODYBIAS_FBB_PWELL_VOL_SEL,
     .modeSel = 0U,
 };
+#endif /* PMU_DRIVER_UPDATE_TRIM_VALUE */
 
 /*
  * Pre-built FBB body-bias config used by every POWER_Enter*Run() FBB apply. Populated
- * by POWER_LoadBodyBiasFuse() (called from POWER_SetPolicy()) as:
+ * by POWER_InitBodyBiasConfig() (called from POWER_SetPolicy()) as:
  *   PMU_GetDefaultBodyBiasConfig(&s_fbbCfg);
- *   s_fbbCfg.mode        = kPMU_BodyBiasFBBFull;
- *   s_fbbCfg.nwellVolSel = s_fbbTrim.nwell;
- *   s_fbbCfg.pwellVolSel = s_fbbTrim.pwell;
+ *   s_fbbCfg.mode        = kPMU_BodyBiasFBBFull;               // always
+ *   s_fbbCfg.nwellVolSel = s_fbbTrim.nwell;                     // only if PMU_DRIVER_UPDATE_TRIM_VALUE
+ *   s_fbbCfg.pwellVolSel = s_fbbTrim.pwell;                     // only if PMU_DRIVER_UPDATE_TRIM_VALUE
+ *
+ * `mode` is always FBBFull: which body-bias mode to request is a driver policy decision,
+ * independent of whether the trim value is known. `nwellVolSel`/`pwellVolSel` are only
+ * populated from the OTP fuse trim when PMU_DRIVER_UPDATE_TRIM_VALUE (fsl_pmu.h) is enabled.
+ * That same macro also gates PMU_ConfigBodyBias() (fsl_pmu.c): disabled (default), it leaves
+ * the NWELL_VOL/PWELL_VOL register bits untouched so ROM's own trim (once the fuses are
+ * trimmed) is never clobbered by SW, and these two fields go unused; enabled, it writes them
+ * like every other field. Both sides read the one macro so they can't drift out of sync.
  *
  * Zero-initialized here so a body-bias apply before POWER_SetPolicy() would come out as
  * pmu_body_bias_mode_t=kPMU_BodyBiasZBB (0) — the safe default that PMU_ApplyBodyBias
@@ -385,31 +395,45 @@ static void POWER_ApplyZeroBodyBias(void)
 }
 
 /*
- * Reads OTP fuses ANA_CFG12 (PRIMARY) and ANA_CFG13 (BACKUP + TRIM_SEL) once via the
- * FSB shadow and caches the resolved Well-Bias trim codes in s_fbbTrim. Called from
- * POWER_SetPolicy().
+ * Establishes the FBBFull body-bias config used by every POWER_Enter*Run() FBB apply.
+ * Called once from POWER_SetPolicy().
  *
- * Per-field selection order (independent for nwell / pwell / modeSel):
- *   1. If CFG13.TRIM_SEL == 1 and the BACKUP field is non-zero, use BACKUP.
- *   2. Otherwise, if the PRIMARY field is non-zero, use PRIMARY.
- *   3. Otherwise, leave s_fbbTrim at its initialized fallback (reference macros for
- *      nwell / pwell, zero for modeSel).
+ * `mode` is always set to FBBFull: which body-bias mode to request is a driver policy
+ * decision, independent of whether the trim value is known.
  *
- * Failure modes that leave s_fbbTrim at its initialized fallback (bring-up safety):
- *   - All fuses not yet valid (FSB_STATUS.VALL == 0) — skip both reads
- *   - FSB reports RD_ERR / RLD_ERR / FUSE_ERR / ADDR_ERR on the CFG12 read — skip both
- *   - FSB reports error on the CFG13 read only — CFG12 PRIMARY path still applies
+ * `nwellVolSel`/`pwellVolSel` are only overridden from the OTP fuse trim when
+ * PMU_DRIVER_UPDATE_TRIM_VALUE (fsl_pmu.h) is enabled — the same macro that gates whether
+ * PMU_ConfigBodyBias() (fsl_pmu.c) actually writes them to hardware, so this fuse read and
+ * that hardware write can't drift out of sync. At its default (disabled, P-Well/N-Well
+ * fuse not yet trimmed) this fuse-read block is skipped entirely and PMU_ConfigBodyBias()
+ * leaves the NWELL_VOL/PWELL_VOL register bits at ROM's own trim.
  */
-static void POWER_LoadBodyBiasFuse(void)
+static void POWER_InitBodyBiasConfig(void)
 {
+    PMU_GetDefaultBodyBiasConfig(&s_fbbCfg);
+    s_fbbCfg.mode = kPMU_BodyBiasFBBFull;
+
+#if PMU_DRIVER_UPDATE_TRIM_VALUE
+    /*
+     * Reads OTP fuses ANA_CFG12 (PRIMARY) and ANA_CFG13 (BACKUP + TRIM_SEL) once via the
+     * FSB shadow and caches the resolved Well-Bias trim codes in s_fbbTrim.
+     *
+     * Per-field selection order (independent for nwell / pwell / modeSel):
+     *   1. If CFG13.TRIM_SEL == 1 and the BACKUP field is non-zero, use BACKUP.
+     *   2. Otherwise, if the PRIMARY field is non-zero, use PRIMARY.
+     *   3. Otherwise, leave s_fbbTrim at its initialized fallback (reference macros for
+     *      nwell / pwell, zero for modeSel).
+     *
+     * Failure modes that leave s_fbbTrim at its initialized fallback (bring-up safety):
+     *   - All fuses not yet valid (FSB_STATUS.VALL == 0) — skip both reads
+     *   - FSB reports RD_ERR / RLD_ERR / FUSE_ERR / ADDR_ERR on the CFG12 read — skip both
+     *   - FSB reports error on the CFG13 read only — CFG12 PRIMARY path still applies
+     */
     const uint32_t errMask = FSB_FUSE_STAT_RD_ERR_MASK | FSB_FUSE_STAT_RLD_ERR_MASK |
                              FSB_FUSE_STAT_FUSE_ERR_MASK | FSB_FUSE_STAT_ADDR_ERR_MASK;
 
-    /* Populate s_fbbCfg with defaults up-front so any early-return path leaves a valid
-     * FBBFull config behind (built from s_fbbTrim, which holds the fallback macros
-     * until the fuse read below overrides them). */
-    PMU_GetDefaultBodyBiasConfig(&s_fbbCfg);
-    s_fbbCfg.mode        = kPMU_BodyBiasFBBFull;
+    /* Seed s_fbbCfg's well-voltage fields from the SW fallback so any early-return path
+     * below leaves a valid config behind (overridden by the fuse read further down). */
     s_fbbCfg.nwellVolSel = s_fbbTrim.nwell;
     s_fbbCfg.pwellVolSel = s_fbbTrim.pwell;
 
@@ -469,6 +493,7 @@ static void POWER_LoadBodyBiasFuse(void)
      * FBB paths can hand s_fbbCfg to PMU_ConfigBodyBias directly. */
     s_fbbCfg.nwellVolSel = s_fbbTrim.nwell;
     s_fbbCfg.pwellVolSel = s_fbbTrim.pwell;
+#endif /* PMU_DRIVER_UPDATE_TRIM_VALUE */
 }
 
 /*
@@ -937,8 +962,9 @@ void POWER_SetPolicy(const power_policy_config_t *config)
     /* 2. Enable PDCON function clock. */
     PDCON_EnableFunctionClock(SYSCON__PDCON, true);
 
-    /* Load OTP body-bias trim once here; FBB apply paths read from s_fbbTrim. */
-    POWER_LoadBodyBiasFuse();
+    /* Establish the FBBFull body-bias config once here; FBB apply paths read from s_fbbCfg.
+     * The OTP trim override inside is gated by PMU_DRIVER_UPDATE_TRIM_VALUE (fsl_pmu.h). */
+    POWER_InitBodyBiasConfig();
 
     /* 3. Apply SoC handshake routing (HSK_SEL routing and PDCON HSKCTRL).
      *    NULL -> apply POR-default values; non-NULL -> apply caller-supplied config. */
