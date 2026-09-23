@@ -35,8 +35,8 @@ m_sdram_start            = 0x80000000;
 m_sdram_size             = 0x01E00000;  /* Reserved 2M for CM33 usage, so size = physical memory size - 2M */
 m_hyperram_start         = 0x04000000;
 m_hyperram_size          = 0x00600000;  /* Reserved 2M for CM33 usage, so size = physical memory size - 2M */
-m_flash_start            = 0x28800000;
-m_flash_size             = 0x00800000;
+m_flash_start            = 0x28200000;
+m_flash_size             = 0x00200000;
 
 /* General definition */
 app_image_offset         = 0x00000000;
