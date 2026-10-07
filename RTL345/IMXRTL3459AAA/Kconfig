@@ -1,0 +1,9 @@
+# Copyright 2025-2026 NXP
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+rsource "${core_id}/Kconfig"
+
+rsource "Kconfig.chip"
+rsource "drivers/Kconfig"
+rsource "Kconfig.defconfig"

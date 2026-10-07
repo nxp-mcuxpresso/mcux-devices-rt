@@ -1,0 +1,59 @@
+# Copyright 2025 NXP
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+menu "Device specific drivers configuration"
+
+    rsource "romapi/Kconfig"
+
+    config MCUX_COMPONENT_driver.clock
+         select MCUX_COMPONENT_driver.rpu
+         bool "clock"
+         default y
+         depends on MCUX_HW_CORE_ID_CM55_CORE0
+
+    config MCUX_COMPONENT_driver.reset
+         select MCUX_COMPONENT_driver.rpu if MCUX_HW_CORE_ID_CM55_CORE0
+         bool "reset"
+         default y
+
+    config MCUX_COMPONENT_driver.power
+         bool "power"
+         default y
+         depends on MCUX_HW_CORE_ID_CM55_CORE0
+
+    config MCUX_COMPONENT_driver.rpu
+         bool "rpu"
+         default y
+         depends on MCUX_HW_CORE_ID_CM55_CORE0
+
+    config MCUX_COMPONENT_driver.rtl3450_swm
+         select MCUX_COMPONENT_driver.rpu
+         bool "rtl3450_swm"
+         default y
+         depends on MCUX_HW_CORE_ID_CM55_CORE0
+
+    config MCUX_COMPONENT_driver.flexcomm_qspi_flr
+         select MCUX_COMPONENT_driver.flexcomm
+         bool "qspi_flr"
+         default n
+
+    config MCUX_COMPONENT_driver.flexcomm_qspi_flr_dma
+         bool "flexcomm_qspi_flr_dma"
+         select MCUX_COMPONENT_driver.flexcomm_qspi_flr
+         select MCUX_COMPONENT_driver.lpc_dma
+         default n
+
+     config MCUX_COMPONENT_driver.event_ctrl
+         bool "event_ctrl"
+         default y
+         depends on MCUX_HW_CORE_ID_CM55_CORE0
+
+    config MCUX_COMPONENT_driver.dma_mux
+         bool "dma_mux"
+         default y
+
+    config MCUX_COMPONENT_driver.fault_handler
+         bool "fault_handler"
+         default y
+endmenu

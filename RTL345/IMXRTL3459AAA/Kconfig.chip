@@ -1,0 +1,51 @@
+# Copyright 2024-2025 NXP
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+# product related
+
+config MCUX_HW_SOC_SERIES_RT
+    bool
+    default y
+
+config MCUX_HW_SOC_MULTICORE_DEVICE
+    bool
+    default y
+
+# device related
+
+config MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+    bool
+
+choice MCUX_HW_DEVICE_PART_IMXRTL3459AAA
+    prompt "Device IMXRTL3459AAA Part"
+    config MCUX_HW_DEVICE_PART_IMXRTL3459AAAFAWAR
+    bool "IMXRTL3459AAAFAWAR"
+    select MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+    config MCUX_HW_DEVICE_PART_IMXRTL3459AAAFBWAR
+    bool "IMXRTL3459AAAFBWAR"
+    select MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+endchoice
+
+config MCUX_HW_DEVICE_ID
+    string
+    default "IMXRTL3459AAAxxxxx" if MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_DEVICE_PART
+    string
+    default "IMXRTL3459AAAFAWAR" if MCUX_HW_DEVICE_PART_IMXRTL3459AAAFAWAR
+    default "IMXRTL3459AAAFBWAR" if MCUX_HW_DEVICE_PART_IMXRTL3459AAAFBWAR
+
+# ip information
+
+config MCUX_HW_IP_DriverType_DMA_CRC
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_XSPI
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+

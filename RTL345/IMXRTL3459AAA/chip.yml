@@ -1,0 +1,71 @@
+---
+
+device.hardware_data:
+  section-type: "manifest_content"
+  belong_to: set.device.IMXRTL3459AAA
+  contents:
+    generated_from_chip_model: "yes"
+    devices:
+      - id: "IMXRTL3459AAAxxxxx"
+        full_name: "IMXRTL3459AAAxxxxx"
+        name: "IMXRTL3459AAA"
+        platform: "i.MX"
+        series: "RT"
+        family: "IMXRTL345"
+        subfamily: "iMXRTL3459AAA"
+        frequency_mhz: 180
+        core:
+          - name: "Cortex-M55"
+            type: "cm55"
+            id: "cm55_core0"
+            description: "M55 core 0 - CTRLSS"
+            fpu: "SP_FPU"
+            dsp: true
+            mpu: true
+            sau: true
+            frequency_mhz: 400
+            boot_role: "primary"
+          - name: "Cortex-M55"
+            type: "cm55"
+            id: "cm55_core1"
+            description: "M55 core 1 - NSS"
+            fpu: "SP_FPU"
+            dsp: true
+            mpu: true
+            sau: false
+            frequency_mhz: 400
+            boot_role: "secondary"
+            slave_role:
+              - id: "M55SLAVE"
+                name: "Cortex-M55 core1 acts as slave"
+        memory:
+          memoryBlock:
+            - id: "SRAM"
+              name: "SRAM"
+              addr: 0x20020000
+              size: 0x40000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "ITCM"
+              name: "ITCM"
+              addr: 0x0
+              size: 0x40000
+              type: "RAM"
+              access: "RW"
+              default: true
+            - id: "DTCM"
+              name: "DTCM"
+              addr: 0x20000000
+              size: 0x40000
+              type: "RAM"
+              access: "RW"
+              default: true
+        total_memory:
+          ram_size_kb: 512
+          flash_size_kb: 0
+        part:
+          - name: "IMXRTL3459AAAFAWAR"
+          - name: "IMXRTL3459AAAFBWAR"
+        modules:
+...

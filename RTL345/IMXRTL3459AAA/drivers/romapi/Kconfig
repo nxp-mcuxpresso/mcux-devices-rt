@@ -1,0 +1,42 @@
+# Copyright 2025-2026 NXP
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+config MCUX_HAS_COMPONENT_driver.romapi
+    bool
+    default y
+
+config MCUX_COMPONENT_driver.romapi
+    bool "romapi"
+    select MCUX_COMPONENT_driver.common
+    select MCUX_COMPONENT_driver.romapi_nboot
+    select MCUX_COMPONENT_driver.romapi_runbootloader
+    select MCUX_COMPONENT_driver.romapi_kbapi
+    select MCUX_COMPONENT_driver.romapi_flash
+    select MCUX_COMPONENT_driver.romapi_otp
+    depends on MCUX_HAS_COMPONENT_driver.romapi
+
+config MCUX_COMPONENT_driver.romapi_nboot
+    bool "romapi_nboot"
+    select MCUX_COMPONENT_driver.common
+    depends on MCUX_HAS_COMPONENT_driver.romapi
+
+config MCUX_COMPONENT_driver.romapi_runbootloader
+    bool "romapi_runbootloader"
+    select MCUX_COMPONENT_driver.common
+    depends on MCUX_HAS_COMPONENT_driver.romapi
+
+config MCUX_COMPONENT_driver.romapi_kbapi
+    bool "romapi_kbapi"
+    select MCUX_COMPONENT_driver.common
+    depends on MCUX_HAS_COMPONENT_driver.romapi
+
+config MCUX_COMPONENT_driver.romapi_flash
+    bool "romapi_flash"
+    select MCUX_COMPONENT_driver.common
+    depends on MCUX_HAS_COMPONENT_driver.romapi
+
+config MCUX_COMPONENT_driver.romapi_otp
+    bool "romapi_otp"
+    select MCUX_COMPONENT_driver.common
+    depends on MCUX_HAS_COMPONENT_driver.romapi

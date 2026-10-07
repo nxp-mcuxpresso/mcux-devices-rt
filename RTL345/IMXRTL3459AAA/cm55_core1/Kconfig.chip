@@ -1,0 +1,89 @@
+# Copyright 2024-2025 NXP
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+# core related
+
+config MCUX_HW_CORE
+    string
+    default "cm55"
+
+config MCUX_HW_CORE_CM55
+    bool
+    default y
+
+config MCUX_HW_CORE_ID
+    string
+    default "cm55_core1"
+
+config MCUX_HW_CORE_ID_CM55_CORE1
+    bool
+    default y
+
+config MCUX_HW_DSP
+    bool
+    default y
+
+config MCUX_HW_MPU
+    bool
+    default y
+
+config MCUX_HW_FPU
+    string
+    default "SP_FPU"
+
+config MCUX_HW_FPU_TYPE
+    string
+    default "fpv5_dp"
+
+config MCUX_HW_FPV5_DP
+    bool
+    default y
+
+config MCUX_HW_SAU
+    bool
+    default n
+
+config MCUX_HW_INT_PRIO_BITS
+    int
+    default 3
+
+# device related
+
+config MCUX_HW_DEVICE_CORE
+    string
+    default "IMXRTL3459AAA_cm55_core1"
+
+# For chipmodel generated files
+
+config MCUX_TOOLCHAIN_LINKER_DEVICE_PREFIX
+    string
+    default "IMXRTL3459AAAxxxxx_cm55_core1" if MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_TOOLCHAIN_MCUX_STARTUP
+    string
+    default "imxrtl3459aaa_cm55_core1"
+
+# Toolchain related
+
+config MCUX_TOOLCHAIN_IAR_CPU_IDENTIFIER
+    string
+    default "IMXRTL3459AAA_M55_1" if MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_TOOLCHAIN_MDK_CPU_IDENTIFIER
+    string
+    default "IMXRTL3459AAAFAWAR:cm55_core1" if MCUX_HW_DEVICE_PART_IMXRTL3459AAAFAWAR
+    default "IMXRTL3459AAAFBWAR:cm55_core1" if MCUX_HW_DEVICE_PART_IMXRTL3459AAAFBWAR
+
+config MCUX_TOOLCHAIN_JLINK_CPU_IDENTIFIER
+    string
+    default "IMXRTL3459AAA_M55_1" if MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+# core-specific ip information
+
+config MCUX_HW_IP_DriverType_EDMA5
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+

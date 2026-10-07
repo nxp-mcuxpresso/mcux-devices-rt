@@ -1,0 +1,20 @@
+# Copyright 2026 NXP
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+config MCUX_HW_DEVICE_IMXRTL3459AAA_CORE_ID_cm55_core0
+    bool
+    default y
+
+rsource "Kconfig.chip"
+rsource "../../../../../devices/arm/Kconfig.common"
+
+## Project segment and component dependency data
+config MCUX_HW_DEVICE_IMXRTL3459AAA
+    # bool "Device IMXRTL3459AAA Configuration"
+    bool
+    default y
+
+    # component dependency
+    select MCUX_COMPONENT_component.usart_adapter if MCUX_COMPONENT_component.serial_manager_uart
+    select MCUX_COMPONENT_component.usart_adapter if MCUX_COMPONENT_utility.debug_console_lite

@@ -1,0 +1,5 @@
+/*!
+@defgroup rpu RPU: Register Protection Unit Driver
+@details The RPU driver unlocks and writes registers protected by the Register Protection Unit.
+
+*/

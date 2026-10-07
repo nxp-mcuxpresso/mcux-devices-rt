@@ -1,0 +1,204 @@
+# Copyright 2024-2025 NXP
+# All rights reserved.
+#
+# SPDX-License-Identifier: BSD-3-Clause
+
+# core related
+
+config MCUX_HW_CORE
+    string
+    default "cm55"
+
+config MCUX_HW_CORE_CM55
+    bool
+    default y
+
+config MCUX_HW_CORE_ID
+    string
+    default "cm55_core0"
+
+config MCUX_HW_CORE_ID_CM55_CORE0
+    bool
+    default y
+
+config MCUX_HW_DSP
+    bool
+    default y
+
+config MCUX_HW_MPU
+    bool
+    default y
+
+config MCUX_HW_FPU
+    string
+    default "SP_FPU"
+
+config MCUX_HW_FPU_TYPE
+    string
+    default "fpv5_dp"
+
+config MCUX_HW_FPV5_DP
+    bool
+    default y
+
+config MCUX_HW_SAU
+    bool
+    default y
+
+config MCUX_HW_INT_PRIO_BITS
+    int
+    default 3
+
+# device related
+
+config MCUX_HW_DEVICE_CORE
+    string
+    default "IMXRTL3459AAA_cm55_core0"
+
+# For chipmodel generated files
+
+config MCUX_TOOLCHAIN_LINKER_DEVICE_PREFIX
+    string
+    default "IMXRTL3459AAAxxxxx_cm55_core0" if MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_TOOLCHAIN_MCUX_STARTUP
+    string
+    default "imxrtl3459aaa_cm55_core0"
+
+# Toolchain related
+
+config MCUX_TOOLCHAIN_IAR_CPU_IDENTIFIER
+    string
+    default "IMXRTL3459AAA_M55_0" if MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_TOOLCHAIN_MDK_CPU_IDENTIFIER
+    string
+    default "IMXRTL3459AAAFAWAR:cm55_core0" if MCUX_HW_DEVICE_PART_IMXRTL3459AAAFAWAR
+    default "IMXRTL3459AAAFBWAR:cm55_core0" if MCUX_HW_DEVICE_PART_IMXRTL3459AAAFBWAR
+
+config MCUX_TOOLCHAIN_JLINK_CPU_IDENTIFIER
+    string
+    default "IMXRTL3459AAA_M55_0" if MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+# core-specific ip information
+
+config MCUX_HW_IP_DriverType_ADSS_PMON
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_CDOG
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_CTIMER
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_DBGMB
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_FLEXCOMM
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_FLEXCOMM_I2C
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_FLEXCOMM_SPI
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_FLEXCOMM_USART
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_GINT
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_GPIO_PORT
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_HSI
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_HSI_PORT
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_I3C
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_INPUTMUX
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_MCO_CRC
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_MRT
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_OSTIMER
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_PINT
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_QSPI_FLR
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_SCTIMER
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_SDMA
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_TRNG
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_UTICK
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
+config MCUX_HW_IP_DriverType_WWDT
+    bool
+    default y
+    depends on MCUX_HW_DEVICE_ID_IMXRTL3459AAAxxxxx
+
