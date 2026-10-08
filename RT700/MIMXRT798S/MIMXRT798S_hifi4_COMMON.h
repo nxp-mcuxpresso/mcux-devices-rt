@@ -7,7 +7,7 @@
 **     Compiler:            Xtensa Compiler
 **     Reference manual:    iMXRT700RM Rev.5, 10/2025
 **     Version:             rev. 6.0, 2025-12-29
-**     Build:               b260429
+**     Build:               b261008
 **
 **     Abstract:
 **         Peripheral Access Layer for MIMXRT798S_hifi4
@@ -1016,33 +1016,33 @@ typedef enum _dma_request_source
 /** Interrupt vectors for the CTIMER peripheral type */
 #define CTIMER_IRQS                              { CTIMER0_IRQn, CTIMER1_IRQn, CTIMER2_IRQn, CTIMER3_IRQn, CTIMER4_IRQn }
 
-/* DEBUG_MAILBOX - Peripheral instance base addresses */
+/* DEBUGMAILBOX - Peripheral instance base addresses */
 #if (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE & 0x2))
   /** Peripheral DEBUG_MAILBOX base address */
   #define DEBUG_MAILBOX_BASE                       (0x50198000u)
   /** Peripheral DEBUG_MAILBOX base address */
   #define DEBUG_MAILBOX_BASE_NS                    (0x40198000u)
   /** Peripheral DEBUG_MAILBOX base pointer */
-  #define DEBUG_MAILBOX                            ((DEBUG_MAILBOX_Type *)DEBUG_MAILBOX_BASE)
+  #define DEBUG_MAILBOX                            ((DEBUGMAILBOX_Type *)DEBUG_MAILBOX_BASE)
   /** Peripheral DEBUG_MAILBOX base pointer */
-  #define DEBUG_MAILBOX_NS                         ((DEBUG_MAILBOX_Type *)DEBUG_MAILBOX_BASE_NS)
-  /** Array initializer of DEBUG_MAILBOX peripheral base addresses */
-  #define DEBUG_MAILBOX_BASE_ADDRS                 { DEBUG_MAILBOX_BASE }
-  /** Array initializer of DEBUG_MAILBOX peripheral base pointers */
-  #define DEBUG_MAILBOX_BASE_PTRS                  { DEBUG_MAILBOX }
-  /** Array initializer of DEBUG_MAILBOX peripheral base addresses */
-  #define DEBUG_MAILBOX_BASE_ADDRS_NS              { DEBUG_MAILBOX_BASE_NS }
-  /** Array initializer of DEBUG_MAILBOX peripheral base pointers */
-  #define DEBUG_MAILBOX_BASE_PTRS_NS               { DEBUG_MAILBOX_NS }
+  #define DEBUG_MAILBOX_NS                         ((DEBUGMAILBOX_Type *)DEBUG_MAILBOX_BASE_NS)
+  /** Array initializer of DEBUGMAILBOX peripheral base addresses */
+  #define DEBUGMAILBOX_BASE_ADDRS                  { DEBUG_MAILBOX_BASE }
+  /** Array initializer of DEBUGMAILBOX peripheral base pointers */
+  #define DEBUGMAILBOX_BASE_PTRS                   { DEBUG_MAILBOX }
+  /** Array initializer of DEBUGMAILBOX peripheral base addresses */
+  #define DEBUGMAILBOX_BASE_ADDRS_NS               { DEBUG_MAILBOX_BASE_NS }
+  /** Array initializer of DEBUGMAILBOX peripheral base pointers */
+  #define DEBUGMAILBOX_BASE_PTRS_NS                { DEBUG_MAILBOX_NS }
 #else
   /** Peripheral DEBUG_MAILBOX base address */
   #define DEBUG_MAILBOX_BASE                       (0x40198000u)
   /** Peripheral DEBUG_MAILBOX base pointer */
-  #define DEBUG_MAILBOX                            ((DEBUG_MAILBOX_Type *)DEBUG_MAILBOX_BASE)
-  /** Array initializer of DEBUG_MAILBOX peripheral base addresses */
-  #define DEBUG_MAILBOX_BASE_ADDRS                 { DEBUG_MAILBOX_BASE }
-  /** Array initializer of DEBUG_MAILBOX peripheral base pointers */
-  #define DEBUG_MAILBOX_BASE_PTRS                  { DEBUG_MAILBOX }
+  #define DEBUG_MAILBOX                            ((DEBUGMAILBOX_Type *)DEBUG_MAILBOX_BASE)
+  /** Array initializer of DEBUGMAILBOX peripheral base addresses */
+  #define DEBUGMAILBOX_BASE_ADDRS                  { DEBUG_MAILBOX_BASE }
+  /** Array initializer of DEBUGMAILBOX peripheral base pointers */
+  #define DEBUGMAILBOX_BASE_PTRS                   { DEBUG_MAILBOX }
 #endif
 
 /* DMA - Peripheral instance base addresses */

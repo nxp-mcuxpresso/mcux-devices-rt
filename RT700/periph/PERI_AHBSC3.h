@@ -41,7 +41,7 @@
 **                          MIMXRT798SGVKB_hifi4
 **
 **     Version:             rev. 6.0, 2025-12-29
-**     Build:               b260330
+**     Build:               b261008
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for AHBSC3
@@ -232,15 +232,15 @@ typedef struct {
        uint8_t RESERVED_9[16];
   __IO uint32_t SRAM_28_RULE[AHBSC3_SRAM_28_RULE_COUNT]; /**< RAM partition 28 Memory Rule Register, array offset: 0x260, array step: 0x4 */
   __IO uint32_t SRAM_29_RULE[AHBSC3_SRAM_29_RULE_COUNT]; /**< RAM partition 29 Memory Rule Register, array offset: 0x270, array step: 0x4 */
-  __IO uint32_t AHB_PERIPHERAL10_SLAVE_RULE0;      /**< AHB Peripheral 10 Slaves Rule Register 0, offset: 0x280 */
-  __IO uint32_t AHB_PERIPHERAL10_SLAVE_RULE1;      /**< AHB Peripheral 10 Slaves Rule Register 1, offset: 0x284 */
+  __IO uint32_t AHB_PERIPHERAL10_SLAVE_RULE0;      /**< AHB Peripheral 10 Targets Rule Register 0, offset: 0x280 */
+  __IO uint32_t AHB_PERIPHERAL10_SLAVE_RULE1;      /**< AHB Peripheral 10 Targets Rule Register 1, offset: 0x284 */
        uint8_t RESERVED_10[8];
   __IO uint32_t AIPS5_BRIDGE_GROUP0_MEM_RULE0;     /**< AIPS5 Bridge Group 0 Memory Rule Register 0, offset: 0x290 */
   __IO uint32_t AIPS5_BRIDGE_GROUP0_MEM_RULE1;     /**< AIPS5 Bridge Group 0 Memory Rule Register 1, offset: 0x294 */
   __IO uint32_t AIPS5_BRIDGE_GROUP0_MEM_RULE2;     /**< AIPS5 Bridge Group 0 Memory Rule Register 2, offset: 0x298 */
   __IO uint32_t AIPS5_BRIDGE_GROUP0_MEM_RULE3;     /**< AIPS5 Bridge Group 0 Memory Rule Register 3, offset: 0x29C */
   struct {                                         /* offset: 0x2A0, array step: 0x10 */
-    __IO uint32_t AHB_PERIPHERAL10_SLAVE_GPIO_RULE;   /**< AHB Peripheral 10 Slaves GPIO8 Rule Register..AHB Peripheral 10 Slaves GPIO10 Rule Register, array offset: 0x2A0, array step: 0x10 */
+    __IO uint32_t AHB_PERIPHERAL10_SLAVE_GPIO_RULE;   /**< AHB Peripheral 10 Targets GPIO8 Rule Register..AHB Peripheral 10 Targets GPIO10 Rule Register, array offset: 0x2A0, array step: 0x10 */
          uint8_t RESERVED_0[12];
   } AHB_PERIPHERAL10_SLAVE_GPION_RULE[AHBSC3_AHB_PERIPHERAL10_SLAVE_GPION_RULE_COUNT];
        uint8_t RESERVED_11[16];
@@ -272,21 +272,21 @@ typedef struct {
        uint8_t RESERVED_22[60];
   __IO uint32_t SEC_VIO_INFO_VALID;                /**< Security Violation Info Validity for Address, offset: 0xF00 */
        uint8_t RESERVED_23[124];
-  __IO uint32_t COMPUTE_ARB1RAM_ACCESS_ENABLE;     /**< Access enable for COMPUTE domain masters to RAM partitions., offset: 0xF80 */
-  __IO uint32_t SENSE_ARB1RAM_ACCESS_ENABLE;       /**< Access enable for SENSE domain masters to RAM partitions., offset: 0xF84 */
-  __IO uint32_t MEDIA_ARB1RAM_ACCESS_ENABLE;       /**< Access enable for MEDIA domain masters to RAM partitions., offset: 0xF88 */
+  __IO uint32_t COMPUTE_ARB1RAM_ACCESS_ENABLE;     /**< Access enable for COMPUTE domain initiators to RAM partitions., offset: 0xF80 */
+  __IO uint32_t SENSE_ARB1RAM_ACCESS_ENABLE;       /**< Access enable for SENSE domain initiators to RAM partitions., offset: 0xF84 */
+  __IO uint32_t MEDIA_ARB1RAM_ACCESS_ENABLE;       /**< Access enable for MEDIA domain initiators to RAM partitions., offset: 0xF88 */
   __IO uint32_t NPU_ARB1RAM_ACCESS_ENABLE;         /**< Access enable for NPU to RAM partitions., offset: 0xF8C */
   __IO uint32_t HIFI4_ARB1RAM_ACCESS_ENABLE;       /**< Access enable for HIFI4 to RAM partitions., offset: 0xF90 */
   __IO uint32_t HIFI1_ARB1RAM_ACCESS_ENABLE;       /**< Access enable for HIFI1 to RAM partitions., offset: 0xF94 */
        uint8_t RESERVED_24[8];
-  __IO uint32_t COMPUTE_APB_PERIPHERAL_ACCESS_ENABLE; /**< Access enable for COMPUTE domain masters to common APB peripherals., offset: 0xFA0 */
-  __IO uint32_t SENSE_APB_PERIPHERAL_ACCESS_ENABLE; /**< Access enable for SENSE domain masters to common APB peripherals., offset: 0xFA4 */
+  __IO uint32_t COMPUTE_APB_PERIPHERAL_ACCESS_ENABLE; /**< Access enable for COMPUTE domain initiators to common APB peripherals., offset: 0xFA0 */
+  __IO uint32_t SENSE_APB_PERIPHERAL_ACCESS_ENABLE; /**< Access enable for SENSE domain initiators to common APB peripherals., offset: 0xFA4 */
        uint8_t RESERVED_25[8];
-  __IO uint32_t COMPUTE_AIPS_PERIPHERAL_ACCESS_ENABLE; /**< Access enable for COMPUTE domain masters to common AIPS peripherals., offset: 0xFB0 */
-  __IO uint32_t SENSE_AIPS_PERIPHERAL_ACCESS_ENABLE; /**< Access enable for SENSE domain masters to common AIPS peripherals., offset: 0xFB4 */
+  __IO uint32_t COMPUTE_AIPS_PERIPHERAL_ACCESS_ENABLE; /**< Access enable for COMPUTE domain initiators to common AIPS peripherals., offset: 0xFB0 */
+  __IO uint32_t SENSE_AIPS_PERIPHERAL_ACCESS_ENABLE; /**< Access enable for SENSE domain initiators to common AIPS peripherals., offset: 0xFB4 */
        uint8_t RESERVED_26[24];
-  __IO uint32_t MASTER_SEC_LEVEL;                  /**< Master Secure Level, offset: 0xFD0 */
-  __IO uint32_t MASTER_SEC_ANTI_POL_REG;           /**< Master Secure Level, offset: 0xFD4 */
+  __IO uint32_t MASTER_SEC_LEVEL;                  /**< Initiator Secure Level, offset: 0xFD0 */
+  __IO uint32_t MASTER_SEC_ANTI_POL_REG;           /**< Initiator Secure Level, offset: 0xFD4 */
        uint8_t RESERVED_27[20];
   __IO uint32_t CPU1_LOCK_REG;                     /**< Miscellaneous CPU1 Control Signals, offset: 0xFEC */
        uint8_t RESERVED_28[8];
@@ -2823,7 +2823,7 @@ typedef struct {
 #define AHBSC3_SRAM_29_RULE_RULE7(x)             (((uint32_t)(((uint32_t)(x)) << AHBSC3_SRAM_29_RULE_RULE7_SHIFT)) & AHBSC3_SRAM_29_RULE_RULE7_MASK)
 /*! @} */
 
-/*! @name AHB_PERIPHERAL10_SLAVE_RULE0 - AHB Peripheral 10 Slaves Rule Register 0 */
+/*! @name AHB_PERIPHERAL10_SLAVE_RULE0 - AHB Peripheral 10 Targets Rule Register 0 */
 /*! @{ */
 
 #define AHBSC3_AHB_PERIPHERAL10_SLAVE_RULE0_LP_FLEXCOMM17_MASK (0x30000U)
@@ -2867,7 +2867,7 @@ typedef struct {
 #define AHBSC3_AHB_PERIPHERAL10_SLAVE_RULE0_LP_FLEXCOMM20(x) (((uint32_t)(((uint32_t)(x)) << AHBSC3_AHB_PERIPHERAL10_SLAVE_RULE0_LP_FLEXCOMM20_SHIFT)) & AHBSC3_AHB_PERIPHERAL10_SLAVE_RULE0_LP_FLEXCOMM20_MASK)
 /*! @} */
 
-/*! @name AHB_PERIPHERAL10_SLAVE_RULE1 - AHB Peripheral 10 Slaves Rule Register 1 */
+/*! @name AHB_PERIPHERAL10_SLAVE_RULE1 - AHB Peripheral 10 Targets Rule Register 1 */
 /*! @{ */
 
 #define AHBSC3_AHB_PERIPHERAL10_SLAVE_RULE1_CDOG4_MASK (0x3U)
@@ -3087,7 +3087,7 @@ typedef struct {
 #define AHBSC3_AIPS5_BRIDGE_GROUP0_MEM_RULE3_DMA_3_CH7(x) (((uint32_t)(((uint32_t)(x)) << AHBSC3_AIPS5_BRIDGE_GROUP0_MEM_RULE3_DMA_3_CH7_SHIFT)) & AHBSC3_AIPS5_BRIDGE_GROUP0_MEM_RULE3_DMA_3_CH7_MASK)
 /*! @} */
 
-/*! @name AHB_PERIPHERAL10_SLAVE_GPIO_RULE - AHB Peripheral 10 Slaves GPIO8 Rule Register..AHB Peripheral 10 Slaves GPIO10 Rule Register */
+/*! @name AHB_PERIPHERAL10_SLAVE_GPIO_RULE - AHB Peripheral 10 Targets GPIO8 Rule Register..AHB Peripheral 10 Targets GPIO10 Rule Register */
 /*! @{ */
 
 #define AHBSC3_AHB_PERIPHERAL10_SLAVE_GPIO_RULE_GPIOn_MASK (0x3U)
@@ -3599,7 +3599,7 @@ typedef struct {
 
 #define AHBSC3_MEDIA_AHB_PERIPHERAL_SLAVE_RULE0_MEDIA_AHB_PERIPHERAL_MASK (0x3U)
 #define AHBSC3_MEDIA_AHB_PERIPHERAL_SLAVE_RULE0_MEDIA_AHB_PERIPHERAL_SHIFT (0U)
-/*! MEDIA_AHB_PERIPHERAL - MEDIA domain AHB Peripheral Slave Rule Register
+/*! MEDIA_AHB_PERIPHERAL - MEDIA domain AHB Peripheral Target Rule Register
  *  0b00..Non-secure and non-privilege user access allowed
  *  0b01..Non-secure and privilege access allowed
  *  0b10..Secure and non-privilege user access allowed
@@ -3613,7 +3613,7 @@ typedef struct {
 
 #define AHBSC3_MEDIA_APB_PERIPHERAL_SLAVE_RULE0_MEDIA_APB_PERIPHERAL_MASK (0x3U)
 #define AHBSC3_MEDIA_APB_PERIPHERAL_SLAVE_RULE0_MEDIA_APB_PERIPHERAL_SHIFT (0U)
-/*! MEDIA_APB_PERIPHERAL - MEDIA domain APB Peripheral Slave
+/*! MEDIA_APB_PERIPHERAL - MEDIA domain APB Peripheral Target
  *  0b00..Non-secure and non-privilege user access allowed
  *  0b01..Non-secure and privilege access allowed
  *  0b10..Secure and non-privilege user access allowed
@@ -3669,12 +3669,12 @@ typedef struct {
 
 #define AHBSC3_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_SEC_LEVEL_MASK (0xF0U)
 #define AHBSC3_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_SEC_LEVEL_SHIFT (4U)
-/*! SEC_VIO_INFO_MASTER_SEC_LEVEL - Security Violation Info Master Security Level */
+/*! SEC_VIO_INFO_MASTER_SEC_LEVEL - Security Violation Info Initiator Security Level */
 #define AHBSC3_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_SEC_LEVEL(x) (((uint32_t)(((uint32_t)(x)) << AHBSC3_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_SEC_LEVEL_SHIFT)) & AHBSC3_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_SEC_LEVEL_MASK)
 
 #define AHBSC3_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_MASK (0x1F00U)
 #define AHBSC3_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_SHIFT (8U)
-/*! SEC_VIO_INFO_MASTER - Security violation master number
+/*! SEC_VIO_INFO_MASTER - Security violation initiator number
  *  0b00000..CPU0 System
  *  0b00001..eDMA0
  *  0b00010..eDMA1
@@ -3854,7 +3854,7 @@ typedef struct {
 #define AHBSC3_SEC_VIO_INFO_VALID_VIO_INFO_VALID16(x) (((uint32_t)(((uint32_t)(x)) << AHBSC3_SEC_VIO_INFO_VALID_VIO_INFO_VALID16_SHIFT)) & AHBSC3_SEC_VIO_INFO_VALID_VIO_INFO_VALID16_MASK)
 /*! @} */
 
-/*! @name COMPUTE_ARB1RAM_ACCESS_ENABLE - Access enable for COMPUTE domain masters to RAM partitions. */
+/*! @name COMPUTE_ARB1RAM_ACCESS_ENABLE - Access enable for COMPUTE domain initiators to RAM partitions. */
 /*! @{ */
 
 #define AHBSC3_COMPUTE_ARB1RAM_ACCESS_ENABLE_RAM_PARTITION_0_ACCESS_EN_MASK (0x1U)
@@ -3954,7 +3954,7 @@ typedef struct {
 #define AHBSC3_COMPUTE_ARB1RAM_ACCESS_ENABLE_RAM_PARTITION_11_ACCESS_EN(x) (((uint32_t)(((uint32_t)(x)) << AHBSC3_COMPUTE_ARB1RAM_ACCESS_ENABLE_RAM_PARTITION_11_ACCESS_EN_SHIFT)) & AHBSC3_COMPUTE_ARB1RAM_ACCESS_ENABLE_RAM_PARTITION_11_ACCESS_EN_MASK)
 /*! @} */
 
-/*! @name SENSE_ARB1RAM_ACCESS_ENABLE - Access enable for SENSE domain masters to RAM partitions. */
+/*! @name SENSE_ARB1RAM_ACCESS_ENABLE - Access enable for SENSE domain initiators to RAM partitions. */
 /*! @{ */
 
 #define AHBSC3_SENSE_ARB1RAM_ACCESS_ENABLE_RAM_PARTITION_0_ACCESS_EN_MASK (0x1U)
@@ -4054,7 +4054,7 @@ typedef struct {
 #define AHBSC3_SENSE_ARB1RAM_ACCESS_ENABLE_RAM_PARTITION_11_ACCESS_EN(x) (((uint32_t)(((uint32_t)(x)) << AHBSC3_SENSE_ARB1RAM_ACCESS_ENABLE_RAM_PARTITION_11_ACCESS_EN_SHIFT)) & AHBSC3_SENSE_ARB1RAM_ACCESS_ENABLE_RAM_PARTITION_11_ACCESS_EN_MASK)
 /*! @} */
 
-/*! @name MEDIA_ARB1RAM_ACCESS_ENABLE - Access enable for MEDIA domain masters to RAM partitions. */
+/*! @name MEDIA_ARB1RAM_ACCESS_ENABLE - Access enable for MEDIA domain initiators to RAM partitions. */
 /*! @{ */
 
 #define AHBSC3_MEDIA_ARB1RAM_ACCESS_ENABLE_RAM_PARTITION_0_ACCESS_EN_MASK (0x1U)
@@ -4454,7 +4454,7 @@ typedef struct {
 #define AHBSC3_HIFI1_ARB1RAM_ACCESS_ENABLE_RAM_PARTITION_11_ACCESS_EN(x) (((uint32_t)(((uint32_t)(x)) << AHBSC3_HIFI1_ARB1RAM_ACCESS_ENABLE_RAM_PARTITION_11_ACCESS_EN_SHIFT)) & AHBSC3_HIFI1_ARB1RAM_ACCESS_ENABLE_RAM_PARTITION_11_ACCESS_EN_MASK)
 /*! @} */
 
-/*! @name COMPUTE_APB_PERIPHERAL_ACCESS_ENABLE - Access enable for COMPUTE domain masters to common APB peripherals. */
+/*! @name COMPUTE_APB_PERIPHERAL_ACCESS_ENABLE - Access enable for COMPUTE domain initiators to common APB peripherals. */
 /*! @{ */
 
 #define AHBSC3_COMPUTE_APB_PERIPHERAL_ACCESS_ENABLE_RSTCTL3_MASK (0x1U)
@@ -4546,7 +4546,7 @@ typedef struct {
 #define AHBSC3_COMPUTE_APB_PERIPHERAL_ACCESS_ENABLE_GDET3(x) (((uint32_t)(((uint32_t)(x)) << AHBSC3_COMPUTE_APB_PERIPHERAL_ACCESS_ENABLE_GDET3_SHIFT)) & AHBSC3_COMPUTE_APB_PERIPHERAL_ACCESS_ENABLE_GDET3_MASK)
 /*! @} */
 
-/*! @name SENSE_APB_PERIPHERAL_ACCESS_ENABLE - Access enable for SENSE domain masters to common APB peripherals. */
+/*! @name SENSE_APB_PERIPHERAL_ACCESS_ENABLE - Access enable for SENSE domain initiators to common APB peripherals. */
 /*! @{ */
 
 #define AHBSC3_SENSE_APB_PERIPHERAL_ACCESS_ENABLE_RSTCTL3_MASK (0x1U)
@@ -4638,7 +4638,7 @@ typedef struct {
 #define AHBSC3_SENSE_APB_PERIPHERAL_ACCESS_ENABLE_GDET3(x) (((uint32_t)(((uint32_t)(x)) << AHBSC3_SENSE_APB_PERIPHERAL_ACCESS_ENABLE_GDET3_SHIFT)) & AHBSC3_SENSE_APB_PERIPHERAL_ACCESS_ENABLE_GDET3_MASK)
 /*! @} */
 
-/*! @name COMPUTE_AIPS_PERIPHERAL_ACCESS_ENABLE - Access enable for COMPUTE domain masters to common AIPS peripherals. */
+/*! @name COMPUTE_AIPS_PERIPHERAL_ACCESS_ENABLE - Access enable for COMPUTE domain initiators to common AIPS peripherals. */
 /*! @{ */
 
 #define AHBSC3_COMPUTE_AIPS_PERIPHERAL_ACCESS_ENABLE_MU0_A_MASK (0x1U)
@@ -4738,7 +4738,7 @@ typedef struct {
 #define AHBSC3_COMPUTE_AIPS_PERIPHERAL_ACCESS_ENABLE_LPI2C15(x) (((uint32_t)(((uint32_t)(x)) << AHBSC3_COMPUTE_AIPS_PERIPHERAL_ACCESS_ENABLE_LPI2C15_SHIFT)) & AHBSC3_COMPUTE_AIPS_PERIPHERAL_ACCESS_ENABLE_LPI2C15_MASK)
 /*! @} */
 
-/*! @name SENSE_AIPS_PERIPHERAL_ACCESS_ENABLE - Access enable for SENSE domain masters to common AIPS peripherals. */
+/*! @name SENSE_AIPS_PERIPHERAL_ACCESS_ENABLE - Access enable for SENSE domain initiators to common AIPS peripherals. */
 /*! @{ */
 
 #define AHBSC3_SENSE_AIPS_PERIPHERAL_ACCESS_ENABLE_MU0_B_MASK (0x2U)
@@ -4838,90 +4838,90 @@ typedef struct {
 #define AHBSC3_SENSE_AIPS_PERIPHERAL_ACCESS_ENABLE_LPI2C15(x) (((uint32_t)(((uint32_t)(x)) << AHBSC3_SENSE_AIPS_PERIPHERAL_ACCESS_ENABLE_LPI2C15_SHIFT)) & AHBSC3_SENSE_AIPS_PERIPHERAL_ACCESS_ENABLE_LPI2C15_MASK)
 /*! @} */
 
-/*! @name MASTER_SEC_LEVEL - Master Secure Level */
+/*! @name MASTER_SEC_LEVEL - Initiator Secure Level */
 /*! @{ */
 
 #define AHBSC3_MASTER_SEC_LEVEL_HIFI1_MASK       (0x3U)
 #define AHBSC3_MASTER_SEC_LEVEL_HIFI1_SHIFT      (0U)
 /*! HIFI1 - HIFI1
- *  0b00..Non-secure and non-privileged Master
- *  0b01..Non-secure and privileged Master
- *  0b10..Secure and non-privileged Master
- *  0b11..Secure and privileged Master
+ *  0b00..Non-secure and non-privileged Initiator
+ *  0b01..Non-secure and privileged Initiator
+ *  0b10..Secure and non-privileged Initiator
+ *  0b11..Secure and privileged Initiator
  */
 #define AHBSC3_MASTER_SEC_LEVEL_HIFI1(x)         (((uint32_t)(((uint32_t)(x)) << AHBSC3_MASTER_SEC_LEVEL_HIFI1_SHIFT)) & AHBSC3_MASTER_SEC_LEVEL_HIFI1_MASK)
 
 #define AHBSC3_MASTER_SEC_LEVEL_MEDIA_MASK       (0xCU)
 #define AHBSC3_MASTER_SEC_LEVEL_MEDIA_SHIFT      (2U)
 /*! MEDIA - MEDIA
- *  0b00..Non-secure and non-privileged Master
- *  0b01..Non-secure and privileged Master
- *  0b10..Secure and non-privileged Master
- *  0b11..Secure and privileged Master
+ *  0b00..Non-secure and non-privileged Initiator
+ *  0b01..Non-secure and privileged Initiator
+ *  0b10..Secure and non-privileged Initiator
+ *  0b11..Secure and privileged Initiator
  */
 #define AHBSC3_MASTER_SEC_LEVEL_MEDIA(x)         (((uint32_t)(((uint32_t)(x)) << AHBSC3_MASTER_SEC_LEVEL_MEDIA_SHIFT)) & AHBSC3_MASTER_SEC_LEVEL_MEDIA_MASK)
 
 #define AHBSC3_MASTER_SEC_LEVEL_DMA2_MASK        (0x30U)
 #define AHBSC3_MASTER_SEC_LEVEL_DMA2_SHIFT       (4U)
 /*! DMA2 - DMA2
- *  0b00..Non-secure and non-privileged Master
- *  0b01..Non-secure and privileged Master
- *  0b10..Secure and non-privileged Master
- *  0b11..Secure and privileged Master
+ *  0b00..Non-secure and non-privileged Initiator
+ *  0b01..Non-secure and privileged Initiator
+ *  0b10..Secure and non-privileged Initiator
+ *  0b11..Secure and privileged Initiator
  */
 #define AHBSC3_MASTER_SEC_LEVEL_DMA2(x)          (((uint32_t)(((uint32_t)(x)) << AHBSC3_MASTER_SEC_LEVEL_DMA2_SHIFT)) & AHBSC3_MASTER_SEC_LEVEL_DMA2_MASK)
 
 #define AHBSC3_MASTER_SEC_LEVEL_DMA3_MASK        (0xC0U)
 #define AHBSC3_MASTER_SEC_LEVEL_DMA3_SHIFT       (6U)
 /*! DMA3 - DMA3
- *  0b00..Non-secure and non-privileged Master
- *  0b01..Non-secure and privileged Master
- *  0b10..Secure and non-privileged Master
- *  0b11..Secure and privileged Master
+ *  0b00..Non-secure and non-privileged Initiator
+ *  0b01..Non-secure and privileged Initiator
+ *  0b10..Secure and non-privileged Initiator
+ *  0b11..Secure and privileged Initiator
  */
 #define AHBSC3_MASTER_SEC_LEVEL_DMA3(x)          (((uint32_t)(((uint32_t)(x)) << AHBSC3_MASTER_SEC_LEVEL_DMA3_SHIFT)) & AHBSC3_MASTER_SEC_LEVEL_DMA3_MASK)
 /*! @} */
 
-/*! @name MASTER_SEC_ANTI_POL_REG - Master Secure Level */
+/*! @name MASTER_SEC_ANTI_POL_REG - Initiator Secure Level */
 /*! @{ */
 
 #define AHBSC3_MASTER_SEC_ANTI_POL_REG_HIFI1_MASK (0x3U)
 #define AHBSC3_MASTER_SEC_ANTI_POL_REG_HIFI1_SHIFT (0U)
 /*! HIFI1 - HIFI1
- *  0b00..Secure and privileged Master
- *  0b01..Secure and non-privileged Master
- *  0b10..Non-secure and privileged Master
- *  0b11..Non-secure and non-privileged Master
+ *  0b00..Secure and privileged Initiator
+ *  0b01..Secure and non-privileged Initiator
+ *  0b10..Non-secure and privileged Initiator
+ *  0b11..Non-secure and non-privileged Initiator
  */
 #define AHBSC3_MASTER_SEC_ANTI_POL_REG_HIFI1(x)  (((uint32_t)(((uint32_t)(x)) << AHBSC3_MASTER_SEC_ANTI_POL_REG_HIFI1_SHIFT)) & AHBSC3_MASTER_SEC_ANTI_POL_REG_HIFI1_MASK)
 
 #define AHBSC3_MASTER_SEC_ANTI_POL_REG_MEDIA_MASK (0xCU)
 #define AHBSC3_MASTER_SEC_ANTI_POL_REG_MEDIA_SHIFT (2U)
 /*! MEDIA - MEDIA
- *  0b00..Secure and privileged Master
- *  0b01..Secure and non-privileged Master
- *  0b10..Non-secure and privileged Master
- *  0b11..Non-secure and non-privileged Master
+ *  0b00..Secure and privileged Initiator
+ *  0b01..Secure and non-privileged Initiator
+ *  0b10..Non-secure and privileged Initiator
+ *  0b11..Non-secure and non-privileged Initiator
  */
 #define AHBSC3_MASTER_SEC_ANTI_POL_REG_MEDIA(x)  (((uint32_t)(((uint32_t)(x)) << AHBSC3_MASTER_SEC_ANTI_POL_REG_MEDIA_SHIFT)) & AHBSC3_MASTER_SEC_ANTI_POL_REG_MEDIA_MASK)
 
 #define AHBSC3_MASTER_SEC_ANTI_POL_REG_DMA2_MASK (0x30U)
 #define AHBSC3_MASTER_SEC_ANTI_POL_REG_DMA2_SHIFT (4U)
 /*! DMA2 - DMA2
- *  0b00..Secure and privileged Master
- *  0b01..Secure and non-privileged Master
- *  0b10..Non-secure and privileged Master
- *  0b11..Non-secure and non-privileged Master
+ *  0b00..Secure and privileged Initiator
+ *  0b01..Secure and non-privileged Initiator
+ *  0b10..Non-secure and privileged Initiator
+ *  0b11..Non-secure and non-privileged Initiator
  */
 #define AHBSC3_MASTER_SEC_ANTI_POL_REG_DMA2(x)   (((uint32_t)(((uint32_t)(x)) << AHBSC3_MASTER_SEC_ANTI_POL_REG_DMA2_SHIFT)) & AHBSC3_MASTER_SEC_ANTI_POL_REG_DMA2_MASK)
 
 #define AHBSC3_MASTER_SEC_ANTI_POL_REG_DMA3_MASK (0xC0U)
 #define AHBSC3_MASTER_SEC_ANTI_POL_REG_DMA3_SHIFT (6U)
 /*! DMA3 - DMA3
- *  0b00..Secure and privileged Master
- *  0b01..Secure and non-privileged Master
- *  0b10..Non-secure and privileged Master
- *  0b11..Non-secure and non-privileged Master
+ *  0b00..Secure and privileged Initiator
+ *  0b01..Secure and non-privileged Initiator
+ *  0b10..Non-secure and privileged Initiator
+ *  0b11..Non-secure and non-privileged Initiator
  */
 #define AHBSC3_MASTER_SEC_ANTI_POL_REG_DMA3(x)   (((uint32_t)(((uint32_t)(x)) << AHBSC3_MASTER_SEC_ANTI_POL_REG_DMA3_SHIFT)) & AHBSC3_MASTER_SEC_ANTI_POL_REG_DMA3_MASK)
 /*! @} */
@@ -5037,10 +5037,10 @@ typedef struct {
 #define AHBSC3_MISC_CTRL_DP_REG_DISABLE_STRICT_MODE_MASK (0xC00U)
 #define AHBSC3_MISC_CTRL_DP_REG_DISABLE_STRICT_MODE_SHIFT (10U)
 /*! DISABLE_STRICT_MODE - Disable Strict Mode
- *  0b00..AHB master in strict mode
- *  0b01..AHB master in tier mode. Can read and write to memories at same or below level.
- *  0b10..AHB master in strict mode
- *  0b11..AHB master in strict mode
+ *  0b00..AHB initiator in strict mode
+ *  0b01..AHB initiator in tier mode. Can read and write to memories at same or below level.
+ *  0b10..AHB initiator in strict mode
+ *  0b11..AHB initiator in strict mode
  */
 #define AHBSC3_MISC_CTRL_DP_REG_DISABLE_STRICT_MODE(x) (((uint32_t)(((uint32_t)(x)) << AHBSC3_MISC_CTRL_DP_REG_DISABLE_STRICT_MODE_SHIFT)) & AHBSC3_MISC_CTRL_DP_REG_DISABLE_STRICT_MODE_MASK)
 
@@ -5112,10 +5112,10 @@ typedef struct {
 #define AHBSC3_MISC_CTRL_REG_DISABLE_STRICT_MODE_MASK (0xC00U)
 #define AHBSC3_MISC_CTRL_REG_DISABLE_STRICT_MODE_SHIFT (10U)
 /*! DISABLE_STRICT_MODE - Disable Strict Mode
- *  0b00..AHB master in strict mode
- *  0b01..AHB master in tier mode. Can read and write to memories at same or below level.
- *  0b10..AHB master in strict mode
- *  0b11..AHB master in strict mode
+ *  0b00..AHB initiator in strict mode
+ *  0b01..AHB initiator in tier mode. Can read and write to memories at same or below level.
+ *  0b10..AHB initiator in strict mode
+ *  0b11..AHB initiator in strict mode
  */
 #define AHBSC3_MISC_CTRL_REG_DISABLE_STRICT_MODE(x) (((uint32_t)(((uint32_t)(x)) << AHBSC3_MISC_CTRL_REG_DISABLE_STRICT_MODE_SHIFT)) & AHBSC3_MISC_CTRL_REG_DISABLE_STRICT_MODE_MASK)
 

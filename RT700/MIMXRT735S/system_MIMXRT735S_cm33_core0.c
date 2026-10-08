@@ -12,7 +12,7 @@
 **
 **     Reference manual:    iMXRT700RM Rev.5, 10/2025
 **     Version:             rev. 6.0, 2025-12-29
-**     Build:               b260330
+**     Build:               b261008
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -49,7 +49,7 @@
 /*!
  * @file MIMXRT735S_cm33_core0
  * @version 1.0
- * @date 2026-03-30
+ * @date 2026-10-08
  * @brief Device specific configuration file for MIMXRT735S_cm33_core0
  *  (implementation file)
  *
@@ -92,6 +92,12 @@ static void GlikeyClearConfig(GLIKEY_Type *base)
 
 /* ----------------------------------------------------------------------------
    -- SystemInit()
+
+ * @brief Early SoC initialization, called before the C runtime startup.
+ *
+ * WARNING: Runs before .data/.bss are initialized. Any code added here
+ * must follow the same constraints as SystemInitHook(), see the full
+ * rules on that function below.
    ---------------------------------------------------------------------------- */
 
 __attribute__((weak)) void SystemInit(void)
@@ -379,6 +385,19 @@ void SystemCoreClockUpdate(void)
 
 /* ----------------------------------------------------------------------------
    -- SystemInitHook()
+
+ * @brief Weak hook called from SystemInit(), very early in boot.
+ *
+ * WARNING: Runs BEFORE the C runtime startup. At this point .data has not
+ * been copied from flash to RAM and .bss has not been zeroed, so:
+ *   - Do NOT read/write any global or static variable (.data/.bss are
+ *     indeterminate).
+ *   - Do NOT call libc / printf / malloc or anything that relies on
+ *     initialized global state.
+ *   - Only touch CPU registers, peripheral registers, and stack locals.
+ *
+ * Typical use: SoC errata workarounds or clock/memory-controller setup
+ * that must happen before RAM is usable.
    ---------------------------------------------------------------------------- */
 
 __attribute__((weak)) void SystemInitHook(void)

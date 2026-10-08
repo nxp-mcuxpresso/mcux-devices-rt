@@ -41,7 +41,7 @@
 **                          MIMXRT798SGVKB_hifi4
 **
 **     Version:             rev. 6.0, 2025-12-29
-**     Build:               b260330
+**     Build:               b261008
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for GDET
@@ -160,7 +160,7 @@ typedef struct {
        uint8_t RESERVED_0[8];
   __IO uint32_t GDET_ENABLE1;                      /**< Enable register, offset: 0x8 */
        uint8_t RESERVED_1[2044];
-  __IO uint32_t GDET_DLY_CTRL;                     /**< GDET delay control register, offset: 0x808 */
+  __IO uint32_t GDET_DLY_CTRL;                     /**< GDET_DLY_CTRL, offset: 0x808 */
   __O  uint32_t GDET_CTRL_CLR;                     /**< GDET Clear Control register, offset: 0x80C */
 } GDET_Type;
 
@@ -185,15 +185,25 @@ typedef struct {
 #define GDET_GDET_ENABLE1_RFU(x)                 (((uint32_t)(((uint32_t)(x)) << GDET_GDET_ENABLE1_RFU_SHIFT)) & GDET_GDET_ENABLE1_RFU_MASK)
 /*! @} */
 
-/*! @name GDET_DLY_CTRL - GDET delay control register */
+/*! @name GDET_DLY_CTRL - GDET_DLY_CTRL */
 /*! @{ */
 
 #define GDET_GDET_DLY_CTRL_VOL_SEL_MASK          (0x3U)
 #define GDET_GDET_DLY_CTRL_VOL_SEL_SHIFT         (0U)
+/*! VOL_SEL - (Voltage) Mode Selection.
+ *  0b00..Drive mode 0.
+ *  0b01..Drive mode 1.
+ *  0b10..Drive mode 2.
+ *  0b11..Drive mode 3.
+ */
 #define GDET_GDET_DLY_CTRL_VOL_SEL(x)            (((uint32_t)(((uint32_t)(x)) << GDET_GDET_DLY_CTRL_VOL_SEL_SHIFT)) & GDET_GDET_DLY_CTRL_VOL_SEL_MASK)
 
 #define GDET_GDET_DLY_CTRL_SW_VOL_CTRL_MASK      (0x4U)
 #define GDET_GDET_DLY_CTRL_SW_VOL_CTRL_SHIFT     (2U)
+/*! SW_VOL_CTRL - Software voltage mode selection.
+ *  0b0..HW control through GDET volt_sel input pin.
+ *  0b1..SW SFR control through GDET_DLY_CTRL.VOL_SEL.
+ */
 #define GDET_GDET_DLY_CTRL_SW_VOL_CTRL(x)        (((uint32_t)(((uint32_t)(x)) << GDET_GDET_DLY_CTRL_SW_VOL_CTRL_SHIFT)) & GDET_GDET_DLY_CTRL_SW_VOL_CTRL_MASK)
 
 #define GDET_GDET_DLY_CTRL_RFU_MASK              (0xFFFFFFF8U)
@@ -206,6 +216,10 @@ typedef struct {
 
 #define GDET_GDET_CTRL_CLR_SFT_RST_MASK          (0x1U)
 #define GDET_GDET_CTRL_CLR_SFT_RST_SHIFT         (0U)
+/*! SFT_RST - Soft Reset
+ *  0b0..No action
+ *  0b1..Reset the GDET module detection logic
+ */
 #define GDET_GDET_CTRL_CLR_SFT_RST(x)            (((uint32_t)(((uint32_t)(x)) << GDET_GDET_CTRL_CLR_SFT_RST_SHIFT)) & GDET_GDET_CTRL_CLR_SFT_RST_MASK)
 /*! @} */
 

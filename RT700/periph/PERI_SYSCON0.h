@@ -41,7 +41,7 @@
 **                          MIMXRT798SGVKB_hifi4
 **
 **     Version:             rev. 6.0, 2025-12-29
-**     Build:               b260330
+**     Build:               b261008
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SYSCON0
@@ -390,22 +390,6 @@ typedef struct {
 
 /*! @name GDET_CTRL - GDET0 Control */
 /*! @{ */
-
-#define SYSCON0_GDET_CTRL_GDET_EVTCNT_CLR_MASK   (0x1U)
-#define SYSCON0_GDET_CTRL_GDET_EVTCNT_CLR_SHIFT  (0U)
-/*! GDET_EVTCNT_CLR - GDET Event Counter Clear
- *  0b0..Not clear
- *  0b1..Clears
- */
-#define SYSCON0_GDET_CTRL_GDET_EVTCNT_CLR(x)     (((uint32_t)(((uint32_t)(x)) << SYSCON0_GDET_CTRL_GDET_EVTCNT_CLR_SHIFT)) & SYSCON0_GDET_CTRL_GDET_EVTCNT_CLR_MASK)
-
-#define SYSCON0_GDET_CTRL_GDET_ERR_CLR_MASK      (0x2U)
-#define SYSCON0_GDET_CTRL_GDET_ERR_CLR_SHIFT     (1U)
-/*! GDET_ERR_CLR - GDET Error Clear
- *  0b0..Not clear
- *  0b1..Clears
- */
-#define SYSCON0_GDET_CTRL_GDET_ERR_CLR(x)        (((uint32_t)(((uint32_t)(x)) << SYSCON0_GDET_CTRL_GDET_ERR_CLR_SHIFT)) & SYSCON0_GDET_CTRL_GDET_ERR_CLR_MASK)
 
 #define SYSCON0_GDET_CTRL_GDET_ISO_SW_MASK       (0xCU)
 #define SYSCON0_GDET_CTRL_GDET_ISO_SW_SHIFT      (2U)

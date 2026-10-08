@@ -41,7 +41,7 @@
 **                          MIMXRT798SGVKB_hifi4
 **
 **     Version:             rev. 6.0, 2025-12-29
-**     Build:               b260330
+**     Build:               b261008
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SYSCON3
@@ -194,13 +194,15 @@ typedef struct {
   __IO uint32_t DEBUG_FEATURES;                    /**< Cortex Debug Features Control, offset: 0x814 */
   __IO uint32_t DEBUG_FEATURES_DP;                 /**< Cortex Debug Features Control, offset: 0x818 */
   __IO uint32_t DEBUG_AUTH_BEACON;                 /**< Debug Authentication Beacon, offset: 0x81C */
-       uint8_t RESERVED_9[832];
+       uint8_t RESERVED_9[16];
+  __IO uint32_t ROM_SCRATCH1_POR;                  /**< ROM Scratch 1 on POR, offset: 0x830 */
+       uint8_t RESERVED_10[812];
   __IO uint32_t GRAY_CODE_LSB;                     /**< Gray to Binary Converter - Gray Code [31:0], offset: 0xB60 */
   __IO uint32_t GRAY_CODE_MSB;                     /**< Gray to Binary Converter - Gray Code [63:32], offset: 0xB64 */
   __I  uint32_t BINARY_CODE_LSB;                   /**< Gray to Binary Converter - Binary Code [31:0], offset: 0xB68 */
   __I  uint32_t BINARY_CODE_MSB;                   /**< Gray to Binary Converter - Binary Code [63:32], offset: 0xB6C */
-       uint8_t RESERVED_10[1136];
-       uint32_t DATA_REG[SYSCON3_DATA_REGS_COUNT]; /**< Data Register 0..Data Register 7, array offset: 0xFE0, array step: 0x4 */
+       uint8_t RESERVED_11[1136];
+  __I  uint32_t DATA_REG[SYSCON3_DATA_REGS_COUNT]; /**< Data Register 0..Data Register 7, array offset: 0xFE0, array step: 0x4 */
 } SYSCON3_Type;
 
 /* ----------------------------------------------------------------------------
@@ -250,22 +252,6 @@ typedef struct {
 
 /*! @name GDET_CTRL - GDET3 Control */
 /*! @{ */
-
-#define SYSCON3_GDET_CTRL_GDET_EVTCNT_CLR_MASK   (0x1U)
-#define SYSCON3_GDET_CTRL_GDET_EVTCNT_CLR_SHIFT  (0U)
-/*! GDET_EVTCNT_CLR - GDET Event Counter Clear
- *  0b0..Not clear
- *  0b1..Clears
- */
-#define SYSCON3_GDET_CTRL_GDET_EVTCNT_CLR(x)     (((uint32_t)(((uint32_t)(x)) << SYSCON3_GDET_CTRL_GDET_EVTCNT_CLR_SHIFT)) & SYSCON3_GDET_CTRL_GDET_EVTCNT_CLR_MASK)
-
-#define SYSCON3_GDET_CTRL_GDET_ERR_CLR_MASK      (0x2U)
-#define SYSCON3_GDET_CTRL_GDET_ERR_CLR_SHIFT     (1U)
-/*! GDET_ERR_CLR - GDET Error Clear
- *  0b0..Not clear
- *  0b1..Clears
- */
-#define SYSCON3_GDET_CTRL_GDET_ERR_CLR(x)        (((uint32_t)(((uint32_t)(x)) << SYSCON3_GDET_CTRL_GDET_ERR_CLR_SHIFT)) & SYSCON3_GDET_CTRL_GDET_ERR_CLR_MASK)
 
 #define SYSCON3_GDET_CTRL_GDET_ISO_SW_MASK       (0xCU)
 #define SYSCON3_GDET_CTRL_GDET_ISO_SW_SHIFT      (2U)
@@ -988,6 +974,23 @@ typedef struct {
 #define SYSCON3_DEBUG_AUTH_BEACON_BEACON_SHIFT   (0U)
 /*! BEACON - Beacon */
 #define SYSCON3_DEBUG_AUTH_BEACON_BEACON(x)      (((uint32_t)(((uint32_t)(x)) << SYSCON3_DEBUG_AUTH_BEACON_BEACON_SHIFT)) & SYSCON3_DEBUG_AUTH_BEACON_BEACON_MASK)
+/*! @} */
+
+/*! @name ROM_SCRATCH1_POR - ROM Scratch 1 on POR */
+/*! @{ */
+
+#define SYSCON3_ROM_SCRATCH1_POR_DICE_CSR_ENABLE_MASK (0x1U)
+#define SYSCON3_ROM_SCRATCH1_POR_DICE_CSR_ENABLE_SHIFT (0U)
+/*! DICE_CSR_ENABLE - DICE CSR Enable
+ *  0b0..Disable
+ *  0b1..Enable
+ */
+#define SYSCON3_ROM_SCRATCH1_POR_DICE_CSR_ENABLE(x) (((uint32_t)(((uint32_t)(x)) << SYSCON3_ROM_SCRATCH1_POR_DICE_CSR_ENABLE_SHIFT)) & SYSCON3_ROM_SCRATCH1_POR_DICE_CSR_ENABLE_MASK)
+
+#define SYSCON3_ROM_SCRATCH1_POR_ROM_SCRATCH1_POR_MASK (0xFFFFFFFEU)
+#define SYSCON3_ROM_SCRATCH1_POR_ROM_SCRATCH1_POR_SHIFT (1U)
+/*! ROM_SCRATCH1_POR - ROM Scratch 1 on POR */
+#define SYSCON3_ROM_SCRATCH1_POR_ROM_SCRATCH1_POR(x) (((uint32_t)(((uint32_t)(x)) << SYSCON3_ROM_SCRATCH1_POR_ROM_SCRATCH1_POR_SHIFT)) & SYSCON3_ROM_SCRATCH1_POR_ROM_SCRATCH1_POR_MASK)
 /*! @} */
 
 /*! @name GRAY_CODE_LSB - Gray to Binary Converter - Gray Code [31:0] */

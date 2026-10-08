@@ -7,7 +7,7 @@
 **     Compiler:            Xtensa Compiler
 **     Reference manual:    iMXRT700RM Rev.5, 10/2025
 **     Version:             rev. 6.0, 2025-12-29
-**     Build:               b260429
+**     Build:               b261008
 **
 **     Abstract:
 **         Peripheral Access Layer for MIMXRT798S_hifi4
@@ -66,7 +66,7 @@
 #include "PERI_CMP.h"
 #include "PERI_CRC.h"
 #include "PERI_CTIMER.h"
-#include "PERI_DEBUG_MAILBOX.h"
+#include "PERI_DEBUGMAILBOX.h"
 #include "PERI_DMA.h"
 #include "PERI_ELS.h"
 #include "PERI_FLEXIO.h"

@@ -41,7 +41,7 @@
 **                          MIMXRT798SGVKB_hifi4
 **
 **     Version:             rev. 6.0, 2025-12-29
-**     Build:               b260330
+**     Build:               b261008
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for AHBSC4
@@ -249,8 +249,8 @@ typedef struct {
        uint8_t RESERVED_7[76];
   __IO uint32_t SEC_VIO_INFO_VALID;                /**< Security Violation Info Validity for Address, offset: 0xF00 */
        uint8_t RESERVED_8[204];
-  __IO uint32_t MASTER_SEC_LEVEL;                  /**< Master Secure Level, offset: 0xFD0 */
-  __IO uint32_t MASTER_SEC_ANTI_POL_REG;           /**< Master Secure Level, offset: 0xFD4 */
+  __IO uint32_t MASTER_SEC_LEVEL;                  /**< Initiator Secure Level, offset: 0xFD0 */
+  __IO uint32_t MASTER_SEC_ANTI_POL_REG;           /**< Initiator Secure Level, offset: 0xFD4 */
        uint8_t RESERVED_9[32];
   __IO uint32_t MISC_CTRL_DP_REG;                  /**< Secure Control Duplicate, offset: 0xFF8 */
   __IO uint32_t MISC_CTRL_REG;                     /**< Secure Control, offset: 0xFFC */
@@ -3344,12 +3344,12 @@ typedef struct {
 
 #define AHBSC4_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_SEC_LEVEL_MASK (0xF0U)
 #define AHBSC4_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_SEC_LEVEL_SHIFT (4U)
-/*! SEC_VIO_INFO_MASTER_SEC_LEVEL - Security Violation Info Master Security Level */
+/*! SEC_VIO_INFO_MASTER_SEC_LEVEL - Security Violation Info Initiator Security Level */
 #define AHBSC4_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_SEC_LEVEL(x) (((uint32_t)(((uint32_t)(x)) << AHBSC4_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_SEC_LEVEL_SHIFT)) & AHBSC4_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_SEC_LEVEL_MASK)
 
 #define AHBSC4_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_MASK (0x1F00U)
 #define AHBSC4_SEC_VIO_MISC_INFO_SEC_VIO_INFO_MASTER_SHIFT (8U)
-/*! SEC_VIO_INFO_MASTER - Security violation master number
+/*! SEC_VIO_INFO_MASTER - Security violation initiator number
  *  0b00000..CPU0 System
  *  0b00001..eDMA0
  *  0b00010..eDMA1
@@ -3497,190 +3497,190 @@ typedef struct {
 #define AHBSC4_SEC_VIO_INFO_VALID_VIO_INFO_VALID12(x) (((uint32_t)(((uint32_t)(x)) << AHBSC4_SEC_VIO_INFO_VALID_VIO_INFO_VALID12_SHIFT)) & AHBSC4_SEC_VIO_INFO_VALID_VIO_INFO_VALID12_MASK)
 /*! @} */
 
-/*! @name MASTER_SEC_LEVEL - Master Secure Level */
+/*! @name MASTER_SEC_LEVEL - Initiator Secure Level */
 /*! @{ */
 
 #define AHBSC4_MASTER_SEC_LEVEL_EZHV_MASK        (0x3U)
 #define AHBSC4_MASTER_SEC_LEVEL_EZHV_SHIFT       (0U)
 /*! EZHV - EZHV
- *  0b00..Non-secure and non-privileged Master
- *  0b01..Non-secure and privileged Master
- *  0b10..Secure and non-privileged Master
- *  0b11..Secure and privileged Master
+ *  0b00..Non-secure and non-privileged Initiator
+ *  0b01..Non-secure and privileged Initiator
+ *  0b10..Secure and non-privileged Initiator
+ *  0b11..Secure and privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_LEVEL_EZHV(x)          (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_LEVEL_EZHV_SHIFT)) & AHBSC4_MASTER_SEC_LEVEL_EZHV_MASK)
 
 #define AHBSC4_MASTER_SEC_LEVEL_SDHC0_MASK       (0xCU)
 #define AHBSC4_MASTER_SEC_LEVEL_SDHC0_SHIFT      (2U)
 /*! SDHC0 - SDHC0
- *  0b00..Non-secure and non-privileged Master
- *  0b01..Non-secure and privileged Master
- *  0b10..Secure and non-privileged Master
- *  0b11..Secure and privileged Master
+ *  0b00..Non-secure and non-privileged Initiator
+ *  0b01..Non-secure and privileged Initiator
+ *  0b10..Secure and non-privileged Initiator
+ *  0b11..Secure and privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_LEVEL_SDHC0(x)         (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_LEVEL_SDHC0_SHIFT)) & AHBSC4_MASTER_SEC_LEVEL_SDHC0_MASK)
 
 #define AHBSC4_MASTER_SEC_LEVEL_SDHC1_MASK       (0x30U)
 #define AHBSC4_MASTER_SEC_LEVEL_SDHC1_SHIFT      (4U)
 /*! SDHC1 - SDHC1
- *  0b00..Non-secure and non-privileged Master
- *  0b01..Non-secure and privileged Master
- *  0b10..Secure and non-privileged Master
- *  0b11..Secure and privileged Master
+ *  0b00..Non-secure and non-privileged Initiator
+ *  0b01..Non-secure and privileged Initiator
+ *  0b10..Secure and non-privileged Initiator
+ *  0b11..Secure and privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_LEVEL_SDHC1(x)         (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_LEVEL_SDHC1_SHIFT)) & AHBSC4_MASTER_SEC_LEVEL_SDHC1_MASK)
 
 #define AHBSC4_MASTER_SEC_LEVEL_USB0_MASK        (0xC0U)
 #define AHBSC4_MASTER_SEC_LEVEL_USB0_SHIFT       (6U)
 /*! USB0 - USB0
- *  0b00..Non-secure and non-privileged Master
- *  0b01..Non-secure and privileged Master
- *  0b10..Secure and non-privileged Master
- *  0b11..Secure and privileged Master
+ *  0b00..Non-secure and non-privileged Initiator
+ *  0b01..Non-secure and privileged Initiator
+ *  0b10..Secure and non-privileged Initiator
+ *  0b11..Secure and privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_LEVEL_USB0(x)          (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_LEVEL_USB0_SHIFT)) & AHBSC4_MASTER_SEC_LEVEL_USB0_MASK)
 
 #define AHBSC4_MASTER_SEC_LEVEL_USB1_MASK        (0x300U)
 #define AHBSC4_MASTER_SEC_LEVEL_USB1_SHIFT       (8U)
 /*! USB1 - USB1
- *  0b00..Non-secure and non-privileged Master
- *  0b01..Non-secure and privileged Master
- *  0b10..Secure and non-privileged Master
- *  0b11..Secure and privileged Master
+ *  0b00..Non-secure and non-privileged Initiator
+ *  0b01..Non-secure and privileged Initiator
+ *  0b10..Secure and non-privileged Initiator
+ *  0b11..Secure and privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_LEVEL_USB1(x)          (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_LEVEL_USB1_SHIFT)) & AHBSC4_MASTER_SEC_LEVEL_USB1_MASK)
 
 #define AHBSC4_MASTER_SEC_LEVEL_LCDIF_MASK       (0xC00U)
 #define AHBSC4_MASTER_SEC_LEVEL_LCDIF_SHIFT      (10U)
 /*! LCDIF - LCDIF
- *  0b00..Non-secure and non-privileged Master
- *  0b01..Non-secure and privileged Master
- *  0b10..Secure and non-privileged Master
- *  0b11..Secure and privileged Master
+ *  0b00..Non-secure and non-privileged Initiator
+ *  0b01..Non-secure and privileged Initiator
+ *  0b10..Secure and non-privileged Initiator
+ *  0b11..Secure and privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_LEVEL_LCDIF(x)         (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_LEVEL_LCDIF_SHIFT)) & AHBSC4_MASTER_SEC_LEVEL_LCDIF_MASK)
 
 #define AHBSC4_MASTER_SEC_LEVEL_GPU_MASK         (0x3000U)
 #define AHBSC4_MASTER_SEC_LEVEL_GPU_SHIFT        (12U)
 /*! GPU - GPU
- *  0b00..Non-secure and non-privileged Master
- *  0b01..Non-secure and privileged Master
- *  0b10..Secure and non-privileged Master
- *  0b11..Secure and privileged Master
+ *  0b00..Non-secure and non-privileged Initiator
+ *  0b01..Non-secure and privileged Initiator
+ *  0b10..Secure and non-privileged Initiator
+ *  0b11..Secure and privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_LEVEL_GPU(x)           (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_LEVEL_GPU_SHIFT)) & AHBSC4_MASTER_SEC_LEVEL_GPU_MASK)
 
 #define AHBSC4_MASTER_SEC_LEVEL_JPEG_MASK        (0xC000U)
 #define AHBSC4_MASTER_SEC_LEVEL_JPEG_SHIFT       (14U)
 /*! JPEG - JPEG
- *  0b00..Non-secure and non-privileged Master
- *  0b01..Non-secure and privileged Master
- *  0b10..Secure and non-privileged Master
- *  0b11..Secure and privileged Master
+ *  0b00..Non-secure and non-privileged Initiator
+ *  0b01..Non-secure and privileged Initiator
+ *  0b10..Secure and non-privileged Initiator
+ *  0b11..Secure and privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_LEVEL_JPEG(x)          (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_LEVEL_JPEG_SHIFT)) & AHBSC4_MASTER_SEC_LEVEL_JPEG_MASK)
 
 #define AHBSC4_MASTER_SEC_LEVEL_PNG_MASK         (0x30000U)
 #define AHBSC4_MASTER_SEC_LEVEL_PNG_SHIFT        (16U)
 /*! PNG - PNG
- *  0b00..Non-secure and non-privileged Master
- *  0b01..Non-secure and privileged Master
- *  0b10..Secure and non-privileged Master
- *  0b11..Secure and privileged Master
+ *  0b00..Non-secure and non-privileged Initiator
+ *  0b01..Non-secure and privileged Initiator
+ *  0b10..Secure and non-privileged Initiator
+ *  0b11..Secure and privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_LEVEL_PNG(x)           (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_LEVEL_PNG_SHIFT)) & AHBSC4_MASTER_SEC_LEVEL_PNG_MASK)
 /*! @} */
 
-/*! @name MASTER_SEC_ANTI_POL_REG - Master Secure Level */
+/*! @name MASTER_SEC_ANTI_POL_REG - Initiator Secure Level */
 /*! @{ */
 
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_EZHV_MASK (0x3U)
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_EZHV_SHIFT (0U)
 /*! EZHV - EZHV
- *  0b00..Secure and privileged Master
- *  0b01..Secure and non-privileged Master
- *  0b10..Non-secure and privileged Master
- *  0b11..Non-secure and non-privileged Master
+ *  0b00..Secure and privileged Initiator
+ *  0b01..Secure and non-privileged Initiator
+ *  0b10..Non-secure and privileged Initiator
+ *  0b11..Non-secure and non-privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_EZHV(x)   (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_ANTI_POL_REG_EZHV_SHIFT)) & AHBSC4_MASTER_SEC_ANTI_POL_REG_EZHV_MASK)
 
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_SDHC0_MASK (0xCU)
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_SDHC0_SHIFT (2U)
 /*! SDHC0 - SDHC0
- *  0b00..Secure and privileged Master
- *  0b01..Secure and non-privileged Master
- *  0b10..Non-secure and privileged Master
- *  0b11..Non-secure and non-privileged Master
+ *  0b00..Secure and privileged Initiator
+ *  0b01..Secure and non-privileged Initiator
+ *  0b10..Non-secure and privileged Initiator
+ *  0b11..Non-secure and non-privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_SDHC0(x)  (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_ANTI_POL_REG_SDHC0_SHIFT)) & AHBSC4_MASTER_SEC_ANTI_POL_REG_SDHC0_MASK)
 
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_SDHC1_MASK (0x30U)
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_SDHC1_SHIFT (4U)
 /*! SDHC1 - SDHC1
- *  0b00..Secure and privileged Master
- *  0b01..Secure and non-privileged Master
- *  0b10..Non-secure and privileged Master
- *  0b11..Non-secure and non-privileged Master
+ *  0b00..Secure and privileged Initiator
+ *  0b01..Secure and non-privileged Initiator
+ *  0b10..Non-secure and privileged Initiator
+ *  0b11..Non-secure and non-privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_SDHC1(x)  (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_ANTI_POL_REG_SDHC1_SHIFT)) & AHBSC4_MASTER_SEC_ANTI_POL_REG_SDHC1_MASK)
 
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_USB0_MASK (0xC0U)
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_USB0_SHIFT (6U)
 /*! USB0 - USB0
- *  0b00..Secure and privileged Master
- *  0b01..Secure and non-privileged Master
- *  0b10..Non-secure and privileged Master
- *  0b11..Non-secure and non-privileged Master
+ *  0b00..Secure and privileged Initiator
+ *  0b01..Secure and non-privileged Initiator
+ *  0b10..Non-secure and privileged Initiator
+ *  0b11..Non-secure and non-privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_USB0(x)   (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_ANTI_POL_REG_USB0_SHIFT)) & AHBSC4_MASTER_SEC_ANTI_POL_REG_USB0_MASK)
 
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_USB1_MASK (0x300U)
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_USB1_SHIFT (8U)
 /*! USB1 - USB1
- *  0b00..Secure and privileged Master
- *  0b01..Secure and non-privileged Master
- *  0b10..Non-secure and privileged Master
- *  0b11..Non-secure and non-privileged Master
+ *  0b00..Secure and privileged Initiator
+ *  0b01..Secure and non-privileged Initiator
+ *  0b10..Non-secure and privileged Initiator
+ *  0b11..Non-secure and non-privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_USB1(x)   (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_ANTI_POL_REG_USB1_SHIFT)) & AHBSC4_MASTER_SEC_ANTI_POL_REG_USB1_MASK)
 
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_LCDIF_MASK (0xC00U)
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_LCDIF_SHIFT (10U)
 /*! LCDIF - LCDIF
- *  0b00..Secure and privileged Master
- *  0b01..Secure and non-privileged Master
- *  0b10..Non-secure and privileged Master
- *  0b11..Non-secure and non-privileged Master
+ *  0b00..Secure and privileged Initiator
+ *  0b01..Secure and non-privileged Initiator
+ *  0b10..Non-secure and privileged Initiator
+ *  0b11..Non-secure and non-privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_LCDIF(x)  (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_ANTI_POL_REG_LCDIF_SHIFT)) & AHBSC4_MASTER_SEC_ANTI_POL_REG_LCDIF_MASK)
 
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_GPU_MASK  (0x3000U)
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_GPU_SHIFT (12U)
 /*! GPU - GPU
- *  0b00..Secure and privileged Master
- *  0b01..Secure and non-privileged Master
- *  0b10..Non-secure and privileged Master
- *  0b11..Non-secure and non-privileged Master
+ *  0b00..Secure and privileged Initiator
+ *  0b01..Secure and non-privileged Initiator
+ *  0b10..Non-secure and privileged Initiator
+ *  0b11..Non-secure and non-privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_GPU(x)    (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_ANTI_POL_REG_GPU_SHIFT)) & AHBSC4_MASTER_SEC_ANTI_POL_REG_GPU_MASK)
 
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_JPEG_MASK (0xC000U)
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_JPEG_SHIFT (14U)
 /*! JPEG - JPEG
- *  0b00..Secure and privileged Master
- *  0b01..Secure and non-privileged Master
- *  0b10..Non-secure and privileged Master
- *  0b11..Non-secure and non-privileged Master
+ *  0b00..Secure and privileged Initiator
+ *  0b01..Secure and non-privileged Initiator
+ *  0b10..Non-secure and privileged Initiator
+ *  0b11..Non-secure and non-privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_JPEG(x)   (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_ANTI_POL_REG_JPEG_SHIFT)) & AHBSC4_MASTER_SEC_ANTI_POL_REG_JPEG_MASK)
 
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_PNG_MASK  (0x30000U)
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_PNG_SHIFT (16U)
 /*! PNG - PNG
- *  0b00..Secure and privileged Master
- *  0b01..Secure and non-privileged Master
- *  0b10..Non-secure and privileged Master
- *  0b11..Non-secure and non-privileged Master
+ *  0b00..Secure and privileged Initiator
+ *  0b01..Secure and non-privileged Initiator
+ *  0b10..Non-secure and privileged Initiator
+ *  0b11..Non-secure and non-privileged Initiator
  */
 #define AHBSC4_MASTER_SEC_ANTI_POL_REG_PNG(x)    (((uint32_t)(((uint32_t)(x)) << AHBSC4_MASTER_SEC_ANTI_POL_REG_PNG_SHIFT)) & AHBSC4_MASTER_SEC_ANTI_POL_REG_PNG_MASK)
 /*! @} */
@@ -3742,10 +3742,10 @@ typedef struct {
 #define AHBSC4_MISC_CTRL_DP_REG_DISABLE_STRICT_MODE_MASK (0xC00U)
 #define AHBSC4_MISC_CTRL_DP_REG_DISABLE_STRICT_MODE_SHIFT (10U)
 /*! DISABLE_STRICT_MODE - Disable Strict Mode
- *  0b00..AHB master in strict mode
- *  0b01..AHB master in tier mode. Can read and write to memories at same or below level.
- *  0b10..AHB master in strict mode
- *  0b11..AHB master in strict mode
+ *  0b00..AHB initiator in strict mode
+ *  0b01..AHB initiator in tier mode. Can read and write to memories at same or below level.
+ *  0b10..AHB initiator in strict mode
+ *  0b11..AHB initiator in strict mode
  */
 #define AHBSC4_MISC_CTRL_DP_REG_DISABLE_STRICT_MODE(x) (((uint32_t)(((uint32_t)(x)) << AHBSC4_MISC_CTRL_DP_REG_DISABLE_STRICT_MODE_SHIFT)) & AHBSC4_MISC_CTRL_DP_REG_DISABLE_STRICT_MODE_MASK)
 
@@ -3817,10 +3817,10 @@ typedef struct {
 #define AHBSC4_MISC_CTRL_REG_DISABLE_STRICT_MODE_MASK (0xC00U)
 #define AHBSC4_MISC_CTRL_REG_DISABLE_STRICT_MODE_SHIFT (10U)
 /*! DISABLE_STRICT_MODE - Disable Strict Mode
- *  0b00..AHB master in strict mode
- *  0b01..AHB master in tier mode. Can read and write to memories at same or below level.
- *  0b10..AHB master in strict mode
- *  0b11..AHB master in strict mode
+ *  0b00..AHB initiator in strict mode
+ *  0b01..AHB initiator in tier mode. Can read and write to memories at same or below level.
+ *  0b10..AHB initiator in strict mode
+ *  0b11..AHB initiator in strict mode
  */
 #define AHBSC4_MISC_CTRL_REG_DISABLE_STRICT_MODE(x) (((uint32_t)(((uint32_t)(x)) << AHBSC4_MISC_CTRL_REG_DISABLE_STRICT_MODE_SHIFT)) & AHBSC4_MISC_CTRL_REG_DISABLE_STRICT_MODE_MASK)
 
