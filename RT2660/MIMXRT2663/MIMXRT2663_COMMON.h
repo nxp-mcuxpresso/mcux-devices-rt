@@ -19,7 +19,7 @@
 **
 **     Reference manual:    iMXRT2660RM Rev.1 DraftN, 08/2026
 **     Version:             rev. 1.0, 2024-11-05
-**     Build:               b260818
+**     Build:               b261011
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT2663
@@ -55,6 +55,14 @@
 #define MCU_MEM_MAP_VERSION 0x0100U
 /** Memory map minor version */
 #define MCU_MEM_MAP_VERSION_MINOR 0x0000U
+
+/* ----------------------------------------------------------------------------
+   --
+   ---------------------------------------------------------------------------- */
+
+/* soc has reset control */
+#define SOC_HAS_RESET_CONTROL 1
+
 
 /* ----------------------------------------------------------------------------
    --
