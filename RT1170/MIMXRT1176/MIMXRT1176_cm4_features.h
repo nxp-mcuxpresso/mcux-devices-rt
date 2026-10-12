@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 2.1, 2025-12-01
-**     Build:               b260717
+**     Build:               b260926
 **
 **     Abstract:
 **         Chip specific module features.
@@ -490,6 +490,8 @@
 #define FSL_FEATURE_FLEXIO_HAS_PIN_REGISTER (0)
 /* @brief Has DOZEN bit(CTRL[DOZEN]) */
 #define FSL_FEATURE_FLEXIO_HAS_DOZE_MODE_SUPPORT (1)
+/* @brief Has register TIMERSDEN */
+#define FSL_FEATURE_FLEXIO_HAS_TIMER_STATUS_DMA (1)
 
 /* FLEXRAM module features */
 
@@ -705,6 +707,8 @@
 #define FSL_FEATURE_LPADC_HAS_CTRL_CALHS (0)
 /* @brief Has Justified Left Enable (bitfield CFG2[JLEFT]). */
 #define FSL_FEATURE_LPADC_HAS_CFG2_JLEFT (0)
+/* @brief Has reference select (bitfield CFG[REFSEL]). */
+#define FSL_FEATURE_LPADC_HAS_CFG_REFSEL (1)
 /* @brief Trigger Control Count. */
 #define FSL_FEATURE_LPADC_TCTRL_COUNT (8)
 
@@ -1157,6 +1161,10 @@
 #define FSL_FEATURE_USDHC_HAS_NO_VOLTAGE_SELECT (0)
 /* @brief Has no VS18 bit in HOST_CTRL_CAP register */
 #define FSL_FEATURE_USDHC_HAS_NO_VS18 (0)
+
+/* WDOG module features */
+
+/* No feature definitions */
 
 /* XBARA module features */
 

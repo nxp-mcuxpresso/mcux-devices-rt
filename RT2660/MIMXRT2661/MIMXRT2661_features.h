@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 1.0, 2024-11-13
-**     Build:               b260908
+**     Build:               b261010
 **
 **     Abstract:
 **         Chip specific module features.
@@ -125,7 +125,7 @@
 
 /* EDMA module features */
 
-/* @brief Number of DMA channels (related to number of registers TCD, DCHPRI, bit fields ERQ[ERQn], EEI[EEIn], INT[INTn], ERR[ERRn], HRS[HRSn] and bit field widths ES[ERRCHN], CEEI[CEEI], SEEI[SEEI], CERQ[CERQ], SERQ[SERQ], CDNE[CDNE], SSRT[SSRT], CERR[CERR], CINT[CINT], TCDn_CITER_ELINKYES[LINKCH], TCDn_CSR[MAJORLINKCH], TCDn_BITER_ELINKYES[LINKCH]). (Valid only for eDMA modules.) Note: This feature value is not the same on all EDMA instances. */
+/* @brief Number of DMA channels (related to number of registers TCD, DCHPRI, bit fields ERQ[ERQn], EEI[EEIn], INT[INTn], ERR[ERRn], HRS[HRSn] and bit field widths ES[ERRCHN], CEEI[CEEI], SEEI[SEEI], CERQ[CERQ], SERQ[SERQ], CDNE[CDNE], SSRT[SSRT], CERR[CERR], CINT[CINT], TCDn_CITER_ELINKYES[LINKCH], TCDn_CSR[MAJORLINKCH], TCDn_BITER_ELINKYES[LINKCH]). (Valid only for eDMA modules.) */
 #define FSL_FEATURE_EDMA_MODULE_CHANNEL (32)
 /* @brief If 8 bytes transfer supported. */
 #define FSL_FEATURE_EDMA_SUPPORT_8_BYTES_TRANSFER (1)
@@ -143,7 +143,7 @@
 #define FSL_FEATURE_EDMA_HAS_ERROR_IRQ (1)
 /* @brief If 64 bytes transfer supported. */
 #define FSL_FEATURE_EDMA_SUPPORT_64_BYTES_TRANSFER (1)
-/* @brief Has register bit fields MP_CSR[GMRC]. Note: This feature value is not the same on all EDMA instances. */
+/* @brief Has register bit fields MP_CSR[GMRC]. */
 #define FSL_FEATURE_EDMA_HAS_GLOBAL_MASTER_ID_REPLICATION (1)
 /* @brief If channel clock controlled independently */
 #define FSL_FEATURE_EDMA_CHANNEL_HAS_OWN_CLOCK_GATE (1)
@@ -175,11 +175,11 @@
 #define FSL_FEATURE_EDMA_INSTANCE_HAS_CHANNEL_MUXn(x) (1)
 /* @brief Whether instance has prot register. */
 #define FSL_FEATURE_EDMA_INSTANCE_HAS_PROT_REGISTERn(x) (0)
-/* @brief Has no register bit fields CH_SBR[ATTR]. Note: This feature value is not the same on all EDMA instances. */
+/* @brief Has no register bit fields CH_SBR[ATTR]. */
 #define FSL_FEATURE_EDMA_HAS_NO_CH_SBR_ATTR (1)
 /* @brief Whether has MP channel mux */
 #define FSL_FEATURE_EDMA_HAS_MP_CHANNEL_MUX (1)
-/* @brief Has register bit field CH_CSR[SWAP]. Note: This feature value is not the same on all EDMA instances. */
+/* @brief Has register bit field CH_CSR[SWAP]. */
 #define FSL_FEATURE_EDMA_HAS_CHANNEL_SWAP_SIZE (1)
 /* @brief Whether instance has MP channel mux. */
 #define FSL_FEATURE_EDMA_INSTANCE_HAS_MP_CHANNEL_MUXn(x) \
@@ -193,7 +193,7 @@
     (((x) == MAIN__EDMA3) ? (0) : \
     (((x) == WAKE__EDMA3) ? (0) : \
     (((x) == AUDIO__EDMA3) ? (0) : (-1)))))
-/* @brief Has register bit field CH_SBR[INSTR]. Note: This feature value is not the same on all EDMA instances. */
+/* @brief Has register bit field CH_SBR[INSTR]. */
 #define FSL_FEATURE_EDMA_HAS_CHANNEL_ACCESS_TYPE (1)
 /* @brief Instance has register bit field CH_SBR[INSTR]. */
 #define FSL_FEATURE_EDMA_INSTANCE_HAS_CHANNEL_ACCESS_TYPEn(x) \
@@ -201,7 +201,7 @@
     (((x) == MAIN__EDMA3) ? (0) : \
     (((x) == WAKE__EDMA3) ? (0) : \
     (((x) == AUDIO__EDMA3) ? (0) : (-1)))))
-/* @brief Has register bit fields CH_MATTR[WCACHE], CH_MATTR[RCACHE]. Note: This feature value is not the same on all EDMA instances. */
+/* @brief Has register bit fields CH_MATTR[WCACHE], CH_MATTR[RCACHE]. */
 #define FSL_FEATURE_EDMA_HAS_CHANNEL_MEMORY_ATTRIBUTE (1)
 /* @brief Instance has register CH_MATTR. */
 #define FSL_FEATURE_EDMA_INSTANCE_HAS_CHANNEL_MEMORY_ATTRIBUTEn(x) \
@@ -209,7 +209,7 @@
     (((x) == MAIN__EDMA3) ? (0) : \
     (((x) == WAKE__EDMA3) ? (0) : \
     (((x) == AUDIO__EDMA3) ? (0) : (-1)))))
-/* @brief Has register bit field CH_CSR[SIGNEXT]. Note: This feature value is not the same on all EDMA instances. */
+/* @brief Has register bit field CH_CSR[SIGNEXT]. */
 #define FSL_FEATURE_EDMA_HAS_CHANNEL_SIGN_EXTENSION (1)
 /* @brief Instance Has register bit field CH_CSR[SIGNEXT]. */
 #define FSL_FEATURE_EDMA_INSTANCE_HAS_CHANNEL_SIGN_EXTENSIONn(x) \
@@ -223,7 +223,7 @@
     (((x) == MAIN__EDMA3) ? (1) : \
     (((x) == WAKE__EDMA3) ? (1) : \
     (((x) == AUDIO__EDMA3) ? (1) : (-1)))))
-/* @brief Has register bit fields TCD_CSR[TMC]. Note: This feature value is not the same on all EDMA instances. */
+/* @brief Has register bit fields TCD_CSR[TMC]. */
 #define FSL_FEATURE_EDMA_HAS_TRANSFER_MODE (1)
 /* @brief Has register bit field TCD_CSR[BWC]. */
 #define FSL_FEATURE_EDMA_HAS_BANDWIDTH (1)
@@ -241,7 +241,7 @@
     (((x) == AUDIO__EDMA3) ? (0) : (-1)))))
 /* @brief Has no register bit fields CH_SBR[SEC]. */
 #define FSL_FEATURE_EDMA_HAS_NO_CH_SBR_SEC (1)
-/* @brief Number of DMA channels with asynchronous request capability. Note: This feature value is not the same on all EDMA instances. */
+/* @brief Number of DMA channels with asynchronous request capability. */
 #define FSL_FEATURE_EDMA_ASYNCHRO_REQUEST_CHANNEL_COUNT (32)
 
 /* FREQME module features */
@@ -255,7 +255,7 @@
 
 /* @brief PDM FIFO offset */
 #define FSL_FEATURE_PDM_FIFO_OFFSET (4)
-/* @brief PDM Channel Number Note: This feature value is not the same on all PDM instances. */
+/* @brief PDM Channel Number */
 #define FSL_FEATURE_PDM_CHANNEL_NUM (6)
 /* @brief PDM FIFO WIDTH Size */
 #define FSL_FEATURE_PDM_FIFO_WIDTH (4)
@@ -344,7 +344,7 @@
 #define FSL_FEATURE_TRDC_DOMAIN_COUNT (4)
 /* @brief TRDC instance has MBC. */
 #define FSL_FEATURE_TRDC_HAS_MBC (1)
-/* @brief TRDC instance has MRC. Note: This feature value is not the same on all TRDC instances. */
+/* @brief TRDC instance has MRC. */
 #define FSL_FEATURE_TRDC_HAS_MRC (1)
 /* @brief TRDC instance has TRDC_CR. */
 #define FSL_FEATURE_TRDC_HAS_GENERAL_CONFIG (1)
@@ -570,6 +570,8 @@
 #define FSL_FEATURE_LPADC_HAS_CTRL_CALHS (0)
 /* @brief Has Justified Left Enable (bitfield CFG2[JLEFT]). */
 #define FSL_FEATURE_LPADC_HAS_CFG2_JLEFT (1)
+/* @brief Has reference select (bitfield CFG[REFSEL]). */
+#define FSL_FEATURE_LPADC_HAS_CFG_REFSEL (1)
 /* @brief Trigger Control Count. */
 #define FSL_FEATURE_LPADC_TCTRL_COUNT (8)
 /* @brief Buffer size of temperature sensor (CMDHa[LOOP] value to be set in process of calculate the temperature). */
@@ -736,6 +738,8 @@
 #define FSL_FEATURE_FLEXIO_HAS_PIN_REGISTER (1)
 /* @brief Has DOZEN bit(CTRL[DOZEN]) */
 #define FSL_FEATURE_FLEXIO_HAS_DOZE_MODE_SUPPORT (1)
+/* @brief Has register TIMERSDEN */
+#define FSL_FEATURE_FLEXIO_HAS_TIMER_STATUS_DMA (1)
 
 /* PWM module features */
 
@@ -1122,6 +1126,15 @@
 #define FSL_FEATURE_RTC_HAS_MINUTES_TIMER_FEATURE (0)
 /* @brief Has RTC BCD mode support */
 #define FSL_FEATURE_RTC_HAS_BCD_MODE (0)
+
+/* TDET module features */
+
+/* @brief Has active tamper (LR[ATL0] bitfield). */
+#define FSL_FEATURE_TDET_HAS_ACTIVE_TAMPER (1)
+/* @brief Number of tamper pins. */
+#define FSL_FEATURE_TDET_TAMPER_PIN_COUNT (2)
+/* @brief Number of on-chip tamper inputs. */
+#define FSL_FEATURE_TDET_TAMPER_INPUT_COUNT (1)
 
 /* ACMP module features */
 
