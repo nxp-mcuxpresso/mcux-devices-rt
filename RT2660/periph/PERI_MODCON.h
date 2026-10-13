@@ -352,7 +352,7 @@ typedef enum _wake_modcon_ip
     kModCon_WAKE_LPUART1            = 6|0x500U,    /**< modcon5 ip index */
     kModCon_WAKE_EWM                = 7|0x500U,    /**< modcon5 ip index */
     kModCon_WAKE_I3C                = 8|0x500U,    /**< modcon5 ip index */
-    kModCon_WAKE_WAKE_RGPIO         = 9|0x500U,    /**< modcon5 ip index */
+    kModCon_WAKE_WAKE_GPIO          = 9|0x500U,    /**< modcon5 ip index */
     kModCon_WAKE_SWT0               = 10|0x500U,   /**< modcon5 ip index */
     kModCon_WAKE_SWT1               = 11|0x500U,   /**< modcon5 ip index */
     kModCon_WAKE_QTPM               = 12|0x500U,   /**< modcon5 ip index */

@@ -148,7 +148,7 @@ typedef uint32_t reset_ip_name_t;
 /* TBC :Is eqdc equal to qdec?*/
 #define EQDC_RSTS                                                                                                                          \
     {                                                                                                                                      \
-        (uint32_t)kModCon_MAIN_EQDC0, (uint32_t)kModCon_MAIN_EQDC1, (uint32_t)kModCon_MAIN_EQDC2, (uint32_t)kModCon_MAIN_EQDC3             \
+        (uint32_t)kModCon_MAIN_QDEC0, (uint32_t)kModCon_MAIN_QDEC1, (uint32_t)kModCon_MAIN_QDEC2, (uint32_t)kModCon_MAIN_QDEC3             \
     }                                                                                                                                      \
 
 /*! @brief MODCON IP name array for GPIO. */
@@ -258,7 +258,7 @@ typedef uint32_t reset_ip_name_t;
 /*! @brief MODCON IP name array for JPEGDEC. */
 #define JPEGDEC_RSTS                                                                                                                       \
     {                                                                                                                                      \
-        (uint32_t)kModCon_MEDIA_JPEG                                                                                                       \
+        (uint32_t)kModCon_MEDIA_JPEG_DECODER                                                                                                       \
     }                                                                                                                                      \
 
 /*! @brief MODCON IP name array for GPU. */
@@ -322,14 +322,45 @@ typedef uint32_t reset_ip_name_t;
     {                                                                                                                                      \
         (uint32_t)kModCon_WAKE_CGU                                                                                                         \
     }                                                                                                                                      \
+
+/*!
+ * @brief Assert reset to peripheral.
+ *
+ * Asserts reset signal to specified peripheral module.
+ *
+ * @param peripheral Assert reset to this peripheral.
+ */
+void RESET_SetPeripheralReset(reset_ip_name_t ip);
+
+/*!
+ * @brief Clear reset to peripheral.
+ *
+ * Clears reset signal to specified peripheral module, allows it to operate.
+ *
+ * @param peripheral Clear reset to this peripheral.
+ */
+void RESET_ClearPeripheralReset(reset_ip_name_t ip);
+
 /*!
  * @brief Reset peripheral module.
  *
- * Reset peripheral module.
+ * Assert reset for the minimum required pulse width, then deassert.
  *
- * @param peripheral Peripheral to reset. The enum argument contains encoding of reset register
- *                   and reset bit position in the reset register.
+ * @param peripheral Peripheral to reset.
  */
 void RESET_PeripheralReset(reset_ip_name_t ip);
+
+/*!
+ * @brief Release peripheral reset (deassert reset).
+ *
+ * Inline alias for RESET_ClearPeripheralReset, provided for API
+ * compatibility with other NXP SOC reset drivers.
+ *
+ * @param peripheral Peripheral whose reset is to be released.
+ */
+static inline void RESET_ReleasePeripheralReset(reset_ip_name_t ip)
+{
+    RESET_ClearPeripheralReset(ip);
+}
 
 #endif

@@ -155,12 +155,37 @@ void MODCON_ClearIPRST(uint32_t ip)
 }
 
 /*!
+ * @brief Assert reset to peripheral.
+ *
+ * Asserts reset signal to specified peripheral module.
+ *
+ * @param peripheral Assert reset to this peripheral.
+ */
+void RESET_SetPeripheralReset(reset_ip_name_t ip)
+{
+    MODCON_SetIPRST((uint32_t)ip);
+}
+
+/*!
+ * @brief Clear reset to peripheral.
+ *
+ * Clears reset signal to specified peripheral module, allows it to operate.
+ *
+ * @param peripheral Clear reset to this peripheral.
+ */
+void RESET_ClearPeripheralReset(reset_ip_name_t ip)
+{
+    MODCON_ClearIPRST((uint32_t)ip);
+}
+
+/*!
  * @brief Reset peripheral module.
  *
- * Reset peripheral module.
+ * Assert reset for MODCON_RST_INTERVAL microseconds, then deassert.
+ * No hardware status feedback is available on this SOC, so a timed
+ * delay is used to guarantee the minimum reset pulse width.
  *
- * @param peripheral Peripheral to reset. The enum argument contains encoding of reset register
- *                   and reset bit position in the reset register.
+ * @param peripheral Peripheral to reset.
  */
 void RESET_PeripheralReset(reset_ip_name_t ip)
 {
@@ -171,7 +196,7 @@ void RESET_PeripheralReset(reset_ip_name_t ip)
     ipIdx     = getModConOffset(ip);
     base      = s_modconBases[modConIdx];
     base->IP[ipIdx].RSTCTRL = base->IP[ipIdx].RSTCTRL | MODCON_RSTCTRL_RST_MASK;
-    // SDK_DelayAtLeastUs(MODCON_RST_INTERVAL);
+    SDK_DelayAtLeastUs(MODCON_RST_INTERVAL, SystemCoreClock);
     base->IP[ipIdx].RSTCTRL = base->IP[ipIdx].RSTCTRL & (~MODCON_RSTCTRL_RST_MASK);
 }
 
