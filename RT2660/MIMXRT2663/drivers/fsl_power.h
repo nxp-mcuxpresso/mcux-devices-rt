@@ -501,13 +501,17 @@ typedef enum _power_wakeup_source
     kPOWER_WakeupIrq_MediaDcifCh6     = MEDIA_DCIF_CH6_IRQn,    /*!< MEDIA DCIF ch 6 (323) */
     kPOWER_WakeupIrq_MediaDcifCh7     = MEDIA_DCIF_CH7_IRQn,    /*!< MEDIA DCIF ch 7 (324) */
     kPOWER_WakeupIrq_MediaDcifCh8     = MEDIA_DCIF_CH8_IRQn,    /*!< MEDIA DCIF ch 8 (325) */
+#if defined(MIMXRT2662_SERIES) || defined(MIMXRT2663_SERIES)
     kPOWER_WakeupIrq_MediaCsi         = MEDIA_CSI_IRQn,         /*!< MEDIA CSI (326) */
+#endif
     kPOWER_WakeupIrq_MediaReformatter = MEDIA_REFORMATTER_IRQn, /*!< MEDIA Reformatter (327) */
     kPOWER_WakeupIrq_MediaIsi         = MEDIA_ISI_IRQn,         /*!< MEDIA ISI (328) */
     kPOWER_WakeupIrq_MediaTingpu      = MEDIA_TINGPU_IRQn,      /*!< MEDIA TinyGPU (329) */
     kPOWER_WakeupIrq_MediaJpegDec     = MEDIA_JPEGDEC_IRQn,     /*!< MEDIA JPEG decoder (330) */
+#if defined(MIMXRT2662_SERIES) || defined(MIMXRT2663_SERIES)
     kPOWER_WakeupIrq_MediaMipiCsi     = MEDIA_MIPI_CSI_IRQn,    /*!< MEDIA MIPI CSI (331) */
     kPOWER_WakeupIrq_MediaMipiDsi     = MEDIA_MIPI_DSI_IRQn,    /*!< MEDIA MIPI DSI (332) */
+#endif
     kPOWER_WakeupIrq_MediaFreqme      = MEDIA_FREQME_IRQn,      /*!< MEDIA FREQME (333) */
 
     /* ----------------------------------------------------------------
