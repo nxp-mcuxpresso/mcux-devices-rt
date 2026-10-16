@@ -33,10 +33,10 @@ STACK_SIZE = DEFINED(__stack_size__) ? __stack_size__ : 0x0800;
 /* Specify the memory areas */
 MEMORY
 {
-  m_interrupts          (RX)  : ORIGIN = 0x20020000, LENGTH = 0x00000400
-  m_text                (RX)  : ORIGIN = 0x20020400, LENGTH = 0x0003FC00
+  m_interrupts          (RX)  : ORIGIN = 0x00000000, LENGTH = 0x00000400
+  m_text                (RX)  : ORIGIN = 0x00000400, LENGTH = 0x0003FC00
   /* DTCM 0x20000000-0x20000BFF reserved for bootloader OTP emulation (NOINIT, kept across reset) */
-  m_data                (RW)  : ORIGIN = 0x20000C00, LENGTH = 0x0001F400
+  m_data                (RW)  : ORIGIN = 0x20000C00, LENGTH = 0x0003F400
 
   /* Shared DNN RAM 2560KB or 2.5MB in total. 5 sections of 512KB. */
   m_data_dnn_s0         (RW)  : ORIGIN = 0x21000000, LENGTH = 0x00080000
