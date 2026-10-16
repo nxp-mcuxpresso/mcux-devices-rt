@@ -30,11 +30,20 @@ ENTRY(Reset_Handler)
 HEAP_SIZE  = DEFINED(__heap_size__)  ? __heap_size__  : 0x0400;
 STACK_SIZE = DEFINED(__stack_size__) ? __stack_size__ : 0x0800;
 
+/* XIP execute-in-place image in external XSPI0 NOR flash.
+ * Assume 16 MB flash attached
+*/
+FLASH_AMBA_BASE   = 0x60000000;
+FLASH_AMBA_SIZE   = 0x01000000;
+FLASH_CONFIG_SIZE = 0x00004000;
+VECTOR_SIZE       = 0x00000400;
+
 /* Specify the memory areas */
 MEMORY
 {
-  m_interrupts          (RX)  : ORIGIN = 0x00000000, LENGTH = 0x00000400
-  m_text                (RX)  : ORIGIN = 0x00000400, LENGTH = 0x0003FC00
+  m_flash_config        (RX)  : ORIGIN = FLASH_AMBA_BASE, LENGTH = FLASH_CONFIG_SIZE
+  m_interrupts          (RX)  : ORIGIN = FLASH_AMBA_BASE + FLASH_CONFIG_SIZE, LENGTH = VECTOR_SIZE
+  m_text                (RX)  : ORIGIN = FLASH_AMBA_BASE + FLASH_CONFIG_SIZE + VECTOR_SIZE, LENGTH = FLASH_AMBA_SIZE - (FLASH_CONFIG_SIZE + VECTOR_SIZE)
   /* DTCM 0x20000000-0x20000BFF reserved for bootloader OTP emulation (NOINIT, kept across reset) */
   m_data                (RW)  : ORIGIN = 0x20000C00, LENGTH = 0x0003F400
 
