@@ -162,6 +162,10 @@ void EVENT_CTRL_ClearEventStatus(EVENT_CTRL_Type *base, event_ctrl_event_status_
 
 void EVENT_CTRL_GenerateOutputEvent(EVENT_CTRL_Type *base, event_ctrl_output_event_t mask)
 {
+    /* An event tells another core to read what this CPU wrote. Without a barrier the write to
+       EVENT_OUT_GEN can overtake earlier stores to shared memory still in the store buffer. */
+    __DSB();
+
     /* The register splits the output events into an NSS half [7:0] and an ADSS half [15:8],
        which matches the bit positions of event_ctrl_output_event_t. */
     base->EVENT_OUT_GEN = (uint32_t)mask & (EVENT_CTRL_EVENT_OUT_GEN_NSS_EVENTS_MASK |

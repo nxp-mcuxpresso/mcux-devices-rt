@@ -305,6 +305,12 @@ void EVENT_CTRL_ClearEventStatus(EVENT_CTRL_Type *base, event_ctrl_event_status_
  *
  * Use the @ref _event_ctrl_output_event enum values to construct the mask parameter.
  *
+ * The function completes all earlier memory writes of the calling CPU (data synchronization
+ * barrier) before it generates the events, so data the CPU wrote to shared memory is visible
+ * to the receiving core when the event arrives. It does not cover data written by a DMA, which
+ * is ordered by the DMA completion, nor data held in a data cache, which the caller must clean
+ * for the shared range first.
+ *
  * @param base  EVENT_CTRL base
  * @param mask  Bitwise OR of @ref _event_ctrl_output_event to generate.
  */
