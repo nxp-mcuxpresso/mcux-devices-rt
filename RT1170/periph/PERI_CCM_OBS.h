@@ -28,14 +28,20 @@
 **                          MIMXRT1175DVMAA_cm7
 **                          MIMXRT1175DVMAB_cm4
 **                          MIMXRT1175DVMAB_cm7
+**                          MIMXRT1176AHM8B_cm4
+**                          MIMXRT1176AHM8B_cm7
 **                          MIMXRT1176AVM8A_cm4
 **                          MIMXRT1176AVM8A_cm7
 **                          MIMXRT1176AVM8B_cm4
 **                          MIMXRT1176AVM8B_cm7
+**                          MIMXRT1176CHM8B_cm4
+**                          MIMXRT1176CHM8B_cm7
 **                          MIMXRT1176CVM8A_cm4
 **                          MIMXRT1176CVM8A_cm7
 **                          MIMXRT1176CVM8B_cm4
 **                          MIMXRT1176CVM8B_cm7
+**                          MIMXRT1176DHMAB_cm4
+**                          MIMXRT1176DHMAB_cm7
 **                          MIMXRT1176DVMAA_cm4
 **                          MIMXRT1176DVMAA_cm7
 **                          MIMXRT1176DVMAB_cm4
@@ -54,7 +60,7 @@
 **                          MIMXRT117HDVMAB_cm7
 **
 **     Version:             rev. 4.0, 2026-01-06
-**     Build:               b260106
+**     Build:               b261019
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CCM_OBS
@@ -106,9 +112,9 @@
 #include "MIMXRT1175_cm4_COMMON.h"
 #elif (defined(CPU_MIMXRT1175AVM8A_cm7) || defined(CPU_MIMXRT1175AVM8B_cm7) || defined(CPU_MIMXRT1175CVM8A_cm7) || defined(CPU_MIMXRT1175CVM8B_cm7) || defined(CPU_MIMXRT1175DVMAA_cm7) || defined(CPU_MIMXRT1175DVMAB_cm7))
 #include "MIMXRT1175_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1176AVM8A_cm4) || defined(CPU_MIMXRT1176AVM8B_cm4) || defined(CPU_MIMXRT1176CVM8A_cm4) || defined(CPU_MIMXRT1176CVM8B_cm4) || defined(CPU_MIMXRT1176DVMAA_cm4) || defined(CPU_MIMXRT1176DVMAB_cm4))
+#elif (defined(CPU_MIMXRT1176AHM8B_cm4) || defined(CPU_MIMXRT1176AVM8A_cm4) || defined(CPU_MIMXRT1176AVM8B_cm4) || defined(CPU_MIMXRT1176CHM8B_cm4) || defined(CPU_MIMXRT1176CVM8A_cm4) || defined(CPU_MIMXRT1176CVM8B_cm4) || defined(CPU_MIMXRT1176DHMAB_cm4) || defined(CPU_MIMXRT1176DVMAA_cm4) || defined(CPU_MIMXRT1176DVMAB_cm4))
 #include "MIMXRT1176_cm4_COMMON.h"
-#elif (defined(CPU_MIMXRT1176AVM8A_cm7) || defined(CPU_MIMXRT1176AVM8B_cm7) || defined(CPU_MIMXRT1176CVM8A_cm7) || defined(CPU_MIMXRT1176CVM8B_cm7) || defined(CPU_MIMXRT1176DVMAA_cm7) || defined(CPU_MIMXRT1176DVMAB_cm7))
+#elif (defined(CPU_MIMXRT1176AHM8B_cm7) || defined(CPU_MIMXRT1176AVM8A_cm7) || defined(CPU_MIMXRT1176AVM8B_cm7) || defined(CPU_MIMXRT1176CHM8B_cm7) || defined(CPU_MIMXRT1176CVM8A_cm7) || defined(CPU_MIMXRT1176CVM8B_cm7) || defined(CPU_MIMXRT1176DHMAB_cm7) || defined(CPU_MIMXRT1176DVMAA_cm7) || defined(CPU_MIMXRT1176DVMAB_cm7))
 #include "MIMXRT1176_cm7_COMMON.h"
 #elif (defined(CPU_MIMXRT117HAVM8A_cm4) || defined(CPU_MIMXRT117HAVM8B_cm4) || defined(CPU_MIMXRT117HCVM8A_cm4) || defined(CPU_MIMXRT117HCVM8B_cm4) || defined(CPU_MIMXRT117HDVMAA_cm4) || defined(CPU_MIMXRT117HDVMAB_cm4))
 #include "MIMXRT117H_cm4_COMMON.h"

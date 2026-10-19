@@ -1,9 +1,12 @@
 /*
 ** ###################################################################
-**     Processors:          MIMXRT1176AVM8A_cm7
+**     Processors:          MIMXRT1176AHM8B_cm7
+**                          MIMXRT1176AVM8A_cm7
 **                          MIMXRT1176AVM8B_cm7
+**                          MIMXRT1176CHM8B_cm7
 **                          MIMXRT1176CVM8A_cm7
 **                          MIMXRT1176CVM8B_cm7
+**                          MIMXRT1176DHMAB_cm7
 **                          MIMXRT1176DVMAA_cm7
 **                          MIMXRT1176DVMAB_cm7
 **
@@ -15,7 +18,7 @@
 **
 **     Reference manual:    IMXRT1170RM, Rev 5, 12/2025
 **     Version:             rev. 4.0, 2026-01-06
-**     Build:               b260106
+**     Build:               b261019
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1176_cm7

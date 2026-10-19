@@ -1,9 +1,12 @@
 /*
 ** ###################################################################
-**     Processors:          MIMXRT1176AVM8A_cm4
+**     Processors:          MIMXRT1176AHM8B_cm4
+**                          MIMXRT1176AVM8A_cm4
 **                          MIMXRT1176AVM8B_cm4
+**                          MIMXRT1176CHM8B_cm4
 **                          MIMXRT1176CVM8A_cm4
 **                          MIMXRT1176CVM8B_cm4
+**                          MIMXRT1176DHMAB_cm4
 **                          MIMXRT1176DVMAA_cm4
 **                          MIMXRT1176DVMAB_cm4
 **
@@ -14,8 +17,8 @@
 **                          MCUXpresso Compiler
 **
 **     Reference manual:    IMXRT1170RM, Rev 5, 12/2025
-**     Version:             rev. 4.1, 2026-05-18
-**     Build:               b260518
+**     Version:             rev. 4.0, 2026-01-06
+**     Build:               b261019
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -41,10 +44,6 @@
 **         Consolidate asrc/xbar and enet macros into common header.
 **     - rev. 4.0 (2026-01-06)
 **         Update header files to align with IMXRT1170RM Rev.5.
-**     - rev. 4.1 (2026-05-18)
-**         Fixed CERT-C INT31-C MSG violations on the ~(uint16_t)WDOG_*_MASK operator-precedence
-**         pattern in the watchdog-disable sequence (SystemInit) by reordering NOT before the
-**         narrowing cast and masking with 0xFFFFU.
 **
 ** ###################################################################
 */
@@ -52,7 +51,7 @@
 /*!
  * @file MIMXRT1176_cm4
  * @version 1.0
- * @date 2026-01-06
+ * @date 2026-10-19
  * @brief Device specific configuration file for MIMXRT1176_cm4 (implementation
  *        file)
  *
@@ -74,6 +73,12 @@ uint32_t SystemCoreClock = DEFAULT_SYSTEM_CLOCK;
 
 /* ----------------------------------------------------------------------------
    -- SystemInit()
+
+ * @brief Early SoC initialization, called before the C runtime startup.
+ *
+ * WARNING: Runs before .data/.bss are initialized. Any code added here
+ * must follow the same constraints as SystemInitHook() — see the full
+ * rules on that function below.
    ---------------------------------------------------------------------------- */
 
 void SystemInit (void) {
@@ -183,6 +188,19 @@ void SystemCoreClockUpdate (void) {
 
 /* ----------------------------------------------------------------------------
    -- SystemInitHook()
+
+ * @brief Weak hook called from SystemInit(), very early in boot.
+ *
+ * WARNING: Runs BEFORE the C runtime startup. At this point .data has not
+ * been copied from flash to RAM and .bss has not been zeroed, so:
+ *   - Do NOT read/write any global or static variable (.data/.bss are
+ *     indeterminate).
+ *   - Do NOT call libc / printf / malloc or anything that relies on
+ *     initialized global state.
+ *   - Only touch CPU registers, peripheral registers, and stack locals.
+ *
+ * Typical use: SoC errata workarounds or clock/memory-controller setup
+ * that must happen before RAM is usable.
    ---------------------------------------------------------------------------- */
 
 __attribute__ ((weak)) void SystemInitHook (void) {

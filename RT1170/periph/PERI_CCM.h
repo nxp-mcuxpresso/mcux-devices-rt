@@ -28,14 +28,20 @@
 **                          MIMXRT1175DVMAA_cm7
 **                          MIMXRT1175DVMAB_cm4
 **                          MIMXRT1175DVMAB_cm7
+**                          MIMXRT1176AHM8B_cm4
+**                          MIMXRT1176AHM8B_cm7
 **                          MIMXRT1176AVM8A_cm4
 **                          MIMXRT1176AVM8A_cm7
 **                          MIMXRT1176AVM8B_cm4
 **                          MIMXRT1176AVM8B_cm7
+**                          MIMXRT1176CHM8B_cm4
+**                          MIMXRT1176CHM8B_cm7
 **                          MIMXRT1176CVM8A_cm4
 **                          MIMXRT1176CVM8A_cm7
 **                          MIMXRT1176CVM8B_cm4
 **                          MIMXRT1176CVM8B_cm7
+**                          MIMXRT1176DHMAB_cm4
+**                          MIMXRT1176DHMAB_cm7
 **                          MIMXRT1176DVMAA_cm4
 **                          MIMXRT1176DVMAA_cm7
 **                          MIMXRT1176DVMAB_cm4
@@ -54,7 +60,7 @@
 **                          MIMXRT117HDVMAB_cm7
 **
 **     Version:             rev. 4.0, 2026-01-06
-**     Build:               b260106
+**     Build:               b261019
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for CCM
@@ -106,9 +112,9 @@
 #include "MIMXRT1175_cm4_COMMON.h"
 #elif (defined(CPU_MIMXRT1175AVM8A_cm7) || defined(CPU_MIMXRT1175AVM8B_cm7) || defined(CPU_MIMXRT1175CVM8A_cm7) || defined(CPU_MIMXRT1175CVM8B_cm7) || defined(CPU_MIMXRT1175DVMAA_cm7) || defined(CPU_MIMXRT1175DVMAB_cm7))
 #include "MIMXRT1175_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1176AVM8A_cm4) || defined(CPU_MIMXRT1176AVM8B_cm4) || defined(CPU_MIMXRT1176CVM8A_cm4) || defined(CPU_MIMXRT1176CVM8B_cm4) || defined(CPU_MIMXRT1176DVMAA_cm4) || defined(CPU_MIMXRT1176DVMAB_cm4))
+#elif (defined(CPU_MIMXRT1176AHM8B_cm4) || defined(CPU_MIMXRT1176AVM8A_cm4) || defined(CPU_MIMXRT1176AVM8B_cm4) || defined(CPU_MIMXRT1176CHM8B_cm4) || defined(CPU_MIMXRT1176CVM8A_cm4) || defined(CPU_MIMXRT1176CVM8B_cm4) || defined(CPU_MIMXRT1176DHMAB_cm4) || defined(CPU_MIMXRT1176DVMAA_cm4) || defined(CPU_MIMXRT1176DVMAB_cm4))
 #include "MIMXRT1176_cm4_COMMON.h"
-#elif (defined(CPU_MIMXRT1176AVM8A_cm7) || defined(CPU_MIMXRT1176AVM8B_cm7) || defined(CPU_MIMXRT1176CVM8A_cm7) || defined(CPU_MIMXRT1176CVM8B_cm7) || defined(CPU_MIMXRT1176DVMAA_cm7) || defined(CPU_MIMXRT1176DVMAB_cm7))
+#elif (defined(CPU_MIMXRT1176AHM8B_cm7) || defined(CPU_MIMXRT1176AVM8A_cm7) || defined(CPU_MIMXRT1176AVM8B_cm7) || defined(CPU_MIMXRT1176CHM8B_cm7) || defined(CPU_MIMXRT1176CVM8A_cm7) || defined(CPU_MIMXRT1176CVM8B_cm7) || defined(CPU_MIMXRT1176DHMAB_cm7) || defined(CPU_MIMXRT1176DVMAA_cm7) || defined(CPU_MIMXRT1176DVMAB_cm7))
 #include "MIMXRT1176_cm7_COMMON.h"
 #elif (defined(CPU_MIMXRT117HAVM8A_cm4) || defined(CPU_MIMXRT117HAVM8B_cm4) || defined(CPU_MIMXRT117HCVM8A_cm4) || defined(CPU_MIMXRT117HCVM8B_cm4) || defined(CPU_MIMXRT117HDVMAA_cm4) || defined(CPU_MIMXRT117HDVMAB_cm4))
 #include "MIMXRT117H_cm4_COMMON.h"
@@ -274,7 +280,7 @@ typedef struct {
        uint8_t RESERVED_3[768];
   struct {                                         /* offset: 0x5000, array step: 0x20 */
     __IO uint32_t DIRECT;                            /**< Clock source direct control, array offset: 0x5000, array step: 0x20 */
-    __IO uint32_t DOMAINr;                           /**< Clock source domain control, array offset: 0x5004, array step: 0x20, 'r' suffix has been added to avoid clash with DOMAIN symbol in math.h */
+    __IO uint32_t DOMAINr;                           /**< Clock source domain control, array offset: 0x5004, array step: 0x20, suffix 'r' added to avoid clash with DOMAIN symbol in math.h */
     __IO uint32_t SETPOINT;                          /**< Clock source Setpoint setting, array offset: 0x5008, array step: 0x20 */
          uint8_t RESERVED_0[4];
     __I  uint32_t STATUS0;                           /**< Clock source working status, array offset: 0x5010, array step: 0x20 */
@@ -285,7 +291,7 @@ typedef struct {
        uint8_t RESERVED_4[3168];
   struct {                                         /* offset: 0x6000, array step: 0x20 */
     __IO uint32_t DIRECT;                            /**< LPCG direct control, array offset: 0x6000, array step: 0x20 */
-    __IO uint32_t DOMAINr;                           /**< LPCG domain control, array offset: 0x6004, array step: 0x20, 'r' suffix has been added to avoid clash with DOMAIN symbol in math.h */
+    __IO uint32_t DOMAINr;                           /**< LPCG domain control, array offset: 0x6004, array step: 0x20, suffix 'r' added to avoid clash with DOMAIN symbol in math.h */
     __IO uint32_t SETPOINT;                          /**< LPCG Setpoint setting, array offset: 0x6008, array step: 0x20, valid indices: [2-12, 14-19, 24-40, 43-48] */
          uint8_t RESERVED_0[4];
     __I  uint32_t STATUS0;                           /**< LPCG working status, array offset: 0x6010, array step: 0x20 */

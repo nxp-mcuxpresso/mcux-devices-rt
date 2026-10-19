@@ -28,14 +28,20 @@
 **                          MIMXRT1175DVMAA_cm7
 **                          MIMXRT1175DVMAB_cm4
 **                          MIMXRT1175DVMAB_cm7
+**                          MIMXRT1176AHM8B_cm4
+**                          MIMXRT1176AHM8B_cm7
 **                          MIMXRT1176AVM8A_cm4
 **                          MIMXRT1176AVM8A_cm7
 **                          MIMXRT1176AVM8B_cm4
 **                          MIMXRT1176AVM8B_cm7
+**                          MIMXRT1176CHM8B_cm4
+**                          MIMXRT1176CHM8B_cm7
 **                          MIMXRT1176CVM8A_cm4
 **                          MIMXRT1176CVM8A_cm7
 **                          MIMXRT1176CVM8B_cm4
 **                          MIMXRT1176CVM8B_cm7
+**                          MIMXRT1176DHMAB_cm4
+**                          MIMXRT1176DHMAB_cm7
 **                          MIMXRT1176DVMAA_cm4
 **                          MIMXRT1176DVMAA_cm7
 **                          MIMXRT1176DVMAB_cm4
@@ -54,7 +60,7 @@
 **                          MIMXRT117HDVMAB_cm7
 **
 **     Version:             rev. 4.0, 2026-01-06
-**     Build:               b260106
+**     Build:               b261019
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for SEMC
@@ -106,9 +112,9 @@
 #include "MIMXRT1175_cm4_COMMON.h"
 #elif (defined(CPU_MIMXRT1175AVM8A_cm7) || defined(CPU_MIMXRT1175AVM8B_cm7) || defined(CPU_MIMXRT1175CVM8A_cm7) || defined(CPU_MIMXRT1175CVM8B_cm7) || defined(CPU_MIMXRT1175DVMAA_cm7) || defined(CPU_MIMXRT1175DVMAB_cm7))
 #include "MIMXRT1175_cm7_COMMON.h"
-#elif (defined(CPU_MIMXRT1176AVM8A_cm4) || defined(CPU_MIMXRT1176AVM8B_cm4) || defined(CPU_MIMXRT1176CVM8A_cm4) || defined(CPU_MIMXRT1176CVM8B_cm4) || defined(CPU_MIMXRT1176DVMAA_cm4) || defined(CPU_MIMXRT1176DVMAB_cm4))
+#elif (defined(CPU_MIMXRT1176AHM8B_cm4) || defined(CPU_MIMXRT1176AVM8A_cm4) || defined(CPU_MIMXRT1176AVM8B_cm4) || defined(CPU_MIMXRT1176CHM8B_cm4) || defined(CPU_MIMXRT1176CVM8A_cm4) || defined(CPU_MIMXRT1176CVM8B_cm4) || defined(CPU_MIMXRT1176DHMAB_cm4) || defined(CPU_MIMXRT1176DVMAA_cm4) || defined(CPU_MIMXRT1176DVMAB_cm4))
 #include "MIMXRT1176_cm4_COMMON.h"
-#elif (defined(CPU_MIMXRT1176AVM8A_cm7) || defined(CPU_MIMXRT1176AVM8B_cm7) || defined(CPU_MIMXRT1176CVM8A_cm7) || defined(CPU_MIMXRT1176CVM8B_cm7) || defined(CPU_MIMXRT1176DVMAA_cm7) || defined(CPU_MIMXRT1176DVMAB_cm7))
+#elif (defined(CPU_MIMXRT1176AHM8B_cm7) || defined(CPU_MIMXRT1176AVM8A_cm7) || defined(CPU_MIMXRT1176AVM8B_cm7) || defined(CPU_MIMXRT1176CHM8B_cm7) || defined(CPU_MIMXRT1176CVM8A_cm7) || defined(CPU_MIMXRT1176CVM8B_cm7) || defined(CPU_MIMXRT1176DHMAB_cm7) || defined(CPU_MIMXRT1176DVMAA_cm7) || defined(CPU_MIMXRT1176DVMAB_cm7))
 #include "MIMXRT1176_cm7_COMMON.h"
 #elif (defined(CPU_MIMXRT117HAVM8A_cm4) || defined(CPU_MIMXRT117HAVM8B_cm4) || defined(CPU_MIMXRT117HCVM8A_cm4) || defined(CPU_MIMXRT117HCVM8B_cm4) || defined(CPU_MIMXRT117HDVMAA_cm4) || defined(CPU_MIMXRT117HDVMAB_cm4))
 #include "MIMXRT117H_cm4_COMMON.h"
@@ -187,7 +193,7 @@ typedef struct {
   __IO uint32_t SRAMCR0;                           /**< SRAM Control Register 0, offset: 0x70 */
   __IO uint32_t SRAMCR1;                           /**< SRAM Control Register 1, offset: 0x74 */
   __IO uint32_t SRAMCR2;                           /**< SRAM Control Register 2, offset: 0x78 */
-       uint32_t SRAMCR3;                           /**< SRAM Control Register 3, offset: 0x7C */
+  __I  uint32_t SRAMCR3;                           /**< SRAM Control Register 3, offset: 0x7C */
   __IO uint32_t DBICR0;                            /**< DBI-B Control Register 0, offset: 0x80 */
   __IO uint32_t DBICR1;                            /**< DBI-B Control Register 1, offset: 0x84 */
   __IO uint32_t DBICR2;                            /**< DBI-B Control Register 2, offset: 0x88 */
@@ -201,21 +207,21 @@ typedef struct {
   __I  uint32_t IPRXDAT;                           /**< RX DATA Register, offset: 0xB0 */
        uint8_t RESERVED_2[12];
   __I  uint32_t STS0;                              /**< Status Register 0, offset: 0xC0 */
-       uint32_t STS1;                              /**< Status Register 1, offset: 0xC4 */
+  __I  uint32_t STS1;                              /**< Status Register 1, offset: 0xC4 */
   __I  uint32_t STS2;                              /**< Status Register 2, offset: 0xC8 */
-       uint32_t STS3;                              /**< Status Register 3, offset: 0xCC */
-       uint32_t STS4;                              /**< Status Register 4, offset: 0xD0 */
-       uint32_t STS5;                              /**< Status Register 5, offset: 0xD4 */
-       uint32_t STS6;                              /**< Status Register 6, offset: 0xD8 */
-       uint32_t STS7;                              /**< Status Register 7, offset: 0xDC */
-       uint32_t STS8;                              /**< Status Register 8, offset: 0xE0 */
-       uint32_t STS9;                              /**< Status Register 9, offset: 0xE4 */
-       uint32_t STS10;                             /**< Status Register 10, offset: 0xE8 */
-       uint32_t STS11;                             /**< Status Register 11, offset: 0xEC */
+  __I  uint32_t STS3;                              /**< Status Register 3, offset: 0xCC */
+  __I  uint32_t STS4;                              /**< Status Register 4, offset: 0xD0 */
+  __I  uint32_t STS5;                              /**< Status Register 5, offset: 0xD4 */
+  __I  uint32_t STS6;                              /**< Status Register 6, offset: 0xD8 */
+  __I  uint32_t STS7;                              /**< Status Register 7, offset: 0xDC */
+  __I  uint32_t STS8;                              /**< Status Register 8, offset: 0xE0 */
+  __I  uint32_t STS9;                              /**< Status Register 9, offset: 0xE4 */
+  __I  uint32_t STS10;                             /**< Status Register 10, offset: 0xE8 */
+  __I  uint32_t STS11;                             /**< Status Register 11, offset: 0xEC */
   __I  uint32_t STS12;                             /**< Status Register 12, offset: 0xF0 */
   __I  uint32_t STS13;                             /**< Status Register 13, offset: 0xF4 */
-       uint32_t STS14;                             /**< Status Register 14, offset: 0xF8 */
-       uint32_t STS15;                             /**< Status Register 15, offset: 0xFC */
+  __I  uint32_t STS14;                             /**< Status Register 14, offset: 0xF8 */
+  __I  uint32_t STS15;                             /**< Status Register 15, offset: 0xFC */
   __IO uint32_t BR9;                               /**< Base Register 9, offset: 0x100 */
   __IO uint32_t BR10;                              /**< Base Register 10, offset: 0x104 */
   __IO uint32_t BR11;                              /**< Base Register 11, offset: 0x108 */

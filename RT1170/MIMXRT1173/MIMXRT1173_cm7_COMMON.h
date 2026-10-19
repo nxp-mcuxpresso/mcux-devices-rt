@@ -11,7 +11,7 @@
 **
 **     Reference manual:    IMXRT1170RM, Rev 5, 12/2025
 **     Version:             rev. 4.0, 2026-01-06
-**     Build:               b260106
+**     Build:               b261019
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for MIMXRT1173_cm7
@@ -737,6 +737,7 @@ typedef enum _xrdc2_periph
     kXRDC2_Periph_DMA_CH_MUX        = XRDC2_MAKE_PERIPH(0, 29 ), /**< DMA_CH_MUX */
     kXRDC2_Periph_EDMA              = XRDC2_MAKE_PERIPH(0, 28 ), /**< EDMA */
     kXRDC2_Periph_IEE               = XRDC2_MAKE_PERIPH(0, 27 ), /**< IEE */
+    kXRDC2_Periph_IEE_APC           = XRDC2_MAKE_PERIPH(0, 26 ), /**< IEE_APC */
     kXRDC2_Periph_DAC               = XRDC2_MAKE_PERIPH(0, 25 ), /**< DAC */
     kXRDC2_Periph_TSC_DIG           = XRDC2_MAKE_PERIPH(0, 23 ), /**< TSC_DIG */
     kXRDC2_Periph_ADC2              = XRDC2_MAKE_PERIPH(0, 21 ), /**< ADC2 */
@@ -860,6 +861,7 @@ typedef enum _xrdc2_periph
     kXRDC2_Periph_SRC               = XRDC2_MAKE_PERIPH(3, 1  ), /**< SRC */
     kXRDC2_Periph_GPC               = XRDC2_MAKE_PERIPH(3, 0  ), /**< GPC */
     kXRDC2_Periph_GPU               = XRDC2_MAKE_PERIPH(4, 0  ), /**< GPU */
+    kXRDC2_Periph_CDOG              = XRDC2_MAKE_PERIPH(5, 0  ), /**< CDOG */
 } xrdc2_periph_t;
 
 /* @} */
@@ -2077,9 +2079,9 @@ typedef enum _xrdc2_periph
 /** Peripheral RDC_SEMAPHORE2 base pointer */
 #define RDC_SEMAPHORE2                           ((RDC_SEMAPHORE_Type *)RDC_SEMAPHORE2_BASE)
 /** Array initializer of RDC_SEMAPHORE peripheral base addresses */
-#define RDC_SEMAPHORE_BASE_ADDRS                 { RDC_SEMAPHORE1_BASE, RDC_SEMAPHORE2_BASE }
+#define RDC_SEMAPHORE_BASE_ADDRS                 { 0u, RDC_SEMAPHORE1_BASE, RDC_SEMAPHORE2_BASE }
 /** Array initializer of RDC_SEMAPHORE peripheral base pointers */
-#define RDC_SEMAPHORE_BASE_PTRS                  { RDC_SEMAPHORE1, RDC_SEMAPHORE2 }
+#define RDC_SEMAPHORE_BASE_PTRS                  { (RDC_SEMAPHORE_Type *)0u, RDC_SEMAPHORE1, RDC_SEMAPHORE2 }
 
 /* RTWDOG - Peripheral instance base addresses */
 /** Peripheral RTWDOG3 base address */
