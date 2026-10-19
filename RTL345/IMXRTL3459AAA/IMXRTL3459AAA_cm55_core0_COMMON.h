@@ -10,7 +10,7 @@
 **
 **     Reference manual:    IMXRTL345_EAR
 **     Version:             rev. 1.0, 2026-06-19
-**     Build:               b261007
+**     Build:               b261015
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for IMXRTL3459AAA_cm55_core0
@@ -39,7 +39,7 @@
  */
 
 #if !defined(IMXRTL3459AAA_CM55_CORE0_COMMON_H_)
-#define IMXRTL3459AAA_CM55_CORE0_COMMON_H_      /**< Symbol preventing repeated inclusion */
+#define IMXRTL3459AAA_CM55_CORE0_COMMON_H_       /**< Symbol preventing repeated inclusion */
 
 /** Memory map major version (memory maps with equal major version number are
  * compatible) */
@@ -3127,22 +3127,11 @@ typedef enum IRQn {
 /** Interrupt vectors for the GPIO peripheral type */
 #define GPIO_IRQS  {GPIO0_IRQn, GPIO1_IRQn}
 /** Peripherals name compatibility */
-#define CTIMER0         CTRLSS__CTIMER_0
-#define CTIMER1         CTRLSS__CTIMER_1
-#define CTIMER2         CTRLSS__CTIMER_2
-#define CTIMER3         CTRLSS__CTIMER_3
-#define CTIMER4         CTRLSS__CTIMER_4
 #define DMA0            CTRLSS__DMA_0
 #define DMA1            CTRLSS__DMA_1
 #define PINT            CTRLSS__PINT
 #define SECPINT         CTRLSS__SECPINT
-#define SCT0            CTRLSS__SCT_0
-#define FLEXCOMM0       CTRLSS__FLEXCOMM_0
-#define FLEXCOMM1       CTRLSS__FLEXCOMM_1
-#define FLEXCOMM2       CTRLSS__FLEXCOMM_2
-#define FLEXCOMM3       CTRLSS__FLEXCOMM_3
-#define FLEXCOMM4       CTRLSS__FLEXCOMM_4
-#define FLEXCOMM5       CTRLSS__FLEXCOMM_5
+#define UTICK0          CTRLSS__UTICK_0
 
 /*!
  * @}

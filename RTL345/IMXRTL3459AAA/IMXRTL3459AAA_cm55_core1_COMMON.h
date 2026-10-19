@@ -10,7 +10,7 @@
 **
 **     Reference manual:    IMXRTL345_EAR
 **     Version:             rev. 1.0, 2026-06-19
-**     Build:               b260924
+**     Build:               b261015
 **
 **     Abstract:
 **         CMSIS Peripheral Access Layer for IMXRTL3459AAA_cm55_core1

@@ -10,7 +10,7 @@
 **
 **     Reference manual:    IMXRTL345_EAR
 **     Version:             rev. 1.0, 2026-06-19
-**     Build:               b261007
+**     Build:               b261015
 **
 **     Abstract:
 **         Provides a system configuration function and a global variable that
@@ -75,7 +75,7 @@ __attribute__ ((weak)) void SystemInit (void) {
      invalidate at startup to flush any stale dirty lines and avoid AXI
      coherency issues carried across a warm reset. */
   SCB_CleanInvalidateDCache();
-
+  
   SystemInitHook();
 }
 
