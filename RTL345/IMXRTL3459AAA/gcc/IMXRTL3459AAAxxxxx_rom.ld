@@ -29,6 +29,10 @@ ENTRY(Reset_Handler)
 HEAP_SIZE  = DEFINED(__heap_size__)  ? __heap_size__  : 0x0400;
 STACK_SIZE = DEFINED(__stack_size__) ? __stack_size__ : 0x0800;
 
+/* The applications place their data from here on (m_data of the cm55_core0 linker files):
+   the ROM keeps its .bss and heap below it, and its stack at the top of the DTCM */
+APP_DATA_START = 0x20000C00;
+
 /* Specify the memory areas */
 MEMORY
 {
@@ -191,14 +195,9 @@ SECTIONS
     __heap_limit = .; /* Add for _sbrk */
   } > m_data
 
-  .stack :
-  {
-    . = ALIGN(8);
-    . += STACK_SIZE;
-  } > m_data
-
-
-  /* Initializes stack on the end of block */
+  /* Initializes stack on the end of block. No .stack placeholder section after the heap:
+     it would reach into the application data, and a simulation image preloaded from the
+     ROM and an application ELF would carry that overlap */
   __StackTop   = ORIGIN(m_data) + LENGTH(m_data);
   __StackLimit = __StackTop - STACK_SIZE;
   PROVIDE(__stack = __StackTop);
@@ -206,4 +205,5 @@ SECTIONS
   .ARM.attributes 0 : { *(.ARM.attributes) }
 
   ASSERT(__StackLimit >= __HeapLimit, "region m_data overflowed with stack and heap")
+  ASSERT(__HeapLimit <= APP_DATA_START, "ROM data runs into the application data region")
 }
