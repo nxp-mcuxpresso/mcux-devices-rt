@@ -13,6 +13,10 @@
 #if defined(CLOCK_ENABLE_INFO_DUMP) && CLOCK_ENABLE_INFO_DUMP
 #include "fsl_debug_console.h"
 #endif
+
+/* SXOSC output frequency in Hz; updated by CLOCK_InitSxosc(). */
+uint32_t g_xtalFreq = 24000000U;
+
 /* Component ID definition, used by tools. */
 #ifndef FSL_COMPONENT_ID
 #define FSL_COMPONENT_ID "platform.drivers.clock"
@@ -981,6 +985,8 @@ void CLOCK_InitSxosc(const clock_cguana_sxosc_config_t *config)
         CGUANA_CGUA_SXOSC_CTRL_REG_SXOSC_DET_TRIM(config->detTrim)              |
         (config->clkDiv2En ? CGUANA_CGUA_SXOSC_CTRL_REG_SXOSC_CLK_DIV2_EN_MASK : 0U);
     CGUANA_FsmOn(CLOCK_CGUANA_FSM_SXOSC);
+    /* Update g_xtalFreq: apply divide-by-2 when clkDiv2En is set. */
+    g_xtalFreq = config->clkDiv2En ? (config->freqHz / 2U) : config->freqHz;
 }
 
 void CLOCK_DeinitSxosc(void)
@@ -991,10 +997,6 @@ void CLOCK_DeinitSxosc(void)
 void CLOCK_InitFro192M(const clock_cguana_fro192m_config_t *config)
 {
     assert(config != NULL);
-    uint32_t reg = SYSCON__CGUANA->CGUA_FRO192M_CTRL_REG;
-    reg &= ~CGUANA_CGUA_FRO192M_CTRL_REG_FRO192M_OTWB_MASK;
-    reg |= CGUANA_CGUA_FRO192M_CTRL_REG_FRO192M_OTWB(config->otwb);
-    SYSCON__CGUANA->CGUA_FRO192M_CTRL_REG = reg;
     CGUANA_FsmOn(CLOCK_CGUANA_FSM_FRO192M);
 }
 
@@ -1006,10 +1008,6 @@ void CLOCK_DeinitFro192M(void)
 void CLOCK_InitFro12M(const clock_cguana_fro12m_config_t *config)
 {
     assert(config != NULL);
-    uint32_t reg = SYSCON__CGUANA->CGUA_FRO12M_CTRL_REG;
-    reg &= ~CGUANA_CGUA_FRO12M_CTRL_REG_FRO12M_OTWB_MASK;
-    reg |= CGUANA_CGUA_FRO12M_CTRL_REG_FRO12M_OTWB(config->otwb);
-    SYSCON__CGUANA->CGUA_FRO12M_CTRL_REG = reg;
     CGUANA_FsmOn(CLOCK_CGUANA_FSM_FRO12M);
 }
 
@@ -1855,7 +1853,7 @@ uint32_t CLOCK_GetClockSrcFreq(clock_name_t name)
          * SXOSC, LP12M_WAKE, LP1M_WAKE are here (not in the table) to break
          * back-edges in the source-name graph -- see the table's NOTE comments. */
         case kCLOCK_SRC_SXOSC:
-            return 24000000U;
+            return g_xtalFreq;
         case kCLOCK_SRC_FRO_192M:
             return 192000000U;
         case kCLOCK_SRC_FRO_96M:

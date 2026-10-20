@@ -42,8 +42,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief CLOCK driver version 1.1.0. */
-#define FSL_CLOCK_DRIVER_VERSION (MAKE_VERSION(1, 1, 0))
+/*! @brief CLOCK driver version 1.2.0. */
+#define FSL_CLOCK_DRIVER_VERSION (MAKE_VERSION(1, 2, 0))
 /*! @} */
 
 /*! @name FREQME-based frequency measurement configuration (set via Kconfig, or override before including this header) */
@@ -1950,10 +1950,23 @@ typedef enum _clock_cguana_pll_start_mode
 typedef enum _clock_cguana_sxosc_mode
 {
     kCLOCK_CguanaSxoscModeCrystal       = 0U, /*!< Crystal (differential) mode */
-    kCLOCK_CguanaSxoscModeAcSlave       = 1U, /*!< AC-coupled slave mode */
+    kCLOCK_CguanaSxoscModeAcSlave       = 1U, /*!< Driven mode (external AC coupling input) */
     kCLOCK_CguanaSxoscModeDcBypass      = 2U, /*!< DC-bypass mode */
     kCLOCK_CguanaSxoscModeDcBypassNoDet = 3U, /*!< DC-bypass without level detector */
 } clock_cguana_sxosc_mode_t;
+/*! @brief SXOSC crystal oscillator transconductance (Gm) selection.
+ *
+ * Use these values to select the GM cell bias current appropriate for the
+ * connected crystal frequency, per Table 885 in the reference manual.
+ */
+typedef enum _clock_cguana_sxosc_gm
+{
+    kCLOCK_CguanaSxoscGm19M2 = 2U, /*!< Gm for 19.2 MHz crystal */
+    kCLOCK_CguanaSxoscGm24M  = 3U, /*!< Gm for 24 MHz crystal   */
+    kCLOCK_CguanaSxoscGm32M  = 4U, /*!< Gm for 32 MHz crystal   */
+    kCLOCK_CguanaSxoscGm40M  = 5U, /*!< Gm for 40 MHz crystal   */
+} clock_cguana_sxosc_gm_t;
+
 
 /*! @brief FRO 192 MHz oscillator trimming word band (OTWB) selection. */
 typedef enum _clock_cguana_fro192m_otwb
@@ -2002,11 +2015,12 @@ typedef struct _clock_cguana_sscg_config
 typedef struct _clock_cguana_sxosc_config
 {
     clock_cguana_sxosc_mode_t modeSel; /*!< Oscillator operating mode */
-    uint8_t                   gmSel;        /*!< Oscillator GM selection [2:0] */
+    clock_cguana_sxosc_gm_t   gmSel;        /*!< Oscillator GM (transconductance) selection, see clock_cguana_sxosc_gm_t */
     uint8_t                   xtal1CapTrim; /*!< XTAL1 pad capacitor trim [5:0] */
     uint8_t                   xtal2CapTrim; /*!< XTAL2 pad capacitor trim [5:0] */
     uint8_t                   detTrim;      /*!< Level detector trim [1:0] */
     bool                      clkDiv2En;    /*!< Enable divide-by-2 on output clock */
+    uint32_t                  freqHz;       /*!< External oscillator frequency in Hz; default 24000000U */
 } clock_cguana_sxosc_config_t;
 
 /*! @brief FRO 192 MHz configuration. */
@@ -2400,6 +2414,14 @@ bool CLOCK_GetClockSrcDiv2(clock_name_t src);
  *
  * @param config  Pointer to SXOSC configuration; must not be NULL.
  */
+/*!< @brief SXOSC output frequency in Hz.
+ *
+ * Reflects the crystal/oscillator frequency specified in clock_cguana_sxosc_config_t.freqHz
+ * divided by 2 when clkDiv2En is true. Updated by CLOCK_InitSxosc().
+ * Default value is 24000000U.
+ */
+extern uint32_t g_xtalFreq;
+
 void CLOCK_InitSxosc(const clock_cguana_sxosc_config_t *config);
 
 /*!
