@@ -39,7 +39,7 @@
   *   - Fast Read (0x0B), Dual/Quad Output Read (0x3B, 0x6B)
   *   - Dual/Quad I/O Read (0xBB, 0xEB)
   *   - Page Program variants (0x02, 0xA2, 0x32, 0x38)
-  * - Configurable dummy cycles (0, 4, 6, or 8 bits)
+  * - Dummy cycles per command applied by the hardware (see @ref qspi_cmd_t)
   * - Both 24-bit and 32-bit address modes (address bits are ignored in slave mode)
   * - MSB/LSB first data shifting
   *
@@ -106,7 +106,21 @@
  *
  * @details These commands correspond to standard QSPI commands.
  * The slave automatically detects the command type and configures the appropriate
- * data transfer mode and dummy cycles.
+ * data transfer mode. The dummy cycles of each command are fixed in the hardware and
+ * applied by it; software does not configure them. Clock cycles between the command
+ * and the data phase (address plus dummy cycles), as specified:
+ *
+ * | Command                 | ID  | Dummy cycles | 24-bit address | 32-bit address |
+ * |-------------------------|-----|--------------|----------------|----------------|
+ * | Single read             | 0Bh | 8            | 32             | 40             |
+ * | Dual read               | 3Bh | 8            | 32             | 40             |
+ * | Dual read short dummy   | BBh | 4            | 16             | 20             |
+ * | Quad read               | 6Bh | 8            | 32             | 40             |
+ * | Quad read short dummy   | EBh | 6            | 12             | 14             |
+ * | Single write            | 02h | 0            | 24             | 32             |
+ * | Dual write              | A2h | 0            | 24             | 32             |
+ * | Quad write              | 32h | 0            | 24             | 32             |
+ * | Quad write short dummy  | 38h | 0            | 6              | 8              |
  */
 typedef enum _qspi_cmd
 {
@@ -133,19 +147,6 @@ typedef enum _qspi_address_bits
     kQSPI_ADDRESS_24BIT = (0b0 << QSPI_FLR_QSPI_CMD_ADDR_MODE_DUMMY_CYL_QSPI_ADDR_MODE_SHIFT), /*!< 24-bit address mode */
     kQSPI_ADDRESS_32BIT = (0b1 << QSPI_FLR_QSPI_CMD_ADDR_MODE_DUMMY_CYL_QSPI_ADDR_MODE_SHIFT), /*!< 32-bit address mode */
 } qspi_address_bits_t;
-
-/**
- * @brief QSPI dummy cycle options.
- *
- * @details Dummy cycles are automatically configured based on the command type.
- */
-typedef enum _qspi_dummy_bits
-{
-    kQSPI_DUMMY_BITS_0 = (0b0 << QSPI_FLR_QSPI_CMD_ADDR_MODE_DUMMY_CYL_QSPI_DUMMY_CYL_SHIFT),  /*!< No dummy cycles */
-    kQSPI_DUMMY_BITS_8 = (0b1 << QSPI_FLR_QSPI_CMD_ADDR_MODE_DUMMY_CYL_QSPI_DUMMY_CYL_SHIFT),  /*!< 8 dummy cycles */
-    kQSPI_DUMMY_BITS_6 = (0b10 << QSPI_FLR_QSPI_CMD_ADDR_MODE_DUMMY_CYL_QSPI_DUMMY_CYL_SHIFT), /*!< 6 dummy cycles */
-    kQSPI_DUMMY_BITS_4 = (0b11 << QSPI_FLR_QSPI_CMD_ADDR_MODE_DUMMY_CYL_QSPI_DUMMY_CYL_SHIFT), /*!< 4 dummy cycles */
-} qspi_dummy_bits_t;
 
 /**
  * @brief QSPI data shift direction options.
@@ -560,7 +561,7 @@ status_t QSPI_SlaveTransferCreateHandle(QSPI_FLR_Type *base,
  *
  * Transfer flow:
  * 1. Validates transfer parameters (size, alignment, state)
- * 2. Configures command parameters (dummy cycles, address mode)
+ * 2. Configures the address mode (the hardware applies the dummy cycles itself)
  * 3. Determines transfer direction from expected command
  * 4. Configures FIFOs for TX or RX operation
  * 5. Enables appropriate FIFO level interrupts
@@ -672,18 +673,6 @@ void QSPI_SlaveTransferHandleIRQ(QSPI_FLR_Type *base, qspi_slave_handle_t *handl
  */
 
 /**
- * @brief Lookup table mapping QSPI commands to required dummy cycle counts.
- *
- * This table provides the hardware-specified dummy cycle requirements for each
- * supported QSPI command. The values are defined by the QSPI protocol specification
- * and cannot be changed.
- *
- * @note This table is indexed by @ref qspi_cmd_t enum values.
- * @note Values are in units of bits, not bytes.
- */
-extern const uint8_t s_qspiDummyBitsLookup[];
-
-/**
  * @brief Check if a QSPI command is a receive (write/program) command.
  *
  * @details Receive commands indicate that the slave will receive data from the master.
@@ -716,15 +705,11 @@ static inline bool QSPI_IsTxCommand(qspi_cmd_t cmd)
 }
 
 /**
- * @brief Configure QSPI command parameters including dummy cycles and address mode.
+ * @brief Configure the QSPI command parameters (address mode).
  *
- * @details This function configures the peripheral's command/address/dummy cycle register
- * based on the expected command and address width. The dummy cycle count is
- * automatically selected from the lookup table based on the command type.
- *
- * Configuration includes:
- * - Dummy cycle count (from s_qspiDummyBitsLookup table)
- * - Address mode (24-bit or 32-bit)
+ * @details This function configures the address width the slave expects from the master.
+ * The dummy cycles are not configured: the hardware applies the fixed dummy cycles of each
+ * command itself and ignores the dummy cycle field of the register (see @ref qspi_cmd_t).
  *
  * This configuration must be set before the master initiates the transfer to
  * ensure the slave correctly interprets the command phase.
@@ -737,7 +722,7 @@ static inline bool QSPI_IsTxCommand(qspi_cmd_t cmd)
  */
 static inline void QSPI_ConfigureCommandParameters(QSPI_FLR_Type *base, qspi_transfer_t *xfer)
 {
-    base->QSPI_CMD_ADDR_MODE_DUMMY_CYL = s_qspiDummyBitsLookup[xfer->expectedCmd] | xfer->expectedAddrBits;
+    base->QSPI_CMD_ADDR_MODE_DUMMY_CYL = (uint32_t)xfer->expectedAddrBits;
 }
 
 /**

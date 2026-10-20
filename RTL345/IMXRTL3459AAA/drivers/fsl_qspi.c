@@ -128,19 +128,6 @@ static const uint32_t s_qspiBaseAddrs[FSL_FEATURE_SOC_QSPI_FLR_COUNT] = QSPI_FLR
 /* Array to map QSPI instance number to IRQ number */
 static const IRQn_Type s_qspiIRQ[FSL_FEATURE_SOC_QSPI_FLR_COUNT] = QSPI_FLR_IRQS;
 
-/* Lookup table of required dummy bits per QSPI command (fixed in HW specification) */
-const uint8_t s_qspiDummyBitsLookup[kQSPI_CMD_MAX] = {
-    [kQSPI_CMD_FASTREAD] = kQSPI_DUMMY_BITS_8,
-    [kQSPI_CMD_READ2O]   = kQSPI_DUMMY_BITS_8,
-    [kQSPI_CMD_READ2IO]  = kQSPI_DUMMY_BITS_4,
-    [kQSPI_CMD_READ4O]   = kQSPI_DUMMY_BITS_8,
-    [kQSPI_CMD_READ4IO]  = kQSPI_DUMMY_BITS_6,
-    [kQSPI_CMD_PP]       = kQSPI_DUMMY_BITS_0,
-    [kQSPI_CMD_PP2O]     = kQSPI_DUMMY_BITS_0,
-    [kQSPI_CMD_PP4O]     = kQSPI_DUMMY_BITS_0,
-    [kQSPI_CMD_PP4IO]    = kQSPI_DUMMY_BITS_0,
-};
-
 /*******************************************************************************
  * Code
  ******************************************************************************/
@@ -356,7 +343,7 @@ static status_t QSPI_ValidateTransferParameters(QSPI_FLR_Type *base, qspi_slave_
         return kStatus_QSPI_DataPointerNotAligned;
     }
 
-    /* Validate the expected command before it is used to index the dummy bits lookup table */
+    /* Validate the expected command before it is used to select the transfer direction */
     if (((uint32_t)xfer->expectedCmd < (uint32_t)kQSPI_CMD_FASTREAD) ||
         ((uint32_t)xfer->expectedCmd >= (uint32_t)kQSPI_CMD_MAX))
     {
@@ -609,7 +596,7 @@ status_t QSPI_SlaveTransferNonBlocking(QSPI_FLR_Type *base, qspi_slave_handle_t 
     /* Initialize transfer parameters in handle */
     QSPI_SetupTransferState(handle, xfer);
 
-    /* Configure command, address, and dummy cycle parameters */
+    /* Configure the address mode; the hardware applies the dummy cycles itself */
     QSPI_ConfigureCommandParameters(base, xfer);
 
     /* Handle transfer based on command type */

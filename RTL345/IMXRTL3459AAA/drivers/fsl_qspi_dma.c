@@ -98,7 +98,7 @@ static status_t QSPI_ValidateTransferParameters(QSPI_FLR_Type *base, qspi_dma_ha
         return kStatus_QSPI_DataPointerNotAligned;
     }
 
-    /* Validate the expected command before it is used to index the dummy bits lookup table */
+    /* Validate the expected command before it is used to select the transfer direction */
     if (((uint32_t)xfer->expectedCmd < (uint32_t)kQSPI_CMD_FASTREAD) ||
         ((uint32_t)xfer->expectedCmd >= (uint32_t)kQSPI_CMD_MAX))
     {
@@ -286,7 +286,7 @@ status_t QSPI_SlaveTransferDMA(QSPI_FLR_Type *base, qspi_dma_handle_t *handle, q
     handle->state = kQSPI_Busy;
     handle->transferSize = xfer->dataSize;
 
-    /* Configure command, address, and dummy cycle parameters */
+    /* Configure the address mode; the hardware applies the dummy cycles itself */
     QSPI_ConfigureCommandParameters(base, xfer);
 
     /* Handle transfer based on command type */
