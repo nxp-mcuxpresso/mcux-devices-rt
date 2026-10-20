@@ -1,7 +1,7 @@
 /*
 ** ###################################################################
 **     Version:             rev. 1.0, 2024-11-13
-**     Build:               b261010
+**     Build:               b261020
 **
 **     Abstract:
 **         Chip specific module features.
@@ -957,7 +957,7 @@
 /* TPM module features */
 
 /* @brief Number of channels. */
-#define FSL_FEATURE_TPM_CHANNEL_COUNTn(x) (6)
+#define FSL_FEATURE_TPM_CHANNEL_COUNTn(x) (2)
 /* @brief Has counter reset by the selected input capture event (register bits C0SC[ICRST], C1SC[ICRST], ...). */
 #define FSL_FEATURE_TPM_HAS_COUNTER_RESET_BY_CAPTURE_EVENT (0)
 /* @brief Has TPM_PARAM. */
