@@ -3132,6 +3132,7 @@ typedef enum IRQn {
 #define PINT            CTRLSS__PINT
 #define SECPINT         CTRLSS__SECPINT
 #define UTICK0          CTRLSS__UTICK_0
+#define INPUTMUX        CTRLSS__INPUTMUX_0
 
 /*!
  * @}
