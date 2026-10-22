@@ -133,8 +133,8 @@ static const clock_freq_desc_t s_clockFreqDesc[kCLOCK_ClockNameCount] = {
  * Prototypes
  ******************************************************************************/
 
-/*! @brief Return a pointer to the primary *_CFG register for a clock source. */
-static volatile uint32_t *CLOCK_GetSourceCfgReg(clock_source_t src);
+/*! @brief Get the CGU offset of the primary *_CFG register of a clock source; false for an unknown source. */
+static bool CLOCK_GetSourceCfgOffset(clock_source_t src, uint32_t *reg_offset);
 
 /*! @brief Write a CGU register through the RPU. */
 static void CLOCK_WriteCguReg(uint32_t reg_offset, uint32_t value);
@@ -148,6 +148,17 @@ static void CLOCK_ModifyCguReg(uint32_t reg_offset, uint32_t clearMask, uint32_t
  ******************************************************************************/
 
 /* Every CGU write goes through the RPU driver, which unlocks only the protected registers. */
+#if FSL_CLOCK_DRIVER_RPU_FAST_PATH
+static void CLOCK_WriteCguReg(uint32_t reg_offset, uint32_t value)
+{
+    RPU_WriteCguRegFast(reg_offset, value);
+}
+
+static void CLOCK_ModifyCguReg(uint32_t reg_offset, uint32_t clearMask, uint32_t setMask)
+{
+    RPU_ModifyCguRegFast(reg_offset, clearMask, setMask);
+}
+#else
 static void CLOCK_WriteCguReg(uint32_t reg_offset, uint32_t value)
 {
     RPU_WriteReg((volatile uint32_t *)(CGU_BASE + reg_offset), value);
@@ -157,6 +168,7 @@ static void CLOCK_ModifyCguReg(uint32_t reg_offset, uint32_t clearMask, uint32_t
 {
     RPU_ModifyReg((volatile uint32_t *)(CGU_BASE + reg_offset), clearMask, setMask);
 }
+#endif
 
 /*
  * brief Enable the clock for specific IP.
@@ -881,38 +893,36 @@ void CLOCK_EnableOstimer32kClock()
     /* TODO: Placeholder implementation following the pattern of other methods */
 }
 
-/* Return a pointer to the primary configuration register for a clock source. */
-static volatile uint32_t *CLOCK_GetSourceCfgReg(clock_source_t src)
+/* Get the CGU offset of the primary configuration register of a clock source. */
+static bool CLOCK_GetSourceCfgOffset(clock_source_t src, uint32_t *reg_offset)
 {
-    uint32_t reg_offset;
-
     switch (src)
     {
         case kCLOCK_SrcFrol:
-            reg_offset = CGU_REG_OFFSET(FROL_CFG);
+            *reg_offset = CGU_REG_OFFSET(FROL_CFG);
             break;
         case kCLOCK_SrcFro:
-            reg_offset = CGU_REG_OFFSET(FRO_CFG);
+            *reg_offset = CGU_REG_OFFSET(FRO_CFG);
             break;
         case kCLOCK_SrcNssFro:
-            reg_offset = CGU_REG_OFFSET(NSS_FRO_CFG);
+            *reg_offset = CGU_REG_OFFSET(NSS_FRO_CFG);
             break;
         case kCLOCK_SrcPll:
-            reg_offset = CGU_REG_OFFSET(PLL_OSC_CFG);
+            *reg_offset = CGU_REG_OFFSET(PLL_OSC_CFG);
             break;
         default:
-            return (volatile uint32_t *)0;
+            return false;
     }
 
-    return (volatile uint32_t *)(CGU_BASE + reg_offset);
+    return true;
 }
 
 /* Enable a root clock source. */
 status_t CLOCK_EnableClockSource(clock_source_t src)
 {
-    volatile uint32_t *pCfg = CLOCK_GetSourceCfgReg(src);
+    uint32_t cfg;
 
-    if (pCfg == (volatile uint32_t *)0)
+    if (!CLOCK_GetSourceCfgOffset(src, &cfg))
     {
         return kStatus_InvalidArgument;
     }
@@ -920,9 +930,9 @@ status_t CLOCK_EnableClockSource(clock_source_t src)
     /* All source *_CFG registers share the same iref/osc/clk enable bit layout
        (bit0 = osc_en, bit1 = clk_en, bit2 = iref_en). Enable the reference
        current first, then the oscillator, then gate on the clock output. */
-    RPU_ModifyReg(pCfg, 0U, CGU_FROL_CFG_IREF_EN_MASK);
-    RPU_ModifyReg(pCfg, 0U, CGU_FROL_CFG_OSC_EN_MASK);
-    RPU_ModifyReg(pCfg, 0U, CGU_FROL_CFG_CLK_EN_MASK);
+    CLOCK_ModifyCguReg(cfg, 0U, CGU_FROL_CFG_IREF_EN_MASK);
+    CLOCK_ModifyCguReg(cfg, 0U, CGU_FROL_CFG_OSC_EN_MASK);
+    CLOCK_ModifyCguReg(cfg, 0U, CGU_FROL_CFG_CLK_EN_MASK);
 
     if (src == kCLOCK_SrcPll)
     {
@@ -938,9 +948,9 @@ status_t CLOCK_EnableClockSource(clock_source_t src)
 /* Disable a root clock source. */
 void CLOCK_DisableClockSource(clock_source_t src)
 {
-    volatile uint32_t *pCfg = CLOCK_GetSourceCfgReg(src);
+    uint32_t cfg;
 
-    if (pCfg == (volatile uint32_t *)0)
+    if (!CLOCK_GetSourceCfgOffset(src, &cfg))
     {
         return;
     }
@@ -953,9 +963,9 @@ void CLOCK_DisableClockSource(clock_source_t src)
     }
 
     /* Gate off the clock output then power down the oscillator. */
-    RPU_ModifyReg(pCfg, CGU_FROL_CFG_CLK_EN_MASK, 0U);
-    RPU_ModifyReg(pCfg, CGU_FROL_CFG_OSC_EN_MASK, 0U);
-    RPU_ModifyReg(pCfg, CGU_FROL_CFG_IREF_EN_MASK, 0U);
+    CLOCK_ModifyCguReg(cfg, CGU_FROL_CFG_CLK_EN_MASK, 0U);
+    CLOCK_ModifyCguReg(cfg, CGU_FROL_CFG_OSC_EN_MASK, 0U);
+    CLOCK_ModifyCguReg(cfg, CGU_FROL_CFG_IREF_EN_MASK, 0U);
 }
 
 /* Decode the PLL_OSC_CFG clk_sel field into the clock source feeding the PLL.
@@ -995,12 +1005,15 @@ void CLOCK_SetClockSourceFreq(clock_source_t src, uint32_t freq)
 /* Get the output frequency of a clock source. */
 uint32_t CLOCK_GetClockSourceFreq(clock_source_t src)
 {
-    volatile uint32_t *pCfg = CLOCK_GetSourceCfgReg(src);
+    uint32_t reg_offset;
+    const volatile uint32_t *pCfg;
 
-    if (pCfg == (volatile uint32_t *)0)
+    if (!CLOCK_GetSourceCfgOffset(src, &reg_offset))
     {
         return 0U;
     }
+
+    pCfg = (const volatile uint32_t *)(CGU_BASE + reg_offset);
 
     /* A source that is not driving its clock output contributes no frequency. */
     if ((*pCfg & CGU_FROL_CFG_CLK_EN_MASK) == 0U)

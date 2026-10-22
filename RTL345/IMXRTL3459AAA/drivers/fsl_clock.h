@@ -38,6 +38,17 @@
 #define FSL_SDK_DISABLE_DRIVER_CLOCK_CONTROL 0U
 #endif
 
+/*! @brief Configure how the clock driver writes RPU-protected CGU registers.
+ *
+ * When set to 0 (default), every CGU write goes through RPU_WriteReg() or RPU_ModifyReg(), which is safe with
+ * interrupts enabled. When set to 1, the writes take the RPU fast path (RPU_WriteCguRegFast()): no address lookup
+ * and no interrupt masking, for a boot path that sets the clocks with interrupts disabled and no other bus master
+ * accessing the CGU.
+ */
+#if !(defined(FSL_CLOCK_DRIVER_RPU_FAST_PATH))
+#define FSL_CLOCK_DRIVER_RPU_FAST_PATH 0U
+#endif
+
 /* Definition for delay API in clock driver, users can redefine it to the real
  * application. */
 #ifndef SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY
